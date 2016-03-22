@@ -134,11 +134,17 @@ public class MatrizHeatMap {
         arraydecores = new Color32[x * y];
         int px = 0;
         int py = 0;
+        Debug.Log(x + " " + y);
 
         for(int i = 0; i < x * y; i++)
         {
             arraydecores[i] = cores[matriz[px, py]];
-            px++; if (px >= x) py++; px = 0;
+            Debug.Log(px + " - " + py + " - " + arraydecores[i]);
+            px++;
+            if (px >= x) {
+                py++;
+                px = 0;
+            }
             
         }
 
