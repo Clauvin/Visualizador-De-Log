@@ -6,10 +6,10 @@ using Basicas;
 public class MatrizHeatMap {
 
     int[,] matriz;
-    public int x = 20;
-    public int y = 15;
-    public int textx = 20;
-    public int texty = 15;
+    public int x = 800;
+    public int y = 600;
+    public int textx = 800;
+    public int texty = 600;
     Dictionary<int, Color> cores;
     Color32[] arraydecores;
     ArrayList numerosdiferentes;
@@ -129,7 +129,7 @@ public class MatrizHeatMap {
         }
     }
 
-    public void PreencherOArray()
+    public void PreencherOArrayOQueÉMUITOLENTO()
     {
         arraydecores = new Color32[x * y];
         int px = 0;
@@ -151,7 +151,7 @@ public class MatrizHeatMap {
 
     }
 
-    public void FillingTheHeatmapFast()
+    public void FillingTheHeatmapSlow()
     {
 
         pintar.SetPixelsEmTodaTextura(heatmap, arraydecores);
