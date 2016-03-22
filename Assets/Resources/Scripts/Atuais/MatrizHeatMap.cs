@@ -11,6 +11,7 @@ public class MatrizHeatMap {
     public int textx = 20;
     public int texty = 15;
     Dictionary<int, Color> cores;
+    Color32[] arraydecores;
     ArrayList numerosdiferentes;
     int maiornumero;
     public Texture2D heatmap;
@@ -126,6 +127,31 @@ public class MatrizHeatMap {
             
             cores.Add((int)numerosdiferentes[i], cordonumero);
         }
+    }
+
+    public void PreencherOArray()
+    {
+        arraydecores = new Color32[x * y];
+        int px = 0;
+        int py = 0;
+
+        for(int i = 0; i < x * y; i++)
+        {
+            arraydecores[i] = cores[matriz[px, py]];
+            px++; if (px >= x) py++; px = 0;
+            
+        }
+
+
+    }
+
+    public void FillingTheHeatmapFast()
+    {
+
+        pintar.SetPixelsEmTodaTextura(heatmap, arraydecores);
+
+        heatmap.Apply();
+
     }
 
     public void FillingTheHeatmap()

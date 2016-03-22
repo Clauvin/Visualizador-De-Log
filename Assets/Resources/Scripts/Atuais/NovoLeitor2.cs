@@ -282,7 +282,9 @@ public class NovoLeitor2 : MonoBehaviour
             ((MatrizHeatMap)matrizesdosheatmaps[j]).AllTheDifferentPoints();
             ((MatrizHeatMap)matrizesdosheatmaps[j]).OrganizePoints();
             ((MatrizHeatMap)matrizesdosheatmaps[j]).FillingTheDictionary();
-            ((MatrizHeatMap)matrizesdosheatmaps[j]).FillingTheHeatmap();
+            //((MatrizHeatMap)matrizesdosheatmaps[j]).FillingTheHeatmap();
+            ((MatrizHeatMap)matrizesdosheatmaps[j]).PreencherOArray();
+            ((MatrizHeatMap)matrizesdosheatmaps[j]).FillingTheHeatmapFast();
             numerosdecores[j] = ((MatrizHeatMap)matrizesdosheatmaps[j]).HowManyPoints();
         }
 

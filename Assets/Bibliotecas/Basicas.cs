@@ -662,6 +662,20 @@ namespace Basicas
             return a;
         }
 
+        public Texture2D SetPixelsEmTodaTextura(Texture2D a, Color32[] cores)
+        {
+            //Checar se o tamanho de cores está correto.
+            //Pintar
+
+            if (cores.Length == a.height * a.width)
+            {
+                a.SetPixels32(cores);
+            } else { return null; }
+
+            return a;
+            
+        }
+
     }
 
 }
