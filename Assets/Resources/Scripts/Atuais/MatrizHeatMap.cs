@@ -138,7 +138,7 @@ public class MatrizHeatMap {
 
         for(int i = 0; i < x * y; i++)
         {
-            arraydecores[i] = cores[matriz[px, py]];
+            arraydecores[i] = cores[matriz[InverterXPraDesenho(px), py]];
             Debug.Log(px + " - " + py + " - " + arraydecores[i]);
             px++;
             if (px >= x) {
