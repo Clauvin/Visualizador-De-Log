@@ -10,6 +10,7 @@ public class NovoLeitorFIT : NovoLeitor2 {
     void Start()
     {
         NovoLeitor2Init();
+        FindFile();
         StartFIT();
         LoadStuffFIT("C:\\Teste\\Teste.txt");
         CreateStuffFIT();
