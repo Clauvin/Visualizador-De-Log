@@ -52,8 +52,9 @@ public class GuiFITTempo : GuiPadrao2
 
             posicaoy = 0;
 
-            GUI.Label(new Rect(10, 0, 210, 20), "Tempo Mostrado em Câmera: " + postempo, "textfield");
-            if (GetComponent<Controlador>().GetAutoMode()) GUI.TextField(new Rect(10, 20, 210, 20), "Modo Automático ativado");
+            GUI.Label(new Rect(10, 0, 210, 40), "Tempo Mostrado em Câmera: " + postempo + " de \n" +
+                GetComponent<NovoLeitor2>().GetUltimoTempoFIT(), "textfield");
+            if (GetComponent<Controlador>().GetAutoMode()) GUI.TextField(new Rect(10, 40, 210, 20), "Modo Automático ativado");
             GUI.Label(new Rect(10, 60, 210, 20), "Pular para Posição", "textfield");
             stringParaEditar = GUI.TextField(new Rect(10, 80, 210, 20), stringParaEditar);
 
