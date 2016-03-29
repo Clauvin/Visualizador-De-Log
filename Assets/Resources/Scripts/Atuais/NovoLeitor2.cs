@@ -7,11 +7,11 @@ using System.Collections;
 public class NovoLeitor2 : MonoBehaviour
 {
 
-    BancoDeDadosBolhas bd;
-    BancoDeDadosFIT bdfit;
-    Vector2 resolucao;
-    ParaHeatmap<GameObject> objetos;
-    ParaHeatmap<Material> materiais;
+    protected BancoDeDadosBolhas bd;
+    protected BancoDeDadosFIT bdfit;
+    protected Vector2 resolucao;
+    protected ParaHeatmap<GameObject> objetos;
+    protected ParaHeatmap<Material> materiais;
 
     public ParaHeatmap<Texture2D> texturas;
     public ParaHeatmap<Texture2D> texturasselecionadas;
@@ -19,33 +19,12 @@ public class NovoLeitor2 : MonoBehaviour
     Pintar pintar;
     public ArrayList listadepontos;
     public ArrayList listadebackgrounds;
-    string modofit;
+    protected string modofit;
 
-    ArrayList matrizesdosheatmaps;
+    protected ArrayList matrizesdosheatmaps;
     public int[] numerosdecores;
 
     GameObject heatmap;
-
-    // Use this for initialization
-    void Start()
-    {
-        resolucao = new Vector2();
-        objetos = new ParaHeatmap<GameObject>();
-        materiais = new ParaHeatmap<Material>();
-        texturas = new ParaHeatmap<Texture2D>();
-        texturasselecionadas = new ParaHeatmap<Texture2D>();
-        pintar = new Pintar();
-        listadepontos = new ArrayList();
-        listadebackgrounds = new ArrayList();
-        matrizesdosheatmaps = new ArrayList();
-
-        StartFIT();
-
-        LoadStuffFIT("C:\\Teste\\Teste.txt");
-        CreateStuffFIT();
-        //PrintStuffFIT();
-
-    }
 
     public void StartFIT()
     {
@@ -562,6 +541,24 @@ public class NovoLeitor2 : MonoBehaviour
 
         }
         
+    }
+
+    public int GetUltimoTempoFIT()
+    {
+        return bdfit.GetTempo(bdfit.GetQuantidadeDeEntradas() - 1);
+    }
+
+    public void NovoLeitor2Init()
+    {
+        resolucao = new Vector2();
+        objetos = new ParaHeatmap<GameObject>();
+        materiais = new ParaHeatmap<Material>();
+        texturas = new ParaHeatmap<Texture2D>();
+        texturasselecionadas = new ParaHeatmap<Texture2D>();
+        pintar = new Pintar();
+        listadepontos = new ArrayList();
+        listadebackgrounds = new ArrayList();
+        matrizesdosheatmaps = new ArrayList();
     }
     
 }

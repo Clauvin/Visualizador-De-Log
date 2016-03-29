@@ -47,6 +47,10 @@ public class Controlador : MonoBehaviour {
     //para o modo automático do 3
     bool automode = false;
 
+    //para o modo automático custom do 3
+    bool automodecustom = false;
+    int posicaotemporal1;
+    int posicaotemporal2;
 
 
     //agoravai serve pra bloquear, se necessário, o input do jogador, o que evita bugs iniciais
@@ -87,6 +91,79 @@ public class Controlador : MonoBehaviour {
                     FindObjectOfType<Camera>().transform.position = posicaocamera;
                 }
 
+                if (automodecustom)
+                {
+                    float y = modos.GetMovimentacao(modo);
+
+                    posicaocamera.y -= y;
+
+                    
+
+                    if (posicaocamera.y <= ((GameObject)GetComponent<NovoLeitor2>().listadebackgrounds[
+                        posicaotemporal2]).transform.position.y)
+                    {
+                        posicaocamera.y = ((GameObject)GetComponent<NovoLeitor2>().listadebackgrounds[
+                            posicaotemporal1]).transform.position.y;
+                    }
+
+                    FindObjectOfType<Camera>().transform.position = posicaocamera;
+                }
+
+                if (Input.GetKeyUp("e"))
+                {
+                    string tempo = GetComponent<GuiFITTempo>().GetStringEditavel();
+                    int posicaotemporal;
+                    bool resultado = int.TryParse(tempo, out posicaotemporal);
+                    if (resultado)
+                    {
+                        if (posicaotemporal <= GetComponent<NovoLeitor2>().GetUltimoTempoFIT())
+                        {
+                            posicaocamera.y = ((GameObject)GetComponent<NovoLeitor2>().listadebackgrounds[0]).transform.position.y +
+                                              20.0f - 20.0f * posicaotemporal;
+                            Debug.Log(posicaocamera.y);
+                        } else
+                        {
+                            GetComponent<GuiFITTempo>().SetStringEditavel("Tempo " + tempo + " não existe.");
+                        }
+                    }
+
+                    FindObjectOfType<Camera>().transform.position = posicaocamera;
+                }
+
+                if (Input.GetKeyUp("t"))
+                {
+                    if (automodecustom == false) {  
+                        string tempo1 = GetComponent<GuiFITTempo>().GetAutoCustomComecoEditavel();
+                        string tempo2 = GetComponent<GuiFITTempo>().GetAutoCustomFinalEditavel();
+
+                        bool resultado1 = int.TryParse(tempo1, out posicaotemporal1);
+                        bool resultado2 = int.TryParse(tempo2, out posicaotemporal2);
+
+                        if (resultado1 && resultado2) {
+                        
+                            if (posicaotemporal1 <= GetComponent<NovoLeitor2>().GetUltimoTempoFIT() &&
+                                posicaotemporal2 <= GetComponent<NovoLeitor2>().GetUltimoTempoFIT()) 
+                            {
+                                if (posicaotemporal1 <= GetComponent<NovoLeitor2>().GetUltimoTempoFIT())
+                                {
+                                    posicaocamera.y = ((GameObject)GetComponent<NovoLeitor2>().listadebackgrounds[0]).transform.position.y +
+                                                        20.0f - 20.0f * posicaotemporal1;
+                                    Debug.Log(posicaocamera.y);
+                                }
+
+                                FindObjectOfType<Camera>().transform.position = posicaocamera;
+                                automodecustom = true;
+                            }
+                            else
+                            {
+                                if (!resultado1) GetComponent<GuiFITTempo>().SetAutoCustomComecoEditavel("Tempo " + tempo1 + " não existe.");
+                                if (!resultado2) GetComponent<GuiFITTempo>().SetAutoCustomFinalEditavel("Tempo " + tempo2 + " não existe.");
+                            }
+                        }
+
+                        FindObjectOfType<Camera>().transform.position = posicaocamera;
+                    } else { automodecustom = false; }
+                }
             }
 
             //Necessário para esse modo específico por conta da movimentação livre dele
@@ -304,6 +381,11 @@ public class Controlador : MonoBehaviour {
                 Vermelhidao(0.2f);
             }
 
+            if (Input.GetButtonDown("Q"))
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+            }
+
             //Esse código serve para fazer a Gui dos pontos funcionar.
             if (Input.GetMouseButtonDown(0)) {
                 RaycastHit acerto = new RaycastHit();
@@ -496,6 +578,12 @@ public class Controlador : MonoBehaviour {
         return automode;
     }
 
+
+    public bool GetAutoModeCustom()
+    {
+        return automodecustom;
+    }
+
     public void Inicializacao()
     {
 
@@ -506,7 +594,8 @@ public class Controlador : MonoBehaviour {
                                              "8 - Aumenta a transparencia dos pontos\n" +
                                              "9 - Diminui a transparencia dos pontos\n" +
                                              "- - Faz as cores dos pontos ficarem mais\n" + "    vermelhas\n" +
-                                             "= - Faz as cores dos pontos voltarem ao normal\n");
+                                             "= - Faz as cores dos pontos voltarem ao normal\n" +
+                                             "Q - Voltar à tela inicial");
         modos.Add("Um Frame De Cada Vez em 3D", 0.5f, 5f, 30f, 0f, 0f, false, 1f, new Vector3(0f, 0f, 330f),
             new Vector3(90f, 0f, 0f), 1f, 2, "6 - Some com os grids\n" + "7 - Faz os grids aparecerem\n" +
                                              "8 - Aumenta a transparencia dos pontos\n" +
@@ -517,7 +606,8 @@ public class Controlador : MonoBehaviour {
                                              "-> - Move a câmera para frente(ela pode \n" +
                                              "atravessar um grid para ver o proximo\n" +
                                              "A - Move a câmera para trás mais rápido\n" +
-                                             "D - Move a câmera para frente mais rápido");
+                                             "D - Move a câmera para frente mais rápido\n" +
+                                             "Q - Voltar à tela inicial");
 
         modos.Add("Um Frame De Cada Vez em 2D", 2f, 0f, 10f, 0f, 0f, true, 1f, new Vector3(0f, 0f, 0f),
             new Vector3(90f, 0f, 0f), 1f, 0, "6 - Some com os grids\n" + "7 - Faz os grids aparecerem\n" +
@@ -531,7 +621,11 @@ public class Controlador : MonoBehaviour {
                                              "mais rápido\n" +
                                              "D - Vai para a posição seguinte dos pontos\n" +
                                              "mais rápido\n" +
-                                             "R - Ativa/desativa modo automático");
+                                             "E - Vai para a posição do tempo escolhido\n" +
+                                             "em 'Pular Para Posição'\n" +
+                                             "R - Ativa/desativa modo automático\n" +
+                                             "T - Ativa/desativa modo automático customizado\n" +
+                                             "Q - Voltar à tela inicial");
 
         modos.Add("Todos De Uma Vez em 3D", 0.5f, 5f, 2f, 0f, 0f, false, 0f, new Vector3(0f, 0f, 0f),
             new Vector3(90f, 0f, 0f), 0f, 2, "8 - Aumenta a transparencia dos pontos\n" +
@@ -543,11 +637,13 @@ public class Controlador : MonoBehaviour {
                                              "A - Move a câmera para trás mais rápido\n" +
                                              "D - Move a câmera para frente mais rápido\n" +
                                              "R - Reseta a posição e rotação da câmera\n" +
-                                             "S - Reseta a rotação da câmera");
+                                             "S - Reseta a rotação da câmera\n" +
+                                             "Q - Voltar à tela inicial");
 
         modos.Add("Heatmap", 0f, 200f, 15f, 0f, 0f, true, 0f, new Vector3(0f, 0f, 0f),
             new Vector3(90f, 0f, 0f), 1f, 2, "<- - Avança na lista de heatmaps\n" +
-                                             "-> - Retorna na lista de heatmaps");
+                                             "-> - Retorna na lista de heatmaps\n" +
+                                             "Q - Voltar à tela inicial");
 
         GameObject background = (GameObject)(GetComponent<NovoLeitor2>().listadebackgrounds[0]);
 

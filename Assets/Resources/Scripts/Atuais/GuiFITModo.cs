@@ -40,9 +40,9 @@ public class GuiFITModo : GuiPadrao2
             GUI.BeginGroup(new Rect(posx, posy, 300, 420));
 
             posicaox = 0;
-            GUI.TextField(new Rect(10, posicaox, 300, 20), "Modo: " + texto);
+            GUI.Label(new Rect(10, posicaox, 300, 20), "Modo: " + texto, "textfield");
             posicaox += 20;
-            GUI.TextField(new Rect(10, posicaox, 300, 400), instrucoes);
+            GUI.Label(new Rect(10, posicaox, 300, 400), instrucoes, "textfield");
 
             GUI.EndGroup();
         }

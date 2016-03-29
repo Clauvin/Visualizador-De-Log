@@ -104,12 +104,6 @@ public class MatrizHeatMap {
         transicaodecorg = (cormaxima.g - corum.g) / HowManyPoints();
         transicaodecorb = (cormaxima.b - corum.b) / HowManyPoints();
         transicaodecora = (cormaxima.a - corum.a) / HowManyPoints();
-
-
-        for (int i = 0; i < numerosdiferentes.Count; i++)
-        {
-            Debug.Log(numerosdiferentes[i]);
-        }
             
         for (int i = 0; i < numerosdiferentes.Count; i++)
         {

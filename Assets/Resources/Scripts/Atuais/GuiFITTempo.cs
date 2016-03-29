@@ -8,10 +8,16 @@ public class GuiFITTempo : GuiPadrao2
 
     protected string texto;
     protected string instrucoes;
+
+    protected string stringParaEditar;
+    protected string autocustom1;
+    protected string autocustom2;
+
     private int posicaoy;
     float posinicialcamera;
     float postempofloat;
     int postempo;
+    
 
     public GuiFITTempo()
     {
@@ -19,6 +25,9 @@ public class GuiFITTempo : GuiPadrao2
         posy = 80;
         texto = "Tempo = ";
         revelado = false;
+        stringParaEditar = "Apenas >= 0 aqui.";
+        autocustom1 = "Apenas >= 0 aqui.";
+        autocustom2 = "Apenas >= 0 aqui.";
     }
 
     public void PegarQualModo(string modo)
@@ -39,14 +48,24 @@ public class GuiFITTempo : GuiPadrao2
     {
         if (revelado)
         {
-            GUI.BeginGroup(new Rect(posx, posy, 220, 40));
+            GUI.BeginGroup(new Rect(posx, posy, 320, 200));
 
             posicaoy = 0;
 
-            GUI.TextField(new Rect(10, 0, 210, 20), "Tempo Mostrado em Câmera: " + postempo);
+            GUI.Label(new Rect(10, 0, 210, 20), "Tempo Mostrado em Câmera: " + postempo, "textfield");
             if (GetComponent<Controlador>().GetAutoMode()) GUI.TextField(new Rect(10, 20, 210, 20), "Modo Automático ativado");
+            GUI.Label(new Rect(10, 60, 210, 20), "Pular para Posição", "textfield");
+            stringParaEditar = GUI.TextField(new Rect(10, 80, 210, 20), stringParaEditar);
 
+            GUI.Label(new Rect(10, 100, 210, 20), "Começo de Modo Automático Customizado", "textfield");
+            autocustom1 = GUI.TextField(new Rect(10, 120, 210, 20), autocustom1);
+            GUI.Label(new Rect(10, 140, 210, 20), "Fim de Modo Automático Customizado", "textfield");
+            autocustom2 = GUI.TextField(new Rect(10, 160, 210, 20), autocustom2);
+            if (GetComponent<Controlador>().GetAutoMode()) {
+                GUI.TextField(new Rect(10, 180, 210, 20), "Modo Automático Customizado ativado");
+            }
             GUI.EndGroup();
+
         }
     }
 
@@ -65,6 +84,18 @@ public class GuiFITTempo : GuiPadrao2
     }
 
     public override string GetTexto() { return texto; }
+
+    public string GetStringEditavel() { return stringParaEditar; }
+
+    public void SetStringEditavel(string editada) { stringParaEditar = editada; }
+
+    public string GetAutoCustomComecoEditavel() { return autocustom1; }
+
+    public void SetAutoCustomComecoEditavel(string editada) { autocustom1 = editada; }
+
+    public string GetAutoCustomFinalEditavel() { return autocustom2; }
+
+    public void SetAutoCustomFinalEditavel(string editada) { autocustom2 = editada; }
 
     void Awake()
     {

@@ -258,7 +258,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1348100971}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad7e9c9c8c196f44ba48d8e2320ccd3e, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ab24dbdb0f66cf4d80024eff6f0011b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   numerosdecores: 

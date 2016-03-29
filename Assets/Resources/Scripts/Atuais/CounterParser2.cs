@@ -85,7 +85,7 @@ public class CounterParser2 : MonoBehaviour
 
     void QualEndereco()
     {
-        endereco = "C:\\Teste\\Teste4.txt";
+        endereco = "C:\\Teste\\TesteBolhas.txt";
 
     }
 }

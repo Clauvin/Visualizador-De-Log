@@ -18,6 +18,8 @@ public class GuiFITHeatmap : GuiPadrao2
     Dictionary<int, Color> dicionarioheatmap;
     List<DadosGUIHashMap> dados;
 
+    Rect posicaomovel;
+
     public GuiFITHeatmap()
     {
         gambiarra = true;
@@ -30,27 +32,28 @@ public class GuiFITHeatmap : GuiPadrao2
 
     public override void OnGUI()
     {
+        int numero;
+
         if ((revelado) && (!gambiarra))
         {
-            int numero;
             int qualheatmap = GetComponent<Controlador>().QualHeatmapMostra();
-            GUI.BeginGroup(new Rect(posx, posy, 180, 20 *
+            GUI.BeginGroup(new Rect(posx, posy, 170, 20 *
                 (dados[qualheatmap].numerosdecor.Count + 3)));
 
             posicaoy = 0;
+
+            GUI.Box(new Rect(10, posicaoy, 170, 40 + 20 * dados[qualheatmap].numerosdecor.Count), string.Empty);
 
             if (qualheatmap == 0)
             {
                 GUI.TextField(new Rect(10, posicaoy, 170, 20), "Cores e Quantos Objetos");
                 posicaoy += 20;
             }
-            else {
+            else
+            {
                 GUI.TextField(new Rect(10, posicaoy, 170, 40), "Cores e Quantos Objetos\n - Jogador " + qualheatmap);
                 posicaoy += 40;
             }
-
-
-            
 
             //lembrando, uma das cores já foi
             for (int i = 0; i < dados[qualheatmap].numerosdecor.Count; i++)
@@ -60,6 +63,7 @@ public class GuiFITHeatmap : GuiPadrao2
                 GUI.TextField(new Rect(35, posicaoy, 145, 20), numero.ToString());
                 posicaoy += 20;
             }
+
 
             GUI.EndGroup();
         }
