@@ -154,11 +154,10 @@ public class Controlador : MonoBehaviour {
                                 FindObjectOfType<Camera>().transform.position = posicaocamera;
                                 automodecustom = true;
                             }
-                            else
-                            {
-                                if (!resultado1) GetComponent<GuiFITTempo>().SetAutoCustomComecoEditavel("Tempo " + tempo1 + " não existe.");
-                                if (!resultado2) GetComponent<GuiFITTempo>().SetAutoCustomFinalEditavel("Tempo " + tempo2 + " não existe.");
-                            }
+                        } else
+                        {
+                            if (!resultado1) GetComponent<GuiFITTempo>().SetAutoCustomComecoEditavel("Tempo " + tempo1 + " não existe.");
+                            if (!resultado2) GetComponent<GuiFITTempo>().SetAutoCustomFinalEditavel("Tempo " + tempo2 + " não existe.");
                         }
 
                         FindObjectOfType<Camera>().transform.position = posicaocamera;
