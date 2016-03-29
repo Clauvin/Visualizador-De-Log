@@ -3,6 +3,7 @@ using Basicas;
 using System;
 using System.IO;
 using System.Collections;
+using UnityEditor;
 
 public class NovoLeitor2 : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class NovoLeitor2 : MonoBehaviour
     public int[] numerosdecores;
 
     GameObject heatmap;
+
+    string enderecodearquivo;
 
     public void StartFIT()
     {
@@ -58,6 +61,12 @@ public class NovoLeitor2 : MonoBehaviour
         materiais.Add("Bolha", (Material)Resources.Load("Materiais/MaterialBolha2"));
         materiais.Add("Ilha", (Material)Resources.Load("Materiais/MaterialIlha2"));
         materiais.Add("Nada", (Material)Resources.Load("Materiais/MaterialNada2"));
+    }
+
+    public bool FindFile()
+    {
+        EditorUtility.OpenFilePanel("Teste", "C:/", "");
+        return true;
     }
 
     public bool LoadStuffFIT(string fileName)
