@@ -65,11 +65,15 @@ public class NovoLeitor2 : MonoBehaviour
 
     public bool FindFile()
     {
-        EditorUtility.OpenFilePanel("Teste", "C:/", "");
+        string[] checagem;
+
+        enderecodearquivo = EditorUtility.OpenFilePanel("Teste", "C:/", "txt");
+
+        Debug.Log(enderecodearquivo);
         return true;
     }
 
-    public bool LoadStuffFIT(string fileName)
+    public bool LoadStuffFIT()
     {
         //number for number of HeatMaps
         int heatmaps = 1;
@@ -80,7 +84,7 @@ public class NovoLeitor2 : MonoBehaviour
         // was saved as
 
         bdfit = new BancoDeDadosFIT();
-        FileStream fs = new FileStream(fileName, FileMode.Open);
+        FileStream fs = new FileStream(enderecodearquivo, FileMode.Open);
         StreamReader theReader = new StreamReader(fs);
         // Part 1: ignores the [Mode 01]
         line = theReader.ReadLine();
