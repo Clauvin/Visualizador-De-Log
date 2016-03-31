@@ -570,6 +570,7 @@ public class NovoLeitor2 : MonoBehaviour
         string extensao;
 
         checagem = enderecodearquivo.Split('/');
+        if (checagem[0] == string.Empty) return false;
         extensao = checagem[checagem.GetUpperBound(0)].Split('.')[1];
 
         if (extensao == "txt") return true;
