@@ -10,10 +10,16 @@ public class NovoLeitorFIT : NovoLeitor2 {
     void Start()
     {
         NovoLeitor2Init();
-        FindFile();
-        StartFIT();
-        LoadStuffFIT();
-        CreateStuffFIT();
+        if (FindFile())
+        {
+            StartFIT();
+            LoadStuffFIT();
+            CreateStuffFIT();
+        } else
+        {
+            RetornarParaTelaInicial();
+        }
+        
 
     }
 

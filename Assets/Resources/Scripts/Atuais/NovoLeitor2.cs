@@ -73,18 +73,8 @@ public class NovoLeitor2 : MonoBehaviour
         checagem = enderecodearquivo.Split('/');
         extensao = checagem[checagem.GetUpperBound(0)].Split('.')[1];
 
-        Debug.Log(enderecodearquivo);
-        Debug.Log(checagem[checagem.GetUpperBound(0)]);
-
         if (extensao == "txt") return true;
-        else
-        {
-            Debug.Log(extensao);
-            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
-        }
-
-        
-        return true;
+        else return false;
     }
 
     public bool LoadStuffFIT()
@@ -573,6 +563,11 @@ public class NovoLeitor2 : MonoBehaviour
     public int GetUltimoTempoFIT()
     {
         return bdfit.GetTempo(bdfit.GetQuantidadeDeEntradas() - 1);
+    }
+
+    public void RetornarParaTelaInicial()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 
     public void NovoLeitor2Init()
