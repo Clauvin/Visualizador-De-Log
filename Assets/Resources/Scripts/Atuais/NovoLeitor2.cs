@@ -65,16 +65,10 @@ public class NovoLeitor2 : MonoBehaviour
 
     public bool FindFile()
     {
-        string[] checagem;
-        string extensao;
 
         enderecodearquivo = EditorUtility.OpenFilePanel("Teste", "C:/", "txt");
 
-        checagem = enderecodearquivo.Split('/');
-        extensao = checagem[checagem.GetUpperBound(0)].Split('.')[1];
-
-        if (extensao == "txt") return true;
-        else return false;
+        return Checagem(enderecodearquivo);
     }
 
     public bool LoadStuffFIT()
@@ -568,6 +562,18 @@ public class NovoLeitor2 : MonoBehaviour
     public void RetornarParaTelaInicial()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
+
+    private bool Checagem(string endereco)
+    {
+        string[] checagem;
+        string extensao;
+
+        checagem = enderecodearquivo.Split('/');
+        extensao = checagem[checagem.GetUpperBound(0)].Split('.')[1];
+
+        if (extensao == "txt") return true;
+        else return false;
     }
 
     public void NovoLeitor2Init()
