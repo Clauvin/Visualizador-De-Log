@@ -66,10 +66,24 @@ public class NovoLeitor2 : MonoBehaviour
     public bool FindFile()
     {
         string[] checagem;
+        string extensao;
 
         enderecodearquivo = EditorUtility.OpenFilePanel("Teste", "C:/", "txt");
 
+        checagem = enderecodearquivo.Split('/');
+        extensao = checagem[checagem.GetUpperBound(0)].Split('.')[1];
+
         Debug.Log(enderecodearquivo);
+        Debug.Log(checagem[checagem.GetUpperBound(0)]);
+
+        if (extensao == "txt") return true;
+        else
+        {
+            Debug.Log(extensao);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        }
+
+        
         return true;
     }
 
