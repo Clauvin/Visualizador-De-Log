@@ -66,7 +66,7 @@ public class NovoLeitor2 : MonoBehaviour
     public bool FindFile()
     {
 
-        enderecodearquivo = EditorUtility.OpenFilePanel("Teste", "C:/", "txt");
+        enderecodearquivo = EditorUtility.OpenFilePanel("Teste", CarregarEnderecoDeUltimaPaginaChecada(), "txt");
 
         return Checagem(enderecodearquivo);
     }
@@ -608,6 +608,36 @@ public class NovoLeitor2 : MonoBehaviour
         fs.Dispose();
         fs.Close();
         
+    }
+
+    public string CarregarEnderecoDeUltimaPaginaChecada()
+    {
+        FileStream fs = null;
+        StreamReader sr = null;
+        string saida;
+
+
+        string posicaodoarquivo = Path.GetFullPath("local.ini");
+        // Handle any problems that might arise when reading the text
+        if (File.Exists(posicaodoarquivo))
+        {
+            fs = File.Open(posicaodoarquivo, FileMode.Open);
+            sr = new StreamReader(fs);
+            saida = sr.ReadLine();
+            sr.Dispose();
+            sr.Close();
+            fs.Dispose();
+            fs.Close();
+
+        }
+        else
+        {
+            saida = Path.GetFullPath("path");
+            saida = saida.Split('/')[0] + "/";
+        }
+
+        return saida;
+
     }
 
     public void NovoLeitor2Init()
