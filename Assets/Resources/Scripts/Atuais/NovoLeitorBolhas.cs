@@ -11,10 +11,17 @@ public class NovoLeitorBolhas : NovoLeitor2
     void Start()
     {
         NovoLeitor2Init();
-        StartBolhas();
-
-        LoadStuffBolhas();
-        CreateStuffBolhas();
+        if (FindFile())
+        {
+            CriarIniDeUltimaPaginaChecada(enderecodearquivo);
+            StartBolhas();
+            LoadStuffBolhas();
+            CreateStuffBolhas();
+        }
+        else
+        {
+            RetornarParaTelaInicial();
+        }
 
     }
 
