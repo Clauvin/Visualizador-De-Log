@@ -8,7 +8,7 @@ using UnityEditor;
 public class NovoLeitor2 : MonoBehaviour
 {
 
-    protected BancoDeDadosBolhas bd;
+    protected BancoDeDadosBolhas bdbolhas;
     protected BancoDeDadosFIT bdfit;
     protected Vector2 resolucao;
     protected ParaHeatmap<GameObject> objetos;
@@ -53,14 +53,13 @@ public class NovoLeitor2 : MonoBehaviour
     public void StartBolhas()
     {
         objetos.Add("Clicou", (GameObject)Resources.Load("Objetos/Qualquer Coisa"));
-        objetos.Add("Pressionou", (GameObject)Resources.Load("Objetos/Qualquer Coisa"));
+        objetos.Add("Segurou", (GameObject)Resources.Load("Objetos/Qualquer Coisa"));
         objetos.Add("Arrastou", (GameObject)Resources.Load("Objetos/Qualquer Coisa"));
-        objetos.Add("Soltou", (GameObject)Resources.Load("Objetos/Qualquer Coisa"));
 
         materiais.Add("Baleia", (Material)Resources.Load("Materiais/MaterialBaleia2"));
         materiais.Add("Bolha", (Material)Resources.Load("Materiais/MaterialBolha2"));
-        materiais.Add("Ilha", (Material)Resources.Load("Materiais/MaterialIlha2"));
-        materiais.Add("Nada", (Material)Resources.Load("Materiais/MaterialNada2"));
+        materiais.Add("Peixe", (Material)Resources.Load("Materiais/MaterialPeixe2"));
+        materiais.Add("Nuvem", (Material)Resources.Load("Materiais/MaterialNuvem2"));
     }
 
     public bool FindFile()
@@ -148,12 +147,15 @@ public class NovoLeitor2 : MonoBehaviour
 
     public bool LoadStuffBolhas(string fileName)
     {
+        //number for number of HeatMaps
+        int heatmaps = 1;
+
         // Handle any problems that might arise when reading the text
         string line;
         // Create a new StreamReader, tell it which file to read and what encoding the file
         // was saved as
 
-        bd = new BancoDeDadosBolhas();
+        bdbolhas = new BancoDeDadosBolhas();
         FileStream fs = new FileStream(fileName, FileMode.Open);
         StreamReader theReader = new StreamReader(fs);
         // Part 1: reads the game screen's resolution in the log.
@@ -201,7 +203,7 @@ public class NovoLeitor2 : MonoBehaviour
                 if (entries.Length == 5)
                 {
                     //X - Y - TEMPO - O QUÊ - NO QUê
-                    bd.Add(Int32.Parse(entries[0]), Int32.Parse(entries[1]),
+                    bdbolhas.Add(Int32.Parse(entries[0]), Int32.Parse(entries[1]),
                             Int32.Parse(entries[2]), (string)entries[3], (string)entries[4]);
                 }
 
@@ -238,10 +240,10 @@ public class NovoLeitor2 : MonoBehaviour
 
     public bool PrintStuffBolhas()
     {
-        for (int i = 0; i < bd.GetQuantidadeDeEntradas(); i++)
+        for (int i = 0; i < bdbolhas.GetQuantidadeDeEntradas(); i++)
         {
-            Debug.Log(bd.GetCoordenadaX(i) + " " + bd.GetCoordenadaY(i) + " " +
-                      bd.GetTempo(i) + " " + bd.GetOQueFez(i) + " " + bd.GetNoQueFez(i));
+            Debug.Log(bdbolhas.GetCoordenadaX(i) + " " + bdbolhas.GetCoordenadaY(i) + " " +
+                      bdbolhas.GetTempo(i) + " " + bdbolhas.GetOQueFez(i) + " " + bdbolhas.GetNoQueFez(i));
         }
         return true;
 
@@ -402,17 +404,17 @@ public class NovoLeitor2 : MonoBehaviour
         int i;
         Material materialbackground = (Material)Resources.Load("Materiais/MaterialBackground");
 
-        for (i = 0; i < bd.GetQuantidadeDeEntradas(); i++)
+        for (i = 0; i < bdbolhas.GetQuantidadeDeEntradas(); i++)
         {
             materialdocreate = null;
 
-            objeto = Instantiate(objetos.Get(bd.GetOQueFez(i)));
+            objeto = Instantiate(objetos.Get(bdbolhas.GetOQueFez(i)));
 
             if (objeto == null) Debug.Log("Deu ruim.");
 
-            objeto.name = bd.GetOQueFez(i) + " " + bd.GetNoQueFez(i) + " " + i.ToString();
+            objeto.name = bdbolhas.GetOQueFez(i) + " " + bdbolhas.GetNoQueFez(i) + " " + i.ToString();
 
-            materialdocreate = materiais.Get(bd.GetNoQueFez(i));
+            materialdocreate = materiais.Get(bdbolhas.GetNoQueFez(i));
             if (materialdocreate == null) { Debug.Log("Deu ruim 2."); }
             else
             {
@@ -423,9 +425,9 @@ public class NovoLeitor2 : MonoBehaviour
 
             objeto.AddComponent<Dados>();
             objeto.GetComponent<Dados>().Atualizar();
-            objeto.GetComponent<Dados>().tempo = bd.GetTempo(i);
-            objeto.GetComponent<Dados>().oquefez = bd.GetOQueFez(i);
-            objeto.GetComponent<Dados>().noquefez = bd.GetNoQueFez(i);
+            objeto.GetComponent<Dados>().tempo = bdbolhas.GetTempo(i);
+            objeto.GetComponent<Dados>().oquefez = bdbolhas.GetOQueFez(i);
+            objeto.GetComponent<Dados>().noquefez = bdbolhas.GetNoQueFez(i);
 
             listadepontos.Add(objeto);
 
@@ -433,7 +435,7 @@ public class NovoLeitor2 : MonoBehaviour
             background.GetComponent<MeshRenderer>().material = materialbackground;
 
             newpos.x = 0;
-            y = background.transform.position.y - (Int32.Parse(Convert.ToString(bd.GetTempo(i))) / 1000) * 20;
+            y = background.transform.position.y - (Int32.Parse(Convert.ToString(bdbolhas.GetTempo(i))) / 1000) * 20;
             newpos.y = y;
             Debug.Log("i -" + y);
             newpos.z = 0;
@@ -448,10 +450,10 @@ public class NovoLeitor2 : MonoBehaviour
             // Passing the values of x, y and time to the position of the objects is a VERY bad idea,
             //      since they can be REALLY big values for the camera, so...
             x = background.GetComponent<Dados>().centro.x - background.GetComponent<Dados>().largurax / 2 +
-                    bd.GetCoordenadaX(i)/resolucao.x * background.GetComponent<Dados>().largurax;
+                    bdbolhas.GetCoordenadaX(i)/resolucao.x * background.GetComponent<Dados>().largurax;
 
             z = background.GetComponent<Dados>().centro.y - background.GetComponent<Dados>().alturaz / 2 +
-                    bd.GetCoordenadaY(i) / resolucao.y * background.GetComponent<Dados>().alturaz;
+                    bdbolhas.GetCoordenadaY(i) / resolucao.y * background.GetComponent<Dados>().alturaz;
 
             newpos = new Vector3(x, y, z);
 
