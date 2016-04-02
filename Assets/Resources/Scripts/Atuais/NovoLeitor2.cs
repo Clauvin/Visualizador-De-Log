@@ -159,6 +159,12 @@ public class NovoLeitor2 : MonoBehaviour
         FileStream fs = new FileStream(fileName, FileMode.Open);
         StreamReader theReader = new StreamReader(fs);
 
+        // Part 1: ignores the [Mode Bolhas]
+        // No futuro, não ignorar.
+        line = theReader.ReadLine();
+
+
+        // Part 2: reads the game screen's resolution in the log.
         line = theReader.ReadLine();
         if (line != null)
         {
