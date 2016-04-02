@@ -31,8 +31,7 @@ public class GuiTelaInicial : GuiPadrao2
                 UnityEngine.SceneManagement.SceneManager.LoadScene(1);
                 break;
             case 1:
-                //Desativado até que o visualizador do Bolhas melhore
-                //UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+                UnityEngine.SceneManagement.SceneManager.LoadScene(2);
                 break;
             case 2:
                 creditos = true;
