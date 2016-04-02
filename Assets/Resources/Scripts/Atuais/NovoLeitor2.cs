@@ -255,8 +255,19 @@ public class NovoLeitor2 : MonoBehaviour
     {
         for (int i = 0; i < bdbolhas.GetQuantidadeDeEntradas(); i++)
         {
-            Debug.Log(bdbolhas.GetCoordenadaX(i) + " " + bdbolhas.GetCoordenadaY(i) + " " +
-                      bdbolhas.GetTempo(i) + " " + bdbolhas.GetOQueFez(i) + " " + bdbolhas.GetNoQueFez(i));
+            if (bdbolhas.GetMouseOuObjeto(i) == "Mouse")
+            {
+                Debug.Log(bdbolhas.GetTempo(i) + " " + bdbolhas.GetMouseOuObjeto(i) + " " +
+                       bdbolhas.GetCoordenadaX(i) + " " + bdbolhas.GetCoordenadaY(i) + " " +
+                       bdbolhas.GetClicando(i) + " " + bdbolhas.GetSegurando(i) + " " + bdbolhas.GetArrastando(i));
+            } else if (bdbolhas.GetMouseOuObjeto(i) == "Objeto")
+            {
+                Debug.Log(bdbolhas.GetTempo(i) + " " + bdbolhas.GetMouseOuObjeto(i) + " " +
+                       bdbolhas.GetCoordenadaX(i) + " " + bdbolhas.GetCoordenadaY(i) + " " +
+                       bdbolhas.GetQualObjeto(i) + " " + bdbolhas.GetQualFrame(i) + " " + bdbolhas.GetQuemCriou(i) + " " +
+                       bdbolhas.GetClicando(i) + " " + bdbolhas.GetSegurando(i) + " " + bdbolhas.GetArrastando(i));
+            }
+
         }
         return true;
 

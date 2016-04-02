@@ -176,7 +176,7 @@ namespace Basicas
 
         public int GetQuantidadeDeEntradas()
         {
-            return coordenadasx.Count;
+            return mouseouobjeto.Count;
         }
 
         public int GetTempo(int pos)
