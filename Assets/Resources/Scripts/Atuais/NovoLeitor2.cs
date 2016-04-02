@@ -224,16 +224,27 @@ public class NovoLeitor2 : MonoBehaviour
                 {
 
                     //TEMPO=MOUSE=X=Y=CLICANDO=SEGURANDO=ARRASTANDO
-                    bdbolhas.AddMouse(Int32.Parse(entries[0]), entries[1].ToString(),
-                            Int32.Parse(entries[2]), Int32.Parse(entries[3]),
-                            entries[4].ToString(), entries[5].ToString(), entries[6].ToString());
+                    bdbolhas.AddMouse(Int32.Parse(entries[0].Split(':')[1]),
+                            entries[1].ToString(),
+                            Int32.Parse(entries[2].Split(':')[1]),
+                            Int32.Parse(entries[3].Split(':')[1]),
+                            entries[4].Split(':')[1].ToString(),
+                            entries[5].Split(':')[1].ToString(),
+                            entries[6].Split(':')[1].ToString());
 
                 } else if ((entries.Length == 11) && (((string)entries[1]) == "Objeto"))
                 {
-                    bdbolhas.AddObjeto(Int32.Parse(entries[0]), entries[1].ToString(),
-                             Int32.Parse(entries[2]), Int32.Parse(entries[3]), entries[4].ToString(),
-                             Int32.Parse(entries[5]), entries[6].ToString(), entries[7].ToString(),
-                             entries[8].ToString(), entries[9].ToString(), entries[10].ToString());
+                    bdbolhas.AddObjeto(Int32.Parse(entries[0].Split(':')[1]),
+                                       entries[1].ToString(),
+                                       Int32.Parse(entries[2].Split(':')[1]), 
+                                       Int32.Parse(entries[3].Split(':')[1]),
+                                       entries[4].ToString(),
+                                       Int32.Parse(entries[5].Split(':')[1]),
+                                       entries[6].Split(':')[1].ToString(),
+                                       entries[7].Split(':')[1].ToString(),
+                                       entries[8].Split(':')[1].ToString(),
+                                       entries[9].ToString(),
+                                       entries[10].ToString());
                 }
 
 #if (DEBUG)
