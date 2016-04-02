@@ -158,11 +158,11 @@ public class NovoLeitor2 : MonoBehaviour
         bdbolhas = new BancoDeDadosBolhas();
         FileStream fs = new FileStream(fileName, FileMode.Open);
         StreamReader theReader = new StreamReader(fs);
-        // Part 1: reads the game screen's resolution in the log.
+
         line = theReader.ReadLine();
         if (line != null)
         {
-            string[] entriesresolution = line.Split('-');
+            string[] entriesresolution = line.Split('x');
             if (entriesresolution.Length == 2)
             {
                 resolucao = new Vector2(Int32.Parse(entriesresolution[0]), Int32.Parse(entriesresolution[1]));
