@@ -479,7 +479,7 @@ public class NovoLeitor2 : MonoBehaviour
             numerosdecores[j] = ((MatrizHeatMap)matrizesdosheatmaps[j]).HowManyPoints();
         }
 
-        for (i = 0; i < bdfit.GetQuantidadeDeEntradas(); i++)
+        for (i = 0; i < bdbolhas.GetQuantidadeDeEntradas(); i++)
         {
             materialdocreate = null;
 
