@@ -13,7 +13,7 @@ public class NovoLeitorBolhas : NovoLeitor2
         NovoLeitor2Init();
         StartBolhas();
 
-        LoadStuffBolhas("C:\\Teste\\TesteBolhas.txt");
+        LoadStuffBolhas();
         CreateStuffBolhas();
 
     }

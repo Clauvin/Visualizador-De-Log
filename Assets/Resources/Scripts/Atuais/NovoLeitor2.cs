@@ -29,6 +29,8 @@ public class NovoLeitor2 : MonoBehaviour
 
     protected string enderecodearquivo;
 
+    public string[] listadeobjetosdobolhas = { "Mouse", "Baleia", "Bolha", "Peixe", "Nuvem" };
+
     public void StartFIT()
     {
         objetos.Add("Qualquer Coisa FIT", (GameObject)Resources.Load("Objetos/Qualquer Coisa FIT"));
@@ -52,14 +54,25 @@ public class NovoLeitor2 : MonoBehaviour
 
     public void StartBolhas()
     {
-        objetos.Add("Clicou", (GameObject)Resources.Load("Objetos/Qualquer Coisa"));
-        objetos.Add("Segurou", (GameObject)Resources.Load("Objetos/Qualquer Coisa"));
-        objetos.Add("Arrastou", (GameObject)Resources.Load("Objetos/Qualquer Coisa"));
+        objetos.Add("Qualquer Coisa Bolhas", (GameObject)Resources.Load("Objetos/Qualquer Coisa Bolhas"));
 
-        materiais.Add("Baleia", (Material)Resources.Load("Materiais/MaterialBaleia2"));
-        materiais.Add("Bolha", (Material)Resources.Load("Materiais/MaterialBolha2"));
-        materiais.Add("Peixe", (Material)Resources.Load("Materiais/MaterialPeixe2"));
-        materiais.Add("Nuvem", (Material)Resources.Load("Materiais/MaterialNuvem2"));
+        materiais.Add("Mouse", (Material)Resources.Load("Materiais/MaterialMouse"));
+        materiais.Add("Baleia", (Material)Resources.Load("Materiais/MaterialBaleia"));
+        materiais.Add("Bolha", (Material)Resources.Load("Materiais/MaterialBolha"));
+        materiais.Add("Peixe", (Material)Resources.Load("Materiais/MaterialPeixe"));
+        materiais.Add("Nuvem", (Material)Resources.Load("Materiais/MaterialNuvem"));
+
+        texturas.Add("Mouse", (Texture2D)Resources.Load("Texturas/P0"));
+        texturas.Add("Baleia", (Texture2D)Resources.Load("Texturas/P1"));
+        texturas.Add("Bolha", (Texture2D)Resources.Load("Texturas/P2"));
+        texturas.Add("Peixe", (Texture2D)Resources.Load("Texturas/P3"));
+        texturas.Add("Nuvem", (Texture2D)Resources.Load("Texturas/P4"));
+
+        texturasselecionadas.Add("Mouse", (Texture2D)Resources.Load("Texturas/P0 Selecionado"));
+        texturasselecionadas.Add("Baleia", (Texture2D)Resources.Load("Texturas/P1 Selecionado"));
+        texturasselecionadas.Add("Bolha", (Texture2D)Resources.Load("Texturas/P2 Selecionado"));
+        texturasselecionadas.Add("Peixe", (Texture2D)Resources.Load("Texturas/P3 Selecionado"));
+        texturasselecionadas.Add("Nuvem", (Texture2D)Resources.Load("Texturas/P4 Selecionado"));
     }
 
     public bool FindFile()
@@ -145,10 +158,11 @@ public class NovoLeitor2 : MonoBehaviour
 
     }
 
-    public bool LoadStuffBolhas(string fileName)
+    public bool LoadStuffBolhas()
     {
         //number for number of HeatMaps
-        int heatmaps = 1;
+        //no caso do Bolhas, 1 + 5 do Mouse mais 4 objetos = 6
+        int heatmaps = 1 + listadeobjetosdobolhas.GetUpperBound(0) + 1;
 
         // Handle any problems that might arise when reading the text
         string line;
@@ -156,7 +170,7 @@ public class NovoLeitor2 : MonoBehaviour
         // was saved as
 
         bdbolhas = new BancoDeDadosBolhas();
-        FileStream fs = new FileStream(fileName, FileMode.Open);
+        FileStream fs = new FileStream(enderecodearquivo, FileMode.Open);
         StreamReader theReader = new StreamReader(fs);
 
         // Part 1: ignores the [Mode Bolhas]
@@ -237,6 +251,12 @@ public class NovoLeitor2 : MonoBehaviour
         fs.Close();
         fs.Dispose();
 
+        for (int i = 0; i < heatmaps; i++)
+        {
+            matrizesdosheatmaps.Add(new MatrizHeatMap());
+        }
+        numerosdecores = new int[heatmaps];
+
         return true;
     }
 
@@ -294,7 +314,7 @@ public class NovoLeitor2 : MonoBehaviour
         for (int j = 0; j < matrizesdosheatmaps.Count; j++)
         {
             //Lê e organiza os pontos dos heatmaps
-            ((MatrizHeatMap)matrizesdosheatmaps[j]).ReadPoints(bdfit, j);
+            ((MatrizHeatMap)matrizesdosheatmaps[j]).ReadPointsFIT(bdfit, j);
             ((MatrizHeatMap)matrizesdosheatmaps[j]).AllTheDifferentPoints();
             ((MatrizHeatMap)matrizesdosheatmaps[j]).OrganizePoints();
             ((MatrizHeatMap)matrizesdosheatmaps[j]).FillingTheDictionary();
@@ -335,7 +355,7 @@ public class NovoLeitor2 : MonoBehaviour
             //ponto já criado, agora adicionar dados a ele
             objeto.AddComponent<Dados>();
             objeto.GetComponent<Dados>().Atualizar();
-            objeto.GetComponent<Dados>().personagem = bdfit.GetPersonagem(i);
+            objeto.GetComponent<Dados>().personagem = bdfit.GetPersonagem(i).ToString();
             objeto.GetComponent<Dados>().tempo = bdfit.GetTempo(i);
             objeto.GetComponent<Dados>().xlog = bdfit.GetGridX(i);
             objeto.GetComponent<Dados>().ylog = bdfit.GetGridY(i);
@@ -416,7 +436,7 @@ public class NovoLeitor2 : MonoBehaviour
 
     }
 
-    public void CreateStuffBolhasAntigo()
+    public void CreateStuffBolhas()
     {
         Camera acamera = FindObjectOfType<Camera>();
         GameObject objeto = null;
@@ -426,19 +446,40 @@ public class NovoLeitor2 : MonoBehaviour
         Material materialdocreate = null;
         float x, y, z;
         int i;
-        Material materialbackground = (Material)Resources.Load("Materiais/MaterialBackground");
+        Material materialbackground = (Material)Resources.Load("Materiais/MaterialBackgroundBolhas");
+        Material[] rend;
 
-        for (i = 0; i < bdbolhas.GetQuantidadeDeEntradas(); i++)
+
+        Material materialheatmap = new Material((Material)Resources.Load("Materiais/MaterialHeatmap"));
+
+        materialbackground.mainTexture = (Texture)Instantiate(Resources.Load("Texturas/Fundo Bolhas"));
+
+        for (int j = 0; j < matrizesdosheatmaps.Count; j++)
+        {
+            //Lê e organiza os pontos dos heatmaps
+            if (j == 0)  ((MatrizHeatMap)matrizesdosheatmaps[j]).ReadPointsBolhas(bdbolhas, "Todos");
+            else ((MatrizHeatMap)matrizesdosheatmaps[j]).ReadPointsBolhas(bdbolhas, listadeobjetosdobolhas[j-1]);
+            ((MatrizHeatMap)matrizesdosheatmaps[j]).AllTheDifferentPoints();
+            ((MatrizHeatMap)matrizesdosheatmaps[j]).OrganizePoints();
+            ((MatrizHeatMap)matrizesdosheatmaps[j]).FillingTheDictionary();
+            ((MatrizHeatMap)matrizesdosheatmaps[j]).FillingTheHeatmap();
+            numerosdecores[j] = ((MatrizHeatMap)matrizesdosheatmaps[j]).HowManyPoints();
+        }
+
+        for (i = 0; i < bdfit.GetQuantidadeDeEntradas(); i++)
         {
             materialdocreate = null;
 
-            objeto = Instantiate(objetos.Get(bdbolhas.GetOQueFez(i)));
+            objeto = Instantiate(objetos.Get("Qualquer Coisa Bolhas"));
+            objeto.AddComponent<AoSerClicado>();
 
             if (objeto == null) Debug.Log("Deu ruim.");
 
-            objeto.name = bdbolhas.GetOQueFez(i) + " " + bdbolhas.GetNoQueFez(i) + " " + i.ToString();
+            objeto.name = bdbolhas.GetTempo(i).ToString() + " " + bdbolhas.GetQualObjeto(i).ToString() + " " +
+                bdbolhas.GetCoordenadaX(i).ToString() + " " + bdbolhas.GetCoordenadaY(i).ToString();
 
-            materialdocreate = materiais.Get(bdbolhas.GetNoQueFez(i));
+            materialdocreate = Instantiate(materiais.Get(bdbolhas.GetQualObjeto(i).ToString()));
+
             if (materialdocreate == null) { Debug.Log("Deu ruim 2."); }
             else
             {
@@ -447,51 +488,105 @@ public class NovoLeitor2 : MonoBehaviour
 
             }
 
+            rend = objeto.GetComponent<MeshRenderer>().materials;
+            rend[0].mainTexture = texturas.Get(bdbolhas.GetQualObjeto(i).ToString());
+            objeto.GetComponent<MeshRenderer>().materials = rend;
+
+
+            //ponto já criado, agora adicionar dados a ele
             objeto.AddComponent<Dados>();
             objeto.GetComponent<Dados>().Atualizar();
             objeto.GetComponent<Dados>().tempo = bdbolhas.GetTempo(i);
-            objeto.GetComponent<Dados>().oquefez = bdbolhas.GetOQueFez(i);
-            objeto.GetComponent<Dados>().noquefez = bdbolhas.GetNoQueFez(i);
+            objeto.GetComponent<Dados>().xlog = bdbolhas.GetCoordenadaX(i);
+            objeto.GetComponent<Dados>().ylog = bdbolhas.GetCoordenadaY(i);
+
+            if (bdbolhas.GetMouseOuObjeto(i) == "Mouse")
+            {
+                if (bdbolhas.GetArrastando(i) == "S") objeto.GetComponent<Dados>().oquefez = "Arrastou";
+                else if (bdbolhas.GetClicando(i) == "S") objeto.GetComponent<Dados>().oquefez = "Clicou";
+                else if (bdbolhas.GetSegurando(i) == "S") objeto.GetComponent<Dados>().oquefez = "Segurando";
+            }
+            else if (bdbolhas.GetMouseOuObjeto(i) == "Objeto")
+            {
+                if (bdbolhas.GetArrastando(i) == "S") objeto.GetComponent<Dados>().oquefez = "Arrastado";
+                else if (bdbolhas.GetClicando(i) == "S") objeto.GetComponent<Dados>().oquefez = "Clicado";
+                else if (bdbolhas.GetSegurando(i) == "S") objeto.GetComponent<Dados>().oquefez = "Segurado";
+            }
 
             listadepontos.Add(objeto);
 
-            background = Instantiate<GameObject>((GameObject)Resources.Load("Objetos/Background"));
-            background.GetComponent<MeshRenderer>().material = materialbackground;
+            //criando background para o par de pontos
+            if (i % 2 == 0)
+            {
+
+                background = Instantiate<GameObject>((GameObject)Resources.Load("Objetos/BackgroundFIT"));
+                background.GetComponent<MeshRenderer>().material = Instantiate(materialbackground);
+                background.GetComponent<Conector>().backgroundprincipal = background;
+
+            }
+
+            GameObject objeto2 = Instantiate(objeto);
+            objeto2.transform.parent = objeto.transform;
+            objeto2.transform.Rotate(new Vector3(0, 0, 180));
+
 
             newpos.x = 0;
-            y = background.transform.position.y - (Int32.Parse(Convert.ToString(bdbolhas.GetTempo(i))) / 1000) * 20;
+            y = background.transform.position.y;
             newpos.y = y;
-            Debug.Log("i -" + y);
             newpos.z = 0;
             background.transform.position = newpos;
 
-            background.AddComponent<Dados>();
-            background.GetComponent<Dados>().Atualizar();
-            background.name = "Background - " + i;
-            listadebackgrounds.Add(background);
+            //adicionando o background onde deve ficar
+            if (i % 2 == 0)
+            {
+                background.AddComponent<Dados>();
+                background.GetComponent<Dados>().Atualizar();
+                background.name = "Background - " + i;
+                listadebackgrounds.Add(background);
+            }
 
             // Explaining this:
             // Passing the values of x, y and time to the position of the objects is a VERY bad idea,
             //      since they can be REALLY big values for the camera, so...
             x = background.GetComponent<Dados>().centro.x - background.GetComponent<Dados>().largurax / 2 +
-                    bdbolhas.GetCoordenadaX(i)/resolucao.x * background.GetComponent<Dados>().largurax;
+                (objeto.GetComponent<MeshCollider>().bounds.max.x - objeto.GetComponent<MeshCollider>().bounds.min.x) / 2 +
+                    bdfit.GetGridX(i) / 32 * (background.GetComponent<Dados>().largurax / 20);
 
-            z = background.GetComponent<Dados>().centro.y - background.GetComponent<Dados>().alturaz / 2 +
-                    bdbolhas.GetCoordenadaY(i) / resolucao.y * background.GetComponent<Dados>().alturaz;
+            z = background.GetComponent<Dados>().centro.y + background.GetComponent<Dados>().alturaz / 2 -
+                (objeto.GetComponent<MeshCollider>().bounds.max.z - objeto.GetComponent<MeshCollider>().bounds.min.z) / 2 -
+                (bdfit.GetGridY(i) / 32 * (background.GetComponent<Dados>().alturaz / 15));
 
             newpos = new Vector3(x, y, z);
 
             objeto.transform.position = newpos;
 
-            y += 0.1f;
+            y += 0.5f;
             objeto.transform.position = new Vector3(x, y, z);
-            objeto.transform.parent = background.transform;
+
+            background.GetComponent<Conector>().SetPonto(objeto, i % 2);
+
+            if (i % 2 == 1)
+            {
+                background.GetComponent<Conector>().Conectar();
+            }
+
         }
 
+        //ajeitando a câmera
         newposcamera.y = ((GameObject)listadebackgrounds[0]).transform.position.y;
         acamera.transform.position = newposcamera;
         acamera.transform.Rotate(90f, 0f, 0f);
         acamera.orthographic = true;
+
+        //ajeitando o heatmap
+        heatmap = Instantiate<GameObject>((GameObject)Resources.Load("Objetos/BackgroundHeatmap"));
+        heatmap.name = "Heatmap";
+        materialheatmap.SetTexture("_MainTex", ((MatrizHeatMap)matrizesdosheatmaps[0]).heatmap);
+        heatmap.GetComponent<MeshRenderer>().material = Instantiate(materialheatmap);
+
+        heatmap.transform.position = ((GameObject)listadebackgrounds[0]).transform.position + new Vector3(200f, 0, 0);
+
+        GetComponent<Controlador>().Inicializacao();
 
     }
 

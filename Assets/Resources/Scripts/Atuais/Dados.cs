@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Dados : MonoBehaviour
 {
-    public int personagem;
+    public string personagem;
     public float largurax;
     public float alturaz;
     public int xlog;
@@ -12,6 +12,8 @@ public class Dados : MonoBehaviour
     public int tempo;
     public string oquefez;
     public string noquefez;
+    public string criadoagora;
+    public string quemcriou;
 
     // Use this for initialization
     void Start () {

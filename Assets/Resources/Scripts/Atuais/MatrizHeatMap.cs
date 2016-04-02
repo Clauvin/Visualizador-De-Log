@@ -52,7 +52,7 @@ public class MatrizHeatMap {
         corum = corum + corminima;
     }
 
-    public void ReadPoints(BancoDeDadosFIT bdfit, int personagem = 0)
+    public void ReadPointsFIT(BancoDeDadosFIT bdfit, int personagem = 0)
     {
         for (int i = 0; i < bdfit.GetQuantidadeDeEntradas(); i++)
         {
@@ -60,6 +60,29 @@ public class MatrizHeatMap {
             {
                 if (bdfit.GetPersonagem(i) == personagem) matriz[bdfit.GetGridX(i) / 32, bdfit.GetGridY(i) / 32] += 1;
             } else matriz[bdfit.GetGridX(i) / 32, bdfit.GetGridY(i) / 32] += 1;
+        }
+    }
+
+    public void ReadPointsBolhas(BancoDeDadosBolhas bdbolhas, string qualobjeto)
+    {
+        for (int i = 0; i < bdbolhas.GetQuantidadeDeEntradas(); i++)
+        {
+            if (qualobjeto == "Todos")
+            {
+                matriz[bdbolhas.GetCoordenadaX(i), bdbolhas.GetCoordenadaY(i)] += 1;
+            } else {
+                if (qualobjeto == "Mouse")
+                {
+                    if (bdbolhas.GetMouseOuObjeto(i) == qualobjeto)
+                    {
+                        matriz[bdbolhas.GetCoordenadaX(i), bdbolhas.GetCoordenadaY(i)] += 1;
+                    }
+                }
+                else
+                {
+                    if (bdbolhas.GetQualObjeto(i) == qualobjeto) matriz[bdbolhas.GetCoordenadaX(i), bdbolhas.GetCoordenadaY(i)] += 1;
+                }
+            }
         }
     }
 

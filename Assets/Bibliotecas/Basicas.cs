@@ -143,7 +143,7 @@ namespace Basicas
             coordenadasx.Add(x);
             coordenadasy.Add(y);
 
-            qualobjeto.Add(string.Empty);
+            qualobjeto.Add("Mouse");
             qualframe.Add(string.Empty);
             criadoagora.Add(string.Empty);
             quemcriou.Add(string.Empty);
