@@ -416,7 +416,7 @@ public class NovoLeitor2 : MonoBehaviour
 
     }
 
-    public void CreateStuffBolhas()
+    public void CreateStuffBolhasAntigo()
     {
         Camera acamera = FindObjectOfType<Camera>();
         GameObject objeto = null;
