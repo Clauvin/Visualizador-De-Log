@@ -147,6 +147,8 @@ public class CounterParserBolhas : MonoBehaviour
 
         System.IO.StreamWriter file = new System.IO.StreamWriter(endereco);
         file.WriteLine("[Mode Bolhas]");
+        file.WriteLine(tamanhodatelax + "x" + tamanhodatelay);
+
         for (int i = 0; i < arraytempo.Count; i++)
         {
             linha = string.Empty;
