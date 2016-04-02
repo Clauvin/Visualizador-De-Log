@@ -511,6 +511,8 @@ public class NovoLeitor2 : MonoBehaviour
                 if (bdbolhas.GetArrastando(i) == "S") objeto.GetComponent<Dados>().oquefez = "Arrastado";
                 else if (bdbolhas.GetClicando(i) == "S") objeto.GetComponent<Dados>().oquefez = "Clicado";
                 else if (bdbolhas.GetSegurando(i) == "S") objeto.GetComponent<Dados>().oquefez = "Segurado";
+                objeto.GetComponent<Dados>().criadoagora = bdbolhas.GetCriadoAgora(i);
+                objeto.GetComponent<Dados>().quemcriou = bdbolhas.GetQuemCriou(i);
             }
 
             listadepontos.Add(objeto);
@@ -519,7 +521,7 @@ public class NovoLeitor2 : MonoBehaviour
             if (i % 2 == 0)
             {
 
-                background = Instantiate<GameObject>((GameObject)Resources.Load("Objetos/BackgroundFIT"));
+                background = Instantiate<GameObject>((GameObject)Resources.Load("Objetos/BackgroundBolhas"));
                 background.GetComponent<MeshRenderer>().material = Instantiate(materialbackground);
                 background.GetComponent<Conector>().backgroundprincipal = background;
 
@@ -550,11 +552,11 @@ public class NovoLeitor2 : MonoBehaviour
             //      since they can be REALLY big values for the camera, so...
             x = background.GetComponent<Dados>().centro.x - background.GetComponent<Dados>().largurax / 2 +
                 (objeto.GetComponent<MeshCollider>().bounds.max.x - objeto.GetComponent<MeshCollider>().bounds.min.x) / 2 +
-                    bdfit.GetGridX(i) / 32 * (background.GetComponent<Dados>().largurax / 20);
+                    bdbolhas.GetCoordenadaX(i) / 32 * (background.GetComponent<Dados>().largurax / 20);
 
             z = background.GetComponent<Dados>().centro.y + background.GetComponent<Dados>().alturaz / 2 -
                 (objeto.GetComponent<MeshCollider>().bounds.max.z - objeto.GetComponent<MeshCollider>().bounds.min.z) / 2 -
-                (bdfit.GetGridY(i) / 32 * (background.GetComponent<Dados>().alturaz / 15));
+                (bdbolhas.GetCoordenadaY(i) / 32 * (background.GetComponent<Dados>().alturaz / 15));
 
             newpos = new Vector3(x, y, z);
 
