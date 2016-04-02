@@ -222,16 +222,18 @@ public class NovoLeitor2 : MonoBehaviour
                 string[] entries = line.Split('=');
                 if ((entries.Length == 7) && (((string)entries[1]) == "Mouse"))
                 {
+
                     //TEMPO=MOUSE=X=Y=CLICANDO=SEGURANDO=ARRASTANDO
-                    bdbolhas.AddMouse(Int32.Parse(entries[0]), (string)entries[1],
+                    bdbolhas.AddMouse(Int32.Parse(entries[0]), entries[1].ToString(),
                             Int32.Parse(entries[2]), Int32.Parse(entries[3]),
-                            (string)entries[4], (string)entries[5], (string)entries[6]);
+                            entries[4].ToString(), entries[5].ToString(), entries[6].ToString());
+
                 } else if ((entries.Length == 11) && (((string)entries[1]) == "Objeto"))
                 {
-                    bdbolhas.AddObjeto(Int32.Parse(entries[0]), (string)entries[1],
-                             Int32.Parse(entries[2]), Int32.Parse(entries[3]), (string)entries[4],
-                             Int32.Parse(entries[5]), (string)entries[6], (string)entries[7],
-                             (string)entries[8], (string)entries[9], (string)entries[10]);
+                    bdbolhas.AddObjeto(Int32.Parse(entries[0]), entries[1].ToString(),
+                             Int32.Parse(entries[2]), Int32.Parse(entries[3]), entries[4].ToString(),
+                             Int32.Parse(entries[5]), entries[6].ToString(), entries[7].ToString(),
+                             entries[8].ToString(), entries[9].ToString(), entries[10].ToString());
                 }
 
 #if (DEBUG)
