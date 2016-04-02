@@ -205,19 +205,26 @@ public class NovoLeitor2 : MonoBehaviour
                 // Do whatever you need to do with the text line, it's a string now
                 // In this example, I split it into arguments based on comma
                 // deliniators, then send that array to DoStuff()
-                string[] entries = line.Split('-');
-                if (entries.Length == 5)
+                string[] entries = line.Split('=');
+                if ((entries.Length == 7) && (((string)entries[1]) == "Mouse"))
                 {
-                    //X - Y - TEMPO - O QUÊ - NO QUê
-                    bdbolhas.Add(Int32.Parse(entries[0]), Int32.Parse(entries[1]),
-                            Int32.Parse(entries[2]), (string)entries[3], (string)entries[4]);
+                    //TEMPO=MOUSE=X=Y=CLICANDO=SEGURANDO=ARRASTANDO
+                    bdbolhas.AddMouse(Int32.Parse(entries[0]), (string)entries[1],
+                            Int32.Parse(entries[2]), Int32.Parse(entries[3]),
+                            (string)entries[4], (string)entries[5], (string)entries[6]);
+                } else if ((entries.Length == 11) && (((string)entries[1]) == "Objeto"))
+                {
+                    bdbolhas.AddObjeto(Int32.Parse(entries[0]), (string)entries[1],
+                             Int32.Parse(entries[2]), Int32.Parse(entries[3]), (string)entries[4],
+                             Int32.Parse(entries[5]), (string)entries[6], (string)entries[7],
+                             (string)entries[8], (string)entries[9], (string)entries[10]);
                 }
 
 #if (DEBUG)
 
                 else
                 {
-                    Debug.Log("NovoLeitor2.LoadStuff - Linha não tinha cinco elementos.");
+                    Debug.Log("NovoLeitor2.LoadStuff - Linha formatada errada.");
                 }
 
 #endif

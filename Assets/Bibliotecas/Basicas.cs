@@ -98,58 +98,85 @@ namespace Basicas
 
     public class BancoDeDadosBolhas
     {
+        private ArrayList tempo;
+        private ArrayList mouseouobjeto;
         private ArrayList coordenadasx;
         private ArrayList coordenadasy;
-        private ArrayList tempo;
+
+        private ArrayList qualobjeto;
+        private ArrayList qualframe;
+        private ArrayList criadoagora;
+        private ArrayList quemcriou;
+
+        private ArrayList clicando;
+        private ArrayList segurando;
+        private ArrayList arrastando;
+
         private ArrayList oquefez;
         private ArrayList noquefez;
 
         public BancoDeDadosBolhas()
         {
+            tempo = new ArrayList();
+            mouseouobjeto = new ArrayList();
             coordenadasx = new ArrayList();
             coordenadasy = new ArrayList();
-            tempo = new ArrayList();
+
+            qualobjeto = new ArrayList();
+            qualframe = new ArrayList();
+            criadoagora = new ArrayList();
+            quemcriou = new ArrayList();
+
+            clicando = new ArrayList();
+            segurando = new ArrayList();
+            arrastando = new ArrayList();
+
             oquefez = new ArrayList();
             noquefez = new ArrayList();
-        }
+    }
 
-        public bool Add(int x, int y, int ms, string oque, string noque)
+        public bool AddMouse(int time, string mouse, int x, int y, string clicado, string segurado, string arrastado)
         {
+
+            tempo.Add(time);
+            mouseouobjeto.Add(mouse);
             coordenadasx.Add(x);
             coordenadasy.Add(y);
-            tempo.Add(ms);
-            oquefez.Add(oque);
-            noquefez.Add(noque);
+
+            qualobjeto.Add(string.Empty);
+            qualframe.Add(string.Empty);
+            criadoagora.Add(string.Empty);
+            quemcriou.Add(string.Empty);
+
+            clicando.Add(clicado);
+            segurando.Add(segurado);
+            arrastando.Add(arrastado);
+            return true;
+        }
+
+        public bool AddObjeto(int time, string objeto, int x, int y, string qual, int frame, string criadonessemomento,
+                              string qcriou, string clicado, string segurado, string arrastado)
+        {
+            tempo.Add(time);
+            mouseouobjeto.Add(objeto);
+            coordenadasx.Add(x);
+            coordenadasy.Add(y);
+
+            qualobjeto.Add(qual);
+            qualframe.Add(frame);
+            criadoagora.Add(criadonessemomento);
+            quemcriou.Add(qcriou);
+
+            clicando.Add(clicado);
+            segurando.Add(segurado);
+            arrastando.Add(arrastado);
+
             return true;
         }
 
         public int GetQuantidadeDeEntradas()
         {
             return coordenadasx.Count;
-        }
-
-        public int GetCoordenadaX(int pos)
-        {
-            try { return (int)coordenadasx[pos]; }
-            //ATENÇAO: Esse catch está correto?
-            catch (ArgumentOutOfRangeException excecao) {
-#if (DEBUG)
-                Debug.Log("BancoDeDadosBolhas.GetCoordenadaX - Não há posição " + pos);
-#endif
-                return -1;
-            }
-        }
-
-        public int GetCoordenadaY(int pos)
-        {
-            try { return (int)coordenadasy[pos]; }
-            //ATENÇAO: Esse catch está correto?
-            catch (ArgumentOutOfRangeException excecao) {
-#if (DEBUG)
-                Debug.Log("BancoDeDadosBolhas.GetCoordenadaY - Não há posição " + pos);
-#endif
-                return -1;
-            }
         }
 
         public int GetTempo(int pos)
@@ -164,26 +191,130 @@ namespace Basicas
             }
         }
 
-        public string GetOQueFez(int pos)
+        public string GetMouseOuObjeto(int pos)
         {
-            try { return (string)oquefez[pos]; }
+            try { return (string)mouseouobjeto[pos]; }
+            //ATENÇAO: Esse catch está correto?
+            catch (ArgumentOutOfRangeException excecao)
+            {
+#if (DEBUG)
+                Debug.Log("BancoDeDadosBolhas.GetMouseOuObjeto - Não há posição " + pos);
+#endif
+                return string.Empty;
+            }
+        }
+
+        public int GetCoordenadaX(int pos)
+        {
+            try { return (int)coordenadasx[pos]; }
+            //ATENÇAO: Esse catch está correto?
+            catch (ArgumentOutOfRangeException excecao)
+            {
+#if (DEBUG)
+                Debug.Log("BancoDeDadosBolhas.GetCoordenadaX - Não há posição " + pos);
+#endif
+                return -1;
+            }
+        }
+
+        public int GetCoordenadaY(int pos)
+        {
+            try { return (int)coordenadasy[pos]; }
+            //ATENÇAO: Esse catch está correto?
+            catch (ArgumentOutOfRangeException excecao)
+            {
+#if (DEBUG)
+                Debug.Log("BancoDeDadosBolhas.GetCoordenadaY - Não há posição " + pos);
+#endif
+                return -1;
+            }
+        }
+
+        public string GetQualObjeto(int pos)
+        {
+            try { return (string)qualobjeto[pos]; }
             //ATENÇAO: Esse catch está correto?
             catch (ArgumentOutOfRangeException excecao) {
 #if (DEBUG)
-                Debug.Log("BancoDeDadosBolhas.GetOQueFez - Não há posição " + pos);
+                Debug.Log("BancoDeDadosBolhas.QualObjeto - Não há posição " + pos);
 #endif
                 return "";
             }
         }
 
-        public string GetNoQueFez(int pos)
+        public int GetQualFrame(int pos)
         {
-            try { return (string)noquefez[pos]; }
+            try { return (int)qualframe[pos]; }
             //ATENÇAO: Esse catch está correto?
             catch (ArgumentOutOfRangeException excecao)
             {
 #if (DEBUG)
-                Debug.Log("BancoDeDadosBolhas.GetNoQueFez - Não há posição " + pos);
+                Debug.Log("BancoDeDadosBolhas.GetQualFrame - Não há posição " + pos);
+#endif
+                return -1;
+            }
+        }
+
+        public string GetCriadoAgora(int pos)
+        {
+            try { return (string)criadoagora[pos]; }
+            //ATENÇAO: Esse catch está correto?
+            catch (ArgumentOutOfRangeException excecao)
+            {
+#if (DEBUG)
+                Debug.Log("BancoDeDadosBolhas.GetCriadoAgora - Não há posição " + pos);
+#endif
+                return "";
+            }
+        }
+
+        public string GetQuemCriou(int pos)
+        {
+            try { return (string)quemcriou[pos]; }
+            //ATENÇAO: Esse catch está correto?
+            catch (ArgumentOutOfRangeException excecao)
+            {
+#if (DEBUG)
+                Debug.Log("BancoDeDadosBolhas.GetQuemCriou - Não há posição " + pos);
+#endif
+                return "";
+            }
+        }
+
+        public string GetClicando(int pos)
+        {
+            try { return (string)clicando[pos]; }
+            //ATENÇAO: Esse catch está correto?
+            catch (ArgumentOutOfRangeException excecao)
+            {
+#if (DEBUG)
+                Debug.Log("BancoDeDadosBolhas.GetClicando - Não há posição " + pos);
+#endif
+                return "";
+            }
+        }
+
+        public string GetSegurando(int pos)
+        {
+            try { return (string)segurando[pos]; }
+            //ATENÇAO: Esse catch está correto?
+            catch (ArgumentOutOfRangeException excecao)
+            {
+#if (DEBUG)
+                Debug.Log("BancoDeDadosBolhas.GetSegurando - Não há posição " + pos);
+#endif
+                return "";
+            }
+        }
+
+        public string GetArrastando(int pos)
+        {
+            try { return (string)arrastando[pos]; }
+            //ATENÇAO: Esse catch está correto?
+            catch (ArgumentOutOfRangeException excecao)
+            {
+#if (DEBUG)
+                Debug.Log("BancoDeDadosBolhas.GetArrastando - Não há posição " + pos);
 #endif
                 return "";
             }
