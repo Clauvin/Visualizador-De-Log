@@ -111,7 +111,7 @@ public class Controlador : MonoBehaviour {
 
                 if (Input.GetKeyUp("e"))
                 {
-                    string tempo = GetComponent<GuiFITTempo>().GetStringEditavel();
+                    string tempo = GetComponent<GuiTempo>().GetStringEditavel();
                     int posicaotemporal;
                     bool resultado = int.TryParse(tempo, out posicaotemporal);
                     if (resultado)
@@ -123,7 +123,7 @@ public class Controlador : MonoBehaviour {
                             Debug.Log(posicaocamera.y);
                         } else
                         {
-                            GetComponent<GuiFITTempo>().SetStringEditavel("Tempo " + tempo + " não existe.");
+                            GetComponent<GuiTempo>().SetStringEditavel("Tempo " + tempo + " não existe.");
                         }
                     }
 
@@ -133,8 +133,8 @@ public class Controlador : MonoBehaviour {
                 if (Input.GetKeyUp("t"))
                 {
                     if (automodecustom == false) {  
-                        string tempo1 = GetComponent<GuiFITTempo>().GetAutoCustomComecoEditavel();
-                        string tempo2 = GetComponent<GuiFITTempo>().GetAutoCustomFinalEditavel();
+                        string tempo1 = GetComponent<GuiTempo>().GetAutoCustomComecoEditavel();
+                        string tempo2 = GetComponent<GuiTempo>().GetAutoCustomFinalEditavel();
 
                         bool resultado1 = int.TryParse(tempo1, out posicaotemporal1);
                         bool resultado2 = int.TryParse(tempo2, out posicaotemporal2);
@@ -156,8 +156,8 @@ public class Controlador : MonoBehaviour {
                             }
                         } else
                         {
-                            if (!resultado1) GetComponent<GuiFITTempo>().SetAutoCustomComecoEditavel("Tempo " + tempo1 + " não existe.");
-                            if (!resultado2) GetComponent<GuiFITTempo>().SetAutoCustomFinalEditavel("Tempo " + tempo2 + " não existe.");
+                            if (!resultado1) GetComponent<GuiTempo>().SetAutoCustomComecoEditavel("Tempo " + tempo1 + " não existe.");
+                            if (!resultado2) GetComponent<GuiTempo>().SetAutoCustomFinalEditavel("Tempo " + tempo2 + " não existe.");
                         }
 
                         FindObjectOfType<Camera>().transform.position = posicaocamera;
@@ -451,9 +451,9 @@ public class Controlador : MonoBehaviour {
 
             if ((modo == "Um Frame De Cada Vez em 3D") || (modo == "Um Frame De Cada Vez em 2D"))
             {
-                GetComponent<GuiFITTempo>().RevelarGui();
+                GetComponent<GuiTempo>().RevelarGui();
             }
-            else { GetComponent<GuiFITTempo>().EsconderGui(); }
+            else { GetComponent<GuiTempo>().EsconderGui(); }
 
             if (modo == "Heatmap")
             {
