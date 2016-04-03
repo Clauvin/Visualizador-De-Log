@@ -1,23 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GuiFITTempo : GuiPadrao2
+public class GuiFITTempo : GuiTempo
 {
-
-    bool gambiarra;
-
-    protected string texto;
-    protected string instrucoes;
-
-    protected string stringParaEditar;
-    protected string autocustom1;
-    protected string autocustom2;
-
-    private int posicaoy;
-    float posinicialcamera;
-    float postempofloat;
-    int postempo;
-    
 
     public GuiFITTempo()
     {
@@ -28,20 +13,6 @@ public class GuiFITTempo : GuiPadrao2
         stringParaEditar = "Apenas >= 0 aqui.";
         autocustom1 = "Apenas >= 0 aqui.";
         autocustom2 = "Apenas >= 0 aqui.";
-    }
-
-    public void PegarQualModo(string modo)
-    {
-
-        texto = modo;
-
-    }
-
-    public void PegarInstrucoes(string instrucao)
-    {
-
-        instrucoes = instrucao;
-
     }
 
     public override void OnGUI()
@@ -62,41 +33,14 @@ public class GuiFITTempo : GuiPadrao2
             autocustom1 = GUI.TextField(new Rect(10, 120, 210, 20), autocustom1);
             GUI.Label(new Rect(10, 140, 210, 20), "Fim de Modo Automático Customizado", "textfield");
             autocustom2 = GUI.TextField(new Rect(10, 160, 210, 20), autocustom2);
-            if (GetComponent<Controlador>().GetAutoMode()) {
+            if (GetComponent<Controlador>().GetAutoMode())
+            {
                 GUI.TextField(new Rect(10, 180, 210, 20), "Modo Automático Customizado ativado");
             }
             GUI.EndGroup();
 
         }
     }
-
-    public override bool MudarTexto(string novotexto)
-    {
-
-        texto = novotexto;
-        return true;
-
-    }
-
-    public bool MudarInstrucoes(string instrucao)
-    {
-        instrucoes = instrucao;
-        return true;
-    }
-
-    public override string GetTexto() { return texto; }
-
-    public string GetStringEditavel() { return stringParaEditar; }
-
-    public void SetStringEditavel(string editada) { stringParaEditar = editada; }
-
-    public string GetAutoCustomComecoEditavel() { return autocustom1; }
-
-    public void SetAutoCustomComecoEditavel(string editada) { autocustom1 = editada; }
-
-    public string GetAutoCustomFinalEditavel() { return autocustom2; }
-
-    public void SetAutoCustomFinalEditavel(string editada) { autocustom2 = editada; }
 
     void Awake()
     {
@@ -118,7 +62,7 @@ public class GuiFITTempo : GuiPadrao2
             gambiarra = false;
         }
 
-        postempofloat = (posinicialcamera - GetComponent<Camera>().transform.position.y)/20;
+        postempofloat = (posinicialcamera - GetComponent<Camera>().transform.position.y) / 20;
         if (GetComponent<Controlador>().modo == "Um Frame De Cada Vez em 2D")
         {
             postempofloat += 0.25f;
