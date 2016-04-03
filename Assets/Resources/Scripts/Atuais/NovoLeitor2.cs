@@ -512,6 +512,7 @@ public class NovoLeitor2 : MonoBehaviour
             objeto.GetComponent<Dados>().tempo = bdbolhas.GetTempo(i);
             objeto.GetComponent<Dados>().xlog = bdbolhas.GetCoordenadaX(i);
             objeto.GetComponent<Dados>().ylog = bdbolhas.GetCoordenadaY(i);
+            objeto.GetComponent<Dados>().personagem = bdbolhas.GetQualObjeto(i);
 
             if (bdbolhas.GetMouseOuObjeto(i) == "Mouse")
             {
