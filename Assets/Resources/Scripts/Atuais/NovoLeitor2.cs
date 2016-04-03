@@ -696,6 +696,11 @@ public class NovoLeitor2 : MonoBehaviour
         return bdfit.GetTempo(bdfit.GetQuantidadeDeEntradas() - 1);
     }
 
+    public int GetUltimoTempoBolhas()
+    {
+        return bdbolhas.GetTempo(bdbolhas.GetQuantidadeDeEntradas() - 1);
+    }
+
     public void RetornarParaTelaInicial()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
