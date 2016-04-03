@@ -532,7 +532,7 @@ public class NovoLeitor2 : MonoBehaviour
             listadepontos.Add(objeto);
 
             //criando background para o par de pontos
-            if (i % 2 == 0)
+            if (i % 6 == 0)
             {
 
                 background = Instantiate<GameObject>((GameObject)Resources.Load("Objetos/BackgroundBolhas"));
@@ -553,7 +553,7 @@ public class NovoLeitor2 : MonoBehaviour
             background.transform.position = newpos;
 
             //adicionando o background onde deve ficar
-            if (i % 2 == 0)
+            if (i % 6 == 0)
             {
                 background.AddComponent<Dados>();
                 background.GetComponent<Dados>().Atualizar();
