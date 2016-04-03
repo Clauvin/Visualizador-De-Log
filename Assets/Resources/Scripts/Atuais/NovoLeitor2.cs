@@ -462,6 +462,8 @@ public class NovoLeitor2 : MonoBehaviour
         Material materialbackground = (Material)Resources.Load("Materiais/MaterialBackgroundBolhas");
         Material[] rend;
 
+        bool novotempo;
+        int tempo;
 
         Material materialheatmap = new Material((Material)Resources.Load("Materiais/MaterialHeatmap"));
 
@@ -479,8 +481,13 @@ public class NovoLeitor2 : MonoBehaviour
             numerosdecores[j] = ((MatrizHeatMap)matrizesdosheatmaps[j]).HowManyPoints();
         }
 
+        tempo = bdbolhas.GetTempo(0);
+        novotempo = true;
+
         for (i = 0; i < bdbolhas.GetQuantidadeDeEntradas(); i++)
         {
+            if (tempo != bdbolhas.GetTempo(i)) novotempo = true;
+
             materialdocreate = null;
 
             objeto = Instantiate(objetos.Get("Qualquer Coisa Bolhas"));
@@ -532,7 +539,7 @@ public class NovoLeitor2 : MonoBehaviour
             listadepontos.Add(objeto);
 
             //criando background para o par de pontos
-            if (i % 6 == 0)
+            if (novotempo)
             {
 
                 background = Instantiate<GameObject>((GameObject)Resources.Load("Objetos/BackgroundBolhas"));
@@ -553,7 +560,7 @@ public class NovoLeitor2 : MonoBehaviour
             background.transform.position = newpos;
 
             //adicionando o background onde deve ficar
-            if (i % 6 == 0)
+            if (novotempo)
             {
                 background.AddComponent<Dados>();
                 background.GetComponent<Dados>().Atualizar();
@@ -581,10 +588,12 @@ public class NovoLeitor2 : MonoBehaviour
 
             background.GetComponent<Conector>().SetPonto(objeto, i % 2);
 
-            if (i % 2 == 1)
+            if (!novotempo)
             {
                 background.GetComponent<Conector>().Conectar();
             }
+
+            novotempo = false;
 
         }
 
