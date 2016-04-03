@@ -15,11 +15,10 @@ public class AoSerClicado : MonoBehaviour {
 
     void OnMouseDown()
     {
-        //FindObjectOfType<Camera>().GetComponent<GuiFITPonto>().EsconderGui();
         Dados d = GetComponent<Dados>();
-        FindObjectOfType<Camera>().GetComponent<GuiFITPonto>().PegarDados(d);
+        FindObjectOfType<Camera>().GetComponent<GuiPonto>().PegarDados(d);
         FindObjectOfType<Camera>().GetComponent<Controlador>().PontoFoiClicado(GetComponent<Transform>());
-        FindObjectOfType<Camera>().GetComponent<GuiFITPonto>().RevelarGui();
+        FindObjectOfType<Camera>().GetComponent<GuiPonto>().RevelarGui();
     }
 
     

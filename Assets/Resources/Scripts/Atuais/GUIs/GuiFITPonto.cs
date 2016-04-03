@@ -21,10 +21,6 @@ public class GuiFITPonto : GuiPonto
         }
     }
 
-    public override bool MudarTexto(string novotexto) { return true; }
-
-    public override string GetTexto() { return texto; }
-
     void Awake()
     {
         dadosdoponto = null;
@@ -33,12 +29,6 @@ public class GuiFITPonto : GuiPonto
         posy = 0;
         texto = "";
         revelado = false;
-    }
-
-    // Use this for initialization
-    void Start()
-    {
-
     }
 
     // Update is called once per frame

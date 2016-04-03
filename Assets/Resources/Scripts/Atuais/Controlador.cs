@@ -397,11 +397,11 @@ public class Controlador : MonoBehaviour {
                 {
                     if (acerto.collider.name.Contains("Background"))
                     {
-                        GetComponent<GuiFITPonto>().EsconderGui();
+                        GetComponent<GuiPonto>().EsconderGui();
                         NenhumPontoFoiClicado();
                     }
                 } else {
-                    GetComponent<GuiFITPonto>().EsconderGui();
+                    GetComponent<GuiPonto>().EsconderGui();
                     NenhumPontoFoiClicado();
                 }
             }
