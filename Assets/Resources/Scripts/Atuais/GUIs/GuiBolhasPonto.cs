@@ -7,15 +7,15 @@ public class GuiBolhasPonto : GuiPonto
     {
         if (revelado)
         {
-            GUI.BeginGroup(new Rect(posx, posy, 300, 80));
+            GUI.BeginGroup(new Rect(posx, posy, 270, 80));
             posicaoy = 0;
-            GUI.TextField(new Rect(10, posicaoy, 290, 20), "Personagem = " + dadosdoponto.personagem);
+            GUI.TextField(new Rect(10, posicaoy, 260, 20), "Personagem = " + dadosdoponto.personagem);
             posicaoy += 20;
-            GUI.TextField(new Rect(10, posicaoy, 290, 20), "X = " + dadosdoponto.xlog / 32);
+            GUI.TextField(new Rect(10, posicaoy, 260, 20), "X = " + dadosdoponto.xlog / 32);
             posicaoy += 20;
-            GUI.TextField(new Rect(10, posicaoy, 290, 20), "Y = " + dadosdoponto.ylog / 32);
+            GUI.TextField(new Rect(10, posicaoy, 260, 20), "Y = " + dadosdoponto.ylog / 32);
             posicaoy += 20;
-            GUI.TextField(new Rect(10, posicaoy, 290, 20), "Tempo = " + dadosdoponto.tempo);
+            GUI.TextField(new Rect(10, posicaoy, 260, 20), "Tempo = " + dadosdoponto.tempo);
 
             GUI.EndGroup();
         }
@@ -29,12 +29,6 @@ public class GuiBolhasPonto : GuiPonto
         posy = 0;
         texto = "";
         revelado = false;
-    }
-
-    // Use this for initialization
-    void Start()
-    {
-
     }
 
     // Update is called once per frame
