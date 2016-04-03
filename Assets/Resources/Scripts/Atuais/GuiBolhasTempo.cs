@@ -24,7 +24,7 @@ public class GuiBolhasTempo : GuiTempo
             posicaoy = 0;
 
             GUI.Label(new Rect(10, 0, 210, 40), "Tempo Mostrado em Câmera: " + postempo + " de \n" +
-                GetComponent<NovoLeitor2>().GetUltimoTempoFIT(), "textfield");
+                GetComponent<NovoLeitor2>().GetUltimoTempoBolhas(), "textfield");
             if (GetComponent<Controlador>().GetAutoMode()) GUI.TextField(new Rect(10, 40, 210, 20), "Modo Automático ativado");
             GUI.Label(new Rect(10, 60, 210, 20), "Pular para Posição", "textfield");
             stringParaEditar = GUI.TextField(new Rect(10, 80, 210, 20), stringParaEditar);
