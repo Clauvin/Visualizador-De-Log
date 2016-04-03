@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GuiFITTempo : GuiTempo
+public class GuiBolhasTempo : GuiTempo
 {
-    public GuiFITTempo()
+
+    public GuiBolhasTempo()
     {
         gambiarra = true;
         posy = 80;
@@ -40,7 +41,7 @@ public class GuiFITTempo : GuiTempo
 
         }
     }
-    
+
     void Awake()
     {
 
@@ -61,7 +62,7 @@ public class GuiFITTempo : GuiTempo
             gambiarra = false;
         }
 
-        postempofloat = (posinicialcamera - GetComponent<Camera>().transform.position.y)/20;
+        postempofloat = (posinicialcamera - GetComponent<Camera>().transform.position.y) / 20;
         if (GetComponent<Controlador>().modo == "Um Frame De Cada Vez em 2D")
         {
             postempofloat += 0.25f;
