@@ -1,22 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GuiFITPonto : GuiPadrao2
+public class GuiFITPonto : GuiPonto
 {
-
-    bool gambiarra;
-    Dados dadosdoponto;
-
-    protected string texto;
-    private int posicaoy;
-
-    public void PegarDados(Dados dados)
-    {
-
-        dadosdoponto = dados;
-
-    }
-
     public override void OnGUI()
     {
         if (revelado)
