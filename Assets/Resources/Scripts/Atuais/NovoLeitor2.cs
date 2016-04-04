@@ -463,6 +463,7 @@ public class NovoLeitor2 : MonoBehaviour
         Material[] rend;
 
         bool novotempo;
+        bool viranovotempo;
         int tempo;
 
         Material materialheatmap = new Material((Material)Resources.Load("Materiais/MaterialHeatmap"));
@@ -483,121 +484,124 @@ public class NovoLeitor2 : MonoBehaviour
 
         tempo = bdbolhas.GetTempo(0);
         novotempo = true;
+        viranovotempo = false;
 
         for (i = 0; i < bdbolhas.GetQuantidadeDeEntradas(); i++)
         {
+            tempo = i;
             if (tempo != bdbolhas.GetTempo(i)) novotempo = true;
+            if (i == bdbolhas.GetQuantidadeDeEntradas() - 1) viranovotempo = true;
+            else if (tempo != bdbolhas.GetTempo(i + 1)) viranovotempo = true; 
+        }
 
-            materialdocreate = null;
+        materialdocreate = null;
 
-            objeto = Instantiate(objetos.Get("Qualquer Coisa Bolhas"));
-            objeto.AddComponent<AoSerClicado>();
+        objeto = Instantiate(objetos.Get("Qualquer Coisa Bolhas"));
+        objeto.AddComponent<AoSerClicado>();
 
-            if (objeto == null) Debug.Log("Deu ruim.");
+        if (objeto == null) Debug.Log("Deu ruim.");
 
-            objeto.name = bdbolhas.GetTempo(i).ToString() + " " + bdbolhas.GetQualObjeto(i).ToString() + " " +
-                bdbolhas.GetCoordenadaX(i).ToString() + " " + bdbolhas.GetCoordenadaY(i).ToString();
+        objeto.name = bdbolhas.GetTempo(i).ToString() + " " + bdbolhas.GetQualObjeto(i).ToString() + " " +
+            bdbolhas.GetCoordenadaX(i).ToString() + " " + bdbolhas.GetCoordenadaY(i).ToString();
 
-            materialdocreate = Instantiate(materiais.Get(bdbolhas.GetQualObjeto(i).ToString()));
+        materialdocreate = Instantiate(materiais.Get(bdbolhas.GetQualObjeto(i).ToString()));
 
-            if (materialdocreate == null) { Debug.Log("Deu ruim 2."); }
-            else
-            {
+        if (materialdocreate == null) { Debug.Log("Deu ruim 2."); }
+        else
+        {
 
-                objeto.GetComponent<MeshRenderer>().material = materialdocreate;
-
-            }
-
-            rend = objeto.GetComponent<MeshRenderer>().materials;
-            rend[0].mainTexture = texturas.Get(bdbolhas.GetQualObjeto(i).ToString());
-            objeto.GetComponent<MeshRenderer>().materials = rend;
-
-
-            //ponto já criado, agora adicionar dados a ele
-            objeto.AddComponent<Dados>();
-            objeto.GetComponent<Dados>().Atualizar();
-            objeto.GetComponent<Dados>().tempo = bdbolhas.GetTempo(i);
-            objeto.GetComponent<Dados>().xlog = bdbolhas.GetCoordenadaX(i);
-            objeto.GetComponent<Dados>().ylog = bdbolhas.GetCoordenadaY(i);
-            objeto.GetComponent<Dados>().personagem = bdbolhas.GetQualObjeto(i);
-
-            if (bdbolhas.GetMouseOuObjeto(i) == "Mouse")
-            {
-                if (bdbolhas.GetArrastando(i) == "S") objeto.GetComponent<Dados>().oquefez = "Arrastou";
-                else if (bdbolhas.GetClicando(i) == "S") objeto.GetComponent<Dados>().oquefez = "Clicou";
-                else if (bdbolhas.GetSegurando(i) == "S") objeto.GetComponent<Dados>().oquefez = "Segurando";
-            }
-            else if (bdbolhas.GetMouseOuObjeto(i) == "Objeto")
-            {
-                if (bdbolhas.GetArrastando(i) == "S") objeto.GetComponent<Dados>().oquefez = "Arrastado";
-                else if (bdbolhas.GetClicando(i) == "S") objeto.GetComponent<Dados>().oquefez = "Clicado";
-                else if (bdbolhas.GetSegurando(i) == "S") objeto.GetComponent<Dados>().oquefez = "Segurado";
-                objeto.GetComponent<Dados>().criadoagora = bdbolhas.GetCriadoAgora(i);
-                objeto.GetComponent<Dados>().quemcriou = bdbolhas.GetQuemCriou(i);
-            }
-
-            listadepontos.Add(objeto);
-
-            //criando background para o par de pontos
-            if (novotempo)
-            {
-
-                background = Instantiate<GameObject>((GameObject)Resources.Load("Objetos/BackgroundBolhas"));
-                background.GetComponent<MeshRenderer>().material = Instantiate(materialbackground);
-                background.GetComponent<Conector>().backgroundprincipal = background;
-
-            }
-
-            GameObject objeto2 = Instantiate(objeto);
-            objeto2.transform.parent = objeto.transform;
-            objeto2.transform.Rotate(new Vector3(0, 0, 180));
-
-
-            newpos.x = 0;
-            y = background.transform.position.y;
-            newpos.y = y;
-            newpos.z = 0;
-            background.transform.position = newpos;
-
-            //adicionando o background onde deve ficar
-            if (novotempo)
-            {
-                background.AddComponent<Dados>();
-                background.GetComponent<Dados>().Atualizar();
-                background.name = "Background - " + i;
-                if (i < 10) Debug.Log(background.name);
-                listadebackgrounds.Add(background);
-            }
-
-            // Explaining this:
-            // Passing the values of x, y and time to the position of the objects is a VERY bad idea,
-            //      since they can be REALLY big values for the camera, so...
-            x = background.GetComponent<Dados>().centro.x - background.GetComponent<Dados>().largurax / 2 +
-                (objeto.GetComponent<MeshCollider>().bounds.max.x - objeto.GetComponent<MeshCollider>().bounds.min.x) / 2 +
-                    bdbolhas.GetCoordenadaX(i) / 32 * (background.GetComponent<Dados>().largurax / 20);
-
-            z = background.GetComponent<Dados>().centro.y + background.GetComponent<Dados>().alturaz / 2 -
-                (objeto.GetComponent<MeshCollider>().bounds.max.z - objeto.GetComponent<MeshCollider>().bounds.min.z) / 2 -
-                (bdbolhas.GetCoordenadaY(i) / 32 * (background.GetComponent<Dados>().alturaz / 15));
-
-            newpos = new Vector3(x, y, z);
-
-            objeto.transform.position = newpos;
-
-            y += 0.5f;
-            objeto.transform.position = new Vector3(x, y, z);
-
-            if (i < 10) Debug.Log(i);
-            background.GetComponent<Conector>().SetPonto(objeto, i % 2);
-
-            if ((background.GetComponent<Conector>().ponto1 != null) && (background.GetComponent<Conector>().ponto2 != null))
-            {
-                background.GetComponent<Conector>().Conectar();
-            }
-
-            novotempo = false;
+            objeto.GetComponent<MeshRenderer>().material = materialdocreate;
 
         }
+
+        rend = objeto.GetComponent<MeshRenderer>().materials;
+        rend[0].mainTexture = texturas.Get(bdbolhas.GetQualObjeto(i).ToString());
+        objeto.GetComponent<MeshRenderer>().materials = rend;
+
+
+        //ponto já criado, agora adicionar dados a ele
+        objeto.AddComponent<Dados>();
+        objeto.GetComponent<Dados>().Atualizar();
+        objeto.GetComponent<Dados>().tempo = bdbolhas.GetTempo(i);
+        objeto.GetComponent<Dados>().xlog = bdbolhas.GetCoordenadaX(i);
+        objeto.GetComponent<Dados>().ylog = bdbolhas.GetCoordenadaY(i);
+        objeto.GetComponent<Dados>().personagem = bdbolhas.GetQualObjeto(i);
+
+        if (bdbolhas.GetMouseOuObjeto(i) == "Mouse")
+        {
+            if (bdbolhas.GetArrastando(i) == "S") objeto.GetComponent<Dados>().oquefez = "Arrastou";
+            else if (bdbolhas.GetClicando(i) == "S") objeto.GetComponent<Dados>().oquefez = "Clicou";
+            else if (bdbolhas.GetSegurando(i) == "S") objeto.GetComponent<Dados>().oquefez = "Segurando";
+        }
+        else if (bdbolhas.GetMouseOuObjeto(i) == "Objeto")
+        {
+            if (bdbolhas.GetArrastando(i) == "S") objeto.GetComponent<Dados>().oquefez = "Arrastado";
+            else if (bdbolhas.GetClicando(i) == "S") objeto.GetComponent<Dados>().oquefez = "Clicado";
+            else if (bdbolhas.GetSegurando(i) == "S") objeto.GetComponent<Dados>().oquefez = "Segurado";
+            objeto.GetComponent<Dados>().criadoagora = bdbolhas.GetCriadoAgora(i);
+            objeto.GetComponent<Dados>().quemcriou = bdbolhas.GetQuemCriou(i);
+        }
+
+        listadepontos.Add(objeto);
+
+        //criando background para o par de pontos
+        if (novotempo)
+        {
+
+            background = Instantiate<GameObject>((GameObject)Resources.Load("Objetos/BackgroundBolhas"));
+            background.GetComponent<MeshRenderer>().material = Instantiate(materialbackground);
+            background.GetComponent<Conector>().backgroundprincipal = background;
+
+        }
+
+        GameObject objeto2 = Instantiate(objeto);
+        objeto2.transform.parent = objeto.transform;
+        objeto2.transform.Rotate(new Vector3(0, 0, 180));
+
+
+        newpos.x = 0;
+        y = background.transform.position.y;
+        newpos.y = y;
+        newpos.z = 0;
+        background.transform.position = newpos;
+
+        //adicionando o background onde deve ficar
+        if (novotempo)
+        {
+            background.AddComponent<Dados>();
+            background.GetComponent<Dados>().Atualizar();
+            background.name = "Background - " + i;
+            listadebackgrounds.Add(background);
+        }
+
+        // Explaining this:
+        // Passing the values of x, y and time to the position of the objects is a VERY bad idea,
+        //      since they can be REALLY big values for the camera, so...
+        x = background.GetComponent<Dados>().centro.x - background.GetComponent<Dados>().largurax / 2 +
+            (objeto.GetComponent<MeshCollider>().bounds.max.x - objeto.GetComponent<MeshCollider>().bounds.min.x) / 2 +
+                bdbolhas.GetCoordenadaX(i) / 32 * (background.GetComponent<Dados>().largurax / 20);
+
+        z = background.GetComponent<Dados>().centro.y + background.GetComponent<Dados>().alturaz / 2 -
+            (objeto.GetComponent<MeshCollider>().bounds.max.z - objeto.GetComponent<MeshCollider>().bounds.min.z) / 2 -
+            (bdbolhas.GetCoordenadaY(i) / 32 * (background.GetComponent<Dados>().alturaz / 15));
+
+        newpos = new Vector3(x, y, z);
+
+        objeto.transform.position = newpos;
+
+        y += 0.5f;
+        objeto.transform.position = new Vector3(x, y, z);
+
+        if (i < 10) Debug.Log(i);
+        background.GetComponent<Conector>().SetPonto(objeto, i % 2);
+
+        if (viranovotempo)
+        {
+            background.GetComponent<Conector>().Conectar();
+        }
+
+        novotempo = false;
+        viranovotempo = false;
 
         //ajeitando a câmera
         newposcamera.y = ((GameObject)listadebackgrounds[0]).transform.position.y;
