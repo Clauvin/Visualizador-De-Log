@@ -747,12 +747,10 @@ public class NovoLeitor2 : MonoBehaviour
         string enderecomodificado = "";
 
         enderecoseparado = enderecotodo.Split('/');
-        Debug.Log(enderecotodo);
         for (int i = 0; i < enderecoseparado.GetUpperBound(0); i++)
         {
             enderecomodificado += enderecoseparado[i];
             enderecomodificado += "/";
-            Debug.Log(enderecomodificado);
         }
 
         // Create a new StreamReader, tell it which file to read and what encoding the file
