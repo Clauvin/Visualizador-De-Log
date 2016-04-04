@@ -319,7 +319,9 @@ public class NovoLeitor2 : MonoBehaviour
         Material materialbackground = (Material)Resources.Load("Materiais/MaterialBackgroundFIT");
         Material[] rend;
 
-        
+        bool criarbackground;
+        bool fecharbackground;
+
         Material materialheatmap = new Material((Material)Resources.Load("Materiais/MaterialHeatmap"));
 
         materialbackground.mainTexture = (Texture)Instantiate(Resources.Load("Texturas/Grid"));
@@ -337,8 +339,26 @@ public class NovoLeitor2 : MonoBehaviour
             numerosdecores[j] = ((MatrizHeatMap)matrizesdosheatmaps[j]).HowManyPoints();
         }
 
+        criarbackground = true;
+        fecharbackground = false;
+
         for (i = 0; i < bdfit.GetQuantidadeDeEntradas(); i++)
         {
+
+            if ((i != bdfit.GetQuantidadeDeEntradas() - 1) && (i != 0))
+            {
+                if (bdfit.GetPersonagem(i) > bdfit.GetPersonagem(i + 1))
+                {
+                    fecharbackground = true;
+                }
+                if (bdfit.GetPersonagem(i) < bdfit.GetPersonagem(i - 1))
+                {
+                    criarbackground = true;
+                }
+            }
+            else if (i == bdfit.GetQuantidadeDeEntradas() - 1) fecharbackground = true;
+            else if (i == 0) criarbackground = true;
+            
             materialdocreate = null;
 
             objeto = Instantiate(objetos.Get("Qualquer Coisa FIT"));
@@ -376,7 +396,7 @@ public class NovoLeitor2 : MonoBehaviour
             listadepontos.Add(objeto);
 
             //criando background para o par de pontos
-            if (i%2 == 0) {
+            if (criarbackground) {
 
                 background = Instantiate<GameObject>((GameObject)Resources.Load("Objetos/BackgroundFIT"));
                 background.GetComponent<MeshRenderer>().material = Instantiate(materialbackground);
@@ -396,7 +416,7 @@ public class NovoLeitor2 : MonoBehaviour
             background.transform.position = newpos;
 
             //adicionando o background onde deve ficar
-            if (i % 2 == 0)
+            if (criarbackground)
             {
                 background.AddComponent<Dados>();
                 background.GetComponent<Dados>().Atualizar();
@@ -422,9 +442,9 @@ public class NovoLeitor2 : MonoBehaviour
             y += 0.5f;
             objeto.transform.position = new Vector3(x, y, z);
 
-            background.GetComponent<Conector>().SetPonto(objeto, i % 2);
+            background.GetComponent<Conector>().AddPonto(objeto);
 
-            if (i % 2 == 1)
+            if (fecharbackground)
             {
                 background.GetComponent<Conector>().Conectar();
             }

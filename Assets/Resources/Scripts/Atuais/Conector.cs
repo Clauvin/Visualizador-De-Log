@@ -8,7 +8,7 @@ public class Conector : MonoBehaviour {
 
     void Awake()
     {
-        listadepontos = new ArrayList(4);
+        listadepontos = new ArrayList(1);
     }
 
 	// Use this for initialization
@@ -21,16 +21,6 @@ public class Conector : MonoBehaviour {
 	
 	}
 
-    public void SetPonto(GameObject ponto, int pos)
-    {
-        while (listadepontos.Count <= pos)
-        {
-            listadepontos.Add("");
-        }
-        listadepontos[pos] = ponto;
-        
-    }
-
     public void AddPonto(GameObject ponto)
     {
         listadepontos.Add(ponto);
@@ -38,7 +28,10 @@ public class Conector : MonoBehaviour {
 
     public void Conectar()
     {
-        for (int i = 0; i < listadepontos.Count; i++) ((GameObject)listadepontos[i]).transform.parent = backgroundprincipal.transform;
+        for (int i = 0; i < listadepontos.Count; i++)
+        {
+            ((GameObject)listadepontos[i]).transform.parent = backgroundprincipal.transform;
+        }
     }
 
     public void Desconectar()

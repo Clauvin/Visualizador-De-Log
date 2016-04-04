@@ -650,7 +650,6 @@ public class Controlador : MonoBehaviour {
 
         //gambiarra a ser corrigida posteriormente
         Vector3 pos = FindObjectOfType<Camera>().transform.position;
-        Debug.Log(modo);
         pos.y = modos.GetCameraInitY(modo);
         FindObjectOfType<Camera>().transform.position = pos;
         //Daqui pra baixo, parte do FIT
