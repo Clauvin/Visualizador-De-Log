@@ -22,11 +22,15 @@ public class Conector : MonoBehaviour {
         if (pos == 0) { ponto1 = ponto; }
         else if (pos == 1) { ponto2 = ponto; }
         else { Debug.Log("Erro - Classe Conector - posição inexistente - " + pos); }
+        
     }
 
     public void Conectar()
     {
-        //Debug.Log("Back + " + backgroundprincipal);
+        Debug.Log("ponto 1 " + ponto1);
+        Debug.Log("ponto 2 " + ponto2);
+        if (ponto1 == null) ponto1 = ponto2;
+        if (ponto2 == null) ponto2 = ponto1;
         ponto1.transform.parent = backgroundprincipal.transform;
         ponto2.transform.parent = backgroundprincipal.transform;
     }

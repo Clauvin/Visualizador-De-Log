@@ -565,6 +565,7 @@ public class NovoLeitor2 : MonoBehaviour
                 background.AddComponent<Dados>();
                 background.GetComponent<Dados>().Atualizar();
                 background.name = "Background - " + i;
+                if (i < 10) Debug.Log(background.name);
                 listadebackgrounds.Add(background);
             }
 
@@ -586,9 +587,10 @@ public class NovoLeitor2 : MonoBehaviour
             y += 0.5f;
             objeto.transform.position = new Vector3(x, y, z);
 
+            if (i < 10) Debug.Log(i);
             background.GetComponent<Conector>().SetPonto(objeto, i % 2);
 
-            if (!novotempo)
+            if ((background.GetComponent<Conector>().ponto1 != null) && (background.GetComponent<Conector>().ponto2 != null))
             {
                 background.GetComponent<Conector>().Conectar();
             }
