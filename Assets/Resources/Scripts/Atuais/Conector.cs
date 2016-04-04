@@ -23,6 +23,10 @@ public class Conector : MonoBehaviour {
 
     public void SetPonto(GameObject ponto, int pos)
     {
+        while (listadepontos.Count <= pos)
+        {
+            listadepontos.Add("");
+        }
         listadepontos[pos] = ponto;
         
     }
