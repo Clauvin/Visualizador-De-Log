@@ -66,7 +66,6 @@ public class CounterParser2 : MonoBehaviour
         for (int i = 0; i < quantasvezes; i++)
         {
             Vector3 posicao = (Vector3)posicoes[i];
-            Debug.Log(posicao.x + "-" + posicao.y + "-" + posicao.z + "-" + oque[i] + "-" + qual[i]);
 
 
         }

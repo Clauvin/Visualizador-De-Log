@@ -46,7 +46,6 @@ public class Leitor2 : MonoBehaviour
             do
             {
                 line = theReader.ReadLine();
-                Debug.Log(line);
 
                 if (line != null)
                 {

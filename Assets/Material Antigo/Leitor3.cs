@@ -110,8 +110,6 @@ public class Leitor3 : MonoBehaviour
 
             objeto.name = oquefez[i].ToString();
 
-            Debug.Log(noquefez[i].ToString());
-
             switch (noquefez[i].ToString())
             {
                 case ("Baleia"):

@@ -120,7 +120,6 @@ public class Controlador : MonoBehaviour {
                         {
                             posicaocamera.y = ((GameObject)GetComponent<NovoLeitor2>().listadebackgrounds[0]).transform.position.y +
                                               20.0f - 20.0f * posicaotemporal;
-                            Debug.Log(posicaocamera.y);
                         } else
                         {
                             GetComponent<GuiTempo>().SetStringEditavel("Tempo " + tempo + " não existe.");
@@ -148,7 +147,6 @@ public class Controlador : MonoBehaviour {
                                 {
                                     posicaocamera.y = ((GameObject)GetComponent<NovoLeitor2>().listadebackgrounds[0]).transform.position.y +
                                                         20.0f - 20.0f * posicaotemporal1;
-                                    Debug.Log(posicaocamera.y);
                                 }
 
                                 FindObjectOfType<Camera>().transform.position = posicaocamera;

@@ -47,7 +47,6 @@ public class CounterParserBolhas : MonoBehaviour
         QualEndereco();
         Gerador();
         Salvador();
-        Debug.Log("ok");
 
     }
 

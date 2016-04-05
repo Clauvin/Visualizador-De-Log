@@ -491,7 +491,6 @@ namespace Basicas
             x += add;
             camerax.Remove(modo);
             camerax.Add(modo, x);
-            //Debug.Log(modo + " " + x);
         }
 
         //Aperfeiçoar essa função, acho que ela não precisa do remove.
@@ -501,7 +500,6 @@ namespace Basicas
             y += add;
             camerainity.Remove(modo);
             camerainity.Add(modo, y);
-            //Debug.Log(modo + " " + y);
         }
 
         public void AddCameraZ(string modo, float add)

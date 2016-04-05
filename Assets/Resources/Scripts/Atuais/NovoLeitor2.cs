@@ -617,7 +617,6 @@ public class NovoLeitor2 : MonoBehaviour
             y += 0.5f;
             objeto.transform.position = new Vector3(x, y, z);
 
-            if (i < 10) Debug.Log(i);
             background.GetComponent<Conector>().AddPonto(objeto);
 
             if (viranovotempo)
