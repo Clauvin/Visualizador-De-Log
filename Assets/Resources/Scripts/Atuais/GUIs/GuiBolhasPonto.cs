@@ -11,9 +11,9 @@ public class GuiBolhasPonto : GuiPonto
             posicaoy = 0;
             GUI.TextField(new Rect(10, posicaoy, 260, 20), "Personagem = " + dadosdoponto.personagem);
             posicaoy += 20;
-            GUI.TextField(new Rect(10, posicaoy, 260, 20), "X = " + dadosdoponto.xlog / 32);
+            GUI.TextField(new Rect(10, posicaoy, 260, 20), "X = " + dadosdoponto.xlog);
             posicaoy += 20;
-            GUI.TextField(new Rect(10, posicaoy, 260, 20), "Y = " + dadosdoponto.ylog / 32);
+            GUI.TextField(new Rect(10, posicaoy, 260, 20), "Y = " + dadosdoponto.ylog);
             posicaoy += 20;
             GUI.TextField(new Rect(10, posicaoy, 260, 20), "Tempo = " + dadosdoponto.tempo);
 

@@ -587,7 +587,6 @@ public class NovoLeitor2 : MonoBehaviour
             objeto2.transform.parent = objeto.transform;
             objeto2.transform.Rotate(new Vector3(0, 0, 180));
 
-
             newpos.x = 0;
             y = background.transform.position.y;
             newpos.y = y;
@@ -608,11 +607,11 @@ public class NovoLeitor2 : MonoBehaviour
             //      since they can be REALLY big values for the camera, so...
             x = background.GetComponent<Dados>().centro.x - background.GetComponent<Dados>().largurax / 2 +
                 (objeto.GetComponent<MeshCollider>().bounds.max.x - objeto.GetComponent<MeshCollider>().bounds.min.x) / 2 +
-                    bdbolhas.GetCoordenadaX(i) / 32 * (background.GetComponent<Dados>().largurax / 20);
+                    bdbolhas.GetCoordenadaX(i) * (background.GetComponent<Dados>().largurax / resolucao.x);
 
             z = background.GetComponent<Dados>().centro.y + background.GetComponent<Dados>().alturaz / 2 -
                 (objeto.GetComponent<MeshCollider>().bounds.max.z - objeto.GetComponent<MeshCollider>().bounds.min.z) / 2 -
-                (bdbolhas.GetCoordenadaY(i) / 32 * (background.GetComponent<Dados>().alturaz / 15));
+                (bdbolhas.GetCoordenadaY(i) * (background.GetComponent<Dados>().alturaz / resolucao.y));
 
             newpos = new Vector3(x, y, z);
 
