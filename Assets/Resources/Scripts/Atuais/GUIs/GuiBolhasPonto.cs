@@ -24,7 +24,7 @@ public class GuiBolhasPonto : GuiPonto
                 GUI.TextField(new Rect(10, posicaoy, 260, 20), "O Que Fez = " + dadosdoponto.oquefez);
             } else
             {
-                GUI.TextField(new Rect(10, posicaoy, 260, 20), "O Que Fizeram = " + dadosdoponto.oquefez);
+                GUI.TextField(new Rect(10, posicaoy, 260, 20), "O Que Fizeram Com Ele = " + dadosdoponto.oquefez);
                 posicaoy += 20;
                 GUI.TextField(new Rect(10, posicaoy, 260, 20), "Quem Criou = " + dadosdoponto.quemcriou);
             }

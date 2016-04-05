@@ -249,8 +249,8 @@ public class NovoLeitor2 : MonoBehaviour
                                        entries[6].Split(':')[1].ToString(),
                                        entries[7].Split(':')[1].ToString(),
                                        entries[8].Split(':')[1].ToString(),
-                                       entries[9].ToString(),
-                                       entries[10].ToString());
+                                       entries[9].Split(':')[1].ToString(),
+                                       entries[10].Split(':')[1].ToString());
                 }
 
 #if (DEBUG)
