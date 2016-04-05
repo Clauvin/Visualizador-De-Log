@@ -3,19 +3,31 @@ using System.Collections;
 
 public class GuiBolhasPonto : GuiPonto
 {
+
     public override void OnGUI()
     {
         if (revelado)
         {
-            GUI.BeginGroup(new Rect(posx, posy, 270, 80));
+            GUI.BeginGroup(new Rect(posx, posy, 270, 120));
             posicaoy = 0;
-            GUI.TextField(new Rect(10, posicaoy, 260, 20), "Personagem = " + dadosdoponto.personagem);
+            GUI.TextField(new Rect(10, posicaoy, 260, 20), "Objeto = " + dadosdoponto.personagem);
             posicaoy += 20;
             GUI.TextField(new Rect(10, posicaoy, 260, 20), "X = " + dadosdoponto.xlog);
             posicaoy += 20;
             GUI.TextField(new Rect(10, posicaoy, 260, 20), "Y = " + dadosdoponto.ylog);
             posicaoy += 20;
             GUI.TextField(new Rect(10, posicaoy, 260, 20), "Tempo = " + dadosdoponto.tempo);
+            posicaoy += 20;
+            if (dadosdoponto.personagem == "Mouse")
+            {
+                Debug.Log(dadosdoponto.oquefez);
+                GUI.TextField(new Rect(10, posicaoy, 260, 20), "O Que Fez = " + dadosdoponto.oquefez);
+            } else
+            {
+                GUI.TextField(new Rect(10, posicaoy, 260, 20), "O Que Fizeram = " + dadosdoponto.oquefez);
+                posicaoy += 20;
+                GUI.TextField(new Rect(10, posicaoy, 260, 20), "Quem Criou = " + dadosdoponto.quemcriou);
+            }
 
             GUI.EndGroup();
         }
