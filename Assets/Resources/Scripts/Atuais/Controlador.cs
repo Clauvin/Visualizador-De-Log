@@ -116,7 +116,7 @@ public class Controlador : MonoBehaviour {
                     bool resultado = int.TryParse(tempo, out posicaotemporal);
                     if (resultado)
                     {
-                        if (posicaotemporal <= GetComponent<NovoLeitor2>().GetUltimoTempoFIT())
+                        if (posicaotemporal <= GetComponent<NovoLeitor2>().GetUltimoTempo())
                         {
                             posicaocamera.y = ((GameObject)GetComponent<NovoLeitor2>().listadebackgrounds[0]).transform.position.y +
                                               20.0f - 20.0f * posicaotemporal;
@@ -140,10 +140,10 @@ public class Controlador : MonoBehaviour {
 
                         if (resultado1 && resultado2) {
                         
-                            if (posicaotemporal1 <= GetComponent<NovoLeitor2>().GetUltimoTempoFIT() &&
-                                posicaotemporal2 <= GetComponent<NovoLeitor2>().GetUltimoTempoFIT()) 
+                            if (posicaotemporal1 <= GetComponent<NovoLeitor2>().GetUltimoTempo() &&
+                                posicaotemporal2 <= GetComponent<NovoLeitor2>().GetUltimoTempo()) 
                             {
-                                if (posicaotemporal1 <= GetComponent<NovoLeitor2>().GetUltimoTempoFIT())
+                                if (posicaotemporal1 <= GetComponent<NovoLeitor2>().GetUltimoTempo())
                                 {
                                     posicaocamera.y = ((GameObject)GetComponent<NovoLeitor2>().listadebackgrounds[0]).transform.position.y +
                                                         20.0f - 20.0f * posicaotemporal1;

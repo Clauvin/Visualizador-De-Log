@@ -31,8 +31,12 @@ public class NovoLeitor2 : MonoBehaviour
 
     public string[] listadeobjetosdobolhas = { "Mouse", "Baleia", "Bolha", "Peixe", "Nuvem" };
 
+    private string qualleitor;
+
     public void StartFIT()
     {
+        qualleitor = "FIT";
+
         objetos.Add("Qualquer Coisa FIT", (GameObject)Resources.Load("Objetos/Qualquer Coisa FIT"));
 
         materiais.Add("1", (Material)Resources.Load("Materiais/MaterialCharacter"));
@@ -54,6 +58,8 @@ public class NovoLeitor2 : MonoBehaviour
 
     public void StartBolhas()
     {
+        qualleitor = "Bolhas";
+
         objetos.Add("Qualquer Coisa Bolhas", (GameObject)Resources.Load("Objetos/Qualquer Coisa Bolhas"));
 
         materiais.Add("Mouse", (Material)Resources.Load("Materiais/MaterialMouse"));
@@ -730,6 +736,13 @@ public class NovoLeitor2 : MonoBehaviour
 
         }
         
+    }
+
+    public int GetUltimoTempo()
+    {
+        if (qualleitor == "FIT") return GetUltimoTempoFIT();
+        else if (qualleitor == "Bolhas") return GetUltimoTempoBolhas();
+        else return 0;
     }
 
     public int GetUltimoTempoFIT()
