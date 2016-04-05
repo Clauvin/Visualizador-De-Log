@@ -7,7 +7,7 @@ public class GuiBolhasTempo : GuiTempo
     public GuiBolhasTempo()
     {
         gambiarra = true;
-        posy = 80;
+        posy = 180;
         texto = "Tempo = ";
         revelado = false;
         stringParaEditar = "Apenas >= 0 aqui.";
