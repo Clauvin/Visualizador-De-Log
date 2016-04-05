@@ -492,7 +492,7 @@ public class NovoLeitor2 : MonoBehaviour
 
         Material materialheatmap = new Material((Material)Resources.Load("Materiais/MaterialHeatmap"));
 
-        materialbackground.mainTexture = (Texture)Instantiate(Resources.Load("Texturas/Fundo Bolhas"));
+        materialbackground.mainTexture = (Texture)Instantiate(Resources.Load("Texturas/Fundo Bolhas Desenhado"));
 
         for (int j = 0; j < matrizesdosheatmaps.Count; j++)
         {
