@@ -16,6 +16,7 @@ public class NovoLeitorFIT : NovoLeitor2 {
             StartFIT();
             LoadStuffFIT();
             CreateStuffFIT();
+            GetComponent<Controlador>().InicializacaoFIT();
         } else
         {
             RetornarParaTelaInicial();

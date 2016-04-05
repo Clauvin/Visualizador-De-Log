@@ -17,6 +17,7 @@ public class NovoLeitorBolhas : NovoLeitor2
             StartBolhas();
             LoadStuffBolhas();
             CreateStuffBolhas();
+            GetComponent<Controlador>().InicializacaoBolhas();
         }
         else
         {

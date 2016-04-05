@@ -584,9 +584,10 @@ public class Controlador : MonoBehaviour {
                                  "3 - Muda para 'Um Frame De Cada Vez em 2D'\n" +
                                  "4 - Muda para 'Todos De Uma Vez em 3D'\n" +
                                  "5 - Muda para Heatmap\n";
+        Inicializacao();
     }
 
-    public void InicializacaoFit()
+    public void InicializacaoFIT()
     {
         instrucoesgenericas = "Instrucoes:\n" +
                                  "1 - Muda para 'Todos De Uma Vez em 2D'\n" +
@@ -594,6 +595,7 @@ public class Controlador : MonoBehaviour {
                                  "3 - Muda para 'Um Frame De Cada Vez em 2D'\n" +
                                  "4 - Muda para 'Todos De Uma Vez em 3D'\n" +
                                  "5 - Muda para Heatmap\n";
+        Inicializacao();
     }
 
     public void Inicializacao()

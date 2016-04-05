@@ -649,8 +649,6 @@ public class NovoLeitor2 : MonoBehaviour
 
         heatmap.transform.position = ((GameObject)listadebackgrounds[0]).transform.position + new Vector3(200f, 0, 0);
 
-        GetComponent<Controlador>().Inicializacao();
-
     }
 
     public void ControlarAlpha(float alpha)
