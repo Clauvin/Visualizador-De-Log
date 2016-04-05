@@ -17,12 +17,7 @@ public class Controlador : MonoBehaviour {
     BancoDeDadosModos modos = new BancoDeDadosModos();
     public string modo = "Todos De Uma Vez em 2D";
     int count;
-    string instrucoesgenericas = "Instrucoes:\n" +
-                                 "1 - Muda para 'Todos De Uma Vez em 2D'\n" +
-                                 "2 - Muda para 'Um Frame De Cada Vez em 3D'\n" +
-                                 "3 - Muda para 'Um Frame De Cada Vez em 2D'\n" +
-                                 "4 - Muda para 'Todos De Uma Vez em 3D'\n" + 
-                                 "5 - Muda para Heatmap\n";
+    string instrucoesgenericas;
 
     Transform clicado = null;
 
@@ -579,6 +574,26 @@ public class Controlador : MonoBehaviour {
     public bool GetAutoModeCustom()
     {
         return automodecustom;
+    }
+
+    public void InicializacaoBolhas()
+    {
+        instrucoesgenericas = "Instrucoes:\n" +
+                                 "1 - Muda para 'Todos De Uma Vez em 2D'\n" +
+                                 "2 - Muda para 'Um Frame De Cada Vez em 3D'\n" +
+                                 "3 - Muda para 'Um Frame De Cada Vez em 2D'\n" +
+                                 "4 - Muda para 'Todos De Uma Vez em 3D'\n" +
+                                 "5 - Muda para Heatmap\n";
+    }
+
+    public void InicializacaoFit()
+    {
+        instrucoesgenericas = "Instrucoes:\n" +
+                                 "1 - Muda para 'Todos De Uma Vez em 2D'\n" +
+                                 "2 - Muda para 'Um Frame De Cada Vez em 3D'\n" +
+                                 "3 - Muda para 'Um Frame De Cada Vez em 2D'\n" +
+                                 "4 - Muda para 'Todos De Uma Vez em 3D'\n" +
+                                 "5 - Muda para Heatmap\n";
     }
 
     public void Inicializacao()
