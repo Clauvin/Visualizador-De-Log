@@ -602,11 +602,6 @@ public class NovoLeitor2 : MonoBehaviour
                 listadebackgrounds.Add(background);
             }
 
-            Debug.Log("string " + bdbolhas.GetQualObjeto(i).ToString());
-            Debug.Log("textura " + texturas.Get(bdbolhas.GetQualObjeto(i).ToString()));
-            Debug.Log("text " + texturas.Get(bdbolhas.GetQualObjeto(i).ToString()).width);
-            Debug.Log("res " + resolucao.x);
-            Debug.Log("---------------------");
             objeto.transform.localScale = new Vector3(texturas.Get(bdbolhas.GetQualObjeto(i).ToString()).width / resolucao.x,
                                                       texturas.Get(bdbolhas.GetQualObjeto(i).ToString()).width / resolucao.x,
                                                       texturas.Get(bdbolhas.GetQualObjeto(i).ToString()).height / resolucao.y);
