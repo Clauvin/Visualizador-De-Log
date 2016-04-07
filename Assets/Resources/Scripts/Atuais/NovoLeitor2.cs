@@ -602,6 +602,15 @@ public class NovoLeitor2 : MonoBehaviour
                 listadebackgrounds.Add(background);
             }
 
+            Debug.Log("string " + bdbolhas.GetQualObjeto(i).ToString());
+            Debug.Log("textura " + texturas.Get(bdbolhas.GetQualObjeto(i).ToString()));
+            Debug.Log("text " + texturas.Get(bdbolhas.GetQualObjeto(i).ToString()).width);
+            Debug.Log("res " + resolucao.x);
+            Debug.Log("---------------------");
+            objeto.transform.localScale = new Vector3(texturas.Get(bdbolhas.GetQualObjeto(i).ToString()).width / resolucao.x,
+                                                      texturas.Get(bdbolhas.GetQualObjeto(i).ToString()).width / resolucao.x,
+                                                      texturas.Get(bdbolhas.GetQualObjeto(i).ToString()).height / resolucao.y);
+
             // Explaining this:
             // Passing the values of x, y and time to the position of the objects is a VERY bad idea,
             //      since they can be REALLY big values for the camera, so...
