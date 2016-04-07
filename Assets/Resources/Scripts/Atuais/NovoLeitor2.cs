@@ -68,16 +68,16 @@ public class NovoLeitor2 : MonoBehaviour
         materiais.Add("Peixe", (Material)Resources.Load("Materiais/MaterialPeixe"));
         materiais.Add("Nuvem", (Material)Resources.Load("Materiais/MaterialNuvem"));
 
-        texturas.Add("Mouse", (Texture2D)Resources.Load("Texturas/P0"));
+        texturas.Add("Mouse", (Texture2D)Resources.Load("Texturas/Mouse"));
         texturas.Add("Baleia", (Texture2D)Resources.Load("Texturas/Baleia"));
         texturas.Add("Bolha", (Texture2D)Resources.Load("Texturas/Bolha"));
-        texturas.Add("Peixe", (Texture2D)Resources.Load("Texturas/P3"));
+        texturas.Add("Peixe", (Texture2D)Resources.Load("Texturas/Peixe"));
         texturas.Add("Nuvem", (Texture2D)Resources.Load("Texturas/Nuvem"));
 
-        texturasselecionadas.Add("Mouse", (Texture2D)Resources.Load("Texturas/P0 Selecionado"));
+        texturasselecionadas.Add("Mouse", (Texture2D)Resources.Load("Texturas/Mouse Clicado"));
         texturasselecionadas.Add("Baleia", (Texture2D)Resources.Load("Texturas/Baleia Clicada"));
         texturasselecionadas.Add("Bolha", (Texture2D)Resources.Load("Texturas/Bolha Clicada"));
-        texturasselecionadas.Add("Peixe", (Texture2D)Resources.Load("Texturas/P3 Selecionado"));
+        texturasselecionadas.Add("Peixe", (Texture2D)Resources.Load("Texturas/Peixe Clicado"));
         texturasselecionadas.Add("Nuvem", (Texture2D)Resources.Load("Texturas/Nuvem Clicada"));
     }
 
