@@ -387,7 +387,6 @@ public class NovoLeitor2 : MonoBehaviour
 
             rend = objeto.GetComponent<MeshRenderer>().materials;
             rend[0].mainTexture = texturas.Get(bdfit.GetPersonagem(i).ToString());
-            //rend[1].mainTexture = texturas.Get(bdfit.GetPersonagem(i).ToString());
             objeto.GetComponent<MeshRenderer>().materials = rend;
 
 
@@ -454,6 +453,9 @@ public class NovoLeitor2 : MonoBehaviour
             {
                 background.GetComponent<Conector>().Conectar();
             }
+
+            criarbackground = false;
+            fecharbackground = false;
 
         }
 
