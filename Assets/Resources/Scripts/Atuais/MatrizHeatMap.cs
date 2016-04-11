@@ -86,6 +86,34 @@ public class MatrizHeatMap {
         }
     }
 
+    private void ImagemCompletaPraMatriz(BancoDeDadosBolhas bdbolhas, int i)
+    {
+        string qual = bdbolhas.GetQualObjeto(i);
+        Texture2D textura = UnityEngine.Object.FindObjectOfType<NovoLeitor2>().texturas.Get("qual");
+        int px = bdbolhas.GetCoordenadaX(i);
+        int py = bdbolhas.GetCoordenadaY(i);
+        int texture_length = textura.width; int limitx = px + texture_length;
+        int texture_heigth = textura.height; int limity = py + texture_heigth;
+
+        if (limitx > x) { limitx = x ; } if (limity > y) { limity = y; }
+
+        for (int j = px; j < limitx; j++)
+        {
+            for (int k = py; k < limity; k++)
+            {
+                if (textura.GetPixel(j, k).a != 255)
+                {
+                    matriz[bdbolhas.GetCoordenadaX(i), bdbolhas.GetCoordenadaY(i)] += 1;
+                }
+            }
+        }
+        
+
+
+
+
+    }
+
     public void AllTheDifferentPoints()
     {
         int cx = 0, cy = 0;
