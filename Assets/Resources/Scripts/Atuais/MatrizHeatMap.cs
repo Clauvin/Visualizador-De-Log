@@ -69,7 +69,7 @@ public class MatrizHeatMap {
         {
             if (qualobjeto == "Todos")
             {
-                matriz[bdbolhas.GetCoordenadaX(i), bdbolhas.GetCoordenadaY(i)] += 1;
+                ImagemCompletaPraMatriz(bdbolhas, i);
             } else {
                 if (qualobjeto == "Mouse")
                 {
@@ -80,16 +80,17 @@ public class MatrizHeatMap {
                 }
                 else
                 {
-                    if (bdbolhas.GetQualObjeto(i) == qualobjeto) matriz[bdbolhas.GetCoordenadaX(i), bdbolhas.GetCoordenadaY(i)] += 1;
+                    if (bdbolhas.GetQualObjeto(i) == qualobjeto) ImagemCompletaPraMatriz(bdbolhas, i);
                 }
             }
         }
     }
 
+    //testada. Não funcionando completamente por alguma razão.
     private void ImagemCompletaPraMatriz(BancoDeDadosBolhas bdbolhas, int i)
     {
         string qual = bdbolhas.GetQualObjeto(i);
-        Texture2D textura = UnityEngine.Object.FindObjectOfType<NovoLeitor2>().texturas.Get("qual");
+        Texture2D textura = UnityEngine.Object.FindObjectOfType<NovoLeitor2>().texturas.Get(qual);
         int px = bdbolhas.GetCoordenadaX(i);
         int py = bdbolhas.GetCoordenadaY(i);
         int texture_length = textura.width; int limitx = px + texture_length;
