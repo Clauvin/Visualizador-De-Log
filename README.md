@@ -5,4 +5,4 @@ Código neste repositório sob licença Creative Commons Attribution-ShareAlike 
 
 Link para sites dos projetos que utilizam este visualizador:
 F!T - http://www.lamae.nce.ufrj.br/?page_id=498
-"Bolhas" - No momento, sem link.
+'Bolhas' - No momento, sem link.
