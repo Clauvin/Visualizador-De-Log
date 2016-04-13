@@ -504,6 +504,7 @@ public class NovoLeitor2 : MonoBehaviour
             ((MatrizHeatMap)matrizesdosheatmaps[j]).AllTheDifferentPoints();
             ((MatrizHeatMap)matrizesdosheatmaps[j]).OrganizePoints();
             ((MatrizHeatMap)matrizesdosheatmaps[j]).FillingTheDictionary();
+            ((MatrizHeatMap)matrizesdosheatmaps[j]).DebugMatrizNoOlho();
             ((MatrizHeatMap)matrizesdosheatmaps[j]).FillingTheHeatmap();
             numerosdecores[j] = ((MatrizHeatMap)matrizesdosheatmaps[j]).HowManyPoints();
         }

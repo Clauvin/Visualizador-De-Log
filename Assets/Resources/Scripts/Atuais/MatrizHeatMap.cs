@@ -65,25 +65,30 @@ public class MatrizHeatMap {
 
     public void ReadPointsBolhas(BancoDeDadosBolhas bdbolhas, string qualobjeto)
     {
+        int contagem = 0;
         for (int i = 0; i < bdbolhas.GetQuantidadeDeEntradas(); i++)
         {
             if (qualobjeto == "Todos")
             {
-                ImagemCompletaPraMatriz(bdbolhas, i);
+                //ImagemCompletaPraMatriz(bdbolhas, i);
+                contagem++;
             } else {
                 if (qualobjeto == "Mouse")
                 {
                     if (bdbolhas.GetMouseOuObjeto(i) == qualobjeto)
                     {
-                        matriz[bdbolhas.GetCoordenadaX(i), bdbolhas.GetCoordenadaY(i)] += 1;
+                        //matriz[bdbolhas.GetCoordenadaX(i), bdbolhas.GetCoordenadaY(i)] += 1;
+                        contagem++;
                     }
                 }
                 else
                 {
                     if (bdbolhas.GetQualObjeto(i) == qualobjeto) ImagemCompletaPraMatriz(bdbolhas, i);
+                    contagem++;
                 }
             }
         }
+        Debug.Log("Contagem de vezes que pintou = " + contagem);
     }
 
     //testada. Não funcionando completamente por alguma razão.
@@ -102,13 +107,14 @@ public class MatrizHeatMap {
         {
             for (int k = py; k < limity; k++)
             {
+                
                 if (textura.GetPixel(j, k).a != 255)
                 {
-                    matriz[bdbolhas.GetCoordenadaX(i), bdbolhas.GetCoordenadaY(i)] += 1;
+                    matriz[j, k] += 1;
                 }
             }
         }
-        
+
 
 
 
@@ -156,10 +162,10 @@ public class MatrizHeatMap {
         transicaodecorg = (cormaxima.g - corum.g) / HowManyPoints();
         transicaodecorb = (cormaxima.b - corum.b) / HowManyPoints();
         transicaodecora = (cormaxima.a - corum.a) / HowManyPoints();
-            
+
+        Color cordonumero;
         for (int i = 0; i < numerosdiferentes.Count; i++)
         {
-            Color cordonumero;
             if (i == 0)
             {
                 cordonumero = corminima;
@@ -172,6 +178,20 @@ public class MatrizHeatMap {
             }
             
             cores.Add((int)numerosdiferentes[i], cordonumero);
+
+        }
+    }
+
+    public void DebugMatrizNoOlho()
+    {
+        int count;
+        for (int i = 0; i < y; i++)
+        {
+            count = 0;
+            for (int j = 0; j < x; j++)
+            {
+                if (matriz[j, i] != 0) count++;
+            }
         }
     }
 
@@ -206,17 +226,16 @@ public class MatrizHeatMap {
 
     public void FillingTheHeatmap()
     {
-
+        int pintura = 0;
         heatmap = pintar.SetPixelsEmTextura(heatmap, 0, 0, textx, texty, corminima);
 
         int cx = 0, cy = 0;
 
         for (int i = 0; i < x * y; i++)
         {
-            if (matriz[cx, cy] != 0) PintarPosicao(cx, cy, cores[matriz[cx, cy]]);
+            if (matriz[cx, cy] != 0) { PintarPosicao(cx, cy, cores[matriz[cx, cy]]); pintura++; }
             cx++; if (cx > x - 1) { cx = 0; cy++; }
         }
-
         heatmap.Apply();
     }
 
