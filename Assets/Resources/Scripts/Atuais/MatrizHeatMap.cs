@@ -70,14 +70,14 @@ public class MatrizHeatMap {
         {
             if (qualobjeto == "Todos")
             {
-                //ImagemCompletaPraMatriz(bdbolhas, i);
+                ImagemCompletaPraMatriz(bdbolhas, i);
                 contagem++;
             } else {
                 if (qualobjeto == "Mouse")
                 {
                     if (bdbolhas.GetMouseOuObjeto(i) == qualobjeto)
                     {
-                        //matriz[bdbolhas.GetCoordenadaX(i), bdbolhas.GetCoordenadaY(i)] += 1;
+                        matriz[bdbolhas.GetCoordenadaX(i), bdbolhas.GetCoordenadaY(i)] += 1;
                         contagem++;
                     }
                 }
