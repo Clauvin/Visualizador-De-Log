@@ -40,7 +40,7 @@ public class Controlador : MonoBehaviour {
     bool pegar_valor_de_camera_todos_de_uma_vez_em_3D = true;
 
     //para a seleção de heatmaps
-    int qual_heatmap = 0;
+    int qual_heatmap_mostrar = 0;
 
     //para o modo automático do 3
     bool auto_mode = false;
@@ -50,8 +50,6 @@ public class Controlador : MonoBehaviour {
     int posicao_temporal_1;
     int posicao_temporal_2;
 
-
-    //agoravai serve pra bloquear, se necessário, o input do jogador, o que evita bugs iniciais
     bool usuario_pode_fazer_input = false;
 	
 	// Update is called once per frame
@@ -71,7 +69,7 @@ public class Controlador : MonoBehaviour {
 
                 if (auto_mode)
                 {
-                    float y = modos.GetMovimentacao(modo_de_visualizacao);
+                    float y = modos.GetVelocidadeDeMovimentacao(modo_de_visualizacao);
 
                     posicao_da_camera.y -= y;
 
@@ -86,7 +84,7 @@ public class Controlador : MonoBehaviour {
 
                 if (auto_mode_custom)
                 {
-                    float y = modos.GetMovimentacao(modo_de_visualizacao);
+                    float y = modos.GetVelocidadeDeMovimentacao(modo_de_visualizacao);
 
                     posicao_da_camera.y -= y;
 
@@ -162,7 +160,7 @@ public class Controlador : MonoBehaviour {
                 //Esse código movimenta a câmera para esquerda e para direita.
                 if (Input.GetAxis("Horizontal") != 0)
                 {
-                    float x = modos.GetMovimentacao(modo_de_visualizacao);
+                    float x = modos.GetVelocidadeDeMovimentacao(modo_de_visualizacao);
 
                     if (Input.GetAxis("Horizontal") > 0) posicao_da_camera.x += x;
                     else if (Input.GetAxis("Horizontal") < 0) posicao_da_camera.x -= x;
@@ -173,7 +171,7 @@ public class Controlador : MonoBehaviour {
                 //Esse código movimenta a câmera para frente e para trás.
                 if (Input.GetAxis("Vertical") != 0)
                 {
-                    float y = modos.GetMovimentacao(modo_de_visualizacao);
+                    float y = modos.GetVelocidadeDeMovimentacao(modo_de_visualizacao);
 
                     if (Input.GetAxis("Vertical") > 0) posicao_da_camera.y -= y;
                     else if (Input.GetAxis("Vertical") < 0) posicao_da_camera.y += y;
@@ -184,7 +182,7 @@ public class Controlador : MonoBehaviour {
                 //Esse código movimenta a câmera para cima e para baixo.
                 if (Input.GetAxis("Zertical") != 0)
                 {
-                    float z = modos.GetMovimentacao(modo_de_visualizacao);
+                    float z = modos.GetVelocidadeDeMovimentacao(modo_de_visualizacao);
 
                     if (Input.GetAxis("Zertical") > 0) posicao_da_camera.z += z;
                     else if (Input.GetAxis("Zertical") < 0) posicao_da_camera.z -= z;
@@ -195,7 +193,7 @@ public class Controlador : MonoBehaviour {
                 //Esse código movimenta a câmera para esquerda e para direita mais rápido.
                 if ((Input.GetButton("a")) || (Input.GetButton("d")))
                 {
-                    float x = modos.GetMovimentacao(modo_de_visualizacao);
+                    float x = modos.GetVelocidadeDeMovimentacao(modo_de_visualizacao);
 
                     if (Input.GetButton("a")) posicao_da_camera.x -= (7 * x);
                     else if (Input.GetButton("d")) posicao_da_camera.x += (7 * x);
@@ -219,7 +217,7 @@ public class Controlador : MonoBehaviour {
 
                 if (Input.GetAxis("Mouse ScrollWheel") != 0)
                 {
-                    float roda = modos.GetMovimentacao(modo_de_visualizacao) * 5;
+                    float roda = modos.GetVelocidadeDeMovimentacao(modo_de_visualizacao) * 5;
                     if (Input.GetAxis("Mouse ScrollWheel") > 0) FindObjectOfType<Camera>().transform.Rotate(0, 0, roda);
                     else if (Input.GetAxis("Mouse ScrollWheel") < 0) FindObjectOfType<Camera>().transform.Rotate(0, 0, -roda);
 
@@ -246,7 +244,7 @@ public class Controlador : MonoBehaviour {
                 {
                     if ((Input.GetKeyUp("left"))) { AlterarQualHeatmapMostraPre(); }
                     if ((Input.GetKeyUp("right"))) { AlterarQualHeatmapMostraPro(); }
-                    GetComponent<NovoLeitor2>().ChangeTexturaHeatmap(qual_heatmap);
+                    GetComponent<NovoLeitor2>().ChangeTexturaHeatmap(qual_heatmap_mostrar);
                 }
                    
 
@@ -257,7 +255,7 @@ public class Controlador : MonoBehaviour {
                     if ((modo_de_visualizacao == "Um Frame De Cada Vez em 2D") && (auto_mode)){ }
                     else { 
 
-                        float y = modos.GetMovimentacao(modo_de_visualizacao);
+                        float y = modos.GetVelocidadeDeMovimentacao(modo_de_visualizacao);
 
                         if (Input.GetAxis("Horizontal") > 0) posicao_da_camera.y -= y;
                         else if (Input.GetAxis("Horizontal") < 0) posicao_da_camera.y += y;
@@ -273,7 +271,7 @@ public class Controlador : MonoBehaviour {
                     if ((modo_de_visualizacao == "Um Frame De Cada Vez em 2D") && (auto_mode)) { }
                     else
                     {
-                        float y = modos.GetMovimentacao(modo_de_visualizacao);
+                        float y = modos.GetVelocidadeDeMovimentacao(modo_de_visualizacao);
 
                         if (Input.GetButton("a")) posicao_da_camera.y += (7 * y);
                         else if (Input.GetButton("d")) posicao_da_camera.y -= (7 * y);
@@ -540,27 +538,27 @@ public class Controlador : MonoBehaviour {
 
     public int QualHeatmapMostra()
     {
-        return qual_heatmap;
+        return qual_heatmap_mostrar;
     }
 
     public void AlterarQualHeatmapMostra(int qual)
     {
         if ((qual >= 0) && (qual < GetComponent<NovoLeitor2>().GetQuantHeatmaps()))
         {
-            qual_heatmap = qual;
+            qual_heatmap_mostrar = qual;
         }
     }
 
     public void AlterarQualHeatmapMostraPre()
     {
-        qual_heatmap--;
-        if (qual_heatmap < 0) qual_heatmap = GetComponent<NovoLeitor2>().GetQuantHeatmaps() - 1;
+        qual_heatmap_mostrar--;
+        if (qual_heatmap_mostrar < 0) qual_heatmap_mostrar = GetComponent<NovoLeitor2>().GetQuantHeatmaps() - 1;
     }
 
     public void AlterarQualHeatmapMostraPro()
     {
-        qual_heatmap++;
-        if (qual_heatmap >= GetComponent<NovoLeitor2>().GetQuantHeatmaps()) qual_heatmap = 0;
+        qual_heatmap_mostrar++;
+        if (qual_heatmap_mostrar >= GetComponent<NovoLeitor2>().GetQuantHeatmaps()) qual_heatmap_mostrar = 0;
     }
 
     public bool GetAutoMode()

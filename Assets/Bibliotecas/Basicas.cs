@@ -385,7 +385,7 @@ namespace Basicas
             return movimentacao.Count;
         }
 
-        public float GetMovimentacao(string modo)
+        public float GetVelocidadeDeMovimentacao(string modo)
         {
             try { return movimentacao[modo]; }
             //ATENÇAO: Esse catch está correto?
