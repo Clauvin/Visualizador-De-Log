@@ -21,9 +21,9 @@ public class Controlador : MonoBehaviour {
     BancoDeDadosModos modos = new BancoDeDadosModos();
     public string modo_de_visualizacao = "Todos De Uma Vez em 2D";
     int count;
-    string instrucoesgenericas;
+    string instrucoes_genericas;
 
-    Transform clicado = null;
+    Transform objeto_clicado = null;
 
     //valores da camera
     float sensX = 10.0f;
@@ -439,7 +439,7 @@ public class Controlador : MonoBehaviour {
             modo_de_visualizacao = modonovo;
 
             GetComponent<GuiFITModo>().MudarTexto(modo_de_visualizacao);
-            GetComponent<GuiFITModo>().MudarInstrucoes(instrucoesgenericas + modos.GetInstrucao(modo_de_visualizacao));
+            GetComponent<GuiFITModo>().MudarInstrucoes(instrucoes_genericas + modos.GetInstrucao(modo_de_visualizacao));
 
             if ((modo_de_visualizacao == "Um Frame De Cada Vez em 3D") || (modo_de_visualizacao == "Um Frame De Cada Vez em 2D"))
             {
@@ -497,15 +497,15 @@ public class Controlador : MonoBehaviour {
 
     public void PontoFoiClicado(Transform click)
     {
-        if (clicado == null)
+        if (objeto_clicado == null)
         {
-            clicado = click;
+            objeto_clicado = click;
             click.GetComponent<MeshRenderer>().material.mainTexture = GetComponent<NovoLeitor2>().
                 texturasselecionadas.Get(click.GetComponent<Dados>().personagem.ToString());
-        } else if (clicado != click) {
-            clicado.GetComponent<MeshRenderer>().material.mainTexture = GetComponent<NovoLeitor2>().
-                texturas.Get(clicado.GetComponent<Dados>().personagem.ToString());
-            clicado = click;
+        } else if (objeto_clicado != click) {
+            objeto_clicado.GetComponent<MeshRenderer>().material.mainTexture = GetComponent<NovoLeitor2>().
+                texturas.Get(objeto_clicado.GetComponent<Dados>().personagem.ToString());
+            objeto_clicado = click;
             click.GetComponent<MeshRenderer>().material.mainTexture = GetComponent<NovoLeitor2>().
                 texturasselecionadas.Get(click.GetComponent<Dados>().personagem.ToString());
         }
@@ -514,10 +514,10 @@ public class Controlador : MonoBehaviour {
 
     public void NenhumPontoFoiClicado()
     {
-        if (clicado != null) {
-            clicado.GetComponent<MeshRenderer>().material.mainTexture = GetComponent<NovoLeitor2>().
-                    texturas.Get(clicado.GetComponent<Dados>().personagem.ToString());
-            clicado = null;
+        if (objeto_clicado != null) {
+            objeto_clicado.GetComponent<MeshRenderer>().material.mainTexture = GetComponent<NovoLeitor2>().
+                    texturas.Get(objeto_clicado.GetComponent<Dados>().personagem.ToString());
+            objeto_clicado = null;
         }
     }
 
@@ -577,7 +577,7 @@ public class Controlador : MonoBehaviour {
 
     public void InicializacaoBolhas()
     {
-        instrucoesgenericas = "Instrucoes:\n" +
+        instrucoes_genericas = "Instrucoes:\n" +
                                  "1 - Muda para 'Todos De Uma Vez em 2D'\n" +
                                  "2 - Muda para 'Um Frame De Cada Vez em 3D'\n" +
                                  "3 - Muda para 'Um Frame De Cada Vez em 2D'\n" +
@@ -588,7 +588,7 @@ public class Controlador : MonoBehaviour {
 
     public void InicializacaoFIT()
     {
-        instrucoesgenericas = "Instrucoes:\n" +
+        instrucoes_genericas = "Instrucoes:\n" +
                                  "1 - Muda para 'Todos De Uma Vez em 2D'\n" +
                                  "2 - Muda para 'Um Frame De Cada Vez em 3D'\n" +
                                  "3 - Muda para 'Um Frame De Cada Vez em 2D'\n" +
@@ -674,7 +674,7 @@ public class Controlador : MonoBehaviour {
         GetComponent<NovoLeitor2>().PosicionarBackgrounds(20f);
         GetComponent<Camera>().clearFlags = CameraClearFlags.Skybox;
         GetComponent<NovoLeitor2>().DesconectarTodos();
-        GetComponent<GuiFITModo>().MudarInstrucoes(instrucoesgenericas + modos.GetInstrucao(modo_de_visualizacao));
+        GetComponent<GuiFITModo>().MudarInstrucoes(instrucoes_genericas + modos.GetInstrucao(modo_de_visualizacao));
         GetComponent<GuiFITModo>().RevelarGui();
 
         agoravai = true;
