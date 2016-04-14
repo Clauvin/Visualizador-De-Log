@@ -94,23 +94,36 @@ public class MatrizHeatMap {
     //testada. Não funcionando completamente por alguma razão.
     private void ImagemCompletaPraMatriz(BancoDeDadosBolhas bdbolhas, int i)
     {
+
         string qual = bdbolhas.GetQualObjeto(i);
+
         Texture2D textura = UnityEngine.Object.FindObjectOfType<NovoLeitor2>().texturas.Get(qual);
         int px = bdbolhas.GetCoordenadaX(i);
         int py = bdbolhas.GetCoordenadaY(i);
+
+        //limitx e limity existem para calcular se o objeto a ser desenhado futuramente vai além da tela ou não.
+        //MELHORAR: Nesta versão atual, ele só considera casos onde ele vai além da tela para direita e para baixo,
+        //  não para esquerda e para cima.
         int texture_length = textura.width; int limitx = px + texture_length;
-        int texture_heigth = textura.height; int limity = py + texture_heigth;
+        int texture_height = textura.height; int limity = py + texture_height;
 
-        if (limitx > x) { limitx = x ; } if (limity > y) { limity = y; }
+        //Se limitx > x, onde x é o tamanho da tela, o limitx é reduzido no quanto ele ultrapassa a tela.
+        //Se não, limitx vira alargura da textura, e o mesmo vale pra y.
+        if (limitx > x) { limitx = texture_length - (limitx - x); } else { limitx = texture_length; }
+        if (limity > y) { limity = texture_height - (limity - y); } else { limity = texture_height; }
 
-        for (int j = px; j < limitx; j++)
+        //Para cada pixel da textura, checar se a transparência
+        //Se sim, adiciona um ponto para a matriz de desenho.
+        for (int j = 0; j < limitx; j++)
         {
-            for (int k = py; k < limity; k++)
+            for (int k = 0; k < limity; k++)
             {
-                
-                if (textura.GetPixel(j, k).a != 255)
+
+                if (textura.GetPixel(j, k).a != 0)
                 {
-                    matriz[j, k] += 1;
+                    if (px + j > matriz.GetLength(0) - 1 ) Debug.Log(px + " " + j + " " + py + " " + k);
+                    if (py + k > matriz.GetLength(1) - 1 ) Debug.Log(px + " " + j + " " + py + " " + k);
+                    matriz[px+j, py+k] += 1;
                 }
             }
         }
