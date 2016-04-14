@@ -73,10 +73,10 @@ public class Controlador : MonoBehaviour {
 
                     posicao_da_camera.y -= y;
 
-                    if (posicao_da_camera.y <= ((GameObject)GetComponent<NovoLeitor2>().listadebackgrounds[
+                    if (posicao_da_camera.y <= ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
                         GetComponent<NovoLeitor2>().listadebackgrounds.Count - 1]).transform.position.y)
                     {
-                        posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().listadebackgrounds[0]).transform.position.y + 20.0f;
+                        posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[0]).transform.position.y + 20.0f;
                     }
 
                     FindObjectOfType<Camera>().transform.position = posicao_da_camera;

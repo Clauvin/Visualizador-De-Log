@@ -18,8 +18,8 @@ public class NovoLeitor2 : MonoBehaviour
     public ParaHeatmap<Texture2D> texturasselecionadas;
 
     Pintar pintar;
-    public ArrayList listadepontos;
-    public ArrayList listadebackgrounds;
+    public ArrayList lista_de_pontos;
+    public ArrayList lista_de_backgrounds;
     protected string modofit;
 
     protected ArrayList matrizesdosheatmaps;
