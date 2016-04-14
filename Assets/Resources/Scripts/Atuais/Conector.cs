@@ -6,30 +6,30 @@ using System.Collections;
 /// </summary>
 public class Conector : MonoBehaviour {
 
-    public ArrayList listadepontos;
+    public ArrayList lista_de_pontos;
     public GameObject backgroundprincipal;
 
     void Awake()
     {
-        listadepontos = new ArrayList(1);
+        lista_de_pontos = new ArrayList(1);
     }
 
     public void AddPonto(GameObject ponto)
     {
-        listadepontos.Add(ponto);
+        lista_de_pontos.Add(ponto);
     }
 
     public void Conectar()
     {
-        for (int i = 0; i < listadepontos.Count; i++)
+        for (int i = 0; i < lista_de_pontos.Count; i++)
         {
-            ((GameObject)listadepontos[i]).transform.parent = backgroundprincipal.transform;
+            ((GameObject)lista_de_pontos[i]).transform.parent = backgroundprincipal.transform;
         }
     }
 
     public void Desconectar()
     {
-        for (int i = 0; i < listadepontos.Count; i++) ((GameObject)listadepontos[i]).transform.parent = null;
+        for (int i = 0; i < lista_de_pontos.Count; i++) ((GameObject)lista_de_pontos[i]).transform.parent = null;
     }
 
     public void NoLayer(int layer)
