@@ -398,7 +398,7 @@ public class NovoLeitor2 : MonoBehaviour
             objeto.GetComponent<Dados>().xlog = bdfit.GetGridX(i);
             objeto.GetComponent<Dados>().ylog = bdfit.GetGridY(i);
 
-            listadepontos.Add(objeto);
+            lista_de_pontos.Add(objeto);
 
             //criando background para o par de pontos
             if (criarbackground) {
@@ -426,7 +426,7 @@ public class NovoLeitor2 : MonoBehaviour
                 background.AddComponent<Dados>();
                 background.GetComponent<Dados>().Atualizar();
                 background.name = "Background - " + i;
-                listadebackgrounds.Add(background);                
+                lista_de_backgrounds.Add(background);                
             }
 
             // Explaining this:
@@ -460,7 +460,7 @@ public class NovoLeitor2 : MonoBehaviour
         }
 
         //ajeitando a câmera
-        newposcamera.y = ((GameObject)listadebackgrounds[0]).transform.position.y;
+        newposcamera.y = ((GameObject)lista_de_backgrounds[0]).transform.position.y;
         acamera.transform.position = newposcamera;
         acamera.transform.Rotate(90f, 0f, 0f);
         acamera.orthographic = true;
@@ -471,7 +471,7 @@ public class NovoLeitor2 : MonoBehaviour
         materialheatmap.SetTexture("_MainTex", ((MatrizHeatMap)matrizesdosheatmaps[0]).heatmap);
         heatmap.GetComponent<MeshRenderer>().material = Instantiate(materialheatmap);
 
-        heatmap.transform.position = ((GameObject)listadebackgrounds[0]).transform.position + new Vector3(200f, 0, 0);
+        heatmap.transform.position = ((GameObject)lista_de_backgrounds[0]).transform.position + new Vector3(200f, 0, 0);
 
     }
 
@@ -574,7 +574,7 @@ public class NovoLeitor2 : MonoBehaviour
                 objeto.GetComponent<Dados>().quemcriou = bdbolhas.GetQuemCriou(i);
             }
 
-            listadepontos.Add(objeto);
+            lista_de_pontos.Add(objeto);
 
             //criando background para o par de pontos
             if (novotempo)
@@ -602,7 +602,7 @@ public class NovoLeitor2 : MonoBehaviour
                 background.AddComponent<Dados>();
                 background.GetComponent<Dados>().Atualizar();
                 background.name = "Background - " + i;
-                listadebackgrounds.Add(background);
+                lista_de_backgrounds.Add(background);
             }
 
             objeto.transform.localScale = new Vector3(texturas.Get(bdbolhas.GetQualObjeto(i).ToString()).width / resolucao.x,
@@ -640,7 +640,7 @@ public class NovoLeitor2 : MonoBehaviour
         }
 
         //ajeitando a câmera
-        newposcamera.y = ((GameObject)listadebackgrounds[0]).transform.position.y;
+        newposcamera.y = ((GameObject)lista_de_backgrounds[0]).transform.position.y;
         acamera.transform.position = newposcamera;
         acamera.transform.Rotate(90f, 0f, 0f);
         acamera.orthographic = true;
@@ -651,28 +651,28 @@ public class NovoLeitor2 : MonoBehaviour
         materialheatmap.SetTexture("_MainTex", ((MatrizHeatMap)matrizesdosheatmaps[0]).heatmap);
         heatmap.GetComponent<MeshRenderer>().material = Instantiate(materialheatmap);
 
-        heatmap.transform.position = ((GameObject)listadebackgrounds[0]).transform.position + new Vector3(200f, 0, 0);
+        heatmap.transform.position = ((GameObject)lista_de_backgrounds[0]).transform.position + new Vector3(200f, 0, 0);
 
     }
 
     public void ControlarAlpha(float alpha)
     {
-        for (int i = 0; i < listadebackgrounds.Count; i++)
+        for (int i = 0; i < lista_de_backgrounds.Count; i++)
         {
-            Color cor = ((GameObject)listadebackgrounds[i]).GetComponent<MeshRenderer>().material.GetColor("_Color");
+            Color cor = ((GameObject)lista_de_backgrounds[i]).GetComponent<MeshRenderer>().material.GetColor("_Color");
                
             cor.a = alpha;
 
-            ((GameObject)listadebackgrounds[i]).GetComponent<MeshRenderer>().material.SetColor("_Color", cor);
+            ((GameObject)lista_de_backgrounds[i]).GetComponent<MeshRenderer>().material.SetColor("_Color", cor);
         }
     }
 
     public void GirarBackgrounds(Vector3 coordenadas)
     {
-        for (int i = 0; i < listadebackgrounds.Count; i++)
+        for (int i = 0; i < lista_de_backgrounds.Count; i++)
         {
-            ((GameObject)listadebackgrounds[i]).transform.rotation = Quaternion.identity;
-            ((GameObject)listadebackgrounds[i]).transform.Rotate(coordenadas);
+            ((GameObject)lista_de_backgrounds[i]).transform.rotation = Quaternion.identity;
+            ((GameObject)lista_de_backgrounds[i]).transform.Rotate(coordenadas);
         }
     }
 
@@ -684,40 +684,40 @@ public class NovoLeitor2 : MonoBehaviour
 
     public void AlterarLayer(int alt)
     {
-        for (int i = 0; i < listadebackgrounds.Count; i++)
+        for (int i = 0; i < lista_de_backgrounds.Count; i++)
         {
-            ((GameObject)listadebackgrounds[i]).GetComponent<Conector>().NoLayer(alt);
+            ((GameObject)lista_de_backgrounds[i]).GetComponent<Conector>().NoLayer(alt);
         }
     }
 
     public void PosicionarBackgrounds(float dist)
     {
-        float yback0 = ((GameObject)listadebackgrounds[0]).transform.position.y;
+        float yback0 = ((GameObject)lista_de_backgrounds[0]).transform.position.y;
         Vector3 pos;
 
-        for (int i = 1; i < listadebackgrounds.Count; i++)
+        for (int i = 1; i < lista_de_backgrounds.Count; i++)
         {
             yback0 -= dist;
-            pos = ((GameObject)listadebackgrounds[i]).transform.position;
+            pos = ((GameObject)lista_de_backgrounds[i]).transform.position;
             pos.y = yback0;
-            ((GameObject)listadebackgrounds[i]).transform.position = pos;
+            ((GameObject)lista_de_backgrounds[i]).transform.position = pos;
         }
     }
 
     public void ConectarTodos()
     {
-        for (int j = 0; j < listadebackgrounds.Count; j++)
+        for (int j = 0; j < lista_de_backgrounds.Count; j++)
         {
-            GameObject background = (GameObject)listadebackgrounds[j];
+            GameObject background = (GameObject)lista_de_backgrounds[j];
             background.GetComponent<Conector>().Conectar();
         }
     }
 
     public void DesconectarTodos()
     {
-        for (int j = 0; j < listadebackgrounds.Count; j++)
+        for (int j = 0; j < lista_de_backgrounds.Count; j++)
         {
-            GameObject background = (GameObject)listadebackgrounds[j];
+            GameObject background = (GameObject)lista_de_backgrounds[j];
             background.GetComponent<Conector>().Desconectar();
         }
     }
@@ -845,8 +845,8 @@ public class NovoLeitor2 : MonoBehaviour
         texturas = new ParaHeatmap<Texture2D>();
         texturasselecionadas = new ParaHeatmap<Texture2D>();
         pintar = new Pintar();
-        listadepontos = new ArrayList();
-        listadebackgrounds = new ArrayList();
+        lista_de_pontos = new ArrayList();
+        lista_de_backgrounds = new ArrayList();
         matrizesdosheatmaps = new ArrayList();
     }
     
