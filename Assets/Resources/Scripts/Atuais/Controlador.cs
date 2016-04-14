@@ -25,9 +25,8 @@ public class Controlador : MonoBehaviour {
 
     Transform objeto_clicado = null;
 
-    //valores da camera
-    float sensX = 10.0f;
-    float sensY = 10.0f;
+    float cam_sensitividade_X = 10.0f;
+    float cam_sensitividade_Y = 10.0f;
     float rotationY = 0.0f;
     float rotationX = 0.0f;
     float minX = -360.0f;
@@ -206,8 +205,8 @@ public class Controlador : MonoBehaviour {
 
                 if (Input.GetMouseButton(1))
                 {
-                    rotationX += Input.GetAxis("Mouse X") * sensX * Time.deltaTime;
-                    rotationY += Input.GetAxis("Mouse Y") * sensY * Time.deltaTime;
+                    rotationX += Input.GetAxis("Mouse X") * cam_sensitividade_X * Time.deltaTime;
+                    rotationY += Input.GetAxis("Mouse Y") * cam_sensitividade_Y * Time.deltaTime;
                     rotationY = Mathf.Clamp(rotationY, minY, maxY);
                     FindObjectOfType<Camera>().transform.Rotate(-rotationY, rotationX, 0);
                 }
