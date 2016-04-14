@@ -5,8 +5,8 @@ public class CounterParser3 : MonoBehaviour
 {
 
     ArrayList tempo;
-    ArrayList oque;
-    ArrayList posicoes;
+    ArrayList qual_objeto;
+    ArrayList posicoes_dos_objetos;
     public int initx1 = 1;
     public int inity1 = 1;
     public int initx2 = 1;
@@ -18,8 +18,8 @@ public class CounterParser3 : MonoBehaviour
     void Start()
     {
         tempo = new ArrayList();
-        oque = new ArrayList();
-        posicoes = new ArrayList();
+        qual_objeto = new ArrayList();
+        posicoes_dos_objetos = new ArrayList();
         QualEndereco();
         Gerador();
         Salvador();
@@ -54,15 +54,15 @@ public class CounterParser3 : MonoBehaviour
 
             temp = i / 2;
             oquefoi = (i % 2) + 1;
-            if (i % 2 == 0) posicoes.Add(new Vector2(x1, y1));
-            if (i % 2 == 1) posicoes.Add(new Vector2(x2, y2));
+            if (i % 2 == 0) posicoes_dos_objetos.Add(new Vector2(x1, y1));
+            if (i % 2 == 1) posicoes_dos_objetos.Add(new Vector2(x2, y2));
             tempo.Add(temp);
-            oque.Add(oquefoi);
+            qual_objeto.Add(oquefoi);
         }
 
         for (int i = 0; i < quantasvezes; i++)
         {
-            Vector2 posicao = (Vector2)posicoes[i];
+            Vector2 posicao = (Vector2)posicoes_dos_objetos[i];
 
 
         }
@@ -74,10 +74,10 @@ public class CounterParser3 : MonoBehaviour
         file.WriteLine("[Mode 01]");
         for (int i = 0; i < quantasvezes; i++)
         {
-            Vector2 posicao = (Vector2)posicoes[i];
-            if (i%2==0) file.WriteLine("TimeA:" + tempo[i] + "=Char:" + oque[i] + "=GridX:" + posicao.x + "=GridY:"
+            Vector2 posicao = (Vector2)posicoes_dos_objetos[i];
+            if (i%2==0) file.WriteLine("TimeA:" + tempo[i] + "=Char:" + qual_objeto[i] + "=GridX:" + posicao.x + "=GridY:"
                 + posicao.y);
-            else file.WriteLine("TimeB:" + tempo[i] + "=Char:" + oque[i] + "=GridX:" + posicao.x + "=GridY:"
+            else file.WriteLine("TimeB:" + tempo[i] + "=Char:" + qual_objeto[i] + "=GridX:" + posicao.x + "=GridY:"
                + posicao.y);
         }
         file.Close();
