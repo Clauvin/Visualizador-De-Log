@@ -88,12 +88,13 @@ public class MatrizHeatMap {
                 }
             }
         }
-        Debug.Log("Contagem de vezes que pintou = " + contagem);
     }
 
     //testada. Não funcionando completamente por alguma razão.
     private void ImagemCompletaPraMatriz(BancoDeDadosBolhas bdbolhas, int i)
     {
+        //vj e vk são os valores a serem usados inicialmente nos for que passam por toda a textura a ser mostrada no heatmap.
+        int vj = 0, vk = 0;
 
         string qual = bdbolhas.GetQualObjeto(i);
 
@@ -102,28 +103,31 @@ public class MatrizHeatMap {
         int py = bdbolhas.GetCoordenadaY(i);
 
         //limitx e limity existem para calcular se o objeto a ser desenhado futuramente vai além da tela ou não.
-        //MELHORAR: Nesta versão atual, ele só considera casos onde ele vai além da tela para direita e para baixo,
-        //  não para esquerda e para cima.
         int texture_length = textura.width; int limitx = px + texture_length;
         int texture_height = textura.height; int limity = py + texture_height;
 
         //Se limitx > x, onde x é o tamanho da tela, o limitx é reduzido no quanto ele ultrapassa a tela.
         //Se não, limitx vira alargura da textura, e o mesmo vale pra y.
+        //Esse é o teste para ultrapassagens à direita e abaixo da tela.
         if (limitx > x) { limitx = texture_length - (limitx - x); } else { limitx = texture_length; }
         if (limity > y) { limity = texture_height - (limity - y); } else { limity = texture_height; }
 
+        //Se px ou py < 0, ou seja, os objetos estão à esquerda ou acima do heatmap, é necessário começar a desenhá-los
+        //  APENAS a partir de onde começam a aparecer em tela, daí j = -px e k = -py;
+        if (px < 0) { vj = -px; } 
+        if (py < 0) { vk = -py; }
+
         //Para cada pixel da textura, checar se a transparência
         //Se sim, adiciona um ponto para a matriz de desenho.
-        for (int j = 0; j < limitx; j++)
+        for (int j = vj ; j < limitx; j++)
         {
-            for (int k = 0; k < limity; k++)
+            for (int k = vk ; k < limity; k++)
             {
-
-                if (textura.GetPixel(j, k).a != 0)
+                try {
+                    if (textura.GetPixel(j, k).a != 0) matriz[px + j, py + k] += 1;
+                } catch(System.IndexOutOfRangeException e)
                 {
-                    if (px + j > matriz.GetLength(0) - 1 ) Debug.Log(px + " " + j + " " + py + " " + k);
-                    if (py + k > matriz.GetLength(1) - 1 ) Debug.Log(px + " " + j + " " + py + " " + k);
-                    matriz[px+j, py+k] += 1;
+                    Debug.Log("px e j " + px + " " + j + " - " + "py e k " + py + " " + k);
                 }
             }
         }
