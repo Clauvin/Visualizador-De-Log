@@ -62,7 +62,7 @@ public class GuiFITTempo : GuiTempo
         }
 
         postempofloat = (posinicialcamera - GetComponent<Camera>().transform.position.y)/20;
-        if (GetComponent<Controlador>().modo == "Um Frame De Cada Vez em 2D")
+        if (GetComponent<Controlador>().modo_de_visualizacao == "Um Frame De Cada Vez em 2D")
         {
             postempofloat += 0.25f;
         }

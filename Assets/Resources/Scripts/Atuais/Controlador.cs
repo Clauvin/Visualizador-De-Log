@@ -11,11 +11,15 @@ using System.Collections;
 
 */
 
+/// <summary>
+/// Classe Controlador, responsável por ler inputs de mouse e teclado para uso do visualizador de log.
+/// <para></para>
+/// </summary>
 public class Controlador : MonoBehaviour {
 
     Vector3 posicaocamera;
     BancoDeDadosModos modos = new BancoDeDadosModos();
-    public string modo = "Todos De Uma Vez em 2D";
+    public string modo_de_visualizacao = "Todos De Uma Vez em 2D";
     int count;
     string instrucoesgenericas;
 
@@ -50,11 +54,6 @@ public class Controlador : MonoBehaviour {
 
     //agoravai serve pra bloquear, se necessário, o input do jogador, o que evita bugs iniciais
     bool agoravai = false;
-
-	// Use this for initialization
-	void Start () {
-
-    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -63,7 +62,7 @@ public class Controlador : MonoBehaviour {
 
             posicaocamera = transform.position;
 
-            if (modo == "Um Frame De Cada Vez em 2D") {
+            if (modo_de_visualizacao == "Um Frame De Cada Vez em 2D") {
 
                 if (Input.GetKeyUp("r"))
                 {
@@ -73,7 +72,7 @@ public class Controlador : MonoBehaviour {
 
                 if (automode)
                 {
-                    float y = modos.GetMovimentacao(modo);
+                    float y = modos.GetMovimentacao(modo_de_visualizacao);
 
                     posicaocamera.y -= y;
 
@@ -88,7 +87,7 @@ public class Controlador : MonoBehaviour {
 
                 if (automodecustom)
                 {
-                    float y = modos.GetMovimentacao(modo);
+                    float y = modos.GetMovimentacao(modo_de_visualizacao);
 
                     posicaocamera.y -= y;
 
@@ -159,12 +158,12 @@ public class Controlador : MonoBehaviour {
             }
 
             //Necessário para esse modo específico por conta da movimentação livre dele
-            if (modo == "Todos De Uma Vez em 3D") {
+            if (modo_de_visualizacao == "Todos De Uma Vez em 3D") {
 
                 //Esse código movimenta a câmera para esquerda e para direita.
                 if (Input.GetAxis("Horizontal") != 0)
                 {
-                    float x = modos.GetMovimentacao(modo);
+                    float x = modos.GetMovimentacao(modo_de_visualizacao);
 
                     if (Input.GetAxis("Horizontal") > 0) posicaocamera.x += x;
                     else if (Input.GetAxis("Horizontal") < 0) posicaocamera.x -= x;
@@ -175,7 +174,7 @@ public class Controlador : MonoBehaviour {
                 //Esse código movimenta a câmera para frente e para trás.
                 if (Input.GetAxis("Vertical") != 0)
                 {
-                    float y = modos.GetMovimentacao(modo);
+                    float y = modos.GetMovimentacao(modo_de_visualizacao);
 
                     if (Input.GetAxis("Vertical") > 0) posicaocamera.y -= y;
                     else if (Input.GetAxis("Vertical") < 0) posicaocamera.y += y;
@@ -186,7 +185,7 @@ public class Controlador : MonoBehaviour {
                 //Esse código movimenta a câmera para cima e para baixo.
                 if (Input.GetAxis("Zertical") != 0)
                 {
-                    float z = modos.GetMovimentacao(modo);
+                    float z = modos.GetMovimentacao(modo_de_visualizacao);
 
                     if (Input.GetAxis("Zertical") > 0) posicaocamera.z += z;
                     else if (Input.GetAxis("Zertical") < 0) posicaocamera.z -= z;
@@ -197,7 +196,7 @@ public class Controlador : MonoBehaviour {
                 //Esse código movimenta a câmera para esquerda e para direita mais rápido.
                 if ((Input.GetButton("a")) || (Input.GetButton("d")))
                 {
-                    float x = modos.GetMovimentacao(modo);
+                    float x = modos.GetMovimentacao(modo_de_visualizacao);
 
                     if (Input.GetButton("a")) posicaocamera.x -= (7 * x);
                     else if (Input.GetButton("d")) posicaocamera.x += (7 * x);
@@ -221,7 +220,7 @@ public class Controlador : MonoBehaviour {
 
                 if (Input.GetAxis("Mouse ScrollWheel") != 0)
                 {
-                    float roda = modos.GetMovimentacao(modo) * 5;
+                    float roda = modos.GetMovimentacao(modo_de_visualizacao) * 5;
                     if (Input.GetAxis("Mouse ScrollWheel") > 0) FindObjectOfType<Camera>().transform.Rotate(0, 0, roda);
                     else if (Input.GetAxis("Mouse ScrollWheel") < 0) FindObjectOfType<Camera>().transform.Rotate(0, 0, -roda);
 
@@ -242,7 +241,7 @@ public class Controlador : MonoBehaviour {
 
                 }
 
-            } else if (modo == "Heatmap") {
+            } else if (modo_de_visualizacao == "Heatmap") {
 
                 if ((Input.GetKeyUp("left")) || ((Input.GetKeyUp("right"))))
                 {
@@ -256,10 +255,10 @@ public class Controlador : MonoBehaviour {
                 //Esse código movimenta a câmera para frente e para trás.
                 if (Input.GetAxis("Horizontal") != 0) {
 
-                    if ((modo == "Um Frame De Cada Vez em 2D") && (automode)){ }
+                    if ((modo_de_visualizacao == "Um Frame De Cada Vez em 2D") && (automode)){ }
                     else { 
 
-                        float y = modos.GetMovimentacao(modo);
+                        float y = modos.GetMovimentacao(modo_de_visualizacao);
 
                         if (Input.GetAxis("Horizontal") > 0) posicaocamera.y -= y;
                         else if (Input.GetAxis("Horizontal") < 0) posicaocamera.y += y;
@@ -272,10 +271,10 @@ public class Controlador : MonoBehaviour {
                 //Esse código movimenta a câmera para frente e para trás mais rápido.
                 if ((Input.GetButton("a")) || (Input.GetButton("d")))
                 {
-                    if ((modo == "Um Frame De Cada Vez em 2D") && (automode)) { }
+                    if ((modo_de_visualizacao == "Um Frame De Cada Vez em 2D") && (automode)) { }
                     else
                     {
-                        float y = modos.GetMovimentacao(modo);
+                        float y = modos.GetMovimentacao(modo_de_visualizacao);
 
                         if (Input.GetButton("a")) posicaocamera.y += (7 * y);
                         else if (Input.GetButton("d")) posicaocamera.y -= (7 * y);
@@ -286,7 +285,7 @@ public class Controlador : MonoBehaviour {
 
             }
 
-            if ((Input.GetButtonDown("1")) && (modo != "Todos De Uma Vez em 2D"))
+            if ((Input.GetButtonDown("1")) && (modo_de_visualizacao != "Todos De Uma Vez em 2D"))
             {
                 GetComponent<NovoLeitor2>().ConectarTodos();
                 Mudanca("Todos De Uma Vez em 2D");
@@ -296,7 +295,7 @@ public class Controlador : MonoBehaviour {
                 GetComponent<NovoLeitor2>().DesconectarTodos();
             }
 
-            if ((Input.GetButtonDown("2")) && (modo != "Um Frame De Cada Vez em 3D"))
+            if ((Input.GetButtonDown("2")) && (modo_de_visualizacao != "Um Frame De Cada Vez em 3D"))
             {
                 GetComponent<NovoLeitor2>().ConectarTodos();
                 Mudanca("Um Frame De Cada Vez em 3D");
@@ -306,7 +305,7 @@ public class Controlador : MonoBehaviour {
                 GetComponent<NovoLeitor2>().DesconectarTodos();
             }
 
-            if ((Input.GetButtonDown("3")) && (modo != "Um Frame De Cada Vez em 2D"))
+            if ((Input.GetButtonDown("3")) && (modo_de_visualizacao != "Um Frame De Cada Vez em 2D"))
             {
                 //Daqui pra baixo, parte do FIT
                 GetComponent<NovoLeitor2>().ConectarTodos();
@@ -317,7 +316,7 @@ public class Controlador : MonoBehaviour {
                 GetComponent<NovoLeitor2>().DesconectarTodos();
             }
 
-            if ((Input.GetButtonDown("4")) && (modo != "Todos De Uma Vez em 3D"))
+            if ((Input.GetButtonDown("4")) && (modo_de_visualizacao != "Todos De Uma Vez em 3D"))
             {
                 //Daqui pra baixo, parte do FIT
                 GetComponent<NovoLeitor2>().ConectarTodos();
@@ -329,7 +328,7 @@ public class Controlador : MonoBehaviour {
                 GetComponent<NovoLeitor2>().DesconectarTodos();
             }
 
-            if ((Input.GetButtonDown("5")) && (modo != "Heatmap"))
+            if ((Input.GetButtonDown("5")) && (modo_de_visualizacao != "Heatmap"))
             {
                 //Daqui pra baixo, parte do FIT
                 GetComponent<NovoLeitor2>().ConectarTodos();
@@ -348,9 +347,9 @@ public class Controlador : MonoBehaviour {
 
             if (Input.GetButtonDown("7"))
             {
-                TransparenciaDeVoltaAoNormal(modo);
+                TransparenciaDeVoltaAoNormal(modo_de_visualizacao);
 
-                if (modo == "Todos De Uma Vez em 2D"){ TransparenciaDoBackground(1f); }
+                if (modo_de_visualizacao == "Todos De Uma Vez em 2D"){ TransparenciaDoBackground(1f); }
             }
 
             if (Input.GetButtonDown("8"))
@@ -418,13 +417,13 @@ public class Controlador : MonoBehaviour {
 
     public void Mudanca(string modonovo, bool forcar = false)
     {
-        if ((modo != modonovo) || (forcar == true))
+        if ((modo_de_visualizacao != modonovo) || (forcar == true))
         {
             Vector3 posicaonova = GetComponent<Camera>().transform.position;
             posicaonova.x = modos.GetCameraX(modonovo);
-            modos.SetCameraInitY(modo, posicaonova.y);
+            modos.SetCameraInitY(modo_de_visualizacao, posicaonova.y);
             posicaonova.y = modos.GetCameraInitY(modonovo);
-            if (modo == "Todos De Uma Vez em 3D") modos.SetCameraInitZ(modo, posicaonova.z);
+            if (modo_de_visualizacao == "Todos De Uma Vez em 3D") modos.SetCameraInitZ(modo_de_visualizacao, posicaonova.z);
             if (modonovo == "Todos De Uma Vez em 3D") posicaonova.z = modos.GetCameraInitZ(modonovo);
             else posicaonova.z = 0.0f;
             GetComponent<Camera>().transform.position = posicaonova;
@@ -437,24 +436,24 @@ public class Controlador : MonoBehaviour {
 
             TransparenciaDoBackground(modos.GetVisibleBackgroundAlpha(modonovo));
 
-            modo = modonovo;
+            modo_de_visualizacao = modonovo;
 
-            GetComponent<GuiFITModo>().MudarTexto(modo);
-            GetComponent<GuiFITModo>().MudarInstrucoes(instrucoesgenericas + modos.GetInstrucao(modo));
+            GetComponent<GuiFITModo>().MudarTexto(modo_de_visualizacao);
+            GetComponent<GuiFITModo>().MudarInstrucoes(instrucoesgenericas + modos.GetInstrucao(modo_de_visualizacao));
 
-            if ((modo == "Um Frame De Cada Vez em 3D") || (modo == "Um Frame De Cada Vez em 2D"))
+            if ((modo_de_visualizacao == "Um Frame De Cada Vez em 3D") || (modo_de_visualizacao == "Um Frame De Cada Vez em 2D"))
             {
                 GetComponent<GuiTempo>().RevelarGui();
             }
             else { GetComponent<GuiTempo>().EsconderGui(); }
 
-            if (modo == "Heatmap")
+            if (modo_de_visualizacao == "Heatmap")
             {
                 GetComponent<GuiFITHeatmap>().RevelarGui();
             }
             else { GetComponent<GuiFITHeatmap>().EsconderGui(); }
 
-            if ((pegarvalorcameratodosdeumavez3D) && (modo == "Todos De Uma Vez em 3D"))
+            if ((pegarvalorcameratodosdeumavez3D) && (modo_de_visualizacao == "Todos De Uma Vez em 3D"))
             {
                 poscamerainicial = GetComponent<Camera>().transform.position;
                 posrotinicial = GetComponent<Camera>().transform.rotation;
@@ -664,7 +663,7 @@ public class Controlador : MonoBehaviour {
 
         //gambiarra a ser corrigida posteriormente
         Vector3 pos = FindObjectOfType<Camera>().transform.position;
-        pos.y = modos.GetCameraInitY(modo);
+        pos.y = modos.GetCameraInitY(modo_de_visualizacao);
         FindObjectOfType<Camera>().transform.position = pos;
         //Daqui pra baixo, parte do FIT
         count = GetComponent<NovoLeitor2>().listadebackgrounds.Count;
@@ -675,7 +674,7 @@ public class Controlador : MonoBehaviour {
         GetComponent<NovoLeitor2>().PosicionarBackgrounds(20f);
         GetComponent<Camera>().clearFlags = CameraClearFlags.Skybox;
         GetComponent<NovoLeitor2>().DesconectarTodos();
-        GetComponent<GuiFITModo>().MudarInstrucoes(instrucoesgenericas + modos.GetInstrucao(modo));
+        GetComponent<GuiFITModo>().MudarInstrucoes(instrucoesgenericas + modos.GetInstrucao(modo_de_visualizacao));
         GetComponent<GuiFITModo>().RevelarGui();
 
         agoravai = true;
