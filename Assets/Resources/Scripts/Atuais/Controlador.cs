@@ -17,7 +17,7 @@ using System.Collections;
 /// </summary>
 public class Controlador : MonoBehaviour {
 
-    Vector3 posicaocamera;
+    Vector3 posicao_da_camera;
     BancoDeDadosModos modos = new BancoDeDadosModos();
     public string modo_de_visualizacao = "Todos De Uma Vez em 2D";
     int count;
@@ -27,123 +27,123 @@ public class Controlador : MonoBehaviour {
 
     float cam_sensitividade_X = 10.0f;
     float cam_sensitividade_Y = 10.0f;
-    float rotationY = 0.0f;
-    float rotationX = 0.0f;
-    float minX = -360.0f;
-    float maxX = 360.0f;
-    float minY = -45.0f;
-    float maxY = 45.0f;
+    float cam_rotation_X = 0.0f;
+    float cam_rotation_Y = 0.0f;
+    float cam_min_mov_X = -360.0f;
+    float cam_max_mov_X = 360.0f;
+    float cam_min_mov_Y = -45.0f;
+    float cam_max_mov_Y = 45.0f;
 
     //valor inicial guardado de câmera para o modo 'Todos De Uma Vez em 3D'
-    Vector3 poscamerainicial = new Vector3();
-    Quaternion posrotinicial = new Quaternion();
-    bool pegarvalorcameratodosdeumavez3D = true;
+    Vector3 pos_camera_inicial_todos_de_uma_vez_em_3D = new Vector3();
+    Quaternion pos_rot_inicial_todos_de_uma_vez_em_3D = new Quaternion();
+    bool pegar_valor_de_camera_todos_de_uma_vez_em_3D = true;
 
     //para a seleção de heatmaps
-    int qualheatmap = 0;
+    int qual_heatmap = 0;
 
     //para o modo automático do 3
-    bool automode = false;
+    bool auto_mode = false;
 
     //para o modo automático custom do 3
-    bool automodecustom = false;
-    int posicaotemporal1;
-    int posicaotemporal2;
+    bool auto_mode_custom = false;
+    int posicao_temporal_1;
+    int posicao_temporal_2;
 
 
     //agoravai serve pra bloquear, se necessário, o input do jogador, o que evita bugs iniciais
-    bool agoravai = false;
+    bool usuario_pode_fazer_input = false;
 	
 	// Update is called once per frame
 	void Update () {
 
-        if (agoravai) { 
+        if (usuario_pode_fazer_input) {
 
-            posicaocamera = transform.position;
+            posicao_da_camera = transform.position;
 
             if (modo_de_visualizacao == "Um Frame De Cada Vez em 2D") {
 
                 if (Input.GetKeyUp("r"))
                 {
-                    if (automode) automode = false;
-                    else automode = true;
+                    if (auto_mode) auto_mode = false;
+                    else auto_mode = true;
                 }
 
-                if (automode)
+                if (auto_mode)
                 {
                     float y = modos.GetMovimentacao(modo_de_visualizacao);
 
-                    posicaocamera.y -= y;
+                    posicao_da_camera.y -= y;
 
-                    if (posicaocamera.y <= ((GameObject)GetComponent<NovoLeitor2>().listadebackgrounds[
+                    if (posicao_da_camera.y <= ((GameObject)GetComponent<NovoLeitor2>().listadebackgrounds[
                         GetComponent<NovoLeitor2>().listadebackgrounds.Count - 1]).transform.position.y)
                     {
-                        posicaocamera.y = ((GameObject)GetComponent<NovoLeitor2>().listadebackgrounds[0]).transform.position.y + 20.0f;
+                        posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().listadebackgrounds[0]).transform.position.y + 20.0f;
                     }
 
-                    FindObjectOfType<Camera>().transform.position = posicaocamera;
+                    FindObjectOfType<Camera>().transform.position = posicao_da_camera;
                 }
 
-                if (automodecustom)
+                if (auto_mode_custom)
                 {
                     float y = modos.GetMovimentacao(modo_de_visualizacao);
 
-                    posicaocamera.y -= y;
+                    posicao_da_camera.y -= y;
 
                     
 
-                    if (posicaocamera.y <= ((GameObject)GetComponent<NovoLeitor2>().listadebackgrounds[
-                        posicaotemporal2]).transform.position.y)
+                    if (posicao_da_camera.y <= ((GameObject)GetComponent<NovoLeitor2>().listadebackgrounds[
+                        posicao_temporal_2]).transform.position.y)
                     {
-                        posicaocamera.y = ((GameObject)GetComponent<NovoLeitor2>().listadebackgrounds[
-                            posicaotemporal1]).transform.position.y;
+                        posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().listadebackgrounds[
+                            posicao_temporal_1]).transform.position.y;
                     }
 
-                    FindObjectOfType<Camera>().transform.position = posicaocamera;
+                    FindObjectOfType<Camera>().transform.position = posicao_da_camera;
                 }
 
                 if (Input.GetKeyUp("e"))
                 {
                     string tempo = GetComponent<GuiTempo>().GetStringEditavel();
-                    int posicaotemporal;
-                    bool resultado = int.TryParse(tempo, out posicaotemporal);
+                    int posicao_temporal_;
+                    bool resultado = int.TryParse(tempo, out posicao_temporal_);
                     if (resultado)
                     {
-                        if (posicaotemporal <= GetComponent<NovoLeitor2>().GetUltimoTempo())
+                        if (posicao_temporal_ <= GetComponent<NovoLeitor2>().GetUltimoTempo())
                         {
-                            posicaocamera.y = ((GameObject)GetComponent<NovoLeitor2>().listadebackgrounds[0]).transform.position.y +
-                                              20.0f - 20.0f * posicaotemporal;
+                            posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().listadebackgrounds[0]).transform.position.y +
+                                              20.0f - 20.0f * posicao_temporal_;
                         } else
                         {
                             GetComponent<GuiTempo>().SetStringEditavel("Tempo " + tempo + " não existe.");
                         }
                     }
 
-                    FindObjectOfType<Camera>().transform.position = posicaocamera;
+                    FindObjectOfType<Camera>().transform.position = posicao_da_camera;
                 }
 
                 if (Input.GetKeyUp("t"))
                 {
-                    if (automodecustom == false) {  
+                    if (auto_mode_custom == false) {  
                         string tempo1 = GetComponent<GuiTempo>().GetAutoCustomComecoEditavel();
                         string tempo2 = GetComponent<GuiTempo>().GetAutoCustomFinalEditavel();
 
-                        bool resultado1 = int.TryParse(tempo1, out posicaotemporal1);
-                        bool resultado2 = int.TryParse(tempo2, out posicaotemporal2);
+                        bool resultado1 = int.TryParse(tempo1, out posicao_temporal_1);
+                        bool resultado2 = int.TryParse(tempo2, out posicao_temporal_2);
 
                         if (resultado1 && resultado2) {
                         
-                            if (posicaotemporal1 <= GetComponent<NovoLeitor2>().GetUltimoTempo() &&
-                                posicaotemporal2 <= GetComponent<NovoLeitor2>().GetUltimoTempo()) 
+                            if (posicao_temporal_1 <= GetComponent<NovoLeitor2>().GetUltimoTempo() &&
+                                posicao_temporal_2 <= GetComponent<NovoLeitor2>().GetUltimoTempo()) 
                             {
-                                if (posicaotemporal1 <= GetComponent<NovoLeitor2>().GetUltimoTempo())
+                                if (posicao_temporal_1 <= GetComponent<NovoLeitor2>().GetUltimoTempo())
                                 {
-                                    posicaocamera.y = ((GameObject)GetComponent<NovoLeitor2>().listadebackgrounds[0]).transform.position.y +
-                                                        20.0f - 20.0f * posicaotemporal1;
+                                    posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().listadebackgrounds[0]).transform.position.y +
+                                                        20.0f - 20.0f * posicao_temporal_1;
                                 }
 
-                                FindObjectOfType<Camera>().transform.position = posicaocamera;
-                                automodecustom = true;
+                                FindObjectOfType<Camera>().transform.position = posicao_da_camera;
+                                auto_mode_custom = true;
                             }
                         } else
                         {
@@ -151,8 +151,8 @@ public class Controlador : MonoBehaviour {
                             if (!resultado2) GetComponent<GuiTempo>().SetAutoCustomFinalEditavel("Tempo " + tempo2 + " não existe.");
                         }
 
-                        FindObjectOfType<Camera>().transform.position = posicaocamera;
-                    } else { automodecustom = false; }
+                        FindObjectOfType<Camera>().transform.position = posicao_da_camera;
+                    } else { auto_mode_custom = false; }
                 }
             }
 
@@ -164,10 +164,10 @@ public class Controlador : MonoBehaviour {
                 {
                     float x = modos.GetMovimentacao(modo_de_visualizacao);
 
-                    if (Input.GetAxis("Horizontal") > 0) posicaocamera.x += x;
-                    else if (Input.GetAxis("Horizontal") < 0) posicaocamera.x -= x;
+                    if (Input.GetAxis("Horizontal") > 0) posicao_da_camera.x += x;
+                    else if (Input.GetAxis("Horizontal") < 0) posicao_da_camera.x -= x;
 
-                    FindObjectOfType<Camera>().transform.position = posicaocamera;
+                    FindObjectOfType<Camera>().transform.position = posicao_da_camera;
                 }
 
                 //Esse código movimenta a câmera para frente e para trás.
@@ -175,10 +175,10 @@ public class Controlador : MonoBehaviour {
                 {
                     float y = modos.GetMovimentacao(modo_de_visualizacao);
 
-                    if (Input.GetAxis("Vertical") > 0) posicaocamera.y -= y;
-                    else if (Input.GetAxis("Vertical") < 0) posicaocamera.y += y;
+                    if (Input.GetAxis("Vertical") > 0) posicao_da_camera.y -= y;
+                    else if (Input.GetAxis("Vertical") < 0) posicao_da_camera.y += y;
 
-                    FindObjectOfType<Camera>().transform.position = posicaocamera;
+                    FindObjectOfType<Camera>().transform.position = posicao_da_camera;
                 }
 
                 //Esse código movimenta a câmera para cima e para baixo.
@@ -186,10 +186,10 @@ public class Controlador : MonoBehaviour {
                 {
                     float z = modos.GetMovimentacao(modo_de_visualizacao);
 
-                    if (Input.GetAxis("Zertical") > 0) posicaocamera.z += z;
-                    else if (Input.GetAxis("Zertical") < 0) posicaocamera.z -= z;
+                    if (Input.GetAxis("Zertical") > 0) posicao_da_camera.z += z;
+                    else if (Input.GetAxis("Zertical") < 0) posicao_da_camera.z -= z;
 
-                    FindObjectOfType<Camera>().transform.position = posicaocamera;
+                    FindObjectOfType<Camera>().transform.position = posicao_da_camera;
                 }
 
                 //Esse código movimenta a câmera para esquerda e para direita mais rápido.
@@ -197,24 +197,24 @@ public class Controlador : MonoBehaviour {
                 {
                     float x = modos.GetMovimentacao(modo_de_visualizacao);
 
-                    if (Input.GetButton("a")) posicaocamera.x -= (7 * x);
-                    else if (Input.GetButton("d")) posicaocamera.x += (7 * x);
+                    if (Input.GetButton("a")) posicao_da_camera.x -= (7 * x);
+                    else if (Input.GetButton("d")) posicao_da_camera.x += (7 * x);
 
-                    FindObjectOfType<Camera>().transform.position = posicaocamera;
+                    FindObjectOfType<Camera>().transform.position = posicao_da_camera;
                 }
 
                 if (Input.GetMouseButton(1))
                 {
-                    rotationX += Input.GetAxis("Mouse X") * cam_sensitividade_X * Time.deltaTime;
-                    rotationY += Input.GetAxis("Mouse Y") * cam_sensitividade_Y * Time.deltaTime;
-                    rotationY = Mathf.Clamp(rotationY, minY, maxY);
-                    FindObjectOfType<Camera>().transform.Rotate(-rotationY, rotationX, 0);
+                    cam_rotation_X += Input.GetAxis("Mouse X") * cam_sensitividade_X * Time.deltaTime;
+                    cam_rotation_Y += Input.GetAxis("Mouse Y") * cam_sensitividade_Y * Time.deltaTime;
+                    cam_rotation_Y = Mathf.Clamp(cam_rotation_Y, cam_min_mov_Y, cam_max_mov_Y);
+                    FindObjectOfType<Camera>().transform.Rotate(-cam_rotation_Y, cam_rotation_X, 0);
                 }
 
                 if (Input.GetMouseButtonUp(1))
                 {
-                    rotationX = 0;
-                    rotationY = 0;
+                    cam_rotation_X = 0;
+                    cam_rotation_Y = 0;
                 }
 
                 if (Input.GetAxis("Mouse ScrollWheel") != 0)
@@ -228,15 +228,15 @@ public class Controlador : MonoBehaviour {
                 if (Input.GetButton("r"))
                 {
 
-                    FindObjectOfType<Camera>().transform.position = poscamerainicial;
-                    FindObjectOfType<Camera>().transform.rotation = posrotinicial;
+                    FindObjectOfType<Camera>().transform.position = pos_camera_inicial_todos_de_uma_vez_em_3D;
+                    FindObjectOfType<Camera>().transform.rotation = pos_rot_inicial_todos_de_uma_vez_em_3D;
 
                 }
 
                 if (Input.GetButton("s"))
                 {
 
-                    FindObjectOfType<Camera>().transform.rotation = posrotinicial;
+                    FindObjectOfType<Camera>().transform.rotation = pos_rot_inicial_todos_de_uma_vez_em_3D;
 
                 }
 
@@ -246,7 +246,7 @@ public class Controlador : MonoBehaviour {
                 {
                     if ((Input.GetKeyUp("left"))) { AlterarQualHeatmapMostraPre(); }
                     if ((Input.GetKeyUp("right"))) { AlterarQualHeatmapMostraPro(); }
-                    GetComponent<NovoLeitor2>().ChangeTexturaHeatmap(qualheatmap);
+                    GetComponent<NovoLeitor2>().ChangeTexturaHeatmap(qual_heatmap);
                 }
                    
 
@@ -254,15 +254,15 @@ public class Controlador : MonoBehaviour {
                 //Esse código movimenta a câmera para frente e para trás.
                 if (Input.GetAxis("Horizontal") != 0) {
 
-                    if ((modo_de_visualizacao == "Um Frame De Cada Vez em 2D") && (automode)){ }
+                    if ((modo_de_visualizacao == "Um Frame De Cada Vez em 2D") && (auto_mode)){ }
                     else { 
 
                         float y = modos.GetMovimentacao(modo_de_visualizacao);
 
-                        if (Input.GetAxis("Horizontal") > 0) posicaocamera.y -= y;
-                        else if (Input.GetAxis("Horizontal") < 0) posicaocamera.y += y;
+                        if (Input.GetAxis("Horizontal") > 0) posicao_da_camera.y -= y;
+                        else if (Input.GetAxis("Horizontal") < 0) posicao_da_camera.y += y;
 
-                        FindObjectOfType<Camera>().transform.position = posicaocamera;
+                        FindObjectOfType<Camera>().transform.position = posicao_da_camera;
 
                     }
                 }
@@ -270,15 +270,15 @@ public class Controlador : MonoBehaviour {
                 //Esse código movimenta a câmera para frente e para trás mais rápido.
                 if ((Input.GetButton("a")) || (Input.GetButton("d")))
                 {
-                    if ((modo_de_visualizacao == "Um Frame De Cada Vez em 2D") && (automode)) { }
+                    if ((modo_de_visualizacao == "Um Frame De Cada Vez em 2D") && (auto_mode)) { }
                     else
                     {
                         float y = modos.GetMovimentacao(modo_de_visualizacao);
 
-                        if (Input.GetButton("a")) posicaocamera.y += (7 * y);
-                        else if (Input.GetButton("d")) posicaocamera.y -= (7 * y);
+                        if (Input.GetButton("a")) posicao_da_camera.y += (7 * y);
+                        else if (Input.GetButton("d")) posicao_da_camera.y -= (7 * y);
 
-                        FindObjectOfType<Camera>().transform.position = posicaocamera;
+                        FindObjectOfType<Camera>().transform.position = posicao_da_camera;
                     }
                 }
 
@@ -452,11 +452,11 @@ public class Controlador : MonoBehaviour {
             }
             else { GetComponent<GuiFITHeatmap>().EsconderGui(); }
 
-            if ((pegarvalorcameratodosdeumavez3D) && (modo_de_visualizacao == "Todos De Uma Vez em 3D"))
+            if ((pegar_valor_de_camera_todos_de_uma_vez_em_3D) && (modo_de_visualizacao == "Todos De Uma Vez em 3D"))
             {
-                poscamerainicial = GetComponent<Camera>().transform.position;
-                posrotinicial = GetComponent<Camera>().transform.rotation;
-                pegarvalorcameratodosdeumavez3D = false;
+                pos_camera_inicial_todos_de_uma_vez_em_3D = GetComponent<Camera>().transform.position;
+                pos_rot_inicial_todos_de_uma_vez_em_3D = GetComponent<Camera>().transform.rotation;
+                pegar_valor_de_camera_todos_de_uma_vez_em_3D = false;
             }
         }
     }
@@ -540,38 +540,38 @@ public class Controlador : MonoBehaviour {
 
     public int QualHeatmapMostra()
     {
-        return qualheatmap;
+        return qual_heatmap;
     }
 
     public void AlterarQualHeatmapMostra(int qual)
     {
         if ((qual >= 0) && (qual < GetComponent<NovoLeitor2>().GetQuantHeatmaps()))
         {
-            qualheatmap = qual;
+            qual_heatmap = qual;
         }
     }
 
     public void AlterarQualHeatmapMostraPre()
     {
-        qualheatmap--;
-        if (qualheatmap < 0) qualheatmap = GetComponent<NovoLeitor2>().GetQuantHeatmaps() - 1;
+        qual_heatmap--;
+        if (qual_heatmap < 0) qual_heatmap = GetComponent<NovoLeitor2>().GetQuantHeatmaps() - 1;
     }
 
     public void AlterarQualHeatmapMostraPro()
     {
-        qualheatmap++;
-        if (qualheatmap >= GetComponent<NovoLeitor2>().GetQuantHeatmaps()) qualheatmap = 0;
+        qual_heatmap++;
+        if (qual_heatmap >= GetComponent<NovoLeitor2>().GetQuantHeatmaps()) qual_heatmap = 0;
     }
 
     public bool GetAutoMode()
     {
-        return automode;
+        return auto_mode;
     }
 
 
     public bool GetAutoModeCustom()
     {
-        return automodecustom;
+        return auto_mode_custom;
     }
 
     public void InicializacaoBolhas()
@@ -676,7 +676,7 @@ public class Controlador : MonoBehaviour {
         GetComponent<GuiFITModo>().MudarInstrucoes(instrucoes_genericas + modos.GetInstrucao(modo_de_visualizacao));
         GetComponent<GuiFITModo>().RevelarGui();
 
-        agoravai = true;
+        usuario_pode_fazer_input = true;
 
     }
 }
