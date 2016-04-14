@@ -123,12 +123,8 @@ public class MatrizHeatMap {
         {
             for (int k = vk ; k < limity; k++)
             {
-                try {
-                    if (textura.GetPixel(j, k).a != 0) matriz[px + j, py + k] += 1;
-                } catch(System.IndexOutOfRangeException e)
-                {
-                    Debug.Log("px e j " + px + " " + j + " - " + "py e k " + py + " " + k);
-                }
+                //vale lembrar: a aqui é um float, não um inteiro.
+                if (textura.GetPixel(j, k).a == 1) matriz[px + j, py + k] += 1;
             }
         }
 
