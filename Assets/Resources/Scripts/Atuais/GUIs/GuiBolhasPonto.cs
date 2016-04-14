@@ -20,7 +20,6 @@ public class GuiBolhasPonto : GuiPonto
             posicaoy += 20;
             if (dadosdoponto.personagem == "Mouse")
             {
-                Debug.Log(dadosdoponto.oquefez);
                 GUI.TextField(new Rect(10, posicaoy, 260, 20), "O Que Fez = " + dadosdoponto.oquefez);
             } else
             {
