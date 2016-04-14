@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>Classe Conector.
+/// <para>Responsável por conectar e desconectar os objetos do visualizador a seus backgrounds respectivos.</para>
+/// </summary>
 public class Conector : MonoBehaviour {
 
     public ArrayList listadepontos;
@@ -10,16 +13,6 @@ public class Conector : MonoBehaviour {
     {
         listadepontos = new ArrayList(1);
     }
-
-	// Use this for initialization
-	void Start () {
-
-    }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
     public void AddPonto(GameObject ponto)
     {
