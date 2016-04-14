@@ -124,7 +124,9 @@ public class MatrizHeatMap {
             for (int k = vk ; k < limity; k++)
             {
                 //vale lembrar: a aqui é um float, não um inteiro.
-                if (textura.GetPixel(j, k).a == 1) matriz[px + j, py + k] += 1;
+                //py + limity - k - 1 está assim porquê a Unity tem como (x=0,y=0) 
+                //  o canto inferior esquerdo das imagens/texturas. Ou seja, y precisa ser invertido.
+                if (textura.GetPixel(j, k).a == 1) matriz[px + j, py + limity - k - 1] += 1;
             }
         }
 
