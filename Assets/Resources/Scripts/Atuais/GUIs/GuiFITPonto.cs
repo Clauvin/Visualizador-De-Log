@@ -11,9 +11,9 @@ public class GuiFITPonto : GuiPonto
             posicaoy = 0;
             GUI.TextField(new Rect(10, posicaoy, 120, 20), "Personagem = " + dadosdoponto.personagem);
             posicaoy += 20;
-            GUI.TextField(new Rect(10, posicaoy, 120, 20), "X = " + dadosdoponto.xlog / 32);
+            GUI.TextField(new Rect(10, posicaoy, 120, 20), "X = " + dadosdoponto.x_log / 32);
             posicaoy += 20;
-            GUI.TextField(new Rect(10, posicaoy, 120, 20), "Y = " + dadosdoponto.ylog / 32);
+            GUI.TextField(new Rect(10, posicaoy, 120, 20), "Y = " + dadosdoponto.y_log / 32);
             posicaoy += 20;
             GUI.TextField(new Rect(10, posicaoy, 120, 20), "Tempo = " + dadosdoponto.tempo);
 

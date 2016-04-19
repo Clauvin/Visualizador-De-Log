@@ -12,20 +12,20 @@ public class GuiBolhasPonto : GuiPonto
             posicaoy = 0;
             GUI.TextField(new Rect(10, posicaoy, 260, 20), "Objeto = " + dadosdoponto.personagem);
             posicaoy += 20;
-            GUI.TextField(new Rect(10, posicaoy, 260, 20), "X = " + dadosdoponto.xlog);
+            GUI.TextField(new Rect(10, posicaoy, 260, 20), "X = " + dadosdoponto.x_log);
             posicaoy += 20;
-            GUI.TextField(new Rect(10, posicaoy, 260, 20), "Y = " + dadosdoponto.ylog);
+            GUI.TextField(new Rect(10, posicaoy, 260, 20), "Y = " + dadosdoponto.y_log);
             posicaoy += 20;
             GUI.TextField(new Rect(10, posicaoy, 260, 20), "Tempo = " + dadosdoponto.tempo);
             posicaoy += 20;
             if (dadosdoponto.personagem == "Mouse")
             {
-                GUI.TextField(new Rect(10, posicaoy, 260, 20), "O Que Fez = " + dadosdoponto.oquefez);
+                GUI.TextField(new Rect(10, posicaoy, 260, 20), "O Que Fez = " + dadosdoponto.acao_dele_ou_nele);
             } else
             {
-                GUI.TextField(new Rect(10, posicaoy, 260, 20), "O Que Fizeram Com Ele = " + dadosdoponto.oquefez);
+                GUI.TextField(new Rect(10, posicaoy, 260, 20), "O Que Fizeram Com Ele = " + dadosdoponto.acao_dele_ou_nele);
                 posicaoy += 20;
-                GUI.TextField(new Rect(10, posicaoy, 260, 20), "Quem Criou = " + dadosdoponto.quemcriou);
+                GUI.TextField(new Rect(10, posicaoy, 260, 20), "Quem Criou = " + dadosdoponto.quem_criou);
             }
 
             GUI.EndGroup();

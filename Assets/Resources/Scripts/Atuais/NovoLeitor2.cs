@@ -395,8 +395,8 @@ public class NovoLeitor2 : MonoBehaviour
             objeto.GetComponent<Dados>().Atualizar();
             objeto.GetComponent<Dados>().personagem = bdfit.GetPersonagem(i).ToString();
             objeto.GetComponent<Dados>().tempo = bdfit.GetTempo(i);
-            objeto.GetComponent<Dados>().xlog = bdfit.GetGridX(i);
-            objeto.GetComponent<Dados>().ylog = bdfit.GetGridY(i);
+            objeto.GetComponent<Dados>().x_log = bdfit.GetGridX(i);
+            objeto.GetComponent<Dados>().y_log = bdfit.GetGridY(i);
 
             lista_de_pontos.Add(objeto);
 
@@ -432,13 +432,13 @@ public class NovoLeitor2 : MonoBehaviour
             // Explaining this:
             // Passing the values of x, y and time to the position of the objects is a VERY bad idea,
             //      since they can be REALLY big values for the camera, so...
-            x = background.GetComponent<Dados>().centro.x - background.GetComponent<Dados>().largurax / 2 +
+            x = background.GetComponent<Dados>().centro.x - background.GetComponent<Dados>().largura_x / 2 +
                 (objeto.GetComponent<MeshCollider>().bounds.max.x - objeto.GetComponent<MeshCollider>().bounds.min.x)/2 +
-                    bdfit.GetGridX(i)/32 * (background.GetComponent<Dados>().largurax/20);
+                    bdfit.GetGridX(i)/32 * (background.GetComponent<Dados>().largura_x/20);
 
-            z = background.GetComponent<Dados>().centro.y + background.GetComponent<Dados>().alturaz / 2 -
+            z = background.GetComponent<Dados>().centro.y + background.GetComponent<Dados>().altura_z / 2 -
                 (objeto.GetComponent<MeshCollider>().bounds.max.z - objeto.GetComponent<MeshCollider>().bounds.min.z)/2 -
-                (bdfit.GetGridY(i)/32 * (background.GetComponent<Dados>().alturaz /15));
+                (bdfit.GetGridY(i)/32 * (background.GetComponent<Dados>().altura_z /15));
 
             newpos = new Vector3(x, y, z);
 
@@ -555,23 +555,23 @@ public class NovoLeitor2 : MonoBehaviour
             objeto.AddComponent<Dados>();
             objeto.GetComponent<Dados>().Atualizar();
             objeto.GetComponent<Dados>().tempo = bdbolhas.GetTempo(i);
-            objeto.GetComponent<Dados>().xlog = bdbolhas.GetCoordenadaX(i);
-            objeto.GetComponent<Dados>().ylog = bdbolhas.GetCoordenadaY(i);
+            objeto.GetComponent<Dados>().x_log = bdbolhas.GetCoordenadaX(i);
+            objeto.GetComponent<Dados>().y_log = bdbolhas.GetCoordenadaY(i);
             objeto.GetComponent<Dados>().personagem = bdbolhas.GetQualObjeto(i);
 
             if (bdbolhas.GetMouseOuObjeto(i) == "Mouse")
             {
-                if (bdbolhas.GetArrastando(i) == "S") objeto.GetComponent<Dados>().oquefez = "Arrastou";
-                else if (bdbolhas.GetClicando(i) == "S") objeto.GetComponent<Dados>().oquefez = "Clicou";
-                else if (bdbolhas.GetSegurando(i) == "S") objeto.GetComponent<Dados>().oquefez = "Segurando";
+                if (bdbolhas.GetArrastando(i) == "S") objeto.GetComponent<Dados>().acao_dele_ou_nele = "Arrastou";
+                else if (bdbolhas.GetClicando(i) == "S") objeto.GetComponent<Dados>().acao_dele_ou_nele = "Clicou";
+                else if (bdbolhas.GetSegurando(i) == "S") objeto.GetComponent<Dados>().acao_dele_ou_nele = "Segurando";
             }
             else if (bdbolhas.GetMouseOuObjeto(i) == "Objeto")
             {
-                if (bdbolhas.GetArrastando(i) == "S") objeto.GetComponent<Dados>().oquefez = "Arrastado";
-                else if (bdbolhas.GetClicando(i) == "S") objeto.GetComponent<Dados>().oquefez = "Clicado";
-                else if (bdbolhas.GetSegurando(i) == "S") objeto.GetComponent<Dados>().oquefez = "Segurado";
-                objeto.GetComponent<Dados>().criadoagora = bdbolhas.GetCriadoAgora(i);
-                objeto.GetComponent<Dados>().quemcriou = bdbolhas.GetQuemCriou(i);
+                if (bdbolhas.GetArrastando(i) == "S") objeto.GetComponent<Dados>().acao_dele_ou_nele = "Arrastado";
+                else if (bdbolhas.GetClicando(i) == "S") objeto.GetComponent<Dados>().acao_dele_ou_nele = "Clicado";
+                else if (bdbolhas.GetSegurando(i) == "S") objeto.GetComponent<Dados>().acao_dele_ou_nele = "Segurado";
+                objeto.GetComponent<Dados>().criado_agora = bdbolhas.GetCriadoAgora(i);
+                objeto.GetComponent<Dados>().quem_criou = bdbolhas.GetQuemCriou(i);
             }
 
             lista_de_pontos.Add(objeto);
@@ -612,13 +612,13 @@ public class NovoLeitor2 : MonoBehaviour
             // Explaining this:
             // Passing the values of x, y and time to the position of the objects is a VERY bad idea,
             //      since they can be REALLY big values for the camera, so...
-            x = background.GetComponent<Dados>().centro.x - background.GetComponent<Dados>().largurax / 2 +
+            x = background.GetComponent<Dados>().centro.x - background.GetComponent<Dados>().largura_x / 2 +
                 (objeto.GetComponent<MeshCollider>().bounds.max.x - objeto.GetComponent<MeshCollider>().bounds.min.x) / 2 +
-                    bdbolhas.GetCoordenadaX(i) * (background.GetComponent<Dados>().largurax / resolucao.x);
+                    bdbolhas.GetCoordenadaX(i) * (background.GetComponent<Dados>().largura_x / resolucao.x);
 
-            z = background.GetComponent<Dados>().centro.y + background.GetComponent<Dados>().alturaz / 2 -
+            z = background.GetComponent<Dados>().centro.y + background.GetComponent<Dados>().altura_z / 2 -
                 (objeto.GetComponent<MeshCollider>().bounds.max.z - objeto.GetComponent<MeshCollider>().bounds.min.z) / 2 -
-                (bdbolhas.GetCoordenadaY(i) * (background.GetComponent<Dados>().alturaz / resolucao.y));
+                (bdbolhas.GetCoordenadaY(i) * (background.GetComponent<Dados>().altura_z / resolucao.y));
 
             newpos = new Vector3(x, y, z);
 
