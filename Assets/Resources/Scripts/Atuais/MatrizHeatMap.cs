@@ -3,21 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using Basicas;
 
-public class MatrizHeatMap {
+/// <summary>
+/// Classe Heatmap, responsável por guardar os dados referentes ao que deve ser desenhado no heatmap, através de uma matriz,]
+/// que cores devem ser usadas, e a textura2D do heatmap em si.
+/// </summary>
+public class HeatMap {
 
     int[,] matriz;
     public int x = 800;
     public int y = 600;
-    public int textx = 800;
-    public int texty = 600;
+    public int text_x = 800;
+    public int text_y = 600;
     Dictionary<int, Color> cores;
-    Color32[] arraydecores;
-    ArrayList numerosdiferentes;
-    int maiornumero;
+    Color32[] array_de_cores;
+    ArrayList numeros_diferentes;
+    int maior_numero;
     public Texture2D heatmap;
-    public Color corminima = Color.blue;
-    Color corum;
-    public Color cormaxima = Color.red;
+    public Color cor_minima = Color.blue;
+    Color cor_um;
+    public Color cor_maxima = Color.red;
     Pintar pintar;
 
 
@@ -27,31 +31,38 @@ public class MatrizHeatMap {
 
     void Start()
     {
-        Acorda();
+        Inicializa();
     }
 
-    public MatrizHeatMap()
+    public HeatMap()
     {
-        Acorda();
+        Inicializa();
     }
 
-    public void Acorda()
+    public void Inicializa()
     {
         matriz = new int[x, y];
         cores = new Dictionary<int, Color>();
-        numerosdiferentes = new ArrayList();
-        heatmap = new Texture2D(textx, texty);
+        numeros_diferentes = new ArrayList();
+        heatmap = new Texture2D(text_x, text_y);
         heatmap.filterMode = FilterMode.Point;
-        maiornumero = 0;
+        maior_numero = 0;
         pintar = new Pintar();
-        corum = new Color();
-        corum.r = (cormaxima.r - corminima.r) / 2;
-        corum.g = (cormaxima.g - corminima.g) / 2;
-        corum.b = (cormaxima.b - corminima.b) / 2;
-        corum.a = (cormaxima.a - corminima.a) / 2;
-        corum = corum + corminima;
+        cor_um = new Color();
+        cor_um.r = (cor_maxima.r - cor_minima.r) / 2;
+        cor_um.g = (cor_maxima.g - cor_minima.g) / 2;
+        cor_um.b = (cor_maxima.b - cor_minima.b) / 2;
+        cor_um.a = (cor_maxima.a - cor_minima.a) / 2;
+        cor_um = cor_um + cor_minima;
     }
 
+    /// <summary>
+    /// Lê quais as coordenadas ocupadas por objetos no BancoDeDadosFIT e preenche a matriz de pintura a partir delas.
+    /// </summary>
+    /// <param name="bdfit">Guarda todas as informações lidas no log do FIT.</param>
+    /// <param name="personagem">Inteiro que representa qual personagem deve ter suas coordenadas lidas.
+    /// O valor = 0 representa que todos os personagens devem ter suas coordenadas lidas, valores maiores que 0
+    /// significam um personagem específico.</param>
     public void ReadPointsFIT(BancoDeDadosFIT bdfit, int personagem = 0)
     {
         for (int i = 0; i < bdfit.GetQuantidadeDeEntradas(); i++)
@@ -63,7 +74,15 @@ public class MatrizHeatMap {
         }
     }
 
-    public void ReadPointsBolhas(BancoDeDadosBolhas bdbolhas, string qualobjeto)
+    /// <summary>
+    /// Lê quais as coordenadas ocupadas por objetos no BancoDeDadosBolhas e preenche a matriz de pintura a partir delas.
+    /// </summary>
+    /// <param name="bdbolhas">Guarda todas as informações lidas no log do Bolhas.</param>
+    /// <param name="qualobjeto">String que representa qual personagem deve ter sua imagem lida.
+    /// "Todos" representa que todos os tipos de objeto devem ter suas imagens lidas,
+    /// Outras strings significam que apenas um tipo de objeto específico é levado em consideração.
+    /// <para>ATENÇÃO: "Mouse" lê apenas uma coordenada, e não todo o desenho do mouse.</para></param>
+    public void ReadPointsBolhas(BancoDeDadosBolhas bdbolhas, string qualobjeto = "Todos")
     {
         int contagem = 0;
         for (int i = 0; i < bdbolhas.GetQuantidadeDeEntradas(); i++)
@@ -90,7 +109,13 @@ public class MatrizHeatMap {
         }
     }
 
-    //testada. Não funcionando completamente por alguma razão.
+
+    /// <summary>
+    /// Recebe um banco de dados do Bolhas e uma posição nesse banco de dados para passar a imagem do objeto correspondente
+    /// para a matriz de pontos a serem pintados.
+    /// </summary>
+    /// <param name="bdbolhas">Guarda todas as informações lidas no log do Bolhas.</param>
+    /// <param name="i">Posição a ser lida em bdbolhas.</param>
     private void ImagemCompletaPraMatriz(BancoDeDadosBolhas bdbolhas, int i)
     {
         //vj e vk são os valores a serem usados inicialmente nos for que passam por toda a textura a ser mostrada no heatmap.
@@ -129,28 +154,27 @@ public class MatrizHeatMap {
                 if (textura.GetPixel(j, k).a == 1) matriz[px + j, py + limity - k - 1] += 1;
             }
         }
-
-
-
-
-
     }
 
+    /// <summary>
+    /// Analisa a matriz de pontos a serem pintados e guarda a quantidade de números diferentes presentes na matriz.
+    /// Esses números serão considerados para a pintura do heatmap: quanto maior o número, mais "calor" naquela coordenada.
+    /// </summary>
     public void AllTheDifferentPoints()
     {
         int cx = 0, cy = 0;
 
         for (int i = 0; i < x * y; i++)
         {
-            if ((numerosdiferentes.BinarySearch(matriz[cx, cy]) > numerosdiferentes.Count) ||
-                    (numerosdiferentes.BinarySearch(matriz[cx, cy]) < 0))
+            if ((numeros_diferentes.BinarySearch(matriz[cx, cy]) > numeros_diferentes.Count) ||
+                    (numeros_diferentes.BinarySearch(matriz[cx, cy]) < 0))
             {
-                numerosdiferentes.Add(matriz[cx, cy]);
+                numeros_diferentes.Add(matriz[cx, cy]);
 
                 //Necessário pois o Sort funciona dentro da condição prévia do ArrayList estar ordenado.
-                numerosdiferentes.Sort();
+                numeros_diferentes.Sort();
 
-                if (matriz[cx, cy] > maiornumero) maiornumero = matriz[cx, cy];
+                if (matriz[cx, cy] > maior_numero) maior_numero = matriz[cx, cy];
             }
             cx++; if (cx > x-1) { cx = 0; cy++; }
         }
@@ -158,14 +182,20 @@ public class MatrizHeatMap {
 
     public void OrganizePoints()
     {
-        numerosdiferentes.Sort();
+        numeros_diferentes.Sort();
     }
 
     public int HowManyPoints()
     {
-        return numerosdiferentes.Count;
+        return numeros_diferentes.Count;
     }
 
+    /// <summary>
+    /// Analisando os diferentes números representativos de quantas vezes uma posição foi ocupada,
+    /// esta função dá uma cor diferente para cada número.
+    /// ATENÇÃO: talvez essa função fique melhor fazendo os cálculos de forma a usar o tamanho relativo
+    /// de cada número em erelação aos outros e não a quantidade de números somente.
+    /// </summary>
     public void FillingTheDictionary()
     {
         float transicaodecorr;
@@ -173,31 +203,31 @@ public class MatrizHeatMap {
         float transicaodecorb;
         float transicaodecora;
 
-        transicaodecorr = (cormaxima.r - corum.r) / HowManyPoints();
-        transicaodecorg = (cormaxima.g - corum.g) / HowManyPoints();
-        transicaodecorb = (cormaxima.b - corum.b) / HowManyPoints();
-        transicaodecora = (cormaxima.a - corum.a) / HowManyPoints();
+        transicaodecorr = (cor_maxima.r - cor_um.r) / HowManyPoints();
+        transicaodecorg = (cor_maxima.g - cor_um.g) / HowManyPoints();
+        transicaodecorb = (cor_maxima.b - cor_um.b) / HowManyPoints();
+        transicaodecora = (cor_maxima.a - cor_um.a) / HowManyPoints();
 
         Color cordonumero;
-        for (int i = 0; i < numerosdiferentes.Count; i++)
+        for (int i = 0; i < numeros_diferentes.Count; i++)
         {
             if (i == 0)
             {
-                cordonumero = corminima;
+                cordonumero = cor_minima;
             } else {
             
-                cordonumero = new Color(corum.r + transicaodecorr * (i + 1),
-                                          corum.g + transicaodecorg * (i + 1),
-                                          corum.b + transicaodecorb * (i + 1),
-                                          corum.a + transicaodecora * (i + 1));
+                cordonumero = new Color(cor_um.r + transicaodecorr * (i + 1),
+                                          cor_um.g + transicaodecorg * (i + 1),
+                                          cor_um.b + transicaodecorb * (i + 1),
+                                          cor_um.a + transicaodecora * (i + 1));
             }
             
-            cores.Add((int)numerosdiferentes[i], cordonumero);
+            cores.Add((int)numeros_diferentes[i], cordonumero);
 
         }
     }
 
-    public void DebugMatrizNoOlho()
+    public void DebugContadorDeEspacosOcupadosPorLinhaNaMatrizDoHeatmap()
     {
         int count;
         for (int i = 0; i < y; i++)
@@ -207,18 +237,26 @@ public class MatrizHeatMap {
             {
                 if (matriz[j, i] != 0) count++;
             }
+            Debug.Log("Espacos ocupados na linha " + i + " da matriz: " + count);
         }
+        
     }
 
+    /// <summary>
+    /// Essa função... ok, sinceramente, ela foi uma tentativa de encontrar uma forma mais rápida e menos custosa
+    /// de pintar a textura do heatmap.
+    /// Não deu certo. Mas como pode ser que tenha alguma utilidade no futuro, ela fica aqui, mas sinceramente,
+    /// nao recomendo seu uso, daí o nome.
+    /// </summary>
     public void PreencherOArrayOQueÉMUITOLENTO()
     {
-        arraydecores = new Color32[x * y];
+        array_de_cores = new Color32[x * y];
         int px = 0;
         int py = 0;
 
         for(int i = 0; i < x * y; i++)
         {
-            arraydecores[i] = cores[matriz[InverterXPraDesenho(px), py]];
+            array_de_cores[i] = cores[matriz[InverterXPraDesenho(px), py]];
             px++;
             if (px >= x) {
                 py++;
@@ -230,19 +268,25 @@ public class MatrizHeatMap {
 
     }
 
+    /// <summary>
+    /// Uma tentativa mal sucedida de achar uma forma mais rápida de pintar as texturas dos heatmaps.
+    /// Uso não recomendado.
+    /// </summary>
     public void FillingTheHeatmapSlow()
     {
 
-        pintar.SetPixelsEmTodaTextura(heatmap, arraydecores);
+        pintar.SetPixelsEmTodaTextura(heatmap, array_de_cores);
 
         heatmap.Apply();
 
     }
 
-    public void FillingTheHeatmap()
+    public void PaintingTheHeatmap()
     {
         int pintura = 0;
-        heatmap = pintar.SetPixelsEmTextura(heatmap, 0, 0, textx, texty, corminima);
+
+        //pinta todo o heatmap da cor referente a zero ocupações de uma coordenada.
+        heatmap = pintar.SetPixelsEmTextura(heatmap, 0, 0, text_x, text_y, cor_minima);
 
         int cx = 0, cy = 0;
 
@@ -257,9 +301,15 @@ public class MatrizHeatMap {
     public void PintarPosicao(int coordx, int coordy, Color cor)
     {
         coordx = InverterXPraDesenho(coordx);
-        heatmap = pintar.SetPixelsEmTextura(heatmap, textx / x * coordx, texty / y * coordy, textx / x, texty / y, cor);
+        heatmap = pintar.SetPixelsEmTextura(heatmap, text_x / x * coordx, text_y / y * coordy, text_x / x, text_y / y, cor);
     }
 
+    /// <summary>
+    /// Porquê InverterXPraDesenho? Porquê por alguma razão, a coordenada X usada em SetPixelsEmTextura
+    /// pinta de forma invertida, então essa função é necessária para desinverter a coordenada.
+    /// </summary>
+    /// <param name="velhox"></param>
+    /// <returns></returns>
     int InverterXPraDesenho(int velhox)
     {
         return x - 1 - velhox;

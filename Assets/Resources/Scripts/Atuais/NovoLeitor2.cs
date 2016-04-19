@@ -156,7 +156,7 @@ public class NovoLeitor2 : MonoBehaviour
 
         for (int i = 0; i < heatmaps; i++)
         {
-            matrizesdosheatmaps.Add(new MatrizHeatMap());
+            matrizesdosheatmaps.Add(new HeatMap());
         }
         numerosdecores = new int[heatmaps];
 
@@ -272,7 +272,7 @@ public class NovoLeitor2 : MonoBehaviour
 
         for (int i = 0; i < heatmaps; i++)
         {
-            matrizesdosheatmaps.Add(new MatrizHeatMap());
+            matrizesdosheatmaps.Add(new HeatMap());
         }
         numerosdecores = new int[heatmaps];
 
@@ -335,14 +335,14 @@ public class NovoLeitor2 : MonoBehaviour
         for (int j = 0; j < matrizesdosheatmaps.Count; j++)
         {
             //Lê e organiza os pontos dos heatmaps
-            ((MatrizHeatMap)matrizesdosheatmaps[j]).ReadPointsFIT(bdfit, j);
-            ((MatrizHeatMap)matrizesdosheatmaps[j]).AllTheDifferentPoints();
-            ((MatrizHeatMap)matrizesdosheatmaps[j]).OrganizePoints();
-            ((MatrizHeatMap)matrizesdosheatmaps[j]).FillingTheDictionary();
-            ((MatrizHeatMap)matrizesdosheatmaps[j]).FillingTheHeatmap();
+            ((HeatMap)matrizesdosheatmaps[j]).ReadPointsFIT(bdfit, j);
+            ((HeatMap)matrizesdosheatmaps[j]).AllTheDifferentPoints();
+            ((HeatMap)matrizesdosheatmaps[j]).OrganizePoints();
+            ((HeatMap)matrizesdosheatmaps[j]).FillingTheDictionary();
+            ((HeatMap)matrizesdosheatmaps[j]).PaintingTheHeatmap();
             //((MatrizHeatMap)matrizesdosheatmaps[j]).PreencherOArrayOQueÉMUITOLENTO();
             //((MatrizHeatMap)matrizesdosheatmaps[j]).FillingTheHeatmapSlow();
-            numerosdecores[j] = ((MatrizHeatMap)matrizesdosheatmaps[j]).HowManyPoints();
+            numerosdecores[j] = ((HeatMap)matrizesdosheatmaps[j]).HowManyPoints();
         }
 
         criarbackground = true;
@@ -468,7 +468,7 @@ public class NovoLeitor2 : MonoBehaviour
         //ajeitando o heatmap
         heatmap = Instantiate<GameObject>((GameObject)Resources.Load("Objetos/BackgroundHeatmap"));
         heatmap.name = "Heatmap";
-        materialheatmap.SetTexture("_MainTex", ((MatrizHeatMap)matrizesdosheatmaps[0]).heatmap);
+        materialheatmap.SetTexture("_MainTex", ((HeatMap)matrizesdosheatmaps[0]).heatmap);
         heatmap.GetComponent<MeshRenderer>().material = Instantiate(materialheatmap);
 
         heatmap.transform.position = ((GameObject)lista_de_backgrounds[0]).transform.position + new Vector3(200f, 0, 0);
@@ -499,14 +499,13 @@ public class NovoLeitor2 : MonoBehaviour
         for (int j = 0; j < matrizesdosheatmaps.Count; j++)
         {
             //Lê e organiza os pontos dos heatmaps
-            if (j == 0)  ((MatrizHeatMap)matrizesdosheatmaps[j]).ReadPointsBolhas(bdbolhas, "Todos");
-            else ((MatrizHeatMap)matrizesdosheatmaps[j]).ReadPointsBolhas(bdbolhas, listadeobjetosdobolhas[j-1]);
-            ((MatrizHeatMap)matrizesdosheatmaps[j]).AllTheDifferentPoints();
-            ((MatrizHeatMap)matrizesdosheatmaps[j]).OrganizePoints();
-            ((MatrizHeatMap)matrizesdosheatmaps[j]).FillingTheDictionary();
-            ((MatrizHeatMap)matrizesdosheatmaps[j]).DebugMatrizNoOlho();
-            ((MatrizHeatMap)matrizesdosheatmaps[j]).FillingTheHeatmap();
-            numerosdecores[j] = ((MatrizHeatMap)matrizesdosheatmaps[j]).HowManyPoints();
+            if (j == 0)  ((HeatMap)matrizesdosheatmaps[j]).ReadPointsBolhas(bdbolhas, "Todos");
+            else ((HeatMap)matrizesdosheatmaps[j]).ReadPointsBolhas(bdbolhas, listadeobjetosdobolhas[j-1]);
+            ((HeatMap)matrizesdosheatmaps[j]).AllTheDifferentPoints();
+            ((HeatMap)matrizesdosheatmaps[j]).OrganizePoints();
+            ((HeatMap)matrizesdosheatmaps[j]).FillingTheDictionary();
+            ((HeatMap)matrizesdosheatmaps[j]).PaintingTheHeatmap();
+            numerosdecores[j] = ((HeatMap)matrizesdosheatmaps[j]).HowManyPoints();
         }
 
         tempo = bdbolhas.GetTempo(0);
@@ -648,7 +647,7 @@ public class NovoLeitor2 : MonoBehaviour
         //ajeitando o heatmap
         heatmap = Instantiate<GameObject>((GameObject)Resources.Load("Objetos/BackgroundHeatmap"));
         heatmap.name = "Heatmap";
-        materialheatmap.SetTexture("_MainTex", ((MatrizHeatMap)matrizesdosheatmaps[0]).heatmap);
+        materialheatmap.SetTexture("_MainTex", ((HeatMap)matrizesdosheatmaps[0]).heatmap);
         heatmap.GetComponent<MeshRenderer>().material = Instantiate(materialheatmap);
 
         heatmap.transform.position = ((GameObject)lista_de_backgrounds[0]).transform.position + new Vector3(200f, 0, 0);
@@ -722,9 +721,9 @@ public class NovoLeitor2 : MonoBehaviour
         }
     }
 
-    public MatrizHeatMap GetMatrizHeatmap(int i = 0)
+    public HeatMap GetMatrizHeatmap(int i = 0)
     {
-        return ((MatrizHeatMap)matrizesdosheatmaps[i]);
+        return ((HeatMap)matrizesdosheatmaps[i]);
     }
 
     public int GetQuantHeatmaps() { return matrizesdosheatmaps.Count; }
@@ -734,7 +733,7 @@ public class NovoLeitor2 : MonoBehaviour
         if ((qual >= 0) && (qual < GetQuantHeatmaps()))
         {
             heatmap.GetComponent<MeshRenderer>().material.
-                SetTexture("_MainTex", ((MatrizHeatMap)matrizesdosheatmaps[qual]).heatmap);
+                SetTexture("_MainTex", ((HeatMap)matrizesdosheatmaps[qual]).heatmap);
 
         }
         
