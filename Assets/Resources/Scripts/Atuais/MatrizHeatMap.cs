@@ -140,7 +140,7 @@ public class HeatMap {
         //Se px ou py < 0, ou seja, os objetos estão à esquerda ou acima do heatmap, é necessário começar a desenhá-los
         //  APENAS a partir de onde começam a aparecer em tela, daí j = -px e k = -py;
         if (px < 0) { vj = -px; } 
-        if (py < 0) { vk = -py; }
+        if (py < 0) { vk = -py; limity -= py; }
 
         //Para cada pixel da textura, checar se a transparência
         //Se sim, adiciona um ponto para a matriz de desenho.
@@ -151,7 +151,16 @@ public class HeatMap {
                 //vale lembrar: a aqui é um float, não um inteiro.
                 //py + limity - k - 1 está assim porquê a Unity tem como (x=0,y=0) 
                 //  o canto inferior esquerdo das imagens/texturas. Ou seja, y precisa ser invertido.
-                if (textura.GetPixel(j, k).a == 1) matriz[px + j, py + limity - k - 1] += 1;
+                try
+                {
+                    if (textura.GetPixel(j, k).a == 1) matriz[px + j, py + limity - k - 1] += 1;
+                }
+                catch (System.IndexOutOfRangeException exc)
+                {
+                    Debug.Log(exc.Message);
+                    Debug.Log(i + " - X = " + (px + j) + " Y = " + (py + limity - k - 1));
+                }
+                
             }
         }
     }
