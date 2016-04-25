@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Basicas;
 
-public class GuiFITHeatmap : GuiHeatmap
+public class GuiBolhasHeatmap : GuiHeatmap
 {
 
     public override void OnGUI()
@@ -27,7 +27,7 @@ public class GuiFITHeatmap : GuiHeatmap
             }
             else
             {
-                GUI.TextField(new Rect(10, posicaoy, 170, 40), "Cores e Quantos Objetos\n - Jogador " +
+                GUI.TextField(new Rect(10, posicaoy, 170, 40), "Cores e Quantos Objetos\n - " +
                     lista_de_objetos[qualheatmap-1]);
                 posicaoy += 40;
             }
@@ -46,11 +46,10 @@ public class GuiFITHeatmap : GuiHeatmap
         }
     }
 
-
     // Use this for initialization
     public void Start()
     {
-        lista_de_objetos = GetComponent<NovoLeitor2>().lista_de_objetos_do_FIT;
+        lista_de_objetos = GetComponent<NovoLeitor2>().lista_de_objetos_do_bolhas;
     }
 
 }
