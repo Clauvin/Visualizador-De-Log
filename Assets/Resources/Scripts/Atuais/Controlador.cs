@@ -489,13 +489,13 @@ public class Controlador : MonoBehaviour {
         {
             objeto_clicado = click;
             click.GetComponent<MeshRenderer>().material.mainTexture = GetComponent<NovoLeitor2>().
-                texturasselecionadas.Get(click.GetComponent<Dados>().personagem.ToString());
+                texturas_selecionadas.Get(click.GetComponent<Dados>().personagem.ToString());
         } else if (objeto_clicado != click) {
             objeto_clicado.GetComponent<MeshRenderer>().material.mainTexture = GetComponent<NovoLeitor2>().
                 texturas.Get(objeto_clicado.GetComponent<Dados>().personagem.ToString());
             objeto_clicado = click;
             click.GetComponent<MeshRenderer>().material.mainTexture = GetComponent<NovoLeitor2>().
-                texturasselecionadas.Get(click.GetComponent<Dados>().personagem.ToString());
+                texturas_selecionadas.Get(click.GetComponent<Dados>().personagem.ToString());
         }
               
     }

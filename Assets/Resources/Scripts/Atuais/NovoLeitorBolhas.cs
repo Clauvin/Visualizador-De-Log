@@ -13,7 +13,7 @@ public class NovoLeitorBolhas : NovoLeitor2
         NovoLeitor2Init();
         if (FindFile())
         {
-            CriarIniDeUltimaPaginaChecada(enderecodearquivo);
+            CriarIniDeUltimaPaginaChecada(endereco_de_arquivo);
             StartBolhas();
             LoadStuffBolhas();
             CreateStuffBolhas();

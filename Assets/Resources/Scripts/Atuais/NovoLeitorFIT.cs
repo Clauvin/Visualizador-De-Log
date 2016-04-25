@@ -12,7 +12,7 @@ public class NovoLeitorFIT : NovoLeitor2 {
         NovoLeitor2Init();
         if (FindFile())
         {
-            CriarIniDeUltimaPaginaChecada(enderecodearquivo);
+            CriarIniDeUltimaPaginaChecada(endereco_de_arquivo);
             StartFIT();
             LoadStuffFIT();
             CreateStuffFIT();

@@ -249,7 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d40754bb36d128746bdd67e7e4e33dca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  modo: Todos De Uma Vez em 2D
+  modo_de_visualizacao: Todos De Uma Vez em 2D
 --- !u!114 &1348100978
 MonoBehaviour:
   m_ObjectHideFlags: 0
