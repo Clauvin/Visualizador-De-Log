@@ -157,8 +157,8 @@ public class HeatMap {
                 }
                 catch (System.IndexOutOfRangeException exc)
                 {
-                    Debug.Log(exc.Message);
-                    Debug.Log(i + " - X = " + (px + j) + " Y = " + (py + limity - k - 1));
+                    //Debug.Log(exc.Message);
+                    //Debug.Log(i + " - X = " + (px + j) + " Y = " + (py + limity - k - 1));
                 }
                 
             }

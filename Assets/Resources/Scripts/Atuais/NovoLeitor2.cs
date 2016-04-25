@@ -29,6 +29,7 @@ public class NovoLeitor2 : MonoBehaviour
 
     protected string endereco_de_arquivo;
 
+    public string[] lista_de_objetos_do_FIT = { "1", "2", "3", "4" };
     public string[] lista_de_objetos_do_bolhas = { "Mouse", "Baleia", "Bolha", "Peixe", "Nuvem" };
 
     private string qual_leitor;

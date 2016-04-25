@@ -437,9 +437,9 @@ public class Controlador : MonoBehaviour {
 
             if (modo_de_visualizacao == "Heatmap")
             {
-                GetComponent<GuiFITHeatmap>().RevelarGui();
+                GetComponent<GuiHeatmap>().RevelarGui();
             }
-            else { GetComponent<GuiFITHeatmap>().EsconderGui(); }
+            else { GetComponent<GuiHeatmap>().EsconderGui(); }
 
             if ((pegar_valor_de_camera_todos_de_uma_vez_em_3D) && (modo_de_visualizacao == "Todos De Uma Vez em 3D"))
             {

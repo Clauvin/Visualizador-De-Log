@@ -729,7 +729,7 @@ namespace Basicas
     }
 
     //melhorar depois para ter métodos de entrada, saída e etc
-    class DadosGUIHashMap
+    public class DadosGUIHashMap
     {
         public List<int> numerosdecor;
         public List<Color> cores;
