@@ -3,6 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using Basicas;
 
+
+/// <summary>
+/// Classe GuiHeatmap, de onde derivam as classes GuiFITHeatmap e GuiBolhasHeatmap.
+/// É a classe responsável por mostrar as cores usadas nos heatmaps e quanto objetos naquele espaço
+/// a cor representa.
+/// </summary>
 public class GuiHeatmap : GuiPadrao2
 {
 
@@ -53,6 +59,8 @@ public class GuiHeatmap : GuiPadrao2
     }
 
     // Update is called once per frame
+    // Todo esse código que só roda uma vez num update foi necessário porquê
+    // ele pega dados de locais que não estão inicializados no momento em que Start() roda.
     void Update()
     {
         if (gambiarra)
