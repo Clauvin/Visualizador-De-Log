@@ -1,0 +1,5 @@
+[Mode Bolhas]
+800x600
+Time:0=Objeto=GridX:-30=GridY:-30=Baleia=Frame:0=CriadoAgora:0=QuemCriou:Baleia=Clicou:N=Segurou:S=Arrastou:N
+Time:0=Objeto=GridX:200=GridY:-10=Bolha=Frame:0=CriadoAgora:0=QuemCriou:Baleia=Clicou:N=Segurou:S=Arrastou:N
+Time:0=Objeto=GridX:400=GridY:-50=Nuvem=Frame:0=CriadoAgora:0=QuemCriou:Baleia=Clicou:N=Segurou:S=Arrastou:N
