@@ -426,8 +426,8 @@ public class Controlador : MonoBehaviour {
 
             modo_de_visualizacao = modonovo;
 
-            GetComponent<GuiFITModo>().MudarTexto(modo_de_visualizacao);
-            GetComponent<GuiFITModo>().MudarInstrucoes(instrucoes_genericas + modos.GetInstrucao(modo_de_visualizacao));
+            GetComponent<GuiModo>().MudarTexto(modo_de_visualizacao);
+            GetComponent<GuiModo>().MudarInstrucoes(instrucoes_genericas + modos.GetInstrucao(modo_de_visualizacao));
 
             if ((modo_de_visualizacao == "Um Frame De Cada Vez em 3D") || (modo_de_visualizacao == "Um Frame De Cada Vez em 2D"))
             {
@@ -662,8 +662,8 @@ public class Controlador : MonoBehaviour {
         GetComponent<NovoLeitor2>().PosicionarBackgrounds(20f);
         GetComponent<Camera>().clearFlags = CameraClearFlags.Skybox;
         GetComponent<NovoLeitor2>().DesconectarTodos();
-        GetComponent<GuiFITModo>().MudarInstrucoes(instrucoes_genericas + modos.GetInstrucao(modo_de_visualizacao));
-        GetComponent<GuiFITModo>().RevelarGui();
+        GetComponent<GuiModo>().MudarInstrucoes(instrucoes_genericas + modos.GetInstrucao(modo_de_visualizacao));
+        GetComponent<GuiModo>().RevelarGui();
 
         usuario_pode_fazer_input = true;
 
