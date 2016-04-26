@@ -459,7 +459,7 @@ public class NovoLeitor2 : MonoBehaviour
 
             // Segundo: a partir daí, achar onde o centro do objeto precisa estar para apenas encostar
             // nessa borda.
-            x += (objeto.GetComponent<MeshCollider>().bounds.max.x - objeto.GetComponent<MeshCollider>().bounds.min.x)/2
+            x += (objeto.GetComponent<MeshCollider>().bounds.max.x - objeto.GetComponent<MeshCollider>().bounds.min.x) / 2;
 
             // Terceiro: finalmente, posicionar o objeto com relação ao background.
             x += bd_fit.GetGridX(i)/32 * (background.GetComponent<Dados>().largura_x/20);
@@ -467,7 +467,7 @@ public class NovoLeitor2 : MonoBehaviour
             //O mesmo descrito acima para z... que nesse caso é equivalente a y no plano 2D. Sim, paciência.
             z = background.GetComponent<Dados>().centro.y + background.GetComponent<Dados>().altura_z / 2;
 
-            z -= (objeto.GetComponent<MeshCollider>().bounds.max.z - objeto.GetComponent<MeshCollider>().bounds.min.z)/2
+            z -= (objeto.GetComponent<MeshCollider>().bounds.max.z - objeto.GetComponent<MeshCollider>().bounds.min.z) / 2;
                 
             z -= (bd_fit.GetGridY(i)/32 * (background.GetComponent<Dados>().altura_z /15));
 
@@ -662,7 +662,7 @@ public class NovoLeitor2 : MonoBehaviour
             //O mesmo descrito acima para z... que nesse caso é equivalente a y no plano 2D. Sim, paciência.
             z = background.GetComponent<Dados>().centro.y + background.GetComponent<Dados>().altura_z / 2;
 
-            z -= (objeto.GetComponent<MeshCollider>().bounds.max.z - objeto.GetComponent<MeshCollider>().bounds.min.z) / 2 
+            z -= (objeto.GetComponent<MeshCollider>().bounds.max.z - objeto.GetComponent<MeshCollider>().bounds.min.z) / 2; 
                 
             z -= (bd_bolhas.GetCoordenadaY(i) * (background.GetComponent<Dados>().altura_z / resolucao.y));
 
