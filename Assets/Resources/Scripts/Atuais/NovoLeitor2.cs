@@ -114,10 +114,10 @@ public class NovoLeitor2 : MonoBehaviour
         do
         {
             string[] entries;
-            string[] entrytime;
-            string[] entrychar;
-            string[] entrygridx;
-            string[] entrygridy;
+            string[] entry_time;
+            string[] entry_char;
+            string[] entry_grid_x;
+            string[] entry_grid_y;
 
             line = theReader.ReadLine();
 
@@ -128,15 +128,15 @@ public class NovoLeitor2 : MonoBehaviour
                 //Correct Example: Time:1=Char:1=GridX:5=GridY:7
                 if (entries.Length == 4)
                 {
-                    entrytime = entries[0].Split(':');
-                    entrychar = entries[1].Split(':');
-                    entrygridx = entries[2].Split(':');
-                    entrygridy = entries[3].Split(':');
+                    entry_time = entries[0].Split(':');
+                    entry_char = entries[1].Split(':');
+                    entry_grid_x = entries[2].Split(':');
+                    entry_grid_y = entries[3].Split(':');
 
-                    bd_fit.Add(Int32.Parse(entrytime[1]), Int32.Parse(entrychar[1]),
-                            Int32.Parse(entrygridx[1]), Int32.Parse(entrygridy[1]));
+                    bd_fit.Add(Int32.Parse(entry_time[1]), Int32.Parse(entry_char[1]),
+                            Int32.Parse(entry_grid_x[1]), Int32.Parse(entry_grid_y[1]));
 
-                    if (Int32.Parse(entrychar[1]) == heatmaps) heatmaps++;
+                    if (Int32.Parse(entry_char[1]) == heatmaps) heatmaps++;
                 }
 
 #if (DEBUG)
@@ -224,9 +224,6 @@ public class NovoLeitor2 : MonoBehaviour
 
             //Exemplo de linha lida:
             //Time:0=Mouse=GridX:776=GridY:97=Clicando:N=Segurando:S=Arrastando:N
-
-
-
             if (line != null)
             {
                 // Do whatever you need to do with the text line, it's a string now
@@ -239,7 +236,6 @@ public class NovoLeitor2 : MonoBehaviour
                 //Time:0
                 //Mouse
                 //GridX:776 e por aí vai.
-
 
                 if ((entries.Length == 7) && (((string)entries[1]) == "Mouse"))
                 {
@@ -350,9 +346,11 @@ public class NovoLeitor2 : MonoBehaviour
 
         material_background.mainTexture = (Texture)Instantiate(Resources.Load("Texturas/Grid"));
 
+
+        // Lê todos os dados do log do FIT...
         for (int j = 0; j < matrizes_dos_heatmaps.Count; j++)
         {
-            //Lê e organiza os pontos dos heatmaps
+
             ((HeatMap)matrizes_dos_heatmaps[j]).ReadPointsFIT(bd_fit, j);
             ((HeatMap)matrizes_dos_heatmaps[j]).AllTheDifferentPoints();
             ((HeatMap)matrizes_dos_heatmaps[j]).OrganizePoints();
@@ -364,9 +362,11 @@ public class NovoLeitor2 : MonoBehaviour
         criar_background = true;
         fechar_background = false;
 
+        // Para cada objeto...
         for (i = 0; i < bd_fit.GetQuantidadeDeEntradas(); i++)
         {
-
+            // Controle de quando criar um background novo ou
+            // não criá-lo. Backgrounds novos são criados, um para cada posição no tempo diferente.
             if ((i != bd_fit.GetQuantidadeDeEntradas() - 1) && (i != 0))
             {
                 if (bd_fit.GetPersonagem(i) > bd_fit.GetPersonagem(i + 1))
@@ -386,6 +386,7 @@ public class NovoLeitor2 : MonoBehaviour
             objeto = Instantiate(objetos.Get("Qualquer Coisa FIT"));
             objeto.AddComponent<AoSerClicado>();
             
+            // :p
             if (objeto == null) Debug.Log("Deu ruim.");
 
             objeto.name = bd_fit.GetTempo(i).ToString() + " " + bd_fit.GetPersonagem(i).ToString() + " " +
@@ -393,6 +394,10 @@ public class NovoLeitor2 : MonoBehaviour
 
             material_do_create = Instantiate(materiais.Get(bd_fit.GetPersonagem(i).ToString()));
 
+            // Essencialmente, materiais guardam texturas, que é o que queremos.
+            // Foi um pouco de exagero fazer um material pra cada objeto, mas
+            // isso vai ser útil no futuro para efeitos diferentes para cada objeto,
+            // se necessário.
             if (material_do_create == null) { Debug.Log("Deu ruim 2."); }
             else
             {
@@ -406,7 +411,7 @@ public class NovoLeitor2 : MonoBehaviour
             objeto.GetComponent<MeshRenderer>().materials = rend;
 
 
-            //ponto já criado, agora adicionar dados a ele
+            // Ponto já criado, agora adicionar dados a ele
             objeto.AddComponent<Dados>();
             objeto.GetComponent<Dados>().Atualizar();
             objeto.GetComponent<Dados>().personagem = bd_fit.GetPersonagem(i).ToString();
@@ -416,7 +421,7 @@ public class NovoLeitor2 : MonoBehaviour
 
             lista_de_pontos.Add(objeto);
 
-            //criando background para o par de pontos
+            // Criando background para os pontos
             if (criar_background) {
 
                 background = Instantiate<GameObject>((GameObject)Resources.Load("Objetos/BackgroundFIT"));
@@ -445,16 +450,26 @@ public class NovoLeitor2 : MonoBehaviour
                 lista_de_backgrounds.Add(background);                
             }
 
-            // Explaining this:
-            // Passing the values of x, y and time to the position of the objects is a VERY bad idea,
-            //      since they can be REALLY big values for the camera, so...
-            x = background.GetComponent<Dados>().centro.x - background.GetComponent<Dados>().largura_x / 2 +
-                (objeto.GetComponent<MeshCollider>().bounds.max.x - objeto.GetComponent<MeshCollider>().bounds.min.x)/2 +
-                    bd_fit.GetGridX(i)/32 * (background.GetComponent<Dados>().largura_x/20);
+            // Passar os valores de x, y e tempo para a posição de objetos
+            // sem tratar as posições é uma péssima ideia, já que podem haver valores MUITO
+            // grande, logo...
 
-            z = background.GetComponent<Dados>().centro.y + background.GetComponent<Dados>().altura_z / 2 -
-                (objeto.GetComponent<MeshCollider>().bounds.max.z - objeto.GetComponent<MeshCollider>().bounds.min.z)/2 -
-                (bd_fit.GetGridY(i)/32 * (background.GetComponent<Dados>().altura_z /15));
+            // Primeiro: conseguir a posição da borda esquerda do background
+            x = background.GetComponent<Dados>().centro.x - background.GetComponent<Dados>().largura_x / 2;
+
+            // Segundo: a partir daí, achar onde o centro do objeto precisa estar para apenas encostar
+            // nessa borda.
+            x += (objeto.GetComponent<MeshCollider>().bounds.max.x - objeto.GetComponent<MeshCollider>().bounds.min.x)/2
+
+            // Terceiro: finalmente, posicionar o objeto com relação ao background.
+            x += bd_fit.GetGridX(i)/32 * (background.GetComponent<Dados>().largura_x/20);
+
+            //O mesmo descrito acima para z... que nesse caso é equivalente a y no plano 2D. Sim, paciência.
+            z = background.GetComponent<Dados>().centro.y + background.GetComponent<Dados>().altura_z / 2;
+
+            z -= (objeto.GetComponent<MeshCollider>().bounds.max.z - objeto.GetComponent<MeshCollider>().bounds.min.z)/2
+                
+            z -= (bd_fit.GetGridY(i)/32 * (background.GetComponent<Dados>().altura_z /15));
 
             newpos = new Vector3(x, y, z);
 
@@ -512,9 +527,9 @@ public class NovoLeitor2 : MonoBehaviour
 
         material_background.mainTexture = (Texture)Instantiate(Resources.Load("Texturas/Fundo Bolhas Desenhado"));
 
+        // Lê todos os dados do log do Bolhas...
         for (int j = 0; j < matrizes_dos_heatmaps.Count; j++)
         {
-            //Lê e organiza os pontos dos heatmaps
             if (j == 0)  ((HeatMap)matrizes_dos_heatmaps[j]).ReadPointsBolhas(bd_bolhas, "Todos");
             else ((HeatMap)matrizes_dos_heatmaps[j]).ReadPointsBolhas(bd_bolhas, lista_de_objetos_do_bolhas[j-1]);
             ((HeatMap)matrizes_dos_heatmaps[j]).AllTheDifferentPoints();
@@ -530,7 +545,9 @@ public class NovoLeitor2 : MonoBehaviour
 
         for (i = 0; i < bd_bolhas.GetQuantidadeDeEntradas(); i++)
         {
-            //refatorar esse código...
+            // Controle de quando criar um background novo ou
+            // não criá-lo. Backgrounds novos são criados, um para cada posição no tempo diferente.
+            // refatorar esse código...
             tempo = bd_bolhas.GetTempo(i);
             if (i != bd_bolhas.GetQuantidadeDeEntradas() - 1)
             {
@@ -553,6 +570,10 @@ public class NovoLeitor2 : MonoBehaviour
 
             material_do_create = Instantiate(materiais.Get(bd_bolhas.GetQualObjeto(i).ToString()));
 
+            // Essencialmente, materiais guardam texturas, que é o que queremos.
+            // Foi um pouco de exagero fazer um material pra cada objeto, mas
+            // isso vai ser útil no futuro para efeitos diferentes para cada objeto,
+            // se necessário.
             if (material_do_create == null) { Debug.Log("Deu ruim 2."); }
             else
             {
@@ -566,7 +587,7 @@ public class NovoLeitor2 : MonoBehaviour
             objeto.GetComponent<MeshRenderer>().materials = rend;
 
 
-            //ponto já criado, agora adicionar dados a ele
+            // Ponto já criado, agora adicionar dados a ele
             objeto.AddComponent<Dados>();
             objeto.GetComponent<Dados>().Atualizar();
             objeto.GetComponent<Dados>().tempo = bd_bolhas.GetTempo(i);
@@ -624,16 +645,26 @@ public class NovoLeitor2 : MonoBehaviour
                                                       texturas.Get(bd_bolhas.GetQualObjeto(i).ToString()).width / resolucao.x,
                                                       texturas.Get(bd_bolhas.GetQualObjeto(i).ToString()).height / resolucao.y);
 
-            // Explaining this:
-            // Passing the values of x, y and time to the position of the objects is a VERY bad idea,
-            //      since they can be REALLY big values for the camera, so...
-            x = background.GetComponent<Dados>().centro.x - background.GetComponent<Dados>().largura_x / 2 +
-                (objeto.GetComponent<MeshCollider>().bounds.max.x - objeto.GetComponent<MeshCollider>().bounds.min.x) / 2 +
-                    bd_bolhas.GetCoordenadaX(i) * (background.GetComponent<Dados>().largura_x / resolucao.x);
+            // Passar os valores de x, y e tempo para a posição de objetos
+            // sem tratar as posições é uma péssima ideia, já que podem haver valores MUITO
+            // grande, logo...
 
-            z = background.GetComponent<Dados>().centro.y + background.GetComponent<Dados>().altura_z / 2 -
-                (objeto.GetComponent<MeshCollider>().bounds.max.z - objeto.GetComponent<MeshCollider>().bounds.min.z) / 2 -
-                (bd_bolhas.GetCoordenadaY(i) * (background.GetComponent<Dados>().altura_z / resolucao.y));
+            // Primeiro: conseguir a posição da borda esquerda do background
+            x = background.GetComponent<Dados>().centro.x - background.GetComponent<Dados>().largura_x / 2;
+
+            // Segundo: a partir daí, achar onde o centro do objeto precisa estar para apenas encostar
+            // nessa borda.
+            x += (objeto.GetComponent<MeshCollider>().bounds.max.x - objeto.GetComponent<MeshCollider>().bounds.min.x) / 2;
+
+            // Terceiro: finalmente, posicionar o objeto com relação ao background.
+            x += bd_bolhas.GetCoordenadaX(i) * (background.GetComponent<Dados>().largura_x / resolucao.x);
+
+            //O mesmo descrito acima para z... que nesse caso é equivalente a y no plano 2D. Sim, paciência.
+            z = background.GetComponent<Dados>().centro.y + background.GetComponent<Dados>().altura_z / 2;
+
+            z -= (objeto.GetComponent<MeshCollider>().bounds.max.z - objeto.GetComponent<MeshCollider>().bounds.min.z) / 2 
+                
+            z -= (bd_bolhas.GetCoordenadaY(i) * (background.GetComponent<Dados>().altura_z / resolucao.y));
 
             newpos = new Vector3(x, y, z);
 
@@ -654,13 +685,13 @@ public class NovoLeitor2 : MonoBehaviour
 
         }
 
-        //ajeitando a câmera
+        // Ajeitando a câmera
         newpos_camera.y = ((GameObject)lista_de_backgrounds[0]).transform.position.y;
         acamera.transform.position = newpos_camera;
         acamera.transform.Rotate(90f, 0f, 0f);
         acamera.orthographic = true;
 
-        //ajeitando o heatmap
+        // Ajeitando o heatmap
         heatmap = Instantiate<GameObject>((GameObject)Resources.Load("Objetos/BackgroundHeatmap"));
         heatmap.name = "Heatmap";
         material_heatmap.SetTexture("_MainTex", ((HeatMap)matrizes_dos_heatmaps[0]).heatmap);
