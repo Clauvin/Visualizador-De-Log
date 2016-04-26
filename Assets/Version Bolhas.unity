@@ -162,7 +162,7 @@ GameObject:
   - 114: {fileID: 1348100979}
   - 114: {fileID: 1348100980}
   - 114: {fileID: 1348100981}
-  - 114: {fileID: 1348100983}
+  - 114: {fileID: 1348100982}
   - 114: {fileID: 1348100978}
   m_Layer: 0
   m_Name: Main Camera
@@ -261,8 +261,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ab24dbdb0f66cf4d80024eff6f0011b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numerosdecores: 
-  listadeobjetosdobolhas:
+  numeros_de_cores: 
+  lista_de_objetos_do_FIT:
+  - 1
+  - 2
+  - 3
+  - 4
+  lista_de_objetos_do_bolhas:
   - Mouse
   - Baleia
   - Bolha
@@ -301,7 +306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c45af09a1a50c742b9fcd93e3211025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1348100983
+--- !u!114 &1348100982
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -309,6 +314,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1348100971}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a154489281e5ac4cb79f81ff410c0cf, type: 3}
+  m_Script: {fileID: 11500000, guid: c846a54bd0890b5448bfe8006bcfb8a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gambiarra: 1
+  posinicialcamera: 0
+  postempofloat: 0
+  postempo: 0
+  quantdeheatmaps: 0
+  lista_de_objetos: []
