@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GuiFITModo : GuiModo {
+public class GuiBolhasModo : GuiModo {
 
 	// Use this for initialization
 	void Start () {
