@@ -144,25 +144,54 @@ public class HeatMap {
 
         //Para cada pixel da textura, checar se a transparência
         //Se sim, adiciona um ponto para a matriz de desenho.
-        for (int j = vj ; j < limitx; j++)
+        if (py >= 0)
         {
-            for (int k = vk ; k < limity; k++)
+            for (int j = vj; j < limitx; j++)
             {
-                //vale lembrar: a aqui é um float, não um inteiro.
-                //py + limity - k - 1 está assim porquê a Unity tem como (x=0,y=0) 
-                //  o canto inferior esquerdo das imagens/texturas. Ou seja, y precisa ser invertido.
-                try
+                for (int k = vk; k < limity; k++)
                 {
-                    if (textura.GetPixel(j, k).a == 1) matriz[px + j, py + limity - k - 1] += 1;
+                    //vale lembrar: a aqui é um float, não um inteiro.
+                    //py + limity - k - 1 está assim porquê a Unity tem como (x=0,y=0) 
+                    //  o canto inferior esquerdo das imagens/texturas. Ou seja, y precisa ser invertido.
+                    try
+                    {
+                        if (textura.GetPixel(j, k).a == 1) matriz[px + j, py + limity - k - 1] += 1;
+                    }
+                    catch (System.IndexOutOfRangeException exc)
+                    {
+                        //Debug.Log(exc.Message);
+                        //Debug.Log(i + " - X = " + (px + j) + " Y = " + (py + limity - k - 1));
+                    }
+
                 }
-                catch (System.IndexOutOfRangeException exc)
+            }
+
+        //py < 0? Ahã. Eu tive que alterar a equação para resolver o caso de ter que
+        //desenhar algo que está um pouco fora do desenho por cima.
+        //Sinceramente, até eu(Cláuvin) estou meio confuso com esse método, então
+        //simplificar ele seria algo bom pra se fazer no futuro.
+        } else {
+            for (int j = vj; j < limitx; j++)
+            {
+                for (int k = vk; k < limity; k++)
                 {
-                    //Debug.Log(exc.Message);
-                    //Debug.Log(i + " - X = " + (px + j) + " Y = " + (py + limity - k - 1));
+                    //vale lembrar: a aqui é um float, não um inteiro.
+                    //py + limity - k - 1 está assim porquê a Unity tem como (x=0,y=0) 
+                    //  o canto inferior esquerdo das imagens/texturas. Ou seja, y precisa ser invertido.
+                    try
+                    {
+                        if (textura.GetPixel(j, k-vk).a == 1) matriz[px + j, py + limity - k - 1] += 1;
+                    }
+                    catch (System.IndexOutOfRangeException exc)
+                    {
+                        //Debug.Log(exc.Message);
+                        //Debug.Log(i + " - X = " + (px + j) + " Y = " + (py + limity - k - 1));
+                    }
+
                 }
-                
             }
         }
+        
     }
 
     /// <summary>
