@@ -88,8 +88,6 @@ public class Controlador : MonoBehaviour {
 
                     posicao_da_camera.y -= y;
 
-                    
-
                     if (posicao_da_camera.y <= ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
                         posicao_temporal_2]).transform.position.y)
                     {
@@ -282,6 +280,8 @@ public class Controlador : MonoBehaviour {
 
             }
 
+            //if 
+
             if ((Input.GetButtonDown("1")) && (modo_de_visualizacao != "Todos De Uma Vez em 2D"))
             {
                 GetComponent<NovoLeitor2>().ConectarTodos();
@@ -348,12 +348,13 @@ public class Controlador : MonoBehaviour {
 
             if (Input.GetButtonDown("8"))
             {
-                MudarTransparenciaDosPontos(-0.2f);
+                //MudarTransparenciaDosObjetos(-0.2f);
+                MudarTransparenciaDeTipoEspecificoDeObjetos("Baleia", 0.0f);
             }
 
             if (Input.GetButtonDown("9"))
             {
-                MudarTransparenciaDosPontos(0.2f);
+                MudarTransparenciaDosObjetos(0.2f);
             }
 
             if (Input.GetButtonDown("-"))
@@ -460,10 +461,31 @@ public class Controlador : MonoBehaviour {
         GetComponent<NovoLeitor2>().ControlarAlpha(modos.GetAlpha(modo));
     }
 
-    void MudarTransparenciaDosPontos(float change) {
+    void MudarTransparenciaDosObjetos(float change) {
 
         MudancaDeCor(true, false, false, false, change);
 
+    }
+
+    void MudarTransparenciaDeTipoEspecificoDeObjetos(string nome, float transparencia)
+    {
+
+        int limit = GetComponent<NovoLeitor2>().lista_de_objetos.Count;
+
+        for (int i = 0; i < limit; i++)
+        {
+            Color cor;
+            if (((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).GetComponent<Dados>().personagem == nome)
+            {
+                cor = ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).
+                            GetComponent<MeshRenderer>().material.GetColor("_Color");
+
+                cor.a = transparencia;
+
+                ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).
+                            GetComponent<MeshRenderer>().material.SetColor("_Color", cor);
+            }
+        }
     }
 
     void TransparenciaDoBackground(float trans)
@@ -511,9 +533,9 @@ public class Controlador : MonoBehaviour {
 
     private void MudancaDeCor(bool a, bool r, bool g, bool b, float change)
     {
-        for (int i = 0; i < GetComponent<NovoLeitor2>().lista_de_pontos.Count; i++)
+        for (int i = 0; i < GetComponent<NovoLeitor2>().lista_de_objetos.Count; i++)
         {
-            Color cor = ((GameObject)GetComponent<NovoLeitor2>().lista_de_pontos[i]).GetComponent<MeshRenderer>().
+            Color cor = ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).GetComponent<MeshRenderer>().
                 material.GetColor("_Color");
 
             if (a) cor.a += change;
@@ -521,7 +543,7 @@ public class Controlador : MonoBehaviour {
             if (g) cor.g += change;
             if (b) cor.b += change;
 
-            ((GameObject)GetComponent<NovoLeitor2>().lista_de_pontos[i]).GetComponent<MeshRenderer>().
+            ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).GetComponent<MeshRenderer>().
                 material.SetColor("_Color", cor);
 
         }
