@@ -18,7 +18,7 @@ public class NovoLeitor2 : MonoBehaviour
     public ParaHeatmap<Texture2D> texturas_selecionadas;
 
     Pintar pintar;
-    public ArrayList lista_de_pontos;
+    public ArrayList lista_de_objetos;
     public ArrayList lista_de_backgrounds;
     protected string modo_fit;
 
@@ -29,8 +29,8 @@ public class NovoLeitor2 : MonoBehaviour
 
     protected string endereco_de_arquivo;
 
-    public string[] lista_de_objetos_do_FIT = { "1", "2", "3", "4" };
-    public string[] lista_de_objetos_do_bolhas = { "Mouse", "Baleia", "Bolha", "Peixe", "Nuvem" };
+    public string[] lista_de_nomes_de_objetos_do_FIT = { "1", "2", "3", "4" };
+    public string[] lista_de_nomes_de_objetos_do_bolhas = { "Mouse", "Baleia", "Bolha", "Peixe", "Nuvem" };
 
     private string qual_leitor;
 
@@ -170,7 +170,7 @@ public class NovoLeitor2 : MonoBehaviour
     {
         //number of HeatMaps
         //no caso do Bolhas, 1 + Mouse mais 4 objetos = 6
-        int heatmaps = 1 + lista_de_objetos_do_bolhas.GetUpperBound(0) + 1;
+        int heatmaps = 1 + lista_de_nomes_de_objetos_do_bolhas.GetUpperBound(0) + 1;
 
         // Handle any problems that might arise when reading the text
         string line;
@@ -419,7 +419,7 @@ public class NovoLeitor2 : MonoBehaviour
             objeto.GetComponent<Dados>().x_log = bd_fit.GetGridX(i);
             objeto.GetComponent<Dados>().y_log = bd_fit.GetGridY(i);
 
-            lista_de_pontos.Add(objeto);
+            lista_de_objetos.Add(objeto);
 
             // Criando background para os pontos
             if (criar_background) {
@@ -531,7 +531,7 @@ public class NovoLeitor2 : MonoBehaviour
         for (int j = 0; j < matrizes_dos_heatmaps.Count; j++)
         {
             if (j == 0)  ((HeatMap)matrizes_dos_heatmaps[j]).ReadPointsBolhas(bd_bolhas, "Todos");
-            else ((HeatMap)matrizes_dos_heatmaps[j]).ReadPointsBolhas(bd_bolhas, lista_de_objetos_do_bolhas[j-1]);
+            else ((HeatMap)matrizes_dos_heatmaps[j]).ReadPointsBolhas(bd_bolhas, lista_de_nomes_de_objetos_do_bolhas[j-1]);
             ((HeatMap)matrizes_dos_heatmaps[j]).AllTheDifferentPoints();
             ((HeatMap)matrizes_dos_heatmaps[j]).OrganizePoints();
             ((HeatMap)matrizes_dos_heatmaps[j]).FillingTheDictionary();
@@ -610,7 +610,7 @@ public class NovoLeitor2 : MonoBehaviour
                 objeto.GetComponent<Dados>().quem_criou = bd_bolhas.GetQuemCriou(i);
             }
 
-            lista_de_pontos.Add(objeto);
+            lista_de_objetos.Add(objeto);
 
             //criando background para o par de pontos
             if (novo_tempo)
@@ -891,7 +891,7 @@ public class NovoLeitor2 : MonoBehaviour
         texturas = new ParaHeatmap<Texture2D>();
         texturas_selecionadas = new ParaHeatmap<Texture2D>();
         pintar = new Pintar();
-        lista_de_pontos = new ArrayList();
+        lista_de_objetos = new ArrayList();
         lista_de_backgrounds = new ArrayList();
         matrizes_dos_heatmaps = new ArrayList();
     }

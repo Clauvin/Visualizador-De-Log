@@ -50,7 +50,7 @@ public class GuiFITHeatmap : GuiHeatmap
     // Use this for initialization
     public void Start()
     {
-        lista_de_objetos = GetComponent<NovoLeitor2>().lista_de_objetos_do_FIT;
+        lista_de_objetos = GetComponent<NovoLeitor2>().lista_de_nomes_de_objetos_do_FIT;
     }
 
 }
