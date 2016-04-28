@@ -11,21 +11,20 @@ using Basicas;
 /// </summary>
 public class GuiHeatmap : GuiPadrao2
 {
-
     public bool gambiarra;
 
     protected string texto;
     protected string instrucoes;
-    protected int posicaoy;
-    public float posinicialcamera;
-    public float postempofloat;
-    public int postempo;
-    public int quantdeheatmaps;
-    public Dictionary<int, Color> dicionarioheatmap;
+    protected int posicao_y;
+    public float pos_inicial_camera;
+    public float pos_tempo_float;
+    public int pos_tempo;
+    public int quant_de_heatmaps;
+    public Dictionary<int, Color> dicionario_heatmap;
     public List<DadosGUIHashMap> dados;
     public string[] lista_de_objetos;
 
-    Rect posicaomovel;
+    Rect posicao_movel;
 
     public GuiHeatmap()
     {
@@ -65,15 +64,15 @@ public class GuiHeatmap : GuiPadrao2
     {
         if (gambiarra)
         {
-            quantdeheatmaps = GetComponent<NovoLeitor2>().GetQuantHeatmaps();
-            for (int i = 0; i < quantdeheatmaps; i++)
+            quant_de_heatmaps = GetComponent<NovoLeitor2>().GetQuantHeatmaps();
+            for (int i = 0; i < quant_de_heatmaps; i++)
             {
 
                 DadosGUIHashMap infoheatmap = new DadosGUIHashMap();
 
-                dicionarioheatmap = GetComponent<NovoLeitor2>().GetMatrizHeatmap(i).GetDicionarioDeCores();
-                infoheatmap.numerosdecor.AddRange(dicionarioheatmap.Keys);
-                infoheatmap.cores.AddRange(dicionarioheatmap.Values);
+                dicionario_heatmap = GetComponent<NovoLeitor2>().GetMatrizHeatmap(i).GetDicionarioDeCores();
+                infoheatmap.numerosdecor.AddRange(dicionario_heatmap.Keys);
+                infoheatmap.cores.AddRange(dicionario_heatmap.Values);
 
                 for (int h = 0; h < infoheatmap.cores.Count; h++)
                 {
