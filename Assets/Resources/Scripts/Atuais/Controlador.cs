@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Basicas;
 using System.Collections;
+using System.Collections.Generic;
 
 /*Modos de uso -
     1 - Um de Cada Vez, em 3D. Mostra uma série de N pontos com N backgrounds, navegáveis com os botões esquerda e
@@ -39,8 +40,8 @@ public class Controlador : MonoBehaviour {
     Quaternion pos_rot_inicial_todos_de_uma_vez_em_3D = new Quaternion();
     bool pegar_valor_de_camera_todos_de_uma_vez_em_3D = true;
 
-    bool[] lista_de_visiveis_do_FIT;
-    bool[] lista_de_visiveis_do_Bolhas;
+    Dictionary<string, bool> lista_de_visiveis_do_FIT;
+    Dictionary<string, bool> lista_de_visiveis_do_Bolhas;
 
     //para a seleção de heatmaps
     int qual_heatmap_mostrar = 0;
@@ -577,90 +578,54 @@ public class Controlador : MonoBehaviour {
         if (qual_heatmap_mostrar >= GetComponent<NovoLeitor2>().GetQuantHeatmaps()) qual_heatmap_mostrar = 0;
     }
 
-    bool GetValorDePosicaoDeVisiveisDoFit(int pos)
+    public bool GetValorDePosicaoDeVisiveisDoFit(string nome)
     {
-        if ((pos < lista_de_visiveis_do_FIT.GetLength(0)) && (pos >= 0))
+        if (lista_de_visiveis_do_FIT.ContainsKey(nome))
         {
-            return lista_de_visiveis_do_FIT[pos];
+            return lista_de_visiveis_do_FIT[nome];
         }
         else
         {
-            Debug.Log("GetValorDePosicaoDeVisiveisDoFit - Posição fora do limite do array.");
+            Debug.Log("GetValorDePosicaoDeVisiveisDoFit - Nome de objeto inexistente.");
             return false;
         }
     }
 
-    void ValorDePosicaoDeVisiveisDoFit(int pos, bool valor)
+    public void SetValorDeVisiveisDoFit(string nome, bool valor)
     {
-        if ((pos < lista_de_visiveis_do_FIT.GetLength(0)) && (pos >= 0))
+        if (lista_de_visiveis_do_FIT.ContainsKey(nome))
         {
-            lista_de_visiveis_do_FIT[pos] = valor;
+            lista_de_visiveis_do_FIT[nome] = valor;
         }
         else
         {
-            Debug.Log("GetValorDePosicaoDeVisiveisDoFit - Posição fora do limite do array.");
+            Debug.Log("SetValorDeVisiveisDoFit - Nome de objeto inexistente.");
         }
     }
 
-    string GetNomeDeObjetoVisivelDoFit(int pos)
+    public bool GetValorDePosicaoDeVisiveisDoBolhas(string nome)
     {
-        if ((pos < lista_de_visiveis_do_FIT.GetLength(0)) && (pos >= 0))
+        if (lista_de_visiveis_do_Bolhas.ContainsKey(nome))
         {
-            return GetComponent<NovoLeitor2>().lista_de_nomes_de_objetos_do_FIT[pos];
+            return lista_de_visiveis_do_Bolhas[nome];
         }
         else
         {
-            Debug.Log("GetNomeDeObjetoVisivelDoFit - Posição fora do limite do array.");
-            return "";
-        }
-    }
-
-    int GetTamanhoDaListaDeVisiveisDoFit()
-    {
-        return lista_de_visiveis_do_FIT.GetLength(0);
-    }
-
-    bool GetValorDePosicaoDeVisiveisDoBolhas(int pos)
-    {
-        if ((pos < lista_de_visiveis_do_Bolhas.GetLength(0)) && (pos >= 0))
-        {
-            return lista_de_visiveis_do_Bolhas[pos];
-        }
-        else
-        {
-            Debug.Log("GetValorDePosicaoDeVisiveisDoBolhas - Posição fora do limite do array.");
+            Debug.Log("GetValorDePosicaoDeVisiveisDoBolhas - Nome de objeto inexistente.");
             return false;
         }
     }
 
-    void ValorDePosicaoDeVisiveisDoBolhas(int pos, bool valor)
+    public void SetValorDeVisiveisDoBolhas(string nome, bool valor)
     {
-        if ((pos < lista_de_visiveis_do_Bolhas.GetLength(0)) && (pos >= 0))
+        if (lista_de_visiveis_do_Bolhas.ContainsKey(nome))
         {
-            lista_de_visiveis_do_Bolhas[pos] = valor;
+            lista_de_visiveis_do_Bolhas[nome] = valor;
         }
         else
         {
-            Debug.Log("GetValorDePosicaoDeVisiveisDoBolhas - Posição fora do limite do array.");
+            Debug.Log("SetValorDeVisiveisDoBolhas - Nome de objeto inexistente.");
         }
-    }
-
-    string GetNomeDeObjetoVisivelDoBolhas(int pos)
-    {
-        if ((pos < lista_de_visiveis_do_Bolhas.GetLength(0)) && (pos >= 0))
-        {
-            return GetComponent<NovoLeitor2>().lista_de_nomes_de_objetos_do_bolhas[pos];
-        }
-        else
-        {
-            Debug.Log("GetNomeDeObjetoVisivelDoBolhas - Posição fora do limite do array.");
-            return "";
-        }
-    }
-
-    int GetTamanhoDaListaDeVisiveisDoBolhas()
-    {
-        return lista_de_visiveis_do_Bolhas.GetLength(0);
     }
 
     public bool GetAutoMode()
@@ -766,17 +731,17 @@ public class Controlador : MonoBehaviour {
         FindObjectOfType<Camera>().transform.position = pos;
         //Daqui pra baixo, parte do FIT
         count = GetComponent<NovoLeitor2>().lista_de_backgrounds.Count;
-        lista_de_visiveis_do_FIT = new bool[GetComponent<NovoLeitor2>().lista_de_nomes_de_objetos_do_FIT.GetLength(0)];
-        lista_de_visiveis_do_Bolhas = new bool[GetComponent<NovoLeitor2>().lista_de_nomes_de_objetos_do_bolhas.GetLength(0)];
+        lista_de_visiveis_do_FIT = new Dictionary<string, bool>();
+        lista_de_visiveis_do_Bolhas = new Dictionary<string, bool>();
 
-        for (int i = 0; i < lista_de_visiveis_do_FIT.GetLength(0); i++)
+        for (int i = 0; i < GetComponent<NovoLeitor2>().lista_de_nomes_de_objetos_do_FIT.GetLength(0); i++)
         {
-            lista_de_visiveis_do_FIT[i] = true;
+            lista_de_visiveis_do_FIT.Add(GetComponent<NovoLeitor2>().lista_de_nomes_de_objetos_do_FIT[i], true);
         }
 
-        for (int i = 0; i < lista_de_visiveis_do_Bolhas.GetLength(0); i++)
+        for (int i = 0; i < GetComponent<NovoLeitor2>().lista_de_nomes_de_objetos_do_bolhas.GetLength(0); i++)
         {
-            lista_de_visiveis_do_Bolhas[i] = true;
+            lista_de_visiveis_do_Bolhas.Add(GetComponent<NovoLeitor2>().lista_de_nomes_de_objetos_do_bolhas[i], true);
         }
 
         TransparenciaDoBackground(1f);

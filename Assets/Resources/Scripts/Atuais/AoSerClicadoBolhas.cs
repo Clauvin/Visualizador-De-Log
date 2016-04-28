@@ -7,9 +7,13 @@ public class AoSerClicadoBolhas : MonoBehaviour {
     {
         Dados d = GetComponent<Dados>();
         Camera cam = FindObjectOfType<Camera>();
-        cam.GetComponent<GuiPonto>().PegarDados(d);
-        cam.GetComponent<Controlador>().PontoFoiClicado(GetComponent<Transform>());
-        cam.GetComponent<GuiPonto>().RevelarGui();
+
+        if (cam.GetComponent<Controlador>().GetValorDePosicaoDeVisiveisDoBolhas(d.personagem))
+        {
+            cam.GetComponent<GuiPonto>().PegarDados(d);
+            cam.GetComponent<Controlador>().PontoFoiClicado(GetComponent<Transform>());
+            cam.GetComponent<GuiPonto>().RevelarGui();
+        }
     }
 
 }
