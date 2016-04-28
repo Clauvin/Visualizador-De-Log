@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GuiBolhasPonto : GuiPonto
+public class GuiBolhasInfoObjeto : GuiInfoObjeto
 {
 
     public override void OnGUI()

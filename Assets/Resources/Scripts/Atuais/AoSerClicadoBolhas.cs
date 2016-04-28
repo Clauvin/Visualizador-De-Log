@@ -10,9 +10,9 @@ public class AoSerClicadoBolhas : MonoBehaviour {
 
         if (cam.GetComponent<Controlador>().GetValorDePosicaoDeVisiveisDoBolhas(d.personagem))
         {
-            cam.GetComponent<GuiPonto>().PegarDados(d);
+            cam.GetComponent<GuiInfoObjeto>().PegarDados(d);
             cam.GetComponent<Controlador>().PontoFoiClicado(GetComponent<Transform>());
-            cam.GetComponent<GuiPonto>().RevelarGui();
+            cam.GetComponent<GuiInfoObjeto>().RevelarGui();
         }
     }
 

@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Classe GuiPadrao2, padrão pelo qual outras classes de interface gráfica derivam.
+/// Contém funções padrões para posicionamento de GUI.
+/// </summary>
 public class GuiPadrao2 : AbstractGui2
 {
 

@@ -1,7 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GuiPonto : GuiPadrao2
+/// <summary>
+/// Classe GuiPonto, responsável por mostrar ao usuário informações sobre
+/// o objeto clicado.
+/// </summary>
+public class GuiInfoObjeto : GuiPadrao2
 {
 
     protected bool gambiarra;

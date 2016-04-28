@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GuiFITPonto : GuiPonto
+public class GuiFITInfoObjeto : GuiInfoObjeto
 {
     public override void OnGUI()
     {
