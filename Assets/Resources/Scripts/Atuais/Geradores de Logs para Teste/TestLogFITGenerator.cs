@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Classe TestLogFITGenerator. 
+/// <para>Responsável por criar um log aleatório no formato do do FIT para testes.</para>
+/// </summary>
 public class TestLogFITGenerator : MonoBehaviour
 {
 

@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Classe GuiTelaInicial. Responsável por definir a tela inicial do programa.
+/// </summary>
 public class GuiTelaInicial : GuiPadrao2
 {
     GUIStyle estilotitulotelainicial;
@@ -27,15 +30,19 @@ public class GuiTelaInicial : GuiPadrao2
 
         switch (resultado)
         {
+            //Vai para o loading do FIT
             case 0:
                 UnityEngine.SceneManagement.SceneManager.LoadScene(1);
                 break;
+            //Vai para o loading do Bolhas
             case 1:
                 UnityEngine.SceneManagement.SceneManager.LoadScene(2);
                 break;
+            //Abre créditos
             case 2:
                 creditos = true;
                 break;
+            //Fecha o programa
             case 3:
                 Application.Quit();
                 break;

@@ -6,8 +6,8 @@ using Basicas;
 
 /// <summary>
 /// Classe GuiHeatmap, de onde derivam as classes GuiFITHeatmap e GuiBolhasHeatmap.
-/// É a classe responsável por mostrar as cores usadas nos heatmaps e quanto objetos naquele espaço
-/// a cor representa.
+/// <para>É a classe responsável por mostrar as cores usadas nos heatmaps e quanto objetos naquele espaço
+/// a cor representa.</para>
 /// </summary>
 public class GuiHeatmap : GuiPadrao2
 {

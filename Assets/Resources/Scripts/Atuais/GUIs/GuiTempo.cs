@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Classe GuiTempo. 
+/// <para>Responsável por passar e receber do usuário informações referentes ao sistema de passagem automática
+/// dos objetos em relação ao tempo.</para>
+/// </summary>
 public class GuiTempo : GuiPadrao2
 {
 
