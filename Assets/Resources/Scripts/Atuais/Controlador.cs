@@ -353,14 +353,14 @@ public class Controlador : MonoBehaviour {
 
             if (Input.GetButtonDown("8"))
             {
-                //MudarTransparenciaDosObjetos(-0.2f);
-                DeixarObjetoInvisivelEIninteragivel("Baleia");
+                MudarTransparenciaDosObjetos(-0.2f);
+                //DeixarObjetoInvisivelEIninteragivel("Baleia");
             }
 
             if (Input.GetButtonDown("9"))
             {
-                //MudarTransparenciaDosObjetos(0.2f);
-                DeixarObjetoVisivelEInteragivel("Baleia");
+                MudarTransparenciaDosObjetos(0.2f);
+                //DeixarObjetoVisivelEInteragivel("Baleia");
             }
 
             if (Input.GetButtonDown("-"))
