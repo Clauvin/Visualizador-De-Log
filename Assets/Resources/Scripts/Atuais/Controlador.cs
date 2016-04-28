@@ -39,6 +39,9 @@ public class Controlador : MonoBehaviour {
     Quaternion pos_rot_inicial_todos_de_uma_vez_em_3D = new Quaternion();
     bool pegar_valor_de_camera_todos_de_uma_vez_em_3D = true;
 
+    bool[] lista_de_visiveis_do_FIT;
+    bool[] lista_de_visiveis_do_Bolhas;
+
     //para a seleção de heatmaps
     int qual_heatmap_mostrar = 0;
 
@@ -677,6 +680,18 @@ public class Controlador : MonoBehaviour {
         FindObjectOfType<Camera>().transform.position = pos;
         //Daqui pra baixo, parte do FIT
         count = GetComponent<NovoLeitor2>().lista_de_backgrounds.Count;
+        lista_de_visiveis_do_FIT = new bool[GetComponent<NovoLeitor2>().lista_de_nomes_de_objetos_do_FIT.GetLength(0)];
+        lista_de_visiveis_do_Bolhas = new bool[GetComponent<NovoLeitor2>().lista_de_nomes_de_objetos_do_bolhas.GetLength(0)];
+
+        for (int i = 0; i < lista_de_visiveis_do_FIT.GetLength(0); i++)
+        {
+            lista_de_visiveis_do_FIT[i] = true;
+        }
+
+        for (int i = 0; i < lista_de_visiveis_do_Bolhas.GetLength(0); i++)
+        {
+            lista_de_visiveis_do_Bolhas[i] = true;
+        }
 
         TransparenciaDoBackground(1f);
         GetComponent<NovoLeitor2>().ConectarTodos();
