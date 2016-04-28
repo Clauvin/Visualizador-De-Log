@@ -23,6 +23,7 @@ public class Controlador : MonoBehaviour {
     public string modo_de_visualizacao = "Todos De Uma Vez em 2D";
     int count;
     string instrucoes_genericas;
+    public string tipo;
 
     Transform objeto_clicado = null;
 
@@ -353,12 +354,13 @@ public class Controlador : MonoBehaviour {
             if (Input.GetButtonDown("8"))
             {
                 //MudarTransparenciaDosObjetos(-0.2f);
-                MudarTransparenciaDeTipoEspecificoDeObjetos("Baleia", 0.0f);
+                DeixarObjetoInvisivelEIninteragivel("Baleia");
             }
 
             if (Input.GetButtonDown("9"))
             {
-                MudarTransparenciaDosObjetos(0.2f);
+                //MudarTransparenciaDosObjetos(0.2f);
+                DeixarObjetoVisivelEInteragivel("Baleia");
             }
 
             if (Input.GetButtonDown("-"))
@@ -489,6 +491,30 @@ public class Controlador : MonoBehaviour {
                 ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).
                             GetComponent<MeshRenderer>().material.SetColor("_Color", cor);
             }
+        }
+    }
+
+    void DeixarObjetoInvisivelEIninteragivel(string nome)
+    {
+        MudarTransparenciaDeTipoEspecificoDeObjetos(nome, 0.0f);
+        if (tipo == "Fit") {
+            if (lista_de_visiveis_do_FIT.ContainsKey(nome)) lista_de_visiveis_do_FIT[nome] = false;
+        }
+        else if (tipo == "Bolhas") {
+            if (lista_de_visiveis_do_Bolhas.ContainsKey(nome)) lista_de_visiveis_do_Bolhas[nome] = false;
+        }
+    }
+
+    void DeixarObjetoVisivelEInteragivel(string nome)
+    {
+        MudarTransparenciaDeTipoEspecificoDeObjetos(nome, 1.0f);
+        if (tipo == "Fit")
+        {
+            if (lista_de_visiveis_do_FIT.ContainsKey(nome)) lista_de_visiveis_do_FIT[nome] = true;
+        }
+        else if (tipo == "Bolhas")
+        {
+            if (lista_de_visiveis_do_Bolhas.ContainsKey(nome)) lista_de_visiveis_do_Bolhas[nome] = true;
         }
     }
 
@@ -633,7 +659,6 @@ public class Controlador : MonoBehaviour {
         return auto_mode;
     }
 
-
     public bool GetAutoModeCustom()
     {
         return auto_mode_custom;
@@ -647,6 +672,7 @@ public class Controlador : MonoBehaviour {
                                  "3 - Muda para 'Um Frame De Cada Vez em 2D'\n" +
                                  "4 - Muda para 'Todos De Uma Vez em 3D'\n" +
                                  "5 - Muda para Heatmap\n";
+        tipo = "Bolhas";
         Inicializacao();
     }
 
@@ -658,6 +684,7 @@ public class Controlador : MonoBehaviour {
                                  "3 - Muda para 'Um Frame De Cada Vez em 2D'\n" +
                                  "4 - Muda para 'Todos De Uma Vez em 3D'\n" +
                                  "5 - Muda para Heatmap\n";
+        tipo = "Fit";
         Inicializacao();
     }
 
