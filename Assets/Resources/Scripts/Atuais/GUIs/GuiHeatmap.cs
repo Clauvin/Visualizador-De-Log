@@ -67,7 +67,7 @@ public class GuiHeatmap : GuiPadrao2
             quant_de_heatmaps = GetComponent<NovoLeitor2>().GetQuantHeatmaps();
             for (int i = 0; i < quant_de_heatmaps; i++)
             {
-
+                //carrega os dados da GUI referente à lista de cores e quantos objetos representados por cor
                 DadosGUIHashMap infoheatmap = new DadosGUIHashMap();
 
                 dicionario_heatmap = GetComponent<NovoLeitor2>().GetMatrizHeatmap(i).GetDicionarioDeCores();
