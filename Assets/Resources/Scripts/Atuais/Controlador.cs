@@ -577,6 +577,92 @@ public class Controlador : MonoBehaviour {
         if (qual_heatmap_mostrar >= GetComponent<NovoLeitor2>().GetQuantHeatmaps()) qual_heatmap_mostrar = 0;
     }
 
+    bool GetValorDePosicaoDeVisiveisDoFit(int pos)
+    {
+        if ((pos < lista_de_visiveis_do_FIT.GetLength(0)) && (pos >= 0))
+        {
+            return lista_de_visiveis_do_FIT[pos];
+        }
+        else
+        {
+            Debug.Log("GetValorDePosicaoDeVisiveisDoFit - Posição fora do limite do array.");
+            return false;
+        }
+    }
+
+    void ValorDePosicaoDeVisiveisDoFit(int pos, bool valor)
+    {
+        if ((pos < lista_de_visiveis_do_FIT.GetLength(0)) && (pos >= 0))
+        {
+            lista_de_visiveis_do_FIT[pos] = valor;
+        }
+        else
+        {
+            Debug.Log("GetValorDePosicaoDeVisiveisDoFit - Posição fora do limite do array.");
+        }
+    }
+
+    string GetNomeDeObjetoVisivelDoFit(int pos)
+    {
+        if ((pos < lista_de_visiveis_do_FIT.GetLength(0)) && (pos >= 0))
+        {
+            return GetComponent<NovoLeitor2>().lista_de_nomes_de_objetos_do_FIT[pos];
+        }
+        else
+        {
+            Debug.Log("GetNomeDeObjetoVisivelDoFit - Posição fora do limite do array.");
+            return "";
+        }
+    }
+
+    int GetTamanhoDaListaDeVisiveisDoFit()
+    {
+        return lista_de_visiveis_do_FIT.GetLength(0);
+    }
+
+    bool GetValorDePosicaoDeVisiveisDoBolhas(int pos)
+    {
+        if ((pos < lista_de_visiveis_do_Bolhas.GetLength(0)) && (pos >= 0))
+        {
+            return lista_de_visiveis_do_Bolhas[pos];
+        }
+        else
+        {
+            Debug.Log("GetValorDePosicaoDeVisiveisDoBolhas - Posição fora do limite do array.");
+            return false;
+        }
+    }
+
+    void ValorDePosicaoDeVisiveisDoBolhas(int pos, bool valor)
+    {
+        if ((pos < lista_de_visiveis_do_Bolhas.GetLength(0)) && (pos >= 0))
+        {
+            lista_de_visiveis_do_Bolhas[pos] = valor;
+        }
+        else
+        {
+            Debug.Log("GetValorDePosicaoDeVisiveisDoBolhas - Posição fora do limite do array.");
+        }
+    }
+
+    string GetNomeDeObjetoVisivelDoBolhas(int pos)
+    {
+        if ((pos < lista_de_visiveis_do_Bolhas.GetLength(0)) && (pos >= 0))
+        {
+            return GetComponent<NovoLeitor2>().lista_de_nomes_de_objetos_do_bolhas[pos];
+        }
+        else
+        {
+            Debug.Log("GetNomeDeObjetoVisivelDoBolhas - Posição fora do limite do array.");
+            return "";
+        }
+    }
+
+    int GetTamanhoDaListaDeVisiveisDoBolhas()
+    {
+        return lista_de_visiveis_do_Bolhas.GetLength(0);
+    }
+
     public bool GetAutoMode()
     {
         return auto_mode;
