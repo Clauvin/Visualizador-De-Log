@@ -494,6 +494,28 @@ public class Controlador : MonoBehaviour {
         }
     }
 
+    void MudarTransparenciaDeObjetosDeEspacoDeTempoEspecifico(int tempo_minimo, int tempo_maximo, float transparencia)
+    {
+
+        int limit = GetComponent<NovoLeitor2>().lista_de_objetos.Count;
+
+        for (int i = 0; i < limit; i++)
+        {
+            Color cor;
+            int tempo = ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).GetComponent<Dados>().tempo;
+            if ((tempo_minimo <= tempo) && (tempo <= tempo_maximo))
+            {
+                cor = ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).
+                            GetComponent<MeshRenderer>().material.GetColor("_Color");
+
+                cor.a = transparencia;
+
+                ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).
+                            GetComponent<MeshRenderer>().material.SetColor("_Color", cor);
+            }
+        }
+    }
+
     void DeixarObjetoInvisivelEIninteragivel(string nome)
     {
         MudarTransparenciaDeTipoEspecificoDeObjetos(nome, 0.0f);
@@ -516,6 +538,16 @@ public class Controlador : MonoBehaviour {
         {
             if (lista_de_visiveis_do_Bolhas.ContainsKey(nome)) lista_de_visiveis_do_Bolhas[nome] = true;
         }
+    }
+
+    void DeixarObjetoInvisivelEIninteragivel(int tempo_minimo, int tempo_maximo)
+    {
+        MudarTransparenciaDeObjetosDeEspacoDeTempoEspecifico(tempo_minimo, tempo_maximo, 0.0f);
+    }
+
+    void DeixarObjetoVisivelEInteragivel(int tempo_minimo, int tempo_maximo)
+    {
+        MudarTransparenciaDeObjetosDeEspacoDeTempoEspecifico(tempo_minimo, tempo_maximo, 1.0f);
     }
 
     void TransparenciaDoBackground(float trans)
