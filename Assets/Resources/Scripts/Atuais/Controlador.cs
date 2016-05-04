@@ -516,7 +516,21 @@ public class Controlador : MonoBehaviour {
         }
     }
 
-    void DeixarObjetoInvisivelEIninteragivel(string nome)
+    void SetInteracaoObjetosDeEspacoDeTempo(int tempo_minimo, int tempo_maximo, bool e_interagivel)
+    {
+        int limit = GetComponent<NovoLeitor2>().lista_de_objetos.Count;
+
+        for (int i = 0; i < limit; i++)
+        {
+            int tempo = ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).GetComponent<Dados>().tempo;
+            if ((tempo_minimo <= tempo) && (tempo <= tempo_maximo))
+            {
+                ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).GetComponent<Clicavel>().SetClicavel(e_interagivel);
+            }
+        }
+    }
+
+    void DeixarTipoDeObjetoInvisivelEIninteragivel(string nome)
     {
         MudarTransparenciaDeTipoEspecificoDeObjetos(nome, 0.0f);
         if (tipo == "Fit") {
@@ -527,7 +541,7 @@ public class Controlador : MonoBehaviour {
         }
     }
 
-    void DeixarObjetoVisivelEInteragivel(string nome)
+    void DeixarTipoDeObjetoVisivelEInteragivel(string nome)
     {
         MudarTransparenciaDeTipoEspecificoDeObjetos(nome, 1.0f);
         if (tipo == "Fit")
@@ -540,14 +554,16 @@ public class Controlador : MonoBehaviour {
         }
     }
 
-    void DeixarObjetoInvisivelEIninteragivel(int tempo_minimo, int tempo_maximo)
+    void DeixarObjetosEmEspacoDeTempoInvisiveisEIninteragiveis(int tempo_minimo, int tempo_maximo)
     {
         MudarTransparenciaDeObjetosDeEspacoDeTempoEspecifico(tempo_minimo, tempo_maximo, 0.0f);
+        SetInteracaoObjetosDeEspacoDeTempo(tempo_minimo, tempo_maximo, false);
     }
 
-    void DeixarObjetoVisivelEInteragivel(int tempo_minimo, int tempo_maximo)
+    void DeixarObjetosEmEspacoDeTempoVisiveisEInteragiveis(int tempo_minimo, int tempo_maximo)
     {
         MudarTransparenciaDeObjetosDeEspacoDeTempoEspecifico(tempo_minimo, tempo_maximo, 1.0f);
+        SetInteracaoObjetosDeEspacoDeTempo(tempo_minimo, tempo_maximo, true);
     }
 
     void TransparenciaDoBackground(float trans)
