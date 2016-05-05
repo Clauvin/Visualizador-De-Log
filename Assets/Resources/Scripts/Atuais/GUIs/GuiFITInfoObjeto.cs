@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Classe GuiFITInfoObjeto, derivada de GuiInfoObjeto.
+/// <para>Responsável por mostrar dados referentes aos objetos do FIT para o usuário.</para>
+/// </summary>
 public class GuiFITInfoObjeto : GuiInfoObjeto
 {
     public override void OnGUI()
