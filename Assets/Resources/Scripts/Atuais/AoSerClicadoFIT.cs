@@ -8,12 +8,9 @@ public class AoSerClicadoFIT : MonoBehaviour {
         Dados d = GetComponent<Dados>();
         Camera cam = FindObjectOfType<Camera>();
 
-        if (cam.GetComponent<Controlador>().GetValorDePosicaoDeVisiveisDoFit(d.personagem))
-        {
-            cam.GetComponent<GuiInfoObjeto>().PegarDados(d);
-            cam.GetComponent<Controlador>().PontoFoiClicado(GetComponent<Transform>());
-            cam.GetComponent<GuiInfoObjeto>().RevelarGui();
-        }
+        cam.GetComponent<GuiInfoObjeto>().PegarDados(d);
+        cam.GetComponent<Controlador>().PontoFoiClicado(GetComponent<Transform>());
+        cam.GetComponent<GuiInfoObjeto>().RevelarGui();
     }
 
 }

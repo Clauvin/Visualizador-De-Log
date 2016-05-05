@@ -41,9 +41,6 @@ public class Controlador : MonoBehaviour {
     Quaternion pos_rot_inicial_todos_de_uma_vez_em_3D = new Quaternion();
     bool pegar_valor_de_camera_todos_de_uma_vez_em_3D = true;
 
-    Dictionary<string, bool> lista_de_visiveis_do_FIT;
-    Dictionary<string, bool> lista_de_visiveis_do_Bolhas;
-
     //para a seleção de heatmaps
     int qual_heatmap_mostrar = 0;
 
@@ -658,56 +655,6 @@ public class Controlador : MonoBehaviour {
         if (qual_heatmap_mostrar >= GetComponent<NovoLeitor2>().GetQuantHeatmaps()) qual_heatmap_mostrar = 0;
     }
 
-    public bool GetValorDePosicaoDeVisiveisDoFit(string nome)
-    {
-        if (lista_de_visiveis_do_FIT.ContainsKey(nome))
-        {
-            return lista_de_visiveis_do_FIT[nome];
-        }
-        else
-        {
-            Debug.Log("GetValorDePosicaoDeVisiveisDoFit - Nome de objeto inexistente.");
-            return false;
-        }
-    }
-
-    public void SetValorDeVisiveisDoFit(string nome, bool valor)
-    {
-        if (lista_de_visiveis_do_FIT.ContainsKey(nome))
-        {
-            lista_de_visiveis_do_FIT[nome] = valor;
-        }
-        else
-        {
-            Debug.Log("SetValorDeVisiveisDoFit - Nome de objeto inexistente.");
-        }
-    }
-
-    public bool GetValorDePosicaoDeVisiveisDoBolhas(string nome)
-    {
-        if (lista_de_visiveis_do_Bolhas.ContainsKey(nome))
-        {
-            return lista_de_visiveis_do_Bolhas[nome];
-        }
-        else
-        {
-            Debug.Log("GetValorDePosicaoDeVisiveisDoBolhas - Nome de objeto inexistente.");
-            return false;
-        }
-    }
-
-    public void SetValorDeVisiveisDoBolhas(string nome, bool valor)
-    {
-        if (lista_de_visiveis_do_Bolhas.ContainsKey(nome))
-        {
-            lista_de_visiveis_do_Bolhas[nome] = valor;
-        }
-        else
-        {
-            Debug.Log("SetValorDeVisiveisDoBolhas - Nome de objeto inexistente.");
-        }
-    }
-
     public bool GetAutoMode()
     {
         return auto_mode;
@@ -812,18 +759,6 @@ public class Controlador : MonoBehaviour {
         FindObjectOfType<Camera>().transform.position = pos;
         //Daqui pra baixo, parte do FIT
         count = GetComponent<NovoLeitor2>().lista_de_backgrounds.Count;
-        lista_de_visiveis_do_FIT = new Dictionary<string, bool>();
-        lista_de_visiveis_do_Bolhas = new Dictionary<string, bool>();
-
-        for (int i = 0; i < GetComponent<NovoLeitor2>().lista_de_nomes_de_objetos_do_FIT.GetLength(0); i++)
-        {
-            lista_de_visiveis_do_FIT.Add(GetComponent<NovoLeitor2>().lista_de_nomes_de_objetos_do_FIT[i], true);
-        }
-
-        for (int i = 0; i < GetComponent<NovoLeitor2>().lista_de_nomes_de_objetos_do_bolhas.GetLength(0); i++)
-        {
-            lista_de_visiveis_do_Bolhas.Add(GetComponent<NovoLeitor2>().lista_de_nomes_de_objetos_do_bolhas[i], true);
-        }
 
         TransparenciaDoBackground(1f);
         GetComponent<NovoLeitor2>().ConectarTodos();
