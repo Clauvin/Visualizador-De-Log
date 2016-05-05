@@ -162,6 +162,7 @@ GameObject:
   - 114: {fileID: 1348100979}
   - 114: {fileID: 1348100980}
   - 114: {fileID: 1348100981}
+  - 114: {fileID: 1348100983}
   - 114: {fileID: 1348100982}
   - 114: {fileID: 1348100978}
   m_Layer: 0
@@ -250,6 +251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   modo_de_visualizacao: Todos De Uma Vez em 2D
+  tipo: 
 --- !u!114 &1348100978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,12 +264,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numeros_de_cores: 
-  lista_de_objetos_do_FIT:
+  lista_de_nomes_de_objetos_do_FIT:
   - 1
   - 2
   - 3
   - 4
-  lista_de_objetos_do_bolhas:
+  lista_de_nomes_de_objetos_do_bolhas:
   - Mouse
   - Baleia
   - Bolha
@@ -318,8 +320,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gambiarra: 1
-  posinicialcamera: 0
-  postempofloat: 0
-  postempo: 0
-  quantdeheatmaps: 0
+  pos_inicial_camera: 0
+  pos_tempo_float: 0
+  pos_tempo: 0
+  quant_de_heatmaps: 0
   lista_de_objetos: []
+--- !u!114 &1348100983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1348100971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2cea355b4c8f5e4fa1bdf23739235fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  posicao_y: 0
