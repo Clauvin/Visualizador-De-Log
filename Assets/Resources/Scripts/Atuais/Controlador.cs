@@ -443,9 +443,13 @@ public class Controlador : MonoBehaviour {
 
             if (modo_de_visualizacao == "Heatmap")
             {
+                GetComponent<GuiVisualizarTipos>().EsconderGui();
                 GetComponent<GuiHeatmap>().RevelarGui();
             }
-            else { GetComponent<GuiHeatmap>().EsconderGui(); }
+            else {
+                GetComponent<GuiVisualizarTipos>().RevelarGui();
+                GetComponent<GuiHeatmap>().EsconderGui();
+            }
 
             if ((pegar_valor_de_camera_todos_de_uma_vez_em_3D) && (modo_de_visualizacao == "Todos De Uma Vez em 3D"))
             {
@@ -545,13 +549,13 @@ public class Controlador : MonoBehaviour {
         }
     }
 
-    void DeixarTipoDeObjetoInvisivelEIninteragivel(string nome)
+    public void DeixarTipoDeObjetoInvisivelEIninteragivel(string nome)
     {
         MudarTransparenciaDeTipoEspecificoDeObjetos(nome, 0.0f);
         SetInteracaoComTiposDeObjetos(nome, false);
     }
 
-    void DeixarTipoDeObjetoVisivelEInteragivel(string nome)
+    public void DeixarTipoDeObjetoVisivelEInteragivel(string nome)
     {
         MudarTransparenciaDeTipoEspecificoDeObjetos(nome, 1.0f);
         SetInteracaoComTiposDeObjetos(nome, true);
