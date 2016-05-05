@@ -353,16 +353,16 @@ public class Controlador : MonoBehaviour {
 
             if (Input.GetButtonDown("8"))
             {
-                //MudarTransparenciaDosObjetos(-0.2f);
+                MudarTransparenciaDosObjetos(-0.2f);
                 //DeixarObjetosEmEspacoDeTempoInvisiveisEIninteragiveis(0, 25);
-                DeixarTipoDeObjetoInvisivelEIninteragivel("Baleia");
+                //DeixarTipoDeObjetoInvisivelEIninteragivel("Baleia");
             }
 
             if (Input.GetButtonDown("9"))
             {
-                //MudarTransparenciaDosObjetos(0.2f);
+                MudarTransparenciaDosObjetos(0.2f);
                 //DeixarObjetosEmEspacoDeTempoVisiveisEInteragiveis(0, 25);
-                DeixarTipoDeObjetoVisivelEInteragivel("Baleia");
+                //DeixarTipoDeObjetoVisivelEInteragivel("Baleia");
             }
 
             if (Input.GetButtonDown("-"))
