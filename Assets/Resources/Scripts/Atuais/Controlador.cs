@@ -480,7 +480,7 @@ public class Controlador : MonoBehaviour {
         for (int i = 0; i < limit; i++)
         {
             Color cor;
-            if (((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).GetComponent<Dados>().personagem == nome)
+            if (((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).GetComponent<Dados>().nome_do_objeto == nome)
             {
                 cor = ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).
                             GetComponent<MeshRenderer>().material.GetColor("_Color");
@@ -536,7 +536,7 @@ public class Controlador : MonoBehaviour {
 
         for (int i = 0; i < limit; i++)
         {
-            string nome_do_objeto = ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).GetComponent<Dados>().personagem;
+            string nome_do_objeto = ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).GetComponent<Dados>().nome_do_objeto;
             if (nome_do_objeto == nome)
             {
                 if (e_interagivel) ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).layer = 0;
@@ -592,13 +592,13 @@ public class Controlador : MonoBehaviour {
         {
             objeto_clicado = click;
             click.GetComponent<MeshRenderer>().material.mainTexture = GetComponent<NovoLeitor2>().
-                texturas_selecionadas.Get(click.GetComponent<Dados>().personagem.ToString());
+                texturas_selecionadas.Get(click.GetComponent<Dados>().nome_do_objeto.ToString());
         } else if (objeto_clicado != click) {
             objeto_clicado.GetComponent<MeshRenderer>().material.mainTexture = GetComponent<NovoLeitor2>().
-                texturas.Get(objeto_clicado.GetComponent<Dados>().personagem.ToString());
+                texturas.Get(objeto_clicado.GetComponent<Dados>().nome_do_objeto.ToString());
             objeto_clicado = click;
             click.GetComponent<MeshRenderer>().material.mainTexture = GetComponent<NovoLeitor2>().
-                texturas_selecionadas.Get(click.GetComponent<Dados>().personagem.ToString());
+                texturas_selecionadas.Get(click.GetComponent<Dados>().nome_do_objeto.ToString());
         }
               
     }
@@ -607,7 +607,7 @@ public class Controlador : MonoBehaviour {
     {
         if (objeto_clicado != null) {
             objeto_clicado.GetComponent<MeshRenderer>().material.mainTexture = GetComponent<NovoLeitor2>().
-                    texturas.Get(objeto_clicado.GetComponent<Dados>().personagem.ToString());
+                    texturas.Get(objeto_clicado.GetComponent<Dados>().nome_do_objeto.ToString());
             objeto_clicado = null;
         }
     }

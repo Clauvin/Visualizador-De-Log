@@ -418,7 +418,7 @@ public class NovoLeitor2 : MonoBehaviour
             // Ponto já criado, agora adicionar dados a ele
             objeto.AddComponent<Dados>();
             objeto.GetComponent<Dados>().Atualizar();
-            objeto.GetComponent<Dados>().personagem = bd_fit.GetPersonagem(i).ToString();
+            objeto.GetComponent<Dados>().nome_do_objeto = bd_fit.GetPersonagem(i).ToString();
             objeto.GetComponent<Dados>().tempo = bd_fit.GetTempo(i);
             objeto.GetComponent<Dados>().x_log = bd_fit.GetGridX(i);
             objeto.GetComponent<Dados>().y_log = bd_fit.GetGridY(i);
@@ -598,7 +598,7 @@ public class NovoLeitor2 : MonoBehaviour
             objeto.GetComponent<Dados>().tempo = bd_bolhas.GetTempo(i);
             objeto.GetComponent<Dados>().x_log = bd_bolhas.GetCoordenadaX(i);
             objeto.GetComponent<Dados>().y_log = bd_bolhas.GetCoordenadaY(i);
-            objeto.GetComponent<Dados>().personagem = bd_bolhas.GetQualObjeto(i);
+            objeto.GetComponent<Dados>().nome_do_objeto = bd_bolhas.GetQualObjeto(i);
 
             if (bd_bolhas.GetMouseOuObjeto(i) == "Mouse")
             {

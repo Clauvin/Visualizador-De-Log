@@ -13,7 +13,7 @@ public class GuiFITInfoObjeto : GuiInfoObjeto
         {
             GUI.BeginGroup(new Rect(posx, posy, 220, 80));
             posicaoy = 0;
-            GUI.TextField(new Rect(10, posicaoy, 120, 20), "Personagem = " + dadosdoponto.personagem);
+            GUI.TextField(new Rect(10, posicaoy, 120, 20), "Personagem = " + dadosdoponto.nome_do_objeto);
             posicaoy += 20;
             GUI.TextField(new Rect(10, posicaoy, 120, 20), "X = " + dadosdoponto.x_log / 32);
             posicaoy += 20;
