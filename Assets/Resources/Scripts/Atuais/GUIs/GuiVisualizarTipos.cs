@@ -68,7 +68,6 @@ public class GuiVisualizarTipos : GuiPadrao2 {
         posy = 400;
         revelado = true;
         tamanho = 20 * (lista_de_nomes_de_objetos.Length + 1);
-        Debug.Log(lista_de_nomes_de_objetos.Length);
 
     }
 	
