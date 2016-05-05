@@ -389,7 +389,6 @@ public class NovoLeitor2 : MonoBehaviour
 
             objeto = Instantiate(objetos.Get("Qualquer Coisa FIT"));
             objeto.AddComponent<AoSerClicadoFIT>();
-            objeto.AddComponent<Clicavel>();
             
             // :p
             if (objeto == null) Debug.Log("Deu ruim.");
@@ -567,7 +566,6 @@ public class NovoLeitor2 : MonoBehaviour
 
             objeto = Instantiate(objetos.Get("Qualquer Coisa Bolhas"));
             objeto.AddComponent<AoSerClicadoBolhas>();
-            objeto.AddComponent<Clicavel>();
 
             if (objeto == null) Debug.Log("Deu ruim.");
 
