@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Classe GuiFITTempo, derivada de GuiTempo. 
+/// <para>Responsável por passar e receber do usuário informações referentes ao sistema de passagem automática
+/// dos objetos em relação ao tempo, quando visualizando dados do FIT.</para>
+/// </summary>
 public class GuiFITTempo : GuiTempo
 {
     public GuiFITTempo()
