@@ -527,7 +527,23 @@ public class Controlador : MonoBehaviour {
             int tempo = ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).GetComponent<Dados>().tempo;
             if ((tempo_minimo <= tempo) && (tempo <= tempo_maximo))
             {
-                ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).GetComponent<Clicavel>().SetClicavel(e_interagivel);
+                if (e_interagivel) ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).layer = 0;
+                else ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).layer = 2;
+            }
+        }
+    }
+
+    void SetInteracaoComTiposDeObjetos(string nome, bool e_interagivel)
+    {
+        int limit = GetComponent<NovoLeitor2>().lista_de_objetos.Count;
+
+        for (int i = 0; i < limit; i++)
+        {
+            string nome_do_objeto = ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).GetComponent<Dados>().personagem;
+            if (nome_do_objeto == nome)
+            {
+                if (e_interagivel) ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).layer = 0;
+                else ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).layer = 2;
             }
         }
     }
@@ -535,25 +551,13 @@ public class Controlador : MonoBehaviour {
     void DeixarTipoDeObjetoInvisivelEIninteragivel(string nome)
     {
         MudarTransparenciaDeTipoEspecificoDeObjetos(nome, 0.0f);
-        if (tipo == "Fit") {
-            if (lista_de_visiveis_do_FIT.ContainsKey(nome)) lista_de_visiveis_do_FIT[nome] = false;
-        }
-        else if (tipo == "Bolhas") {
-            if (lista_de_visiveis_do_Bolhas.ContainsKey(nome)) lista_de_visiveis_do_Bolhas[nome] = false;
-        }
+        SetInteracaoComTiposDeObjetos(nome, false);
     }
 
     void DeixarTipoDeObjetoVisivelEInteragivel(string nome)
     {
         MudarTransparenciaDeTipoEspecificoDeObjetos(nome, 1.0f);
-        if (tipo == "Fit")
-        {
-            if (lista_de_visiveis_do_FIT.ContainsKey(nome)) lista_de_visiveis_do_FIT[nome] = true;
-        }
-        else if (tipo == "Bolhas")
-        {
-            if (lista_de_visiveis_do_Bolhas.ContainsKey(nome)) lista_de_visiveis_do_Bolhas[nome] = true;
-        }
+        SetInteracaoComTiposDeObjetos(nome, true);
     }
 
     void DeixarObjetosEmEspacoDeTempoInvisiveisEIninteragiveis(int tempo_minimo, int tempo_maximo)
