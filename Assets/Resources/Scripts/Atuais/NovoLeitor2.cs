@@ -507,6 +507,7 @@ public class NovoLeitor2 : MonoBehaviour
         heatmap.GetComponent<MeshRenderer>().material = Instantiate(materialheatmap);
 
         heatmap.transform.position = ((GameObject)lista_de_backgrounds[0]).transform.position + new Vector3(200f, 0, 0);
+        GetComponent<Controlador>().MudarTransparenciaDosObjetos(0.2f);
 
     }
 
@@ -702,6 +703,7 @@ public class NovoLeitor2 : MonoBehaviour
         heatmap.GetComponent<MeshRenderer>().material = Instantiate(material_heatmap);
 
         heatmap.transform.position = ((GameObject)lista_de_backgrounds[0]).transform.position + new Vector3(200f, 0, 0);
+        GetComponent<Controlador>().MudarTransparenciaDosObjetos(0.2f);
 
     }
 

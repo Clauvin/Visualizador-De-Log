@@ -466,7 +466,7 @@ public class Controlador : MonoBehaviour {
         GetComponent<NovoLeitor2>().ControlarAlpha(modos.GetAlpha(modo));
     }
 
-    void MudarTransparenciaDosObjetos(float change) {
+    public void MudarTransparenciaDosObjetos(float change) {
 
         MudancaDeCor(true, false, false, false, change);
 
