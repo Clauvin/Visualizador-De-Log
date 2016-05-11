@@ -15,8 +15,12 @@ public class GuiVisualizarPorTempo : GuiPadrao2 {
     string tempomaximo = "Apenas >= 0 aqui.";
     int visivel_ou_invisivel = 1;
     public string[] o_que_escrever_nos_botoes;
-    bool erro_de_input_a = false;
-    bool erro_de_input_b = false;
+
+    //variáveis que definem se houve ou não erro, o que mostra mensagens de erro.
+    bool erro_de_input_errado_minimo = false;
+    bool erro_de_input_errado_maximo = false;
+    bool erro_de_input_vazio_minimo = false;
+    bool erro_de_input_vazio_maximo = false;
     bool erro_de_maior_que = false;
     int posicao_erro_y = 100;
 
@@ -39,10 +43,19 @@ public class GuiVisualizarPorTempo : GuiPadrao2 {
             tempomaximo = GUI.TextField(new Rect(0, 80, 210, 20), tempomaximo);
             if (GUI.Button(new Rect(210, 20, 80, 80), o_que_escrever_nos_botoes[visivel_ou_invisivel]))
             {
-                try { Int32.Parse(tempominimo); erro_de_input_a = false; } catch (FormatException fe) { erro_de_input_a = true; }
-                try { Int32.Parse(tempomaximo); erro_de_input_b = false; } catch (FormatException fe) { erro_de_input_b = true; }
+                try { Int32.Parse(tempominimo); erro_de_input_errado_minimo = false; }
+                catch (FormatException fe) { erro_de_input_errado_minimo = true; }
 
-                if (!(erro_de_input_a || erro_de_input_b))
+                try { Int32.Parse(tempomaximo); erro_de_input_errado_maximo = false; }
+                catch (FormatException fe) { erro_de_input_errado_maximo = true; }
+
+                /*if (tempominimo == "") { erro_de_input_vazio_minimo = true; }
+                else erro_de_input_vazio_minimo = false;
+
+                if (tempomaximo == "") { erro_de_input_vazio_maximo = true; }
+                else erro_de_input_vazio_maximo = false;*/
+
+                if (!(erro_de_input_errado_minimo || erro_de_input_errado_maximo))
                 {
                     if (Int32.Parse(tempominimo) > Int32.Parse(tempomaximo))
                     {
@@ -51,7 +64,7 @@ public class GuiVisualizarPorTempo : GuiPadrao2 {
                 }
 
                 //Deus abençoe que C# me permite fazer essas comparações em sequência.
-                if (!(erro_de_input_a || erro_de_input_b || erro_de_maior_que))
+                if (!(erro_de_input_errado_minimo || erro_de_input_errado_maximo || erro_de_maior_que))
                 {
                     if (visivel_ou_invisivel == 1)
                     {
@@ -67,12 +80,12 @@ public class GuiVisualizarPorTempo : GuiPadrao2 {
                     }
                 }
             }
-            if (erro_de_input_a)
+            if (erro_de_input_errado_minimo)
             {
                 GUI.Label(new Rect(0, posicao_erro_y, 210, 40), "Valor mínimo precisa ser de\n" + "apenas números.", "textfield");
                 posicao_erro_y += 40;
             }
-            if (erro_de_input_b)
+            if (erro_de_input_errado_maximo)
             {
                 GUI.Label(new Rect(0, posicao_erro_y, 210, 40), "Valor máximo precisa ser de\n" + "apenas números.", "textfield");
                 posicao_erro_y += 40;
