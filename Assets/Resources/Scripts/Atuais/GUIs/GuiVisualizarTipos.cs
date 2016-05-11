@@ -67,17 +67,4 @@ public class GuiVisualizarTipos : GuiPadrao2 {
 
     }
 
-    void Start()
-    {
-
-        lista_de_nomes_de_objetos = new string[5];
-        lista_de_nomes_de_objetos[0] = "Mouse"; lista_de_nomes_de_objetos[1] = "Baleia";
-        lista_de_nomes_de_objetos[2] = "Bolha"; lista_de_nomes_de_objetos[3] = "Peixe";
-        lista_de_nomes_de_objetos[4] = "Nuvem";
-
-        InicializacaoComumATodos();
-
-    }
-
-    
 }
