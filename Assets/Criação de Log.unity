@@ -94,7 +94,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 1011841220}
   - 114: {fileID: 1011841219}
-  - 114: {fileID: 1011841221}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -108,7 +107,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1011841218}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e7c7a920ce22024ba3437381c5b6193, type: 3}
   m_Name: 
@@ -117,7 +116,7 @@ MonoBehaviour:
   inity1: 1
   initx2: 1
   inity2: 2
-  quantasvezes: 100
+  quantos_objetos_criar: 100
 --- !u!4 &1011841220
 Transform:
   m_ObjectHideFlags: 0
@@ -130,17 +129,3 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &1011841221
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1011841218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1686923be1d327439b771139ca26df6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initx: 100
-  inity: 100
-  quantasvezes: 2000
