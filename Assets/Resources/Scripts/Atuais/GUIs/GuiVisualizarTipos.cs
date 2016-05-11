@@ -46,13 +46,8 @@ public class GuiVisualizarTipos : GuiPadrao2 {
         }
     }
 
-    // Use this for initialization
-    void Start () {
-
-        lista_de_nomes_de_objetos = new string[5];
-        lista_de_nomes_de_objetos[0] = "Mouse"; lista_de_nomes_de_objetos[1] = "Baleia";
-        lista_de_nomes_de_objetos[2] = "Bolha"; lista_de_nomes_de_objetos[3] = "Peixe";
-        lista_de_nomes_de_objetos[4] = "Nuvem";
+    public void InicializacaoComumATodos()
+    {
 
         visivel_ou_invisivel = new int[lista_de_nomes_de_objetos.Length];
         for (int i = 0; i < visivel_ou_invisivel.Length; i++)
@@ -69,10 +64,20 @@ public class GuiVisualizarTipos : GuiPadrao2 {
         revelado = true;
         tamanho = 20 * (lista_de_nomes_de_objetos.Length + 1);
 
+
     }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
+    void Start()
+    {
+
+        lista_de_nomes_de_objetos = new string[5];
+        lista_de_nomes_de_objetos[0] = "Mouse"; lista_de_nomes_de_objetos[1] = "Baleia";
+        lista_de_nomes_de_objetos[2] = "Bolha"; lista_de_nomes_de_objetos[3] = "Peixe";
+        lista_de_nomes_de_objetos[4] = "Nuvem";
+
+        InicializacaoComumATodos();
+
+    }
+
+    
 }

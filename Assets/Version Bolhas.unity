@@ -162,8 +162,8 @@ GameObject:
   - 114: {fileID: 1348100979}
   - 114: {fileID: 1348100980}
   - 114: {fileID: 1348100981}
-  - 114: {fileID: 1348100983}
   - 114: {fileID: 1348100982}
+  - 114: {fileID: 1348100983}
   - 114: {fileID: 1348100978}
   m_Layer: 0
   m_Name: Main Camera
@@ -333,7 +333,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1348100971}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2cea355b4c8f5e4fa1bdf23739235fe, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ba62107b280264469fcce211ef009c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   posicao_y: 0
+  lista_de_nomes_de_objetos: []
+  visivel_ou_invisivel: 
+  o_que_escrever_nos_botoes: []
