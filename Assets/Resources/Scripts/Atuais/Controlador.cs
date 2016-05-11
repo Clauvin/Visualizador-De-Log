@@ -561,13 +561,13 @@ public class Controlador : MonoBehaviour {
         SetInteracaoComTiposDeObjetos(nome, true);
     }
 
-    void DeixarObjetosEmEspacoDeTempoInvisiveisEIninteragiveis(int tempo_minimo, int tempo_maximo)
+    public void DeixarObjetosEmEspacoDeTempoInvisiveisEIninteragiveis(int tempo_minimo, int tempo_maximo)
     {
         MudarTransparenciaDeObjetosDeEspacoDeTempoEspecifico(tempo_minimo, tempo_maximo, 0.0f);
         SetInteracaoObjetosDeEspacoDeTempo(tempo_minimo, tempo_maximo, false);
     }
 
-    void DeixarObjetosEmEspacoDeTempoVisiveisEInteragiveis(int tempo_minimo, int tempo_maximo)
+    public void DeixarObjetosEmEspacoDeTempoVisiveisEInteragiveis(int tempo_minimo, int tempo_maximo)
     {
         MudarTransparenciaDeObjetosDeEspacoDeTempoEspecifico(tempo_minimo, tempo_maximo, 1.0f);
         SetInteracaoObjetosDeEspacoDeTempo(tempo_minimo, tempo_maximo, true);
