@@ -444,10 +444,12 @@ public class Controlador : MonoBehaviour {
             if (modo_de_visualizacao == "Heatmap")
             {
                 GetComponent<GuiVisualizarTipos>().EsconderGui();
+                GetComponent<GuiVisualizarPorTempo>().EsconderGui();
                 GetComponent<GuiHeatmap>().RevelarGui();
             }
             else {
                 GetComponent<GuiVisualizarTipos>().RevelarGui();
+                GetComponent<GuiVisualizarPorTempo>().RevelarGui();
                 GetComponent<GuiHeatmap>().EsconderGui();
             }
 
