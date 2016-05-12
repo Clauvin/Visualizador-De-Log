@@ -30,6 +30,44 @@ public class GuiVisualizarPorTempo : GuiPadrao2 {
         else visivel_ou_invisivel = 1;
     }
 
+    void DetectarETratarErrosEExcecoesDeInput(string tempominimo, string tempomaximo)
+    {
+
+        erro_de_input_errado_minimo = false;
+        erro_de_input_errado_maximo = false;
+        erro_de_input_vazio_minimo = false;
+        erro_de_input_vazio_maximo = false;
+        erro_de_maior_que = false;
+        Debug.Log(tempominimo);
+        if (tempominimo == "") { erro_de_input_vazio_minimo = true; }
+        else { erro_de_input_vazio_minimo = false; }
+
+        if (tempomaximo == "") { erro_de_input_vazio_maximo = true; }
+        else erro_de_input_vazio_maximo = false;
+
+        if (!erro_de_input_vazio_minimo)
+        {
+            try { Int32.Parse(tempominimo); erro_de_input_errado_minimo = false; }
+            catch (FormatException fe) { erro_de_input_errado_minimo = true; }
+        }
+
+        if (!erro_de_input_vazio_maximo)
+        {
+            try { Int32.Parse(tempomaximo); erro_de_input_errado_maximo = false; }
+            catch (FormatException fe) { erro_de_input_errado_maximo = true; }
+        }
+
+        if (!(erro_de_input_errado_minimo || erro_de_input_errado_maximo ||
+              erro_de_input_vazio_minimo || erro_de_input_vazio_maximo))
+        {
+            if (Int32.Parse(tempominimo) > Int32.Parse(tempomaximo))
+            {
+                erro_de_maior_que = true;
+            }
+            else { erro_de_maior_que = false; }
+        }
+    }
+
     public override void OnGUI()
     {
         posicao_erro_y = 100;
@@ -43,30 +81,7 @@ public class GuiVisualizarPorTempo : GuiPadrao2 {
             tempomaximo = GUI.TextField(new Rect(0, 80, 210, 20), tempomaximo);
             if (GUI.Button(new Rect(210, 20, 80, 80), o_que_escrever_nos_botoes[visivel_ou_invisivel]))
             {
-                if (tempominimo == "") { erro_de_input_vazio_minimo = true; }
-                else erro_de_input_vazio_minimo = false;
-
-                if (tempomaximo == "") { erro_de_input_vazio_maximo = true; }
-                else erro_de_input_vazio_maximo = false;
-
-                if (!erro_de_input_vazio_minimo) { 
-                    try { Int32.Parse(tempominimo); erro_de_input_errado_minimo = false; }
-                    catch (FormatException fe) { erro_de_input_errado_minimo = true; }
-                }
-
-                if (!erro_de_input_vazio_maximo) { 
-                    try { Int32.Parse(tempomaximo); erro_de_input_errado_maximo = false; }
-                    catch (FormatException fe) { erro_de_input_errado_maximo = true; }
-                }
-
-                if (!(erro_de_input_errado_minimo || erro_de_input_errado_maximo ||
-                      erro_de_input_vazio_minimo || erro_de_input_vazio_maximo))
-                {
-                    if (Int32.Parse(tempominimo) > Int32.Parse(tempomaximo))
-                    {
-                        erro_de_maior_que = true;
-                    } else { erro_de_maior_que = false; }
-                }
+                DetectarETratarErrosEExcecoesDeInput(tempominimo, tempomaximo);
 
                 //Deus abençoe que C# me permite fazer essas comparações em sequência.
                 if (!(erro_de_input_errado_minimo || erro_de_input_errado_maximo || erro_de_maior_que ||
