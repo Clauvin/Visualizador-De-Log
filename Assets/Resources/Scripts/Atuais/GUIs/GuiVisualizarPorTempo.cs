@@ -38,6 +38,8 @@ public class GuiVisualizarPorTempo : GuiPadrao2 {
 
     int posicao_da_mensagem_de_erro_y = 100;
 
+
+
     // bool responsável por fazer o botão dessa GUI alternar entre visível ou invisível
     // Futuramente, pode se tornar desnecessário caso tenhamos dois botões: um pra deixar visível
     // e outro pra deixar invisível.
