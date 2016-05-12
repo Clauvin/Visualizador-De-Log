@@ -186,9 +186,11 @@ public class GuiVisualizarPorTempo : GuiPadrao2 {
             GUI.BeginGroup(new Rect(posx, posy, 290, 180));
             GUI.TextField(new Rect(0, 0, 290, 20), "Invisibilidade de Espaço de Tempo");
             GUI.Label(new Rect(0, 20, 210, 20), "Tempo Mínimo", "textfield");
-            tempo_minimo = GUI.TextField(new Rect(0, 40, 210, 20), tempo_minimo);
+            if (visivel_ou_invisivel == 1) tempo_minimo = GUI.TextField(new Rect(0, 40, 210, 20), tempo_minimo);
+            else GUI.Label(new Rect(0, 40, 210, 20), tempo_minimo, "textfield");
             GUI.Label(new Rect(0, 60, 210, 20), "Tempo Máximo", "textfield");
-            tempo_maximo = GUI.TextField(new Rect(0, 80, 210, 20), tempo_maximo);
+            if (visivel_ou_invisivel == 1) tempo_maximo = GUI.TextField(new Rect(0, 80, 210, 20), tempo_maximo);
+            else GUI.Label(new Rect(0, 80, 210, 20), tempo_maximo, "textfield");
             if (GUI.Button(new Rect(210, 20, 80, 80), o_que_escrever_nos_botoes[visivel_ou_invisivel]))
             {
                 DetectarETratarErrosEExcecoesDeInput(tempo_minimo, tempo_maximo);
