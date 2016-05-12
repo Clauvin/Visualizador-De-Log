@@ -58,40 +58,37 @@ public class GuiVisualizarPorTempo : GuiPadrao2 {
 
         if (tempo_maximo == "") { erro_de_input_vazio_maximo = true; }
 
-        if(!(erro_de_input_vazio_minimo || erro_de_input_vazio_maximo))
-        {
-            long long_minimo = long.Parse(tempo_minimo, NumberStyles.AllowThousands | NumberStyles.AllowLeadingSign);
-            long long_maximo = long.Parse(tempo_maximo, NumberStyles.AllowThousands | NumberStyles.AllowLeadingSign);
-            if (long_minimo < Int32.MinValue)
-            {
-                erro_de_input_minimo_menor_que_limite_minimo = true;
-            }
-            if (long_minimo > Int32.MaxValue)
-            {
-                erro_de_input_minimo_maior_que_limite_maximo = true;
-            }
-            if (long_maximo > Int32.MinValue)
-            {
-                erro_de_input_maximo_menor_que_limite_minimo = true;
-            }
-            if (long_maximo > Int32.MaxValue)
-            {
-                erro_de_input_maximo_maior_que_limite_maximo = true;
-            }
-        }
-
-        if (!(erro_de_input_vazio_minimo ||
-              erro_de_input_minimo_menor_que_limite_minimo || erro_de_input_minimo_maior_que_limite_maximo))
+        if (!erro_de_input_vazio_minimo)
         {
             try { Int32.Parse(tempo_minimo); }
             catch (FormatException fe) { erro_de_input_errado_minimo = true; }
+            catch (OverflowException oe) {
+                long long_minimo = long.Parse(tempo_minimo, NumberStyles.AllowThousands | NumberStyles.AllowLeadingSign);
+                if (long_minimo < Int32.MinValue)
+                {
+                    erro_de_input_minimo_menor_que_limite_minimo = true;
+                } else if (long_minimo > Int32.MaxValue)
+                {
+                    erro_de_input_minimo_maior_que_limite_maximo = true;
+                }
+            }
         }
 
-        if (!(erro_de_input_vazio_maximo ||
-              erro_de_input_maximo_menor_que_limite_minimo || erro_de_input_maximo_maior_que_limite_maximo))
+        if (!erro_de_input_vazio_maximo)
         {
             try { Int32.Parse(tempo_maximo); }
             catch (FormatException fe) { erro_de_input_errado_maximo = true; }
+            catch (OverflowException oe) {
+                long long_maximo = long.Parse(tempo_maximo, NumberStyles.AllowThousands | NumberStyles.AllowLeadingSign);
+
+                if (long_maximo < Int32.MinValue)
+                {
+                    erro_de_input_maximo_menor_que_limite_minimo = true;
+                } else if (long_maximo > Int32.MaxValue)
+                {
+                    erro_de_input_maximo_maior_que_limite_maximo = true;
+                }
+            }
         }
 
         if (!(erro_de_input_errado_minimo || erro_de_input_errado_maximo ||
@@ -133,13 +130,26 @@ public class GuiVisualizarPorTempo : GuiPadrao2 {
         {
             // Sim, eu me dou o direito de apontar isso, porquê quem vai colocar o tempo ABSURDAMENTE
             // menor que zero?!
-            GUI.Label(new Rect(0, posicao_erro_y, 210, 40), "... por favor. Você fez isso de propósito.", "textfield");
+            GUI.Label(new Rect(0, posicao_erro_y, 210, 40), "... por favor. Você fez isso\n" +"de propósito.", "textfield");
+            posicao_erro_y += 40;
+        }
+        if (erro_de_input_minimo_maior_que_limite_maximo)
+        {
+            // Sim, eu me dou o direito de apontar isso, porquê quem vai colocar o tempo ABSURDAMENTE
+            // menor que zero?!
+            GUI.Label(new Rect(0, posicao_erro_y, 210, 40), "...tempo mínimo não pode\n" + "ultrapassar 2147483647.", "textfield");
+            posicao_erro_y += 40;
+        }
+        if (erro_de_input_maximo_menor_que_limite_minimo)
+        {
+
+            GUI.Label(new Rect(0, posicao_erro_y, 210, 40), "... por favor. Você COM CERTEZA fez\n" + "isso de propósito.", "textfield");
             posicao_erro_y += 40;
         }
         if (erro_de_input_maximo_maior_que_limite_maximo)
         {
 
-            GUI.Label(new Rect(0, posicao_erro_y, 210, 40), "...tempo máximo não pode ultrapassar 2147483647.", "textfield");
+            GUI.Label(new Rect(0, posicao_erro_y, 210, 40), "...tempo máximo não pode\n" + "ultrapassar 2147483647.", "textfield");
             posicao_erro_y += 40;
         }
         if (erro_de_maior_que)
