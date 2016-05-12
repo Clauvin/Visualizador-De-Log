@@ -117,12 +117,14 @@ public class GuiVisualizarPorTempo : GuiPadrao2 {
     {
         if (erro_de_input_errado_minimo)
         {
-            GUI.Label(new Rect(0, posicao_da_mensagem_de_erro_y, 210, 40), "Valor mínimo precisa ser de\n" + "apenas números.", "textfield");
+            GUI.Label(new Rect(0, posicao_da_mensagem_de_erro_y, 210, 40), "Valor mínimo precisa ser de\n"
+                                                                           + "apenas números.", "textfield");
             posicao_da_mensagem_de_erro_y += 40;
         }
         if (erro_de_input_errado_maximo)
         {
-            GUI.Label(new Rect(0, posicao_da_mensagem_de_erro_y, 210, 40), "Valor máximo precisa ser de\n" + "apenas números.", "textfield");
+            GUI.Label(new Rect(0, posicao_da_mensagem_de_erro_y, 210, 40), "Valor máximo precisa ser de\n"
+                                                                           + "apenas números.", "textfield");
             posicao_da_mensagem_de_erro_y += 40;
         }
         if (erro_de_input_vazio_minimo)
@@ -139,31 +141,36 @@ public class GuiVisualizarPorTempo : GuiPadrao2 {
         {
             // Sim, eu me dou o direito de apontar isso, porquê quem vai colocar o tempo ABSURDAMENTE
             // menor que zero?!
-            GUI.Label(new Rect(0, posicao_da_mensagem_de_erro_y, 210, 40), "... por favor. Você fez isso\n" +"de propósito.", "textfield");
+            GUI.Label(new Rect(0, posicao_da_mensagem_de_erro_y, 210, 40), "... por favor. Você fez isso\n" + 
+                                                                           "de propósito.", "textfield");
             posicao_da_mensagem_de_erro_y += 40;
         }
         if (erro_de_input_minimo_maior_que_limite_maximo)
         {
             // Sim, eu me dou o direito de apontar isso, porquê quem vai colocar o tempo ABSURDAMENTE
             // menor que zero?!
-            GUI.Label(new Rect(0, posicao_da_mensagem_de_erro_y, 210, 40), "...tempo mínimo não pode\n" + "ultrapassar 2147483647.", "textfield");
+            GUI.Label(new Rect(0, posicao_da_mensagem_de_erro_y, 210, 40), "...tempo mínimo não pode\n" +
+                                                                           "ultrapassar 2147483647.", "textfield");
             posicao_da_mensagem_de_erro_y += 40;
         }
         if (erro_de_input_maximo_menor_que_limite_minimo)
         {
 
-            GUI.Label(new Rect(0, posicao_da_mensagem_de_erro_y, 210, 40), "... por favor. Você COM CERTEZA fez\n" + "isso de propósito.", "textfield");
+            GUI.Label(new Rect(0, posicao_da_mensagem_de_erro_y, 210, 40), "... por favor. Você COM CERTEZA fez\n"
+                                                                           + "isso de propósito.", "textfield");
             posicao_da_mensagem_de_erro_y += 40;
         }
         if (erro_de_input_maximo_maior_que_limite_maximo)
         {
 
-            GUI.Label(new Rect(0, posicao_da_mensagem_de_erro_y, 210, 40), "...tempo máximo não pode\n" + "ultrapassar 2147483647.", "textfield");
+            GUI.Label(new Rect(0, posicao_da_mensagem_de_erro_y, 210, 40), "...tempo máximo não pode\n"
+                                                                           + "ultrapassar 2147483647.", "textfield");
             posicao_da_mensagem_de_erro_y += 40;
         }
         if (erro_de_maior_que)
         {
-            GUI.Label(new Rect(0, posicao_da_mensagem_de_erro_y, 210, 40), "Valor mínimo tem que ser\n" + "menor que o máximo.", "textfield");
+            GUI.Label(new Rect(0, posicao_da_mensagem_de_erro_y, 210, 40), "Valor mínimo tem que ser\n"
+                                                                           + "menor que o máximo.", "textfield");
         }
     }
 
@@ -184,7 +191,7 @@ public class GuiVisualizarPorTempo : GuiPadrao2 {
         if (revelado)
         {
             GUI.BeginGroup(new Rect(posx, posy, 290, 180));
-            GUI.TextField(new Rect(0, 0, 290, 20), "Invisibilidade de Espaço de Tempo");
+            GUI.TextField(new Rect(0, 0, 290, 20), "Invisibilidade de Objetos em Espaço de Tempo", "textfield");
             GUI.Label(new Rect(0, 20, 210, 20), "Tempo Mínimo", "textfield");
             if (visivel_ou_invisivel == 1) tempo_minimo = GUI.TextField(new Rect(0, 40, 210, 20), tempo_minimo);
             else GUI.Label(new Rect(0, 40, 210, 20), tempo_minimo, "textfield");
@@ -230,6 +237,8 @@ public class GuiVisualizarPorTempo : GuiPadrao2 {
         o_que_escrever_nos_botoes = new string[2];
         o_que_escrever_nos_botoes[0] = "Apertar\npara\nvisível";
         o_que_escrever_nos_botoes[1] = "Apertar\npara\ninvisível";
+
+        
     }
 	
 	// Update is called once per frame
