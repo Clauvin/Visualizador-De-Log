@@ -15,6 +15,7 @@ public class NovoLeitorBolhas : NovoLeitor2
         {
             CriarIniDeUltimaPaginaChecada(endereco_de_arquivo);
             StartBolhas();
+            //LoadStuffBolhas(10, 30);
             LoadStuffBolhas();
             CreateStuffBolhas();
             GetComponent<Controlador>().InicializacaoBolhas();
