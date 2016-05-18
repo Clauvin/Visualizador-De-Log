@@ -338,7 +338,7 @@ public class NovoLeitor2 : MonoBehaviour
 
     }
 
-    public void CreateStuffFIT(int tempo_minimo = 0, int tempo_maximo = int.MaxValue)
+    public void CreateStuffFIT()
     {
         Camera acamera = FindObjectOfType<Camera>();
         GameObject objeto = null;
