@@ -13,6 +13,10 @@ public class GuiTelaDePreLoad : GuiPadrao2
     private int resultado = -1;
     private string[] toolbarStrings = { "Escolher Outro Log", "Visualizar Log",
                                         "Retornar Para Tela Título" };
+    protected string tempo_minimo = "Apenas números >= a 0 aqui.";
+    protected string tempo_maximo = "Apenas números >= a 0 aqui.";
+    protected int tempo_minimo_convertido;
+    protected int tempo_maximo_convertido;
 
     private bool creditos = false;
 
@@ -27,6 +31,11 @@ public class GuiTelaDePreLoad : GuiPadrao2
 
         GUI.Label(new Rect(Screen.width / 4, Screen.height / 2 - 20, Screen.width / 2, 20), "Nome do Arquivo de Log");
         GUI.Label(new Rect(Screen.width / 4, Screen.height / 2, Screen.width / 2, 20), "Aqui fica o texto", "textfield");
+        GUI.Label(new Rect(Screen.width / 4, Screen.height / 2 + 20, 120, 20), "Tempo Mínimo", "textfield");
+        GUI.Label(new Rect(Screen.width / 2, Screen.height / 2 + 20, 120, 20), "Tempo Máximo", "textfield");
+        tempo_minimo = GUI.TextArea(new Rect(Screen.width / 4, Screen.height / 2 + 40, 240, 20), tempo_minimo);
+        tempo_maximo = GUI.TextArea(new Rect(Screen.width / 2, Screen.height / 2 + 40, 240, 20), tempo_maximo);
+
 
         resultado = GUI.Toolbar(new Rect(Screen.width / 12 * 3, Screen.height / 10 * 8, Screen.width / 12 * 6, Screen.height / 10), qualbotao,
             toolbarStrings);
