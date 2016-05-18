@@ -51,22 +51,4 @@ public class GuiBolhasTempo : GuiTempo
     {
 
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (gambiarra)
-        {
-            posinicialcamera = GetComponent<Camera>().transform.position.y;
-            gambiarra = false;
-        }
-
-        postempofloat = (posinicialcamera - GetComponent<Camera>().transform.position.y) / 20;
-        if (GetComponent<Controlador>().modo_de_visualizacao == "Um Frame De Cada Vez em 2D")
-        {
-            postempofloat += 0.25f;
-        }
-        postempo = (int)postempofloat;
-        if (postempo < 0) postempo = 0;
-    }
 }
