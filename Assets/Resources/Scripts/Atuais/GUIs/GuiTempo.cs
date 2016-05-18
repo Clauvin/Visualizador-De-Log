@@ -22,6 +22,7 @@ public class GuiTempo : GuiPadrao2
     protected float posinicialcamera;
     protected float postempofloat;
     protected int postempo;
+    protected int tempo_inicial;
 
 
     public GuiTempo()
@@ -110,8 +111,10 @@ public class GuiTempo : GuiPadrao2
     }
 
     // Use this for initialization
-    public void Start()
+    void Start()
     {
+
+        tempo_inicial = GetComponent<NovoLeitor2>().GetPrimeiroTempo();
 
     }
 
@@ -124,7 +127,7 @@ public class GuiTempo : GuiPadrao2
             gambiarra = false;
         }
 
-        postempofloat = (posinicialcamera - GetComponent<Camera>().transform.position.y) / 20;
+        postempofloat = (posinicialcamera - GetComponent<Camera>().transform.position.y) / 20 + tempo_inicial;
         if (GetComponent<Controlador>().modo_de_visualizacao == "Um Frame De Cada Vez em 2D")
         {
             postempofloat += 0.25f;
@@ -132,4 +135,6 @@ public class GuiTempo : GuiPadrao2
         postempo = (int)postempofloat;
         if (postempo < 0) postempo = 0;
     }
+
+
 }
