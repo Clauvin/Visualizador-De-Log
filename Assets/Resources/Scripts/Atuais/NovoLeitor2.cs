@@ -96,7 +96,7 @@ public class NovoLeitor2 : MonoBehaviour
         return Checagem(endereco_de_arquivo);
     }
 
-    public bool LoadStuffFIT(int tempo_minimo = 0, int tempo_maximo = int.MaxValue)
+    public bool LoadStuffFIT(/*int tempo_minimo = 0, int tempo_maximo = int.MaxValue*/)
     {
         //number for number of HeatMaps
         int heatmaps = 1;
@@ -135,8 +135,8 @@ public class NovoLeitor2 : MonoBehaviour
                     entry_time = entries[0].Split(':');
                     checando_tempo_do_log = Convert.ToInt32(entry_time[1]);
                     
-                    if ((tempo_minimo <= checando_tempo_do_log) && (checando_tempo_do_log <= tempo_maximo))
-                    {
+                    /*if ((tempo_minimo <= checando_tempo_do_log) && (checando_tempo_do_log <= tempo_maximo))*/
+                    //{
                         entry_char = entries[1].Split(':');
                         entry_grid_x = entries[2].Split(':');
                         entry_grid_y = entries[3].Split(':');
@@ -145,7 +145,7 @@ public class NovoLeitor2 : MonoBehaviour
                                 Int32.Parse(entry_grid_x[1]), Int32.Parse(entry_grid_y[1]));
 
                         if (Int32.Parse(entry_char[1]) == heatmaps) heatmaps++;
-                    }
+                    //}
                 }
 
 #if (DEBUG)
@@ -338,7 +338,7 @@ public class NovoLeitor2 : MonoBehaviour
 
     }
 
-    public void CreateStuffFIT()
+    public void CreateStuffFIT(int tempo_minimo = 0, int tempo_maximo = int.MaxValue)
     {
         Camera acamera = FindObjectOfType<Camera>();
         GameObject objeto = null;
@@ -798,6 +798,23 @@ public class NovoLeitor2 : MonoBehaviour
 
         }
         
+    }
+
+    public int GetPrimeiroTempo()
+    {
+        if (qual_leitor == "FIT") return GetPrimeiroTempoFIT();
+        else if (qual_leitor == "Bolhas") return GetPrimeiroTempoBolhas();
+        else return 0;
+    }
+
+    public int GetPrimeiroTempoFIT()
+    {
+        return bd_fit.GetTempo(0);
+    }
+
+    public int GetPrimeiroTempoBolhas()
+    {
+        return bd_bolhas.GetTempo(0);
     }
 
     public int GetUltimoTempo()
