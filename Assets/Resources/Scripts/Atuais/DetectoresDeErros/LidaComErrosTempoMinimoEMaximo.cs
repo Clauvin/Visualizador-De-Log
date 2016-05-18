@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DetectaErrosTempoMinimoEMaximo : MonoBehaviour {
+public class LidaComErrosTempoMinimoEMaximo : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
