@@ -96,14 +96,13 @@ public class NovoLeitor2 : MonoBehaviour
         return Checagem(endereco_de_arquivo);
     }
 
-    public bool LoadStuffFIT()
+    public bool LoadStuffFIT(int tempo_minimo = 0, int tempo_maximo = int.MaxValue)
     {
         //number for number of HeatMaps
         int heatmaps = 1;
 
         // Handle any problems that might arise when reading the text
         string line;
-
 
         bd_fit = new BancoDeDadosFIT();
         // Create a new StreamReader, tell it which file to read and what encoding the file
@@ -122,6 +121,7 @@ public class NovoLeitor2 : MonoBehaviour
             string[] entry_char;
             string[] entry_grid_x;
             string[] entry_grid_y;
+            int checando_tempo_do_log;
 
             line = theReader.ReadLine();
 
@@ -133,14 +133,19 @@ public class NovoLeitor2 : MonoBehaviour
                 if (entries.Length == 4)
                 {
                     entry_time = entries[0].Split(':');
-                    entry_char = entries[1].Split(':');
-                    entry_grid_x = entries[2].Split(':');
-                    entry_grid_y = entries[3].Split(':');
+                    checando_tempo_do_log = Convert.ToInt32(entry_time[1]);
+                    
+                    if ((tempo_minimo <= checando_tempo_do_log) && (checando_tempo_do_log <= tempo_maximo))
+                    {
+                        entry_char = entries[1].Split(':');
+                        entry_grid_x = entries[2].Split(':');
+                        entry_grid_y = entries[3].Split(':');
 
-                    bd_fit.Add(Int32.Parse(entry_time[1]), Int32.Parse(entry_char[1]),
-                            Int32.Parse(entry_grid_x[1]), Int32.Parse(entry_grid_y[1]));
+                        bd_fit.Add(Int32.Parse(entry_time[1]), Int32.Parse(entry_char[1]),
+                                Int32.Parse(entry_grid_x[1]), Int32.Parse(entry_grid_y[1]));
 
-                    if (Int32.Parse(entry_char[1]) == heatmaps) heatmaps++;
+                        if (Int32.Parse(entry_char[1]) == heatmaps) heatmaps++;
+                    }
                 }
 
 #if (DEBUG)
