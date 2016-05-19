@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.IO;
+using System;
 
 /// <summary>
 /// Classe GuiTelaDePreLoad. Responsável por definir a tela de pré-load de log.
@@ -23,6 +25,8 @@ public class GuiTelaDePreLoad : GuiPadrao2
     protected PegarEnderecoDeLog pegar_endereco_do_log;
     protected string endereco = "Aqui ficará o endereço do log.";
     protected string nome_do_arquivo = "Nome do Arquivo de Log";
+
+    // tudo abaixo é para a leitura do tempo mínimo e máximo do log.
 
     public override void OnGUI()
     {
@@ -53,9 +57,24 @@ public class GuiTelaDePreLoad : GuiPadrao2
                     endereco = pegar_endereco_do_log.endereco_de_arquivo;
                     nome_do_arquivo = pegar_endereco_do_log.GetNomeDeArquivoDeLog();
 
+                    // Create a new StreamReader, tell it which file to read and what encoding the file
+                    // was saved as
+                    FileStream fs = new FileStream(pegar_endereco_do_log.endereco_de_arquivo, FileMode.Open);
+                    StreamReader theReader = new StreamReader(fs);
 
+                    // Parte 1: ignora o [Mode 01]
+                    string line = theReader.ReadLine();
+
+                    // Lê a primeira linha com dados do pre-load do FIT.
+                    line = theReader.ReadLine();
+
+                    string[] entries = line.Split('=');
+
+                    if (entries.Length == 4)
+                    {
+                        tempo_minimo = entries[0].Split(':')[1];
+                    }
                 }
-                
                 break;
             // Vai para o visualizador do FITs
             case 1:
