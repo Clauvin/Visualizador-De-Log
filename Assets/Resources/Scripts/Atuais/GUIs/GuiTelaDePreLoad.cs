@@ -25,6 +25,7 @@ public class GuiTelaDePreLoad : GuiPadrao2
     protected PegarEnderecoDeLog pegar_endereco_do_log;
     protected string endereco = "Aqui ficará o endereço do log.";
     protected string nome_do_arquivo = "Nome do Arquivo de Log";
+    LidaComErrosTempoMinimoEMaximo lida_com_erros_min_e_max;
 
     // todas as variáveis abaixo são para a leitura do tempo mínimo e máximo do log.
     FileStream fs;
@@ -105,7 +106,18 @@ public class GuiTelaDePreLoad : GuiPadrao2
                 break;
             // Vai para o visualizador do FITs
             case 1:
-                UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+
+                lida_com_erros_min_e_max.DetectarETratarErrosEExcecoesDeInput(tempo_minimo, tempo_maximo);
+
+                if (lida_com_erros_min_e_max.NaoTemosErrosDeInput())
+                {
+
+                } else
+                {
+                    lida_com_erros_min_e_max.PossiveisMensagensDeErro();
+                }
+
+                //UnityEngine.SceneManagement.SceneManager.LoadScene(1);
                 break;
             // Retorna para a tela título
             case 2:
@@ -133,6 +145,7 @@ public class GuiTelaDePreLoad : GuiPadrao2
         estilo_botoes_tela_de_preload.font = Font.CreateDynamicFontFromOSFont("Verdana", 10);
 
         pegar_endereco_do_log = new PegarEnderecoDeLog();
+        lida_com_erros_min_e_max = new LidaComErrosTempoMinimoEMaximo();
     }
 
     // Update is called once per frame
