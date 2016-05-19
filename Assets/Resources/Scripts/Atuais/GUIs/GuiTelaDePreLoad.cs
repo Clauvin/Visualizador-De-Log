@@ -22,6 +22,7 @@ public class GuiTelaDePreLoad : GuiPadrao2
 
     protected PegarEnderecoDeLog pegar_endereco_do_log;
     protected string endereco = "Aqui ficará o endereço do log.";
+    protected string nome_do_arquivo = "Nome do Arquivo de Log";
 
     public override void OnGUI()
     {
@@ -32,7 +33,7 @@ public class GuiTelaDePreLoad : GuiPadrao2
         GUI.Box(new Rect(Screen.width / 4, Screen.height / 9, Screen.width / 2, Screen.height / 4), "Escolha de Log do FIT\n" +
             "e Tempo Carregado do Log", estilo_titulo_tela_de_preload);
 
-        GUI.Label(new Rect(Screen.width / 4, Screen.height / 2 - 20, Screen.width / 2, 20), "Nome do Arquivo de Log");
+        GUI.Label(new Rect(Screen.width / 4, Screen.height / 2 - 20, Screen.width / 2, 20), nome_do_arquivo);
         GUI.Label(new Rect(Screen.width / 4, Screen.height / 2, Screen.width / 2, 20), endereco, "textfield");
         GUI.Label(new Rect(Screen.width / 4, Screen.height / 2 + 20, 120, 20), "Tempo Mínimo", "textfield");
         GUI.Label(new Rect(Screen.width / 2, Screen.height / 2 + 20, 120, 20), "Tempo Máximo", "textfield");
@@ -47,8 +48,12 @@ public class GuiTelaDePreLoad : GuiPadrao2
         {
             // Vai para o loading do FIT
             case 0:
-                pegar_endereco_do_log.FindFile();
-                endereco = pegar_endereco_do_log.endereco_de_arquivo;
+                if (pegar_endereco_do_log.FindFile())
+                {
+                    endereco = pegar_endereco_do_log.endereco_de_arquivo;
+                    nome_do_arquivo = pegar_endereco_do_log.GetNomeDeArquivoDeLog();
+                }
+                
                 break;
             // Vai para o visualizador do FITs
             case 1:

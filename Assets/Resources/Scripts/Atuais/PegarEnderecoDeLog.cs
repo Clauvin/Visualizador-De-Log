@@ -33,6 +33,17 @@ public class PegarEnderecoDeLog : MonoBehaviour {
         return AExtensaoETxt(endereco_de_arquivo);
     }
 
+    public string GetNomeDeArquivoDeLog()
+    {
+        string nome_final;
+        string[] endereco_separado = endereco_de_arquivo.Split('/');
+
+        nome_final = endereco_separado[endereco_separado.GetUpperBound(0)];
+
+        return nome_final;
+
+    }
+
     //MELHORAR: No futuro, que hajam dois arquivos. Um para a posição do log do F!T e outro para a posição do log do Bolhas
     public void CriarIniDeUltimoLogChecado(string enderecotodo)
     {
