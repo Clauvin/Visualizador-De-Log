@@ -13,7 +13,7 @@ public class NovoLeitorBolhas : NovoLeitor2
         NovoLeitor2Init();
         if (pegar_endereco_de_log.FindFile())
         {
-            pegar_endereco_de_log.CriarIniDeUltimaPaginaChecada(pegar_endereco_de_log.endereco_de_arquivo);
+            pegar_endereco_de_log.CriarIniDeUltimoLogChecado(pegar_endereco_de_log.endereco_de_arquivo);
             StartBolhas();
             //LoadStuffBolhas(10, 30);
             LoadStuffBolhas();

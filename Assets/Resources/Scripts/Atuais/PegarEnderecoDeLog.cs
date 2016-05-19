@@ -11,7 +11,7 @@ public class PegarEnderecoDeLog : MonoBehaviour {
 
     public string endereco_de_arquivo;
 
-    private bool Checagem(string endereco)
+    private bool AExtensaoETxt(string endereco)
     {
         string[] checagem;
         string extensao;
@@ -28,35 +28,35 @@ public class PegarEnderecoDeLog : MonoBehaviour {
     {
 
         //Abre uma janela de procurar arquivos .txt para abrir.
-        endereco_de_arquivo = EditorUtility.OpenFilePanel("Teste", CarregarEnderecoDeUltimaPaginaChecada(), "txt");
+        endereco_de_arquivo = EditorUtility.OpenFilePanel("Teste", CarregarEnderecoDeUltimoLogChecado(), "txt");
 
-        return Checagem(endereco_de_arquivo);
+        return AExtensaoETxt(endereco_de_arquivo);
     }
 
     //MELHORAR: No futuro, que hajam dois arquivos. Um para a posição do log do F!T e outro para a posição do log do Bolhas
-    public void CriarIniDeUltimaPaginaChecada(string enderecotodo)
+    public void CriarIniDeUltimoLogChecado(string enderecotodo)
     {
         // Handle any problems that might arise when reading the text
 
-        string posicaodoarquivo = Path.GetFullPath("local.ini");
+        string posicao_do_arquivo = Path.GetFullPath("local.ini");
         FileStream fs;
         StreamWriter sw;
 
-        string[] enderecoseparado;
-        string enderecomodificado = "";
+        string[] endereco_separado;
+        string endereco_modificado = "";
 
-        enderecoseparado = enderecotodo.Split('/');
-        for (int i = 0; i < enderecoseparado.GetUpperBound(0); i++)
+        endereco_separado = enderecotodo.Split('/');
+        for (int i = 0; i < endereco_separado.GetUpperBound(0); i++)
         {
-            enderecomodificado += enderecoseparado[i];
-            enderecomodificado += "/";
+            endereco_modificado += endereco_separado[i];
+            endereco_modificado += "/";
         }
 
         // Create a new StreamReader, tell it which file to read and what encoding the file
         // was saved as
-        fs = File.Create(posicaodoarquivo);
+        fs = File.Create(posicao_do_arquivo);
         sw = new StreamWriter(fs);
-        sw.Write(enderecomodificado);
+        sw.Write(endereco_modificado);
 
         sw.Dispose();
         sw.Close();
@@ -65,18 +65,18 @@ public class PegarEnderecoDeLog : MonoBehaviour {
 
     }
 
-    public string CarregarEnderecoDeUltimaPaginaChecada()
+    public string CarregarEnderecoDeUltimoLogChecado()
     {
         FileStream fs = null;
         StreamReader sr = null;
         string saida;
 
 
-        string posicaodoarquivo = Path.GetFullPath("local.ini");
+        string posicao_do_arquivo = Path.GetFullPath("local.ini");
         // Handle any problems that might arise when reading the text
-        if (File.Exists(posicaodoarquivo))
+        if (File.Exists(posicao_do_arquivo))
         {
-            fs = File.Open(posicaodoarquivo, FileMode.Open);
+            fs = File.Open(posicao_do_arquivo, FileMode.Open);
             sr = new StreamReader(fs);
             saida = sr.ReadLine();
             sr.Dispose();
