@@ -46,12 +46,14 @@ public class GuiTelaDePreLoad : GuiPadrao2
 
         switch (resultado)
         {
-            // Vai para o loading do FIT
+            // Abre a janela do FIT de escolher arquivo, e lê do arquivo escolhido seu tempo inicial e final.
             case 0:
                 if (pegar_endereco_do_log.FindFile())
                 {
                     endereco = pegar_endereco_do_log.endereco_de_arquivo;
                     nome_do_arquivo = pegar_endereco_do_log.GetNomeDeArquivoDeLog();
+
+
                 }
                 
                 break;
