@@ -31,7 +31,7 @@ public class NovoLeitor2 : MonoBehaviour
 
     GameObject heatmap;
 
-    protected string endereco_de_arquivo;
+    protected PegarEnderecoDeLog pegar_endereco_de_log;
 
     public string[] lista_de_nomes_de_objetos_do_FIT = { "1", "2", "3", "4" };
     public string[] lista_de_nomes_de_objetos_do_bolhas = { "Mouse", "Baleia", "Bolha", "Peixe", "Nuvem" };
@@ -87,15 +87,6 @@ public class NovoLeitor2 : MonoBehaviour
         texturas_selecionadas.Add("Nuvem", (Texture2D)Resources.Load("Texturas/Nuvem Clicada"));
     }
 
-    public bool FindFile()
-    {
-
-        //Abre uma janela de procurar arquivos .txt para abrir.
-        endereco_de_arquivo = EditorUtility.OpenFilePanel("Teste", CarregarEnderecoDeUltimaPaginaChecada(), "txt");
-
-        return Checagem(endereco_de_arquivo);
-    }
-
     public bool LoadStuffFIT(int tempo_minimo = 0, int tempo_maximo = int.MaxValue)
     {
         //number for number of HeatMaps
@@ -107,7 +98,7 @@ public class NovoLeitor2 : MonoBehaviour
         bd_fit = new BancoDeDadosFIT();
         // Create a new StreamReader, tell it which file to read and what encoding the file
         // was saved as
-        FileStream fs = new FileStream(endereco_de_arquivo, FileMode.Open);
+        FileStream fs = new FileStream(pegar_endereco_de_log.endereco_de_arquivo, FileMode.Open);
         StreamReader theReader = new StreamReader(fs);
         // Part 1: ignores the [Mode 01]
         line = theReader.ReadLine();
@@ -187,7 +178,7 @@ public class NovoLeitor2 : MonoBehaviour
         // Create a new StreamReader, tell it which file to read and what encoding the file
         // was saved as
         bd_bolhas = new BancoDeDadosBolhas();
-        FileStream fs = new FileStream(endereco_de_arquivo, FileMode.Open);
+        FileStream fs = new FileStream(pegar_endereco_de_log.endereco_de_arquivo, FileMode.Open);
         StreamReader theReader = new StreamReader(fs);
 
         // Part 1: ignores the [Mode Bolhas]
@@ -839,81 +830,6 @@ public class NovoLeitor2 : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 
-    private bool Checagem(string endereco)
-    {
-        string[] checagem;
-        string extensao;
-
-        checagem = endereco_de_arquivo.Split('/');
-        if (checagem[0] == string.Empty) return false;
-        extensao = checagem[checagem.GetUpperBound(0)].Split('.')[1];
-
-        if (extensao == "txt") return true;
-        else return false;
-    }
-
-    //MELHORAR: No futuro, que hajam dois arquivos. Um para a posição do log do F!T e outro para a posição do log do Bolhas
-    public void CriarIniDeUltimaPaginaChecada(string enderecotodo)
-    {
-        // Handle any problems that might arise when reading the text
-        
-        string posicaodoarquivo = Path.GetFullPath("local.ini");
-        FileStream fs;
-        StreamWriter sw;
-
-        string[] enderecoseparado;
-        string enderecomodificado = "";
-
-        enderecoseparado = enderecotodo.Split('/');
-        for (int i = 0; i < enderecoseparado.GetUpperBound(0); i++)
-        {
-            enderecomodificado += enderecoseparado[i];
-            enderecomodificado += "/";
-        }
-
-        // Create a new StreamReader, tell it which file to read and what encoding the file
-        // was saved as
-        fs = File.Create(posicaodoarquivo);
-        sw = new StreamWriter(fs);
-        sw.Write(enderecomodificado);
-
-        sw.Dispose();
-        sw.Close();
-        fs.Dispose();
-        fs.Close();
-        
-    }
-
-    public string CarregarEnderecoDeUltimaPaginaChecada()
-    {
-        FileStream fs = null;
-        StreamReader sr = null;
-        string saida;
-
-
-        string posicaodoarquivo = Path.GetFullPath("local.ini");
-        // Handle any problems that might arise when reading the text
-        if (File.Exists(posicaodoarquivo))
-        {
-            fs = File.Open(posicaodoarquivo, FileMode.Open);
-            sr = new StreamReader(fs);
-            saida = sr.ReadLine();
-            sr.Dispose();
-            sr.Close();
-            fs.Dispose();
-            fs.Close();
-
-        }
-        else
-        {
-            saida = Path.GetFullPath("path");
-            saida = saida.Split('/')[0] + "/";
-        }
-
-        return saida;
-
-    }
-
     public void NovoLeitor2Init()
     {
         resolucao = new Vector2();
@@ -925,6 +841,7 @@ public class NovoLeitor2 : MonoBehaviour
         lista_de_objetos = new ArrayList();
         lista_de_backgrounds = new ArrayList();
         matrizes_dos_heatmaps = new ArrayList();
+        pegar_endereco_de_log = new PegarEnderecoDeLog();
     }
     
 }

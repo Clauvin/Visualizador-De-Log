@@ -10,9 +10,9 @@ public class NovoLeitorFIT : NovoLeitor2 {
     void Start()
     {
         NovoLeitor2Init();
-        if (FindFile())
+        if (pegar_endereco_de_log.FindFile())
         {
-            CriarIniDeUltimaPaginaChecada(endereco_de_arquivo);
+            pegar_endereco_de_log.CriarIniDeUltimaPaginaChecada(pegar_endereco_de_log.endereco_de_arquivo);
             StartFIT();
             LoadStuffFIT();
             CreateStuffFIT();
