@@ -26,7 +26,11 @@ public class GuiTelaDePreLoad : GuiPadrao2
     protected string endereco = "Aqui ficará o endereço do log.";
     protected string nome_do_arquivo = "Nome do Arquivo de Log";
 
-    // tudo abaixo é para a leitura do tempo mínimo e máximo do log.
+    // todas as variáveis abaixo são para a leitura do tempo mínimo e máximo do log.
+    FileStream fs;
+    StreamReader theReader;
+    string line; string control_line;
+    string[] entries;
 
     public override void OnGUI()
     {
@@ -59,21 +63,44 @@ public class GuiTelaDePreLoad : GuiPadrao2
 
                     // Create a new StreamReader, tell it which file to read and what encoding the file
                     // was saved as
-                    FileStream fs = new FileStream(pegar_endereco_do_log.endereco_de_arquivo, FileMode.Open);
-                    StreamReader theReader = new StreamReader(fs);
+                    fs = new FileStream(pegar_endereco_do_log.endereco_de_arquivo, FileMode.Open);
+                    theReader = new StreamReader(fs);
 
                     // Parte 1: ignora o [Mode 01]
-                    string line = theReader.ReadLine();
+                    control_line = theReader.ReadLine();
 
                     // Lê a primeira linha com dados do pre-load do FIT.
-                    line = theReader.ReadLine();
+                    line = control_line;
 
-                    string[] entries = line.Split('=');
+                    control_line = theReader.ReadLine();
+
+                    entries = control_line.Split('=');
 
                     if (entries.Length == 4)
                     {
                         tempo_minimo = entries[0].Split(':')[1];
                     }
+
+
+                    do
+                    {
+                        line = control_line;
+                        control_line = theReader.ReadLine();
+
+                    } while (control_line != null);
+
+                    entries = line.Split('=');
+
+                    if (entries.Length == 4)
+                    {
+                        tempo_maximo = entries[0].Split(':')[1];
+                    }
+
+                    theReader.Close();
+                    theReader.Dispose();
+                    fs.Close();
+                    fs.Dispose();
+
                 }
                 break;
             // Vai para o visualizador do FITs
