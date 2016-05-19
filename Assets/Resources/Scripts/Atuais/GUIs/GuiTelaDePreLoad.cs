@@ -11,7 +11,7 @@ public class GuiTelaDePreLoad : GuiPadrao2
     private int posicaox;
     private int qualbotao = -1;
     private int resultado = -1;
-    private string[] toolbarStrings = { "Escolher Outro Log", "Visualizar Log",
+    private string[] toolbarStrings = { "Escolher Log", "Visualizar Log",
                                         "Retornar Para Tela Título" };
     protected string tempo_minimo = "Apenas números >= a 0 aqui.";
     protected string tempo_maximo = "Apenas números >= a 0 aqui.";
@@ -19,6 +19,9 @@ public class GuiTelaDePreLoad : GuiPadrao2
     protected int tempo_maximo_convertido;
 
     private bool creditos = false;
+
+    protected PegarEnderecoDeLog pegar_endereco_do_log;
+    protected string endereco = "Aqui ficará o endereço do log.";
 
     public override void OnGUI()
     {
@@ -30,7 +33,7 @@ public class GuiTelaDePreLoad : GuiPadrao2
             "e Tempo Carregado do Log", estilo_titulo_tela_de_preload);
 
         GUI.Label(new Rect(Screen.width / 4, Screen.height / 2 - 20, Screen.width / 2, 20), "Nome do Arquivo de Log");
-        GUI.Label(new Rect(Screen.width / 4, Screen.height / 2, Screen.width / 2, 20), "Aqui fica o texto", "textfield");
+        GUI.Label(new Rect(Screen.width / 4, Screen.height / 2, Screen.width / 2, 20), endereco, "textfield");
         GUI.Label(new Rect(Screen.width / 4, Screen.height / 2 + 20, 120, 20), "Tempo Mínimo", "textfield");
         GUI.Label(new Rect(Screen.width / 2, Screen.height / 2 + 20, 120, 20), "Tempo Máximo", "textfield");
         tempo_minimo = GUI.TextArea(new Rect(Screen.width / 4, Screen.height / 2 + 40, 240, 20), tempo_minimo);
@@ -44,7 +47,8 @@ public class GuiTelaDePreLoad : GuiPadrao2
         {
             // Vai para o loading do FIT
             case 0:
-                //UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+                pegar_endereco_do_log.FindFile();
+                endereco = pegar_endereco_do_log.endereco_de_arquivo;
                 break;
             // Vai para o visualizador do FITs
             case 1:
@@ -74,6 +78,8 @@ public class GuiTelaDePreLoad : GuiPadrao2
         estilo_botoes_tela_de_preload = new GUIStyle("box");
         estilo_botoes_tela_de_preload.alignment = TextAnchor.MiddleCenter;
         estilo_botoes_tela_de_preload.font = Font.CreateDynamicFontFromOSFont("Verdana", 10);
+
+        pegar_endereco_do_log = new PegarEnderecoDeLog();
     }
 
     // Update is called once per frame
