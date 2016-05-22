@@ -17,8 +17,6 @@ public class GuiTelaDePreLoad : GuiPadrao2
                                         "Retornar Para Tela Título" };
     protected string tempo_minimo = "Apenas números >= a 0 aqui.";
     protected string tempo_maximo = "Apenas números >= a 0 aqui.";
-    protected int tempo_minimo_convertido;
-    protected int tempo_maximo_convertido;
 
     private bool creditos = false;
 
