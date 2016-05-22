@@ -34,7 +34,7 @@ public class LidaComErrosTempoMinimoEMaximo : MonoBehaviour {
     public int altura_da_janela_de_erro_de_erro_maximo;
 
 
-    public void ConfigurarParaVisualizacaoDeObjetos()
+    public void ConfigurarVariaveisParaVisualizacaoDeObjetos()
     {
 
         x_da_janela_de_erro_de_erro_minimo = 0;
@@ -49,17 +49,17 @@ public class LidaComErrosTempoMinimoEMaximo : MonoBehaviour {
 
     }
 
-    public void ConfigurarParaPreload()
+    public void ConfigurarVariaveisParaPreload()
     {
-        x_da_janela_de_erro_de_erro_minimo = 0;
-        y_da_janela_de_erro_de_erro_minimo = 0;
-        largura_da_janela_de_erro_de_erro_minimo = 0;
-        altura_da_janela_de_erro_de_erro_minimo = 0;
+        x_da_janela_de_erro_de_erro_minimo = Screen.width / 4;
+        largura_da_janela_de_erro_de_erro_minimo = 240;
+        altura_da_janela_de_erro_de_erro_minimo = 20;
 
-        x_da_janela_de_erro_de_erro_maximo = 0;
-        y_da_janela_de_erro_de_erro_maximo = 0;
-        largura_da_janela_de_erro_de_erro_maximo = 0;
-        altura_da_janela_de_erro_de_erro_maximo = 0;
+        x_da_janela_de_erro_de_erro_maximo = Screen.width / 2;
+        largura_da_janela_de_erro_de_erro_maximo = 240;
+        altura_da_janela_de_erro_de_erro_maximo = 20;
+
+        posicao_da_mensagem_de_erro_y = Screen.height / 2 + 60;
     }
 
     public void DetectarETratarErrosEExcecoesDeInput(string tempo_minimo, string tempo_maximo)

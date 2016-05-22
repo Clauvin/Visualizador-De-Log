@@ -35,6 +35,7 @@ public class GuiTelaDePreLoad : GuiPadrao2
 
     public override void OnGUI()
     {
+        lida_com_erros_min_e_max.ConfigurarVariaveisParaPreload();
         GUI.BeginGroup(new Rect(0, 0, Screen.width, Screen.height));
 
         posicaox = 0;
