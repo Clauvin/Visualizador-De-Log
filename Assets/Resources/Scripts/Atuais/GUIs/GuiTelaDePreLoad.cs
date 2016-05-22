@@ -111,6 +111,8 @@ public class GuiTelaDePreLoad : GuiPadrao2
 
                 if (lida_com_erros_min_e_max.NaoTemosErrosDeInput())
                 {
+                    PassadorDeDados pd = FindObjectOfType<PassadorDeDados>();
+                    pd.SetValuesDePassagem(Convert.ToInt32(tempo_minimo), Convert.ToInt32(tempo_maximo), endereco);
                     UnityEngine.SceneManagement.SceneManager.LoadScene(3);
                 } else
                 {
