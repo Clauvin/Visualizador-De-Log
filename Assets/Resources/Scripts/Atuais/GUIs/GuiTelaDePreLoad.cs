@@ -111,14 +111,14 @@ public class GuiTelaDePreLoad : GuiPadrao2
 
                 if (lida_com_erros_min_e_max.NaoTemosErrosDeInput())
                 {
-                    Debug.Log("Ok");
+                    UnityEngine.SceneManagement.SceneManager.LoadScene(3);
                 } else
                 {
                     
                     
                 }
 
-                //UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+                
                 break;
             // Retorna para a tela título
             case 2:
