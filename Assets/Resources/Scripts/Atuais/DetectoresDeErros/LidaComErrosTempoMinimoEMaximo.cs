@@ -33,6 +33,8 @@ public class LidaComErrosTempoMinimoEMaximo : MonoBehaviour {
     public int largura_da_janela_de_erro_de_erro_maximo;
     public int altura_da_janela_de_erro_de_erro_maximo;
 
+    public int quantidade_de_mudanca_de_posicao_y;
+
 
     public void ConfigurarVariaveisParaVisualizacaoDeObjetos()
     {
@@ -46,6 +48,7 @@ public class LidaComErrosTempoMinimoEMaximo : MonoBehaviour {
         altura_da_janela_de_erro_de_erro_maximo = 40;
 
         posicao_da_mensagem_de_erro_y = 100;
+        quantidade_de_mudanca_de_posicao_y = 40;
 
     }
 
@@ -53,13 +56,14 @@ public class LidaComErrosTempoMinimoEMaximo : MonoBehaviour {
     {
         x_da_janela_de_erro_de_erro_minimo = Screen.width / 4;
         largura_da_janela_de_erro_de_erro_minimo = 240;
-        altura_da_janela_de_erro_de_erro_minimo = 20;
+        altura_da_janela_de_erro_de_erro_minimo = 40;
 
         x_da_janela_de_erro_de_erro_maximo = Screen.width / 2;
         largura_da_janela_de_erro_de_erro_maximo = 240;
-        altura_da_janela_de_erro_de_erro_maximo = 20;
+        altura_da_janela_de_erro_de_erro_maximo = 40;
 
         posicao_da_mensagem_de_erro_y = Screen.height / 2 + 60;
+        quantidade_de_mudanca_de_posicao_y = 0;
     }
 
     public void DetectarETratarErrosEExcecoesDeInput(string tempo_minimo, string tempo_maximo)
@@ -134,62 +138,73 @@ public class LidaComErrosTempoMinimoEMaximo : MonoBehaviour {
 
     public void PossiveisMensagensDeErro()
     {
-        if (erro_de_input_errado_minimo)
-        {
-            GUI.Label(new Rect(0, posicao_da_mensagem_de_erro_y, 210, 40), "Valor mínimo precisa ser de\n"
-                                                                           + "apenas números.", "textfield");
-            posicao_da_mensagem_de_erro_y += 40;
+        if (erro_de_input_errado_minimo) {
+
+            GUI.Label(new Rect(x_da_janela_de_erro_de_erro_minimo, posicao_da_mensagem_de_erro_y,
+                                largura_da_janela_de_erro_de_erro_minimo, altura_da_janela_de_erro_de_erro_minimo),
+                                "Valor mínimo precisa ser de\n" + "apenas números.", "textfield");
+            posicao_da_mensagem_de_erro_y += quantidade_de_mudanca_de_posicao_y;
         }
         if (erro_de_input_errado_maximo)
         {
-            GUI.Label(new Rect(0, posicao_da_mensagem_de_erro_y, 210, 40), "Valor máximo precisa ser de\n"
-                                                                           + "apenas números.", "textfield");
-            posicao_da_mensagem_de_erro_y += 40;
+            GUI.Label(new Rect(x_da_janela_de_erro_de_erro_maximo, posicao_da_mensagem_de_erro_y,
+                                largura_da_janela_de_erro_de_erro_maximo, altura_da_janela_de_erro_de_erro_maximo),
+                                "Valor máximo precisa ser de\n" + "apenas números.", "textfield");
+            posicao_da_mensagem_de_erro_y += quantidade_de_mudanca_de_posicao_y;
         }
         if (erro_de_input_vazio_minimo)
         {
-            GUI.Label(new Rect(0, posicao_da_mensagem_de_erro_y, 210, 40), "Falta preencher o valor mínimo.", "textfield");
-            posicao_da_mensagem_de_erro_y += 40;
+            GUI.Label(new Rect(x_da_janela_de_erro_de_erro_minimo, posicao_da_mensagem_de_erro_y,
+                                largura_da_janela_de_erro_de_erro_minimo, altura_da_janela_de_erro_de_erro_minimo),
+                                "Falta preencher o valor mínimo.", "textfield");
+            posicao_da_mensagem_de_erro_y += quantidade_de_mudanca_de_posicao_y;
         }
         if (erro_de_input_vazio_maximo)
         {
-            GUI.Label(new Rect(0, posicao_da_mensagem_de_erro_y, 210, 40), "Falta preencher o valor máximo.", "textfield");
-            posicao_da_mensagem_de_erro_y += 40;
+            GUI.Label(new Rect(x_da_janela_de_erro_de_erro_maximo, posicao_da_mensagem_de_erro_y,
+                                largura_da_janela_de_erro_de_erro_maximo, altura_da_janela_de_erro_de_erro_maximo),
+                                "Falta preencher o valor máximo.", "textfield");
+            posicao_da_mensagem_de_erro_y += quantidade_de_mudanca_de_posicao_y;
         }
         if (erro_de_input_minimo_menor_que_limite_minimo)
         {
             // Sim, eu me dou o direito de apontar isso, porquê quem vai colocar o tempo ABSURDAMENTE
             // menor que zero?!
-            GUI.Label(new Rect(0, posicao_da_mensagem_de_erro_y, 210, 40), "... por favor. Você fez isso\n" +
-                                                                           "de propósito.", "textfield");
-            posicao_da_mensagem_de_erro_y += 40;
+            GUI.Label(new Rect(x_da_janela_de_erro_de_erro_minimo, posicao_da_mensagem_de_erro_y,
+                                largura_da_janela_de_erro_de_erro_minimo, altura_da_janela_de_erro_de_erro_minimo),
+                                "... por favor. Você fez isso\n" + "de propósito.", "textfield");
+            posicao_da_mensagem_de_erro_y += quantidade_de_mudanca_de_posicao_y;
         }
         if (erro_de_input_minimo_maior_que_limite_maximo)
         {
             // Sim, eu me dou o direito de apontar isso, porquê quem vai colocar o tempo ABSURDAMENTE
             // menor que zero?!
-            GUI.Label(new Rect(0, posicao_da_mensagem_de_erro_y, 210, 40), "...tempo mínimo não pode\n" +
-                                                                           "ultrapassar 2147483647.", "textfield");
-            posicao_da_mensagem_de_erro_y += 40;
+            GUI.Label(new Rect(x_da_janela_de_erro_de_erro_minimo, posicao_da_mensagem_de_erro_y,
+                                largura_da_janela_de_erro_de_erro_minimo, altura_da_janela_de_erro_de_erro_minimo),
+                                "...tempo mínimo não pode\n" + "ultrapassar 2147483647.", "textfield");
+            posicao_da_mensagem_de_erro_y += quantidade_de_mudanca_de_posicao_y;
         }
         if (erro_de_input_maximo_menor_que_limite_minimo)
         {
 
-            GUI.Label(new Rect(0, posicao_da_mensagem_de_erro_y, 210, 40), "... por favor. Você COM CERTEZA fez\n"
-                                                                           + "isso de propósito.", "textfield");
-            posicao_da_mensagem_de_erro_y += 40;
+            GUI.Label(new Rect(x_da_janela_de_erro_de_erro_maximo, posicao_da_mensagem_de_erro_y,
+                                largura_da_janela_de_erro_de_erro_maximo, altura_da_janela_de_erro_de_erro_maximo),
+                                "... por favor. Você COM CERTEZA fez\n" + "isso de propósito.", "textfield");
+            posicao_da_mensagem_de_erro_y += quantidade_de_mudanca_de_posicao_y;
         }
         if (erro_de_input_maximo_maior_que_limite_maximo)
         {
 
-            GUI.Label(new Rect(0, posicao_da_mensagem_de_erro_y, 210, 40), "...tempo máximo não pode\n"
-                                                                           + "ultrapassar 2147483647.", "textfield");
-            posicao_da_mensagem_de_erro_y += 40;
+            GUI.Label(new Rect(x_da_janela_de_erro_de_erro_maximo, posicao_da_mensagem_de_erro_y,
+                                largura_da_janela_de_erro_de_erro_maximo, altura_da_janela_de_erro_de_erro_maximo),
+                                "...tempo máximo não pode\n" + "ultrapassar 2147483647.", "textfield");
+            posicao_da_mensagem_de_erro_y += quantidade_de_mudanca_de_posicao_y;
         }
         if (erro_de_maior_que)
         {
-            GUI.Label(new Rect(0, posicao_da_mensagem_de_erro_y, 210, 40), "Valor mínimo tem que ser\n"
-                                                                           + "menor que o máximo.", "textfield");
+            GUI.Label(new Rect(x_da_janela_de_erro_de_erro_minimo, posicao_da_mensagem_de_erro_y,
+                                largura_da_janela_de_erro_de_erro_minimo, altura_da_janela_de_erro_de_erro_minimo),
+                                "Valor mínimo tem que ser\n" + "menor que o máximo.", "textfield");
         }
     }
 

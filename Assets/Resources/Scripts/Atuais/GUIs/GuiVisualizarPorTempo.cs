@@ -85,7 +85,7 @@ public class GuiVisualizarPorTempo : GuiPadrao2 {
         o_que_escrever_nos_botoes[1] = "Apertar\npara\ninvisível";
 
         lida_com_erros = new LidaComErrosTempoMinimoEMaximo();
-        lida_com_erros.ConfigurarParaVisualizacaoDeObjetos();
+        lida_com_erros.ConfigurarVariaveisParaVisualizacaoDeObjetos();
 
     }
 	

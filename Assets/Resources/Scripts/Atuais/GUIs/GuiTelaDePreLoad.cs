@@ -50,7 +50,6 @@ public class GuiTelaDePreLoad : GuiPadrao2
         tempo_minimo = GUI.TextArea(new Rect(Screen.width / 4, Screen.height / 2 + 40, 240, 20), tempo_minimo);
         tempo_maximo = GUI.TextArea(new Rect(Screen.width / 2, Screen.height / 2 + 40, 240, 20), tempo_maximo);
 
-
         resultado = GUI.Toolbar(new Rect(Screen.width / 12 * 3, Screen.height / 10 * 8, Screen.width / 12 * 6, Screen.height / 10), qualbotao,
             toolbarStrings);
 
@@ -112,10 +111,11 @@ public class GuiTelaDePreLoad : GuiPadrao2
 
                 if (lida_com_erros_min_e_max.NaoTemosErrosDeInput())
                 {
-
+                    Debug.Log("Ok");
                 } else
                 {
-                    lida_com_erros_min_e_max.PossiveisMensagensDeErro();
+                    
+                    
                 }
 
                 //UnityEngine.SceneManagement.SceneManager.LoadScene(1);
@@ -127,6 +127,8 @@ public class GuiTelaDePreLoad : GuiPadrao2
             default:
                 break;
         }
+
+        lida_com_erros_min_e_max.PossiveisMensagensDeErro();
 
         resultado = -1;
 
