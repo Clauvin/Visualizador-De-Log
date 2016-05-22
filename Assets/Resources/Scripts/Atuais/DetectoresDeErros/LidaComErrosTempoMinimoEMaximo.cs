@@ -5,7 +5,7 @@ using System.Globalization;
 
 public class LidaComErrosTempoMinimoEMaximo : MonoBehaviour {
 
-    public int posicao_da_mensagem_de_erro_y = 100;
+    public int posicao_da_mensagem_de_erro_y;
 
     //variáveis que definem se houve ou não erro, o que mostra mensagens de erro.
     public bool erro_de_input_errado_minimo = false;
@@ -22,6 +22,45 @@ public class LidaComErrosTempoMinimoEMaximo : MonoBehaviour {
     public bool erro_de_input_maximo_menor_que_limite_minimo = false;
     public bool erro_de_input_maximo_maior_que_limite_maximo = false;
     public bool erro_de_maior_que = false;
+
+    public int x_da_janela_de_erro_de_erro_minimo;
+    public int y_da_janela_de_erro_de_erro_minimo;
+    public int largura_da_janela_de_erro_de_erro_minimo;
+    public int altura_da_janela_de_erro_de_erro_minimo;
+
+    public int x_da_janela_de_erro_de_erro_maximo;
+    public int y_da_janela_de_erro_de_erro_maximo;
+    public int largura_da_janela_de_erro_de_erro_maximo;
+    public int altura_da_janela_de_erro_de_erro_maximo;
+
+
+    public void ConfigurarParaVisualizacaoDeObjetos()
+    {
+
+        x_da_janela_de_erro_de_erro_minimo = 0;
+        largura_da_janela_de_erro_de_erro_minimo = 210;
+        altura_da_janela_de_erro_de_erro_minimo = 40;
+
+        x_da_janela_de_erro_de_erro_maximo = 0;
+        largura_da_janela_de_erro_de_erro_maximo = 210;
+        altura_da_janela_de_erro_de_erro_maximo = 40;
+
+        posicao_da_mensagem_de_erro_y = 100;
+
+    }
+
+    public void ConfigurarParaPreload()
+    {
+        x_da_janela_de_erro_de_erro_minimo = 0;
+        y_da_janela_de_erro_de_erro_minimo = 0;
+        largura_da_janela_de_erro_de_erro_minimo = 0;
+        altura_da_janela_de_erro_de_erro_minimo = 0;
+
+        x_da_janela_de_erro_de_erro_maximo = 0;
+        y_da_janela_de_erro_de_erro_maximo = 0;
+        largura_da_janela_de_erro_de_erro_maximo = 0;
+        altura_da_janela_de_erro_de_erro_maximo = 0;
+    }
 
     public void DetectarETratarErrosEExcecoesDeInput(string tempo_minimo, string tempo_maximo)
     {
