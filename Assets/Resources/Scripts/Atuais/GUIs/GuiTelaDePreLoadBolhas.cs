@@ -4,11 +4,13 @@ using System.IO;
 using System;
 
 /// <summary>
-/// Classe GuiTelaDePreLoad. Responsável por definir a tela de pré-load de log.
+/// Classe GuiTelaDePreLoadBolhas. Classe filha de GuiTelaDePreLoad, responsável por definir
+/// para a Scene de PreLoad do Bolhas o que o programa deve fazer.
 /// </summary>
 public class GuiTelaDePreLoadBolhas : GuiTelaDePreLoad
 {
 
+    // Essa função diverge entre FIT e Bolhas, por conta da diferença do formato do log de ambos.
     protected override void EscolhaDeArquivo()
     {
         if (pegar_endereco_do_log.FindFile())
@@ -34,11 +36,12 @@ public class GuiTelaDePreLoadBolhas : GuiTelaDePreLoad
 
             control_line = theReader.ReadLine();
 
-            entries = control_line.Split('=');
+            entradas_separadas = control_line.Split('=');
 
-            if ((entries.Length == 7) || (entries.Length == 11))
+            // == 7 ou 11 porquê existem 7 ou 11 termos por linha de dados no log do Bolhas.
+            if ((entradas_separadas.Length == 7) || (entradas_separadas.Length == 11))
             {
-                tempo_minimo = entries[0].Split(':')[1];
+                tempo_minimo = entradas_separadas[0].Split(':')[1];
             }
 
             do
@@ -48,11 +51,12 @@ public class GuiTelaDePreLoadBolhas : GuiTelaDePreLoad
 
             } while (control_line != null);
 
-            entries = line.Split('=');
+            entradas_separadas = line.Split('=');
 
-            if ((entries.Length == 7) || (entries.Length == 11))
+            // == 7 ou 11 porquê existem 7 ou 11 termos por linha de dados no log do Bolhas.
+            if ((entradas_separadas.Length == 7) || (entradas_separadas.Length == 11))
             {
-                tempo_maximo = entries[0].Split(':')[1];
+                tempo_maximo = entradas_separadas[0].Split(':')[1];
             }
 
             theReader.Close();
@@ -71,6 +75,7 @@ public class GuiTelaDePreLoadBolhas : GuiTelaDePreLoad
 
     protected override void IrParaLoad()
     {
+        // Vai pra Scene "Version Bolhas"
         UnityEngine.SceneManagement.SceneManager.LoadScene(4);
     }
 

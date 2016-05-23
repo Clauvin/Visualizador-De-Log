@@ -3,6 +3,10 @@ using System.Collections;
 using System.IO;
 using System;
 
+/// <summary>
+/// Classe GuiTelaDePreLoad. Classe básica semi-esqueletal(por conta de classes virtuais vazias)
+/// responsável pela interface de usuário e definir o que cada botão faz.
+/// </summary>
 public class GuiTelaDePreLoad : GuiPadrao2 {
 
     protected GUIStyle estilo_titulo_tela_de_preload;
@@ -28,7 +32,7 @@ public class GuiTelaDePreLoad : GuiPadrao2 {
     protected StreamReader theReader;
     protected string line;
     protected string control_line;
-    protected string[] entries;
+    protected string[] entradas_separadas;
 
     protected string titulo = "Escolha de Log do FIT\n" + "e Tempo Carregado do Log";
 
@@ -89,6 +93,7 @@ public class GuiTelaDePreLoad : GuiPadrao2 {
 
     }
 
+    // Inicialização comum a todos os tipos de log existentes
     protected void InicializacaoGenerica()
     {
         estilo_titulo_tela_de_preload = new GUIStyle();
@@ -104,17 +109,19 @@ public class GuiTelaDePreLoad : GuiPadrao2 {
         lida_com_erros_endereco_de_log = new LidaComErrosEnderecoDeLog();
     }
 
-
+    // Inicialização específica dependendo do log que se vai ler
     protected virtual void InicializacaoEspecifica()
     {
 
     }
 
+    // Mudança de Scene
     protected virtual void IrParaLoad()
     {
 
     }
 
+    // Essa função diverge entre FIT e Bolhas, por conta da diferença do formato do log de ambos.
     protected virtual void EscolhaDeArquivo()
     {
 

@@ -4,11 +4,13 @@ using System.IO;
 using System;
 
 /// <summary>
-/// Classe GuiTelaDePreLoad. Responsável por definir a tela de pré-load de log.
+/// Classe GuiTelaDePreLoadFIT. Classe filha de GuiTelaDePreLoad, responsável por definir
+/// para a Scene de PreLoad do FIT o que o programa deve fazer.
 /// </summary>
 public class GuiTelaDePreLoadFIT : GuiTelaDePreLoad
 {
     
+    // Essa função diverge entre FIT e Bolhas, por conta da diferença do formato do log de ambos.
     protected override void EscolhaDeArquivo()
     {
         if (pegar_endereco_do_log.FindFile())
@@ -29,11 +31,12 @@ public class GuiTelaDePreLoadFIT : GuiTelaDePreLoad
 
             control_line = theReader.ReadLine();
 
-            entries = control_line.Split('=');
+            entradas_separadas = control_line.Split('=');
 
-            if (entries.Length == 4)
+            // == 4 porquê existem 4 termos por linha de dados no log do FIT.
+            if (entradas_separadas.Length == 4)
             {
-                tempo_minimo = entries[0].Split(':')[1];
+                tempo_minimo = entradas_separadas[0].Split(':')[1];
             }
 
             do
@@ -43,11 +46,12 @@ public class GuiTelaDePreLoadFIT : GuiTelaDePreLoad
 
             } while (control_line != null);
 
-            entries = line.Split('=');
+            entradas_separadas = line.Split('=');
 
-            if (entries.Length == 4)
+            // == 4 porquê existem 4 termos por linha de dados no log do FIT.
+            if (entradas_separadas.Length == 4)
             {
-                tempo_maximo = entries[0].Split(':')[1];
+                tempo_maximo = entradas_separadas[0].Split(':')[1];
             }
 
             theReader.Close();
@@ -66,6 +70,7 @@ public class GuiTelaDePreLoadFIT : GuiTelaDePreLoad
 
     protected override void IrParaLoad()
     {
+        // Vai pra Scene "Version FIT 3"
         UnityEngine.SceneManagement.SceneManager.LoadScene(3);
     }
 
