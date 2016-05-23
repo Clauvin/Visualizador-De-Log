@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.IO;
+using System;
 
 /// <summary>
 /// Classe LidaComErrosTempoMinimoEMaximo. Criada para detectar erros no arquivo escolhido para ser carregado pelo visualizador de logs,
@@ -10,6 +11,7 @@ public class LidaComErrosEnderecoDeLog : MonoBehaviour
 {
 
     // variáveis que definem se houve ou não erro, o que mostra mensagens de erro.
+    public bool erro_de_acesso_nao_autorizado;
     public bool erro_de_inexistencia_do_arquivo;
     public bool erro_de_caminho_escolhido_invalido;
     public bool erro_de_caminho_escolhido_longo_demais;
@@ -33,11 +35,11 @@ public class LidaComErrosEnderecoDeLog : MonoBehaviour
     public void ConfigurarVariaveis()
     {
 
-        /*x_da_janela_de_erro = ;
-        posicao_da_mensagem_de_erro_y = ;
-        largura_da_janela_de_erro = ;
-        altura_da_janela_de_erro = ;
-        quantidade_de_mudanca_de_posicao_y = ;*/
+        x_da_janela_de_erro = Screen.width / 4;
+        posicao_da_mensagem_de_erro_y = Screen.height / 2 + 20;
+        largura_da_janela_de_erro = Screen.width / 2;
+        altura_da_janela_de_erro = 20;
+        quantidade_de_mudanca_de_posicao_y = 0;
 
     }
 
@@ -58,6 +60,7 @@ public class LidaComErrosEnderecoDeLog : MonoBehaviour
     {
         // esse reset das variáveis ao usar essa função é necessário para evitar
         // que mensagens bloqueiem umas as outras.
+        erro_de_acesso_nao_autorizado = false;
         erro_de_inexistencia_do_arquivo = false;
         erro_de_caminho_escolhido_invalido = false;
         erro_de_caminho_escolhido_longo_demais = false;
@@ -70,6 +73,11 @@ public class LidaComErrosEnderecoDeLog : MonoBehaviour
         // adequadas como true.
         try {
             filestream_de_teste = new FileStream(endereco, FileMode.Open);
+        }
+        // O acesso ao endereço escolhido foi bloqueado?
+        catch (UnauthorizedAccessException uae)
+        {
+            erro_de_acesso_nao_autorizado = true;
         }
         // O arquivo escolhido existe?
         catch (FileNotFoundException ex)
@@ -88,7 +96,8 @@ public class LidaComErrosEnderecoDeLog : MonoBehaviour
         }
 
         // Se não foram encontrados erros até agora...
-        if ((erro_de_inexistencia_do_arquivo) && (erro_de_caminho_escolhido_invalido) && (erro_de_caminho_escolhido_longo_demais)){
+        if (!((erro_de_acesso_nao_autorizado) || (erro_de_inexistencia_do_arquivo) || 
+              (erro_de_caminho_escolhido_invalido) || (erro_de_caminho_escolhido_longo_demais))){
         // O arquivo escolhido não tem extensão txt?
             if (!AExtensaoETxt(endereco))
             {
@@ -98,18 +107,32 @@ public class LidaComErrosEnderecoDeLog : MonoBehaviour
             else
             {
                 streamreader_de_teste = new StreamReader(filestream_de_teste);
-                if (streamreader_de_teste.ReadLine() != valor_de_comparacao_de_tipo_de_log)
+                string leitura = streamreader_de_teste.ReadLine();
+                if (leitura != valor_de_comparacao_de_tipo_de_log)
                 {
                     erro_de_log_errado = true;
                 }
+                streamreader_de_teste.Dispose();
+                streamreader_de_teste.Close();
             }
         }
-        filestream_de_teste.Dispose();
-        filestream_de_teste.Close();
+        if (filestream_de_teste != null)
+        {
+            filestream_de_teste.Dispose();
+            filestream_de_teste.Close();
+        }
+        
     }
 
     public void PossiveisMensagensDeErro()
     {
+        if (erro_de_acesso_nao_autorizado)
+        {
+            GUI.Label(new Rect(x_da_janela_de_erro, posicao_da_mensagem_de_erro_y,
+                                largura_da_janela_de_erro, altura_da_janela_de_erro),
+                                "Acesso bloqueado ao endereço/arquivo.", "textfield");
+            posicao_da_mensagem_de_erro_y += quantidade_de_mudanca_de_posicao_y;
+        }
         if (erro_de_inexistencia_do_arquivo)
         {
             GUI.Label(new Rect(x_da_janela_de_erro, posicao_da_mensagem_de_erro_y,
@@ -144,8 +167,7 @@ public class LidaComErrosEnderecoDeLog : MonoBehaviour
             // menor que zero?!
             GUI.Label(new Rect(x_da_janela_de_erro, posicao_da_mensagem_de_erro_y,
                                 largura_da_janela_de_erro, altura_da_janela_de_erro),
-                                "Tipo de log errado. Você pode ter escolhido o preload errado\n"+
-                                "para o arquivo escolhido.", "textfield");
+                                "Tipo de log errado. Você pode ter escolhido o preload errado para o arquivo escolhido.", "textfield");
             posicao_da_mensagem_de_erro_y += quantidade_de_mudanca_de_posicao_y;
         }
     }
