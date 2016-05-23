@@ -1,4 +1,4 @@
-[Mode 01]
+[Mode FIT]
 TimeA:0=Char:1=GridX:64=GridY:32
 TimeB:0=Char:2=GridX:32=GridY:64
 TimeA:1=Char:1=GridX:96=GridY:32
