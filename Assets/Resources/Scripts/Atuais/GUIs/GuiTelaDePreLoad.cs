@@ -24,6 +24,7 @@ public class GuiTelaDePreLoad : GuiPadrao2
     protected string endereco = "Aqui ficará o endereço do log.";
     protected string nome_do_arquivo = "Nome do Arquivo de Log";
     LidaComErrosTempoMinimoEMaximo lida_com_erros_min_e_max;
+    LidaComErrosEnderecoDeLog lida_com_erros_endereco_de_log;
 
     // todas as variáveis abaixo são para a leitura do tempo mínimo e máximo do log.
     FileStream fs;
@@ -34,6 +35,7 @@ public class GuiTelaDePreLoad : GuiPadrao2
     public override void OnGUI()
     {
         lida_com_erros_min_e_max.ConfigurarVariaveisParaPreload();
+        lida_com_erros_endereco_de_log.ConfigurarVariaveis();
         GUI.BeginGroup(new Rect(0, 0, Screen.width, Screen.height));
 
         posicaox = 0;
@@ -80,7 +82,6 @@ public class GuiTelaDePreLoad : GuiPadrao2
                         tempo_minimo = entries[0].Split(':')[1];
                     }
 
-
                     do
                     {
                         line = control_line;
@@ -106,8 +107,9 @@ public class GuiTelaDePreLoad : GuiPadrao2
             case 1:
 
                 lida_com_erros_min_e_max.DetectarETratarErrosEExcecoesDeInput(tempo_minimo, tempo_maximo);
+                lida_com_erros_endereco_de_log.DetectarETratarErrosEExcecoesDeInput(endereco);
 
-                if (lida_com_erros_min_e_max.NaoTemosErrosDeInput())
+                if (lida_com_erros_min_e_max.NaoTemosErrosDeInput() && lida_com_erros_endereco_de_log.NaoTemosErrosDeInput())
                 {
                     PassadorDeDados pd = FindObjectOfType<PassadorDeDados>();
                     pd.SetValuesDePassagem(Convert.ToInt32(tempo_minimo), Convert.ToInt32(tempo_maximo), endereco);
@@ -129,6 +131,7 @@ public class GuiTelaDePreLoad : GuiPadrao2
         }
 
         lida_com_erros_min_e_max.PossiveisMensagensDeErro();
+        lida_com_erros_endereco_de_log.PossiveisMensagensDeErro();
 
         resultado = -1;
 
@@ -149,6 +152,8 @@ public class GuiTelaDePreLoad : GuiPadrao2
 
         pegar_endereco_do_log = new PegarEnderecoDeLog();
         lida_com_erros_min_e_max = new LidaComErrosTempoMinimoEMaximo();
+        lida_com_erros_endereco_de_log = new LidaComErrosEnderecoDeLog();
+        lida_com_erros_endereco_de_log.valor_de_comparacao_de_tipo_de_log = "[Mode FIT]";
     }
 
     // Update is called once per frame
