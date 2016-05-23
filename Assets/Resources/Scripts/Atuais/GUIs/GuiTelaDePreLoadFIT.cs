@@ -6,7 +6,7 @@ using System;
 /// <summary>
 /// Classe GuiTelaDePreLoad. Responsável por definir a tela de pré-load de log.
 /// </summary>
-public class GuiTelaDePreLoad : GuiPadrao2
+public class GuiTelaDePreLoadFIT : GuiPadrao2
 {
     GUIStyle estilo_titulo_tela_de_preload;
     GUIStyle estilo_botoes_tela_de_preload;
