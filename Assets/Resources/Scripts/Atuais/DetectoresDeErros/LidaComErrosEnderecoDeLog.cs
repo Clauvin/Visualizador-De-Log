@@ -114,28 +114,28 @@ public class LidaComErrosEnderecoDeLog : MonoBehaviour
         {
             GUI.Label(new Rect(x_da_janela_de_erro, posicao_da_mensagem_de_erro_y,
                                 largura_da_janela_de_erro, altura_da_janela_de_erro),
-                                "Valor mínimo precisa ser de\n" + "apenas números.", "textfield");
+                                "Arquivo inexistente.", "textfield");
             posicao_da_mensagem_de_erro_y += quantidade_de_mudanca_de_posicao_y;
         }
         if (erro_de_caminho_escolhido_invalido)
         {
             GUI.Label(new Rect(x_da_janela_de_erro, posicao_da_mensagem_de_erro_y,
                                 largura_da_janela_de_erro, altura_da_janela_de_erro),
-                                "Valor máximo precisa ser de\n" + "apenas números.", "textfield");
+                                "Endereço de arquivo inexistente.", "textfield");
             posicao_da_mensagem_de_erro_y += quantidade_de_mudanca_de_posicao_y;
         }
         if (erro_de_caminho_escolhido_longo_demais)
         {
             GUI.Label(new Rect(x_da_janela_de_erro, posicao_da_mensagem_de_erro_y,
                                 largura_da_janela_de_erro, altura_da_janela_de_erro),
-                                "Falta preencher o valor mínimo.", "textfield");
+                                "Endereço longo demais, ele não pode exceder 248 caracteres.", "textfield");
             posicao_da_mensagem_de_erro_y += quantidade_de_mudanca_de_posicao_y;
         }
         if (erro_de_extensao_nao_txt)
         {
             GUI.Label(new Rect(x_da_janela_de_erro, posicao_da_mensagem_de_erro_y,
                                 largura_da_janela_de_erro, altura_da_janela_de_erro),
-                                "Falta preencher o valor máximo.", "textfield");
+                                "Arquivo escolhido não é um .txt.", "textfield");
             posicao_da_mensagem_de_erro_y += quantidade_de_mudanca_de_posicao_y;
         }
         if (erro_de_log_errado)
@@ -144,7 +144,8 @@ public class LidaComErrosEnderecoDeLog : MonoBehaviour
             // menor que zero?!
             GUI.Label(new Rect(x_da_janela_de_erro, posicao_da_mensagem_de_erro_y,
                                 largura_da_janela_de_erro, altura_da_janela_de_erro),
-                                "... por favor. Você fez isso\n" + "de propósito.", "textfield");
+                                "Tipo de log errado. Você pode ter escolhido o preload errado\n"+
+                                "para o arquivo escolhido.", "textfield");
             posicao_da_mensagem_de_erro_y += quantidade_de_mudanca_de_posicao_y;
         }
     }
