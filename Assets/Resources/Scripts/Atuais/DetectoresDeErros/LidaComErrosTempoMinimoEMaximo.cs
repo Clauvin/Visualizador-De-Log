@@ -3,6 +3,10 @@ using System.Collections;
 using System;
 using System.Globalization;
 
+/// <summary>
+/// Classe LidaComErrosTempoMinimoEMaximo. Criada para detectar erros nos valores de tempo mínimo e máximo usados no programa,
+/// e uma vez encontrados, avisar isso e gerar mensagens de erro adequadas para que apareçam na GUI.
+/// </summary>
 public class LidaComErrosTempoMinimoEMaximo : MonoBehaviour {
 
     public int posicao_da_mensagem_de_erro_y;
@@ -24,12 +28,10 @@ public class LidaComErrosTempoMinimoEMaximo : MonoBehaviour {
     public bool erro_de_maior_que = false;
 
     public int x_da_janela_de_erro_de_erro_minimo;
-    public int y_da_janela_de_erro_de_erro_minimo;
     public int largura_da_janela_de_erro_de_erro_minimo;
     public int altura_da_janela_de_erro_de_erro_minimo;
 
     public int x_da_janela_de_erro_de_erro_maximo;
-    public int y_da_janela_de_erro_de_erro_maximo;
     public int largura_da_janela_de_erro_de_erro_maximo;
     public int altura_da_janela_de_erro_de_erro_maximo;
 
