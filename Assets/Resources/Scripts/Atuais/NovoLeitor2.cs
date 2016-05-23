@@ -166,7 +166,7 @@ public class NovoLeitor2 : MonoBehaviour
 
     }
 
-    public bool LoadStuffBolhas()
+    public bool LoadStuffBolhas(int tempo_minimo = 0, int tempo_maximo = int.MaxValue)
     {
         //number of HeatMaps
         //no caso do Bolhas, 1 + Mouse mais 4 objetos = 6
@@ -239,25 +239,30 @@ public class NovoLeitor2 : MonoBehaviour
 
                 if ((entries.Length == 7) && (((string)entries[1]) == "Mouse"))
                 {
-                    int tempo = Int32.Parse(entries[0].Split(':')[1]);
+                    int checando_tempo_do_log = Int32.Parse(entries[0].Split(':')[1]);
 
                     //Os splits dividem os strings entre antes e depois dos ':' presentes
                     //Daí é só pegar o dado necessário, e não sua legenda.
-                    bd_bolhas.AddMouse(tempo,
+                    if ((tempo_minimo <= checando_tempo_do_log) && (checando_tempo_do_log <= tempo_maximo))
+                    {
+                        bd_bolhas.AddMouse(checando_tempo_do_log,
                             entries[1].ToString(),
                             Int32.Parse(entries[2].Split(':')[1]),
                             Int32.Parse(entries[3].Split(':')[1]),
                             entries[4].Split(':')[1].ToString(),
                             entries[5].Split(':')[1].ToString(),
                             entries[6].Split(':')[1].ToString());
+                    }
 
                 } else if ((entries.Length == 11) && (((string)entries[1]) == "Objeto"))
                 {
-                    int tempo = Int32.Parse(entries[0].Split(':')[1]);
+                    int checando_tempo_do_log = Int32.Parse(entries[0].Split(':')[1]);
 
                     //Os splits dividem os strings entre antes e depois dos ':' presentes
                     //Daí é só pegar o dado necessário, e não sua legenda.
-                    bd_bolhas.AddObjeto(Int32.Parse(entries[0].Split(':')[1]),
+                    if ((tempo_minimo <= checando_tempo_do_log) && (checando_tempo_do_log <= tempo_maximo))
+                    {
+                        bd_bolhas.AddObjeto(Int32.Parse(entries[0].Split(':')[1]),
                                     entries[1].ToString(),
                                     Int32.Parse(entries[2].Split(':')[1]),
                                     Int32.Parse(entries[3].Split(':')[1]),
@@ -268,6 +273,7 @@ public class NovoLeitor2 : MonoBehaviour
                                     entries[8].Split(':')[1].ToString(),
                                     entries[9].Split(':')[1].ToString(),
                                     entries[10].Split(':')[1].ToString());
+                    }
                 }
 
 #if (DEBUG)
