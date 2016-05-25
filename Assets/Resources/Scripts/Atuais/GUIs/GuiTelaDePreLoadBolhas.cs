@@ -64,6 +64,8 @@ public class GuiTelaDePreLoadBolhas : GuiTelaDePreLoad
             fs.Close();
             fs.Dispose();
 
+            pegar_endereco_do_log.CriarIniDeUltimoLogChecado(endereco);
+
         }
     }
 
