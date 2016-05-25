@@ -97,13 +97,13 @@ public class GuiTempo : GuiPadrao2
 
     public void SetStringEditavel(string editada) { string_Para_Editar = editada; }
 
-    public string GetAutoCustomComecoEditavel() { return auto_custom_1; }
+    public string GetAutoPassagemDeTempoCustomComecoEditavel() { return auto_custom_1; }
 
-    public void SetAutoCustomComecoEditavel(string editada) { auto_custom_1 = editada; }
+    public void SetAutoPassagemDeTempoCustomComecoEditavel(string editada) { auto_custom_1 = editada; }
 
-    public string GetAutoCustomFinalEditavel() { return auto_custom_2; }
+    public string GetAutoPassagemDeTempoCustomFinalEditavel() { return auto_custom_2; }
 
-    public void SetAutoCustomFinalEditavel(string editada) { auto_custom_2 = editada; }
+    public void SetAutoPassagemDeTempoCustomFinalEditavel(string editada) { auto_custom_2 = editada; }
 
     void Awake()
     {

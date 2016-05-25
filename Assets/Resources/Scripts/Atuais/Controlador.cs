@@ -123,8 +123,8 @@ public class Controlador : MonoBehaviour {
                 if (Input.GetKeyUp("t"))
                 {
                     if (auto_mode_custom == false) {  
-                        string tempo1 = GetComponent<GuiTempo>().GetAutoCustomComecoEditavel();
-                        string tempo2 = GetComponent<GuiTempo>().GetAutoCustomFinalEditavel();
+                        string tempo1 = GetComponent<GuiTempo>().GetAutoPassagemDeTempoCustomComecoEditavel();
+                        string tempo2 = GetComponent<GuiTempo>().GetAutoPassagemDeTempoCustomFinalEditavel();
 
                         bool resultado1 = int.TryParse(tempo1, out posicao_temporal_1);
                         bool resultado2 = int.TryParse(tempo2, out posicao_temporal_2);
@@ -145,8 +145,8 @@ public class Controlador : MonoBehaviour {
                             }
                         } else
                         {
-                            if (!resultado1) GetComponent<GuiTempo>().SetAutoCustomComecoEditavel("Tempo " + tempo1 + " não existe.");
-                            if (!resultado2) GetComponent<GuiTempo>().SetAutoCustomFinalEditavel("Tempo " + tempo2 + " não existe.");
+                            if (!resultado1) GetComponent<GuiTempo>().SetAutoPassagemDeTempoCustomComecoEditavel("Tempo " + tempo1 + " não existe.");
+                            if (!resultado2) GetComponent<GuiTempo>().SetAutoPassagemDeTempoCustomFinalEditavel("Tempo " + tempo2 + " não existe.");
                         }
 
                         FindObjectOfType<Camera>().transform.position = posicao_da_camera;
