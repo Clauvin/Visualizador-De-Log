@@ -26,7 +26,7 @@ public class GuiTelaDePreLoadFIT : GuiTelaDePreLoad
             // Parte 1: ignora o [Mode 01]
             control_line = theReader.ReadLine();
 
-            // Lê a primeira linha com dados do pre-load do FIT.
+            // Lê a linha com dados do pre-load do FIT.
             line = control_line;
 
             control_line = theReader.ReadLine();

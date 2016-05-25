@@ -26,12 +26,12 @@ public class GuiTelaDePreLoadBolhas : GuiTelaDePreLoad
             // Parte 1: ignora o [Mode Bolhas]
             control_line = theReader.ReadLine();
 
-            // Lê a primeira linha com resolução do Bolhas.
+            // Lê a linha com resolução do Bolhas.
             line = control_line;
 
             control_line = theReader.ReadLine();
 
-            // Lê a primeira linha de dados de log do Bolhas.
+            // Lê a linha de dados de log do Bolhas.
             line = control_line;
 
             control_line = theReader.ReadLine();
