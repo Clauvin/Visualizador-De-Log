@@ -9,7 +9,9 @@ using System.Collections.Generic;
 
 namespace Basicas
 {
-
+    /// <summary>
+    /// Classe BancoDeDadosFIT. Responsável por guardar os dados do log carregado do FIT.
+    /// </summary>
     public class BancoDeDadosFIT
     {
         private ArrayList tempo;
@@ -104,6 +106,9 @@ namespace Basicas
         }
     }
 
+    /// <summary>
+    /// Classe BancoDeDadosBolhas. Responsável por guardar os dados do log carregado do Bolhas.
+    /// </summary>
     public class BancoDeDadosBolhas
     {
         private ArrayList tempo;
@@ -339,6 +344,9 @@ namespace Basicas
 	    (Vector3)6 - A rotação dos backgrounds.
         (Vector3)7 - A rotação da câmera.
     */
+    /// <summary>
+    /// Classe BancoDeDadosModos. Responsável por guardar os dados dos modos de visão possível dos logs.
+    /// </summary>
     class BancoDeDadosModos
     {
         private Dictionary<string, float> movimentacao;
@@ -669,12 +677,17 @@ namespace Basicas
 
     }
 
-    public class ParaHeatmap<T>
+    /// <summary>
+    /// Classe ParaVisualizacao. Responsável por guardar todos os tipos de dados que fossem necessários para a criação da visualização
+    /// dos dados do log.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class ParaVisualizacao<T>
     {
 
         private Dictionary<string, T> para_heatmap;
 
-        public ParaHeatmap()
+        public ParaVisualizacao()
         {
             para_heatmap = new Dictionary<string, T>();
         }
@@ -736,7 +749,9 @@ namespace Basicas
 
     }
 
-    //melhorar depois para ter métodos de entrada, saída e etc
+    /// <summary>
+    /// Classe DadosGUIHashMap. Responsável por guardar os dados sobre as cores do HashMap. Precisa ter funções de entrada e saída.
+    /// </summary>
     public class DadosGUIHashMap
     {
         public List<int> numeros_de_cor;
@@ -751,6 +766,9 @@ namespace Basicas
         }
     }
 
+    /// <summary>
+    /// Classe Pintar. Classe que guarda funções para pintura de Texturas2D, e em um caso, alterar Alpha de Materiais.
+    /// </summary>
     class Pintar {
 
         public Texture2D TexturaBemA(Texture2D B, Texture2D A)

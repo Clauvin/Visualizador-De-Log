@@ -15,11 +15,11 @@ public class NovoLeitor2 : MonoBehaviour
     protected BancoDeDadosBolhas bd_bolhas;
     protected BancoDeDadosFIT bd_fit;
     protected Vector2 resolucao;
-    protected ParaHeatmap<GameObject> objetos;
-    protected ParaHeatmap<Material> materiais;
+    protected ParaVisualizacao<GameObject> objetos;
+    protected ParaVisualizacao<Material> materiais;
 
-    public ParaHeatmap<Texture2D> texturas;
-    public ParaHeatmap<Texture2D> texturas_selecionadas;
+    public ParaVisualizacao<Texture2D> texturas;
+    public ParaVisualizacao<Texture2D> texturas_selecionadas;
 
     Pintar pintar;
     public ArrayList lista_de_objetos;
@@ -839,10 +839,10 @@ public class NovoLeitor2 : MonoBehaviour
     public void NovoLeitor2Init()
     {
         resolucao = new Vector2();
-        objetos = new ParaHeatmap<GameObject>();
-        materiais = new ParaHeatmap<Material>();
-        texturas = new ParaHeatmap<Texture2D>();
-        texturas_selecionadas = new ParaHeatmap<Texture2D>();
+        objetos = new ParaVisualizacao<GameObject>();
+        materiais = new ParaVisualizacao<Material>();
+        texturas = new ParaVisualizacao<Texture2D>();
+        texturas_selecionadas = new ParaVisualizacao<Texture2D>();
         pintar = new Pintar();
         lista_de_objetos = new ArrayList();
         lista_de_backgrounds = new ArrayList();
