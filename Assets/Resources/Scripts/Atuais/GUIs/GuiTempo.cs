@@ -14,14 +14,14 @@ public class GuiTempo : GuiPadrao2
     protected string texto;
     protected string instrucoes;
 
-    protected string stringParaEditar;
-    protected string autocustom1;
-    protected string autocustom2;
+    protected string string_Para_Editar;
+    protected string auto_custom_1;
+    protected string auto_custom_2;
 
-    protected int posicaoy;
-    protected float posinicialcamera;
-    protected float postempofloat;
-    protected int postempo;
+    protected int posicao_y;
+    protected float pos_inicial_camera;
+    protected float pos_tempo_float;
+    protected int pos_tempo;
     protected int tempo_inicial;
 
 
@@ -31,9 +31,9 @@ public class GuiTempo : GuiPadrao2
         posy = 80;
         texto = "Tempo = ";
         revelado = false;
-        stringParaEditar = "Apenas >= 0 aqui.";
-        autocustom1 = "Apenas >= 0 aqui.";
-        autocustom2 = "Apenas >= 0 aqui.";
+        string_Para_Editar = "Apenas >= 0 aqui.";
+        auto_custom_1 = "Apenas >= 0 aqui.";
+        auto_custom_2 = "Apenas >= 0 aqui.";
     }
 
     public override void OnGUI()
@@ -42,18 +42,18 @@ public class GuiTempo : GuiPadrao2
         {
             GUI.BeginGroup(new Rect(posx, posy, 320, 200));
 
-            posicaoy = 0;
+            posicao_y = 0;
 
-            GUI.Label(new Rect(10, 0, 210, 40), "Tempo Mostrado em Câmera: " + postempo + " de \n" +
+            GUI.Label(new Rect(10, 0, 210, 40), "Tempo Mostrado em Câmera: " + pos_tempo + " de \n" +
                 GetComponent<NovoLeitor2>().GetUltimoTempoFIT(), "textfield");
             if (GetComponent<Controlador>().GetAutoMode()) GUI.TextField(new Rect(10, 40, 210, 20), "Modo Automático ativado");
             GUI.Label(new Rect(10, 60, 210, 20), "Pular para Posição", "textfield");
-            stringParaEditar = GUI.TextField(new Rect(10, 80, 210, 20), stringParaEditar);
+            string_Para_Editar = GUI.TextField(new Rect(10, 80, 210, 20), string_Para_Editar);
 
             GUI.Label(new Rect(10, 100, 210, 20), "Começo de Modo Automático Customizado", "textfield");
-            autocustom1 = GUI.TextField(new Rect(10, 120, 210, 20), autocustom1);
+            auto_custom_1 = GUI.TextField(new Rect(10, 120, 210, 20), auto_custom_1);
             GUI.Label(new Rect(10, 140, 210, 20), "Fim de Modo Automático Customizado", "textfield");
-            autocustom2 = GUI.TextField(new Rect(10, 160, 210, 20), autocustom2);
+            auto_custom_2 = GUI.TextField(new Rect(10, 160, 210, 20), auto_custom_2);
             if (GetComponent<Controlador>().GetAutoMode())
             {
                 GUI.TextField(new Rect(10, 180, 210, 20), "Modo Automático Customizado ativado");
@@ -93,17 +93,17 @@ public class GuiTempo : GuiPadrao2
 
     public override string GetTexto() { return texto; }
 
-    public string GetStringEditavel() { return stringParaEditar; }
+    public string GetStringEditavel() { return string_Para_Editar; }
 
-    public void SetStringEditavel(string editada) { stringParaEditar = editada; }
+    public void SetStringEditavel(string editada) { string_Para_Editar = editada; }
 
-    public string GetAutoCustomComecoEditavel() { return autocustom1; }
+    public string GetAutoCustomComecoEditavel() { return auto_custom_1; }
 
-    public void SetAutoCustomComecoEditavel(string editada) { autocustom1 = editada; }
+    public void SetAutoCustomComecoEditavel(string editada) { auto_custom_1 = editada; }
 
-    public string GetAutoCustomFinalEditavel() { return autocustom2; }
+    public string GetAutoCustomFinalEditavel() { return auto_custom_2; }
 
-    public void SetAutoCustomFinalEditavel(string editada) { autocustom2 = editada; }
+    public void SetAutoCustomFinalEditavel(string editada) { auto_custom_2 = editada; }
 
     void Awake()
     {
@@ -123,17 +123,17 @@ public class GuiTempo : GuiPadrao2
     {
         if (gambiarra)
         {
-            posinicialcamera = GetComponent<Camera>().transform.position.y;
+            pos_inicial_camera = GetComponent<Camera>().transform.position.y;
             gambiarra = false;
         }
 
-        postempofloat = (posinicialcamera - GetComponent<Camera>().transform.position.y) / 20 + tempo_inicial;
+        pos_tempo_float = (pos_inicial_camera - GetComponent<Camera>().transform.position.y) / 20 + tempo_inicial;
         if (GetComponent<Controlador>().modo_de_visualizacao == "Um Frame De Cada Vez em 2D")
         {
-            postempofloat += 0.25f;
+            pos_tempo_float += 0.25f;
         }
-        postempo = (int)postempofloat;
-        if (postempo < 0) postempo = 0;
+        pos_tempo = (int)pos_tempo_float;
+        if (pos_tempo < 0) pos_tempo = 0;
     }
 
 
