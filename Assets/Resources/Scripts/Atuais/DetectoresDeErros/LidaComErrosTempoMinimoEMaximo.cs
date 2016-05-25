@@ -7,9 +7,8 @@ using System.Globalization;
 /// Classe LidaComErrosTempoMinimoEMaximo. Criada para detectar erros nos valores de tempo mínimo e máximo usados no programa,
 /// e uma vez encontrados, avisar isso e gerar mensagens de erro adequadas para que apareçam na GUI.
 /// </summary>
-public class LidaComErrosTempoMinimoEMaximo : MonoBehaviour {
-
-    public int posicao_da_mensagem_de_erro_y;
+public class LidaComErrosTempoMinimoEMaximo : LidaComErros
+{
 
     //variáveis que definem se houve ou não erro, o que mostra mensagens de erro.
     public bool erro_de_input_errado_minimo = false;
@@ -34,9 +33,6 @@ public class LidaComErrosTempoMinimoEMaximo : MonoBehaviour {
     public int x_da_janela_de_erro_de_erro_maximo;
     public int largura_da_janela_de_erro_de_erro_maximo;
     public int altura_da_janela_de_erro_de_erro_maximo;
-
-    public int quantidade_de_mudanca_de_posicao_y;
-
 
     public void ConfigurarVariaveisParaVisualizacaoDeObjetos()
     {
@@ -138,7 +134,7 @@ public class LidaComErrosTempoMinimoEMaximo : MonoBehaviour {
         }
     }
 
-    public void PossiveisMensagensDeErro()
+    public override void PossiveisMensagensDeErro()
     {
         if (erro_de_input_errado_minimo) {
 
@@ -210,7 +206,7 @@ public class LidaComErrosTempoMinimoEMaximo : MonoBehaviour {
         }
     }
 
-    public bool NaoTemosErrosDeInput()
+    public override bool NaoTemosErrosDeInput()
     {
 
         // Deus abençoe que C# me permite fazer essas comparações em sequência.

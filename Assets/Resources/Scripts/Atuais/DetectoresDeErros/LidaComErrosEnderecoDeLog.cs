@@ -7,7 +7,7 @@ using System;
 /// Classe LidaComErrosTempoMinimoEMaximo. Criada para detectar erros no arquivo escolhido para ser carregado pelo visualizador de logs,
 /// e uma vez encontrados, avisar isso e gerar mensagens de erro adequadas para que apareçam na GUI.
 /// </summary>
-public class LidaComErrosEnderecoDeLog : MonoBehaviour
+public class LidaComErrosEnderecoDeLog : LidaComErros
 {
 
     // variáveis que definem se houve ou não erro, o que mostra mensagens de erro.
@@ -23,10 +23,8 @@ public class LidaComErrosEnderecoDeLog : MonoBehaviour
     public string valor_de_comparacao_de_tipo_de_log;
 
     public int x_da_janela_de_erro;
-    public int posicao_da_mensagem_de_erro_y;
     public int largura_da_janela_de_erro;
     public int altura_da_janela_de_erro;
-    public int quantidade_de_mudanca_de_posicao_y;
 
     // Variáveis necessárias para tentar abrir o log através do endereco dado e ver se existem erros.
     FileStream filestream_de_teste;
@@ -43,6 +41,7 @@ public class LidaComErrosEnderecoDeLog : MonoBehaviour
 
     }
 
+    // Enfim, a extensão do arquivo carregado é .txt ou não?
     private bool AExtensaoETxt(string endereco)
     {
         string[] checagem;
@@ -124,7 +123,7 @@ public class LidaComErrosEnderecoDeLog : MonoBehaviour
         
     }
 
-    public void PossiveisMensagensDeErro()
+    public override void PossiveisMensagensDeErro()
     {
         if (erro_de_acesso_nao_autorizado)
         {
@@ -172,7 +171,7 @@ public class LidaComErrosEnderecoDeLog : MonoBehaviour
         }
     }
 
-    public bool NaoTemosErrosDeInput()
+    public override bool NaoTemosErrosDeInput()
     {
         // Deus abençoe que C# me permite fazer essas comparações em sequência.
         return !(erro_de_inexistencia_do_arquivo || erro_de_caminho_escolhido_invalido ||
