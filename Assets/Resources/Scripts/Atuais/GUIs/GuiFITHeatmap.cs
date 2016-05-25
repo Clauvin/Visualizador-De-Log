@@ -21,11 +21,11 @@ public class GuiFITHeatmap : GuiHeatmap
         {
             int qualheatmap = GetComponent<Controlador>().QualHeatmapMostra();
             GUI.BeginGroup(new Rect(posx, posy, 170, 20 *
-                (dados[qualheatmap].numerosdecor.Count + 3)));
+                (dados[qualheatmap].numeros_de_cor.Count + 3)));
 
             posicao_y = 0;
 
-            GUI.Box(new Rect(10, posicao_y, 170, 40 + 20 * dados[qualheatmap].numerosdecor.Count), string.Empty);
+            GUI.Box(new Rect(10, posicao_y, 170, 40 + 20 * dados[qualheatmap].numeros_de_cor.Count), string.Empty);
 
             if (qualheatmap == 0)
             {
@@ -40,10 +40,10 @@ public class GuiFITHeatmap : GuiHeatmap
             }
 
             //lembrando, uma das cores já foi
-            for (int i = 0; i < dados[qualheatmap].numerosdecor.Count; i++)
+            for (int i = 0; i < dados[qualheatmap].numeros_de_cor.Count; i++)
             {
-                GUI.Box(new Rect(10, posicao_y, 20, 20), dados[qualheatmap].texturasdecor[i]);
-                numero = dados[qualheatmap].numerosdecor[i];
+                GUI.Box(new Rect(10, posicao_y, 20, 20), dados[qualheatmap].texturas_de_cor[i]);
+                numero = dados[qualheatmap].numeros_de_cor[i];
                 GUI.TextField(new Rect(35, posicao_y, 145, 20), numero.ToString());
                 posicao_y += 20;
             }

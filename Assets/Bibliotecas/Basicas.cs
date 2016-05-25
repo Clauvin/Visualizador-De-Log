@@ -14,24 +14,24 @@ namespace Basicas
     {
         private ArrayList tempo;
         private ArrayList personagem;
-        private ArrayList gridx;
-        private ArrayList gridy;
+        private ArrayList grid_x;
+        private ArrayList grid_y;
         //Time: 1 = Char:1 = GridX:5 = GridY:7
 
         public BancoDeDadosFIT()
         {
             tempo = new ArrayList();
             personagem = new ArrayList();
-            gridx = new ArrayList();
-            gridy = new ArrayList();
+            grid_x = new ArrayList();
+            grid_y = new ArrayList();
         }
 
         public bool Add(int time, int pers, int x, int y)
         {
             tempo.Add(time);
             personagem.Add(pers);
-            gridx.Add(x);
-            gridy.Add(y);
+            grid_x.Add(x);
+            grid_y.Add(y);
             return true;
         }
 
@@ -49,9 +49,11 @@ namespace Basicas
 
 
             
-#if (DEBUG)
+                #if (DEBUG)
+
                 Debug.Log("BancoDeDadosFIT.GetTempo - Não há posição " + pos);
-#endif
+
+                #endif
                 return -1;
             }
         }
@@ -62,35 +64,41 @@ namespace Basicas
             //ATENÇAO: Esse catch está correto?
             catch (ArgumentOutOfRangeException excecao)
             {
-#if (DEBUG)
+                #if (DEBUG)
+
                 Debug.Log("BancoDeDadosFIT.GetPersonagem - Não há posição " + pos);
-#endif
+
+                #endif
                 return -1;
             }
         }
 
         public int GetGridX(int pos)
         {
-            try { return (int)gridx[pos]; }
+            try { return (int)grid_x[pos]; }
             //ATENÇAO: Esse catch está correto?
             catch (ArgumentOutOfRangeException excecao)
             {
-#if (DEBUG)
+                #if (DEBUG)
+
                 Debug.Log("BancoDeDadosFIT.GetGridX - Não há posição " + pos);
-#endif
+
+                #endif
                 return -1;
             }
         }
 
         public int GetGridY(int pos)
         {
-            try { return (int)gridy[pos]; }
+            try { return (int)grid_y[pos]; }
             //ATENÇAO: Esse catch está correto?
             catch (ArgumentOutOfRangeException excecao)
             {
-#if (DEBUG)
+                #if (DEBUG)
+
                 Debug.Log("BancoDeDadosFIT.GetGridY - Não há posição " + pos);
-#endif
+
+                #endif
                 return -1;
             }
         }
@@ -99,54 +107,54 @@ namespace Basicas
     public class BancoDeDadosBolhas
     {
         private ArrayList tempo;
-        private ArrayList mouseouobjeto;
-        private ArrayList coordenadasx;
-        private ArrayList coordenadasy;
+        private ArrayList mouse_ou_objeto;
+        private ArrayList coordenadas_x;
+        private ArrayList coordenadas_y;
 
-        private ArrayList qualobjeto;
-        private ArrayList qualframe;
-        private ArrayList criadoagora;
-        private ArrayList quemcriou;
+        private ArrayList qual_objeto;
+        private ArrayList qual_frame;
+        private ArrayList criado_agora;
+        private ArrayList quem_criou;
 
         private ArrayList clicando;
         private ArrayList segurando;
         private ArrayList arrastando;
 
-        private ArrayList oquefez;
-        private ArrayList noquefez;
+        private ArrayList o_que_fez;
+        private ArrayList no_que_fez;
 
         public BancoDeDadosBolhas()
         {
             tempo = new ArrayList();
-            mouseouobjeto = new ArrayList();
-            coordenadasx = new ArrayList();
-            coordenadasy = new ArrayList();
+            mouse_ou_objeto = new ArrayList();
+            coordenadas_x = new ArrayList();
+            coordenadas_y = new ArrayList();
 
-            qualobjeto = new ArrayList();
-            qualframe = new ArrayList();
-            criadoagora = new ArrayList();
-            quemcriou = new ArrayList();
+            qual_objeto = new ArrayList();
+            qual_frame = new ArrayList();
+            criado_agora = new ArrayList();
+            quem_criou = new ArrayList();
 
             clicando = new ArrayList();
             segurando = new ArrayList();
             arrastando = new ArrayList();
 
-            oquefez = new ArrayList();
-            noquefez = new ArrayList();
+            o_que_fez = new ArrayList();
+            no_que_fez = new ArrayList();
     }
 
         public bool AddMouse(int time, string mouse, int x, int y, string clicado, string segurado, string arrastado)
         {
 
             tempo.Add(time);
-            mouseouobjeto.Add(mouse);
-            coordenadasx.Add(x);
-            coordenadasy.Add(y);
+            mouse_ou_objeto.Add(mouse);
+            coordenadas_x.Add(x);
+            coordenadas_y.Add(y);
 
-            qualobjeto.Add("Mouse");
-            qualframe.Add(string.Empty);
-            criadoagora.Add(string.Empty);
-            quemcriou.Add(string.Empty);
+            qual_objeto.Add("Mouse");
+            qual_frame.Add(string.Empty);
+            criado_agora.Add(string.Empty);
+            quem_criou.Add(string.Empty);
 
             clicando.Add(clicado);
             segurando.Add(segurado);
@@ -158,14 +166,14 @@ namespace Basicas
                               string qcriou, string clicado, string segurado, string arrastado)
         {
             tempo.Add(time);
-            mouseouobjeto.Add(objeto);
-            coordenadasx.Add(x);
-            coordenadasy.Add(y);
+            mouse_ou_objeto.Add(objeto);
+            coordenadas_x.Add(x);
+            coordenadas_y.Add(y);
 
-            qualobjeto.Add(qual);
-            qualframe.Add(frame);
-            criadoagora.Add(criadonessemomento);
-            quemcriou.Add(qcriou);
+            qual_objeto.Add(qual);
+            qual_frame.Add(frame);
+            criado_agora.Add(criadonessemomento);
+            quem_criou.Add(qcriou);
 
             clicando.Add(clicado);
             segurando.Add(segurado);
@@ -176,7 +184,7 @@ namespace Basicas
 
         public int GetQuantidadeDeEntradas()
         {
-            return mouseouobjeto.Count;
+            return mouse_ou_objeto.Count;
         }
 
         public int GetTempo(int pos)
@@ -193,7 +201,7 @@ namespace Basicas
 
         public string GetMouseOuObjeto(int pos)
         {
-            try { return (string)mouseouobjeto[pos]; }
+            try { return (string)mouse_ou_objeto[pos]; }
             //ATENÇAO: Esse catch está correto?
             catch (ArgumentOutOfRangeException excecao)
             {
@@ -206,7 +214,7 @@ namespace Basicas
 
         public int GetCoordenadaX(int pos)
         {
-            try { return (int)coordenadasx[pos]; }
+            try { return (int)coordenadas_x[pos]; }
             //ATENÇAO: Esse catch está correto?
             catch (ArgumentOutOfRangeException excecao)
             {
@@ -219,7 +227,7 @@ namespace Basicas
 
         public int GetCoordenadaY(int pos)
         {
-            try { return (int)coordenadasy[pos]; }
+            try { return (int)coordenadas_y[pos]; }
             //ATENÇAO: Esse catch está correto?
             catch (ArgumentOutOfRangeException excecao)
             {
@@ -232,7 +240,7 @@ namespace Basicas
 
         public string GetQualObjeto(int pos)
         {
-            try { return (string)qualobjeto[pos]; }
+            try { return (string)qual_objeto[pos]; }
             //ATENÇAO: Esse catch está correto?
             catch (ArgumentOutOfRangeException excecao) {
 #if (DEBUG)
@@ -244,7 +252,7 @@ namespace Basicas
 
         public int GetQualFrame(int pos)
         {
-            try { return (int)qualframe[pos]; }
+            try { return (int)qual_frame[pos]; }
             //ATENÇAO: Esse catch está correto?
             catch (ArgumentOutOfRangeException excecao)
             {
@@ -257,7 +265,7 @@ namespace Basicas
 
         public string GetCriadoAgora(int pos)
         {
-            try { return (string)criadoagora[pos]; }
+            try { return (string)criado_agora[pos]; }
             //ATENÇAO: Esse catch está correto?
             catch (ArgumentOutOfRangeException excecao)
             {
@@ -270,7 +278,7 @@ namespace Basicas
 
         public string GetQuemCriou(int pos)
         {
-            try { return (string)quemcriou[pos]; }
+            try { return (string)quem_criou[pos]; }
             //ATENÇAO: Esse catch está correto?
             catch (ArgumentOutOfRangeException excecao)
             {
@@ -334,30 +342,30 @@ namespace Basicas
     class BancoDeDadosModos
     {
         private Dictionary<string, float> movimentacao;
-        private Dictionary<string, float> camerax;
-        private Dictionary<string, float> camerainity;
-        private Dictionary<string, float> cameraz;
-        private Dictionary<string, float> camerainitz;
+        private Dictionary<string, float> camera_x;
+        private Dictionary<string, float> camera_init_y;
+        private Dictionary<string, float> camera_z;
+        private Dictionary<string, float> camera_init_z;
         private Dictionary<string, bool> orthographic;
         private Dictionary<string, float> alpha;
         private Dictionary<string, Vector3> rotation;
-        private Dictionary<string, Vector3> rotationcamera;
-        private Dictionary<string, float> visiblebackgroundalpha;
+        private Dictionary<string, Vector3> rotation_camera;
+        private Dictionary<string, float> visible_background_alpha;
         private Dictionary<string, int> layer;
         private Dictionary<string, string> instrucoes;
 
         public BancoDeDadosModos()
         {
             movimentacao = new Dictionary<string, float>();
-            camerax = new Dictionary<string, float>();
-            camerainity = new Dictionary<string, float>();
-            cameraz = new Dictionary<string, float>();
-            camerainitz = new Dictionary<string, float>();
+            camera_x = new Dictionary<string, float>();
+            camera_init_y = new Dictionary<string, float>();
+            camera_z = new Dictionary<string, float>();
+            camera_init_z = new Dictionary<string, float>();
             orthographic = new Dictionary<string, bool>();
             alpha = new Dictionary<string, float>();
             rotation = new Dictionary<string, Vector3>();
-            rotationcamera = new Dictionary<string, Vector3>();
-            visiblebackgroundalpha = new Dictionary<string, float>();
+            rotation_camera = new Dictionary<string, Vector3>();
+            visible_background_alpha = new Dictionary<string, float>();
             layer = new Dictionary<string, int>();
             instrucoes = new Dictionary<string, string>();
         }
@@ -366,15 +374,15 @@ namespace Basicas
             float alph, Vector3 rot, Vector3 rotationcam, float backalpha, int novolayer, string instrucao)
         {
             movimentacao.Add(modo, mov);
-            camerax.Add(modo, x);
-            camerainity.Add(modo, y);
-            cameraz.Add(modo, z);
-            camerainitz.Add(modo, initz);
+            camera_x.Add(modo, x);
+            camera_init_y.Add(modo, y);
+            camera_z.Add(modo, z);
+            camera_init_z.Add(modo, initz);
             orthographic.Add(modo, ort);
             alpha.Add(modo, alph);
             rotation.Add(modo, rot);
-            rotationcamera.Add(modo, rotationcam);
-            visiblebackgroundalpha.Add(modo, backalpha);
+            rotation_camera.Add(modo, rotationcam);
+            visible_background_alpha.Add(modo, backalpha);
             layer.Add(modo, novolayer);
             instrucoes.Add(modo, instrucao);
             return true;
@@ -407,7 +415,7 @@ namespace Basicas
 
         public float GetCameraX(string modo)
         {
-            try { return camerax[modo]; }
+            try { return camera_x[modo]; }
             //ATENÇAO: Esse catch está correto?
             catch (ArgumentNullException excecao)
             {
@@ -427,7 +435,7 @@ namespace Basicas
 
         public float GetCameraInitY(string modo)
         {
-            try { return camerainity[modo]; }
+            try { return camera_init_y[modo]; }
             //ATENÇAO: Esse catch está correto?
             catch (ArgumentNullException excecao)
             {
@@ -447,7 +455,7 @@ namespace Basicas
 
         public float GetCameraZ(string modo)
         {
-            try { return cameraz[modo]; }
+            try { return camera_z[modo]; }
             //ATENÇAO: Esse catch está correto?
             catch (ArgumentNullException excecao)
             {
@@ -467,7 +475,7 @@ namespace Basicas
 
         public float GetCameraInitZ(string modo)
         {
-            try { return camerainitz[modo]; }
+            try { return camera_init_z[modo]; }
             //ATENÇAO: Esse catch está correto?
             catch (ArgumentNullException excecao)
             {
@@ -489,8 +497,8 @@ namespace Basicas
         {
             float x = GetCameraX(modo);
             x += add;
-            camerax.Remove(modo);
-            camerax.Add(modo, x);
+            camera_x.Remove(modo);
+            camera_x.Add(modo, x);
         }
 
         //Aperfeiçoar essa função, acho que ela não precisa do remove.
@@ -498,28 +506,28 @@ namespace Basicas
         {
             float y = GetCameraInitY(modo);
             y += add;
-            camerainity.Remove(modo);
-            camerainity.Add(modo, y);
+            camera_init_y.Remove(modo);
+            camera_init_y.Add(modo, y);
         }
 
         public void AddCameraZ(string modo, float add)
         {
             float z = GetCameraZ(modo);
             z += add;
-            camerax.Remove(modo);
-            camerax.Add(modo, z);
+            camera_x.Remove(modo);
+            camera_x.Add(modo, z);
         }
 
         public void SetCameraInitY(string modo, float set)
         {
-            camerainity.Remove(modo);
-            camerainity.Add(modo, set);
+            camera_init_y.Remove(modo);
+            camera_init_y.Add(modo, set);
         }
 
         public void SetCameraInitZ(string modo, float set)
         {
-            camerainitz.Remove(modo);
-            camerainitz.Add(modo, set);
+            camera_init_z.Remove(modo);
+            camera_init_z.Add(modo, set);
         }
 
         public bool GetOrthographic(string modo)
@@ -590,7 +598,7 @@ namespace Basicas
 
         public Vector3 GetRotationChangeCamera(string modo)
         {
-            try { return rotationcamera[modo]; }
+            try { return rotation_camera[modo]; }
             //ATENÇAO: Esse catch está correto?
             catch (ArgumentNullException excecao)
             {
@@ -612,7 +620,7 @@ namespace Basicas
 
         public float GetVisibleBackgroundAlpha(string modo)
         {
-            try { return visiblebackgroundalpha[modo]; }
+            try { return visible_background_alpha[modo]; }
             //ATENÇAO: Esse catch está correto?
             catch (ArgumentNullException excecao)
             {
@@ -664,18 +672,18 @@ namespace Basicas
     public class ParaHeatmap<T>
     {
 
-        private Dictionary<string, T> paraheatmap;
+        private Dictionary<string, T> para_heatmap;
 
         public ParaHeatmap()
         {
-            paraheatmap = new Dictionary<string, T>();
+            para_heatmap = new Dictionary<string, T>();
         }
 
         public bool Add(string palavra, T objeto)
         {
             try
             {
-                paraheatmap.Add(palavra, objeto);
+                para_heatmap.Add(palavra, objeto);
                 return true;
             } catch (ArgumentNullException a) // value = NULL;
             {
@@ -696,7 +704,7 @@ namespace Basicas
         {
             try
             {
-                paraheatmap.Remove(palavra);
+                para_heatmap.Remove(palavra);
                 return true;
             }
             catch (ArgumentNullException a) // value = NULL;
@@ -714,7 +722,7 @@ namespace Basicas
 
             try
             {
-                paraheatmap.TryGetValue(palavra, out objeto);
+                para_heatmap.TryGetValue(palavra, out objeto);
                 return objeto;
             } catch (ArgumentNullException a) // value = NULL;
             {
@@ -731,15 +739,15 @@ namespace Basicas
     //melhorar depois para ter métodos de entrada, saída e etc
     public class DadosGUIHashMap
     {
-        public List<int> numerosdecor;
+        public List<int> numeros_de_cor;
         public List<Color> cores;
-        public List<Texture2D> texturasdecor;
+        public List<Texture2D> texturas_de_cor;
 
         public DadosGUIHashMap()
         {
-            numerosdecor = new List<int>();
+            numeros_de_cor = new List<int>();
             cores = new List<Color>();
-            texturasdecor = new List<Texture2D>();
+            texturas_de_cor = new List<Texture2D>();
         }
     }
 
@@ -765,9 +773,6 @@ namespace Basicas
 
         public Material AlterarAlphaDeMaterial(Material A, float alpha)
         {
-
-            int x = 0;
-            int y = 0;
             Color cor = new Color();
 
             cor = A.color;

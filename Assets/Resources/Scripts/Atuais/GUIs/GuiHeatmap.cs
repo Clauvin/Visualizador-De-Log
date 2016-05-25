@@ -71,7 +71,7 @@ public class GuiHeatmap : GuiPadrao2
                 DadosGUIHashMap infoheatmap = new DadosGUIHashMap();
 
                 dicionario_heatmap = GetComponent<NovoLeitor2>().GetMatrizHeatmap(i).GetDicionarioDeCores();
-                infoheatmap.numerosdecor.AddRange(dicionario_heatmap.Keys);
+                infoheatmap.numeros_de_cor.AddRange(dicionario_heatmap.Keys);
                 infoheatmap.cores.AddRange(dicionario_heatmap.Values);
 
                 for (int h = 0; h < infoheatmap.cores.Count; h++)
@@ -85,7 +85,7 @@ public class GuiHeatmap : GuiPadrao2
                         }
                     }
                     textura.Apply();
-                    infoheatmap.texturasdecor.Add(textura);
+                    infoheatmap.texturas_de_cor.Add(textura);
                 }
 
                 dados.Add(infoheatmap);
