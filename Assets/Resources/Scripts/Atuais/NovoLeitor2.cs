@@ -348,11 +348,11 @@ public class NovoLeitor2 : MonoBehaviour
 
     public void CreateStuffFIT()
     {
-        Camera acamera = FindObjectOfType<Camera>();
+        Camera a_camera = FindObjectOfType<Camera>();
         GameObject objeto = null;
         GameObject background = null;
-        Vector3 newpos = new Vector3(0f, 0f, 0f);
-        Vector3 newpos_camera = new Vector3(0f, 0f, 0f);
+        Vector3 new_pos = new Vector3(0f, 0f, 0f);
+        Vector3 new_pos_camera = new Vector3(0f, 0f, 0f);
         Material material_do_create = null;
         float x, y, z;
         int i;
@@ -444,11 +444,11 @@ public class NovoLeitor2 : MonoBehaviour
             objeto2.transform.Rotate(new Vector3(0, 0, 180));
 
 
-            newpos.x = 0;
+            new_pos.x = 0;
             y = background.transform.position.y;
-            newpos.y = y;
-            newpos.z = 0;
-            background.transform.position = newpos;
+            new_pos.y = y;
+            new_pos.z = 0;
+            background.transform.position = new_pos;
 
             //adicionando o background onde deve ficar
             if (criar_background)
@@ -480,9 +480,9 @@ public class NovoLeitor2 : MonoBehaviour
                 
             z -= (bd_fit.GetGridY(i)/32 * (background.GetComponent<Dados>().altura_z /15));
 
-            newpos = new Vector3(x, y, z);
+            new_pos = new Vector3(x, y, z);
 
-            objeto.transform.position = newpos;
+            objeto.transform.position = new_pos;
 
             y += 0.5f;
             objeto.transform.position = new Vector3(x, y, z);
@@ -499,11 +499,7 @@ public class NovoLeitor2 : MonoBehaviour
 
         }
 
-        //ajeitando a câmera
-        newpos_camera.y = ((GameObject)lista_de_backgrounds[0]).transform.position.y;
-        acamera.transform.position = newpos_camera;
-        acamera.transform.Rotate(90f, 0f, 0f);
-        acamera.orthographic = true;
+        AjeitandoACamera(new_pos_camera, a_camera);
 
         //ajeitando o heatmap
         heatmap = Instantiate<GameObject>((GameObject)Resources.Load("Objetos/BackgroundHeatmap"));
@@ -518,11 +514,11 @@ public class NovoLeitor2 : MonoBehaviour
 
     public void CreateStuffBolhas()
     {
-        Camera acamera = FindObjectOfType<Camera>();
+        Camera a_camera = FindObjectOfType<Camera>();
         GameObject objeto = null;
         GameObject background = null;
-        Vector3 newpos = new Vector3(0f, 0f, 0f);
-        Vector3 newpos_camera = new Vector3(0f, 0f, 0f);
+        Vector3 new_pos = new Vector3(0f, 0f, 0f);
+        Vector3 new_pos_camera = new Vector3(0f, 0f, 0f);
         Material material_do_create = null;
         float x, y, z;
         int i;
@@ -612,11 +608,11 @@ public class NovoLeitor2 : MonoBehaviour
             objeto2.transform.parent = objeto.transform;
             objeto2.transform.Rotate(new Vector3(0, 0, 180));
 
-            newpos.x = 0;
+            new_pos.x = 0;
             y = background.transform.position.y;
-            newpos.y = y;
-            newpos.z = 0;
-            background.transform.position = newpos;
+            new_pos.y = y;
+            new_pos.z = 0;
+            background.transform.position = new_pos;
 
             //adicionando o background onde deve ficar
             if (novo_tempo)
@@ -652,9 +648,9 @@ public class NovoLeitor2 : MonoBehaviour
                 
             z -= (bd_bolhas.GetCoordenadaY(i) * (background.GetComponent<Dados>().altura_z / resolucao.y));
 
-            newpos = new Vector3(x, y, z);
+            new_pos = new Vector3(x, y, z);
 
-            objeto.transform.position = newpos;
+            objeto.transform.position = new_pos;
 
             y += 0.5f;
             objeto.transform.position = new Vector3(x, y, z);
@@ -671,11 +667,7 @@ public class NovoLeitor2 : MonoBehaviour
 
         }
 
-        // Ajeitando a câmera
-        newpos_camera.y = ((GameObject)lista_de_backgrounds[0]).transform.position.y;
-        acamera.transform.position = newpos_camera;
-        acamera.transform.Rotate(90f, 0f, 0f);
-        acamera.orthographic = true;
+        AjeitandoACamera(new_pos_camera, a_camera);
 
         // Ajeitando o heatmap
         heatmap = Instantiate<GameObject>((GameObject)Resources.Load("Objetos/BackgroundHeatmap"));
@@ -819,6 +811,14 @@ public class NovoLeitor2 : MonoBehaviour
             objeto_a_receber_dados.GetComponent<Dados>().criado_agora = bd_bolhas.GetCriadoAgora(i);
             objeto_a_receber_dados.GetComponent<Dados>().quem_criou = bd_bolhas.GetQuemCriou(i);
         }
+    }
+
+    protected void AjeitandoACamera(Vector3 new_pos_camera, Camera a_camera)
+    {
+        new_pos_camera.y = ((GameObject)lista_de_backgrounds[0]).transform.position.y;
+        a_camera.transform.position = new_pos_camera;
+        a_camera.transform.Rotate(90f, 0f, 0f);
+        a_camera.orthographic = true;
     }
 
     public int GetPrimeiroTempoFIT()
