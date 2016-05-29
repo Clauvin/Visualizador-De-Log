@@ -361,7 +361,7 @@ public class NovoLeitor2 : MonoBehaviour
 
         bool criar_background; bool fechar_background;
 
-        Material materialheatmap = new Material((Material)Resources.Load("Materiais/MaterialHeatmap"));
+        Material material_heatmap = new Material((Material)Resources.Load("Materiais/MaterialHeatmap"));
 
         material_background.mainTexture = (Texture)Instantiate(Resources.Load("Texturas/Grid"));
 
@@ -501,13 +501,8 @@ public class NovoLeitor2 : MonoBehaviour
 
         AjeitandoACamera(new_pos_camera, a_camera);
 
-        //ajeitando o heatmap
-        heatmap = Instantiate<GameObject>((GameObject)Resources.Load("Objetos/BackgroundHeatmap"));
-        heatmap.name = "Heatmap";
-        materialheatmap.SetTexture("_MainTex", ((HeatMap)matrizes_dos_heatmaps[0]).heatmap);
-        heatmap.GetComponent<MeshRenderer>().material = Instantiate(materialheatmap);
+        AjeitandoOHeatmap(material_heatmap);
 
-        heatmap.transform.position = ((GameObject)lista_de_backgrounds[0]).transform.position + new Vector3(200f, 0, 0);
         GetComponent<Controlador>().MudarTransparenciaDosObjetos(0.2f);
 
     }
@@ -669,13 +664,8 @@ public class NovoLeitor2 : MonoBehaviour
 
         AjeitandoACamera(new_pos_camera, a_camera);
 
-        // Ajeitando o heatmap
-        heatmap = Instantiate<GameObject>((GameObject)Resources.Load("Objetos/BackgroundHeatmap"));
-        heatmap.name = "Heatmap";
-        material_heatmap.SetTexture("_MainTex", ((HeatMap)matrizes_dos_heatmaps[0]).heatmap);
-        heatmap.GetComponent<MeshRenderer>().material = Instantiate(material_heatmap);
+        AjeitandoOHeatmap(material_heatmap);
 
-        heatmap.transform.position = ((GameObject)lista_de_backgrounds[0]).transform.position + new Vector3(200f, 0, 0);
         GetComponent<Controlador>().MudarTransparenciaDosObjetos(0.2f);
 
     }
@@ -819,6 +809,16 @@ public class NovoLeitor2 : MonoBehaviour
         a_camera.transform.position = new_pos_camera;
         a_camera.transform.Rotate(90f, 0f, 0f);
         a_camera.orthographic = true;
+    }
+
+    protected void AjeitandoOHeatmap(Material materialheatmap)
+    {
+        heatmap = Instantiate<GameObject>((GameObject)Resources.Load("Objetos/BackgroundHeatmap"));
+        heatmap.name = "Heatmap";
+        materialheatmap.SetTexture("_MainTex", ((HeatMap)matrizes_dos_heatmaps[0]).heatmap);
+        heatmap.GetComponent<MeshRenderer>().material = Instantiate(materialheatmap);
+
+        heatmap.transform.position = ((GameObject)lista_de_backgrounds[0]).transform.position + new Vector3(200f, 0, 0);
     }
 
     public int GetPrimeiroTempoFIT()
