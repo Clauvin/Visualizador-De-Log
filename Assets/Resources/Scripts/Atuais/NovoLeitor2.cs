@@ -6,7 +6,7 @@ using System.Collections;
 
 /// <summary>
 /// Classe NovoLeitor2.
-/// <para>Responsável por carregar as informações necessárias para o programa funcionar e fazer o que precisa ser feito com elas.</para>
+/// <para>Responsável por carregar as informações necessárias para o programa funcionar e usá-las.</para>
 /// </summary>
 public class NovoLeitor2 : MonoBehaviour
 {
