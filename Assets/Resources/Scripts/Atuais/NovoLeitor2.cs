@@ -404,8 +404,6 @@ public class NovoLeitor2 : MonoBehaviour
             objeto = Instantiate(objetos.Get("Qualquer Coisa FIT"));
             objeto.AddComponent<AoSerClicadoFIT>();
 
-            if (objeto == null) Debug.Log("Deu ruim.");
-
             objeto.name = bd_fit.GetTempo(i).ToString() + " " + bd_fit.GetPersonagem(i).ToString() + " " +
                 bd_fit.GetGridX(i).ToString() + " " + bd_fit.GetGridY(i).ToString();
 
@@ -415,8 +413,7 @@ public class NovoLeitor2 : MonoBehaviour
             // Foi um pouco de exagero fazer um material pra cada objeto, mas
             // isso vai ser útil no futuro para efeitos diferentes para cada objeto,
             // se necessário.
-            if (material_do_create == null) { Debug.Log("Deu ruim 2."); }
-            else
+            if (material_do_create != null)
             {
 
                 objeto.GetComponent<MeshRenderer>().material = material_do_create;
@@ -429,12 +426,7 @@ public class NovoLeitor2 : MonoBehaviour
 
 
             // Ponto já criado, agora adicionar dados a ele
-            objeto.AddComponent<Dados>();
-            objeto.GetComponent<Dados>().Atualizar();
-            objeto.GetComponent<Dados>().nome_do_objeto = bd_fit.GetPersonagem(i).ToString();
-            objeto.GetComponent<Dados>().tempo = bd_fit.GetTempo(i);
-            objeto.GetComponent<Dados>().x_log = bd_fit.GetGridX(i);
-            objeto.GetComponent<Dados>().y_log = bd_fit.GetGridY(i);
+            AddDados(objeto, i);
 
             lista_de_objetos.Add(objeto);
 
@@ -581,8 +573,6 @@ public class NovoLeitor2 : MonoBehaviour
             objeto = Instantiate(objetos.Get("Qualquer Coisa Bolhas"));
             objeto.AddComponent<AoSerClicadoBolhas>();
 
-            if (objeto == null) Debug.Log("Deu ruim.");
-
             objeto.name = bd_bolhas.GetTempo(i).ToString() + " " + bd_bolhas.GetQualObjeto(i).ToString() + " " +
                 bd_bolhas.GetCoordenadaX(i).ToString() + " " + bd_bolhas.GetCoordenadaY(i).ToString();
 
@@ -592,9 +582,7 @@ public class NovoLeitor2 : MonoBehaviour
             // Foi um pouco de exagero fazer um material pra cada objeto, mas
             // isso vai ser útil no futuro para efeitos diferentes para cada objeto,
             // se necessário.
-            if (material_do_create == null) { Debug.Log("Deu ruim 2."); }
-            else
-            {
+            if (material_do_create != null) {
 
                 objeto.GetComponent<MeshRenderer>().material = material_do_create;
 
@@ -606,27 +594,7 @@ public class NovoLeitor2 : MonoBehaviour
 
 
             // Ponto já criado, agora adicionar dados a ele
-            objeto.AddComponent<Dados>();
-            objeto.GetComponent<Dados>().Atualizar();
-            objeto.GetComponent<Dados>().tempo = bd_bolhas.GetTempo(i);
-            objeto.GetComponent<Dados>().x_log = bd_bolhas.GetCoordenadaX(i);
-            objeto.GetComponent<Dados>().y_log = bd_bolhas.GetCoordenadaY(i);
-            objeto.GetComponent<Dados>().nome_do_objeto = bd_bolhas.GetQualObjeto(i);
-
-            if (bd_bolhas.GetMouseOuObjeto(i) == "Mouse")
-            {
-                if (bd_bolhas.GetArrastando(i) == "S") objeto.GetComponent<Dados>().acao_dele_ou_nele = "Arrastou";
-                else if (bd_bolhas.GetClicando(i) == "S") objeto.GetComponent<Dados>().acao_dele_ou_nele = "Clicou";
-                else if (bd_bolhas.GetSegurando(i) == "S") objeto.GetComponent<Dados>().acao_dele_ou_nele = "Segurando";
-            }
-            else if (bd_bolhas.GetMouseOuObjeto(i) == "Objeto")
-            {
-                if (bd_bolhas.GetArrastando(i) == "S") objeto.GetComponent<Dados>().acao_dele_ou_nele = "Arrastado";
-                else if (bd_bolhas.GetClicando(i) == "S") objeto.GetComponent<Dados>().acao_dele_ou_nele = "Clicado";
-                else if (bd_bolhas.GetSegurando(i) == "S") objeto.GetComponent<Dados>().acao_dele_ou_nele = "Segurado";
-                objeto.GetComponent<Dados>().criado_agora = bd_bolhas.GetCriadoAgora(i);
-                objeto.GetComponent<Dados>().quem_criou = bd_bolhas.GetQuemCriou(i);
-            }
+            AddDados(objeto, i);
 
             lista_de_objetos.Add(objeto);
 
@@ -810,6 +778,47 @@ public class NovoLeitor2 : MonoBehaviour
         if (qual_leitor == "FIT") return GetPrimeiroTempoFIT();
         else if (qual_leitor == "Bolhas") return GetPrimeiroTempoBolhas();
         else return 0;
+    }
+
+    protected void AddDados(GameObject objeto_a_receber_dados, int i)
+    {
+        if (qual_leitor == "FIT") AddDadosFIT(objeto_a_receber_dados, i);
+        if (qual_leitor == "Bolhas") AddDadosBolhas(objeto_a_receber_dados, i);
+    }
+
+    protected void AddDadosFIT(GameObject objeto_a_receber_dados, int i)
+    {
+        objeto_a_receber_dados.AddComponent<Dados>();
+        objeto_a_receber_dados.GetComponent<Dados>().Atualizar();
+        objeto_a_receber_dados.GetComponent<Dados>().nome_do_objeto = bd_fit.GetPersonagem(i).ToString();
+        objeto_a_receber_dados.GetComponent<Dados>().tempo = bd_fit.GetTempo(i);
+        objeto_a_receber_dados.GetComponent<Dados>().x_log = bd_fit.GetGridX(i);
+        objeto_a_receber_dados.GetComponent<Dados>().y_log = bd_fit.GetGridY(i);
+    }
+
+    protected void AddDadosBolhas(GameObject objeto_a_receber_dados, int i)
+    {
+        objeto_a_receber_dados.AddComponent<Dados>();
+        objeto_a_receber_dados.GetComponent<Dados>().Atualizar();
+        objeto_a_receber_dados.GetComponent<Dados>().tempo = bd_bolhas.GetTempo(i);
+        objeto_a_receber_dados.GetComponent<Dados>().x_log = bd_bolhas.GetCoordenadaX(i);
+        objeto_a_receber_dados.GetComponent<Dados>().y_log = bd_bolhas.GetCoordenadaY(i);
+        objeto_a_receber_dados.GetComponent<Dados>().nome_do_objeto = bd_bolhas.GetQualObjeto(i);
+
+        if (bd_bolhas.GetMouseOuObjeto(i) == "Mouse")
+        {
+            if (bd_bolhas.GetArrastando(i) == "S") objeto_a_receber_dados.GetComponent<Dados>().acao_dele_ou_nele = "Arrastou";
+            else if (bd_bolhas.GetClicando(i) == "S") objeto_a_receber_dados.GetComponent<Dados>().acao_dele_ou_nele = "Clicou";
+            else if (bd_bolhas.GetSegurando(i) == "S") objeto_a_receber_dados.GetComponent<Dados>().acao_dele_ou_nele = "Segurando";
+        }
+        else if (bd_bolhas.GetMouseOuObjeto(i) == "Objeto")
+        {
+            if (bd_bolhas.GetArrastando(i) == "S") objeto_a_receber_dados.GetComponent<Dados>().acao_dele_ou_nele = "Arrastado";
+            else if (bd_bolhas.GetClicando(i) == "S") objeto_a_receber_dados.GetComponent<Dados>().acao_dele_ou_nele = "Clicado";
+            else if (bd_bolhas.GetSegurando(i) == "S") objeto_a_receber_dados.GetComponent<Dados>().acao_dele_ou_nele = "Segurado";
+            objeto_a_receber_dados.GetComponent<Dados>().criado_agora = bd_bolhas.GetCriadoAgora(i);
+            objeto_a_receber_dados.GetComponent<Dados>().quem_criou = bd_bolhas.GetQuemCriou(i);
+        }
     }
 
     public int GetPrimeiroTempoFIT()
