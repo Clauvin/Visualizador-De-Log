@@ -119,10 +119,14 @@ public class NovoLeitor2 : MonoBehaviour
             {
                 // Do whatever you need to do with the text line, it's a string now
                 entries = line.Split('=');
-                //Correct Example: Time:1=Char:1=GridX:5=GridY:7
+                // Correct Example: Time:1=Char:1=GridX:5=GridY:7
                 if (entries.Length == 4)
                 {
+                    // Nesse ponto, seguindo o exemplo, entries é um vetor com os quatro valores
+                    // Time:1 | Char:1 | GridX:5 | GridY:7
                     entry_time = entries[0].Split(':');
+
+                    // entry_time = Time | 1
                     checando_tempo_do_log = Convert.ToInt32(entry_time[1]);
                     
                     if ((tempo_minimo <= checando_tempo_do_log) && (checando_tempo_do_log <= tempo_maximo))
@@ -134,18 +138,26 @@ public class NovoLeitor2 : MonoBehaviour
                         bd_fit.Add(Int32.Parse(entry_time[1]), Int32.Parse(entry_char[1]),
                                 Int32.Parse(entry_grid_x[1]), Int32.Parse(entry_grid_y[1]));
 
+                        // como o fit precisa ter, para ajudar na visualização, um heatmap para cada jogador,
+                        // essa linha se aproveita do fato das informações de char serem guardadas em ordem crescente em cada
+                        // tempo para descobrir o número de heatmaps extras, além do com todos os jogadores.
+                        
+                        // ou seja: começamos com um heatmap, lemos 1 em entry_char, colocamos mais um heatmap, temos dois.
+                        // lemos 2 em entry_char, colocamos mais um, temos três, e por aí vai.
+
+                        // Mas sinceramente eu posso não fazer isso e só pegar do vetor de nomes do FIT.
                         if (Int32.Parse(entry_char[1]) == heatmaps) heatmaps++;
                     }
                 }
 
-#if (DEBUG)
+                #if (DEBUG)
 
                 else
                 {
                     Debug.Log("NovoLeitor2.LoadStuff - Linha não tinha quatro elementos.");
                 }
 
-#endif
+                #endif
 
             }
         } while (line != null);
@@ -195,25 +207,25 @@ public class NovoLeitor2 : MonoBehaviour
                 resolucao = new Vector2(Int32.Parse(entriesresolution[0]), Int32.Parse(entriesresolution[1]));
             }
 
-#if (DEBUG)
+            #if (DEBUG)
 
             else
             { 
                 Debug.Log("NovoLeitor2.LoadStuff - Linha não tinha dois elementos.");
             }
 
-#endif
+            #endif
 
          }
 
-#if (DEBUG)
+        #if (DEBUG)
 
         else
         {
             Debug.Log("NovoLeitor2.LoadStuff - Linha de resolução = null.");
         }
 
-#endif
+        #endif
 
         // Part 2: reads the game events.
         // While there's lines left in the text file, do this:
@@ -232,9 +244,9 @@ public class NovoLeitor2 : MonoBehaviour
 
                 //Após o split:
 
-                //Time:0
-                //Mouse
-                //GridX:776 e por aí vai.
+                // Time:0
+                // Mouse
+                // GridX:776 e por aí vai.
 
                 if ((entries.Length == 7) && (((string)entries[1]) == "Mouse"))
                 {
@@ -275,14 +287,14 @@ public class NovoLeitor2 : MonoBehaviour
                     }
                 }
 
-#if (DEBUG)
+                #if (DEBUG)
 
                 else
                 {
                     Debug.Log("NovoLeitor2.LoadStuff - Linha formatada errada.");
                 }
 
-#endif
+                #endif
 
             }
         } while (line != null);
@@ -347,18 +359,16 @@ public class NovoLeitor2 : MonoBehaviour
         Material material_background = (Material)Resources.Load("Materiais/MaterialBackgroundFIT");
         Material[] rend;
 
-        bool criar_background;
-        bool fechar_background;
+        bool criar_background; bool fechar_background;
 
         Material materialheatmap = new Material((Material)Resources.Load("Materiais/MaterialHeatmap"));
 
         material_background.mainTexture = (Texture)Instantiate(Resources.Load("Texturas/Grid"));
 
 
-        // Lê todos os dados do log do FIT...
+        // Lê e organiza todos os dados do log do FIT.
         for (int j = 0; j < matrizes_dos_heatmaps.Count; j++)
         {
-
             ((HeatMap)matrizes_dos_heatmaps[j]).ReadPointsFIT(bd_fit, j);
             ((HeatMap)matrizes_dos_heatmaps[j]).AllTheDifferentPoints();
             ((HeatMap)matrizes_dos_heatmaps[j]).OrganizePoints();
@@ -393,8 +403,7 @@ public class NovoLeitor2 : MonoBehaviour
 
             objeto = Instantiate(objetos.Get("Qualquer Coisa FIT"));
             objeto.AddComponent<AoSerClicadoFIT>();
-            
-            // :p
+
             if (objeto == null) Debug.Log("Deu ruim.");
 
             objeto.name = bd_fit.GetTempo(i).ToString() + " " + bd_fit.GetPersonagem(i).ToString() + " " +
