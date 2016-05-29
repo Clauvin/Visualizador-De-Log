@@ -3,7 +3,6 @@ using Basicas;
 using System;
 using System.IO;
 using System.Collections;
-using UnityEditor;
 
 /// <summary>
 /// Classe NovoLeitor2.
