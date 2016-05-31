@@ -4,8 +4,7 @@ using System.IO;
 using System;
 
 /// <summary>
-/// Classe GuiTelaDePreLoadFIT. Classe filha de GuiTelaDePreLoad, responsável por definir
-/// para a Scene de PreLoad do FIT o que o programa deve fazer.
+/// Classe derivada de GuiTelaDePreLoad, responsável por definir para a Scene de PreLoad do FIT o que o programa deve fazer.
 /// </summary>
 public class GuiTelaDePreLoadFIT : GuiTelaDePreLoad
 {

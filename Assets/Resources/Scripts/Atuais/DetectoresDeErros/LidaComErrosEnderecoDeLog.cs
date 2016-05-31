@@ -4,8 +4,9 @@ using System.IO;
 using System;
 
 /// <summary>
-/// Classe LidaComErrosTempoMinimoEMaximo. Criada para detectar erros no arquivo escolhido para ser carregado pelo visualizador de logs,
-/// e uma vez encontrados, avisar isso e gerar mensagens de erro adequadas para que apareçam na GUI.
+/// Classe derivada de LidaComErros.
+/// <para>Criada para detectar erros no arquivo escolhido para ser carregado pelo visualizador de logs,
+/// e uma vez encontrados, avisar isso e gerar mensagens de erro adequadas para que apareçam na GUI.</para>
 /// </summary>
 public class LidaComErrosEnderecoDeLog : LidaComErros
 {

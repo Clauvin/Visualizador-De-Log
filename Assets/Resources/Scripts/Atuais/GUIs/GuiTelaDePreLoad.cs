@@ -4,8 +4,8 @@ using System.IO;
 using System;
 
 /// <summary>
-/// Classe GuiTelaDePreLoad. Classe básica semi-esqueletal(por conta de classes virtuais vazias)
-/// responsável pela interface de usuário e definir o que cada botão faz.
+/// Classe básica semi-esqueletal(por conta de classes virtuais vazias)
+/// responsável pela interface de usuário da tela de preload e definir o que cada botão nela faz.
 /// </summary>
 public class GuiTelaDePreLoad : GuiPadrao2 {
 

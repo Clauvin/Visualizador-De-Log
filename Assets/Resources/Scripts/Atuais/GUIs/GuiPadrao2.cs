@@ -2,7 +2,7 @@
 using System.Collections;
 
 /// <summary>
-/// Classe GuiPadrao2, padrão pelo qual outras classes de interface gráfica derivam.
+/// Classe padrão de onde outras classes de interface gráfica derivam.
 /// <para>Contém funções padrões para posicionamento de GUI.</para>
 /// </summary>
 public class GuiPadrao2 : AbstractGui2

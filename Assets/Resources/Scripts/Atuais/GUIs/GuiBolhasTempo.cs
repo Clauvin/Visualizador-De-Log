@@ -2,7 +2,7 @@
 using System.Collections;
 
 /// <summary>
-/// Classe GuiBolhasTempo, derivada de GuiTempo. 
+/// Classe derivada de GuiTempo. 
 /// <para>Responsável por passar e receber do usuário informações referentes ao sistema de passagem automática
 /// dos objetos em relação ao tempo, quando visualizando dados do Bolhas.</para>
 /// </summary>

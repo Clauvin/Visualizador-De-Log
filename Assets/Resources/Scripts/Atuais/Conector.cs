@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-/// <summary>Classe Conector.
-/// <para>Responsável por conectar e desconectar os objetos do visualizador a seus backgrounds respectivos.</para>
+/// <summary>
+/// Responsável por conectar e desconectar os objetos do visualizador a seus backgrounds respectivos.
 /// </summary>
 public class Conector : MonoBehaviour {
 

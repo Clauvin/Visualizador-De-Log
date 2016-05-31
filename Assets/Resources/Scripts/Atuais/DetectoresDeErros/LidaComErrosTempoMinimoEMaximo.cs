@@ -4,8 +4,8 @@ using System;
 using System.Globalization;
 
 /// <summary>
-/// Classe LidaComErrosTempoMinimoEMaximo. Criada para detectar erros nos valores de tempo mínimo e máximo usados no programa,
-/// e uma vez encontrados, avisar isso e gerar mensagens de erro adequadas para que apareçam na GUI.
+/// Classe derivada de LidaComErros. <para>Criada para detectar erros nos valores de tempo mínimo e máximo usados no programa,
+/// e uma vez encontrados, avisar isso e gerar mensagens de erro adequadas para que apareçam na GUI.</para>
 /// </summary>
 public class LidaComErrosTempoMinimoEMaximo : LidaComErros
 {

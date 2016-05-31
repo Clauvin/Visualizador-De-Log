@@ -10,7 +10,7 @@ using System.Collections.Generic;
 namespace Basicas
 {
     /// <summary>
-    /// Classe BancoDeDadosFIT. Responsável por guardar os dados do log carregado do FIT.
+    /// Responsável por guardar os dados do log carregado do FIT.
     /// </summary>
     public class BancoDeDadosFIT
     {
@@ -107,7 +107,7 @@ namespace Basicas
     }
 
     /// <summary>
-    /// Classe BancoDeDadosBolhas. Responsável por guardar os dados do log carregado do Bolhas.
+    /// Responsável por guardar os dados do log carregado do Bolhas.
     /// </summary>
     public class BancoDeDadosBolhas
     {
@@ -678,7 +678,7 @@ namespace Basicas
     }
 
     /// <summary>
-    /// Classe ParaVisualizacao. Responsável por guardar todos os tipos de dados que fossem necessários para a criação da visualização
+    /// Responsável por guardar todos os tipos de dados que fossem necessários para a criação da visualização
     /// dos dados do log.
     /// </summary>
     /// <typeparam name="T"></typeparam>
@@ -767,7 +767,7 @@ namespace Basicas
     }
 
     /// <summary>
-    /// Classe Pintar. Classe que guarda funções para pintura de Texturas2D, e em um caso, alterar Alpha de Materiais.
+    /// Classe que guarda funções para pintura de Texturas2D, e em um caso, alterar Alpha de Materiais.
     /// </summary>
     class Pintar {
 

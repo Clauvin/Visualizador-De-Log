@@ -2,7 +2,7 @@
 using System.Collections;
 
 /// <summary>
-/// Classe GuiBolhasInfoObjeto, derivada de GuiInfoObjeto.
+/// Classe derivada de GuiInfoObjeto.
 /// <para>Responsável por mostrar dados referentes aos objetos do Bolhas para o usuário.</para>
 /// </summary>
 public class GuiBolhasInfoObjeto : GuiInfoObjeto

@@ -5,8 +5,7 @@ using System.IO;
 using System.Collections;
 
 /// <summary>
-/// Classe NovoLeitor2.
-/// <para>Responsável por carregar as informações necessárias para o programa funcionar e usá-las.</para>
+/// Responsável por carregar as informações necessárias para o programa funcionar e usá-las.
 /// </summary>
 public class NovoLeitor2 : MonoBehaviour
 {
@@ -265,7 +264,8 @@ public class NovoLeitor2 : MonoBehaviour
                             entries[6].Split(':')[1].ToString());
                     }
 
-                } else if ((entries.Length == 11) && (((string)entries[1]) == "Objeto"))
+                }
+                else if ((entries.Length == 11) && (((string)entries[1]) == "Objeto"))
                 {
                     int checando_tempo_do_log = Int32.Parse(entries[0].Split(':')[1]);
 
@@ -333,7 +333,8 @@ public class NovoLeitor2 : MonoBehaviour
                 Debug.Log(bd_bolhas.GetTempo(i) + " " + bd_bolhas.GetMouseOuObjeto(i) + " " +
                        bd_bolhas.GetCoordenadaX(i) + " " + bd_bolhas.GetCoordenadaY(i) + " " +
                        bd_bolhas.GetClicando(i) + " " + bd_bolhas.GetSegurando(i) + " " + bd_bolhas.GetArrastando(i));
-            } else if (bd_bolhas.GetMouseOuObjeto(i) == "Objeto")
+            }
+            else if (bd_bolhas.GetMouseOuObjeto(i) == "Objeto")
             {
                 Debug.Log(bd_bolhas.GetTempo(i) + " " + bd_bolhas.GetMouseOuObjeto(i) + " " +
                        bd_bolhas.GetCoordenadaX(i) + " " + bd_bolhas.GetCoordenadaY(i) + " " +

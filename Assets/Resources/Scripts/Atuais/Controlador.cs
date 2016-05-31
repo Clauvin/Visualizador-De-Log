@@ -13,8 +13,7 @@ using System.Collections.Generic;
 */
 
 /// <summary>
-/// Classe Controlador, responsável por ler inputs de mouse e teclado para uso do visualizador de log.
-/// <para></para>
+/// Responsável por ler inputs de mouse e teclado para uso do visualizador de log.
 /// </summary>
 public class Controlador : MonoBehaviour {
 

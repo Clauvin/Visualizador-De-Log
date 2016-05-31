@@ -2,7 +2,7 @@
 using System.Collections;
 
 /// <summary>
-/// Classe GuiModo, responsável por mostrar qual modo de visualização está sendo visto pelo usuário.
+/// Classe responsável por mostrar qual modo de visualização está sendo visto pelo usuário.
 /// </summary>
 public class GuiModo : GuiPadrao2
 {

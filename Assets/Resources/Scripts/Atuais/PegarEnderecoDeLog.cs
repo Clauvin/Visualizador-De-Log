@@ -4,8 +4,8 @@ using System.Collections;
 using System.IO;
 
 /// <summary>
-/// Classe PegarEnderecoDeLog. Responsável por abrir a janela de endereço de log, guardar e analisar o endereço dele
-/// e guardar a posição da última pasta aberta na janela de endereço de log.
+/// Responsável por abrir a janela de endereço de log, guardar o endereço dele, analisá-lo
+/// e também guardar a posição da última pasta aberta na janela de endereço de log.
 /// </summary>
 public class PegarEnderecoDeLog : MonoBehaviour {
 

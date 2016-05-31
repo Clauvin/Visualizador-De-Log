@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Basicas;
 
 /// <summary>
-/// Classe GuiBolhasHeatmap, derivada de GuiHeatmap.
+/// Classe derivada de GuiHeatmap.
 /// <para>É a classe responsável por mostrar as cores usadas nos heatmaps do Bolhas e quanto objetos naquele espaço
 /// a cor representa.</para>
 /// <para>A única diferença dela de GuiFITHeatmap é o Start(), no resto, são idênticas o suficiente

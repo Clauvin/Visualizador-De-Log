@@ -2,7 +2,7 @@
 using System.Collections;
 
 /// <summary>
-/// Classe Dados, responsável por armazenar informação sobre os objetos mostrados pelo visualizador do log.
+/// Responsável por armazenar informação sobre os objetos mostrados pelo visualizador do log.
 /// <para>Essa classe merece métodos de Get e Set futuramente, o acesso aos dados dela é feito diretamente nas variáveis.</para>
 /// </summary>
 public class Dados : MonoBehaviour

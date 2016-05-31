@@ -2,7 +2,7 @@
 using System.Collections;
 
 /// <summary>
-/// Classe GuiSairDaVisualizacao. Responsável pelos dois botões na tela de visualização dos elementos do log
+/// Classe responsável pelos dois botões na tela de visualização dos elementos do log
 /// para voltar para o Pre-Load e voltar para a tela inicial.
 /// <para>ATENÇÃO: o botão dessa classe para voltar para o Pre-Load só funciona em suas classes filhas, uma para cada
 /// tipo de log.</para>

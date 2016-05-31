@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Basicas;
 
 /// <summary>
-/// Classe Heatmap, responsável por guardar os dados referentes ao que deve ser desenhado no heatmap, através de uma matriz,
+/// Responsável por guardar os dados referentes ao que deve ser desenhado no heatmap, através de uma matriz,
 /// que cores devem ser usadas, e a textura2D do heatmap em si.
 /// </summary>
 public class HeatMap {

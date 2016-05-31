@@ -2,7 +2,7 @@
 using System.Collections;
 
 /// <summary>
-/// Classe GuiTelaInicial. Responsável por definir a tela inicial do programa.
+/// Classe responsável por definir a tela inicial do programa.
 /// </summary>
 public class GuiTelaInicial : GuiPadrao2
 {

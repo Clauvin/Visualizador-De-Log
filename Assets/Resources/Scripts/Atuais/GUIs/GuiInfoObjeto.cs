@@ -2,7 +2,7 @@
 using System.Collections;
 
 /// <summary>
-/// Classe GuiInfoObjeto, de onde derivam GuiFITInfoObjeto e GuiBolhasInfoObjeto.
+/// Classe de onde derivam GuiFITInfoObjeto e GuiBolhasInfoObjeto.
 /// <para>Responsável por mostrar ao usuário informações sobre o objeto clicado.</para>
 /// </summary>
 public class GuiInfoObjeto : GuiPadrao2

@@ -4,7 +4,7 @@ using System;
 using System.Globalization;
 
 /// <summary>
-/// Classe GuiVisualizarPorTempo. Responsável por permitir ao usuário sumir e aparecer com objetos baseando-se no
+/// Classe responsável por permitir ao usuário sumir e aparecer com objetos baseando-se no
 /// tempo em que aparecem.
 /// <para>Atenção: essa classe tem um tratamento grande de exceções, o que no futuro precisa ser feito em outras
 /// classes, conforme o projeto vai sendo usado por mais e mais usuários.</para>
