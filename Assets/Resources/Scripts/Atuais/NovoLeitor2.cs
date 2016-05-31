@@ -442,9 +442,7 @@ public class NovoLeitor2 : MonoBehaviour
             //adicionando o background onde deve ficar
             if (criar_background)
             {
-                background.AddComponent<Dados>();
-                background.GetComponent<Dados>().Atualizar();
-                background.name = "Background - " + i;
+                background = ColocarDadosEmBackground(background, i);
                 lista_de_backgrounds.Add(background);                
             }
 
@@ -595,9 +593,7 @@ public class NovoLeitor2 : MonoBehaviour
             //adicionando o background onde deve ficar
             if (novo_tempo)
             {
-                background.AddComponent<Dados>();
-                background.GetComponent<Dados>().Atualizar();
-                background.name = "Background - " + i;
+                background = ColocarDadosEmBackground(background, i);
                 lista_de_backgrounds.Add(background);
             }
 
@@ -752,6 +748,14 @@ public class NovoLeitor2 : MonoBehaviour
         if (qual_leitor == "FIT") objeto = CriarBackgroundFIT(background, material_background);
         else if (qual_leitor == "Bolhas") objeto = CriarBackgroundBolhas(background, material_background);
         return objeto;
+    }
+
+    protected GameObject ColocarDadosEmBackground(GameObject background, int i)
+    {
+        background.AddComponent<Dados>();
+        background.GetComponent<Dados>().Atualizar();
+        background.name = "Background - " + i;
+        return background;
     }
 
     protected GameObject CriarBackgroundFIT(GameObject background, Material material_background)
