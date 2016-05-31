@@ -421,9 +421,7 @@ public class NovoLeitor2 : MonoBehaviour
             }
 
             rend = objeto.GetComponent<MeshRenderer>().materials;
-            rend[0].mainTexture = texturas.Get(bd_fit.GetPersonagem(i).ToString());
-            objeto.GetComponent<MeshRenderer>().materials = rend;
-
+            AddMaterialAObjeto(rend, objeto, i);
 
             // Ponto já criado, agora adicionar dados a ele
             AddDados(objeto, i);
@@ -580,10 +578,8 @@ public class NovoLeitor2 : MonoBehaviour
             }
 
             rend = objeto.GetComponent<MeshRenderer>().materials;
-            rend[0].mainTexture = texturas.Get(bd_bolhas.GetQualObjeto(i).ToString());
-            objeto.GetComponent<MeshRenderer>().materials = rend;
-
-
+            AddMaterialAObjeto(rend, objeto, i);
+            
             // Ponto já criado, agora adicionar dados a ele
             AddDados(objeto, i);
 
@@ -760,6 +756,24 @@ public class NovoLeitor2 : MonoBehaviour
         if (qual_leitor == "FIT") return GetPrimeiroTempoFIT();
         else if (qual_leitor == "Bolhas") return GetPrimeiroTempoBolhas();
         else return 0;
+    }
+
+    protected void AddMaterialAObjeto(Material[] rend, GameObject objeto, int i)
+    {
+        if (qual_leitor == "FIT") AddMaterialAObjetoFIT(rend, objeto, i);
+        if (qual_leitor == "Bolhas") AddMaterialAObjetoBolhas(rend, objeto, i);
+    }
+
+    protected void AddMaterialAObjetoFIT(Material[] rend, GameObject objeto, int i)
+    {
+        rend[0].mainTexture = texturas.Get(bd_fit.GetPersonagem(i).ToString());
+        objeto.GetComponent<MeshRenderer>().materials = rend;
+    }
+
+    protected void AddMaterialAObjetoBolhas(Material[] rend, GameObject objeto, int i)
+    {
+        rend[0].mainTexture = texturas.Get(bd_bolhas.GetQualObjeto(i).ToString());
+        objeto.GetComponent<MeshRenderer>().materials = rend;
     }
 
     protected void AddDados(GameObject objeto_a_receber_dados, int i)
