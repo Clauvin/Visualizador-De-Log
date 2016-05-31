@@ -440,13 +440,8 @@ public class NovoLeitor2 : MonoBehaviour
             GameObject objeto2 = Instantiate(objeto);
             objeto2.transform.parent = objeto.transform;
             objeto2.transform.Rotate(new Vector3(0, 0, 180));
-
-
-            new_pos.x = 0;
-            y = background.transform.position.y;
-            new_pos.y = y;
-            new_pos.z = 0;
-            background.transform.position = new_pos;
+            
+            CriarPosicaoDoBackground(new_pos, background);
 
             //adicionando o background onde deve ficar
             if (criar_background)
@@ -460,6 +455,7 @@ public class NovoLeitor2 : MonoBehaviour
             // Passar os valores de x, y e tempo para a posição de objetos
             // sem tratar as posições é uma péssima ideia, já que podem haver valores MUITO
             // grande, logo...
+            y = background.transform.position.y;
 
             // Primeiro: conseguir a posição da borda esquerda do background
             x = background.GetComponent<Dados>().centro.x - background.GetComponent<Dados>().largura_x / 2;
@@ -599,11 +595,8 @@ public class NovoLeitor2 : MonoBehaviour
             objeto2.transform.parent = objeto.transform;
             objeto2.transform.Rotate(new Vector3(0, 0, 180));
 
-            new_pos.x = 0;
-            y = background.transform.position.y;
-            new_pos.y = y;
-            new_pos.z = 0;
-            background.transform.position = new_pos;
+
+            CriarPosicaoDoBackground(new_pos, background);
 
             //adicionando o background onde deve ficar
             if (novo_tempo)
@@ -621,6 +614,7 @@ public class NovoLeitor2 : MonoBehaviour
             // Passar os valores de x, y e tempo para a posição de objetos
             // sem tratar as posições é uma péssima ideia, já que podem haver valores MUITO
             // grande, logo...
+            y = background.transform.position.y;
 
             // Primeiro: conseguir a posição da borda esquerda do background
             x = background.GetComponent<Dados>().centro.x - background.GetComponent<Dados>().largura_x / 2;
@@ -756,6 +750,17 @@ public class NovoLeitor2 : MonoBehaviour
         if (qual_leitor == "FIT") return GetPrimeiroTempoFIT();
         else if (qual_leitor == "Bolhas") return GetPrimeiroTempoBolhas();
         else return 0;
+    }
+
+    protected void CriarPosicaoDoBackground(Vector3 new_pos, GameObject background)
+    {
+        float y = background.transform.position.y;
+
+        new_pos.x = 0;
+        y = background.transform.position.y;
+        new_pos.y = y;
+        new_pos.z = 0;
+        background.transform.position = new_pos;
     }
 
     protected void AddMaterialAObjeto(Material[] rend, GameObject objeto, int i)
