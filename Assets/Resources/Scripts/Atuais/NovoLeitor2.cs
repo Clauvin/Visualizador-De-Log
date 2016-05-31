@@ -795,7 +795,7 @@ public class NovoLeitor2 : MonoBehaviour
     protected void AddMaterialAObjeto(Material[] rend, GameObject objeto, int i)
     {
         if (qual_leitor == "FIT") AddMaterialAObjetoFIT(rend, objeto, i);
-        if (qual_leitor == "Bolhas") AddMaterialAObjetoBolhas(rend, objeto, i);
+        else if (qual_leitor == "Bolhas") AddMaterialAObjetoBolhas(rend, objeto, i);
     }
 
     protected void AddMaterialAObjetoFIT(Material[] rend, GameObject objeto, int i)
@@ -813,7 +813,7 @@ public class NovoLeitor2 : MonoBehaviour
     protected void AddDados(GameObject objeto_a_receber_dados, int i)
     {
         if (qual_leitor == "FIT") AddDadosFIT(objeto_a_receber_dados, i);
-        if (qual_leitor == "Bolhas") AddDadosBolhas(objeto_a_receber_dados, i);
+        else if (qual_leitor == "Bolhas") AddDadosBolhas(objeto_a_receber_dados, i);
     }
 
     protected void AddDadosFIT(GameObject objeto_a_receber_dados, int i)
