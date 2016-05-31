@@ -437,10 +437,8 @@ public class NovoLeitor2 : MonoBehaviour
 
             }
 
-            GameObject objeto2 = Instantiate(objeto);
-            objeto2.transform.parent = objeto.transform;
-            objeto2.transform.Rotate(new Vector3(0, 0, 180));
-            
+            PermitindoObjetosVisiveisPorTras(objeto);
+
             CriarPosicaoDoBackground(new_pos, background);
 
             //adicionando o background onde deve ficar
@@ -591,10 +589,7 @@ public class NovoLeitor2 : MonoBehaviour
 
             }
 
-            GameObject objeto2 = Instantiate(objeto);
-            objeto2.transform.parent = objeto.transform;
-            objeto2.transform.Rotate(new Vector3(0, 0, 180));
-
+            PermitindoObjetosVisiveisPorTras(objeto);
 
             CriarPosicaoDoBackground(new_pos, background);
 
@@ -761,6 +756,13 @@ public class NovoLeitor2 : MonoBehaviour
         new_pos.y = y;
         new_pos.z = 0;
         background.transform.position = new_pos;
+    }
+
+    protected void PermitindoObjetosVisiveisPorTras(GameObject objeto)
+    {
+        GameObject objeto2 = Instantiate(objeto);
+        objeto2.transform.parent = objeto.transform;
+        objeto2.transform.Rotate(new Vector3(0, 0, 180));
     }
 
     protected void AddMaterialAObjeto(Material[] rend, GameObject objeto, int i)
