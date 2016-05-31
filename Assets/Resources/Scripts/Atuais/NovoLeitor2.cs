@@ -431,9 +431,7 @@ public class NovoLeitor2 : MonoBehaviour
             // Criando background para os pontos
             if (criar_background) {
 
-                background = Instantiate<GameObject>((GameObject)Resources.Load("Objetos/BackgroundFIT"));
-                background.GetComponent<MeshRenderer>().material = Instantiate(material_background);
-                background.GetComponent<Conector>().backgroundprincipal = background;
+                background = CriarBackground(background, material_background); 
 
             }
 
@@ -546,10 +544,13 @@ public class NovoLeitor2 : MonoBehaviour
             {
                 if (tempo != bd_bolhas.GetTempo(i + 1)) novo_tempo = true;
             }
-            else if (tempo != bd_bolhas.GetTempo(i - 1)) novo_tempo = true;
-                if (i == bd_bolhas.GetQuantidadeDeEntradas() - 1) vira_novo_tempo = true;
-            else if (tempo != bd_bolhas.GetTempo(i + 1)) vira_novo_tempo = true;
+            else if (tempo != bd_bolhas.GetTempo(i - 1))
+            {
+                novo_tempo = true;
+            }
 
+            if (i == bd_bolhas.GetQuantidadeDeEntradas() - 1) vira_novo_tempo = true;
+            else if (tempo != bd_bolhas.GetTempo(i + 1)) vira_novo_tempo = true;
 
             material_do_create = null;
 
@@ -583,9 +584,7 @@ public class NovoLeitor2 : MonoBehaviour
             if (novo_tempo)
             {
 
-                background = Instantiate<GameObject>((GameObject)Resources.Load("Objetos/BackgroundBolhas"));
-                background.GetComponent<MeshRenderer>().material = Instantiate(material_background);
-                background.GetComponent<Conector>().backgroundprincipal = background;
+                background = CriarBackground(background, material_background);
 
             }
 
@@ -745,6 +744,30 @@ public class NovoLeitor2 : MonoBehaviour
         if (qual_leitor == "FIT") return GetPrimeiroTempoFIT();
         else if (qual_leitor == "Bolhas") return GetPrimeiroTempoBolhas();
         else return 0;
+    }
+
+    protected GameObject CriarBackground(GameObject background, Material material_background)
+    {
+        GameObject objeto = null;
+        if (qual_leitor == "FIT") objeto = CriarBackgroundFIT(background, material_background);
+        else if (qual_leitor == "Bolhas") objeto = CriarBackgroundBolhas(background, material_background);
+        return objeto;
+    }
+
+    protected GameObject CriarBackgroundFIT(GameObject background, Material material_background)
+    {
+        background = Instantiate<GameObject>((GameObject)Resources.Load("Objetos/BackgroundFIT"));
+        background.GetComponent<MeshRenderer>().material = Instantiate(material_background);
+        background.GetComponent<Conector>().backgroundprincipal = background;
+        return background;
+    }
+
+    protected GameObject CriarBackgroundBolhas(GameObject background, Material material_background)
+    {
+        background = Instantiate<GameObject>((GameObject)Resources.Load("Objetos/BackgroundBolhas"));
+        background.GetComponent<MeshRenderer>().material = Instantiate(material_background);
+        background.GetComponent<Conector>().backgroundprincipal = background;
+        return background;
     }
 
     protected void CriarPosicaoDoBackground(Vector3 new_pos, GameObject background)
