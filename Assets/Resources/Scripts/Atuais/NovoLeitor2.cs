@@ -721,10 +721,14 @@ public class NovoLeitor2 : MonoBehaviour
 
     public float DefinirZDeObjeto(GameObject objeto, GameObject background, float z, int i)
     {
+        // Primeiro: conseguir a posição da borda superior do background
         z = background.GetComponent<Dados>().centro.y + background.GetComponent<Dados>().altura_z / 2;
 
+        // Segundo: a partir daí, achar onde o centro do objeto precisa estar para apenas encostar
+        // nessa borda.
         z -= (objeto.GetComponent<MeshCollider>().bounds.max.z - objeto.GetComponent<MeshCollider>().bounds.min.z) / 2;
 
+        // Terceiro: finalmente, posicionar o objeto com relação ao background.
         if (qual_leitor == "FIT") z -= (bd_fit.GetGridY(i) / 32 * (background.GetComponent<Dados>().altura_z / 15));
         if (qual_leitor == "Bolhas") z -= (bd_bolhas.GetCoordenadaY(i) * (background.GetComponent<Dados>().altura_z / resolucao.y));
 
