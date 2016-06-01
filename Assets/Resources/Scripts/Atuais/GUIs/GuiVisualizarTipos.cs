@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Responsável por visualizar quais tipos de objetos estão visíveis, quais não
+/// e permite ao usuário alterar isso.
+/// </summary>
 public class GuiVisualizarTipos : GuiPadrao2 {
 
     public int posicao_y = 0;

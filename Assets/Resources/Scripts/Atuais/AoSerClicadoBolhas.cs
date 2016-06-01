@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Responsável por fazer aparecer as informações referente a objetos do Bolhas quando clicados.
+/// </summary>
 public class AoSerClicadoBolhas : MonoBehaviour {
 
     void OnMouseDown()
