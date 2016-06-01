@@ -362,6 +362,10 @@ public class NovoLeitor2 : MonoBehaviour
 
         bool criar_background; bool fechar_background;
 
+        // Definição inicial de valores de x, y e z para que possam ser usados
+        // nas funções de definição de posição de objetos
+        x = 0.0f; y = 0.0f; z = 0.0f;
+
         Material material_heatmap = new Material((Material)Resources.Load("Materiais/MaterialHeatmap"));
 
         material_background.mainTexture = (Texture)Instantiate(Resources.Load("Texturas/Grid"));
@@ -452,22 +456,10 @@ public class NovoLeitor2 : MonoBehaviour
             // grande, logo...
             y = background.transform.position.y;
 
-            // Primeiro: conseguir a posição da borda esquerda do background
-            x = background.GetComponent<Dados>().centro.x - background.GetComponent<Dados>().largura_x / 2;
+            x = DefinirXDeObjeto(objeto, background, x, i);
 
-            // Segundo: a partir daí, achar onde o centro do objeto precisa estar para apenas encostar
-            // nessa borda.
-            x += (objeto.GetComponent<MeshCollider>().bounds.max.x - objeto.GetComponent<MeshCollider>().bounds.min.x) / 2;
-
-            // Terceiro: finalmente, posicionar o objeto com relação ao background.
-            x += bd_fit.GetGridX(i)/32 * (background.GetComponent<Dados>().largura_x/20);
-
-            //O mesmo descrito acima para z... que nesse caso é equivalente a y no plano 2D. Sim, paciência.
-            z = background.GetComponent<Dados>().centro.y + background.GetComponent<Dados>().altura_z / 2;
-
-            z -= (objeto.GetComponent<MeshCollider>().bounds.max.z - objeto.GetComponent<MeshCollider>().bounds.min.z) / 2;
-                
-            z -= (bd_fit.GetGridY(i)/32 * (background.GetComponent<Dados>().altura_z /15));
+            // Z... que nesse caso é equivalente a y no plano 2D. Sim, paciência.
+            z = DefinirZDeObjeto(objeto, background, z, i);
 
             new_pos = new Vector3(x, y, z);
 
@@ -504,6 +496,7 @@ public class NovoLeitor2 : MonoBehaviour
         Vector3 new_pos = new Vector3(0f, 0f, 0f);
         Vector3 new_pos_camera = new Vector3(0f, 0f, 0f);
         Material material_do_create = null;
+
         float x, y, z;
         int i;
         Material material_background = (Material)Resources.Load("Materiais/MaterialBackgroundBolhas");
@@ -512,6 +505,10 @@ public class NovoLeitor2 : MonoBehaviour
         bool novo_tempo;
         bool vira_novo_tempo;
         int tempo;
+
+        // Definição inicial de valores de x, y e z para que possam ser usados
+        // nas funções de definição de posição de objetos
+        x = 0.0f; y = 0.0f; z = 0.0f;
 
         Material material_heatmap = new Material((Material)Resources.Load("Materiais/MaterialHeatmap"));
 
@@ -607,22 +604,10 @@ public class NovoLeitor2 : MonoBehaviour
             // grande, logo...
             y = background.transform.position.y;
 
-            // Primeiro: conseguir a posição da borda esquerda do background
-            x = background.GetComponent<Dados>().centro.x - background.GetComponent<Dados>().largura_x / 2;
+            x = DefinirXDeObjeto(objeto, background, x, i);
 
-            // Segundo: a partir daí, achar onde o centro do objeto precisa estar para apenas encostar
-            // nessa borda.
-            x += (objeto.GetComponent<MeshCollider>().bounds.max.x - objeto.GetComponent<MeshCollider>().bounds.min.x) / 2;
-
-            // Terceiro: finalmente, posicionar o objeto com relação ao background.
-            x += bd_bolhas.GetCoordenadaX(i) * (background.GetComponent<Dados>().largura_x / resolucao.x);
-
-            //O mesmo descrito acima para z... que nesse caso é equivalente a y no plano 2D. Sim, paciência.
-            z = background.GetComponent<Dados>().centro.y + background.GetComponent<Dados>().altura_z / 2;
-
-            z -= (objeto.GetComponent<MeshCollider>().bounds.max.z - objeto.GetComponent<MeshCollider>().bounds.min.z) / 2; 
-                
-            z -= (bd_bolhas.GetCoordenadaY(i) * (background.GetComponent<Dados>().altura_z / resolucao.y));
+            // Z... nesse caso é equivalente a y no plano 2D. Sim, paciência.
+            z = DefinirZDeObjeto(objeto, background, z, i);
 
             new_pos = new Vector3(x, y, z);
 
@@ -716,6 +701,34 @@ public class NovoLeitor2 : MonoBehaviour
             GameObject background = (GameObject)lista_de_backgrounds[j];
             background.GetComponent<Conector>().Desconectar();
         }
+    }
+
+    public float DefinirXDeObjeto(GameObject objeto, GameObject background, float x, int i)
+    {
+        // Primeiro: conseguir a posição da borda esquerda do background
+        x = background.GetComponent<Dados>().centro.x - background.GetComponent<Dados>().largura_x / 2;
+
+        // Segundo: a partir daí, achar onde o centro do objeto precisa estar para apenas encostar
+        // nessa borda.
+        x += (objeto.GetComponent<MeshCollider>().bounds.max.x - objeto.GetComponent<MeshCollider>().bounds.min.x) / 2;
+
+        // Terceiro: finalmente, posicionar o objeto com relação ao background.
+        if (qual_leitor == "FIT") x += bd_fit.GetGridX(i) / 32 * (background.GetComponent<Dados>().largura_x / 20);
+        if (qual_leitor == "Bolhas") x += bd_bolhas.GetCoordenadaX(i) * (background.GetComponent<Dados>().largura_x / resolucao.x);
+
+        return x;
+    }
+
+    public float DefinirZDeObjeto(GameObject objeto, GameObject background, float z, int i)
+    {
+        z = background.GetComponent<Dados>().centro.y + background.GetComponent<Dados>().altura_z / 2;
+
+        z -= (objeto.GetComponent<MeshCollider>().bounds.max.z - objeto.GetComponent<MeshCollider>().bounds.min.z) / 2;
+
+        if (qual_leitor == "FIT") z -= (bd_fit.GetGridY(i) / 32 * (background.GetComponent<Dados>().altura_z / 15));
+        if (qual_leitor == "Bolhas") z -= (bd_bolhas.GetCoordenadaY(i) * (background.GetComponent<Dados>().altura_z / resolucao.y));
+
+        return z;
     }
 
     public HeatMap GetMatrizHeatmap(int i = 0)
