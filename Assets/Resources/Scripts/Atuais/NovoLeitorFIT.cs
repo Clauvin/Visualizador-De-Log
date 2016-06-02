@@ -24,8 +24,6 @@ public class NovoLeitorFIT : NovoLeitor2 {
         {
             RetornarParaTelaInicial();
         }
-        
-
     }
 
 }
