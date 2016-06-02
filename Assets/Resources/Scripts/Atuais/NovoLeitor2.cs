@@ -555,6 +555,7 @@ public class NovoLeitor2 : MonoBehaviour
 
             objeto = Instantiate(objetos.Get("Qualquer Coisa Bolhas"));
             objeto.AddComponent<AoSerClicadoBolhas>();
+            objeto.AddComponent<LigaDesliga>();
 
             objeto.name = bd_bolhas.GetTempo(i).ToString() + " " + bd_bolhas.GetQualObjeto(i).ToString() + " " +
                 bd_bolhas.GetCoordenadaX(i).ToString() + " " + bd_bolhas.GetCoordenadaY(i).ToString();
