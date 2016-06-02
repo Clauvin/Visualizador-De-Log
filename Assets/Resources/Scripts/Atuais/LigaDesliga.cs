@@ -7,35 +7,35 @@ using System.Collections;
 /// </summary>
 public class LigaDesliga : MonoBehaviour {
 
-    private void SetActive(bool ativo)
+    private void SetarActive(bool ativo)
     {
-        SetActive(ativo);
+        gameObject.SetActive(ativo);
     }
 
     public bool EstaLigado()
     {
-        return GetComponent<GameObject>().activeSelf;
+        return gameObject.activeSelf;
     }
 
     public bool EstaHieraquicamenteLigado()
     {
-        return GetComponent<GameObject>().activeInHierarchy;
+        return gameObject.activeInHierarchy;
     }
 
     public void Alterna()
     {
-        if (GetComponent<GameObject>().activeSelf == true) Desligar();
+        if (gameObject.activeSelf == true) Desligar();
         else Ligar();
     }
 
 	public void Ligar()
     {
-        GetComponent<GameObject>().SetActive(true);
+        SetarActive(true);
     }
 
     public void Desligar()
     {
-        GetComponent<GameObject>().SetActive(false);
+        SetarActive(false);
     }
 
     
