@@ -409,6 +409,7 @@ public class NovoLeitor2 : MonoBehaviour
 
             objeto = Instantiate(objetos.Get("Qualquer Coisa FIT"));
             objeto.AddComponent<AoSerClicadoFIT>();
+            objeto.AddComponent<LigaDesliga>();
 
             objeto.name = bd_fit.GetTempo(i).ToString() + " " + bd_fit.GetPersonagem(i).ToString() + " " +
                 bd_fit.GetGridX(i).ToString() + " " + bd_fit.GetGridY(i).ToString();
@@ -783,6 +784,7 @@ public class NovoLeitor2 : MonoBehaviour
         background = Instantiate<GameObject>((GameObject)Resources.Load("Objetos/BackgroundFIT"));
         background.GetComponent<MeshRenderer>().material = Instantiate(material_background);
         background.GetComponent<Conector>().backgroundprincipal = background;
+        background.AddComponent<LigaDesliga>();
         return background;
     }
 
@@ -791,6 +793,7 @@ public class NovoLeitor2 : MonoBehaviour
         background = Instantiate<GameObject>((GameObject)Resources.Load("Objetos/BackgroundBolhas"));
         background.GetComponent<MeshRenderer>().material = Instantiate(material_background);
         background.GetComponent<Conector>().backgroundprincipal = background;
+        background.AddComponent<LigaDesliga>();
         return background;
     }
 
