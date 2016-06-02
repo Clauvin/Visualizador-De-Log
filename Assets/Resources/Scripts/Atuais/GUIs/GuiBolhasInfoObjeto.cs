@@ -39,19 +39,10 @@ public class GuiBolhasInfoObjeto : GuiInfoObjeto
     void Awake()
     {
         dadosdoponto = null;
-        gambiarra = true;
         posx = 0;
         posy = 0;
         texto = "";
         revelado = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (gambiarra)
-        {
-            gambiarra = false;
-        }
-    }
 }

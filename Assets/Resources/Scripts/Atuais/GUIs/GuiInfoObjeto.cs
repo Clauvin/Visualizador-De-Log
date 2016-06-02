@@ -7,8 +7,6 @@ using System.Collections;
 /// </summary>
 public class GuiInfoObjeto : GuiPadrao2
 {
-
-    protected bool gambiarra;
     protected Dados dadosdoponto;
 
     protected string texto;
@@ -28,7 +26,6 @@ public class GuiInfoObjeto : GuiPadrao2
     void Awake()
     {
         dadosdoponto = null;
-        gambiarra = true;
         posx = 0;
         posy = 0;
         texto = "";
@@ -41,12 +38,5 @@ public class GuiInfoObjeto : GuiPadrao2
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (gambiarra)
-        {
-            gambiarra = false;
-        }
-    }
+
 }
