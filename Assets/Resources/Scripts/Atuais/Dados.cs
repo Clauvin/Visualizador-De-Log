@@ -19,17 +19,6 @@ public class Dados : MonoBehaviour
     public string criado_agora;
     public string quem_criou;
 
-    // Use this for initialization
-    void Start () {
-	
-    }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
-
     /// <summary>
     /// Atualiza dados de posicionamento do objeto com relação ao espaço em que se encontra no visualizador.
     /// </summary>
