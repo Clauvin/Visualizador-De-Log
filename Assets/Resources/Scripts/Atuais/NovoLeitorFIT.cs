@@ -28,8 +28,4 @@ public class NovoLeitorFIT : NovoLeitor2 {
 
     }
 
-    // Update is called once per frame
-    void Update () {
-	
-	}
 }
