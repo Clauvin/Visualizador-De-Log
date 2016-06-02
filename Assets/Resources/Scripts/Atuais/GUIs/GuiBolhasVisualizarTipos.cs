@@ -12,9 +12,4 @@ public class GuiBolhasVisualizarTipos : GuiVisualizarTipos
         InicializacaoComumATodos();
 
     }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }

@@ -12,9 +12,5 @@ public class GuiFITVisualizarTipos : GuiVisualizarTipos
         InicializacaoComumATodos();
 
     }
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
 }
