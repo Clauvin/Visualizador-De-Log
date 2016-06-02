@@ -52,9 +52,4 @@ public class GuiSairDaVisualizacao : GuiPadrao2 {
         altura_dos_botoes = 45;
 	
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }
