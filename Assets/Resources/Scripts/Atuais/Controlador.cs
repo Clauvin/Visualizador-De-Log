@@ -459,6 +459,17 @@ public class Controlador : MonoBehaviour {
                 pegar_valor_de_camera_todos_de_uma_vez_em_3D = false;
             }
         }
+
+        if (modonovo == "Todos De Uma Vez em 2D")
+        {
+            ArrayList lista_de_backs = GetComponent<NovoLeitor2>().lista_de_backgrounds;
+            for (int i = 0; i < lista_de_backs.Count-1; i++)
+            {
+                Debug.Log(lista_de_backs[i]);
+                ((GameObject)lista_de_backs[i]).GetComponent<LigaDesliga>().Desligar();
+                //((GameObject)lista_de_backs[i]).SetActive(false);
+            }
+        }
     }
 
     void Transparencia0()
