@@ -374,7 +374,6 @@ public class NovoLeitor2 : MonoBehaviour
         // Lê e organiza todos os dados do log do FIT.
         for (int j = 0; j < matrizes_dos_heatmaps.Count; j++)
         {
-            ((HeatMap)matrizes_dos_heatmaps[j]).AlterarValoresDeTamanhoDeHeatmap(20, 15);
             ((HeatMap)matrizes_dos_heatmaps[j]).ReadPointsFIT(bd_fit, j);
             ((HeatMap)matrizes_dos_heatmaps[j]).AllTheDifferentPoints();
             ((HeatMap)matrizes_dos_heatmaps[j]).OrganizePoints();
@@ -518,7 +517,6 @@ public class NovoLeitor2 : MonoBehaviour
         // Lê todos os dados do log do Bolhas...
         for (int j = 0; j < matrizes_dos_heatmaps.Count; j++)
         {
-            ((HeatMap)matrizes_dos_heatmaps[j]).AlterarValoresDeTamanhoDeHeatmap(800, 600);
             if (j == 0)  ((HeatMap)matrizes_dos_heatmaps[j]).ReadPointsBolhas(bd_bolhas, "Todos");
             else ((HeatMap)matrizes_dos_heatmaps[j]).ReadPointsBolhas(bd_bolhas, lista_de_nomes_de_objetos_do_bolhas[j-1]);
             ((HeatMap)matrizes_dos_heatmaps[j]).AllTheDifferentPoints();
@@ -888,9 +886,6 @@ public class NovoLeitor2 : MonoBehaviour
 
         heatmap.transform.position = ((GameObject)lista_de_backgrounds[0]).transform.position + new Vector3(200f, 0, 0);
     }
-
-    public string GetQualLeitor() { return qual_leitor; }
-    public void SetQualLeitor(string qual) { qual_leitor = qual; }
 
     public int GetPrimeiroTempoFIT()
     {

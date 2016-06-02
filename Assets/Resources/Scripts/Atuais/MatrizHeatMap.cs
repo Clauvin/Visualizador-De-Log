@@ -10,10 +10,10 @@ using Basicas;
 public class HeatMap {
 
     int[,] matriz;
-    public int x;
-    public int y;
-    public int text_x;
-    public int text_y;
+    public int x = 800;
+    public int y = 600;
+    public int text_x = 800;
+    public int text_y = 600;
     Dictionary<int, Color> cores;
     Color32[] array_de_cores;
     ArrayList numeros_diferentes;
@@ -41,9 +41,6 @@ public class HeatMap {
 
     public void Inicializa()
     {
-        string qual_leitor = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<NovoLeitor2>().GetQualLeitor();
-        if (qual_leitor == "FIT") AlterarValoresDeTamanhoDeHeatmap(20, 15);
-        else if (qual_leitor == "Bolhas") AlterarValoresDeTamanhoDeHeatmap(800, 600);
         matriz = new int[x, y];
         cores = new Dictionary<int, Color>();
         numeros_diferentes = new ArrayList();
@@ -57,12 +54,6 @@ public class HeatMap {
         cor_um.b = (cor_maxima.b - cor_minima.b) / 2;
         cor_um.a = (cor_maxima.a - cor_minima.a) / 2;
         cor_um = cor_um + cor_minima;
-    }
-
-    public void AlterarValoresDeTamanhoDeHeatmap(int novo_x, int novo_y)
-    {
-        text_x = novo_x; x = novo_x;
-        text_y = novo_y; y = novo_y;
     }
 
     /// <summary>
