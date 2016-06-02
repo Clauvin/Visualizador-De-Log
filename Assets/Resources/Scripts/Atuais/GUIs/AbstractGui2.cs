@@ -21,16 +21,4 @@ public abstract class AbstractGui2 : MonoBehaviour
     public abstract bool EsconderGui();
 
     public abstract bool RevelarGui();
-
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }
