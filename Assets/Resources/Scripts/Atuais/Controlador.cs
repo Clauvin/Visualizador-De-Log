@@ -708,7 +708,6 @@ public class Controlador : MonoBehaviour {
     public void Inicializacao()
     {
 
-        //modos.Add("Um De Cada Vez 3D Bolhas", 0.1f, 15f, 30f, false, 1f, new Vector3(0f, 0f, 330f), new Vector3(90f, 0f, 0f));
         modos.Add("Todos De Uma Vez em 2D", 0f, 0f, 15f, 0f, 0f, true, 0f, new Vector3(0f, 0f, 0f),
             new Vector3(90f, 0f, 0f), 1f, 2, "6 - Some com os grids\n" + "7 - Faz os grids aparecerem\n" +
                                              "8 - Aumenta a transparencia dos pontos\n" +
