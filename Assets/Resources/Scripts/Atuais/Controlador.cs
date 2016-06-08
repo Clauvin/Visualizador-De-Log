@@ -416,9 +416,28 @@ public class Controlador : MonoBehaviour {
             posicaonova.x = modos.GetCameraX(modonovo);
             modos.SetCameraInitY(modo_de_visualizacao, posicaonova.y);
             posicaonova.y = modos.GetCameraInitY(modonovo);
+
             if (modo_de_visualizacao == "Todos De Uma Vez em 3D") modos.SetCameraInitZ(modo_de_visualizacao, posicaonova.z);
             if (modonovo == "Todos De Uma Vez em 3D") posicaonova.z = modos.GetCameraInitZ(modonovo);
             else posicaonova.z = 0.0f;
+            if (modonovo == "Todos De Uma Vez em 2D")
+            {
+                ArrayList lista_de_backs = GetComponent<NovoLeitor2>().lista_de_backgrounds;
+                for (int i = 0; i < lista_de_backs.Count - 1; i++)
+                {
+                    ((GameObject)lista_de_backs[i]).GetComponent<LigaDesliga>().Desligar();
+                }
+            }
+            if ((modo_de_visualizacao != modonovo) && (modo_de_visualizacao == "Todos De Uma Vez em 2D"))
+            {
+                ArrayList lista_de_backs = GetComponent<NovoLeitor2>().lista_de_backgrounds;
+                for (int i = 0; i < lista_de_backs.Count - 1; i++)
+                {
+                    Debug.Log(lista_de_backs[i]);
+                    ((GameObject)lista_de_backs[i]).GetComponent<LigaDesliga>().Ligar();
+                }
+            }
+
             GetComponent<Camera>().transform.position = posicaonova;
             GetComponent<Camera>().orthographic = modos.GetOrthographic(modonovo);
 
@@ -459,17 +478,7 @@ public class Controlador : MonoBehaviour {
                 pegar_valor_de_camera_todos_de_uma_vez_em_3D = false;
             }
         }
-
-        /*if (modonovo == "Todos De Uma Vez em 2D")
-        {
-            ArrayList lista_de_backs = GetComponent<NovoLeitor2>().lista_de_backgrounds;
-            for (int i = 0; i < lista_de_backs.Count-1; i++)
-            {
-                Debug.Log(lista_de_backs[i]);
-                ((GameObject)lista_de_backs[i]).GetComponent<LigaDesliga>().Desligar();
-                //((GameObject)lista_de_backs[i]).SetActive(false);
-            }
-        }*/
+        
     }
 
     void Transparencia0()
