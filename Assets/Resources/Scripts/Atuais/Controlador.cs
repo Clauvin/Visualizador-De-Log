@@ -460,7 +460,7 @@ public class Controlador : MonoBehaviour {
             }
         }
 
-        if (modonovo == "Todos De Uma Vez em 2D")
+        /*if (modonovo == "Todos De Uma Vez em 2D")
         {
             ArrayList lista_de_backs = GetComponent<NovoLeitor2>().lista_de_backgrounds;
             for (int i = 0; i < lista_de_backs.Count-1; i++)
@@ -469,7 +469,7 @@ public class Controlador : MonoBehaviour {
                 ((GameObject)lista_de_backs[i]).GetComponent<LigaDesliga>().Desligar();
                 //((GameObject)lista_de_backs[i]).SetActive(false);
             }
-        }
+        }*/
     }
 
     void Transparencia0()
