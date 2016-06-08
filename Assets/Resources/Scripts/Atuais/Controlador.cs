@@ -420,21 +420,17 @@ public class Controlador : MonoBehaviour {
             if (modo_de_visualizacao == "Todos De Uma Vez em 3D") modos.SetCameraInitZ(modo_de_visualizacao, posicaonova.z);
             if (modonovo == "Todos De Uma Vez em 3D") posicaonova.z = modos.GetCameraInitZ(modonovo);
             else posicaonova.z = 0.0f;
-            if (modonovo == "Todos De Uma Vez em 2D")
+            if ((modonovo == "Todos De Uma Vez em 2D") || 
+                    ((modo_de_visualizacao != modonovo) && (modo_de_visualizacao == "Todos De Uma Vez em 2D")))
             {
                 ArrayList lista_de_backs = GetComponent<NovoLeitor2>().lista_de_backgrounds;
                 for (int i = 0; i < lista_de_backs.Count - 1; i++)
                 {
-                    ((GameObject)lista_de_backs[i]).GetComponent<LigaDesliga>().Desligar();
-                }
-            }
-            if ((modo_de_visualizacao != modonovo) && (modo_de_visualizacao == "Todos De Uma Vez em 2D"))
-            {
-                ArrayList lista_de_backs = GetComponent<NovoLeitor2>().lista_de_backgrounds;
-                for (int i = 0; i < lista_de_backs.Count - 1; i++)
-                {
-                    Debug.Log(lista_de_backs[i]);
-                    ((GameObject)lista_de_backs[i]).GetComponent<LigaDesliga>().Ligar();
+                    if (modonovo == "Todos De Uma Vez em 2D") ((GameObject)lista_de_backs[i]).GetComponent<LigaDesliga>().Desligar();
+                    else if ((modo_de_visualizacao != modonovo) && (modo_de_visualizacao == "Todos De Uma Vez em 2D"))
+                    {
+                        ((GameObject)lista_de_backs[i]).GetComponent<LigaDesliga>().Ligar();
+                    }
                 }
             }
 
