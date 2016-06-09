@@ -717,8 +717,8 @@ public class Controlador : MonoBehaviour {
                                  "5 - Muda para Heatmap\n";
         tipo = "Bolhas";
 
-        parte_da_transparencia_dos_objetos += "8 - Aumenta a transparencia dos objetos\n" +
-                                             "9 - Diminui a transparencia dos objetos\n";
+        parte_da_transparencia_dos_objetos += "8 - Diminui os detalhes dos/some com os objetos\n" +
+                                             "9 - Aumenta os detalhes dos objetos\n";
 
         Inicializacao();
     }
