@@ -761,8 +761,6 @@ public class Controlador : MonoBehaviour {
         modos.Add("Todos De Uma Vez em 2D", 0f, 0f, 15f, 0f, 0f, true, 0f, new Vector3(0f, 0f, 0f),
             new Vector3(90f, 0f, 0f), 1f, 2, "6 - Some com os grids\n" + "7 - Faz os grids aparecerem\n" +
                                              parte_da_transparencia_dos_objetos +
-                                             "- - Faz as cores dos pontos ficarem mais\n" + "    vermelhas\n" +
-                                             "= - Faz as cores dos pontos voltarem ao normal\n" +
                                              "Q - Voltar à tela inicial");
         modos.Add("Um Frame De Cada Vez em 3D", 0.5f, 5f, 30f, 0f, 0f, false, 1f, new Vector3(0f, 0f, 330f),
             new Vector3(90f, 0f, 0f), 1f, 2, "6 - Some com os grids\n" + "7 - Faz os grids aparecerem\n" +
