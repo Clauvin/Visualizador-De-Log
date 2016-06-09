@@ -628,13 +628,6 @@ public class Controlador : MonoBehaviour {
             GetComponent<MeshRenderer>().material.SetColor("_Color", cor);
     }
 
-    void AumentarVermelhidao(float change)
-    {
-
-        MudancaDeCor(false, false, true, true, change);
-
-    }
-
     public void PontoFoiClicado(Transform click)
     {
         if (objeto_clicado == null)
