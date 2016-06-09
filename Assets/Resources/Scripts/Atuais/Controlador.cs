@@ -2,6 +2,7 @@
 using Basicas;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 /*Modos de uso -
     1 - Um de Cada Vez, em 3D. Mostra uma série de N pontos com N backgrounds, navegáveis com os botões esquerda e
@@ -52,9 +53,13 @@ public class Controlador : MonoBehaviour {
     int posicao_temporal_2;
 
     bool usuario_pode_fazer_input = false;
-	
-	// Update is called once per frame
-	void Update () {
+
+    private ArrayList lista_de_objetos_a_ligar_ou_desligar;
+
+    string parte_da_transparencia_dos_objetos;
+
+    // Update is called once per frame
+    void Update () {
 
         if (usuario_pode_fazer_input) {
 
@@ -347,28 +352,11 @@ public class Controlador : MonoBehaviour {
                 if (modo_de_visualizacao == "Todos De Uma Vez em 2D"){ TransparenciaDoBackground(1f); }
             }
 
-            if (Input.GetButtonDown("8"))
+            if (tipo == "Bolhas")
             {
-                MudarTransparenciaDosObjetos(-0.2f);
-                //DeixarObjetosEmEspacoDeTempoInvisiveisEIninteragiveis(0, 25);
-                //DeixarTipoDeObjetoInvisivelEIninteragivel("Baleia");
-            }
+                if (Input.GetButtonDown("8")) MudarTransparenciaDosObjetos(-0.2f);
 
-            if (Input.GetButtonDown("9"))
-            {
-                MudarTransparenciaDosObjetos(0.2f);
-                //DeixarObjetosEmEspacoDeTempoVisiveisEInteragiveis(0, 25);
-                //DeixarTipoDeObjetoVisivelEInteragivel("Baleia");
-            }
-
-            if (Input.GetButtonDown("-"))
-            {
-                AumentarVermelhidao(-0.2f);
-            }
-
-            if (Input.GetButtonDown("="))
-            {
-                AumentarVermelhidao(0.2f);
+                if (Input.GetButtonDown("9")) MudarTransparenciaDosObjetos(0.2f);
             }
 
             if (Input.GetButtonDown("Q"))
@@ -416,9 +404,35 @@ public class Controlador : MonoBehaviour {
             posicaonova.x = modos.GetCameraX(modonovo);
             modos.SetCameraInitY(modo_de_visualizacao, posicaonova.y);
             posicaonova.y = modos.GetCameraInitY(modonovo);
+
             if (modo_de_visualizacao == "Todos De Uma Vez em 3D") modos.SetCameraInitZ(modo_de_visualizacao, posicaonova.z);
+            if ((modo_de_visualizacao == "Todos De Uma Vez em 3D") || (modo_de_visualizacao == "Todos De Uma Vez em 2D"))
+            {
+                ArrayList lista_de_backs = GetComponent<NovoLeitor2>().lista_de_backgrounds;
+                int contagem = 0;
+                if (modo_de_visualizacao == "Todos De Uma Vez em 3D") contagem = lista_de_backs.Count;
+                else if (modo_de_visualizacao == "Todos De Uma Vez em 2D") contagem = lista_de_backs.Count - 1;
+                for (int i = 0; i < contagem; i++)
+                {
+                    ((GameObject)lista_de_backs[i]).GetComponent<LigaDesliga>().Ligar();
+                }
+            }
+        
             if (modonovo == "Todos De Uma Vez em 3D") posicaonova.z = modos.GetCameraInitZ(modonovo);
             else posicaonova.z = 0.0f;
+
+            if ((modonovo == "Todos De Uma Vez em 3D") || (modonovo == "Todos De Uma Vez em 2D"))
+            {
+                ArrayList lista_de_backs = GetComponent<NovoLeitor2>().lista_de_backgrounds;
+                int contagem = 0;
+                if (modonovo == "Todos De Uma Vez em 3D") contagem = lista_de_backs.Count;
+                else if (modonovo == "Todos De Uma Vez em 2D") contagem = lista_de_backs.Count - 1;
+                for (int i = 0; i < contagem; i++)
+                {
+                    ((GameObject)lista_de_backs[i]).GetComponent<LigaDesliga>().Desligar();
+                }
+            }
+
             GetComponent<Camera>().transform.position = posicaonova;
             GetComponent<Camera>().orthographic = modos.GetOrthographic(modonovo);
 
@@ -459,6 +473,7 @@ public class Controlador : MonoBehaviour {
                 pegar_valor_de_camera_todos_de_uma_vez_em_3D = false;
             }
         }
+        
     }
 
     void Transparencia0()
@@ -475,6 +490,113 @@ public class Controlador : MonoBehaviour {
 
         MudancaDeCor(true, false, false, false, change);
 
+    }
+
+    private void LigarOuDesligarObjetos(bool ligar, bool tipo, string qual_tipo, bool tempo, int tempo_minimo, int tempo_maximo)
+    {
+        int limit = GetComponent<NovoLeitor2>().lista_de_objetos.Count;
+        lista_de_objetos_a_ligar_ou_desligar = GetComponent<NovoLeitor2>().lista_de_objetos;
+
+        for (int i = 0; i < limit; i++)
+        {
+            // Explicação sobre o código abaixo:
+            // modificar é a variável que indica no fim das comparações se o objeto dentro do for é aquele
+            // o qual se quer ligar ou desligar.
+            // A linha modificar && ... está ali para simultaneamente permitir que modificar se mantenha como true
+            // a cada condição passada e que em caso de false em uma dessas condições, o false também se propague e não
+            // seja sobreescrito por próximos trues.
+            bool modificar = true;
+            if (tipo)
+            {
+                modificar = (modificar &&
+                            ((GameObject)lista_de_objetos_a_ligar_ou_desligar[i]).GetComponent<Dados>().nome_do_objeto == qual_tipo);
+            }
+            if (tempo)
+            {
+                int qual_tempo = ((GameObject)lista_de_objetos_a_ligar_ou_desligar[i]).GetComponent<Dados>().tempo;
+                modificar = (modificar &&
+                            ((tempo_minimo <= qual_tempo) && (qual_tempo <= tempo_maximo)));
+            }
+
+            if (modificar)
+            {
+                if (ligar) ((GameObject)lista_de_objetos_a_ligar_ou_desligar[i]).GetComponent<LigaDesliga>().Ligar();
+                else ((GameObject)lista_de_objetos_a_ligar_ou_desligar[i]).GetComponent<LigaDesliga>().Desligar();
+            }
+        }
+    }
+
+    private void LigarOuDesligarObjetosConsiderandoSobreposicao
+                 (bool ligar, bool tipo, string qual_tipo, bool tempo, int tempo_minimo, int tempo_maximo)
+    {
+        int limit = GetComponent<NovoLeitor2>().lista_de_objetos.Count;
+        int qual_tempo;
+
+        // variáveis usadas para evitar objetos ativos ignorando desligamento por tempo/tipo, quando ambos estão sendo
+        // usados e um deles é desfeito.
+        int t_minimo; int t_maximo;
+        int posicao_de_checagem_de_tipo_de_objeto;
+
+        lista_de_objetos_a_ligar_ou_desligar = GetComponent<NovoLeitor2>().lista_de_objetos;
+
+        for (int i = 0; i < limit; i++)
+        {
+            // Explicação sobre o código abaixo:
+            // modificar é a variável que indica no fim das comparações se o objeto dentro do for é aquele
+            // o qual se quer ligar ou desligar.
+            // A linha modificar && ... está ali para simultaneamente permitir que modificar se mantenha como true
+            // a cada condição passada e que em caso de false em uma dessas condições, o false também se propague e não
+            // seja sobreescrito por próximos trues.
+            bool modificar = true;
+            if (tipo)
+            {
+                modificar = (modificar &&
+                            ((GameObject)lista_de_objetos_a_ligar_ou_desligar[i]).GetComponent<Dados>().nome_do_objeto == qual_tipo);
+            }
+            if (tempo)
+            {
+                qual_tempo = ((GameObject)lista_de_objetos_a_ligar_ou_desligar[i]).GetComponent<Dados>().tempo;
+                modificar = (modificar &&
+                            ((tempo_minimo <= qual_tempo) && (qual_tempo <= tempo_maximo)));
+            }
+
+            if (modificar)
+            {
+                if (ligar)
+                {
+                    if (tipo && !GetComponent<GuiVisualizarPorTempo>().GetTrueFalsePorVariavelVisivelOuInvisivel())
+                    {
+                        qual_tempo = ((GameObject)lista_de_objetos_a_ligar_ou_desligar[i]).GetComponent<Dados>().tempo;
+                        t_minimo = Int32.Parse(GetComponent<GuiVisualizarPorTempo>().GetTempoMinimo());
+                        t_maximo = Int32.Parse(GetComponent<GuiVisualizarPorTempo>().GetTempoMaximo());
+                        modificar = modificar && !((t_minimo <= qual_tempo) && (qual_tempo <= t_maximo));
+                    }
+                    if (tempo && GetComponent<GuiVisualizarTipos>().AlgumTipoDeObjetoInvisivel())
+                    {
+                        // ou faco isso ou o compilador acusa erro de não declaração de variável.
+                        posicao_de_checagem_de_tipo_de_objeto = 0;
+
+                        // Lembrando: this serve para fazer referência à classe em que o código se encontra.
+                        // Uso aqui porquê a variável interna da função é idêntica à variável da classe.
+                        // Seria legal se alguém deixasse as duas variáveis com nomes diferentes depois...
+                        if (this.tipo == "FIT")
+                            posicao_de_checagem_de_tipo_de_objeto = GetComponent<NovoLeitor2>().
+                                           nomes_e_numeros_de_objetos_do_FIT[
+                                            ((GameObject)lista_de_objetos_a_ligar_ou_desligar[i]).GetComponent<Dados>().name
+                                            ];
+                        else if (this.tipo == "Bolhas")
+                            posicao_de_checagem_de_tipo_de_objeto = GetComponent<NovoLeitor2>().
+                                           nomes_e_numeros_de_objetos_do_bolhas[
+                                            ((GameObject)lista_de_objetos_a_ligar_ou_desligar[i]).GetComponent<Dados>().name
+                                            ];
+
+                        modificar = modificar && !GetComponent<GuiVisualizarTipos>().EstaInvisivel(posicao_de_checagem_de_tipo_de_objeto);
+                    }
+                    if (modificar) ((GameObject)lista_de_objetos_a_ligar_ou_desligar[i]).GetComponent<LigaDesliga>().Ligar();
+                }
+                else ((GameObject)lista_de_objetos_a_ligar_ou_desligar[i]).GetComponent<LigaDesliga>().Desligar();
+            }
+        }
     }
 
     void MudarTransparenciaDeTipoEspecificoDeObjetos(string nome, float transparencia)
@@ -552,26 +674,22 @@ public class Controlador : MonoBehaviour {
 
     public void DeixarTipoDeObjetoInvisivelEIninteragivel(string nome)
     {
-        MudarTransparenciaDeTipoEspecificoDeObjetos(nome, 0.0f);
-        SetInteracaoComTiposDeObjetos(nome, false);
+        LigarOuDesligarObjetosConsiderandoSobreposicao(false, true, nome, false, 0, 0);
     }
 
     public void DeixarTipoDeObjetoVisivelEInteragivel(string nome)
     {
-        MudarTransparenciaDeTipoEspecificoDeObjetos(nome, 1.0f);
-        SetInteracaoComTiposDeObjetos(nome, true);
+        LigarOuDesligarObjetosConsiderandoSobreposicao(true, true, nome, false, 0, 0);
     }
 
     public void DeixarObjetosEmEspacoDeTempoInvisiveisEIninteragiveis(int tempo_minimo, int tempo_maximo)
     {
-        MudarTransparenciaDeObjetosDeEspacoDeTempoEspecifico(tempo_minimo, tempo_maximo, 0.0f);
-        SetInteracaoObjetosDeEspacoDeTempo(tempo_minimo, tempo_maximo, false);
+        LigarOuDesligarObjetosConsiderandoSobreposicao(false, false, null, true, tempo_minimo, tempo_maximo);
     }
 
     public void DeixarObjetosEmEspacoDeTempoVisiveisEInteragiveis(int tempo_minimo, int tempo_maximo)
     {
-        MudarTransparenciaDeObjetosDeEspacoDeTempoEspecifico(tempo_minimo, tempo_maximo, 1.0f);
-        SetInteracaoObjetosDeEspacoDeTempo(tempo_minimo, tempo_maximo, true);
+        LigarOuDesligarObjetosConsiderandoSobreposicao(true, false, null, true, tempo_minimo, tempo_maximo);
     }
 
     void TransparenciaDoBackground(float trans)
@@ -582,13 +700,6 @@ public class Controlador : MonoBehaviour {
         cor.a = trans;
         ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[count - 1]).
             GetComponent<MeshRenderer>().material.SetColor("_Color", cor);
-    }
-
-    void AumentarVermelhidao(float change)
-    {
-
-        MudancaDeCor(false, false, true, true, change);
-
     }
 
     public void PontoFoiClicado(Transform click)
@@ -679,6 +790,10 @@ public class Controlador : MonoBehaviour {
                                  "4 - Muda para 'Todos De Uma Vez em 3D'\n" +
                                  "5 - Muda para Heatmap\n";
         tipo = "Bolhas";
+
+        parte_da_transparencia_dos_objetos += "8 - Diminui os detalhes dos/some com os objetos\n" +
+                                             "9 - Aumenta os detalhes dos objetos\n";
+
         Inicializacao();
     }
 
@@ -691,26 +806,22 @@ public class Controlador : MonoBehaviour {
                                  "4 - Muda para 'Todos De Uma Vez em 3D'\n" +
                                  "5 - Muda para Heatmap\n";
         tipo = "Fit";
+
+        parte_da_transparencia_dos_objetos = "";
+
         Inicializacao();
     }
 
     public void Inicializacao()
     {
 
-        //modos.Add("Um De Cada Vez 3D Bolhas", 0.1f, 15f, 30f, false, 1f, new Vector3(0f, 0f, 330f), new Vector3(90f, 0f, 0f));
         modos.Add("Todos De Uma Vez em 2D", 0f, 0f, 15f, 0f, 0f, true, 0f, new Vector3(0f, 0f, 0f),
             new Vector3(90f, 0f, 0f), 1f, 2, "6 - Some com os grids\n" + "7 - Faz os grids aparecerem\n" +
-                                             "8 - Aumenta a transparencia dos pontos\n" +
-                                             "9 - Diminui a transparencia dos pontos\n" +
-                                             "- - Faz as cores dos pontos ficarem mais\n" + "    vermelhas\n" +
-                                             "= - Faz as cores dos pontos voltarem ao normal\n" +
+                                             parte_da_transparencia_dos_objetos +
                                              "Q - Voltar à tela inicial");
         modos.Add("Um Frame De Cada Vez em 3D", 0.5f, 5f, 30f, 0f, 0f, false, 1f, new Vector3(0f, 0f, 330f),
             new Vector3(90f, 0f, 0f), 1f, 2, "6 - Some com os grids\n" + "7 - Faz os grids aparecerem\n" +
-                                             "8 - Aumenta a transparencia dos pontos\n" +
-                                             "9 - Diminui a transparencia dos pontos\n" +
-                                             "- - Faz as cores dos pontos ficarem mais\n" + "    vermelhas\n" +
-                                             "= - Faz as cores dos pontos voltarem ao normal\n" +
+                                             parte_da_transparencia_dos_objetos +
                                              "<- - Move a câmera para trás\n" +
                                              "-> - Move a câmera para frente(ela pode \n" +
                                              "atravessar um grid para ver o proximo\n" +
@@ -720,10 +831,7 @@ public class Controlador : MonoBehaviour {
 
         modos.Add("Um Frame De Cada Vez em 2D", 2f, 0f, 10f, 0f, 0f, true, 1f, new Vector3(0f, 0f, 0f),
             new Vector3(90f, 0f, 0f), 1f, 0, "6 - Some com os grids\n" + "7 - Faz os grids aparecerem\n" +
-                                             "8 - Aumenta a transparencia dos pontos\n" +
-                                             "9 - Diminui a transparencia dos pontos\n" +
-                                             "- - Faz as cores dos pontos ficarem mais\n" + "    vermelhas\n" +
-                                             "= - Faz as cores dos pontos voltarem ao normal\n" +
+                                             parte_da_transparencia_dos_objetos +
                                              "<- - Vai para a posição anterior dos pontos\n" +
                                              "-> - Vai para a posição seguinte dos pontos\n" +
                                              "A - Vai para a posição anterior dos pontos\n" +
@@ -737,10 +845,7 @@ public class Controlador : MonoBehaviour {
                                              "Q - Voltar à tela inicial");
 
         modos.Add("Todos De Uma Vez em 3D", 0.5f, 5f, 2f, 0f, 0f, false, 0f, new Vector3(0f, 0f, 0f),
-            new Vector3(90f, 0f, 0f), 0f, 2, "8 - Aumenta a transparencia dos pontos\n" +
-                                             "9 - Diminui a transparencia dos pontos\n" +
-                                             "- - Faz as cores dos pontos ficarem mais\n" + "    vermelhas\n" +
-                                             "= - Faz as cores dos pontos voltarem ao normal\n" +
+            new Vector3(90f, 0f, 0f), 0f, 2, parte_da_transparencia_dos_objetos +
                                              "<- - Move a câmera para trás\n" +
                                              "-> - Move a câmera para frente\n" +
                                              "A - Move a câmera para trás mais rápido\n" +

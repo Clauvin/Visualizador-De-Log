@@ -19,6 +19,21 @@ public class GuiVisualizarTipos : GuiPadrao2 {
         else visivel_ou_invisivel[posicao] = 1;
     }
 
+    public bool AlgumTipoDeObjetoInvisivel()
+    {
+        for (int i = 0; i < visivel_ou_invisivel.GetLength(0); i++)
+        {
+            if (visivel_ou_invisivel[i] == 0) return true;
+        }
+        return false;
+    }
+
+    public bool EstaInvisivel(int posicao)
+    {
+        if (visivel_ou_invisivel[posicao] == 0) return true;
+        else return false;
+    }
+
     public override void OnGUI()
     {
         if (revelado)
