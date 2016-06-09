@@ -16,10 +16,11 @@ public class GuiBolhasHeatmap : GuiHeatmap
     public override void OnGUI()
     {
         int numero;
+        int qualheatmap;
 
         if ((revelado) && (!gambiarra))
         {
-            int qualheatmap = GetComponent<Controlador>().QualHeatmapMostra();
+            qualheatmap = GetComponent<Controlador>().QualHeatmapMostra();
             GUI.BeginGroup(new Rect(posx, posy, 170, 20 *
                 (dados[qualheatmap].numeros_de_cor.Count + 3)));
 

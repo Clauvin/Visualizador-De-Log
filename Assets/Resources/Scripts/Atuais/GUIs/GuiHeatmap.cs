@@ -23,6 +23,7 @@ public class GuiHeatmap : GuiPadrao2
     public Dictionary<int, Color> dicionario_heatmap;
     public List<DadosGUIHashMap> dados;
     public string[] lista_de_objetos;
+    protected DadosGUIHashMap infoheatmap;
 
     Rect posicao_movel;
 
@@ -68,7 +69,7 @@ public class GuiHeatmap : GuiPadrao2
             for (int i = 0; i < quant_de_heatmaps; i++)
             {
                 //carrega os dados da GUI referente à lista de cores e quantos objetos representados por cor
-                DadosGUIHashMap infoheatmap = new DadosGUIHashMap();
+                infoheatmap = new DadosGUIHashMap();
 
                 dicionario_heatmap = GetComponent<NovoLeitor2>().GetMatrizHeatmap(i).GetDicionarioDeCores();
                 infoheatmap.numeros_de_cor.AddRange(dicionario_heatmap.Keys);
