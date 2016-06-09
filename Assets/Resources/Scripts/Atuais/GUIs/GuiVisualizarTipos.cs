@@ -28,6 +28,12 @@ public class GuiVisualizarTipos : GuiPadrao2 {
         return false;
     }
 
+    public bool EstaInvisivel(int posicao)
+    {
+        if (visivel_ou_invisivel[posicao] == 0) return true;
+        else return false;
+    }
+
     public override void OnGUI()
     {
         if (revelado)
