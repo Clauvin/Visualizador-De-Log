@@ -52,6 +52,8 @@ public class Controlador : MonoBehaviour {
     int posicao_temporal_2;
 
     bool usuario_pode_fazer_input = false;
+
+    private ArrayList lista_de_objetos_a_ligar_ou_desligar;
 	
 	// Update is called once per frame
 	void Update () {
@@ -504,6 +506,40 @@ public class Controlador : MonoBehaviour {
 
     }
 
+    private void LigarOuDesligarObjetos(bool ligar, bool tipo, string qual_tipo, bool tempo, int tempo_minimo, int tempo_maximo)
+    {
+        int limit = GetComponent<NovoLeitor2>().lista_de_objetos.Count;
+        lista_de_objetos_a_ligar_ou_desligar = GetComponent<NovoLeitor2>().lista_de_objetos;
+
+        for (int i = 0; i < limit; i++)
+        {
+            // Explicação sobre o código abaixo:
+            // modificar é a variável que indica no fim das comparações se o objeto dentro do for é aquele
+            // o qual se quer ligar ou desligar.
+            // A linha modificar && ... está ali para simultaneamente permitir que modificar se mantenha como true
+            // a cada condição passada e que em caso de false em uma dessas condições, o false também se propague e não
+            // seja sobreescrito por próximos trues.
+            bool modificar = true;
+            if (tipo)
+            {
+                modificar = (modificar &&
+                            ((GameObject)lista_de_objetos_a_ligar_ou_desligar[i]).GetComponent<Dados>().nome_do_objeto == qual_tipo);
+            }
+            if (tempo)
+            {
+                int qual_tempo = ((GameObject)lista_de_objetos_a_ligar_ou_desligar[i]).GetComponent<Dados>().tempo;
+                modificar = (modificar &&
+                            ((tempo_minimo <= qual_tempo) && (qual_tempo <= tempo_maximo)));
+            }
+
+            if (modificar)
+            {
+                if (ligar) ((GameObject)lista_de_objetos_a_ligar_ou_desligar[i]).GetComponent<LigaDesliga>().Ligar();
+                else ((GameObject)lista_de_objetos_a_ligar_ou_desligar[i]).GetComponent<LigaDesliga>().Desligar();
+            }
+        }
+    }
+
     void MudarTransparenciaDeTipoEspecificoDeObjetos(string nome, float transparencia)
     {
 
@@ -579,12 +615,14 @@ public class Controlador : MonoBehaviour {
 
     public void DeixarTipoDeObjetoInvisivelEIninteragivel(string nome)
     {
+        //LigarOuDesligarObjetos(false, true, nome, false, 0, 0);
         MudarTransparenciaDeTipoEspecificoDeObjetos(nome, 0.0f);
         SetInteracaoComTiposDeObjetos(nome, false);
     }
 
     public void DeixarTipoDeObjetoVisivelEInteragivel(string nome)
     {
+        //LigarOuDesligarObjetos(true, true, nome, false, 0, 0);
         MudarTransparenciaDeTipoEspecificoDeObjetos(nome, 1.0f);
         SetInteracaoComTiposDeObjetos(nome, true);
     }
