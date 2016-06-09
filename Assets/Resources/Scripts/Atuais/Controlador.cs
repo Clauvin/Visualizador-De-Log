@@ -767,8 +767,6 @@ public class Controlador : MonoBehaviour {
         modos.Add("Um Frame De Cada Vez em 3D", 0.5f, 5f, 30f, 0f, 0f, false, 1f, new Vector3(0f, 0f, 330f),
             new Vector3(90f, 0f, 0f), 1f, 2, "6 - Some com os grids\n" + "7 - Faz os grids aparecerem\n" +
                                              parte_da_transparencia_dos_objetos +
-                                             "- - Faz as cores dos pontos ficarem mais\n" + "    vermelhas\n" +
-                                             "= - Faz as cores dos pontos voltarem ao normal\n" +
                                              "<- - Move a câmera para trás\n" +
                                              "-> - Move a câmera para frente(ela pode \n" +
                                              "atravessar um grid para ver o proximo\n" +
@@ -779,8 +777,6 @@ public class Controlador : MonoBehaviour {
         modos.Add("Um Frame De Cada Vez em 2D", 2f, 0f, 10f, 0f, 0f, true, 1f, new Vector3(0f, 0f, 0f),
             new Vector3(90f, 0f, 0f), 1f, 0, "6 - Some com os grids\n" + "7 - Faz os grids aparecerem\n" +
                                              parte_da_transparencia_dos_objetos +
-                                             "- - Faz as cores dos pontos ficarem mais\n" + "    vermelhas\n" +
-                                             "= - Faz as cores dos pontos voltarem ao normal\n" +
                                              "<- - Vai para a posição anterior dos pontos\n" +
                                              "-> - Vai para a posição seguinte dos pontos\n" +
                                              "A - Vai para a posição anterior dos pontos\n" +
@@ -795,8 +791,6 @@ public class Controlador : MonoBehaviour {
 
         modos.Add("Todos De Uma Vez em 3D", 0.5f, 5f, 2f, 0f, 0f, false, 0f, new Vector3(0f, 0f, 0f),
             new Vector3(90f, 0f, 0f), 0f, 2, parte_da_transparencia_dos_objetos +
-                                             "- - Faz as cores dos pontos ficarem mais\n" + "    vermelhas\n" +
-                                             "= - Faz as cores dos pontos voltarem ao normal\n" +
                                              "<- - Move a câmera para trás\n" +
                                              "-> - Move a câmera para frente\n" +
                                              "A - Move a câmera para trás mais rápido\n" +
