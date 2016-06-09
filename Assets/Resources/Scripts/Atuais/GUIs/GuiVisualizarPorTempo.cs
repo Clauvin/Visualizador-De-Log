@@ -22,6 +22,17 @@ public class GuiVisualizarPorTempo : GuiPadrao2 {
     int visivel_ou_invisivel = 1;
     public string[] o_que_escrever_nos_botoes;
 
+    public string GetTempoMinimo() { return tempo_minimo; }
+    public string GetTempoMaximo() { return tempo_maximo; }
+
+    public int GetVariavelVisivelOuInvisivel() { return visivel_ou_invisivel; }
+    public bool GetTrueFalsePorVariavelVisivelOuInvisivel()
+    {
+        if (visivel_ou_invisivel == 0) return false;
+        else return true;
+    }
+    
+
     // bool responsável por fazer o botão dessa GUI alternar entre visível ou invisível
     // Futuramente, pode se tornar desnecessário caso tenhamos dois botões: um pra deixar visível
     // e outro pra deixar invisível.
