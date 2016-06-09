@@ -615,16 +615,16 @@ public class Controlador : MonoBehaviour {
 
     public void DeixarTipoDeObjetoInvisivelEIninteragivel(string nome)
     {
-        //LigarOuDesligarObjetos(false, true, nome, false, 0, 0);
-        MudarTransparenciaDeTipoEspecificoDeObjetos(nome, 0.0f);
-        SetInteracaoComTiposDeObjetos(nome, false);
+        LigarOuDesligarObjetos(false, true, nome, false, 0, 0);
+        //MudarTransparenciaDeTipoEspecificoDeObjetos(nome, 0.0f);
+        //SetInteracaoComTiposDeObjetos(nome, false);
     }
 
     public void DeixarTipoDeObjetoVisivelEInteragivel(string nome)
     {
-        //LigarOuDesligarObjetos(true, true, nome, false, 0, 0);
-        MudarTransparenciaDeTipoEspecificoDeObjetos(nome, 1.0f);
-        SetInteracaoComTiposDeObjetos(nome, true);
+        LigarOuDesligarObjetos(true, true, nome, false, 0, 0);
+        //MudarTransparenciaDeTipoEspecificoDeObjetos(nome, 1.0f);
+        //SetInteracaoComTiposDeObjetos(nome, true);
     }
 
     public void DeixarObjetosEmEspacoDeTempoInvisiveisEIninteragiveis(int tempo_minimo, int tempo_maximo)
