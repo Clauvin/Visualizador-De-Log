@@ -3,6 +3,7 @@ using Basicas;
 using System;
 using System.IO;
 using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
 /// Responsável por carregar as informações necessárias para o programa funcionar e usá-las.
@@ -34,6 +35,10 @@ public class NovoLeitor2 : MonoBehaviour
     public string[] lista_de_nomes_de_objetos_do_FIT = { "1", "2", "3", "4" };
     public string[] lista_de_nomes_de_objetos_do_bolhas = { "Mouse", "Baleia", "Bolha", "Peixe", "Nuvem" };
 
+    // Criado especificamente pra resolver um bug de sobreposição de desligamento de objetos lá em Controlador
+    public Dictionary<string, int> nomes_e_numeros_de_objetos_do_FIT;
+    public Dictionary<string, int> nomes_e_numeros_de_objetos_do_bolhas;
+
     private string qual_leitor;
 
     public void StartFIT()
@@ -58,6 +63,10 @@ public class NovoLeitor2 : MonoBehaviour
         texturas_selecionadas.Add("3", (Texture2D)Resources.Load("Texturas/P3 Selecionado"));
         texturas_selecionadas.Add("4", (Texture2D)Resources.Load("Texturas/P4 Selecionado"));
 
+        nomes_e_numeros_de_objetos_do_FIT.Add("1", 0);
+        nomes_e_numeros_de_objetos_do_FIT.Add("2", 1);
+        nomes_e_numeros_de_objetos_do_FIT.Add("3", 2);
+        nomes_e_numeros_de_objetos_do_FIT.Add("4", 3);
     }
 
     public void StartBolhas()
@@ -83,6 +92,12 @@ public class NovoLeitor2 : MonoBehaviour
         texturas_selecionadas.Add("Bolha", (Texture2D)Resources.Load("Texturas/Bolha Clicada"));
         texturas_selecionadas.Add("Peixe", (Texture2D)Resources.Load("Texturas/Peixe Clicado"));
         texturas_selecionadas.Add("Nuvem", (Texture2D)Resources.Load("Texturas/Nuvem Clicada"));
+
+        nomes_e_numeros_de_objetos_do_bolhas.Add("Mouse", 0);
+        nomes_e_numeros_de_objetos_do_bolhas.Add("Baleia", 1);
+        nomes_e_numeros_de_objetos_do_bolhas.Add("Bolha", 2);
+        nomes_e_numeros_de_objetos_do_bolhas.Add("Peixe", 3);
+        nomes_e_numeros_de_objetos_do_bolhas.Add("Nuvem", 4);
     }
 
     public bool LoadStuffFIT(int tempo_minimo = 0, int tempo_maximo = int.MaxValue)
