@@ -358,16 +358,6 @@ public class Controlador : MonoBehaviour {
                 if (Input.GetButtonDown("9")) MudarTransparenciaDosObjetos(0.2f);
             }
 
-            if (Input.GetButtonDown("-"))
-            {
-                AumentarVermelhidao(-0.2f);
-            }
-
-            if (Input.GetButtonDown("="))
-            {
-                AumentarVermelhidao(0.2f);
-            }
-
             if (Input.GetButtonDown("Q"))
             {
                 UnityEngine.SceneManagement.SceneManager.LoadScene(0);
