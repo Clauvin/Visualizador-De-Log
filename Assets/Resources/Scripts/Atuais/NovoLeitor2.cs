@@ -955,6 +955,8 @@ public class NovoLeitor2 : MonoBehaviour
         lista_de_backgrounds = new ArrayList();
         matrizes_dos_heatmaps = new ArrayList();
         pegar_endereco_de_log = new PegarEnderecoDeLog();
-    }
+        nomes_e_numeros_de_objetos_do_FIT = new Dictionary<string, int>();
+        nomes_e_numeros_de_objetos_do_bolhas = new Dictionary<string, int>();
+}
     
 }
