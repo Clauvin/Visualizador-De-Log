@@ -54,9 +54,11 @@ public class Controlador : MonoBehaviour {
     bool usuario_pode_fazer_input = false;
 
     private ArrayList lista_de_objetos_a_ligar_ou_desligar;
-	
-	// Update is called once per frame
-	void Update () {
+
+    string parte_da_transparencia_dos_objetos;
+
+    // Update is called once per frame
+    void Update () {
 
         if (usuario_pode_fazer_input) {
 
@@ -349,18 +351,11 @@ public class Controlador : MonoBehaviour {
                 if (modo_de_visualizacao == "Todos De Uma Vez em 2D"){ TransparenciaDoBackground(1f); }
             }
 
-            if (Input.GetButtonDown("8"))
+            if (tipo == "Bolhas")
             {
-                MudarTransparenciaDosObjetos(-0.2f);
-                //DeixarObjetosEmEspacoDeTempoInvisiveisEIninteragiveis(0, 25);
-                //DeixarTipoDeObjetoInvisivelEIninteragivel("Baleia");
-            }
+                if (Input.GetButtonDown("8")) MudarTransparenciaDosObjetos(-0.2f);
 
-            if (Input.GetButtonDown("9"))
-            {
-                MudarTransparenciaDosObjetos(0.2f);
-                //DeixarObjetosEmEspacoDeTempoVisiveisEInteragiveis(0, 25);
-                //DeixarTipoDeObjetoVisivelEInteragivel("Baleia");
+                if (Input.GetButtonDown("9")) MudarTransparenciaDosObjetos(0.2f);
             }
 
             if (Input.GetButtonDown("-"))
@@ -738,6 +733,10 @@ public class Controlador : MonoBehaviour {
                                  "4 - Muda para 'Todos De Uma Vez em 3D'\n" +
                                  "5 - Muda para Heatmap\n";
         tipo = "Bolhas";
+
+        parte_da_transparencia_dos_objetos += "8 - Aumenta a transparencia dos objetos\n" +
+                                             "9 - Diminui a transparencia dos objetos\n";
+
         Inicializacao();
     }
 
@@ -750,6 +749,9 @@ public class Controlador : MonoBehaviour {
                                  "4 - Muda para 'Todos De Uma Vez em 3D'\n" +
                                  "5 - Muda para Heatmap\n";
         tipo = "Fit";
+
+        parte_da_transparencia_dos_objetos = "";
+
         Inicializacao();
     }
 
@@ -758,15 +760,13 @@ public class Controlador : MonoBehaviour {
 
         modos.Add("Todos De Uma Vez em 2D", 0f, 0f, 15f, 0f, 0f, true, 0f, new Vector3(0f, 0f, 0f),
             new Vector3(90f, 0f, 0f), 1f, 2, "6 - Some com os grids\n" + "7 - Faz os grids aparecerem\n" +
-                                             "8 - Aumenta a transparencia dos pontos\n" +
-                                             "9 - Diminui a transparencia dos pontos\n" +
+                                             parte_da_transparencia_dos_objetos +
                                              "- - Faz as cores dos pontos ficarem mais\n" + "    vermelhas\n" +
                                              "= - Faz as cores dos pontos voltarem ao normal\n" +
                                              "Q - Voltar à tela inicial");
         modos.Add("Um Frame De Cada Vez em 3D", 0.5f, 5f, 30f, 0f, 0f, false, 1f, new Vector3(0f, 0f, 330f),
             new Vector3(90f, 0f, 0f), 1f, 2, "6 - Some com os grids\n" + "7 - Faz os grids aparecerem\n" +
-                                             "8 - Aumenta a transparencia dos pontos\n" +
-                                             "9 - Diminui a transparencia dos pontos\n" +
+                                             parte_da_transparencia_dos_objetos +
                                              "- - Faz as cores dos pontos ficarem mais\n" + "    vermelhas\n" +
                                              "= - Faz as cores dos pontos voltarem ao normal\n" +
                                              "<- - Move a câmera para trás\n" +
@@ -778,8 +778,7 @@ public class Controlador : MonoBehaviour {
 
         modos.Add("Um Frame De Cada Vez em 2D", 2f, 0f, 10f, 0f, 0f, true, 1f, new Vector3(0f, 0f, 0f),
             new Vector3(90f, 0f, 0f), 1f, 0, "6 - Some com os grids\n" + "7 - Faz os grids aparecerem\n" +
-                                             "8 - Aumenta a transparencia dos pontos\n" +
-                                             "9 - Diminui a transparencia dos pontos\n" +
+                                             parte_da_transparencia_dos_objetos +
                                              "- - Faz as cores dos pontos ficarem mais\n" + "    vermelhas\n" +
                                              "= - Faz as cores dos pontos voltarem ao normal\n" +
                                              "<- - Vai para a posição anterior dos pontos\n" +
@@ -795,8 +794,7 @@ public class Controlador : MonoBehaviour {
                                              "Q - Voltar à tela inicial");
 
         modos.Add("Todos De Uma Vez em 3D", 0.5f, 5f, 2f, 0f, 0f, false, 0f, new Vector3(0f, 0f, 0f),
-            new Vector3(90f, 0f, 0f), 0f, 2, "8 - Aumenta a transparencia dos pontos\n" +
-                                             "9 - Diminui a transparencia dos pontos\n" +
+            new Vector3(90f, 0f, 0f), 0f, 2, parte_da_transparencia_dos_objetos +
                                              "- - Faz as cores dos pontos ficarem mais\n" + "    vermelhas\n" +
                                              "= - Faz as cores dos pontos voltarem ao normal\n" +
                                              "<- - Move a câmera para trás\n" +
