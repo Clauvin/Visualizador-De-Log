@@ -579,18 +579,27 @@ public class Controlador : MonoBehaviour {
                         // Lembrando: this serve para fazer referência à classe em que o código se encontra.
                         // Uso aqui porquê a variável interna da função é idêntica à variável da classe.
                         // Seria legal se alguém deixasse as duas variáveis com nomes diferentes depois...
-                        if (this.tipo == "FIT")
+                        if (this.tipo == "Fit")
+                        {
                             posicao_de_checagem_de_tipo_de_objeto = GetComponent<NovoLeitor2>().
                                            nomes_e_numeros_de_objetos_do_FIT[
-                                            ((GameObject)lista_de_objetos_a_ligar_ou_desligar[i]).GetComponent<Dados>().name
+                                            ((GameObject)lista_de_objetos_a_ligar_ou_desligar[i]).GetComponent<Dados>().nome_do_objeto
                                             ];
+                        }
+
                         else if (this.tipo == "Bolhas")
+                        {
                             posicao_de_checagem_de_tipo_de_objeto = GetComponent<NovoLeitor2>().
                                            nomes_e_numeros_de_objetos_do_bolhas[
-                                            ((GameObject)lista_de_objetos_a_ligar_ou_desligar[i]).GetComponent<Dados>().name
+                                            ((GameObject)lista_de_objetos_a_ligar_ou_desligar[i]).GetComponent<Dados>().nome_do_objeto
                                             ];
+                        }
+                            
+                        if (GetComponent<GuiVisualizarTipos>().EstaInvisivel(posicao_de_checagem_de_tipo_de_objeto))
+                        {
+                            modificar = false;
+                        }                         
 
-                        modificar = modificar && !GetComponent<GuiVisualizarTipos>().EstaInvisivel(posicao_de_checagem_de_tipo_de_objeto);
                     }
                     if (modificar) ((GameObject)lista_de_objetos_a_ligar_ou_desligar[i]).GetComponent<LigaDesliga>().Ligar();
                 }
