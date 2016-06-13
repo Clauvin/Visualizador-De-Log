@@ -20,7 +20,7 @@ public class Controlador : MonoBehaviour {
 
     Vector3 posicao_da_camera;
     BancoDeDadosModos modos = new BancoDeDadosModos();
-    public string modo_de_visualizacao = "Todos De Uma Vez em 2D";
+    public string modo_de_visualizacao = "Todos De Uma Vez em 3D";
     int count;
     string instrucoes_genericas;
     public string tipo;
@@ -288,7 +288,7 @@ public class Controlador : MonoBehaviour {
 
             //if 
 
-            if ((Input.GetButtonDown("1")) && (modo_de_visualizacao != "Todos De Uma Vez em 2D"))
+            if ((Input.GetButtonDown("1")) && (modo_de_visualizacao != "Todos De Uma Vez em 2D") && (tipo != "Fit"))
             {
                 GetComponent<NovoLeitor2>().ConectarTodos();
                 Mudanca_De_Modo_De_Visualizacao("Todos De Uma Vez em 2D");
@@ -388,11 +388,13 @@ public class Controlador : MonoBehaviour {
     {
         int pos = GetComponent<NovoLeitor2>().lista_de_backgrounds.Count/2;
 
+        if (tipo == "Bolhas") modos.AddCameraInitY("Todos De Uma Vez em 2D", posicaoy0);
         modos.AddCameraInitY("Um Frame De Cada Vez em 3D", posicaoy0);
-        modos.AddCameraInitY("Todos De Uma Vez em 2D", posicaoy0);
         modos.AddCameraInitY("Um Frame De Cada Vez em 2D", posicaoy0);
         modos.AddCameraInitY("Todos De Uma Vez em 3D", posicaoy0+10f);
+
         modos.AddCameraInitX("Todos De Uma Vez em 3D", 0f);
+
         modos.AddCameraInitY("Heatmap", posicaoy0);
     }
 
@@ -803,13 +805,19 @@ public class Controlador : MonoBehaviour {
         parte_da_transparencia_dos_objetos += "8 - Diminui os detalhes dos/some com os objetos\n" +
                                              "9 - Aumenta os detalhes dos objetos\n";
 
+        modos.Add("Todos De Uma Vez em 2D", 0f, 0f, 15f, 0f, 0f, true, 0f, new Vector3(0f, 0f, 0f),
+            new Vector3(90f, 0f, 0f), 1f, 2, "6 - Some com os grids\n" + "7 - Faz os grids aparecerem\n" +
+                                             parte_da_transparencia_dos_objetos +
+                                             "Q - Voltar à tela inicial");
+
+        modo_de_visualizacao = "Todos De Uma Vez em 2D";
+
         Inicializacao();
     }
 
     public void InicializacaoFIT()
     {
         instrucoes_genericas = "Instrucoes:\n" +
-                                 "1 - Muda para 'Todos De Uma Vez em 2D'\n" +
                                  "2 - Muda para 'Um Frame De Cada Vez em 3D'\n" +
                                  "3 - Muda para 'Um Frame De Cada Vez em 2D'\n" +
                                  "4 - Muda para 'Todos De Uma Vez em 3D'\n" +
@@ -818,16 +826,13 @@ public class Controlador : MonoBehaviour {
 
         parte_da_transparencia_dos_objetos = "";
 
+        modo_de_visualizacao = "Um Frame De Cada Vez em 3D";
+
         Inicializacao();
     }
 
     public void Inicializacao()
     {
-
-        modos.Add("Todos De Uma Vez em 2D", 0f, 0f, 15f, 0f, 0f, true, 0f, new Vector3(0f, 0f, 0f),
-            new Vector3(90f, 0f, 0f), 1f, 2, "6 - Some com os grids\n" + "7 - Faz os grids aparecerem\n" +
-                                             parte_da_transparencia_dos_objetos +
-                                             "Q - Voltar à tela inicial");
         modos.Add("Um Frame De Cada Vez em 3D", 0.5f, 5f, 30f, 0f, 0f, false, 1f, new Vector3(0f, 0f, 330f),
             new Vector3(90f, 0f, 0f), 1f, 2, "6 - Some com os grids\n" + "7 - Faz os grids aparecerem\n" +
                                              parte_da_transparencia_dos_objetos +
@@ -881,7 +886,8 @@ public class Controlador : MonoBehaviour {
 
         TransparenciaDoBackground(1f);
         GetComponent<NovoLeitor2>().ConectarTodos();
-        Mudanca_De_Modo_De_Visualizacao("Todos De Uma Vez em 2D", true);
+        if (tipo == "Fit") Mudanca_De_Modo_De_Visualizacao("Um Frame De Cada Vez em 3D", true);
+        else if (tipo == "Bolhas") Mudanca_De_Modo_De_Visualizacao("Todos De Uma Vez em 2D", true);
         GetComponent<NovoLeitor2>().PosicionarBackgrounds(20f);
         GetComponent<Camera>().clearFlags = CameraClearFlags.Skybox;
         GetComponent<NovoLeitor2>().DesconectarTodos();
