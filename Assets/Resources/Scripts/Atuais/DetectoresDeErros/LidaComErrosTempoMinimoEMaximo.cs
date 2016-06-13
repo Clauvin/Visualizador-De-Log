@@ -22,8 +22,10 @@ public class LidaComErrosTempoMinimoEMaximo : LidaComErros
     // do que espalhar elas pelo código.
     public bool erro_de_input_minimo_menor_que_limite_minimo = false;
     public bool erro_de_input_minimo_maior_que_limite_maximo = false;
+    public bool erro_de_input_minimo_voce_ta_de_sacanagem = false;
     public bool erro_de_input_maximo_menor_que_limite_minimo = false;
     public bool erro_de_input_maximo_maior_que_limite_maximo = false;
+    public bool erro_de_input_maximo_voce_ta_de_sacanagem = false;
     public bool erro_de_maior_que = false;
 
     public int x_da_janela_de_erro_de_erro_minimo;
@@ -74,8 +76,10 @@ public class LidaComErrosTempoMinimoEMaximo : LidaComErros
         erro_de_input_errado_maximo = false;
         erro_de_input_minimo_menor_que_limite_minimo = false;
         erro_de_input_minimo_maior_que_limite_maximo = false;
+        erro_de_input_minimo_voce_ta_de_sacanagem = false;
         erro_de_input_maximo_menor_que_limite_minimo = false;
         erro_de_input_maximo_maior_que_limite_maximo = false;
+        erro_de_input_maximo_voce_ta_de_sacanagem = false;
         erro_de_maior_que = false;
 
         if (tempo_minimo == "") { erro_de_input_vazio_minimo = true; }
@@ -89,14 +93,24 @@ public class LidaComErrosTempoMinimoEMaximo : LidaComErros
             catch (FormatException fe) { erro_de_input_errado_minimo = true; }
             catch (OverflowException oe)
             {
-                long long_minimo = long.Parse(tempo_minimo, NumberStyles.AllowThousands | NumberStyles.AllowLeadingSign);
-                if (long_minimo < Int32.MinValue)
-                {
-                    erro_de_input_minimo_menor_que_limite_minimo = true;
+                long long_minimo = 0;
+                try {
+                    long_minimo = long.Parse(tempo_minimo, NumberStyles.AllowThousands | NumberStyles.AllowLeadingSign);
                 }
-                else if (long_minimo > Int32.MaxValue)
+                catch (OverflowException oe2)
                 {
-                    erro_de_input_minimo_maior_que_limite_maximo = true;
+                    erro_de_input_minimo_voce_ta_de_sacanagem = true;
+                }
+                if (!erro_de_input_minimo_voce_ta_de_sacanagem)
+                {
+                    if (long_minimo < Int32.MinValue)
+                    {
+                        erro_de_input_minimo_menor_que_limite_minimo = true;
+                    }
+                    else if (long_minimo > Int32.MaxValue)
+                    {
+                        erro_de_input_minimo_maior_que_limite_maximo = true;
+                    }
                 }
             }
         }
@@ -108,15 +122,26 @@ public class LidaComErrosTempoMinimoEMaximo : LidaComErros
             catch (FormatException fe) { erro_de_input_errado_maximo = true; }
             catch (OverflowException oe)
             {
-                long long_maximo = long.Parse(tempo_maximo, NumberStyles.AllowThousands | NumberStyles.AllowLeadingSign);
 
-                if (long_maximo < Int32.MinValue)
+                long long_maximo = 0;
+                try
                 {
-                    erro_de_input_maximo_menor_que_limite_minimo = true;
+                    long_maximo = long.Parse(tempo_maximo, NumberStyles.AllowThousands | NumberStyles.AllowLeadingSign);
                 }
-                else if (long_maximo > Int32.MaxValue)
+                catch (OverflowException oe2)
                 {
-                    erro_de_input_maximo_maior_que_limite_maximo = true;
+                    erro_de_input_maximo_voce_ta_de_sacanagem = true;
+                }
+                if (!erro_de_input_maximo_voce_ta_de_sacanagem)
+                {
+                    if (long_maximo < Int32.MinValue)
+                    {
+                        erro_de_input_maximo_menor_que_limite_minimo = true;
+                    }
+                    else if (long_maximo > Int32.MaxValue)
+                    {
+                        erro_de_input_maximo_maior_que_limite_maximo = true;
+                    }
                 }
             }
         }
@@ -124,7 +149,8 @@ public class LidaComErrosTempoMinimoEMaximo : LidaComErros
         if (!(erro_de_input_errado_minimo || erro_de_input_errado_maximo ||
               erro_de_input_vazio_minimo || erro_de_input_vazio_maximo ||
               erro_de_input_minimo_menor_que_limite_minimo || erro_de_input_minimo_maior_que_limite_maximo ||
-              erro_de_input_maximo_menor_que_limite_minimo || erro_de_input_maximo_maior_que_limite_maximo))
+              erro_de_input_maximo_menor_que_limite_minimo || erro_de_input_maximo_maior_que_limite_maximo ||
+              erro_de_input_minimo_voce_ta_de_sacanagem || erro_de_input_maximo_voce_ta_de_sacanagem))
         {
             if (Int32.Parse(tempo_minimo) > Int32.Parse(tempo_maximo))
             {
@@ -182,6 +208,12 @@ public class LidaComErrosTempoMinimoEMaximo : LidaComErros
                                 "...tempo mínimo não pode\n" + "ultrapassar 2147483647.", "textfield");
             posicao_da_mensagem_de_erro_y += quantidade_de_mudanca_de_posicao_y;
         }
+        if (erro_de_input_minimo_voce_ta_de_sacanagem)
+        {
+            GUI.Label(new Rect(x_da_janela_de_erro_de_erro_minimo, posicao_da_mensagem_de_erro_y,
+                                largura_da_janela_de_erro_de_erro_minimo, altura_da_janela_de_erro_de_erro_minimo),
+                                "...tempo mínimo entre\n" + "0 e 2147483647, por favor.", "textfield");
+        }
         if (erro_de_input_maximo_menor_que_limite_minimo)
         {
 
@@ -196,6 +228,13 @@ public class LidaComErrosTempoMinimoEMaximo : LidaComErros
             GUI.Label(new Rect(x_da_janela_de_erro_de_erro_maximo, posicao_da_mensagem_de_erro_y,
                                 largura_da_janela_de_erro_de_erro_maximo, altura_da_janela_de_erro_de_erro_maximo),
                                 "...tempo máximo não pode\n" + "ultrapassar 2147483647.", "textfield");
+            posicao_da_mensagem_de_erro_y += quantidade_de_mudanca_de_posicao_y;
+        }
+        if (erro_de_input_maximo_voce_ta_de_sacanagem)
+        {
+            GUI.Label(new Rect(x_da_janela_de_erro_de_erro_maximo, posicao_da_mensagem_de_erro_y,
+                                largura_da_janela_de_erro_de_erro_maximo, altura_da_janela_de_erro_de_erro_maximo),
+                                "...tempo máximo entre\n" + "0 e 2147483647, por favor.", "textfield");
             posicao_da_mensagem_de_erro_y += quantidade_de_mudanca_de_posicao_y;
         }
         if (erro_de_maior_que)
@@ -213,7 +252,8 @@ public class LidaComErrosTempoMinimoEMaximo : LidaComErros
         return !(erro_de_input_errado_minimo || erro_de_input_errado_maximo || erro_de_maior_que ||
                       erro_de_input_vazio_minimo || erro_de_input_vazio_maximo ||
                       erro_de_input_minimo_menor_que_limite_minimo || erro_de_input_minimo_maior_que_limite_maximo ||
-                      erro_de_input_maximo_menor_que_limite_minimo || erro_de_input_maximo_maior_que_limite_maximo
+                      erro_de_input_maximo_menor_que_limite_minimo || erro_de_input_maximo_maior_que_limite_maximo ||
+                      erro_de_input_minimo_voce_ta_de_sacanagem || erro_de_input_maximo_voce_ta_de_sacanagem
                       );
 
     }
