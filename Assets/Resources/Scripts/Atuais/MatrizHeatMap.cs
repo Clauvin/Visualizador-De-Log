@@ -164,7 +164,7 @@ public class HeatMap {
                     //  o canto inferior esquerdo das imagens/texturas. Ou seja, y precisa ser invertido.
                     try
                     {
-                        if (textura.GetPixel(j, k).a == 1) matriz[px + j, py + limity - k - 1] += 1;
+                        if (textura.GetPixel(j, k + (texture_height - limity)).a == 1) matriz[px + j, py + limity - k - 1] += 1;
                     }
                     catch (System.IndexOutOfRangeException exc)
                     {
