@@ -3,3 +3,8 @@
 Time:0=Objeto=GridX:-30=GridY:-30=Baleia=Frame:0=CriadoAgora:0=QuemCriou:Baleia=Clicou:N=Segurou:S=Arrastou:N
 Time:0=Objeto=GridX:200=GridY:-10=Bolha=Frame:0=CriadoAgora:0=QuemCriou:Baleia=Clicou:N=Segurou:S=Arrastou:N
 Time:0=Objeto=GridX:400=GridY:-50=Nuvem=Frame:0=CriadoAgora:0=QuemCriou:Baleia=Clicou:N=Segurou:S=Arrastou:N
+Time:0=Objeto=GridX:300=GridY:320=Nuvem=Frame:0=CriadoAgora:0=QuemCriou:Baleia=Clicou:N=Segurou:S=Arrastou:N
+Time:0=Objeto=GridX:0=GridY:520=Nuvem=Frame:0=CriadoAgora:0=QuemCriou:Baleia=Clicou:N=Segurou:S=Arrastou:N
+Time:0=Objeto=GridX:100=GridY:550=Nuvem=Frame:0=CriadoAgora:0=QuemCriou:Baleia=Clicou:N=Segurou:S=Arrastou:N
+Time:0=Objeto=GridX:200=GridY:560=Nuvem=Frame:0=CriadoAgora:0=QuemCriou:Baleia=Clicou:N=Segurou:S=Arrastou:N
+Time:0=Objeto=GridX:300=GridY:570=Nuvem=Frame:0=CriadoAgora:0=QuemCriou:Baleia=Clicou:N=Segurou:S=Arrastou:N
