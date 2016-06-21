@@ -805,13 +805,6 @@ public class Controlador : MonoBehaviour {
         parte_da_transparencia_dos_objetos += "8 - Diminui os detalhes dos/some com os objetos\n" +
                                              "9 - Aumenta os detalhes dos objetos\n";
 
-        modos.Add("Todos De Uma Vez em 2D", 0f, 0f, 15f, 0f, 0f, true, 0f, new Vector3(0f, 0f, 0f),
-            new Vector3(90f, 0f, 0f), 1f, 2, "6 - Some com os grids\n" + "7 - Faz os grids aparecerem\n" +
-                                             parte_da_transparencia_dos_objetos +
-                                             "Q - Voltar à tela inicial");
-
-        modo_de_visualizacao = "Todos De Uma Vez em 2D";
-
         Inicializacao();
     }
 
