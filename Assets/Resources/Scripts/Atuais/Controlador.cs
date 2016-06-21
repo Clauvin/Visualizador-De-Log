@@ -290,18 +290,6 @@ public class Controlador : MonoBehaviour {
 
             }
 
-            //if 
-
-            if ((Input.GetButtonDown("1")) && (modo_de_visualizacao != "Todos De Uma Vez em 2D") && (tipo != "Fit"))
-            {
-                GetComponent<NovoLeitor2>().ConectarTodos();
-                Mudanca_De_Modo_De_Visualizacao("Todos De Uma Vez em 2D");
-
-                GetComponent<NovoLeitor2>().PosicionarBackgrounds(20f);
-                GetComponent<Camera>().clearFlags = CameraClearFlags.Skybox;
-                GetComponent<NovoLeitor2>().DesconectarTodos();
-            }
-
             if ((Input.GetButtonDown("2")) && (modo_de_visualizacao != "Um Frame De Cada Vez em 3D"))
             {
                 GetComponent<NovoLeitor2>().ConectarTodos();
@@ -352,8 +340,6 @@ public class Controlador : MonoBehaviour {
             if (Input.GetButtonDown("7"))
             {
                 TransparenciaDeVoltaAoNormal(modo_de_visualizacao);
-
-                if (modo_de_visualizacao == "Todos De Uma Vez em 2D"){ TransparenciaDoBackground(1f); }
             }
 
             if (tipo == "Bolhas")
@@ -392,7 +378,6 @@ public class Controlador : MonoBehaviour {
     {
         int pos = GetComponent<NovoLeitor2>().lista_de_backgrounds.Count/2;
 
-        if (tipo == "Bolhas") modos.AddCameraInitY("Todos De Uma Vez em 2D", posicaoy0);
         modos.AddCameraInitY("Um Frame De Cada Vez em 3D", posicaoy0);
         modos.AddCameraInitY("Um Frame De Cada Vez em 2D", posicaoy0);
         modos.AddCameraInitY("Todos De Uma Vez em 3D", posicaoy0+10f);
