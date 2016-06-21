@@ -797,6 +797,7 @@ public class Controlador : MonoBehaviour {
 
     public void Inicializacao()
     {
+
         modos.Add("Um Frame De Cada Vez em 3D", 0.5f, 5f, 30f, 0f, 0f, false, 1f, new Vector3(0f, 0f, 330f),
             new Vector3(90f, 0f, 0f), 1f, 2, "6 - Some com os grids\n" + "7 - Faz os grids aparecerem\n" +
                                              parte_da_transparencia_dos_objetos +
