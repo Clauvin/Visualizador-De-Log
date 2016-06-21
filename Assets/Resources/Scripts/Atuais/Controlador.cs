@@ -886,8 +886,7 @@ public class Controlador : MonoBehaviour {
 
         TransparenciaDoBackground(1f);
         GetComponent<NovoLeitor2>().ConectarTodos();
-        if (tipo == "Fit") Mudanca_De_Modo_De_Visualizacao("Um Frame De Cada Vez em 3D", true);
-        else if (tipo == "Bolhas") Mudanca_De_Modo_De_Visualizacao("Todos De Uma Vez em 2D", true);
+        Mudanca_De_Modo_De_Visualizacao("Um Frame De Cada Vez em 3D", true);
         GetComponent<NovoLeitor2>().PosicionarBackgrounds(20f);
         GetComponent<Camera>().clearFlags = CameraClearFlags.Skybox;
         GetComponent<NovoLeitor2>().DesconectarTodos();
