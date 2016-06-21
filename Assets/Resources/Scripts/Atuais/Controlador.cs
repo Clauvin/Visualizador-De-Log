@@ -22,7 +22,11 @@ public class Controlador : MonoBehaviour {
     BancoDeDadosModos modos = new BancoDeDadosModos();
     public string modo_de_visualizacao = "Todos De Uma Vez em 3D";
     int count;
-    string instrucoes_genericas;
+    string instrucoes_genericas = "Instrucoes:\n" +
+                                 "2 - Muda para 'Um Frame De Cada Vez em 3D'\n" +
+                                 "3 - Muda para 'Um Frame De Cada Vez em 2D'\n" +
+                                 "4 - Muda para 'Todos De Uma Vez em 3D'\n" +
+                                 "5 - Muda para Heatmap\n";
     public string tipo;
 
     Transform objeto_clicado = null;
@@ -794,12 +798,7 @@ public class Controlador : MonoBehaviour {
 
     public void InicializacaoBolhas()
     {
-        instrucoes_genericas = "Instrucoes:\n" +
-                                 "1 - Muda para 'Todos De Uma Vez em 2D'\n" +
-                                 "2 - Muda para 'Um Frame De Cada Vez em 3D'\n" +
-                                 "3 - Muda para 'Um Frame De Cada Vez em 2D'\n" +
-                                 "4 - Muda para 'Todos De Uma Vez em 3D'\n" +
-                                 "5 - Muda para Heatmap\n";
+        
         tipo = "Bolhas";
 
         parte_da_transparencia_dos_objetos += "8 - Diminui os detalhes dos/some com os objetos\n" +
@@ -810,16 +809,9 @@ public class Controlador : MonoBehaviour {
 
     public void InicializacaoFIT()
     {
-        instrucoes_genericas = "Instrucoes:\n" +
-                                 "2 - Muda para 'Um Frame De Cada Vez em 3D'\n" +
-                                 "3 - Muda para 'Um Frame De Cada Vez em 2D'\n" +
-                                 "4 - Muda para 'Todos De Uma Vez em 3D'\n" +
-                                 "5 - Muda para Heatmap\n";
         tipo = "Fit";
 
         parte_da_transparencia_dos_objetos = "";
-
-        modo_de_visualizacao = "Um Frame De Cada Vez em 3D";
 
         Inicializacao();
     }
