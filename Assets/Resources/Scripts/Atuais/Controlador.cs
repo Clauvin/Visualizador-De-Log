@@ -396,33 +396,27 @@ public class Controlador : MonoBehaviour {
             modos.SetCameraInitY(modo_de_visualizacao, posicaonova.y);
             posicaonova.y = modos.GetCameraInitY(modonovo);
 
-            if (modo_de_visualizacao == "Todos De Uma Vez em 3D") modos.SetCameraInitZ(modo_de_visualizacao, posicaonova.z);
-            if ((modo_de_visualizacao == "Todos De Uma Vez em 3D") || (modo_de_visualizacao == "Todos De Uma Vez em 2D"))
+            if (modo_de_visualizacao == "Todos De Uma Vez em 3D")
             {
+                modos.SetCameraInitZ(modo_de_visualizacao, posicaonova.z);
                 ArrayList lista_de_backs = GetComponent<NovoLeitor2>().lista_de_backgrounds;
-                int contagem = 0;
-                if (modo_de_visualizacao == "Todos De Uma Vez em 3D") contagem = lista_de_backs.Count;
-                else if (modo_de_visualizacao == "Todos De Uma Vez em 2D") contagem = lista_de_backs.Count - 1;
+                int contagem = lista_de_backs.Count;
                 for (int i = 0; i < contagem; i++)
                 {
                     ((GameObject)lista_de_backs[i]).GetComponent<LigaDesliga>().Ligar();
                 }
             }
         
-            if (modonovo == "Todos De Uma Vez em 3D") posicaonova.z = modos.GetCameraInitZ(modonovo);
-            else posicaonova.z = 0.0f;
-
-            if ((modonovo == "Todos De Uma Vez em 3D") || (modonovo == "Todos De Uma Vez em 2D"))
+            if (modonovo == "Todos De Uma Vez em 3D")
             {
+                posicaonova.z = modos.GetCameraInitZ(modonovo);
                 ArrayList lista_de_backs = GetComponent<NovoLeitor2>().lista_de_backgrounds;
-                int contagem = 0;
-                if (modonovo == "Todos De Uma Vez em 3D") contagem = lista_de_backs.Count;
-                else if (modonovo == "Todos De Uma Vez em 2D") contagem = lista_de_backs.Count - 1;
+                int contagem = lista_de_backs.Count;
                 for (int i = 0; i < contagem; i++)
                 {
                     ((GameObject)lista_de_backs[i]).GetComponent<LigaDesliga>().Desligar();
                 }
-            }
+            } else posicaonova.z = 0.0f;
 
             GetComponent<Camera>().transform.position = posicaonova;
             GetComponent<Camera>().orthographic = modos.GetOrthographic(modonovo);
@@ -439,7 +433,7 @@ public class Controlador : MonoBehaviour {
             GetComponent<GuiModo>().MudarTexto(modo_de_visualizacao);
             GetComponent<GuiModo>().MudarInstrucoes(instrucoes_genericas + modos.GetInstrucao(modo_de_visualizacao));
 
-            if ((modo_de_visualizacao == "Um Frame De Cada Vez em 3D") || (modo_de_visualizacao == "Um Frame De Cada Vez em 2D"))
+            if (modo_de_visualizacao == "Um Frame De Cada Vez em 3D")
             {
                 GetComponent<GuiTempo>().RevelarGui();
             }
