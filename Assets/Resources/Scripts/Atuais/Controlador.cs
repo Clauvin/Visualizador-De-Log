@@ -430,7 +430,7 @@ public class Controlador : MonoBehaviour
             modos.SetCameraInitY(modo_de_visualizacao, posicaonova.y);
             posicaonova.y = modos.GetCameraInitY(modonovo);
 
-            if (modo_de_visualizacao == "Todos De Uma Vez em 3D")
+            if ((modo_de_visualizacao == "Todos De Uma Vez em 3D") || (modo_de_visualizacao == "Um Frame De Cada Vez em 2D"))
             {
                 modos.SetCameraInitZ(modo_de_visualizacao, posicaonova.z);
                 ArrayList lista_de_backs = GetComponent<NovoLeitor2>().lista_de_backgrounds;
@@ -442,7 +442,7 @@ public class Controlador : MonoBehaviour
                 }
             }
 
-            if (modonovo == "Todos De Uma Vez em 3D")
+            if ((modonovo == "Todos De Uma Vez em 3D") || (modonovo == "Um Frame De Cada Vez em 2D"))
             {
                 posicaonova.z = modos.GetCameraInitZ(modonovo);
                 ArrayList lista_de_backs = GetComponent<NovoLeitor2>().lista_de_backgrounds;
