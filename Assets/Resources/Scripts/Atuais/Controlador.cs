@@ -528,6 +528,23 @@ public class Controlador : MonoBehaviour
 
     }
 
+    void AlterarPosicaoDeCamera(char coordenada, bool usar_valor_custom = false, float valor = 0.0f, float acelerador = 1.0f)
+    {
+        float valor_final;
+        string eixo = "";
+        int eixo_int = 0;
+        if (usar_valor_custom) valor_final = valor;
+        else valor_final = modos.GetVelocidadeDeMovimentacao(modo_de_visualizacao);
+
+        if (coordenada == 'x') { eixo = "Horizontal"; eixo_int = 0; }
+        else if (coordenada == 'y') { eixo = "Vertical"; eixo_int = 1; }
+        else if (coordenada == 'z') { eixo = "Zertical"; eixo_int = 2; }
+
+        if (Input.GetAxis(eixo) > 0) posicao_da_camera[eixo_int] += valor_final * acelerador;
+        else if (Input.GetAxis(eixo) < 0) posicao_da_camera[eixo_int] -= valor_final * acelerador;
+
+    }
+
     void Transparencia0()
     {
         GetComponent<NovoLeitor2>().ControlarAlpha(0f);
