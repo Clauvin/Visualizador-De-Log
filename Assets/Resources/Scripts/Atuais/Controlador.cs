@@ -294,6 +294,18 @@ public class Controlador : MonoBehaviour
                             posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[0]).transform.position.y + 5.0f;
                         }
 
+                        float limitacao = 5.0f;
+                        if (modo_de_visualizacao == "Um Frame De Cada Vez em 3D") limitacao = -15.0f;
+
+                        if (posicao_da_camera.y < ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
+                                                    GetComponent<NovoLeitor2>().lista_de_backgrounds.Count - 2
+                                                    ]).transform.position.y + limitacao)
+                        {
+                            posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
+                                                    GetComponent<NovoLeitor2>().lista_de_backgrounds.Count - 2
+                                                    ]).transform.position.y + limitacao;
+                        }
+
                         FindObjectOfType<Camera>().transform.position = posicao_da_camera;
 
                     }
@@ -313,6 +325,18 @@ public class Controlador : MonoBehaviour
                         if (posicao_da_camera.y > ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[0]).transform.position.y + 5.0f)
                         {
                             posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[0]).transform.position.y + 5.0f;
+                        }
+
+                        float limitacao = 5.0f;
+                        if (modo_de_visualizacao == "Um Frame De Cada Vez em 3D") limitacao = -15.0f;
+
+                        if (posicao_da_camera.y < ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
+                                                    GetComponent<NovoLeitor2>().lista_de_backgrounds.Count - 2
+                                                    ]).transform.position.y + limitacao)
+                        {
+                            posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
+                                                    GetComponent<NovoLeitor2>().lista_de_backgrounds.Count - 2
+                                                    ]).transform.position.y + limitacao;
                         }
 
                         FindObjectOfType<Camera>().transform.position = posicao_da_camera;
