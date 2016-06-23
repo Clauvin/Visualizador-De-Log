@@ -182,10 +182,8 @@ public class Controlador : MonoBehaviour
 
                 if (Input.GetAxis("Horizontal") != 0)
                 {
-                    float x = modos.GetVelocidadeDeMovimentacao(modo_de_visualizacao);
 
-                    if (Input.GetAxis("Horizontal") > 0) posicao_da_camera.x += x;
-                    else if (Input.GetAxis("Horizontal") < 0) posicao_da_camera.x -= x;
+                    AlterarPosicaoDeCamera('x');
 
                     FindObjectOfType<Camera>().transform.position = posicao_da_camera;
                 }
@@ -193,10 +191,7 @@ public class Controlador : MonoBehaviour
                 //Esse código movimenta a câmera para frente e para trás.
                 if (Input.GetAxis("Vertical") != 0)
                 {
-                    float y = modos.GetVelocidadeDeMovimentacao(modo_de_visualizacao);
-
-                    if (Input.GetAxis("Vertical") > 0) posicao_da_camera.y -= y;
-                    else if (Input.GetAxis("Vertical") < 0) posicao_da_camera.y += y;
+                    AlterarPosicaoDeCamera('y', false, 0, -1.0f);
 
                     FindObjectOfType<Camera>().transform.position = posicao_da_camera;
                 }
@@ -204,10 +199,7 @@ public class Controlador : MonoBehaviour
                 //Esse código movimenta a câmera para cima e para baixo.
                 if (Input.GetAxis("Zertical") != 0)
                 {
-                    float z = modos.GetVelocidadeDeMovimentacao(modo_de_visualizacao);
-
-                    if (Input.GetAxis("Zertical") > 0) posicao_da_camera.z += z;
-                    else if (Input.GetAxis("Zertical") < 0) posicao_da_camera.z -= z;
+                    AlterarPosicaoDeCamera('z');
 
                     FindObjectOfType<Camera>().transform.position = posicao_da_camera;
                 }
