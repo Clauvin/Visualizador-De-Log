@@ -498,7 +498,10 @@ public class Controlador : MonoBehaviour
 
             if ((modo_de_visualizacao == "Um Frame De Cada Vez em 3D") || (modo_de_visualizacao == "Um Frame De Cada Vez em 2D"))
             {
+                if (modo_de_visualizacao == "Um Frame De Cada Vez em 3D") GetComponent<GuiTempo>().DesativarGuiDoAutoMode();
+                else if (modo_de_visualizacao == "Um Frame De Cada Vez em 2D") GetComponent<GuiTempo>().AtivarGuiDoAutoMode();
                 GetComponent<GuiTempo>().RevelarGui();
+                
             }
             else { GetComponent<GuiTempo>().EsconderGui(); }
 
