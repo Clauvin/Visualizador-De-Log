@@ -79,8 +79,6 @@ public class Controlador : MonoBehaviour
             if (modo_de_visualizacao == "Um Frame De Cada Vez em 2D")
             {
 
-                //background_um_de_cada_vez_2D_posicao_atual = background_um_de_cada_vez_2D.transform.position;
-
                 if (Input.GetKeyUp("r"))
                 {
                     if (auto_mode) auto_mode = false;
@@ -92,18 +90,14 @@ public class Controlador : MonoBehaviour
                     float y = modos.GetVelocidadeDeMovimentacao(modo_de_visualizacao);
 
                     posicao_da_camera.y -= y;
-                    //background_um_de_cada_vez_2D_posicao_atual.y -= y;
-
 
                     if (posicao_da_camera.y <= ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
                         GetComponent<NovoLeitor2>().lista_de_backgrounds.Count - 1]).transform.position.y)
                     {
                         posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[0]).transform.position.y + 20.0f;
-                        //background_um_de_cada_vez_2D.transform.position = background_um_de_cada_vez_2D_posicao_original;
                     }
 
                     FindObjectOfType<Camera>().transform.position = posicao_da_camera;
-                    //background_um_de_cada_vez_2D.transform.position = background_um_de_cada_vez_2D_posicao_atual;
                 }
 
                 if (auto_mode_custom)
@@ -111,18 +105,16 @@ public class Controlador : MonoBehaviour
                     float y = modos.GetVelocidadeDeMovimentacao(modo_de_visualizacao);
 
                     posicao_da_camera.y -= y;
-                    //background_um_de_cada_vez_2D_posicao_atual.y -= y;
 
                     if (posicao_da_camera.y <= ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
                         posicao_temporal_2]).transform.position.y)
                     {
                         posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
                             posicao_temporal_1]).transform.position.y;
-                        //background_um_de_cada_vez_2D_posicao_atual.y = posicao_da_camera.y - 20.0f;
                     }
 
                     FindObjectOfType<Camera>().transform.position = posicao_da_camera;
-                    //background_um_de_cada_vez_2D.transform.position = background_um_de_cada_vez_2D_posicao_atual;
+
                 }
 
                 if (Input.GetKeyUp("e"))
@@ -428,46 +420,29 @@ public class Controlador : MonoBehaviour
             modos.SetCameraInitY(modo_de_visualizacao, posicaonova.y);
             posicaonova.y = modos.GetCameraInitY(modonovo);
 
-            if ((modo_de_visualizacao == "Todos De Uma Vez em 3D") || (modo_de_visualizacao == "Um Frame De Cada Vez em 2D"))
+            if (modo_de_visualizacao == "Todos De Uma Vez em 3D")
             {
-                if (modo_de_visualizacao == "Todos De Uma Vez em 3D") modos.SetCameraInitZ(modo_de_visualizacao, posicaonova.z);
+                modos.SetCameraInitZ(modo_de_visualizacao, posicaonova.z);
                 ArrayList lista_de_backs = GetComponent<NovoLeitor2>().lista_de_backgrounds;
                 int contagem = lista_de_backs.Count;
-                int comeco = 0;
-                if (modo_de_visualizacao == "Todos De Uma Vez em 3D") comeco = 0;
-                else if (modo_de_visualizacao == "Um Frame De Cada Vez em 2D") comeco = 1;
-                for (int i = comeco; i < contagem; i++)
+
+                for (int i = 0; i < contagem; i++)
                 {
                     ((GameObject)lista_de_backs[i]).GetComponent<LigaDesliga>().Ligar();
                 }
-                if (modo_de_visualizacao == "Um Frame De Cada Vez em 2D")
-                {
-                    ((GameObject)lista_de_backs[0]).GetComponent<Transform>().position = background_um_de_cada_vez_2D_posicao_original;
-                }
             }
 
-            if ((modonovo == "Todos De Uma Vez em 3D") || (modonovo == "Um Frame De Cada Vez em 2D"))
+            if (modonovo == "Todos De Uma Vez em 3D")
             {
-                if (modonovo == "Todos De Uma Vez em 3D") posicaonova.z = modos.GetCameraInitZ(modonovo);
+                posicaonova.z = modos.GetCameraInitZ(modonovo);
                 ArrayList lista_de_backs = GetComponent<NovoLeitor2>().lista_de_backgrounds;
                 int contagem = lista_de_backs.Count;
-                int comeco = 0;
-                if (modonovo == "Todos De Uma Vez em 3D") comeco = 0;
-                else if (modonovo == "Um Frame De Cada Vez em 2D") comeco = 1;
-                /*for (int i = comeco; i < contagem; i++)
+
+                for (int i = 0; i < contagem; i++)
                 {
                     ((GameObject)lista_de_backs[i]).GetComponent<LigaDesliga>().Desligar();
-                }*/
-                if (modonovo == "Um Frame De Cada Vez em 2D")
-                {
-                    background_um_de_cada_vez_2D = (GameObject)lista_de_backs[0];
-                    background_um_de_cada_vez_2D_posicao_original = ((GameObject)lista_de_backs[0]).GetComponent<Transform>().position;
-                    if (!background_um_de_cada_vez_2D_posicao_atual_foi_preenchido)
-                    {
-                        background_um_de_cada_vez_2D_posicao_atual = background_um_de_cada_vez_2D_posicao_original;
-                        background_um_de_cada_vez_2D_posicao_atual_foi_preenchido = true;
-                    }
                 }
+
             }
 
             if (modonovo != "Todos De Uma Vez em 3D!") posicaonova.z = 0.0f;
