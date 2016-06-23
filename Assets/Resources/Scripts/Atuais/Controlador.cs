@@ -16,7 +16,8 @@ using System;
 /// <summary>
 /// Responsável por ler inputs de mouse e teclado para uso do visualizador de log.
 /// </summary>
-public class Controlador : MonoBehaviour {
+public class Controlador : MonoBehaviour
+{
 
     Vector3 posicao_da_camera;
     BancoDeDadosModos modos = new BancoDeDadosModos();
@@ -63,13 +64,16 @@ public class Controlador : MonoBehaviour {
     string parte_da_transparencia_dos_objetos;
 
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
 
-        if (usuario_pode_fazer_input) {
+        if (usuario_pode_fazer_input)
+        {
 
             posicao_da_camera = transform.position;
 
-            if (modo_de_visualizacao == "Um Frame De Cada Vez em 2D") {
+            if (modo_de_visualizacao == "Um Frame De Cada Vez em 2D")
+            {
 
                 if (Input.GetKeyUp("r"))
                 {
@@ -119,7 +123,8 @@ public class Controlador : MonoBehaviour {
                         {
                             posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[0]).transform.position.y +
                                               20.0f - 20.0f * posicao_temporal_;
-                        } else
+                        }
+                        else
                         {
                             GetComponent<GuiTempo>().SetStringEditavel("Tempo " + tempo + " não existe.");
                         }
@@ -130,17 +135,19 @@ public class Controlador : MonoBehaviour {
 
                 if (Input.GetKeyUp("t"))
                 {
-                    if (auto_mode_custom == false) {  
+                    if (auto_mode_custom == false)
+                    {
                         string tempo1 = GetComponent<GuiTempo>().GetAutoPassagemDeTempoCustomComecoEditavel();
                         string tempo2 = GetComponent<GuiTempo>().GetAutoPassagemDeTempoCustomFinalEditavel();
 
                         bool resultado1 = int.TryParse(tempo1, out posicao_temporal_1);
                         bool resultado2 = int.TryParse(tempo2, out posicao_temporal_2);
 
-                        if (resultado1 && resultado2) {
-                        
+                        if (resultado1 && resultado2)
+                        {
+
                             if (posicao_temporal_1 <= GetComponent<NovoLeitor2>().GetUltimoTempo() &&
-                                posicao_temporal_2 <= GetComponent<NovoLeitor2>().GetUltimoTempo()) 
+                                posicao_temporal_2 <= GetComponent<NovoLeitor2>().GetUltimoTempo())
                             {
                                 if (posicao_temporal_1 <= GetComponent<NovoLeitor2>().GetUltimoTempo())
                                 {
@@ -151,19 +158,22 @@ public class Controlador : MonoBehaviour {
                                 FindObjectOfType<Camera>().transform.position = posicao_da_camera;
                                 auto_mode_custom = true;
                             }
-                        } else
+                        }
+                        else
                         {
                             if (!resultado1) GetComponent<GuiTempo>().SetAutoPassagemDeTempoCustomComecoEditavel("Tempo " + tempo1 + " não existe.");
                             if (!resultado2) GetComponent<GuiTempo>().SetAutoPassagemDeTempoCustomFinalEditavel("Tempo " + tempo2 + " não existe.");
                         }
 
                         FindObjectOfType<Camera>().transform.position = posicao_da_camera;
-                    } else { auto_mode_custom = false; }
+                    }
+                    else { auto_mode_custom = false; }
                 }
             }
 
             //Necessário para esse modo específico por conta da movimentação livre dele
-            if (modo_de_visualizacao == "Todos De Uma Vez em 3D") {
+            if (modo_de_visualizacao == "Todos De Uma Vez em 3D")
+            {
 
                 if (Input.GetAxis("Horizontal") != 0)
                 {
@@ -246,7 +256,9 @@ public class Controlador : MonoBehaviour {
 
                 }
 
-            } else if (modo_de_visualizacao == "Heatmap") {
+            }
+            else if (modo_de_visualizacao == "Heatmap")
+            {
 
                 if ((Input.GetKeyUp("left")) || ((Input.GetKeyUp("right"))))
                 {
@@ -254,14 +266,18 @@ public class Controlador : MonoBehaviour {
                     if ((Input.GetKeyUp("right"))) { MostrarHeatmapPosterior(); }
                     GetComponent<NovoLeitor2>().ChangeTexturaHeatmap(qual_heatmap_mostrar);
                 }
-                   
 
-            } else {
+
+            }
+            else
+            {
                 //Esse código movimenta a câmera para frente e para trás.
-                if (Input.GetAxis("Horizontal") != 0) {
+                if (Input.GetAxis("Horizontal") != 0)
+                {
 
-                    if ((modo_de_visualizacao == "Um Frame De Cada Vez em 2D") && (auto_mode)){ }
-                    else { 
+                    if ((modo_de_visualizacao == "Um Frame De Cada Vez em 2D") && (auto_mode)) { }
+                    else
+                    {
 
                         float y = modos.GetVelocidadeDeMovimentacao(modo_de_visualizacao);
 
@@ -355,7 +371,8 @@ public class Controlador : MonoBehaviour {
             }
 
             //Esse código serve para fazer a Gui dos pontos funcionar.
-            if (Input.GetMouseButtonDown(0)) {
+            if (Input.GetMouseButtonDown(0))
+            {
                 RaycastHit acerto = new RaycastHit();
                 Ray raio = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -366,7 +383,9 @@ public class Controlador : MonoBehaviour {
                         GetComponent<GuiInfoObjeto>().EsconderGui();
                         NenhumPontoFoiClicado();
                     }
-                } else {
+                }
+                else
+                {
                     GetComponent<GuiInfoObjeto>().EsconderGui();
                     NenhumPontoFoiClicado();
                 }
@@ -376,11 +395,11 @@ public class Controlador : MonoBehaviour {
 
     public void AtualizarValoresDePosicionamento(float posicaoy0)
     {
-        int pos = GetComponent<NovoLeitor2>().lista_de_backgrounds.Count/2;
+        int pos = GetComponent<NovoLeitor2>().lista_de_backgrounds.Count / 2;
 
         modos.AddCameraInitY("Um Frame De Cada Vez em 3D", posicaoy0);
         modos.AddCameraInitY("Um Frame De Cada Vez em 2D", posicaoy0);
-        modos.AddCameraInitY("Todos De Uma Vez em 3D", posicaoy0+10f);
+        modos.AddCameraInitY("Todos De Uma Vez em 3D", posicaoy0 + 10f);
 
         modos.AddCameraInitX("Todos De Uma Vez em 3D", 0f);
 
@@ -396,27 +415,35 @@ public class Controlador : MonoBehaviour {
             modos.SetCameraInitY(modo_de_visualizacao, posicaonova.y);
             posicaonova.y = modos.GetCameraInitY(modonovo);
 
-            if (modo_de_visualizacao == "Todos De Uma Vez em 3D")
+            if ((modo_de_visualizacao == "Todos De Uma Vez em 3D") || (modo_de_visualizacao == "Um Frame De Cada Vez em 2D"))
             {
-                modos.SetCameraInitZ(modo_de_visualizacao, posicaonova.z);
+                if (modo_de_visualizacao == "Todos De Uma Vez em 3D") modos.SetCameraInitZ(modo_de_visualizacao, posicaonova.z);
                 ArrayList lista_de_backs = GetComponent<NovoLeitor2>().lista_de_backgrounds;
                 int contagem = lista_de_backs.Count;
-                for (int i = 0; i < contagem; i++)
+                int comeco = 0;
+                if (modonovo == "Todos De Uma Vez em 3D") comeco = 0;
+                else if (modonovo == "Um Frame De Cada Vez em 2D") comeco = 1;
+                for (int i = comeco; i < contagem; i++)
                 {
                     ((GameObject)lista_de_backs[i]).GetComponent<LigaDesliga>().Ligar();
                 }
             }
-        
-            if (modonovo == "Todos De Uma Vez em 3D")
+
+            if ((modonovo == "Todos De Uma Vez em 3D") || (modonovo == "Um Frame De Cada Vez em 2D"))
             {
-                posicaonova.z = modos.GetCameraInitZ(modonovo);
+                if (modonovo == "Todos De Uma Vez em 3D") posicaonova.z = modos.GetCameraInitZ(modonovo);
                 ArrayList lista_de_backs = GetComponent<NovoLeitor2>().lista_de_backgrounds;
                 int contagem = lista_de_backs.Count;
-                for (int i = 0; i < contagem; i++)
+                int comeco = 0;
+                if (modonovo == "Todos De Uma Vez em 3D") comeco = 0;
+                else if (modonovo == "Um Frame De Cada Vez em 2D") comeco = 1;
+                for (int i = comeco; i < contagem; i++)
                 {
                     ((GameObject)lista_de_backs[i]).GetComponent<LigaDesliga>().Desligar();
                 }
-            } else posicaonova.z = 0.0f;
+            }
+
+            if (modonovo != "Todos De Uma Vez em 3D!") posicaonova.z = 0.0f;
 
             GetComponent<Camera>().transform.position = posicaonova;
             GetComponent<Camera>().orthographic = modos.GetOrthographic(modonovo);
@@ -445,7 +472,8 @@ public class Controlador : MonoBehaviour {
                 GetComponent<GuiVisualizarPorTempo>().EsconderGui();
                 GetComponent<GuiHeatmap>().RevelarGui();
             }
-            else {
+            else
+            {
                 GetComponent<GuiVisualizarTipos>().RevelarGui();
                 GetComponent<GuiVisualizarPorTempo>().RevelarGui();
                 GetComponent<GuiHeatmap>().EsconderGui();
@@ -458,7 +486,7 @@ public class Controlador : MonoBehaviour {
                 pegar_valor_de_camera_todos_de_uma_vez_em_3D = false;
             }
         }
-        
+
     }
 
     void Transparencia0()
@@ -471,7 +499,8 @@ public class Controlador : MonoBehaviour {
         GetComponent<NovoLeitor2>().ControlarAlpha(modos.GetAlpha(modo));
     }
 
-    public void MudarTransparenciaDosObjetos(float change) {
+    public void MudarTransparenciaDosObjetos(float change)
+    {
 
         MudancaDeCor(true, false, false, false, change);
 
@@ -579,11 +608,11 @@ public class Controlador : MonoBehaviour {
                                             ((GameObject)lista_de_objetos_a_ligar_ou_desligar[i]).GetComponent<Dados>().nome_do_objeto
                                             ];
                         }
-                            
+
                         if (GetComponent<GuiVisualizarTipos>().EstaInvisivel(posicao_de_checagem_de_tipo_de_objeto))
                         {
                             modificar = false;
-                        }                         
+                        }
 
                     }
                     if (modificar) ((GameObject)lista_de_objetos_a_ligar_ou_desligar[i]).GetComponent<LigaDesliga>().Ligar();
@@ -703,19 +732,22 @@ public class Controlador : MonoBehaviour {
             objeto_clicado = click;
             click.GetComponent<MeshRenderer>().material.mainTexture = GetComponent<NovoLeitor2>().
                 texturas_selecionadas.Get(click.GetComponent<Dados>().nome_do_objeto.ToString());
-        } else if (objeto_clicado != click) {
+        }
+        else if (objeto_clicado != click)
+        {
             objeto_clicado.GetComponent<MeshRenderer>().material.mainTexture = GetComponent<NovoLeitor2>().
                 texturas.Get(objeto_clicado.GetComponent<Dados>().nome_do_objeto.ToString());
             objeto_clicado = click;
             click.GetComponent<MeshRenderer>().material.mainTexture = GetComponent<NovoLeitor2>().
                 texturas_selecionadas.Get(click.GetComponent<Dados>().nome_do_objeto.ToString());
         }
-              
+
     }
 
     public void NenhumPontoFoiClicado()
     {
-        if (objeto_clicado != null) {
+        if (objeto_clicado != null)
+        {
             objeto_clicado.GetComponent<MeshRenderer>().material.mainTexture = GetComponent<NovoLeitor2>().
                     texturas.Get(objeto_clicado.GetComponent<Dados>().nome_do_objeto.ToString());
             objeto_clicado = null;
@@ -777,7 +809,7 @@ public class Controlador : MonoBehaviour {
 
     public void InicializacaoBolhas()
     {
-        
+
         tipo = "Bolhas";
 
         parte_da_transparencia_dos_objetos += "8 - Diminui os detalhes dos/some com os objetos\n" +
