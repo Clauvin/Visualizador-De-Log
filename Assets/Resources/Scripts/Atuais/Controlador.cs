@@ -30,8 +30,10 @@ public class Controlador : MonoBehaviour
                                  "5 - Muda para Heatmap\n";
     public string tipo;
 
-    GameObject background_unico;
-    Vector3 background_posicao_original;
+    GameObject background_um_de_cada_vez_2D;
+    Vector3 background_um_de_cada_vez_2D_posicao_original;
+    Vector3 background_um_de_cada_vez_2D_posicao_atual;
+    bool background_um_de_cada_vez_2D_posicao_atual_foi_preenchido = false;
 
     Transform objeto_clicado = null;
 
@@ -78,6 +80,8 @@ public class Controlador : MonoBehaviour
             if (modo_de_visualizacao == "Um Frame De Cada Vez em 2D")
             {
 
+                background_um_de_cada_vez_2D_posicao_atual = background_um_de_cada_vez_2D.transform.position;
+
                 if (Input.GetKeyUp("r"))
                 {
                     if (auto_mode) auto_mode = false;
@@ -89,14 +93,18 @@ public class Controlador : MonoBehaviour
                     float y = modos.GetVelocidadeDeMovimentacao(modo_de_visualizacao);
 
                     posicao_da_camera.y -= y;
+                    background_um_de_cada_vez_2D_posicao_atual.y -= y;
+
 
                     if (posicao_da_camera.y <= ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
                         GetComponent<NovoLeitor2>().lista_de_backgrounds.Count - 1]).transform.position.y)
                     {
                         posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[0]).transform.position.y + 20.0f;
+                        background_um_de_cada_vez_2D.transform.position = background_um_de_cada_vez_2D_posicao_original;
                     }
 
                     FindObjectOfType<Camera>().transform.position = posicao_da_camera;
+                    background_um_de_cada_vez_2D.transform.position = background_um_de_cada_vez_2D_posicao_atual;
                 }
 
                 if (auto_mode_custom)
@@ -104,15 +112,18 @@ public class Controlador : MonoBehaviour
                     float y = modos.GetVelocidadeDeMovimentacao(modo_de_visualizacao);
 
                     posicao_da_camera.y -= y;
+                    background_um_de_cada_vez_2D_posicao_atual.y -= y;
 
                     if (posicao_da_camera.y <= ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
                         posicao_temporal_2]).transform.position.y)
                     {
                         posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
                             posicao_temporal_1]).transform.position.y;
+                        background_um_de_cada_vez_2D_posicao_atual.y = posicao_da_camera.y - 20.0f;
                     }
 
                     FindObjectOfType<Camera>().transform.position = posicao_da_camera;
+                    background_um_de_cada_vez_2D.transform.position = background_um_de_cada_vez_2D_posicao_atual;
                 }
 
                 if (Input.GetKeyUp("e"))
@@ -432,7 +443,7 @@ public class Controlador : MonoBehaviour
                 }
                 if (modonovo == "Um Frame De Cada Vez em 2D")
                 {
-                    ((GameObject)lista_de_backs[0]).GetComponent<Transform>().position = background_posicao_original;
+                    ((GameObject)lista_de_backs[0]).GetComponent<Transform>().position = background_um_de_cada_vez_2D_posicao_original;
                 }
             }
 
@@ -450,8 +461,13 @@ public class Controlador : MonoBehaviour
                 }
                 if (modonovo == "Um Frame De Cada Vez em 2D")
                 {
-                    background_unico = (GameObject)lista_de_backs[0];
-                    background_posicao_original = ((GameObject)lista_de_backs[0]).GetComponent<Transform>().position;
+                    background_um_de_cada_vez_2D = (GameObject)lista_de_backs[0];
+                    background_um_de_cada_vez_2D_posicao_original = ((GameObject)lista_de_backs[0]).GetComponent<Transform>().position;
+                    if (!background_um_de_cada_vez_2D_posicao_atual_foi_preenchido)
+                    {
+                        background_um_de_cada_vez_2D_posicao_atual = background_um_de_cada_vez_2D_posicao_original;
+                        background_um_de_cada_vez_2D_posicao_atual_foi_preenchido = true;
+                    }
                 }
             }
 
