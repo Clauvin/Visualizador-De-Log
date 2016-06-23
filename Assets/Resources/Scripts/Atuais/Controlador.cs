@@ -207,10 +207,12 @@ public class Controlador : MonoBehaviour
                 //Esse código movimenta a câmera para esquerda e para direita mais rápido.
                 if ((Input.GetButton("a")) || (Input.GetButton("d")))
                 {
-                    float x = modos.GetVelocidadeDeMovimentacao(modo_de_visualizacao);
+
+                    AlterarPosicaoDeCamera('x', false, 0, 7, true, "a", "d");
+                    /*float x = modos.GetVelocidadeDeMovimentacao(modo_de_visualizacao);
 
                     if (Input.GetButton("a")) posicao_da_camera.x -= (7 * x);
-                    else if (Input.GetButton("d")) posicao_da_camera.x += (7 * x);
+                    else if (Input.GetButton("d")) posicao_da_camera.x += (7 * x);*/
 
                     FindObjectOfType<Camera>().transform.position = posicao_da_camera;
                 }
@@ -520,8 +522,10 @@ public class Controlador : MonoBehaviour
 
     }
 
-    void AlterarPosicaoDeCamera(char coordenada, bool usar_valor_custom = false, float valor = 0.0f, float acelerador = 1.0f)
+    void AlterarPosicaoDeCamera(char coordenada, bool usar_valor_custom = false, float valor = 0.0f, float acelerador = 1.0f,
+                                bool usa_teclas_custom = false, string tecla_menos = "", string tecla_mais = "")
     {
+
         float valor_final;
         string eixo = "";
         int eixo_int = 0;
@@ -532,8 +536,16 @@ public class Controlador : MonoBehaviour
         else if (coordenada == 'y') { eixo = "Vertical"; eixo_int = 1; }
         else if (coordenada == 'z') { eixo = "Zertical"; eixo_int = 2; }
 
-        if (Input.GetAxis(eixo) > 0) posicao_da_camera[eixo_int] += valor_final * acelerador;
-        else if (Input.GetAxis(eixo) < 0) posicao_da_camera[eixo_int] -= valor_final * acelerador;
+        if (usa_teclas_custom == false)
+        {
+            if (Input.GetAxis(eixo) > 0) posicao_da_camera[eixo_int] += valor_final * acelerador;
+            else if (Input.GetAxis(eixo) < 0) posicao_da_camera[eixo_int] -= valor_final * acelerador;
+        } else
+        {
+            if (Input.GetButton(tecla_menos)) posicao_da_camera[eixo_int] -= valor_final * acelerador;
+            else if (Input.GetButton(tecla_mais)) posicao_da_camera[eixo_int] += valor_final * acelerador;
+        }
+        
 
     }
 
