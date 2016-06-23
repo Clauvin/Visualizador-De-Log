@@ -488,7 +488,7 @@ public class Controlador : MonoBehaviour
             GetComponent<GuiModo>().MudarTexto(modo_de_visualizacao);
             GetComponent<GuiModo>().MudarInstrucoes(instrucoes_genericas + modos.GetInstrucao(modo_de_visualizacao));
 
-            if (modo_de_visualizacao == "Um Frame De Cada Vez em 3D")
+            if ((modo_de_visualizacao == "Um Frame De Cada Vez em 3D") || (modo_de_visualizacao == "Um Frame De Cada Vez em 2D"))
             {
                 GetComponent<GuiTempo>().RevelarGui();
             }
