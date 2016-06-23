@@ -191,7 +191,7 @@ public class Controlador : MonoBehaviour
                 //Esse código movimenta a câmera para frente e para trás.
                 if (Input.GetAxis("Vertical") != 0)
                 {
-                    AlterarPosicaoDeCamera('y', false, 0, -1.0f);
+                    AlterarPosicaoDeCamera('y', false, "", "", false, 0, -1.0f);
 
                     FindObjectOfType<Camera>().transform.position = posicao_da_camera;
                 }
@@ -208,11 +208,7 @@ public class Controlador : MonoBehaviour
                 if ((Input.GetButton("a")) || (Input.GetButton("d")))
                 {
 
-                    AlterarPosicaoDeCamera('x', false, 0, 7, true, "a", "d");
-                    /*float x = modos.GetVelocidadeDeMovimentacao(modo_de_visualizacao);
-
-                    if (Input.GetButton("a")) posicao_da_camera.x -= (7 * x);
-                    else if (Input.GetButton("d")) posicao_da_camera.x += (7 * x);*/
+                    AlterarPosicaoDeCamera('x', false, "", "", false, 0, 7, true, "a", "d");
 
                     FindObjectOfType<Camera>().transform.position = posicao_da_camera;
                 }
@@ -278,10 +274,11 @@ public class Controlador : MonoBehaviour
                     else
                     {
 
-                        float y = modos.GetVelocidadeDeMovimentacao(modo_de_visualizacao);
+                        AlterarPosicaoDeCamera('y', true, "Horizontal", "Vertical", false, 0, -1.0f);
+                        /*float y = modos.GetVelocidadeDeMovimentacao(modo_de_visualizacao);
 
                         if (Input.GetAxis("Horizontal") > 0) posicao_da_camera.y -= y;
-                        else if (Input.GetAxis("Horizontal") < 0) posicao_da_camera.y += y;
+                        else if (Input.GetAxis("Horizontal") < 0) posicao_da_camera.y += y;*/
 
                         if (posicao_da_camera.y > ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[0]).transform.position.y + 5.0f)
                         {
@@ -522,7 +519,8 @@ public class Controlador : MonoBehaviour
 
     }
 
-    void AlterarPosicaoDeCamera(char coordenada, bool usar_valor_custom = false, float valor = 0.0f, float acelerador = 1.0f,
+    void AlterarPosicaoDeCamera(char coordenada, bool usar_eixo_custom = false, string o_eixo_das_teclas = "", string o_eixo = "",
+                                bool usar_valor_custom = false, float valor = 0.0f, float acelerador = 1.0f,
                                 bool usa_teclas_custom = false, string tecla_menos = "", string tecla_mais = "")
     {
 
@@ -532,9 +530,18 @@ public class Controlador : MonoBehaviour
         if (usar_valor_custom) valor_final = valor;
         else valor_final = modos.GetVelocidadeDeMovimentacao(modo_de_visualizacao);
 
-        if (coordenada == 'x') { eixo = "Horizontal"; eixo_int = 0; }
-        else if (coordenada == 'y') { eixo = "Vertical"; eixo_int = 1; }
-        else if (coordenada == 'z') { eixo = "Zertical"; eixo_int = 2; }
+        if (usar_eixo_custom == false)
+        {
+            if (coordenada == 'x') { eixo = "Horizontal"; eixo_int = 0; }
+            else if (coordenada == 'y') { eixo = "Vertical"; eixo_int = 1; }
+            else if (coordenada == 'z') { eixo = "Zertical"; eixo_int = 2; }
+        } else
+        {
+            eixo = o_eixo_das_teclas;
+            if (o_eixo == "Horizontal") eixo_int = 0;
+            if (o_eixo == "Vertical") eixo_int = 1;
+            if (o_eixo == "Zertical") eixo_int = 2;
+        }
 
         if (usa_teclas_custom == false)
         {
