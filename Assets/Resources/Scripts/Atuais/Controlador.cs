@@ -289,6 +289,11 @@ public class Controlador : MonoBehaviour
                         if (Input.GetAxis("Horizontal") > 0) posicao_da_camera.y -= y;
                         else if (Input.GetAxis("Horizontal") < 0) posicao_da_camera.y += y;
 
+                        if (posicao_da_camera.y > ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[0]).transform.position.y + 5.0f)
+                        {
+                            posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[0]).transform.position.y + 5.0f;
+                        }
+
                         FindObjectOfType<Camera>().transform.position = posicao_da_camera;
 
                     }
@@ -304,6 +309,11 @@ public class Controlador : MonoBehaviour
 
                         if (Input.GetButton("a")) posicao_da_camera.y += (7 * y);
                         else if (Input.GetButton("d")) posicao_da_camera.y -= (7 * y);
+
+                        if (posicao_da_camera.y > ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[0]).transform.position.y + 5.0f)
+                        {
+                            posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[0]).transform.position.y + 5.0f;
+                        }
 
                         FindObjectOfType<Camera>().transform.position = posicao_da_camera;
                     }
