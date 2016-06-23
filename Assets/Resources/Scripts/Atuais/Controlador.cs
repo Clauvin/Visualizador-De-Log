@@ -30,6 +30,9 @@ public class Controlador : MonoBehaviour
                                  "5 - Muda para Heatmap\n";
     public string tipo;
 
+    GameObject background_unico;
+    Vector3 background_posicao_original;
+
     Transform objeto_clicado = null;
 
     float cam_sensitividade_X = 10.0f;
@@ -427,6 +430,10 @@ public class Controlador : MonoBehaviour
                 {
                     ((GameObject)lista_de_backs[i]).GetComponent<LigaDesliga>().Ligar();
                 }
+                if (modonovo == "Um Frame De Cada Vez em 2D")
+                {
+                    ((GameObject)lista_de_backs[0]).GetComponent<Transform>().position = background_posicao_original;
+                }
             }
 
             if ((modonovo == "Todos De Uma Vez em 3D") || (modonovo == "Um Frame De Cada Vez em 2D"))
@@ -440,6 +447,11 @@ public class Controlador : MonoBehaviour
                 for (int i = comeco; i < contagem; i++)
                 {
                     ((GameObject)lista_de_backs[i]).GetComponent<LigaDesliga>().Desligar();
+                }
+                if (modonovo == "Um Frame De Cada Vez em 2D")
+                {
+                    background_unico = (GameObject)lista_de_backs[0];
+                    background_posicao_original = ((GameObject)lista_de_backs[0]).GetComponent<Transform>().position;
                 }
             }
 
