@@ -19,7 +19,7 @@ public class Controlador : MonoBehaviour
 {
 
     Vector3 posicao_da_camera;
-    bool gambiarra_inicial_um_2D;
+    int get_tempo_anterior;
     BancoDeDadosModos modos = new BancoDeDadosModos();
     public string modo_de_visualizacao = "Todos De Uma Vez em 3D";
     int count;
@@ -295,7 +295,7 @@ public class Controlador : MonoBehaviour
                         }
 
                         FindObjectOfType<Camera>().transform.position = posicao_da_camera;
- 
+
                     }
                 }
 
@@ -325,6 +325,19 @@ public class Controlador : MonoBehaviour
                         }
 
                         FindObjectOfType<Camera>().transform.position = posicao_da_camera;
+                    }
+                }
+
+                if (modo_de_visualizacao == "Um Frame De Cada Vez em 2D")
+                {
+                    if (GetComponent<GuiTempo>().GetTempo() != get_tempo_anterior)
+                    {
+                        ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[get_tempo_anterior]).
+                            GetComponent<LigaDesliga>().Desligar();
+                        get_tempo_anterior = GetComponent<GuiTempo>().GetTempo();
+                        ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[get_tempo_anterior]).
+                            GetComponent<LigaDesliga>().Ligar();
+
                     }
                 }
 
@@ -457,7 +470,7 @@ public class Controlador : MonoBehaviour
                 ArrayList lista_de_backs = GetComponent<NovoLeitor2>().lista_de_backgrounds;
                 int contagem = lista_de_backs.Count;
 
-                for (int i = 0; i < contagem; i++)
+                for (int i = 1; i < contagem; i++)
                 {
                     ((GameObject)lista_de_backs[i]).GetComponent<LigaDesliga>().Desligar();
                 }
@@ -475,6 +488,13 @@ public class Controlador : MonoBehaviour
             GetComponent<NovoLeitor2>().AlterarLayer(modos.GetLayer(modonovo));
 
             TransparenciaDoBackground(modos.GetVisibleBackgroundAlpha(modonovo));
+
+            if (modonovo == "Um Frame De Cada Vez em 2D")
+            {
+                get_tempo_anterior = GetComponent<GuiTempo>().GetTempo();
+
+            }
+            
 
             modo_de_visualizacao = modonovo;
 
@@ -509,6 +529,8 @@ public class Controlador : MonoBehaviour
                 pos_rot_inicial_todos_de_uma_vez_em_3D = GetComponent<Camera>().transform.rotation;
                 pegar_valor_de_camera_todos_de_uma_vez_em_3D = false;
             }
+
+            
 
         }
 
@@ -1019,7 +1041,6 @@ public class Controlador : MonoBehaviour
         GetComponent<GuiModo>().MudarInstrucoes(instrucoes_genericas + modos.GetInstrucao(modo_de_visualizacao));
         GetComponent<GuiModo>().RevelarGui();
 
-        gambiarra_inicial_um_2D = true;
         usuario_pode_fazer_input = true;
 
     }
