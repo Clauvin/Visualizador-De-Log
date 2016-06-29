@@ -576,6 +576,45 @@ public class Controlador : MonoBehaviour
 
     }
 
+    Vector3 AlterarPosicaoDeCamera(Vector3 posicao, char coordenada, bool usar_eixo_custom = false, string o_eixo_das_teclas = "",
+                                string o_eixo = "", bool usar_valor_custom = false, float valor = 0.0f, float acelerador = 1.0f,
+                                bool usa_teclas_custom = false, string tecla_menos = "", string tecla_mais = "")
+    {
+
+        float valor_final;
+        string eixo = "";
+        int eixo_int = 0;
+        if (usar_valor_custom) valor_final = valor;
+        else valor_final = modos.GetVelocidadeDeMovimentacao(modo_de_visualizacao);
+
+        if (usar_eixo_custom == false)
+        {
+            if (coordenada == 'x') { eixo = "Horizontal"; eixo_int = 0; }
+            else if (coordenada == 'y') { eixo = "Vertical"; eixo_int = 1; }
+            else if (coordenada == 'z') { eixo = "Zertical"; eixo_int = 2; }
+        }
+        else
+        {
+            eixo = o_eixo_das_teclas;
+            if (o_eixo == "Horizontal") eixo_int = 0;
+            if (o_eixo == "Vertical") eixo_int = 1;
+            if (o_eixo == "Zertical") eixo_int = 2;
+        }
+
+        if (usa_teclas_custom == false)
+        {
+            if (Input.GetAxis(eixo) > 0) posicao[eixo_int] += valor_final * acelerador;
+            else if (Input.GetAxis(eixo) < 0) posicao[eixo_int] -= valor_final * acelerador;
+        }
+        else
+        {
+            if (Input.GetButton(tecla_menos)) posicao[eixo_int] -= valor_final * acelerador;
+            else if (Input.GetButton(tecla_mais)) posicao[eixo_int] += valor_final * acelerador;
+        }
+
+        return posicao;
+    }
+
     int QualTempoEVisto()
     {
         float pos_tempo_float = (GetComponent<GuiTempo>().GetPosicaoInicialDaCamera() - GetComponent<Camera>().transform.position.y);
