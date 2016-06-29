@@ -20,6 +20,8 @@ public class Controlador : MonoBehaviour
 
     Vector3 posicao_da_camera;
     Vector3 posicao_da_camera_um_2D;
+    Vector3 posicao_da_camera_inicial_um_2D;
+    bool gambiarra_inicial_um_2D;
     BancoDeDadosModos modos = new BancoDeDadosModos();
     public string modo_de_visualizacao = "Todos De Uma Vez em 3D";
     int count;
@@ -71,6 +73,13 @@ public class Controlador : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if ((gambiarra_inicial_um_2D) && (modo_de_visualizacao == "Um Frame De Cada Vez em 2D"))
+        {
+            posicao_da_camera_inicial_um_2D = FindObjectOfType<Camera>().transform.position;
+            gambiarra_inicial_um_2D = false;
+
+        }
 
         if (usuario_pode_fazer_input)
         {
@@ -272,6 +281,53 @@ public class Controlador : MonoBehaviour
                 {
 
                     if ((modo_de_visualizacao == "Um Frame De Cada Vez em 2D") && (auto_mode)) { }
+                    else if (modo_de_visualizacao == "Um Frame De Cada Vez em 2D")
+                    {
+                        posicao_da_camera_um_2D = AlterarPosicaoDeCamera(posicao_da_camera_um_2D, 'y',
+                                                                        true, "Horizontal", "Vertical", false, 0, -1.0f);
+
+                        if (posicao_da_camera_um_2D.y > ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[0]).transform.position.y + 5.0f)
+                        {
+                            posicao_da_camera_um_2D.y = ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[0]).transform.position.y + 5.0f;
+                        }
+
+                        float limitacao = 5.0f;
+                        if (modo_de_visualizacao == "Um Frame De Cada Vez em 3D") limitacao = -15.0f;
+
+                        if (posicao_da_camera_um_2D.y < ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
+                                                    GetComponent<NovoLeitor2>().lista_de_backgrounds.Count - 2
+                                                    ]).transform.position.y + limitacao)
+                        {
+                            posicao_da_camera_um_2D.y = ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
+                                                    GetComponent<NovoLeitor2>().lista_de_backgrounds.Count - 2
+                                                    ]).transform.position.y + limitacao;
+                        }
+
+                        if (FindObjectOfType<Camera>().transform.position.y - posicao_da_camera_um_2D.y <= -20)
+                        {
+
+                            ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
+                                QualTempoEVisto(posicao_da_camera_inicial_um_2D.y)
+                                ]).GetComponent<LigaDesliga>().Desligar();
+                            ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
+                                QualTempoEVisto(posicao_da_camera_inicial_um_2D.y) + 1
+                                ]).GetComponent<LigaDesliga>().Ligar();
+                            FindObjectOfType<Camera>().transform.position = posicao_da_camera_um_2D;
+
+                        }
+
+                        if (FindObjectOfType<Camera>().transform.position.y - posicao_da_camera_um_2D.y >= 20)
+                        {
+                            ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
+                                QualTempoEVisto(posicao_da_camera_inicial_um_2D.y)
+                                ]).GetComponent<LigaDesliga>().Desligar();
+                            ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
+                                QualTempoEVisto(posicao_da_camera_inicial_um_2D.y) - 1
+                                ]).GetComponent<LigaDesliga>().Ligar();
+
+                            FindObjectOfType<Camera>().transform.position = posicao_da_camera_um_2D;
+                        }
+                    }
                     else
                     {
 
@@ -294,32 +350,8 @@ public class Controlador : MonoBehaviour
                                                     ]).transform.position.y + limitacao;
                         }
 
-                        /*if (FindObjectOfType<Camera>().transform.position.y - posicao_da_camera.y >= 20)
-                        {
-                            ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
-                                QualTempoEVisto(posicao_da_camera.y)
-                                ]).GetComponent<LigaDesliga>().Desligar();
-                            ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
-                                QualTempoEVisto(posicao_da_camera.y)+1
-                                ]).GetComponent<LigaDesliga>().Ligar();
-                            FindObjectOfType<Camera>().transform.position = posicao_da_camera;
-
-                        }
-
-                        if (FindObjectOfType<Camera>().transform.position.y - posicao_da_camera.y <= -20)
-                        {
-                            ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
-                                QualTempoEVisto(posicao_da_camera.y)
-                                ]).GetComponent<LigaDesliga>().Desligar();
-                            ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
-                                QualTempoEVisto(posicao_da_camera.y) - 1
-                                ]).GetComponent<LigaDesliga>().Ligar();
-                            FindObjectOfType<Camera>().transform.position = posicao_da_camera;
-
-                        }*/
-
-
-
+                        FindObjectOfType<Camera>().transform.position = posicao_da_camera;
+ 
                     }
                 }
 
@@ -534,7 +566,7 @@ public class Controlador : MonoBehaviour
                 pegar_valor_de_camera_todos_de_uma_vez_em_3D = false;
             }
 
-            if (modo_de_visualizacao == "Um De Cada Vez em 2D") posicao_da_camera_um_2D = transform.position;
+            if (modo_de_visualizacao == "Um Frame De Cada Vez em 2D") posicao_da_camera_um_2D = GetComponent<Camera>().transform.position;
         }
 
     }
@@ -1044,6 +1076,7 @@ public class Controlador : MonoBehaviour
         GetComponent<GuiModo>().MudarInstrucoes(instrucoes_genericas + modos.GetInstrucao(modo_de_visualizacao));
         GetComponent<GuiModo>().RevelarGui();
 
+        gambiarra_inicial_um_2D = true;
         usuario_pode_fazer_input = true;
 
     }
