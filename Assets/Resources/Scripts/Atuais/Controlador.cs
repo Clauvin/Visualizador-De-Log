@@ -293,7 +293,14 @@ public class Controlador : MonoBehaviour
                                                     ]).transform.position.y + limitacao;
                         }
 
-                        FindObjectOfType<Camera>().transform.position = posicao_da_camera;
+                        /*if (FindObjectOfType<Camera>().transform.position.y - posicao_da_camera.y > 50)
+                        {
+
+                            FindObjectOfType<Camera>().transform.position = posicao_da_camera;
+
+                        }*/
+
+                        
 
                     }
                 }
@@ -554,6 +561,20 @@ public class Controlador : MonoBehaviour
         float pos_tempo_float = (GetComponent<GuiTempo>().GetPosicaoInicialDaCamera() - GetComponent<Camera>().transform.position.y);
         pos_tempo_float /= 20;
         pos_tempo_float +=  GetComponent<NovoLeitor2>().GetPrimeiroTempo();
+        if (GetComponent<Controlador>().modo_de_visualizacao == "Um Frame De Cada Vez em 2D")
+        {
+            pos_tempo_float += 0.25f;
+        }
+        int pos_tempo = (int)pos_tempo_float;
+        if (pos_tempo < 0) pos_tempo = 0;
+        return pos_tempo;
+    }
+
+    int QualTempoEVisto(float coordenada)
+    {
+        float pos_tempo_float = coordenada;
+        pos_tempo_float /= 20;
+        pos_tempo_float += GetComponent<NovoLeitor2>().GetPrimeiroTempo();
         if (GetComponent<Controlador>().modo_de_visualizacao == "Um Frame De Cada Vez em 2D")
         {
             pos_tempo_float += 0.25f;
