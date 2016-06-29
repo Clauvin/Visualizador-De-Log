@@ -108,6 +108,8 @@ public class GuiTempo : GuiPadrao2
 
     public override string GetTexto() { return texto; }
 
+    public float GetPosicaoInicialDaCamera() { return pos_inicial_camera; }
+
     public string GetStringEditavel() { return string_Para_Editar; }
 
     public void SetStringEditavel(string editada) { string_Para_Editar = editada; }
