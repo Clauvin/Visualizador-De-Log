@@ -19,6 +19,7 @@ public class Controlador : MonoBehaviour
 {
 
     Vector3 posicao_da_camera;
+    Vector3 posicao_da_camera_um_2D;
     BancoDeDadosModos modos = new BancoDeDadosModos();
     public string modo_de_visualizacao = "Todos De Uma Vez em 3D";
     int count;
@@ -293,14 +294,31 @@ public class Controlador : MonoBehaviour
                                                     ]).transform.position.y + limitacao;
                         }
 
-                        /*if (FindObjectOfType<Camera>().transform.position.y - posicao_da_camera.y > 50)
+                        /*if (FindObjectOfType<Camera>().transform.position.y - posicao_da_camera.y >= 20)
                         {
+                            ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
+                                QualTempoEVisto(posicao_da_camera.y)
+                                ]).GetComponent<LigaDesliga>().Desligar();
+                            ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
+                                QualTempoEVisto(posicao_da_camera.y)+1
+                                ]).GetComponent<LigaDesliga>().Ligar();
+                            FindObjectOfType<Camera>().transform.position = posicao_da_camera;
 
+                        }
+
+                        if (FindObjectOfType<Camera>().transform.position.y - posicao_da_camera.y <= -20)
+                        {
+                            ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
+                                QualTempoEVisto(posicao_da_camera.y)
+                                ]).GetComponent<LigaDesliga>().Desligar();
+                            ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
+                                QualTempoEVisto(posicao_da_camera.y) - 1
+                                ]).GetComponent<LigaDesliga>().Ligar();
                             FindObjectOfType<Camera>().transform.position = posicao_da_camera;
 
                         }*/
 
-                        
+
 
                     }
                 }
@@ -515,6 +533,8 @@ public class Controlador : MonoBehaviour
                 pos_rot_inicial_todos_de_uma_vez_em_3D = GetComponent<Camera>().transform.rotation;
                 pegar_valor_de_camera_todos_de_uma_vez_em_3D = false;
             }
+
+            if (modo_de_visualizacao == "Um De Cada Vez em 2D") posicao_da_camera_um_2D = transform.position;
         }
 
     }
