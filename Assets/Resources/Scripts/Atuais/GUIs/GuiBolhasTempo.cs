@@ -30,18 +30,23 @@ public class GuiBolhasTempo : GuiTempo
 
             GUI.Label(new Rect(10, 0, 210, 40), "Tempo Mostrado em Câmera: " + pos_tempo + " de \n" +
                 GetComponent<NovoLeitor2>().GetUltimoTempoBolhas(), "textfield");
-            if (GetComponent<Controlador>().GetAutoMode()) GUI.TextField(new Rect(10, 40, 210, 20), "Modo Automático ativado");
-            GUI.Label(new Rect(10, 60, 210, 20), "Pular para Posição", "textfield");
-            string_Para_Editar = GUI.TextField(new Rect(10, 80, 210, 20), string_Para_Editar);
 
-            GUI.Label(new Rect(10, 100, 210, 20), "Começo de Modo Automático Customizado", "textfield");
-            auto_custom_1 = GUI.TextField(new Rect(10, 120, 210, 20), auto_custom_1);
-            GUI.Label(new Rect(10, 140, 210, 20), "Fim de Modo Automático Customizado", "textfield");
-            auto_custom_2 = GUI.TextField(new Rect(10, 160, 210, 20), auto_custom_2);
-            if (GetComponent<Controlador>().GetAutoMode())
+            if (mostra_auto_mode)
             {
-                GUI.TextField(new Rect(10, 180, 210, 20), "Modo Automático Customizado ativado");
+                if (GetComponent<Controlador>().GetAutoMode()) GUI.TextField(new Rect(10, 40, 210, 20), "Modo Automático ativado");
+                GUI.Label(new Rect(10, 60, 210, 20), "Pular para Posição", "textfield");
+                string_Para_Editar = GUI.TextField(new Rect(10, 80, 210, 20), string_Para_Editar);
+
+                GUI.Label(new Rect(10, 100, 210, 20), "Começo de Modo Automático Customizado", "textfield");
+                auto_custom_1 = GUI.TextField(new Rect(10, 120, 210, 20), auto_custom_1);
+                GUI.Label(new Rect(10, 140, 210, 20), "Fim de Modo Automático Customizado", "textfield");
+                auto_custom_2 = GUI.TextField(new Rect(10, 160, 210, 20), auto_custom_2);
+                if (GetComponent<Controlador>().GetAutoMode())
+                {
+                    GUI.TextField(new Rect(10, 180, 210, 20), "Modo Automático Customizado ativado");
+                }
             }
+
             GUI.EndGroup();
 
         }

@@ -143,6 +143,7 @@ Transform:
   m_LocalRotation: {x: -0.67696244, y: 0.10421215, z: -0.21621315, w: -0.6957827}
   m_LocalPosition: {x: -1000, y: 1000, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -238,6 +239,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 60, y: 1, z: 15}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -252,7 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d40754bb36d128746bdd67e7e4e33dca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  modo_de_visualizacao: Todos De Uma Vez em 2D
+  modo_de_visualizacao: Todos De Uma Vez em 3D
   tipo: 
 --- !u!114 &1348100978
 MonoBehaviour:

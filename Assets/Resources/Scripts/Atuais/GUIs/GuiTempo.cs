@@ -14,6 +14,8 @@ public class GuiTempo : GuiPadrao2
     protected string texto;
     protected string instrucoes;
 
+    protected bool mostra_auto_mode;
+
     protected string string_Para_Editar;
     protected string auto_custom_1;
     protected string auto_custom_2;
@@ -28,6 +30,7 @@ public class GuiTempo : GuiPadrao2
     public GuiTempo()
     {
         gambiarra = true;
+        mostra_auto_mode = true;
         posy = 80;
         texto = "Tempo = ";
         revelado = false;
@@ -44,8 +47,7 @@ public class GuiTempo : GuiPadrao2
 
             posicao_y = 0;
 
-            GUI.Label(new Rect(10, 0, 210, 40), "Tempo Mostrado em Câmera: " + pos_tempo + " de \n" +
-                GetComponent<NovoLeitor2>().GetUltimoTempoFIT(), "textfield");
+            GUI.Label(new Rect(10, 0, 210, 40), "Tempo Mostrado em Câmera: " + pos_tempo + " de \n", "textfield");
             if (GetComponent<Controlador>().GetAutoMode()) GUI.TextField(new Rect(10, 40, 210, 20), "Modo Automático ativado");
             GUI.Label(new Rect(10, 60, 210, 20), "Pular para Posição", "textfield");
             string_Para_Editar = GUI.TextField(new Rect(10, 80, 210, 20), string_Para_Editar);
@@ -58,9 +60,12 @@ public class GuiTempo : GuiPadrao2
             {
                 GUI.TextField(new Rect(10, 180, 210, 20), "Modo Automático Customizado ativado");
             }
+
             GUI.EndGroup();
 
         }
+
+        
     }
 
     public void PegarQualModo(string modo)
@@ -68,6 +73,16 @@ public class GuiTempo : GuiPadrao2
 
         texto = modo;
 
+    }
+
+    public void AtivarGuiDoAutoMode()
+    {
+        mostra_auto_mode = true;
+    }
+
+    public void DesativarGuiDoAutoMode()
+    {
+        mostra_auto_mode = false;
     }
 
     public void PegarInstrucoes(string instrucao)
@@ -92,6 +107,10 @@ public class GuiTempo : GuiPadrao2
     }
 
     public override string GetTexto() { return texto; }
+
+    public int GetTempo() { return pos_tempo; }
+
+    public float GetPosicaoInicialDaCamera() { return pos_inicial_camera; }
 
     public string GetStringEditavel() { return string_Para_Editar; }
 
