@@ -39,13 +39,17 @@ public class GuiVisualizarTipos : GuiPadrao2 {
         if (revelado)
         {
             posicao_y = 0;
-            GUI.BeginGroup(new Rect(posx, posy, 270, 120));
+            GUI.BeginGroup(new Rect(posx, posy, 270, 20));
             GUI.TextField(new Rect(0, posicao_y, 270, 20), "Visibilidade de Tipos de Objetos");
+            GUI.EndGroup();
+
+
             for (int i = 0; i < lista_de_nomes_de_objetos.Length; i++)
             {
                 
                 posicao_y += 20;
                 GUI.TextField(new Rect(0, posicao_y, 135, 20), lista_de_nomes_de_objetos[i]);
+                posicao_y += 20;
                 if (GUI.Button(new Rect(135, posicao_y, 135, 20), o_que_escrever_nos_botoes[visivel_ou_invisivel[i]]))
                 {
                     if (visivel_ou_invisivel[i] == 1)
