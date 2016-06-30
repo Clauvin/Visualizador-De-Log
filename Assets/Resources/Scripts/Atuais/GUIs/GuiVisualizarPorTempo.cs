@@ -49,12 +49,12 @@ public class GuiVisualizarPorTempo : GuiPadrao2 {
         {
             GUI.BeginGroup(new Rect(posx, posy, 290, 180));
             GUI.TextField(new Rect(0, 0, 290, 20), "Invisibilidade de Objetos em Espaço de Tempo", "textfield");
-            GUI.Label(new Rect(0, 20, 210, 20), "Tempo Mínimo", "textfield");
-            if (visivel_ou_invisivel == 1) tempo_minimo = GUI.TextField(new Rect(0, 40, 210, 20), tempo_minimo);
-            else GUI.Label(new Rect(0, 40, 210, 20), tempo_minimo, "textfield");
-            GUI.Label(new Rect(0, 60, 210, 20), "Tempo Máximo", "textfield");
-            if (visivel_ou_invisivel == 1) tempo_maximo = GUI.TextField(new Rect(0, 80, 210, 20), tempo_maximo);
-            else GUI.Label(new Rect(0, 80, 210, 20), tempo_maximo, "textfield");
+            GUI.Label(new Rect(70, 20, 140, 20), "Tempo Mínimo", "textfield");
+            if (visivel_ou_invisivel == 1) tempo_minimo = GUI.TextField(new Rect(70, 40, 140, 20), tempo_minimo);
+            else GUI.Label(new Rect(70, 40, 140, 20), tempo_minimo, "textfield");
+            GUI.Label(new Rect(70, 60, 140, 20), "Tempo Máximo", "textfield");
+            if (visivel_ou_invisivel == 1) tempo_maximo = GUI.TextField(new Rect(70, 80, 140, 20), tempo_maximo);
+            else GUI.Label(new Rect(70, 80, 140, 20), tempo_maximo, "textfield");
             if (GUI.Button(new Rect(210, 20, 80, 80), o_que_escrever_nos_botoes[visivel_ou_invisivel]))
             {
                 lida_com_erros.DetectarETratarErrosEExcecoesDeInput(tempo_minimo, tempo_maximo);
@@ -89,7 +89,7 @@ public class GuiVisualizarPorTempo : GuiPadrao2 {
         revelado = true;
 
         posx = Screen.width - 290;
-        posy = 400;
+        posy = Screen.height - 180;
 
         o_que_escrever_nos_botoes = new string[2];
         o_que_escrever_nos_botoes[0] = "Apertar\npara\nvisível";
@@ -103,5 +103,6 @@ public class GuiVisualizarPorTempo : GuiPadrao2 {
 	// Update is called once per frame
 	void Update () {
         posx = Screen.width - 290;
+        posy = Screen.height - 180;
     }
 }

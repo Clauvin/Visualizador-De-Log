@@ -16,7 +16,7 @@ public class GuiModo : GuiPadrao2
     public GuiModo()
     {
         gambiarra = true;
-        posx = Screen.width - 300;
+        posx = Screen.width - 250;
         posy = 0;
         texto = "";
         revelado = false;
@@ -40,12 +40,12 @@ public class GuiModo : GuiPadrao2
     {
         if (revelado)
         {
-            GUI.BeginGroup(new Rect(posx, posy, 300, 390));
+            GUI.BeginGroup(new Rect(posx, posy, 250, 390));
 
             posicaox = 0;
-            GUI.Label(new Rect(10, posicaox, 300, 20), "Modo: " + texto, "textfield");
+            GUI.Label(new Rect(10, posicaox, 250, 20), "Modo: " + texto, "textfield");
             posicaox += 20;
-            GUI.Label(new Rect(10, posicaox, 300, 370), instrucoes, "textfield");
+            GUI.Label(new Rect(10, posicaox, 250, 370), instrucoes, "textfield");
 
             GUI.EndGroup();
         }
@@ -84,6 +84,6 @@ public class GuiModo : GuiPadrao2
         {
             gambiarra = false;
         }
-        posx = Screen.width - 300;
+        posx = Screen.width - 250;
     }
 }

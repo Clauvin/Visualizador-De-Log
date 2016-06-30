@@ -14,7 +14,7 @@ public class GuiSairDaVisualizacao : GuiPadrao2 {
     private int resultado;
     private int qual_botao = -1;
 
-    protected string[] strings_da_toolbar = { "Voltar Para Tela\n" + "De Pre-Load", "Voltar Para Tela\n" + "Inicial" };
+    protected string[] strings_da_toolbar = { "Tela De Pre-Load", "Tela Inicial" };
 
     public virtual void RetornarParaTelaDePreLoad() { }
 
@@ -25,7 +25,7 @@ public class GuiSairDaVisualizacao : GuiPadrao2 {
 
     public override void OnGUI()
     {
-        MudarCoordenadas(Screen.width - largura_dos_botoes, Screen.height - (altura_dos_botoes * 2));
+        MudarCoordenadas(Screen.width - largura_dos_botoes, Screen.height - altura_dos_botoes);
 
         GUI.BeginGroup(new Rect(posx, posy, largura_dos_botoes, altura_dos_botoes));
         resultado = GUI.Toolbar(new Rect(0, 0, largura_dos_botoes, altura_dos_botoes), qual_botao,
@@ -49,7 +49,7 @@ public class GuiSairDaVisualizacao : GuiPadrao2 {
     // Use this for initialization
     void Start () {
         largura_dos_botoes = 240;
-        altura_dos_botoes = 45;
+        altura_dos_botoes = 22;
 	
 	}
 }
