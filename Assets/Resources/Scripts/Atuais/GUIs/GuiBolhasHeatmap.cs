@@ -30,12 +30,12 @@ public class GuiBolhasHeatmap : GuiHeatmap
 
             if (qualheatmap == 0)
             {
-                GUI.TextField(new Rect(10, posicao_y, 170, 20), "Cores e Quantos Objetos");
+                GUI.TextField(new Rect(10, posicao_y, 160, 20), "Cores e Quantos Objetos");
                 posicao_y += 20;
             }
             else
             {
-                GUI.TextField(new Rect(10, posicao_y, 170, 40), "Cores e Quantos Objetos\n - " +
+                GUI.TextField(new Rect(10, posicao_y, 160, 40), "Cores e Quantos Objetos\n - " +
                     lista_de_objetos[qualheatmap-1]);
                 posicao_y += 40;
             }
@@ -45,7 +45,7 @@ public class GuiBolhasHeatmap : GuiHeatmap
             {
                 GUI.Box(new Rect(10, posicao_y, 20, 20), dados[qualheatmap].texturas_de_cor[i]);
                 numero = dados[qualheatmap].numeros_de_cor[i];
-                GUI.TextField(new Rect(35, posicao_y, 145, 20), numero.ToString());
+                GUI.TextField(new Rect(35, posicao_y, 80, 20), numero.ToString());
                 posicao_y += 20;
             }
 
