@@ -24,10 +24,10 @@ public class Controlador : MonoBehaviour
     public string modo_de_visualizacao = "Todos De Uma Vez em 3D";
     int count;
     string instrucoes_genericas = "Instrucoes:\n" +
-                                 "2 - Muda para 'Um Frame De Cada Vez em 3D'\n" +
-                                 "3 - Muda para 'Um Frame De Cada Vez em 2D'\n" +
-                                 "4 - Muda para 'Todos De Uma Vez em 3D'\n" +
-                                 "5 - Muda para Heatmap\n";
+                                 "2 - 'Um Frame De Cada Vez em 3D'\n" +
+                                 "3 - 'Um Frame De Cada Vez em 2D'\n" +
+                                 "4 - 'Todos De Uma Vez em 3D'\n" +
+                                 "5 - Heatmap\n";
     public string tipo;
 
     GameObject background_um_de_cada_vez_2D;
@@ -985,8 +985,8 @@ public class Controlador : MonoBehaviour
 
         tipo = "Bolhas";
 
-        parte_da_transparencia_dos_objetos += "8 - Diminui os detalhes dos/some com os objetos\n" +
-                                             "9 - Aumenta os detalhes dos objetos\n";
+        parte_da_transparencia_dos_objetos += "8 - Diminui detalhes \n" +
+                                             "9 - Aumenta detalhes \n";
 
         Inicializacao();
     }
