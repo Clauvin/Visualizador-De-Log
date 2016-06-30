@@ -1018,24 +1018,24 @@ public class Controlador : MonoBehaviour
                                              parte_da_transparencia_dos_objetos +
                                              "<- - Posição anterior\n" +
                                              "-> - Posição seguinte\n" +
-                                             "A - Posição anterior\n" +
-                                             "mais rápido\n" +
-                                             "D - Posição seguinte\n" +
-                                             "mais rápido\n" +
+                                             "A - Anterior mais rápido\n" +
+                                             "D - Seguinte mais rápido\n" +
                                              "E - Posição escolhida\n" +
                                              "em 'Pular Para Posição'\n" +
-                                             "R - Liga/Desliga modo automático\n" +
-                                             "T - Liga/Desliga modo automático customizado\n" +
+                                             "R - Liga/Desliga\n" +
+                                             "automático\n" +
+                                             "T - Liga/Desliga\n" +
+                                             "automático customizado\n" +
                                              "Q - Voltar à tela inicial");
 
         modos.Add("Todos De Uma Vez em 3D", 0.5f, 5f, 2f, 0f, 0f, false, 0f, new Vector3(0f, 0f, 0f),
             new Vector3(90f, 0f, 0f), 0f, 2, parte_da_transparencia_dos_objetos +
                                              "<- - Câmera recua\n" +
                                              "-> - Câmera avança\n" +
-                                             "A - Câmera recua mais rápido\n" +
-                                             "D - Câmera avança mais rápido\n" +
-                                             "R - Reseta posição e rotação da câmera\n" +
-                                             "S - Reseta rotação da câmera\n" +
+                                             "A - Recua mais rápido\n" +
+                                             "D - Avança mais rápido\n" +
+                                             "R - Reseta posição e rotação\n" +
+                                             "S - Reseta rotação\n" +
                                              "Q - Tela inicial");
 
         modos.Add("Heatmap", 0f, 200f, 15f, 0f, 0f, true, 0f, new Vector3(0f, 0f, 0f),
