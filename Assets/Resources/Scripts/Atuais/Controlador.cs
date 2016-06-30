@@ -1004,44 +1004,44 @@ public class Controlador : MonoBehaviour
     {
 
         modos.Add("Um Frame De Cada Vez em 3D", 0.5f, 5f, 30f, 0f, 0f, false, 1f, new Vector3(0f, 0f, 330f),
-            new Vector3(90f, 0f, 0f), 1f, 2, "6 - Some com os grids\n" + "7 - Faz os grids aparecerem\n" +
+            new Vector3(90f, 0f, 0f), 1f, 2, "6 - Sem grids\n" + "7 - Com grids\n" +
                                              parte_da_transparencia_dos_objetos +
-                                             "<- - Move a câmera para trás\n" +
-                                             "-> - Move a câmera para frente(ela pode \n" +
-                                             "atravessar um grid para ver o proximo\n" +
-                                             "A - Move a câmera para trás mais rápido\n" +
-                                             "D - Move a câmera para frente mais rápido\n" +
+                                             "<- - Câmera recua\n" +
+                                             "-> - Câmera avança(pode \n" +
+                                             "atravessar grids)\n" +
+                                             "A - Câmera recua mais rápido\n" +
+                                             "D - Câmera avança mais rápido\n" +
                                              "Q - Voltar à tela inicial");
 
         modos.Add("Um Frame De Cada Vez em 2D", 2f, 0f, 10f, 0f, 0f, true, 1f, new Vector3(0f, 0f, 0f),
-            new Vector3(90f, 0f, 0f), 1f, 0, "6 - Some com os grids\n" + "7 - Faz os grids aparecerem\n" +
+            new Vector3(90f, 0f, 0f), 1f, 0, "6 - Sem grids\n" + "7 - Com grids\n" +
                                              parte_da_transparencia_dos_objetos +
-                                             "<- - Vai para a posição anterior dos pontos\n" +
-                                             "-> - Vai para a posição seguinte dos pontos\n" +
-                                             "A - Vai para a posição anterior dos pontos\n" +
+                                             "<- - Posição anterior\n" +
+                                             "-> - Posição seguinte\n" +
+                                             "A - Posição anterior\n" +
                                              "mais rápido\n" +
-                                             "D - Vai para a posição seguinte dos pontos\n" +
+                                             "D - Posição seguinte\n" +
                                              "mais rápido\n" +
-                                             "E - Vai para a posição do tempo escolhido\n" +
+                                             "E - Posição escolhida\n" +
                                              "em 'Pular Para Posição'\n" +
-                                             "R - Ativa/desativa modo automático\n" +
-                                             "T - Ativa/desativa modo automático customizado\n" +
+                                             "R - Liga/Desliga modo automático\n" +
+                                             "T - Liga/Desliga modo automático customizado\n" +
                                              "Q - Voltar à tela inicial");
 
         modos.Add("Todos De Uma Vez em 3D", 0.5f, 5f, 2f, 0f, 0f, false, 0f, new Vector3(0f, 0f, 0f),
             new Vector3(90f, 0f, 0f), 0f, 2, parte_da_transparencia_dos_objetos +
-                                             "<- - Move a câmera para trás\n" +
-                                             "-> - Move a câmera para frente\n" +
-                                             "A - Move a câmera para trás mais rápido\n" +
-                                             "D - Move a câmera para frente mais rápido\n" +
-                                             "R - Reseta a posição e rotação da câmera\n" +
-                                             "S - Reseta a rotação da câmera\n" +
-                                             "Q - Voltar à tela inicial");
+                                             "<- - Câmera recua\n" +
+                                             "-> - Câmera avança\n" +
+                                             "A - Câmera recua mais rápido\n" +
+                                             "D - Câmera avança mais rápido\n" +
+                                             "R - Reseta posição e rotação da câmera\n" +
+                                             "S - Reseta rotação da câmera\n" +
+                                             "Q - Tela inicial");
 
         modos.Add("Heatmap", 0f, 200f, 15f, 0f, 0f, true, 0f, new Vector3(0f, 0f, 0f),
             new Vector3(90f, 0f, 0f), 1f, 2, "<- - Avança na lista de heatmaps\n" +
                                              "-> - Retorna na lista de heatmaps\n" +
-                                             "Q - Voltar à tela inicial");
+                                             "Q - Tela inicial");
 
         GameObject background = (GameObject)(GetComponent<NovoLeitor2>().lista_de_backgrounds[0]);
 
