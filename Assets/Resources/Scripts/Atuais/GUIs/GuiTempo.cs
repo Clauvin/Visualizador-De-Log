@@ -47,9 +47,9 @@ public class GuiTempo : GuiPadrao2
 
             posicao_y = 0;
 
-            GUI.Label(new Rect(10, 0, 210, 40), "Tempo Mostrado\n" + "em Câmera: " + pos_tempo + " de \n", "textfield");
-            if (GetComponent<Controlador>().GetAutoMode()) GUI.TextField(new Rect(10, 40, 210, 20), "Modo Automático ativado");
-            GUI.Label(new Rect(10, 60, 210, 20), "Pular para Posição", "textfield");
+            GUI.Label(new Rect(10, 0, 150, 40), "Tempo Mostrado\n" + "em Câmera: " + pos_tempo + " de ", "textfield");
+            if (GetComponent<Controlador>().GetAutoMode()) GUI.TextField(new Rect(10, 40, 150, 20), "Modo Automático ativado");
+            GUI.Label(new Rect(10, 60, 150, 20), "Pular para Posição", "textfield");
             string_Para_Editar = GUI.TextField(new Rect(10, 80, 210, 20), string_Para_Editar);
 
             GUI.Label(new Rect(10, 100, 210, 40), "Começo de Modo\nAutomático Customizado", "textfield");
