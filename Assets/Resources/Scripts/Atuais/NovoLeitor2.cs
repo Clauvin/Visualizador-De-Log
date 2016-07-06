@@ -556,7 +556,8 @@ public class NovoLeitor2 : MonoBehaviour
             tempo = bd_bolhas.GetTempo(i);
             if (i != bd_bolhas.GetQuantidadeDeEntradas() - 1)
             {
-                if (tempo != bd_bolhas.GetTempo(i + 1)) novo_tempo = true;
+                if (i == 0) novo_tempo = true;
+                else if (tempo != bd_bolhas.GetTempo(i - 1)) novo_tempo = true;
             }
             else if (tempo != bd_bolhas.GetTempo(i - 1))
             {
