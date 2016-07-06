@@ -381,7 +381,7 @@ public class Controlador : MonoBehaviour
 
                 GetComponent<NovoLeitor2>().PosicionarBackgrounds(20f);
                 GetComponent<Camera>().clearFlags = CameraClearFlags.Skybox;
-                GetComponent<NovoLeitor2>().DesconectarTodos();
+                //GetComponent<NovoLeitor2>().DesconectarTodos();
             }
 
             if ((Input.GetButtonDown("4")) && (modo_de_visualizacao != "Todos De Uma Vez em 3D"))
@@ -479,6 +479,10 @@ public class Controlador : MonoBehaviour
                 modos.SetCameraInitZ(modo_de_visualizacao, posicaonova.z);
                 ArrayList lista_de_backs = GetComponent<NovoLeitor2>().lista_de_backgrounds;
                 int contagem = lista_de_backs.Count;
+                if (modo_de_visualizacao == "Um Frame De Cada Vez em 2D")
+                {
+                    //GetComponent<NovoLeitor2>().DesconectarTodos();
+                }
 
                 for (int i = 0; i < contagem; i++)
                 {
@@ -492,10 +496,12 @@ public class Controlador : MonoBehaviour
                 int contagem = lista_de_backs.Count;
                 int desligar = 0;
                 if (modonovo == "Todos De Uma Vez em 3D") desligar = 0;
-                else if (modonovo == "Um Frame De Cada Vez em 2D") desligar = 1;
-
-
-                    for (int i = desligar; i < contagem; i++)
+                else if (modonovo == "Um Frame De Cada Vez em 2D")
+                {
+                    //GetComponent<NovoLeitor2>().ConectarTodos();
+                    desligar = 1;
+                }
+                for (int i = desligar; i < contagem; i++)
                 {
                     ((GameObject)lista_de_backs[i]).GetComponent<LigaDesliga>().Desligar();
                 }
