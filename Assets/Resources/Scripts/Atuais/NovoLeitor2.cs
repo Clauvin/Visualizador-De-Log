@@ -155,7 +155,7 @@ public class NovoLeitor2 : MonoBehaviour
                         entry_grid_y = entries[3].Split(':');
 
                         bd_fit.Add(Int32.Parse(entry_time[1]), Int32.Parse(entry_char[1]),
-                                Int32.Parse(entry_grid_x[1]), Int32.Parse(entry_grid_y[1]));
+                                Int32.Parse(entry_grid_x[1]), Int32.Parse(entry_grid_y[1]), 0, "", 0, 0);
 
                         // como o fit precisa ter, para ajudar na visualização, um heatmap para cada jogador,
                         // essa linha se aproveita do fato das informações de char serem guardadas em ordem crescente em cada

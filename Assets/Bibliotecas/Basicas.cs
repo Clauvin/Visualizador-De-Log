@@ -14,10 +14,24 @@ namespace Basicas
     /// </summary>
     public class BancoDeDadosFIT
     {
+        // int
         private ArrayList tempo;
+        // int
         private ArrayList personagem;
+        // int
         private ArrayList grid_x;
+        // int
         private ArrayList grid_y;
+        // int
+        private ArrayList tempo_do_servidor;
+        // string
+        private ArrayList nome_do_jogador;
+        // int
+        private ArrayList id_do_jogador;
+        // int
+        private ArrayList modo_de_jogo;
+
+
         //Time: 1 = Char:1 = GridX:5 = GridY:7
 
         public BancoDeDadosFIT()
@@ -26,14 +40,23 @@ namespace Basicas
             personagem = new ArrayList();
             grid_x = new ArrayList();
             grid_y = new ArrayList();
+            tempo_do_servidor = new ArrayList();
+            nome_do_jogador = new ArrayList();
+            id_do_jogador = new ArrayList();
+            modo_de_jogo = new ArrayList();
         }
 
-        public bool Add(int time, int pers, int x, int y)
+        public bool Add(int time, int pers, int x, int y, int server_time,
+                        string player_name, int player_id, int game_mode)
         {
             tempo.Add(time);
             personagem.Add(pers);
             grid_x.Add(x);
             grid_y.Add(y);
+            tempo_do_servidor.Add(server_time);
+            nome_do_jogador.Add(player_name);
+            id_do_jogador.Add(player_id);
+            modo_de_jogo.Add(game_mode);
             return true;
         }
 
@@ -104,6 +127,72 @@ namespace Basicas
                 return -1;
             }
         }
+
+        public int GetTempoDeServidor(int pos)
+        {
+            try { return (int)tempo_do_servidor[pos]; }
+            //ATENÇAO: Esse catch está correto?
+            catch (ArgumentOutOfRangeException excecao)
+            {
+
+                #if (DEBUG)
+
+                Debug.Log("BancoDeDadosFIT.GetTempoDeServidor - Não há posição " + pos);
+
+                #endif
+                return -1;
+            }
+        }
+
+        public string GetNomeDoJogador(int pos)
+        {
+            try { return (string)nome_do_jogador[pos]; }
+            //ATENÇAO: Esse catch está correto?
+            catch (ArgumentOutOfRangeException excecao)
+            {
+
+#if (DEBUG)
+
+                Debug.Log("BancoDeDadosFIT.GetNomeDoJogador - Não há posição " + pos);
+
+#endif
+                return "";
+            }
+        }
+
+        public int GetIdDoJogador(int pos)
+        {
+            try { return (int)id_do_jogador[pos]; }
+            //ATENÇAO: Esse catch está correto?
+            catch (ArgumentOutOfRangeException excecao)
+            {
+
+#if (DEBUG)
+
+                Debug.Log("BancoDeDadosFIT.GetIdDoJogador - Não há posição " + pos);
+
+#endif
+                return -1;
+            }
+        }
+
+        public int GetModoDeJogo(int pos)
+        {
+            try { return (int)modo_de_jogo[pos]; }
+            //ATENÇAO: Esse catch está correto?
+            catch (ArgumentOutOfRangeException excecao)
+            {
+
+#if (DEBUG)
+
+                Debug.Log("BancoDeDadosFIT.GetModoDeJogo - Não há posição " + pos);
+
+#endif
+                return -1;
+            }
+        }
+
+
     }
 
     /// <summary>
