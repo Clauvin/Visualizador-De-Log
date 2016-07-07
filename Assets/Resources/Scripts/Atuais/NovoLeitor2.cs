@@ -41,6 +41,11 @@ public class NovoLeitor2 : MonoBehaviour
 
     private string qual_leitor;
 
+    // No caso, é mesmo um list que guarda lists de Vector2.
+    // No caso, cada list<Vector2> são as posições iniciais para um mapa do FIT.
+    // O primeiro é o mapa 1, o segundo é o mapa 2, etc.
+    List<List<Vector2>> posicoes_iniciais_de_personagens_nos_mapas_do_FIT;
+
     public void StartFIT()
     {
         qual_leitor = "FIT";
@@ -958,6 +963,7 @@ public class NovoLeitor2 : MonoBehaviour
         pegar_endereco_de_log = new PegarEnderecoDeLog();
         nomes_e_numeros_de_objetos_do_FIT = new Dictionary<string, int>();
         nomes_e_numeros_de_objetos_do_bolhas = new Dictionary<string, int>();
-}
+        posicoes_iniciais_de_personagens_nos_mapas_do_FIT = new List<List<Vector2>>();
+    }
     
 }
