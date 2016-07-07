@@ -14,12 +14,12 @@ public class GuiTelaDePreLoadBolhas : GuiTelaDePreLoad
     {
         if (pegar_endereco_do_log.FindFile())
         {
-            endereco = pegar_endereco_do_log.endereco_de_arquivo;
+            endereco = pegar_endereco_do_log.endereco_de_arquivo[0];
             nome_do_arquivo = pegar_endereco_do_log.GetNomeDeArquivoDeLog();
 
             // Create a new StreamReader, tell it which file to read and what encoding the file
             // was saved as
-            fs = new FileStream(pegar_endereco_do_log.endereco_de_arquivo, FileMode.Open);
+            fs = new FileStream(pegar_endereco_do_log.endereco_de_arquivo[0], FileMode.Open);
             theReader = new StreamReader(fs);
 
             // Parte 1: ignora o [Mode Bolhas]

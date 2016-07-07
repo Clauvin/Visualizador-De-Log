@@ -116,7 +116,7 @@ public class NovoLeitor2 : MonoBehaviour
         bd_fit = new BancoDeDadosFIT();
         // Create a new StreamReader, tell it which file to read and what encoding the file
         // was saved as
-        FileStream fs = new FileStream(pegar_endereco_de_log.endereco_de_arquivo, FileMode.Open);
+        FileStream fs = new FileStream(pegar_endereco_de_log.endereco_de_arquivo[0], FileMode.Open);
         StreamReader theReader = new StreamReader(fs);
         // Part 1: ignores the [Mode 01]
         line = theReader.ReadLine();
@@ -208,7 +208,7 @@ public class NovoLeitor2 : MonoBehaviour
         // Create a new StreamReader, tell it which file to read and what encoding the file
         // was saved as
         bd_bolhas = new BancoDeDadosBolhas();
-        FileStream fs = new FileStream(pegar_endereco_de_log.endereco_de_arquivo, FileMode.Open);
+        FileStream fs = new FileStream(pegar_endereco_de_log.endereco_de_arquivo[0], FileMode.Open);
         StreamReader theReader = new StreamReader(fs);
 
         // Part 1: ignores the [Mode Bolhas]

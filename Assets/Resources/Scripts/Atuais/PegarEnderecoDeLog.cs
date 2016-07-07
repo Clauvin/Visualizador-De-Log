@@ -2,21 +2,28 @@
 using UnityEngine;
 using System.Collections;
 using System.IO;
+using System.Collections.Generic;
 
 /// <summary>
-/// Responsável por abrir a janela de endereço de log, guardar o endereço dele, analisá-lo
+/// Responsável por abrir a janela de endereço de log, guardar endereços na classe, analisá-los
 /// e também guardar a posição da última pasta aberta na janela de endereço de log.
 /// </summary>
 public class PegarEnderecoDeLog : MonoBehaviour {
 
-    public string endereco_de_arquivo;
+    public List<string> endereco_de_arquivo;
 
-    private bool AExtensaoETxt(string endereco)
+    public PegarEnderecoDeLog()
+    {
+        endereco_de_arquivo = new List<string>();
+        endereco_de_arquivo.Add("");
+    }
+
+    private bool AExtensaoETxt(string endereco, int posicao = 0)
     {
         string[] checagem;
         string extensao;
 
-        checagem = endereco_de_arquivo.Split('/');
+        checagem = endereco_de_arquivo[posicao].Split('/');
         if (checagem[0] == string.Empty) return false;
         extensao = checagem[checagem.GetUpperBound(0)].Split('.')[1];
 
@@ -24,19 +31,19 @@ public class PegarEnderecoDeLog : MonoBehaviour {
         else return false;
     }
 
-    public bool FindFile()
+    public bool FindFile(int posicao = 0)
     {
 
         //Abre uma janela de procurar arquivos .txt para abrir.
-        endereco_de_arquivo = EditorUtility.OpenFilePanel("Teste", CarregarEnderecoDeUltimoLogChecado(), "txt");
+        endereco_de_arquivo[posicao] = EditorUtility.OpenFilePanel("Teste", CarregarEnderecoDeUltimoLogChecado(), "txt");
 
-        return AExtensaoETxt(endereco_de_arquivo);
+        return AExtensaoETxt(endereco_de_arquivo[posicao]);
     }
 
-    public string GetNomeDeArquivoDeLog()
+    public string GetNomeDeArquivoDeLog(int posicao = 0)
     {
         string nome_final;
-        string[] endereco_separado = endereco_de_arquivo.Split('/');
+        string[] endereco_separado = endereco_de_arquivo[posicao].Split('/');
 
         nome_final = endereco_separado[endereco_separado.GetUpperBound(0)];
 

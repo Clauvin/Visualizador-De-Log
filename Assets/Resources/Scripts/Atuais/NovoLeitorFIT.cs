@@ -13,7 +13,7 @@ public class NovoLeitorFIT : NovoLeitor2 {
         PassadorDeDados pd = FindObjectOfType<PassadorDeDados>();
         if (pd.endereco_do_arquivo != "")
         {
-            pegar_endereco_de_log.endereco_de_arquivo = pd.endereco_do_arquivo;
+            pegar_endereco_de_log.endereco_de_arquivo[0] = pd.endereco_do_arquivo;
             pegar_endereco_de_log.CriarIniDeUltimoLogChecado(pd.endereco_do_arquivo);
             StartFIT();
             LoadStuffFIT(pd.tempo_minimo, pd.tempo_maximo);
