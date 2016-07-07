@@ -1,0 +1,11 @@
+Level 1: A (X96,Y96) B (X64, Y384)
+
+Level 2: A (X544,Y64) B (X32,Y32) 
+
+Level 3: A (X64,Y64) B (X64,Y192) C (X544,Y384)
+
+Level 4: A (X64,Y64) B (X224,Y160) C (X192,Y320)
+
+Level 5: A (X64,Y64) B (X544,Y384) C (X64,Y384) D (X544,Y64)
+
+Level 6: A (X288,Y64)
