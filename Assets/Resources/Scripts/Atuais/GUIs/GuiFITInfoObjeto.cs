@@ -30,7 +30,6 @@ public class GuiFITInfoObjeto : GuiInfoObjeto
             posicaoy += 20;
             GUI.TextField(new Rect(10, posicaoy, 120, 20), "ID do Jogador = " + dadosdoponto.id_do_jogador);
             
-
             GUI.EndGroup();
         }
     }

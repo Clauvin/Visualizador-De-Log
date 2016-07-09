@@ -48,7 +48,7 @@ public class GuiVisualizarPorTempo : GuiPadrao2 {
         if (revelado)
         {
             GUI.BeginGroup(new Rect(posx, posy, 290, 180));
-            GUI.TextField(new Rect(0, 0, 290, 20), "Invisibilidade de Objetos em Espaço de Tempo", "textfield");
+            GUI.TextField(new Rect(10, 0, 280, 20), "Invisibilidade de Objetos em Espaço de Tempo", "textfield");
             GUI.Label(new Rect(70, 20, 140, 20), "Tempo Mínimo", "textfield");
             if (visivel_ou_invisivel == 1) tempo_minimo = GUI.TextField(new Rect(70, 40, 140, 20), tempo_minimo);
             else GUI.Label(new Rect(70, 40, 140, 20), tempo_minimo, "textfield");
