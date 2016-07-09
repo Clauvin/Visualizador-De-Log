@@ -11,7 +11,7 @@ public class GuiFITTempo : GuiTempo
     public GuiFITTempo()
     {
         gambiarra = true;
-        posy = 80;
+        posy = 160;
         texto = "Tempo = ";
         revelado = false;
         string_Para_Editar = "Apenas >= 0 aqui.";
