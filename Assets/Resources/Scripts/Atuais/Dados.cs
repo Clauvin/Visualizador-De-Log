@@ -14,6 +14,12 @@ public class Dados : MonoBehaviour
     public int y_log;
     public Vector2 centro;
     public int tempo;
+    public int tempo_do_servidor;
+    public string qual_jogador;
+    public int id_do_jogador;
+    public int modo_de_jogo;
+    public int instante_em_camera;
+
     public string acao_dele_ou_nele;
     public string no_que_fez;
     public string criado_agora;
