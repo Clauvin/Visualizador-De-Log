@@ -113,13 +113,29 @@ public class NovoLeitor2 : MonoBehaviour
         // Handle any problems that might arise when reading the text
         string line;
 
+        // Abrindo o arquivo com os mapas
+        FileStream fs = new FileStream(pegar_endereco_de_log.endereco_de_arquivo[1], FileMode.Open);
+        StreamReader theReader = new StreamReader(fs);
+
+        do
+        {
+            line = theReader.ReadLine();
+        } while (line != null);
+
+        theReader.Close();
+        theReader.Dispose();
+        fs.Close();
+        fs.Dispose();
+
+
+
         bd_fit = new BancoDeDadosFIT();
         // Create a new StreamReader, tell it which file to read and what encoding the file
         // was saved as
-        FileStream fs = new FileStream(pegar_endereco_de_log.endereco_de_arquivo[0], FileMode.Open);
-        StreamReader theReader = new StreamReader(fs);
-        // Part 1: ignores the [Mode 01]
-        line = theReader.ReadLine();
+        fs = new FileStream(pegar_endereco_de_log.endereco_de_arquivo[0], FileMode.Open);
+        theReader = new StreamReader(fs);
+        // Part 1: ignores  the [], the == START =, the [Test01] e ServerTime:481=CONNECTED =
+        line = theReader.ReadLine(); //line = theReader.ReadLine(); line = theReader.ReadLine();
 
         // Part 2: reads the game events.
         // While there's lines left in the text file, do this:
@@ -138,7 +154,7 @@ public class NovoLeitor2 : MonoBehaviour
             {
                 // Do whatever you need to do with the text line, it's a string now
                 entries = line.Split('=');
-                // Correct Example: Time:1=Char:1=GridX:5=GridY:7
+                // Correct Example: ServerTime:491=ServerID:1=Player:THIAGO=MODE:3=Level:1=Input:4=Time:237
                 if (entries.Length == 4)
                 {
                     // Nesse ponto, seguindo o exemplo, entries é um vetor com os quatro valores
