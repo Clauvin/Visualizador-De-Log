@@ -169,7 +169,7 @@ public class NovoLeitor2 : MonoBehaviour
         fs = new FileStream(pegar_endereco_de_log.endereco_de_arquivo[0], FileMode.Open);
         theReader = new StreamReader(fs);
         // Part 1: ignores  the [], the == START =, the [Test01] e ServerTime:481=CONNECTED =
-        line = theReader.ReadLine(); //line = theReader.ReadLine(); line = theReader.ReadLine();
+        line = theReader.ReadLine(); line = theReader.ReadLine(); line = theReader.ReadLine(); line = theReader.ReadLine();
 
         // Part 2: reads the game events.
         // While there's lines left in the text file, do this:
