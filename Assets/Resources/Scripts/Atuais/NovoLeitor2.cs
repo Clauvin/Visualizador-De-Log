@@ -122,8 +122,12 @@ public class NovoLeitor2 : MonoBehaviour
         string[] linha_alterada;
         string[] coordenadas;
 
+
+
         do
         {
+            List<Vector2> posicoes = new List<Vector2>();
+
             //Level 1: A(X96,Y96) B(X64,Y384)
             linha_alterada = line.Split(':');
             //Level 1| A(X96, Y96) B(X64, Y384)
@@ -139,9 +143,14 @@ public class NovoLeitor2 : MonoBehaviour
                 coordenadas = linha_alterada[i].Split(',');
                 coordenadas[0] = coordenadas[0].Remove(0, 1);
                 coordenadas[1] = coordenadas[1].Remove(0, 1);
-                Debug.Log(coordenadas[0]);
-                Debug.Log(coordenadas[1]);
+
+                Vector2 x_e_y = new Vector2(Int32.Parse(coordenadas[0])/32, Int32.Parse(coordenadas[1])/32);
+                posicoes.Add(x_e_y);
+
+
             }
+
+            posicoes_iniciais_de_personagens_nos_mapas_do_FIT.Add(posicoes);
 
             // Próxima linha...
             line = theReader.ReadLine(); line = theReader.ReadLine();
@@ -154,7 +163,17 @@ public class NovoLeitor2 : MonoBehaviour
         fs.Close();
         fs.Dispose();
 
+        for (int i = 0; i < posicoes_iniciais_de_personagens_nos_mapas_do_FIT.Count; i++)
+        {
 
+            for (int j = 0; j < posicoes_iniciais_de_personagens_nos_mapas_do_FIT[i].Count; j++)
+            {
+
+                Debug.Log(posicoes_iniciais_de_personagens_nos_mapas_do_FIT[i][j]);
+
+            }
+
+        }
 
         bd_fit = new BancoDeDadosFIT();
         // Create a new StreamReader, tell it which file to read and what encoding the file
