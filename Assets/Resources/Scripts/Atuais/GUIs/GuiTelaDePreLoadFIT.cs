@@ -28,6 +28,7 @@ public class GuiTelaDePreLoadFIT : GuiTelaDePreLoad
             // Lê a linha com dados do pre-load do FIT.
             line = control_line;
 
+            control_line = theReader.ReadLine(); control_line = theReader.ReadLine(); control_line = theReader.ReadLine();
             control_line = theReader.ReadLine();
 
             entradas_separadas = control_line.Split('=');
@@ -35,7 +36,7 @@ public class GuiTelaDePreLoadFIT : GuiTelaDePreLoad
             // == 4 porquê existem 4 termos por linha de dados no log do FIT.
             if (entradas_separadas.Length == 7)
             {
-                tempo_minimo = "0";
+                tempo_minimo = Convert.ToString(0);
             }
 
             int contagem = 0;
