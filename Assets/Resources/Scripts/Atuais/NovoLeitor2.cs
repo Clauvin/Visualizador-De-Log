@@ -229,7 +229,7 @@ public class NovoLeitor2 : MonoBehaviour
 
                 else
                 {
-                    Debug.Log("NovoLeitor2.LoadStuff - Linha não tinha quatro elementos, tinha " + entries.GetLength(0) + ".");
+                    Debug.Log("NovoLeitor2.LoadStuff - Linha não tinha sete elementos, tinha " + entries.GetLength(0) + ".");
                 }
 
                 #endif
