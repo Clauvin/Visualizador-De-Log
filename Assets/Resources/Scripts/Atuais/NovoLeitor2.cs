@@ -117,9 +117,23 @@ public class NovoLeitor2 : MonoBehaviour
         FileStream fs = new FileStream(pegar_endereco_de_log.endereco_de_arquivo[1], FileMode.Open);
         StreamReader theReader = new StreamReader(fs);
 
+        line = theReader.ReadLine();
+
         do
         {
-            line = theReader.ReadLine();
+            //Level 1: A(X96, Y96) B(X64, Y384)
+            string[] linha_alterada = line.Split(':');
+            //Level 1| A(X96, Y96) B(X64, Y384)
+
+            linha_alterada[1] = linha_alterada[1].Remove(0, 1);
+            //Level 1|A(X96, Y96) B(X64, Y384)
+
+            Debug.Log(linha_alterada[1]);
+
+            // Próxima linha...
+            line = theReader.ReadLine(); line = theReader.ReadLine();
+
+
         } while (line != null);
 
         theReader.Close();
