@@ -119,16 +119,29 @@ public class NovoLeitor2 : MonoBehaviour
 
         line = theReader.ReadLine();
 
+        string[] linha_alterada;
+        string[] coordenadas;
+
         do
         {
-            //Level 1: A(X96, Y96) B(X64, Y384)
-            string[] linha_alterada = line.Split(':');
+            //Level 1: A(X96,Y96) B(X64,Y384)
+            linha_alterada = line.Split(':');
             //Level 1| A(X96, Y96) B(X64, Y384)
 
             linha_alterada[1] = linha_alterada[1].Remove(0, 1);
-            //Level 1|A(X96, Y96) B(X64, Y384)
+            //Level 1|A(X96,Y96) B(X64,Y384)
 
-            Debug.Log(linha_alterada[1]);
+            linha_alterada = linha_alterada[1].Split('(', ')');
+
+            //A|X96,Y96| B|X64,Y384|
+            for (int i = 1; i < linha_alterada.GetLength(0); i = i + 2)
+            {
+                coordenadas = linha_alterada[i].Split(',');
+                coordenadas[0] = coordenadas[0].Remove(0, 1);
+                coordenadas[1] = coordenadas[1].Remove(0, 1);
+                Debug.Log(coordenadas[0]);
+                Debug.Log(coordenadas[1]);
+            }
 
             // Próxima linha...
             line = theReader.ReadLine(); line = theReader.ReadLine();
