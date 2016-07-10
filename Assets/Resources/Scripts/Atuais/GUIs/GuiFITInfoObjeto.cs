@@ -12,8 +12,10 @@ public class GuiFITInfoObjeto : GuiInfoObjeto
         //Personagem, X, Y, Tempo, Tempo Do Servidor, Jogador, ID do Jogador, Modo de Jogo e Instante Mostrado Em Câmera.
         if (revelado)
         {
-            GUI.BeginGroup(new Rect(posx, posy, 220, 160));
+            GUI.BeginGroup(new Rect(posx, posy, 220, 180));
             posicaoy = 0;
+            GUI.TextField(new Rect(10, posicaoy, 120, 20), "Nivel = " + dadosdoponto.nivel);
+            posicaoy += 20;
             GUI.TextField(new Rect(10, posicaoy, 120, 20), "Personagem = " + dadosdoponto.nome_do_objeto);
             posicaoy += 20;
             GUI.TextField(new Rect(10, posicaoy, 120, 20), "X = " + dadosdoponto.x_log / 32);
@@ -29,7 +31,9 @@ public class GuiFITInfoObjeto : GuiInfoObjeto
             GUI.TextField(new Rect(10, posicaoy, 120, 20), "Jogador = " + dadosdoponto.qual_jogador);
             posicaoy += 20;
             GUI.TextField(new Rect(10, posicaoy, 120, 20), "ID do Jogador = " + dadosdoponto.id_do_jogador);
+
             
+
             GUI.EndGroup();
         }
     }
