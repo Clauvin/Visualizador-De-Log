@@ -163,18 +163,6 @@ public class NovoLeitor2 : MonoBehaviour
         fs.Close();
         fs.Dispose();
 
-        for (int i = 0; i < posicoes_iniciais_de_personagens_nos_mapas_do_FIT.Count; i++)
-        {
-
-            for (int j = 0; j < posicoes_iniciais_de_personagens_nos_mapas_do_FIT[i].Count; j++)
-            {
-
-                Debug.Log(posicoes_iniciais_de_personagens_nos_mapas_do_FIT[i][j]);
-
-            }
-
-        }
-
         bd_fit = new BancoDeDadosFIT();
         // Create a new StreamReader, tell it which file to read and what encoding the file
         // was saved as
@@ -192,6 +180,11 @@ public class NovoLeitor2 : MonoBehaviour
             string[] entry_char;
             string[] entry_grid_x;
             string[] entry_grid_y;
+            string[] entry_tempo_do_servidor;
+            string[] entry_nome_do_jogador;
+            string[] entry_id_do_jogador;
+            string[] entry_modo_de_jogo;
+            string[] entry_nivel;
             int checando_tempo_do_log;
 
             line = theReader.ReadLine();
@@ -201,10 +194,11 @@ public class NovoLeitor2 : MonoBehaviour
                 // Do whatever you need to do with the text line, it's a string now
                 entries = line.Split('=');
                 // Correct Example: ServerTime:491=ServerID:1=Player:THIAGO=MODE:3=Level:1=Input:4=Time:237
-                if (entries.Length == 4)
+                if (entries.Length == 7)
                 {
-                    // Nesse ponto, seguindo o exemplo, entries é um vetor com os quatro valores
-                    // Time:1 | Char:1 | GridX:5 | GridY:7
+                    // Nesse ponto, seguindo o exemplo, entries é um vetor com os sete valores
+                    // ServerTime:491 | ServerID:1 | Player:THIAGO | MODE:3 | Level:1 | Input:4 | Time:237
+                    // O próximo passo é conseguir 
                     entry_time = entries[0].Split(':');
 
                     // entry_time = Time | 1
