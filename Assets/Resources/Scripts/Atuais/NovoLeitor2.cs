@@ -122,8 +122,6 @@ public class NovoLeitor2 : MonoBehaviour
         string[] linha_alterada;
         string[] coordenadas;
 
-
-
         do
         {
             List<Vector2> posicoes = new List<Vector2>();
@@ -198,17 +196,29 @@ public class NovoLeitor2 : MonoBehaviour
                 {
                     // Nesse ponto, seguindo o exemplo, entries é um vetor com os sete valores
                     // ServerTime:491 | ServerID:1 | Player:THIAGO | MODE:3 | Level:1 | Input:4 | Time:237
-                    // O próximo passo é conseguir 
-                    entry_time = entries[0].Split(':');
+                    // O próximo passo é conseguir os valores de cada caso
 
+
+                    entry_time = entries[6].Split(':');
                     // entry_time = Time | 1
                     checando_tempo_do_log = Convert.ToInt32(entry_time[1]);
                     
                     if ((tempo_minimo <= checando_tempo_do_log) && (checando_tempo_do_log <= tempo_maximo))
                     {
+
+                        entry_tempo_do_servidor = entries[0].Split(':');
+                        entry_id_do_jogador = entries[1].Split(':');
+                        entry_nome_do_jogador = entries[2].Split(':');
+                        entry_modo_de_jogo = entries[3].Split(':');
+                        entry_nivel = entries[4].Split(':');
+
+
                         entry_char = entries[1].Split(':');
                         entry_grid_x = entries[2].Split(':');
                         entry_grid_y = entries[3].Split(':');
+                        entry_tempo_do_servidor = entries[0].Split(':');
+                        entry_nivel = entries[4].Split(':');
+
 
                         bd_fit.Add(Int32.Parse(entry_time[1]), Int32.Parse(entry_char[1]),
                                 Int32.Parse(entry_grid_x[1]), Int32.Parse(entry_grid_y[1]), 0, "", 0, 0);
@@ -220,7 +230,7 @@ public class NovoLeitor2 : MonoBehaviour
                         // ou seja: começamos com um heatmap, lemos 1 em entry_char, colocamos mais um heatmap, temos dois.
                         // lemos 2 em entry_char, colocamos mais um, temos três, e por aí vai.
 
-                        // Mas sinceramente eu posso não fazer isso e só pegar do vetor de nomes do FIT.
+                        // Mas sinceramente eu posso não fazer isso e só pegar do vetor de nomes do FIT...
                         if (Int32.Parse(entry_char[1]) == heatmaps) heatmaps++;
                     }
                 }
