@@ -198,7 +198,6 @@ public class NovoLeitor2 : MonoBehaviour
                     // ServerTime:491 | ServerID:1 | Player:THIAGO | MODE:3 | Level:1 | Input:4 | Time:237
                     // O próximo passo é conseguir os valores de cada caso
 
-
                     entry_time = entries[6].Split(':');
                     // entry_time = Time | 1
                     checando_tempo_do_log = Convert.ToInt32(entry_time[1]);
@@ -211,7 +210,6 @@ public class NovoLeitor2 : MonoBehaviour
                         entry_nome_do_jogador = entries[2].Split(':');
                         entry_modo_de_jogo = entries[3].Split(':');
                         entry_nivel = entries[4].Split(':');
-
 
                         entry_char = entries[1].Split(':');
                         entry_grid_x = entries[2].Split(':');
