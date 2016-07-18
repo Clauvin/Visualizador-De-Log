@@ -169,6 +169,11 @@ public class NovoLeitor2 : MonoBehaviour
         // Part 1: ignores  the [], the == START =, the [Test01] e ServerTime:481=CONNECTED =
         line = theReader.ReadLine(); line = theReader.ReadLine(); line = theReader.ReadLine(); line = theReader.ReadLine();
 
+
+        // variaveis a serem usadas dentro do loop de leitura do log
+        int estagio_atual = -1;
+        int personagem_atual = -1;
+
         // Part 2: reads the game events.
         // While there's lines left in the text file, do this:
         do
@@ -211,6 +216,8 @@ public class NovoLeitor2 : MonoBehaviour
                         entry_modo_de_jogo = entries[3].Split(':');
                         entry_nivel = entries[4].Split(':');
 
+                        estagio_atual = Int32.Parse(entry_nivel[1]);
+
                         entry_char = entries[1].Split(':');
                         entry_grid_x = entries[2].Split(':');
                         entry_grid_y = entries[3].Split(':');
@@ -219,7 +226,9 @@ public class NovoLeitor2 : MonoBehaviour
 
 
                         bd_fit.Add(Int32.Parse(entry_time[1]), Int32.Parse(entry_char[1]),
-                                Int32.Parse(entry_grid_x[1]), Int32.Parse(entry_grid_y[1]), 0, "", 0, 0);
+                                Int32.Parse(entry_grid_x[1]), Int32.Parse(entry_grid_y[1]),
+                                Int32.Parse(entry_tempo_do_servidor[1]), entry_nome_do_jogador[1],
+                                Int32.Parse(entry_id_do_jogador[1]), Int32.Parse(entry_modo_de_jogo[1]));
 
                         // como o fit precisa ter, para ajudar na visualização, um heatmap para cada jogador,
                         // essa linha se aproveita do fato das informações de char serem guardadas em ordem crescente em cada
