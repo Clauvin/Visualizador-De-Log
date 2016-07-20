@@ -105,7 +105,7 @@ public class NovoLeitor2 : MonoBehaviour
         nomes_e_numeros_de_objetos_do_bolhas.Add("Nuvem", 4);
     }
 
-    public bool LoadStuffFIT(int tempo_minimo = 0, int tempo_maximo = int.MaxValue)
+    public bool LoadStuffFIT(int instante_minimo = 0, int instante_maximo = int.MaxValue)
     {
         //number for number of HeatMaps
         int heatmaps = 1;
@@ -171,8 +171,11 @@ public class NovoLeitor2 : MonoBehaviour
 
 
         // variaveis a serem usadas dentro do loop de leitura do log
-        int estagio_atual = -1;
-        int personagem_atual = -1;
+        int estagio_anterior = 0;
+        int estagio_atual = 1;
+        int personagem_atual = 1;
+        List<List<Vector2>> posicoes_atuais_de_personagens_nos_mapas_do_FIT =
+            posicoes_iniciais_de_personagens_nos_mapas_do_FIT;
 
         // Part 2: reads the game events.
         // While there's lines left in the text file, do this:
@@ -207,7 +210,7 @@ public class NovoLeitor2 : MonoBehaviour
                     // entry_time = Time | 1
                     checando_tempo_do_log = Convert.ToInt32(entry_time[1]);
                     
-                    if ((tempo_minimo <= checando_tempo_do_log) && (checando_tempo_do_log <= tempo_maximo))
+                    if ((instante_minimo <= checando_tempo_do_log) && (checando_tempo_do_log <= instante_maximo))
                     {
 
                         entry_tempo_do_servidor = entries[0].Split(':');
