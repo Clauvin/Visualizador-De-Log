@@ -217,7 +217,7 @@ public class NovoLeitor2 : MonoBehaviour
                         entry_nivel = entries[4].Split(':');
                         input = Int32.Parse(entries[5].Split(':')[1]);
 
-                        estagio_atual = Int32.Parse(entry_nivel[1]);
+                        estagio_atual = Int32.Parse(entry_nivel[1])-1;
 
                         for (int i = 0; i < posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual].Count; i++)
                         {
@@ -259,7 +259,7 @@ public class NovoLeitor2 : MonoBehaviour
                                         break;
                                 }
 
-                                bd_fit.Add(Int32.Parse(entry_time[1]), i,
+                                bd_fit.Add(Int32.Parse(entry_time[1]), i+1,
                                     (int)posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i].x,
                                     (int)posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i].y,
                                     Int32.Parse(entry_tempo_do_servidor[1]), entry_nome_do_jogador[1],
@@ -555,6 +555,7 @@ public class NovoLeitor2 : MonoBehaviour
             objeto.name = bd_fit.GetTempo(i).ToString() + " " + bd_fit.GetPersonagem(i).ToString() + " " +
                 bd_fit.GetGridX(i).ToString() + " " + bd_fit.GetGridY(i).ToString();
 
+            Debug.Log(bd_fit.GetPersonagem(i).ToString());
             material_do_create = Instantiate(materiais.Get(bd_fit.GetPersonagem(i).ToString()));
 
             // Essencialmente, materiais guardam texturas, que é o que queremos.
