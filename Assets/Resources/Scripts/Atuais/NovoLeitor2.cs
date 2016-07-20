@@ -169,10 +169,8 @@ public class NovoLeitor2 : MonoBehaviour
         // Part 1: ignores  the [], the == START =, the [Test01] e ServerTime:481=CONNECTED =
         line = theReader.ReadLine(); line = theReader.ReadLine(); line = theReader.ReadLine(); line = theReader.ReadLine();
 
-
         // variaveis a serem usadas dentro do loop de leitura do log
-        int estagio_anterior = 0;
-        int estagio_atual = 1;
+        int estagio_atual = -1;
         int personagem_atual = 1;
         List<List<Vector2>> posicoes_atuais_de_personagens_nos_mapas_do_FIT =
             posicoes_iniciais_de_personagens_nos_mapas_do_FIT;
@@ -184,14 +182,14 @@ public class NovoLeitor2 : MonoBehaviour
             string[] entries;
             string[] entry_time;
             string[] entry_char;
-            string[] entry_grid_x;
-            string[] entry_grid_y;
             string[] entry_tempo_do_servidor;
             string[] entry_nome_do_jogador;
             string[] entry_id_do_jogador;
             string[] entry_modo_de_jogo;
             string[] entry_nivel;
-            int checando_tempo_do_log;
+            int input;
+            int checando_instante_do_log = 0;
+            Vector2 vetor_de_passagem;
 
             line = theReader.ReadLine();
 
@@ -208,9 +206,8 @@ public class NovoLeitor2 : MonoBehaviour
 
                     entry_time = entries[6].Split(':');
                     // entry_time = Time | 1
-                    checando_tempo_do_log = Convert.ToInt32(entry_time[1]);
                     
-                    if ((instante_minimo <= checando_tempo_do_log) && (checando_tempo_do_log <= instante_maximo))
+                    if ((instante_minimo <= checando_instante_do_log) && (checando_instante_do_log <= instante_maximo))
                     {
 
                         entry_tempo_do_servidor = entries[0].Split(':');
@@ -218,31 +215,79 @@ public class NovoLeitor2 : MonoBehaviour
                         entry_nome_do_jogador = entries[2].Split(':');
                         entry_modo_de_jogo = entries[3].Split(':');
                         entry_nivel = entries[4].Split(':');
+                        input = Int32.Parse(entries[5].Split(':')[1]);
 
                         estagio_atual = Int32.Parse(entry_nivel[1]);
 
-                        entry_char = entries[1].Split(':');
-                        entry_grid_x = entries[2].Split(':');
-                        entry_grid_y = entries[3].Split(':');
-                        entry_tempo_do_servidor = entries[0].Split(':');
-                        entry_nivel = entries[4].Split(':');
+                        for (int i = 0; i < posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual].Count; i++)
+                        {
 
+                            if (i+1 == personagem_atual)
+                            {
+                                switch (input)
+                                {
+                                    // Movimentacao para cima;
+                                    case 1:
+                                        vetor_de_passagem = posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i];
+                                        vetor_de_passagem.y -= 1;
+                                        posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i] = vetor_de_passagem;
+                                        break;
+                                    // Movimentacao para esquerda;
+                                    case 2:
+                                        vetor_de_passagem = posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i];
+                                        vetor_de_passagem.x -= 1;
+                                        posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i] = vetor_de_passagem;
+                                        break;
+                                    // Movimentacao para baixo;
+                                    case 3:
+                                        vetor_de_passagem = posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i];
+                                        vetor_de_passagem.y += 1;
+                                        posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i] = vetor_de_passagem;
+                                        break;
+                                    // Movimentacao para direita;
+                                    case 4:
+                                        vetor_de_passagem = posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i];
+                                        vetor_de_passagem.x += 1;
+                                        posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i] = vetor_de_passagem;
+                                        break;
+                                    // Troca de Personagem
+                                    case 0:
+                                        personagem_atual = (personagem_atual + 1) %
+                                            posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual].Count;
+                                        break;
+                                    default:
+                                        break;
+                                }
 
-                        bd_fit.Add(Int32.Parse(entry_time[1]), Int32.Parse(entry_char[1]),
-                                Int32.Parse(entry_grid_x[1]), Int32.Parse(entry_grid_y[1]),
-                                Int32.Parse(entry_tempo_do_servidor[1]), entry_nome_do_jogador[1],
-                                Int32.Parse(entry_id_do_jogador[1]), Int32.Parse(entry_modo_de_jogo[1]));
+                                bd_fit.Add(Int32.Parse(entry_time[1]), i,
+                                    (int)posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i].x,
+                                    (int)posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i].y,
+                                    Int32.Parse(entry_tempo_do_servidor[1]), entry_nome_do_jogador[1],
+                                    Int32.Parse(entry_id_do_jogador[1]), Int32.Parse(entry_modo_de_jogo[1]));
 
-                        // como o fit precisa ter, para ajudar na visualização, um heatmap para cada jogador,
-                        // essa linha se aproveita do fato das informações de char serem guardadas em ordem crescente em cada
-                        // tempo para descobrir o número de heatmaps extras, além do com todos os jogadores.
+                            }
+
+                            
+
+                            // como o fit precisa ter, para ajudar na visualização, um heatmap para cada jogador,
+                            // essa linha se aproveita do fato das informações de char serem guardadas em ordem crescente em cada
+                            // tempo para descobrir o número de heatmaps extras, além do com todos os jogadores.
+
+                            // ou seja: começamos com um heatmap, lemos 1 em entry_char, colocamos mais um heatmap, temos dois.
+                            // lemos 2 em entry_char, colocamos mais um, temos três, e por aí vai.
+
+                            // Mas sinceramente eu posso não fazer isso e só pegar do vetor de nomes do FIT...
+                            if (i == heatmaps) heatmaps++;
+
+                        }
+
                         
-                        // ou seja: começamos com um heatmap, lemos 1 em entry_char, colocamos mais um heatmap, temos dois.
-                        // lemos 2 em entry_char, colocamos mais um, temos três, e por aí vai.
 
-                        // Mas sinceramente eu posso não fazer isso e só pegar do vetor de nomes do FIT...
-                        if (Int32.Parse(entry_char[1]) == heatmaps) heatmaps++;
+                        
                     }
+
+                    checando_instante_do_log++;
+
                 }
 
                 #if (DEBUG)
