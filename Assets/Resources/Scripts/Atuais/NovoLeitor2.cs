@@ -171,7 +171,8 @@ public class NovoLeitor2 : MonoBehaviour
 
         // variaveis a serem usadas dentro do loop de leitura do log
         int estagio_atual = -1;
-        int personagem_atual = 1;
+        int personagem_atual = 0;
+        bool checagem_de_acao_do_jogador = true;
         List<List<Vector2>> posicoes_atuais_de_personagens_nos_mapas_do_FIT =
             posicoes_iniciais_de_personagens_nos_mapas_do_FIT;
 
@@ -181,7 +182,6 @@ public class NovoLeitor2 : MonoBehaviour
         {
             string[] entries;
             string[] entry_time;
-            string[] entry_char;
             string[] entry_tempo_do_servidor;
             string[] entry_nome_do_jogador;
             string[] entry_id_do_jogador;
@@ -222,8 +222,9 @@ public class NovoLeitor2 : MonoBehaviour
                         for (int i = 0; i < posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual].Count; i++)
                         {
 
-                            if (i+1 == personagem_atual)
+                            if ((i == personagem_atual) && (checagem_de_acao_do_jogador))
                             {
+                                checagem_de_acao_do_jogador = false;
                                 switch (input)
                                 {
                                     // Movimentacao para cima;
@@ -252,8 +253,8 @@ public class NovoLeitor2 : MonoBehaviour
                                         break;
                                     // Troca de Personagem
                                     case 0:
-                                        personagem_atual = (personagem_atual + 1) %
-                                            posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual].Count;
+                                        personagem_atual = personagem_atual + 1;
+                                        personagem_atual %= posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual].Count;
                                         break;
                                     default:
                                         break;
@@ -286,6 +287,7 @@ public class NovoLeitor2 : MonoBehaviour
                         
                     }
 
+                    checagem_de_acao_do_jogador = true;
                     checando_instante_do_log++;
 
                 }

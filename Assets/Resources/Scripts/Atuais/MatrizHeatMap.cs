@@ -79,7 +79,12 @@ public class HeatMap {
             if (personagem != 0)
             {
                 if (bdfit.GetPersonagem(i) == personagem) matriz[bdfit.GetGridX(i) / 32, bdfit.GetGridY(i) / 32] += 1;
-            } else matriz[bdfit.GetGridX(i) / 32, bdfit.GetGridY(i) / 32] += 1;
+            }
+            else
+            {
+                Debug.Log(bdfit.GetPersonagem(i) + " " + bdfit.GetGridX(i) + " " + bdfit.GetGridY(i) + " " + bdfit.GetTempo(i));
+                matriz[bdfit.GetGridX(i) / 32, bdfit.GetGridY(i) / 32] += 1;
+            }
         }
     }
 
