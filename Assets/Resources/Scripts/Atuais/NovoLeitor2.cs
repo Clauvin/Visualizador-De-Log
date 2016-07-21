@@ -171,7 +171,7 @@ public class NovoLeitor2 : MonoBehaviour
 
         // variaveis a serem usadas dentro do loop de leitura do log
         int estagio_atual = -1;
-        int personagem_atual = 0;
+        int personagem_atual = -1;
         bool checagem_de_acao_do_jogador = true;
         List<List<Vector2>> posicoes_atuais_de_personagens_nos_mapas_do_FIT =
             posicoes_iniciais_de_personagens_nos_mapas_do_FIT;
@@ -217,6 +217,7 @@ public class NovoLeitor2 : MonoBehaviour
                         entry_nivel = entries[4].Split(':');
                         input = Int32.Parse(entries[5].Split(':')[1]);
 
+                        if (Int32.Parse(entry_nivel[1]) - 1 != estagio_atual) personagem_atual = 0;
                         estagio_atual = Int32.Parse(entry_nivel[1])-1;
 
                         for (int i = 0; i < posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual].Count; i++)
@@ -282,9 +283,6 @@ public class NovoLeitor2 : MonoBehaviour
 
                         }
 
-                        
-
-                        
                     }
 
                     checagem_de_acao_do_jogador = true;
@@ -532,7 +530,6 @@ public class NovoLeitor2 : MonoBehaviour
         // Para cada objeto...
         for (i = 0; i < bd_fit.GetQuantidadeDeEntradas(); i++)
         {
-            Debug.Log(i + " " + bd_fit.GetPersonagem(i));
             // Controle de quando criar um background novo ou
             // não criá-lo. Backgrounds novos são criados, um para cada posição no tempo diferente.
             if ((i != bd_fit.GetQuantidadeDeEntradas() - 1) && (i != 0))
