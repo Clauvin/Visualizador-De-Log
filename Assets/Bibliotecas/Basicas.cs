@@ -15,6 +15,8 @@ namespace Basicas
     public class BancoDeDadosFIT
     {
         // int
+        private ArrayList instante;
+        // int
         private ArrayList tempo;
         // int
         private ArrayList personagem;
@@ -36,6 +38,7 @@ namespace Basicas
 
         public BancoDeDadosFIT()
         {
+            instante = new ArrayList();
             tempo = new ArrayList();
             personagem = new ArrayList();
             grid_x = new ArrayList();
@@ -46,9 +49,10 @@ namespace Basicas
             modo_de_jogo = new ArrayList();
         }
 
-        public bool Add(int time, int pers, int x, int y, int server_time,
+        public bool Add(int inst, int time, int pers, int x, int y, int server_time,
                         string player_name, int player_id, int game_mode)
         {
+            instante.Add(inst);
             tempo.Add(time);
             personagem.Add(pers);
             grid_x.Add(x);
@@ -63,6 +67,24 @@ namespace Basicas
         public int GetQuantidadeDeEntradas()
         {
             return tempo.Count;
+        }
+
+        public int GetInstante(int pos)
+        {
+            try { return (int)instante[pos]; }
+            //ATENÇAO: Esse catch está correto?
+            catch (ArgumentOutOfRangeException excecao)
+            {
+
+
+
+#if (DEBUG)
+
+                Debug.Log("BancoDeDadosFIT.GetInstante - Não há posição " + pos);
+
+#endif
+                return -1;
+            }
         }
 
         public int GetTempo(int pos)

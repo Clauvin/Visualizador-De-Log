@@ -263,7 +263,7 @@ public class NovoLeitor2 : MonoBehaviour
 
                             }
 
-                            bd_fit.Add(Int32.Parse(entry_time[1]), i + 1,
+                            bd_fit.Add(checando_instante_do_log, Int32.Parse(entry_time[1]), i + 1,
                                 (int)posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i].x,
                                 (int)posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i].y,
                                 Int32.Parse(entry_tempo_do_servidor[1]), entry_nome_do_jogador[1],
@@ -991,6 +991,10 @@ public class NovoLeitor2 : MonoBehaviour
         objeto_a_receber_dados.GetComponent<Dados>().tempo = bd_fit.GetTempo(i);
         objeto_a_receber_dados.GetComponent<Dados>().x_log = bd_fit.GetGridX(i);
         objeto_a_receber_dados.GetComponent<Dados>().y_log = bd_fit.GetGridY(i);
+        objeto_a_receber_dados.GetComponent<Dados>().tempo_do_servidor = bd_fit.GetTempoDeServidor(i);
+        objeto_a_receber_dados.GetComponent<Dados>().id_do_jogador = bd_fit.GetIdDoJogador(i);
+        objeto_a_receber_dados.GetComponent<Dados>().qual_jogador = bd_fit.GetNomeDoJogador(i);
+        objeto_a_receber_dados.GetComponent<Dados>().instante_em_camera = bd_fit.GetInstante(i);
     }
 
     protected void AddDadosBolhas(GameObject objeto_a_receber_dados, int i)
