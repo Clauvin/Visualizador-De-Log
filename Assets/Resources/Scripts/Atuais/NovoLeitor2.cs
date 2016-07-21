@@ -142,7 +142,7 @@ public class NovoLeitor2 : MonoBehaviour
                 coordenadas[0] = coordenadas[0].Remove(0, 1);
                 coordenadas[1] = coordenadas[1].Remove(0, 1);
 
-                Vector2 x_e_y = new Vector2(Int32.Parse(coordenadas[0])/32, Int32.Parse(coordenadas[1])/32);
+                Vector2 x_e_y = new Vector2(Int32.Parse(coordenadas[0]), Int32.Parse(coordenadas[1]));
                 posicoes.Add(x_e_y);
 
 
@@ -229,25 +229,25 @@ public class NovoLeitor2 : MonoBehaviour
                                     // Movimentacao para cima;
                                     case 1:
                                         vetor_de_passagem = posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i];
-                                        vetor_de_passagem.y -= 1;
+                                        vetor_de_passagem.y -= 32;
                                         posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i] = vetor_de_passagem;
                                         break;
                                     // Movimentacao para esquerda;
                                     case 2:
                                         vetor_de_passagem = posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i];
-                                        vetor_de_passagem.x -= 1;
+                                        vetor_de_passagem.x -= 32;
                                         posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i] = vetor_de_passagem;
                                         break;
                                     // Movimentacao para baixo;
                                     case 3:
                                         vetor_de_passagem = posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i];
-                                        vetor_de_passagem.y += 1;
+                                        vetor_de_passagem.y += 32;
                                         posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i] = vetor_de_passagem;
                                         break;
                                     // Movimentacao para direita;
                                     case 4:
                                         vetor_de_passagem = posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i];
-                                        vetor_de_passagem.x += 1;
+                                        vetor_de_passagem.x += 32;
                                         posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i] = vetor_de_passagem;
                                         break;
                                     // Troca de Personagem
@@ -259,7 +259,7 @@ public class NovoLeitor2 : MonoBehaviour
                                         break;
                                 }
 
-                                bd_fit.Add(Int32.Parse(entry_time[1]), i+1,
+                                bd_fit.Add(Int32.Parse(entry_time[1]), i + 1,
                                     (int)posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i].x,
                                     (int)posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i].y,
                                     Int32.Parse(entry_tempo_do_servidor[1]), entry_nome_do_jogador[1],
@@ -530,10 +530,12 @@ public class NovoLeitor2 : MonoBehaviour
         // Para cada objeto...
         for (i = 0; i < bd_fit.GetQuantidadeDeEntradas(); i++)
         {
+            Debug.Log(i + " " + bd_fit.GetPersonagem(i));
             // Controle de quando criar um background novo ou
             // não criá-lo. Backgrounds novos são criados, um para cada posição no tempo diferente.
             if ((i != bd_fit.GetQuantidadeDeEntradas() - 1) && (i != 0))
             {
+                
                 if (bd_fit.GetPersonagem(i) > bd_fit.GetPersonagem(i + 1))
                 {
                     fechar_background = true;
@@ -555,7 +557,6 @@ public class NovoLeitor2 : MonoBehaviour
             objeto.name = bd_fit.GetTempo(i).ToString() + " " + bd_fit.GetPersonagem(i).ToString() + " " +
                 bd_fit.GetGridX(i).ToString() + " " + bd_fit.GetGridY(i).ToString();
 
-            Debug.Log(bd_fit.GetPersonagem(i).ToString());
             material_do_create = Instantiate(materiais.Get(bd_fit.GetPersonagem(i).ToString()));
 
             // Essencialmente, materiais guardam texturas, que é o que queremos.
