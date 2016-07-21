@@ -259,15 +259,15 @@ public class NovoLeitor2 : MonoBehaviour
                                         break;
                                 }
 
-                                bd_fit.Add(Int32.Parse(entry_time[1]), i + 1,
-                                    (int)posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i].x,
-                                    (int)posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i].y,
-                                    Int32.Parse(entry_tempo_do_servidor[1]), entry_nome_do_jogador[1],
-                                    Int32.Parse(entry_id_do_jogador[1]), Int32.Parse(entry_modo_de_jogo[1]));
-
                             }
 
-                            
+                            bd_fit.Add(Int32.Parse(entry_time[1]), i + 1,
+                                (int)posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i].x,
+                                (int)posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i].y,
+                                Int32.Parse(entry_tempo_do_servidor[1]), entry_nome_do_jogador[1],
+                                Int32.Parse(entry_id_do_jogador[1]), Int32.Parse(entry_modo_de_jogo[1]));
+
+
 
                             // como o fit precisa ter, para ajudar na visualização, um heatmap para cada jogador,
                             // essa linha se aproveita do fato das informações de char serem guardadas em ordem crescente em cada
