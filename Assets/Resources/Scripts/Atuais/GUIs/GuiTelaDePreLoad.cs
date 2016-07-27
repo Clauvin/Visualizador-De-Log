@@ -36,6 +36,8 @@ public class GuiTelaDePreLoad : GuiPadrao2 {
 
     protected string titulo = "Escolha de Log do FIT\n" + "e Tempo Carregado do Log";
 
+    PassadorDeDados pd;
+
     public override void OnGUI()
     {
         lida_com_erros_min_e_max.ConfigurarVariaveisParaPreload();
@@ -56,6 +58,7 @@ public class GuiTelaDePreLoad : GuiPadrao2 {
         resultado = GUI.Toolbar(new Rect(Screen.width / 12 * 3, Screen.height / 10 * 8, Screen.width / 12 * 6, Screen.height / 10), qualbotao,
             toolbarStrings);
 
+        
         switch (resultado)
         {
             // Abre a janela do FIT de escolher arquivo, e lê do arquivo escolhido seu tempo inicial e final.
@@ -71,13 +74,15 @@ public class GuiTelaDePreLoad : GuiPadrao2 {
 
                 if (lida_com_erros_min_e_max.NaoTemosErrosDeInput() && lida_com_erros_endereco_de_log.NaoTemosErrosDeInput())
                 {
-                    PassadorDeDados pd = FindObjectOfType<PassadorDeDados>();
+                    pd = FindObjectOfType<PassadorDeDados>();
                     pd.SetValuesDePassagem(Convert.ToInt32(tempo_minimo), Convert.ToInt32(tempo_maximo), endereco);
                     IrParaLoad();
                 }
                 break;
             // Retorna para a tela título
             case 2:
+                pd = FindObjectOfType<PassadorDeDados>();
+                pd.Destruir();
                 UnityEngine.SceneManagement.SceneManager.LoadScene(0);
                 break;
             default:
