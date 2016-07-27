@@ -18,9 +18,8 @@ public class GuiFITInfoObjeto : GuiInfoObjeto
             posicaoy += 20;
             GUI.TextField(new Rect(10, posicaoy, 150, 20), "Personagem = " + dadosdoponto.nome_do_objeto);
             posicaoy += 20;
-            GUI.TextField(new Rect(10, posicaoy, 150, 20), "X = " + dadosdoponto.x_log / 32);
-            posicaoy += 20;
-            GUI.TextField(new Rect(10, posicaoy, 150, 20), "Y = " + dadosdoponto.y_log / 32);
+            GUI.TextField(new Rect(10, posicaoy, 75, 20), "X = " + dadosdoponto.x_log / 32);
+            GUI.TextField(new Rect(85, posicaoy, 75, 20), "Y = " + dadosdoponto.y_log / 32);
             posicaoy += 20;
             GUI.TextField(new Rect(10, posicaoy, 150, 20), "Instante = " + dadosdoponto.instante_em_camera);
             posicaoy += 20;
