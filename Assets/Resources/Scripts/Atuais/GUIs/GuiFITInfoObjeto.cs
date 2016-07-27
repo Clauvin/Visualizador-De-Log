@@ -25,7 +25,7 @@ public class GuiFITInfoObjeto : GuiInfoObjeto
             posicaoy += 20;
             GUI.TextField(new Rect(10, posicaoy, 150, 20), "Tempo = " + dadosdoponto.tempo);
             posicaoy += 20;
-            GUI.TextField(new Rect(10, posicaoy, 150, 20), "Tempo do Servidor = " + dadosdoponto.tempo_do_servidor);
+            GUI.TextField(new Rect(10, posicaoy, 150, 20), "do Servidor = " + dadosdoponto.tempo_do_servidor);
             posicaoy += 20;
             GUI.TextField(new Rect(10, posicaoy, 150, 20), "Jogador = " + dadosdoponto.qual_jogador);
             posicaoy += 20;
