@@ -175,9 +175,12 @@ public class NovoLeitor2 : MonoBehaviour
         bool checagem_de_acao_do_jogador = true;
         List<List<Vector2>> posicoes_atuais_de_personagens_nos_mapas_do_FIT =
             posicoes_iniciais_de_personagens_nos_mapas_do_FIT;
+        int checando_instante_do_log = 0;
 
         // Part 2: reads the game events.
         // While there's lines left in the text file, do this:
+
+
         do
         {
             string[] entries;
@@ -188,7 +191,6 @@ public class NovoLeitor2 : MonoBehaviour
             string[] entry_modo_de_jogo;
             string[] entry_nivel;
             int input;
-            int checando_instante_do_log = 0;
             Vector2 vetor_de_passagem;
 
             line = theReader.ReadLine();
@@ -1045,7 +1047,7 @@ public class NovoLeitor2 : MonoBehaviour
 
     public int GetPrimeiroTempoFIT()
     {
-        return bd_fit.GetTempo(0);
+        return bd_fit.GetInstante(0);
     }
 
     public int GetPrimeiroTempoBolhas()
@@ -1062,7 +1064,7 @@ public class NovoLeitor2 : MonoBehaviour
 
     public int GetUltimoTempoFIT()
     {
-        return bd_fit.GetTempo(bd_fit.GetQuantidadeDeEntradas() - 1);
+        return bd_fit.GetInstante(bd_fit.GetQuantidadeDeEntradas() - 1);
     }
 
     public int GetUltimoTempoBolhas()
