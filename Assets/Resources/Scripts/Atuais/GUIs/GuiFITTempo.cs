@@ -27,7 +27,7 @@ public class GuiFITTempo : GuiTempo
 
             posicao_y = 0;
 
-            GUI.Label(new Rect(10, 0, 150, 40), "Tempo Mostrado\n" + "em Câmera: " + pos_tempo + " de " +
+            GUI.Label(new Rect(10, 0, 150, 40), "Instante Mostrado\n" + "em Câmera: " + pos_tempo + " de " +
                 GetComponent<NovoLeitor2>().GetUltimoTempoFIT(), "textfield");
 
             if (mostra_auto_mode)
