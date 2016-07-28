@@ -537,11 +537,11 @@ public class NovoLeitor2 : MonoBehaviour
             if ((i != bd_fit.GetQuantidadeDeEntradas() - 1) && (i != 0))
             {
                 
-                if (bd_fit.GetPersonagem(i) > bd_fit.GetPersonagem(i + 1))
+                if (bd_fit.GetPersonagem(i) >= bd_fit.GetPersonagem(i + 1))
                 {
                     fechar_background = true;
                 }
-                if (bd_fit.GetPersonagem(i) < bd_fit.GetPersonagem(i - 1))
+                if (bd_fit.GetPersonagem(i) <= bd_fit.GetPersonagem(i - 1))
                 {
                     criar_background = true;
                 }
