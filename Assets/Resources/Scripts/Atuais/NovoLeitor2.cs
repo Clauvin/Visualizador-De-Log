@@ -536,7 +536,7 @@ public class NovoLeitor2 : MonoBehaviour
             // não criá-lo. Backgrounds novos são criados, um para cada posição no tempo diferente.
             if ((i != bd_fit.GetQuantidadeDeEntradas() - 1) && (i != 0))
             {
-                
+
                 if (bd_fit.GetPersonagem(i) >= bd_fit.GetPersonagem(i + 1))
                 {
                     fechar_background = true;
@@ -546,9 +546,17 @@ public class NovoLeitor2 : MonoBehaviour
                     criar_background = true;
                 }
             }
-            else if (i == bd_fit.GetQuantidadeDeEntradas() - 1) fechar_background = true;
+            else if (i == bd_fit.GetQuantidadeDeEntradas() - 1)
+            {
+                if (bd_fit.GetPersonagem(i) <= bd_fit.GetPersonagem(i - 1))
+                {
+                    criar_background = true;
+                }
+
+                fechar_background = true;
+            }
             else if (i == 0) criar_background = true;
-            
+
             material_do_create = null;
 
             objeto = Instantiate(objetos.Get("Qualquer Coisa FIT"));
