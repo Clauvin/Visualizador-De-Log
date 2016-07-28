@@ -317,11 +317,11 @@ public class Controlador : MonoBehaviour
 
                         if (posicao_da_camera.y < ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
                                                     GetComponent<NovoLeitor2>().lista_de_backgrounds.Count - 2
-                                                    ]).transform.position.y + limitacao)
+                                                    ]).transform.position.y + limitacao - 5.0f)
                         {
                             posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
                                                     GetComponent<NovoLeitor2>().lista_de_backgrounds.Count - 2
-                                                    ]).transform.position.y + limitacao;
+                                                    ]).transform.position.y + limitacao - 5.0f;
                         }
 
                         FindObjectOfType<Camera>().transform.position = posicao_da_camera;
