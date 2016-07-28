@@ -26,7 +26,6 @@ public class GuiTempo : GuiPadrao2
     protected int pos_tempo;
     protected int tempo_inicial;
 
-
     public GuiTempo()
     {
         gambiarra = true;
