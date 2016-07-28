@@ -8,6 +8,7 @@ using System.Collections;
 public class Dados : MonoBehaviour
 {
     public string nome_do_objeto;
+    public int nivel;
     public float largura_x;
     public float altura_z;
     public int x_log;

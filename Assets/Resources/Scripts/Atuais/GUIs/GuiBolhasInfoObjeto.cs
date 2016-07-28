@@ -16,9 +16,8 @@ public class GuiBolhasInfoObjeto : GuiInfoObjeto
             posicaoy = 0;
             GUI.TextField(new Rect(10, posicaoy, 260, 20), "Objeto = " + dadosdoponto.nome_do_objeto);
             posicaoy += 20;
-            GUI.TextField(new Rect(10, posicaoy, 260, 20), "X = " + dadosdoponto.x_log);
-            posicaoy += 20;
-            GUI.TextField(new Rect(10, posicaoy, 260, 20), "Y = " + dadosdoponto.y_log);
+            GUI.TextField(new Rect(10, posicaoy, 130, 20), "X = " + dadosdoponto.x_log);
+            GUI.TextField(new Rect(140, posicaoy, 130, 20), "Y = " + dadosdoponto.y_log);
             posicaoy += 20;
             GUI.TextField(new Rect(10, posicaoy, 260, 20), "Tempo = " + dadosdoponto.tempo);
             posicaoy += 20;

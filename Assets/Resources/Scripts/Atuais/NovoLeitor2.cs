@@ -105,7 +105,7 @@ public class NovoLeitor2 : MonoBehaviour
         nomes_e_numeros_de_objetos_do_bolhas.Add("Nuvem", 4);
     }
 
-    public bool LoadStuffFIT(int tempo_minimo = 0, int tempo_maximo = int.MaxValue)
+    public bool LoadStuffFIT(int instante_minimo = 0, int instante_maximo = int.MaxValue)
     {
         //number for number of HeatMaps
         int heatmaps = 1;
@@ -113,24 +113,85 @@ public class NovoLeitor2 : MonoBehaviour
         // Handle any problems that might arise when reading the text
         string line;
 
+        // Abrindo o arquivo com os mapas
+        FileStream fs = new FileStream(pegar_endereco_de_log.endereco_de_arquivo[1], FileMode.Open);
+        StreamReader theReader = new StreamReader(fs);
+
+        line = theReader.ReadLine();
+
+        string[] linha_alterada;
+        string[] coordenadas;
+
+        do
+        {
+            List<Vector2> posicoes = new List<Vector2>();
+
+            //Level 1: A(X96,Y96) B(X64,Y384)
+            linha_alterada = line.Split(':');
+            //Level 1| A(X96, Y96) B(X64, Y384)
+
+            linha_alterada[1] = linha_alterada[1].Remove(0, 1);
+            //Level 1|A(X96,Y96) B(X64,Y384)
+
+            linha_alterada = linha_alterada[1].Split('(', ')');
+
+            //A|X96,Y96| B|X64,Y384|
+            for (int i = 1; i < linha_alterada.GetLength(0); i = i + 2)
+            {
+                coordenadas = linha_alterada[i].Split(',');
+                coordenadas[0] = coordenadas[0].Remove(0, 1);
+                coordenadas[1] = coordenadas[1].Remove(0, 1);
+
+                Vector2 x_e_y = new Vector2(Int32.Parse(coordenadas[0]), Int32.Parse(coordenadas[1]));
+                posicoes.Add(x_e_y);
+
+
+            }
+
+            posicoes_iniciais_de_personagens_nos_mapas_do_FIT.Add(posicoes);
+
+            // Próxima linha...
+            line = theReader.ReadLine(); line = theReader.ReadLine();
+
+
+        } while (line != null);
+
+        theReader.Close();
+        theReader.Dispose();
+        fs.Close();
+        fs.Dispose();
+
         bd_fit = new BancoDeDadosFIT();
         // Create a new StreamReader, tell it which file to read and what encoding the file
         // was saved as
-        FileStream fs = new FileStream(pegar_endereco_de_log.endereco_de_arquivo[0], FileMode.Open);
-        StreamReader theReader = new StreamReader(fs);
-        // Part 1: ignores the [Mode 01]
-        line = theReader.ReadLine();
+        fs = new FileStream(pegar_endereco_de_log.endereco_de_arquivo[0], FileMode.Open);
+        theReader = new StreamReader(fs);
+        // Part 1: ignores  the [], the == START =, the [Test01] e ServerTime:481=CONNECTED =
+        line = theReader.ReadLine(); line = theReader.ReadLine(); line = theReader.ReadLine(); line = theReader.ReadLine();
+
+        // variaveis a serem usadas dentro do loop de leitura do log
+        int estagio_atual = -1;
+        int personagem_atual = -1;
+        bool checagem_de_acao_do_jogador = true;
+        List<List<Vector2>> posicoes_atuais_de_personagens_nos_mapas_do_FIT =
+            posicoes_iniciais_de_personagens_nos_mapas_do_FIT;
+        int checando_instante_do_log = 0;
 
         // Part 2: reads the game events.
         // While there's lines left in the text file, do this:
+
+
         do
         {
             string[] entries;
             string[] entry_time;
-            string[] entry_char;
-            string[] entry_grid_x;
-            string[] entry_grid_y;
-            int checando_tempo_do_log;
+            string[] entry_tempo_do_servidor;
+            string[] entry_nome_do_jogador;
+            string[] entry_id_do_jogador;
+            string[] entry_modo_de_jogo;
+            string[] entry_nivel;
+            int input;
+            Vector2 vetor_de_passagem;
 
             line = theReader.ReadLine();
 
@@ -138,42 +199,104 @@ public class NovoLeitor2 : MonoBehaviour
             {
                 // Do whatever you need to do with the text line, it's a string now
                 entries = line.Split('=');
-                // Correct Example: Time:1=Char:1=GridX:5=GridY:7
-                if (entries.Length == 4)
+                // Correct Example: ServerTime:491=ServerID:1=Player:THIAGO=MODE:3=Level:1=Input:4=Time:237
+                if (entries.Length == 7)
                 {
-                    // Nesse ponto, seguindo o exemplo, entries é um vetor com os quatro valores
-                    // Time:1 | Char:1 | GridX:5 | GridY:7
-                    entry_time = entries[0].Split(':');
+                    // Nesse ponto, seguindo o exemplo, entries é um vetor com os sete valores
+                    // ServerTime:491 | ServerID:1 | Player:THIAGO | MODE:3 | Level:1 | Input:4 | Time:237
+                    // O próximo passo é conseguir os valores de cada caso
 
+                    entry_time = entries[6].Split(':');
                     // entry_time = Time | 1
-                    checando_tempo_do_log = Convert.ToInt32(entry_time[1]);
                     
-                    if ((tempo_minimo <= checando_tempo_do_log) && (checando_tempo_do_log <= tempo_maximo))
+                    if ((instante_minimo <= checando_instante_do_log) && (checando_instante_do_log <= instante_maximo))
                     {
-                        entry_char = entries[1].Split(':');
-                        entry_grid_x = entries[2].Split(':');
-                        entry_grid_y = entries[3].Split(':');
 
-                        bd_fit.Add(Int32.Parse(entry_time[1]), Int32.Parse(entry_char[1]),
-                                Int32.Parse(entry_grid_x[1]), Int32.Parse(entry_grid_y[1]), 0, "", 0, 0);
+                        entry_tempo_do_servidor = entries[0].Split(':');
+                        entry_id_do_jogador = entries[1].Split(':');
+                        entry_nome_do_jogador = entries[2].Split(':');
+                        entry_modo_de_jogo = entries[3].Split(':');
+                        entry_nivel = entries[4].Split(':');
+                        input = Int32.Parse(entries[5].Split(':')[1]);
 
-                        // como o fit precisa ter, para ajudar na visualização, um heatmap para cada jogador,
-                        // essa linha se aproveita do fato das informações de char serem guardadas em ordem crescente em cada
-                        // tempo para descobrir o número de heatmaps extras, além do com todos os jogadores.
-                        
-                        // ou seja: começamos com um heatmap, lemos 1 em entry_char, colocamos mais um heatmap, temos dois.
-                        // lemos 2 em entry_char, colocamos mais um, temos três, e por aí vai.
+                        if (Int32.Parse(entry_nivel[1]) - 1 != estagio_atual) personagem_atual = 0;
+                        estagio_atual = Int32.Parse(entry_nivel[1])-1;
 
-                        // Mas sinceramente eu posso não fazer isso e só pegar do vetor de nomes do FIT.
-                        if (Int32.Parse(entry_char[1]) == heatmaps) heatmaps++;
+                        for (int i = 0; i < posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual].Count; i++)
+                        {
+
+                            if ((i == personagem_atual) && (checagem_de_acao_do_jogador))
+                            {
+                                checagem_de_acao_do_jogador = false;
+                                switch (input)
+                                {
+                                    // Movimentacao para cima;
+                                    case 1:
+                                        vetor_de_passagem = posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i];
+                                        vetor_de_passagem.y -= 32;
+                                        posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i] = vetor_de_passagem;
+                                        break;
+                                    // Movimentacao para esquerda;
+                                    case 2:
+                                        vetor_de_passagem = posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i];
+                                        vetor_de_passagem.x -= 32;
+                                        posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i] = vetor_de_passagem;
+                                        break;
+                                    // Movimentacao para baixo;
+                                    case 3:
+                                        vetor_de_passagem = posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i];
+                                        vetor_de_passagem.y += 32;
+                                        posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i] = vetor_de_passagem;
+                                        break;
+                                    // Movimentacao para direita;
+                                    case 4:
+                                        vetor_de_passagem = posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i];
+                                        vetor_de_passagem.x += 32;
+                                        posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i] = vetor_de_passagem;
+                                        break;
+                                    // Troca de Personagem
+                                    case 0:
+                                        personagem_atual = personagem_atual + 1;
+                                        personagem_atual %= posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual].Count;
+                                        break;
+                                    default:
+                                        break;
+                                }
+
+                            }
+
+                            bd_fit.Add(checando_instante_do_log, Int32.Parse(entry_time[1]), i + 1,
+                                (int)posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i].x,
+                                (int)posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i].y,
+                                Int32.Parse(entry_tempo_do_servidor[1]), entry_nome_do_jogador[1],
+                                Int32.Parse(entry_id_do_jogador[1]), Int32.Parse(entry_modo_de_jogo[1]));
+
+
+
+                            // como o fit precisa ter, para ajudar na visualização, um heatmap para cada jogador,
+                            // essa linha se aproveita do fato das informações de char serem guardadas em ordem crescente em cada
+                            // tempo para descobrir o número de heatmaps extras, além do com todos os jogadores.
+
+                            // ou seja: começamos com um heatmap, lemos 1 em entry_char, colocamos mais um heatmap, temos dois.
+                            // lemos 2 em entry_char, colocamos mais um, temos três, e por aí vai.
+
+                            // Mas sinceramente eu posso não fazer isso e só pegar do vetor de nomes do FIT...
+                            if (i == heatmaps) heatmaps++;
+
+                        }
+
                     }
+
+                    checagem_de_acao_do_jogador = true;
+                    checando_instante_do_log++;
+
                 }
 
                 #if (DEBUG)
 
                 else
                 {
-                    Debug.Log("NovoLeitor2.LoadStuff - Linha não tinha quatro elementos.");
+                    Debug.Log("NovoLeitor2.LoadStuff - Linha não tinha sete elementos, tinha " + entries.GetLength(0) + ".");
                 }
 
                 #endif
@@ -413,18 +536,27 @@ public class NovoLeitor2 : MonoBehaviour
             // não criá-lo. Backgrounds novos são criados, um para cada posição no tempo diferente.
             if ((i != bd_fit.GetQuantidadeDeEntradas() - 1) && (i != 0))
             {
-                if (bd_fit.GetPersonagem(i) > bd_fit.GetPersonagem(i + 1))
+
+                if (bd_fit.GetPersonagem(i) >= bd_fit.GetPersonagem(i + 1))
                 {
                     fechar_background = true;
                 }
-                if (bd_fit.GetPersonagem(i) < bd_fit.GetPersonagem(i - 1))
+                if (bd_fit.GetPersonagem(i) <= bd_fit.GetPersonagem(i - 1))
                 {
                     criar_background = true;
                 }
             }
-            else if (i == bd_fit.GetQuantidadeDeEntradas() - 1) fechar_background = true;
+            else if (i == bd_fit.GetQuantidadeDeEntradas() - 1)
+            {
+                if (bd_fit.GetPersonagem(i) <= bd_fit.GetPersonagem(i - 1))
+                {
+                    criar_background = true;
+                }
+
+                fechar_background = true;
+            }
             else if (i == 0) criar_background = true;
-            
+
             material_do_create = null;
 
             objeto = Instantiate(objetos.Get("Qualquer Coisa FIT"));
@@ -869,6 +1001,10 @@ public class NovoLeitor2 : MonoBehaviour
         objeto_a_receber_dados.GetComponent<Dados>().tempo = bd_fit.GetTempo(i);
         objeto_a_receber_dados.GetComponent<Dados>().x_log = bd_fit.GetGridX(i);
         objeto_a_receber_dados.GetComponent<Dados>().y_log = bd_fit.GetGridY(i);
+        objeto_a_receber_dados.GetComponent<Dados>().tempo_do_servidor = bd_fit.GetTempoDeServidor(i);
+        objeto_a_receber_dados.GetComponent<Dados>().id_do_jogador = bd_fit.GetIdDoJogador(i);
+        objeto_a_receber_dados.GetComponent<Dados>().qual_jogador = bd_fit.GetNomeDoJogador(i);
+        objeto_a_receber_dados.GetComponent<Dados>().instante_em_camera = bd_fit.GetInstante(i);
     }
 
     protected void AddDadosBolhas(GameObject objeto_a_receber_dados, int i)
@@ -919,7 +1055,7 @@ public class NovoLeitor2 : MonoBehaviour
 
     public int GetPrimeiroTempoFIT()
     {
-        return bd_fit.GetTempo(0);
+        return bd_fit.GetInstante(0);
     }
 
     public int GetPrimeiroTempoBolhas()
@@ -936,7 +1072,7 @@ public class NovoLeitor2 : MonoBehaviour
 
     public int GetUltimoTempoFIT()
     {
-        return bd_fit.GetTempo(bd_fit.GetQuantidadeDeEntradas() - 1);
+        return bd_fit.GetInstante(bd_fit.GetQuantidadeDeEntradas() - 1);
     }
 
     public int GetUltimoTempoBolhas()
