@@ -45,10 +45,12 @@ public class testFileBrowser : MonoBehaviour {
 		GUILayout.Space(10);
 		GUILayout.Label("Selected File: "+output);
 		GUILayout.EndHorizontal();
-		//draw and display output
-		if(fb.draw()){ //true is returned when a file has been selected
-			//the output file is a member if the FileInfo class, if cancel was selected the value is null
-			output = (fb.outputFile==null)?"cancel hit":fb.outputFile.ToString();
-		}
-	}
+        //draw and display output
+        if (fb.draw())
+        { 
+          //true is returned when a file has been selected
+          //the output file is a member if the FileInfo class, if cancel was selected the value is null
+            output = (fb.outputFile == null) ? "cancel hit" : fb.outputFile.ToString();
+        }
+    }
 }
