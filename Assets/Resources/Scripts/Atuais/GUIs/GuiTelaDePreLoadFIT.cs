@@ -8,10 +8,32 @@ using System;
 /// </summary>
 public class GuiTelaDePreLoadFIT : GuiTelaDePreLoad
 {
-    
+    FileBrowser fb;
+
     // Essa função diverge entre FIT e Bolhas, por conta da diferença do formato do log de ambos.
     protected override void EscolhaDeArquivo()
     {
+        if (fb == null)
+        {
+            fb = new FileBrowser(pegar_endereco_do_log.CarregarEnderecoDeUltimoLogChecado(), 0, new Rect(100, 100, 100, 100));
+            fb.showSearch = true;
+            fb.searchRecursively = true;
+        }
+
+        if (fb.draw())
+        {
+            if (fb.outputFile == null)
+            {
+                Debug.Log("Cancel hit");
+            }
+            else
+            {
+                //lembrando que não necessariamente vai ser zero, por conta do arquivo extra de mapa
+                pegar_endereco_do_log.endereco_de_arquivo[0] = fb.outputFile.ToString();
+            }
+        }
+
+
         if (pegar_endereco_do_log.FindFile())
         {
             endereco = pegar_endereco_do_log.endereco_de_arquivo[0];
