@@ -12,7 +12,7 @@ using System.Collections.Generic;
 public class PegarEnderecoDeLog : MonoBehaviour {
 
     public List<string> endereco_de_arquivo;
-    FileBrowser fb;
+    
 
     public PegarEnderecoDeLog()
     {
@@ -37,15 +37,13 @@ public class PegarEnderecoDeLog : MonoBehaviour {
     {
 
         //Abre uma janela de procurar arquivos .txt para abrir.
-        //endereco_de_arquivo[posicao] = EditorUtility.OpenFilePanel("Teste", CarregarEnderecoDeUltimoLogChecado(), "txt");
-        if (fb == null)
+        endereco_de_arquivo[posicao] = EditorUtility.OpenFilePanel("Teste", CarregarEnderecoDeUltimoLogChecado(), "txt");
+        /*if (fb == null)
         {
             fb = new FileBrowser(CarregarEnderecoDeUltimoLogChecado(), 0, new Rect(100, 100, 100, 100));
             fb.showSearch = true;
             fb.searchRecursively = true;
         }
-        Debug.Log(fb.draw());
-        Debug.Log(fb == null);
 
         if (fb.draw())
         {
@@ -57,7 +55,7 @@ public class PegarEnderecoDeLog : MonoBehaviour {
             {
                 endereco_de_arquivo[posicao] = fb.outputFile.ToString();
             }
-        }
+        }*/
 
         return AExtensaoETxt(endereco_de_arquivo[posicao]);
     }
@@ -137,7 +135,7 @@ public class PegarEnderecoDeLog : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        fb = new FileBrowser();
+        //fb = new FileBrowser();
 	}
 	
 	// Update is called once per frame
