@@ -4,6 +4,7 @@ using System.Collections;
 using System.IO;
 using System.Collections.Generic;
 
+
 /// <summary>
 /// Responsável por abrir a janela de endereço de log, guardar endereços na classe, analisá-los
 /// e também guardar a posição da última pasta aberta na janela de endereço de log.
@@ -11,6 +12,7 @@ using System.Collections.Generic;
 public class PegarEnderecoDeLog : MonoBehaviour {
 
     public List<string> endereco_de_arquivo;
+    FileBrowser fb;
 
     public PegarEnderecoDeLog()
     {
@@ -35,7 +37,27 @@ public class PegarEnderecoDeLog : MonoBehaviour {
     {
 
         //Abre uma janela de procurar arquivos .txt para abrir.
-        endereco_de_arquivo[posicao] = EditorUtility.OpenFilePanel("Teste", CarregarEnderecoDeUltimoLogChecado(), "txt");
+        //endereco_de_arquivo[posicao] = EditorUtility.OpenFilePanel("Teste", CarregarEnderecoDeUltimoLogChecado(), "txt");
+        if (fb == null)
+        {
+            fb = new FileBrowser(CarregarEnderecoDeUltimoLogChecado(), 0, new Rect(100, 100, 100, 100));
+            fb.showSearch = true;
+            fb.searchRecursively = true;
+        }
+        Debug.Log(fb.draw());
+        Debug.Log(fb == null);
+
+        if (fb.draw())
+        {
+            if (fb.outputFile == null)
+            {
+                Debug.Log("Cancel hit");
+            }
+            else
+            {
+                endereco_de_arquivo[posicao] = fb.outputFile.ToString();
+            }
+        }
 
         return AExtensaoETxt(endereco_de_arquivo[posicao]);
     }
@@ -115,7 +137,7 @@ public class PegarEnderecoDeLog : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-	
+        fb = new FileBrowser();
 	}
 	
 	// Update is called once per frame

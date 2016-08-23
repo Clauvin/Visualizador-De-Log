@@ -80,6 +80,7 @@ public class FileBrowser{
 		}
 		GUILayout.BeginArea(guiSize);
 		GUILayout.BeginVertical("box");
+        Debug.Log(layout);
 		switch(layout){
 			case 0:
 				GUILayout.BeginHorizontal("box");
