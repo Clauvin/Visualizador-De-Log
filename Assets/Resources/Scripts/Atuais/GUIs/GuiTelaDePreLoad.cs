@@ -67,7 +67,7 @@ public class GuiTelaDePreLoad : GuiPadrao2 {
                 new Rect(Screen.width / 4, Screen.height / 9, Screen.width / 2, Screen.height / 1.25f));
         }
 
-        fb.draw();
+        pegar_endereco_do_log.DesenharNavegadorDeArquivos();
 
         switch (resultado)
         {
