@@ -29,12 +29,20 @@ public class PegarEnderecoDeLog : MonoBehaviour {
         navegador_de_arquivos = new FileBrowser();
         desenhar_navegador = false;
 
-        file = Resources.Load<Texture2D>("Texturas/file");
-        folder = Resources.Load<Texture2D>("Texturas/folder");
-        back = Resources.Load<Texture2D>("Texturas/back");
-        drive = Resources.Load<Texture2D>("Texturas/drive");
+        file = Resources.Load<Texture2D>("Texturas/file menor");
+        folder = Resources.Load<Texture2D>("Texturas/folder menor");
+        back = Resources.Load<Texture2D>("Texturas/back menor");
+        drive = Resources.Load<Texture2D>("Texturas/drive menor");
 
-        // Colocando as imagens da GUI do desenhar_navegador pra dentro do desenhar_navegador
+        // Eu QUERIA cortar a altura e largura assim MAS fazer isso chega a Texture.Set_width e Texture.Set_height...
+        // e isso gera um erro de NullReferenceException: ainda não implementaram Texture.Set_width e Texture.Set_height -__-
+        // (na Unity 5.3.5f1 Personal)
+        /*file.width /= 2; file.height /= 2;
+        folder.width /= 2; folder.height /= 2;
+        back.width /= 2; back.height /= 2;
+        drive.width /= 2; drive.height /= 2;*/
+
+        // Colocando as imagens da GUI do desenhar_navegador pra dentro dele
         navegador_de_arquivos.fileTexture = file;
         navegador_de_arquivos.directoryTexture = folder;
         navegador_de_arquivos.backTexture = back;
