@@ -12,12 +12,15 @@ public class PegarEnderecoDeLog : MonoBehaviour {
 
     public List<string> endereco_de_arquivo;
     public FileBrowser navegador_de_arquivos;
+
+    private bool desenhar_navegador;
     
     public PegarEnderecoDeLog()
     {
         endereco_de_arquivo = new List<string>();
         endereco_de_arquivo.Add("");
         navegador_de_arquivos = new FileBrowser(new Rect(Screen.width / 4, Screen.height / 9, Screen.width / 2, Screen.height / 1.25f));
+        desenhar_navegador = false;
     }
 
     private bool AExtensaoETxt(string endereco, int posicao = 0)
@@ -35,7 +38,7 @@ public class PegarEnderecoDeLog : MonoBehaviour {
 
     public void DesenharNavegadorDeArquivos()
     {
-        navegador_de_arquivos.draw();
+        if (desenhar_navegador) navegador_de_arquivos.draw();
     }
 
     public bool FindFile(int posicao = 0)
