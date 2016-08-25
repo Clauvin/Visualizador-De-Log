@@ -38,8 +38,6 @@ public class GuiTelaDePreLoad : GuiPadrao2 {
 
     PassadorDeDados pd;
 
-    FileBrowser fb;
-
     public override void OnGUI()
     {
         lida_com_erros_min_e_max.ConfigurarVariaveisDePosicionamentoDeGuiParaPreload();
@@ -59,13 +57,6 @@ public class GuiTelaDePreLoad : GuiPadrao2 {
 
         resultado = GUI.Toolbar(new Rect(Screen.width / 12 * 3, Screen.height / 10 * 8, Screen.width / 12 * 6, Screen.height / 10), qualbotao,
             toolbarStrings);
-
-        if (fb == null)
-        {
-            fb = new FileBrowser(pegar_endereco_do_log.CarregarEnderecoDeUltimoLogChecado(),
-                0,
-                new Rect(Screen.width / 4, Screen.height / 9, Screen.width / 2, Screen.height / 1.25f));
-        }
 
         pegar_endereco_do_log.DesenharNavegadorDeArquivos();
 
