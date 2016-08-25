@@ -15,13 +15,17 @@ public class PegarEnderecoDeLog : MonoBehaviour {
 
     private bool desenhar_navegador;
 
-    
-    
+    private float navegador_pos_x = Screen.width / 4;
+    private float navegador_pos_y = Screen.height / 9;
+    private float navegador_largura = Screen.width / 2;
+    private float navegador_altura = Screen.height / 1.25f;
+
+
     public PegarEnderecoDeLog()
     {
         endereco_de_arquivo = new List<string>();
         endereco_de_arquivo.Add("");
-        navegador_de_arquivos = new FileBrowser(new Rect(Screen.width / 4, Screen.height / 9, Screen.width / 2, Screen.height / 1.25f));
+        navegador_de_arquivos = new FileBrowser();
         desenhar_navegador = false;
     }
 
@@ -42,6 +46,17 @@ public class PegarEnderecoDeLog : MonoBehaviour {
         desenhar_navegador = !desenhar_navegador;
     }
 
+    // necessário por conta de possíveis mudanças de tamanho da tela por parte do usuário.
+    public void Atualizar_Posicao_E_Tamanho_Do_Navegador()
+    {
+        navegador_pos_x = Screen.width / 4;
+        navegador_pos_y = Screen.height / 9;
+        navegador_largura = Screen.width / 2;
+        navegador_altura = Screen.height / 1.25f;
+
+        navegador_de_arquivos.setGUIRect(new Rect(navegador_pos_x, navegador_pos_y, navegador_largura, navegador_altura));
+    }
+
     private bool AExtensaoETxt(string endereco, int posicao = 0)
     {
         string[] checagem;
@@ -57,7 +72,11 @@ public class PegarEnderecoDeLog : MonoBehaviour {
 
     public void DesenharNavegadorDeArquivos()
     {
-        if (desenhar_navegador) navegador_de_arquivos.draw();
+        if (desenhar_navegador)
+        {
+            Atualizar_Posicao_E_Tamanho_Do_Navegador();
+            navegador_de_arquivos.draw();
+        }
     }
 
     public bool FindFile(int posicao = 0)
