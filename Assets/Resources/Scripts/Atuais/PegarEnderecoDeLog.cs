@@ -4,7 +4,6 @@ using System.Collections;
 using System.IO;
 using System.Collections.Generic;
 
-
 /// <summary>
 /// Responsável por abrir a janela de endereço de log, guardar endereços na classe, analisá-los
 /// e também guardar a posição da última pasta aberta na janela de endereço de log.
@@ -12,8 +11,8 @@ using System.Collections.Generic;
 public class PegarEnderecoDeLog : MonoBehaviour {
 
     public List<string> endereco_de_arquivo;
+    public FileBrowser navegador_de_arquivos;
     
-
     public PegarEnderecoDeLog()
     {
         endereco_de_arquivo = new List<string>();
