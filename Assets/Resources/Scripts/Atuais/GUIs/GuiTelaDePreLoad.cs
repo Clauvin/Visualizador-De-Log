@@ -62,7 +62,9 @@ public class GuiTelaDePreLoad : GuiPadrao2 {
 
         if (fb == null)
         {
-            fb = new FileBrowser("C:\\", 0, new Rect(100.0f, 100.0f, 500.0f, 500.0f));
+            fb = new FileBrowser(pegar_endereco_do_log.CarregarEnderecoDeUltimoLogChecado(),
+                0,
+                new Rect(Screen.width / 4, Screen.height / 9, Screen.width / 2, Screen.height / 1.25f));
         }
 
         fb.draw();
