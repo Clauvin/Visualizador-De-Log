@@ -20,6 +20,7 @@ public class PegarEnderecoDeLog : MonoBehaviour {
     private float navegador_largura = Screen.width / 2;
     private float navegador_altura = Screen.height / 1.25f;
 
+    private Texture2D file, folder, back, drive;
 
     public PegarEnderecoDeLog()
     {
@@ -27,6 +28,19 @@ public class PegarEnderecoDeLog : MonoBehaviour {
         endereco_de_arquivo.Add("");
         navegador_de_arquivos = new FileBrowser();
         desenhar_navegador = false;
+
+        file = Resources.Load<Texture2D>("Texturas/file");
+        folder = Resources.Load<Texture2D>("Texturas/folder");
+        back = Resources.Load<Texture2D>("Texturas/back");
+        drive = Resources.Load<Texture2D>("Texturas/drive");
+
+        // Colocando as imagens da GUI do desenhar_navegador pra dentro do desenhar_navegador
+        navegador_de_arquivos.fileTexture = file;
+        navegador_de_arquivos.directoryTexture = folder;
+        navegador_de_arquivos.backTexture = back;
+        navegador_de_arquivos.driveTexture = drive;
+
+        if (drive == null) Debug.Log("Nao foi");
     }
 
     public void Set_Desenhar_Navegador(bool true_ou_false)
