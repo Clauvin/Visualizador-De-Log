@@ -14,6 +14,8 @@ public class PegarEnderecoDeLog : MonoBehaviour {
     public FileBrowser navegador_de_arquivos;
 
     private bool desenhar_navegador;
+
+    
     
     public PegarEnderecoDeLog()
     {
@@ -21,6 +23,23 @@ public class PegarEnderecoDeLog : MonoBehaviour {
         endereco_de_arquivo.Add("");
         navegador_de_arquivos = new FileBrowser(new Rect(Screen.width / 4, Screen.height / 9, Screen.width / 2, Screen.height / 1.25f));
         desenhar_navegador = false;
+    }
+
+    public void Set_Desenhar_Navegador(bool true_ou_false)
+    {
+        desenhar_navegador = true_ou_false;
+    }
+
+    public bool Get_Desenhar_Navegador()
+    {
+        return desenhar_navegador;
+    }
+
+    // muda o valor de desenhar_navegador para o único valor possível.
+    // ou seja, se true, vira false. Se false, vira true.
+    public void Inverter_Desenhar_Navegador()
+    {
+        desenhar_navegador = !desenhar_navegador;
     }
 
     private bool AExtensaoETxt(string endereco, int posicao = 0)
