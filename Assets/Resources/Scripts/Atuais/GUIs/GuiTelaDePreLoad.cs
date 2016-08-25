@@ -38,9 +38,11 @@ public class GuiTelaDePreLoad : GuiPadrao2 {
 
     PassadorDeDados pd;
 
+    FileBrowser fb;
+
     public override void OnGUI()
     {
-        lida_com_erros_min_e_max.ConfigurarVariaveisParaPreload();
+        lida_com_erros_min_e_max.ConfigurarVariaveisDePosicionamentoDeGuiParaPreload();
         lida_com_erros_endereco_de_log.ConfigurarVariaveis();
         GUI.BeginGroup(new Rect(0, 0, Screen.width, Screen.height));
 
@@ -58,7 +60,13 @@ public class GuiTelaDePreLoad : GuiPadrao2 {
         resultado = GUI.Toolbar(new Rect(Screen.width / 12 * 3, Screen.height / 10 * 8, Screen.width / 12 * 6, Screen.height / 10), qualbotao,
             toolbarStrings);
 
-        
+        if (fb == null)
+        {
+            fb = new FileBrowser("C:\\", 0, new Rect(100.0f, 100.0f, 500.0f, 500.0f));
+        }
+
+        fb.draw();
+
         switch (resultado)
         {
             // Abre a janela do FIT de escolher arquivo, e lê do arquivo escolhido seu tempo inicial e final.
