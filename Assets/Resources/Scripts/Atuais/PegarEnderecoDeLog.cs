@@ -104,26 +104,12 @@ public class PegarEnderecoDeLog : MonoBehaviour {
     public bool FindFile(int posicao = 0)
     {
 
-        //Abre uma janela de procurar arquivos .txt para abrir.
-        endereco_de_arquivo[posicao] = EditorUtility.OpenFilePanel("Teste", CarregarEnderecoDeUltimoLogChecado(), "txt");
-        /*if (fb == null)
-        {
-            fb = new FileBrowser(CarregarEnderecoDeUltimoLogChecado(), 0, new Rect(100, 100, 100, 100));
-            fb.showSearch = true;
-            fb.searchRecursively = true;
-        }
+        // Abre uma janela de procurar arquivos .txt para abrir.
+        // Descomentar caso se queira usar a janela nativa do sistema operacional, e ainda assim, apenas dentro do 
+        // Editor da Unity.
+        //endereco_de_arquivo[posicao] = EditorUtility.OpenFilePanel("Teste", CarregarEnderecoDeUltimoLogChecado(), "txt");
 
-        if (fb.draw())
-        {
-            if (fb.outputFile == null)
-            {
-                Debug.Log("Cancel hit");
-            }
-            else
-            {
-                endereco_de_arquivo[posicao] = fb.outputFile.ToString();
-            }
-        }*/
+        endereco_de_arquivo[posicao] = navegador_de_arquivos.outputFile.ToString();
 
         return AExtensaoETxt(endereco_de_arquivo[posicao]);
     }
