@@ -65,16 +65,13 @@ public class GuiTelaDePreLoad : GuiPadrao2 {
             // Abre a janela do FIT de escolher arquivo, e lê do arquivo escolhido seu tempo inicial e final.
             case 0:
 
-                //EscolhaDeArquivo();
-
                 pegar_endereco_do_log.Inverter_Desenhar_Navegador();
-                Debug.Log(pegar_endereco_do_log.navegador_de_arquivos.outputFile);
 
                 break;
             // Vai para o visualizador do FITs
             case 1:
 
-                /*lida_com_erros_min_e_max.DetectarETratarErrosEExcecoesDeInput(tempo_minimo, tempo_maximo);
+                lida_com_erros_min_e_max.DetectarETratarErrosEExcecoesDeInput(tempo_minimo, tempo_maximo);
                 lida_com_erros_endereco_de_log.DetectarETratarErrosEExcecoesDeInput(endereco);
 
                 if (lida_com_erros_min_e_max.NaoTemosErrosDeInput() && lida_com_erros_endereco_de_log.NaoTemosErrosDeInput())
@@ -82,16 +79,23 @@ public class GuiTelaDePreLoad : GuiPadrao2 {
                     pd = FindObjectOfType<PassadorDeDados>();
                     pd.SetValuesDePassagem(Convert.ToInt32(tempo_minimo), Convert.ToInt32(tempo_maximo), endereco);
                     IrParaLoad();
-                }*/
+                }
                 break;
             // Retorna para a tela título
             case 2:
-                /*pd = FindObjectOfType<PassadorDeDados>();
+                pd = FindObjectOfType<PassadorDeDados>();
                 pd.Destruir();
-                UnityEngine.SceneManagement.SceneManager.LoadScene(0);*/
+                UnityEngine.SceneManagement.SceneManager.LoadScene(0);
                 break;
             default:
                 break;
+        }
+
+        if (pegar_endereco_do_log.navegador_de_arquivos.outputFile != null)
+        {
+            pegar_endereco_do_log.Inverter_Desenhar_Navegador();
+            EscolhaDeArquivo();
+            pegar_endereco_do_log.navegador_de_arquivos.outputFile = null;
         }
 
         lida_com_erros_min_e_max.PossiveisMensagensDeErro();
