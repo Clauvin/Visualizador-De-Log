@@ -75,6 +75,40 @@ public class GuiTelaDePreLoadBolhas : GuiTelaDePreLoad
         toolbarStrings = new string[] { "Escolher Log", "Visualizar Log", "Retornar Para Tela Título" };
     }
 
+    protected override void FuncionamentoDosBotoes()
+    {
+        switch (resultado)
+        {
+            // Abre a janela do Bolhas de escolher arquivo, e lê do arquivo escolhido seu tempo inicial e final.
+            case 0:
+
+                pegar_endereco_do_log.Inverter_Desenhar_Navegador();
+
+                break;
+            // Vai para o visualizador do Bolhas
+            case 1:
+
+                lida_com_erros_min_e_max.DetectarETratarErrosEExcecoesDeInput(tempo_minimo, tempo_maximo);
+                lida_com_erros_endereco_de_log.DetectarETratarErrosEExcecoesDeInput(endereco);
+
+                if (lida_com_erros_min_e_max.NaoTemosErrosDeInput() && lida_com_erros_endereco_de_log.NaoTemosErrosDeInput())
+                {
+                    pd = FindObjectOfType<PassadorDeDados>();
+                    pd.SetValuesDePassagem(Convert.ToInt32(tempo_minimo), Convert.ToInt32(tempo_maximo), endereco);
+                    IrParaLoad();
+                }
+                break;
+            // Retorna para a tela título
+            case 2:
+                pd = FindObjectOfType<PassadorDeDados>();
+                pd.Destruir();
+                UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+                break;
+            default:
+                break;
+        }
+    }
+
     protected override void IrParaLoad()
     {
         // Vai pra Scene "Version Bolhas"

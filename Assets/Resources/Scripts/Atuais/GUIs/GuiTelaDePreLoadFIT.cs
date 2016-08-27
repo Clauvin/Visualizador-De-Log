@@ -68,6 +68,43 @@ public class GuiTelaDePreLoadFIT : GuiTelaDePreLoad
         toolbarStrings = new string[] { "Escolher Log", "Escolher Posições Iniciais", "Visualizar Log", "Retornar Para Tela Título" };
     }
 
+    protected override void FuncionamentoDosBotoes()
+    {
+        switch (resultado)
+        {
+            // Abre a janela do FIT de escolher arquivo, e lê do arquivo escolhido seu tempo inicial e final.
+            case 0:
+
+                pegar_endereco_do_log.Inverter_Desenhar_Navegador();
+
+                break;
+            case 1:
+
+                break;
+            // Vai para o visualizador do FITs
+            case 2:
+
+                lida_com_erros_min_e_max.DetectarETratarErrosEExcecoesDeInput(tempo_minimo, tempo_maximo);
+                lida_com_erros_endereco_de_log.DetectarETratarErrosEExcecoesDeInput(endereco);
+
+                if (lida_com_erros_min_e_max.NaoTemosErrosDeInput() && lida_com_erros_endereco_de_log.NaoTemosErrosDeInput())
+                {
+                    pd = FindObjectOfType<PassadorDeDados>();
+                    pd.SetValuesDePassagem(Convert.ToInt32(tempo_minimo), Convert.ToInt32(tempo_maximo), endereco);
+                    IrParaLoad();
+                }
+                break;
+            // Retorna para a tela título
+            case 3:
+                pd = FindObjectOfType<PassadorDeDados>();
+                pd.Destruir();
+                UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+                break;
+            default:
+                break;
+        }
+    }
+
     protected override void IrParaLoad()
     {
         // Vai pra Scene "Version FIT 3"
