@@ -91,6 +91,8 @@ public class GuiTelaDePreLoad : GuiPadrao2 {
                 break;
         }
 
+        // graças a C# File Browser, foi necessário adicionar esse código
+        // ao invés de usar FindFile() como antes.
         if (pegar_endereco_do_log.navegador_de_arquivos.outputFile != null)
         {
             pegar_endereco_do_log.Inverter_Desenhar_Navegador();
