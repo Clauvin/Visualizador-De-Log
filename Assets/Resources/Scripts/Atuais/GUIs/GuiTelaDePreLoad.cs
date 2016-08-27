@@ -22,7 +22,7 @@ public class GuiTelaDePreLoad : GuiPadrao2 {
 
     protected PegarEnderecoDeLog pegar_endereco_do_log;
     protected string endereco = "Aqui ficará o endereço do log.";
-    protected string nome_do_arquivo = "Nome do Arquivo de Log";
+    protected string nome_do_arquivo = "Nome do Arquivo de Log - apenas arquivos .txt são aceitos.";
     protected LidaComErrosTempoMinimoEMaximo lida_com_erros_min_e_max;
     protected LidaComErrosEnderecoDeLog lida_com_erros_endereco_de_log;
 
