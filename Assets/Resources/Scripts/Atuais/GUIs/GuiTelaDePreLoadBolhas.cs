@@ -72,6 +72,7 @@ public class GuiTelaDePreLoadBolhas : GuiTelaDePreLoad
     {
         lida_com_erros_endereco_de_log.valor_de_comparacao_de_tipo_de_log = "[Mode Bolhas]";
         titulo = "Escolha de Log do Bolhas\n" + "e Tempo Carregado do Log";
+        toolbarStrings = new string[] { "Escolher Log", "Visualizar Log", "Retornar Para Tela Título" };
     }
 
     protected override void IrParaLoad()

@@ -14,8 +14,7 @@ public class GuiTelaDePreLoad : GuiPadrao2 {
     protected int posicaox;
     protected int qualbotao = -1;
     protected int resultado = -1;
-    protected string[] toolbarStrings = { "Escolher Log", "Visualizar Log",
-                                        "Retornar Para Tela Título" };
+    protected string[] toolbarStrings;
     protected string tempo_minimo = "Apenas números >= a 0 aqui.";
     protected string tempo_maximo = "Apenas números >= a 0 aqui.";
 
