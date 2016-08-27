@@ -34,7 +34,7 @@ public class GuiTelaDePreLoad : GuiPadrao2 {
     protected string control_line;
     protected string[] entradas_separadas;
 
-    protected string titulo = "Escolha de Log do FIT\n" + "e Tempo Carregado do Log";
+    protected string titulo;
 
     PassadorDeDados pd;
 
