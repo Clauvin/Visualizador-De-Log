@@ -8,6 +8,8 @@ using System;
 /// </summary>
 public class GuiTelaDePreLoadFIT : GuiTelaDePreLoad
 {
+    protected string endereco_das_posicoes_iniciais = "Aqui ficará o endereço das posições iniciais.";
+    protected string nome_do_arquivo_de_posicoes_iniciais = "Nome do Arquivo de Posições Iniciais - apenas arquivos .txt são aceitos.";
 
     // Essa função diverge entre FIT e Bolhas, por conta da diferença do formato do log de ambos.
     protected override void EscolhaDeArquivo()
