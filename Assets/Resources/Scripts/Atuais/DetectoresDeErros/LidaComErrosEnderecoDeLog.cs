@@ -35,7 +35,7 @@ public class LidaComErrosEnderecoDeLog : LidaComErros
     {
 
         x_da_janela_de_erro = Screen.width / 4;
-        posicao_da_mensagem_de_erro_y = Screen.height / 2 + 20;
+        posicao_da_mensagem_de_erro_y = Screen.height / 2;
         largura_da_janela_de_erro = Screen.width / 2;
         altura_da_janela_de_erro = 20;
         quantidade_de_mudanca_de_posicao_y = 0;

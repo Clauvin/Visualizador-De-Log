@@ -62,7 +62,7 @@ public class LidaComErrosTempoMinimoEMaximo : LidaComErros
         largura_da_janela_de_erro_de_erro_maximo = 240;
         altura_da_janela_de_erro_de_erro_maximo = 40;
 
-        posicao_da_mensagem_de_erro_y = Screen.height / 2 + 80;
+        posicao_da_mensagem_de_erro_y = Screen.height / 2 + 60;
         quantidade_de_mudanca_de_posicao_y = 0;
     }
 
