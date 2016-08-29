@@ -160,7 +160,7 @@ public class LidaComErrosTempoMinimoEMaximo : LidaComErros
         }
     }
 
-    public override void PossiveisMensagensDeErro()
+    public override void DesenharPossiveisMensagensDeErro()
     {
         if (erro_de_input_errado_minimo) {
 

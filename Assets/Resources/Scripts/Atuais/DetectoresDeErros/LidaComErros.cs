@@ -13,7 +13,7 @@ public class LidaComErros : MonoBehaviour {
     public int posicao_da_mensagem_de_erro_y;
     public int quantidade_de_mudanca_de_posicao_y;
 
-    public virtual void PossiveisMensagensDeErro() { }
+    public virtual void DesenharPossiveisMensagensDeErro() { }
 
     public virtual bool NaoTemosErrosDeInput() { return false; }
 
