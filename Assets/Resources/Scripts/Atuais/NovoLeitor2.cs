@@ -117,10 +117,15 @@ public class NovoLeitor2 : MonoBehaviour
         FileStream fs = new FileStream(pegar_endereco_de_log.endereco_de_arquivo[1], FileMode.Open);
         StreamReader theReader = new StreamReader(fs);
 
+        //linha extra para ler [Mode Log FIT]
+        line = theReader.ReadLine();
+
         line = theReader.ReadLine();
 
         string[] linha_alterada;
         string[] coordenadas;
+
+        
 
         do
         {
@@ -128,7 +133,7 @@ public class NovoLeitor2 : MonoBehaviour
 
             //Level 1: A(X96,Y96) B(X64,Y384)
             linha_alterada = line.Split(':');
-            //Level 1| A(X96, Y96) B(X64, Y384)
+            //Level 1| A(X96, Y96) B(X64,Y384)
 
             linha_alterada[1] = linha_alterada[1].Remove(0, 1);
             //Level 1|A(X96,Y96) B(X64,Y384)
