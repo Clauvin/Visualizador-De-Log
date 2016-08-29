@@ -77,7 +77,7 @@ public class GuiVisualizarPorTempo : GuiPadrao2 {
                 }
             }
 
-            lida_com_erros.PossiveisMensagensDeErro();
+            lida_com_erros.DesenharPossiveisMensagensDeErro();
 
             GUI.EndGroup();
         }
