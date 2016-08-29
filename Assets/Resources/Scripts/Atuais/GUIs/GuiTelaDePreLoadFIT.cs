@@ -85,8 +85,8 @@ public class GuiTelaDePreLoadFIT : GuiTelaDePreLoad
 
             GUI.Label(new Rect(Screen.width / 4, Screen.height / 2 - 20, Screen.width / 2, 20), nome_do_arquivo);
             GUI.TextField(new Rect(Screen.width / 4, Screen.height / 2, Screen.width / 2, 20), endereco, "textfield");
-            GUI.Label(new Rect(Screen.width / 4, Screen.height / 2 + 40, 120, 20), "Instante Mínimo", "textfield");
-            GUI.Label(new Rect(Screen.width / 2, Screen.height / 2 + 40, 120, 20), "Instante Máximo", "textfield");
+            GUI.Label(new Rect(Screen.width / 4, Screen.height / 2 + 40, 120, 20), "Instante Mínimo", "label");
+            GUI.Label(new Rect(Screen.width / 2, Screen.height / 2 + 40, 120, 20), "Instante Máximo", "label");
             tempo_minimo = GUI.TextArea(new Rect(Screen.width / 4, Screen.height / 2 + 60, 240, 20), tempo_minimo);
             tempo_maximo = GUI.TextArea(new Rect(Screen.width / 2, Screen.height / 2 + 60, 240, 20), tempo_maximo);
 
