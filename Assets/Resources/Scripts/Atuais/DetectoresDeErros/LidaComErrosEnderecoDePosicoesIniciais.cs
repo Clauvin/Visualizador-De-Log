@@ -5,7 +5,8 @@ using System;
 
 /// <summary>
 /// Classe derivada de LidaComErros.
-/// <para>Criada para detectar erros no arquivo escolhido para ser carregado pelo visualizador de logs,
+/// <para>Criada para detectar erros no arquivo escolhido para ser carregado pelo visualizador de logs
+/// quanto às posições iniciais dos personagens do FIT em cada nível,
 /// e uma vez encontrados, avisar isso e gerar mensagens de erro adequadas para que apareçam na GUI.</para>
 /// </summary>
 public class LidaComErrosEnderecoDePosicoesIniciais : LidaComErros
