@@ -75,8 +75,8 @@ public class GuiTelaDePreLoad : GuiPadrao2 {
             pegar_endereco_do_log.navegador_de_arquivos.outputFile = null;
         }
 
-        lida_com_erros_min_e_max.PossiveisMensagensDeErro();
-        lida_com_erros_endereco_de_log.PossiveisMensagensDeErro();
+        lida_com_erros_min_e_max.DesenharPossiveisMensagensDeErro();
+        lida_com_erros_endereco_de_log.DesenharPossiveisMensagensDeErro();
 
         resultado = -1;
 
