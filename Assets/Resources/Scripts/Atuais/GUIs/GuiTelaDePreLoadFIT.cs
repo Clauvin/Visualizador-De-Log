@@ -11,11 +11,14 @@ public class GuiTelaDePreLoadFIT : GuiTelaDePreLoad
     protected string endereco_das_posicoes_iniciais = "Aqui ficará o endereço das posições iniciais.";
     protected string nome_do_arquivo_de_posicoes_iniciais = "Nome do Arquivo de Posições Iniciais - apenas arquivos .txt são aceitos.";
 
+    protected LidaComErrosEnderecoDePosicoesIniciais lida_com_erros_endereco_de_posicoes_iniciais;
+
+    string escolher_que_arquivo = "";
+
     // Essa função diverge entre FIT e Bolhas, por conta da diferença do formato do log de ambos.
     protected override void EscolhaDeArquivo()
     {
-
-        if (pegar_endereco_do_log.FindFile())
+        if ((pegar_endereco_do_log.FindFile(0)) && (escolher_que_arquivo == "Log"))
         {
             endereco = pegar_endereco_do_log.endereco_de_arquivo[0];
             nome_do_arquivo = pegar_endereco_do_log.GetNomeDeArquivoDeLog();
@@ -60,7 +63,22 @@ public class GuiTelaDePreLoadFIT : GuiTelaDePreLoad
             fs.Dispose();
 
             pegar_endereco_do_log.CriarIniDeUltimoLogChecado(endereco);
+
         }
+        else if ((pegar_endereco_do_log.FindFile(1)) && (escolher_que_arquivo == "Posicoes Iniciais"))
+        {
+
+            endereco_das_posicoes_iniciais = pegar_endereco_do_log.endereco_de_arquivo[1];
+            nome_do_arquivo_de_posicoes_iniciais = pegar_endereco_do_log.GetNomeDeArquivoDeLog(1);
+
+            pegar_endereco_do_log.CriarIniDeUltimoLogChecado(endereco);
+
+        }
+    }
+
+    protected void EscolhaDeArquivoDePosicoes()
+    {
+
     }
 
     protected override void InicializacaoEspecifica()
@@ -118,10 +136,14 @@ public class GuiTelaDePreLoadFIT : GuiTelaDePreLoad
             // Abre a janela do FIT de escolher arquivo, e lê do arquivo escolhido seu tempo inicial e final.
             case 0:
 
+                escolher_que_arquivo = "Log";
                 pegar_endereco_do_log.Inverter_Desenhar_Navegador();
 
                 break;
             case 1:
+
+                escolher_que_arquivo = "Posicoes Iniciais";
+                pegar_endereco_do_log.Inverter_Desenhar_Navegador();
 
                 break;
             // Vai para o visualizador do FITs
