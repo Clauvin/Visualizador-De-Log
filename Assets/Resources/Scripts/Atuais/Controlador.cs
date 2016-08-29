@@ -337,7 +337,6 @@ public class Controlador : MonoBehaviour
                             ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[get_tempo_anterior - 1]).
                                 GetComponent<LigaDesliga>().Desligar();
                         }
-                        if (get_tempo_anterior > 500) Debug.Log(get_tempo_anterior);
                         ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[get_tempo_anterior]).
                             GetComponent<LigaDesliga>().Desligar();
                         if (get_tempo_anterior + 1 <= GetComponent<NovoLeitor2>().lista_de_backgrounds.Count-1)
