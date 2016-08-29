@@ -13,12 +13,14 @@ public class PassadorDeDados : MonoBehaviour {
     public int tempo_minimo;
     public int tempo_maximo;
     public string endereco_do_arquivo;
+    public string endereco_das_posicoes_iniciais;
 
-    public void SetValuesDePassagem(int tempo_min, int tempo_max, string endereco)
+    public void SetValuesDePassagem(int tempo_min, int tempo_max, string endereco, string endereco_das_posicoes)
     {
         tempo_minimo = tempo_min;
         tempo_maximo = tempo_max;
         endereco_do_arquivo = endereco;
+        endereco_das_posicoes_iniciais = endereco_das_posicoes;
     }
 
     public void Destruir()

@@ -155,7 +155,7 @@ public class GuiTelaDePreLoadFIT : GuiTelaDePreLoad
                 if (lida_com_erros_min_e_max.NaoTemosErrosDeInput() && lida_com_erros_endereco_de_log.NaoTemosErrosDeInput())
                 {
                     pd = FindObjectOfType<PassadorDeDados>();
-                    pd.SetValuesDePassagem(Convert.ToInt32(tempo_minimo), Convert.ToInt32(tempo_maximo), endereco);
+                    pd.SetValuesDePassagem(Convert.ToInt32(tempo_minimo), Convert.ToInt32(tempo_maximo), endereco, endereco_das_posicoes_iniciais);
                     IrParaLoad();
                 }
                 break;
