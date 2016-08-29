@@ -26,7 +26,7 @@ public class PegarEnderecoDeLog : MonoBehaviour {
     public PegarEnderecoDeLog()
     {
         endereco_de_arquivo = new List<string>();
-        endereco_de_arquivo.Add("");
+        endereco_de_arquivo.Add(""); endereco_de_arquivo.Add("");
         navegador_de_arquivos = new FileBrowser();
         desenhar_navegador = false;
 
