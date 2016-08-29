@@ -117,6 +117,7 @@ public class PegarEnderecoDeLog : MonoBehaviour {
 
     public string GetNomeDeArquivoDeLog(int posicao = 0)
     {
+
         string nome_final;
         string[] endereco_separado = endereco_de_arquivo[posicao].Split('\\');
 
