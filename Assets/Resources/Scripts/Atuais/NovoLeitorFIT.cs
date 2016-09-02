@@ -10,13 +10,19 @@ public class NovoLeitorFIT : NovoLeitor2 {
     void Start()
     {
         NovoLeitor2Init();
+
+
+        string endereco = Application.dataPath;
+#if UNITY_EDITOR
+        endereco += "/Arquivos de Teste de Log";
+#endif
         PassadorDeDados pd = FindObjectOfType<PassadorDeDados>();
         if (pd.endereco_do_arquivo != "")
         {
             pegar_endereco_de_log.endereco_de_arquivo[0] = pd.endereco_do_arquivo;
 
             // Gambiarra temporária para testar o carregar do arquivo de mapas.
-            pegar_endereco_de_log.endereco_de_arquivo.Add("C:\\Teste\\InfoInicialDasFases.txt");
+            pegar_endereco_de_log.endereco_de_arquivo.Add(endereco + "/InfoInicialDasFases.txt");
 
             pegar_endereco_de_log.CriarIniDeUltimoLogChecado(pd.endereco_do_arquivo);
             StartFIT();
