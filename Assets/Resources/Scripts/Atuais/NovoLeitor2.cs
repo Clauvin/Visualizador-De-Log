@@ -319,6 +319,14 @@ public class NovoLeitor2 : MonoBehaviour
 
     }
 
+    public bool TestMultiplePlayers()
+    {
+        return true;
+
+
+
+    }
+
     public bool LoadStuffBolhas(int tempo_minimo = 0, int tempo_maximo = int.MaxValue)
     {
         //number of HeatMaps
