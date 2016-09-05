@@ -338,15 +338,6 @@ public class NovoLeitor2 : MonoBehaviour
 
         }
 
-        for (int i = 0; i < bds_de_jogadores.Count; i++)
-        {
-
-            Debug.Log("Banco de dados " + (i + 1) + " do jogador " + bds_de_jogadores[i].GetNomeDoJogador(0) +
-                      ", contendo " + bds_de_jogadores[i].GetQuantidadeDeEntradas() + ".");
-
-        }
-
-
     }
 
     public bool LoadStuffBolhas(int tempo_minimo = 0, int tempo_maximo = int.MaxValue)
