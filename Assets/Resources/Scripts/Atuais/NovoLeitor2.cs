@@ -319,10 +319,32 @@ public class NovoLeitor2 : MonoBehaviour
 
     }
 
-    public bool TestMultiplePlayers()
+    public void TestMultiplePlayers()
     {
-        return true;
+        List<BancoDeDadosFIT> bds_de_jogadores = new List<BancoDeDadosFIT>();
 
+        for(int i = 0; i < bd_fit.GetQuantidadeDeEntradas(); i++)
+        {
+            while (bd_fit.GetIdDoJogador(i) > bds_de_jogadores.Count){
+
+                bds_de_jogadores.Add(new BancoDeDadosFIT());
+
+            }
+
+            bds_de_jogadores[bd_fit.GetIdDoJogador(i) - 1].Add(bd_fit.GetInstante(i), bd_fit.GetTempo(i), bd_fit.GetPersonagem(i),
+                                                             bd_fit.GetGridX(i), bd_fit.GetGridY(i), bd_fit.GetTempoDeServidor(i),
+                                                             bd_fit.GetNomeDoJogador(i), bd_fit.GetIdDoJogador(i), bd_fit.GetModoDeJogo(i));
+
+
+        }
+
+        for (int i = 0; i < bds_de_jogadores.Count; i++)
+        {
+
+            Debug.Log("Banco de dados " + (i + 1) + " do jogador " + bds_de_jogadores[i].GetNomeDoJogador(0) +
+                      ", contendo " + bds_de_jogadores[i].GetQuantidadeDeEntradas() + ".");
+
+        }
 
 
     }

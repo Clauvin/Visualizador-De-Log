@@ -29,6 +29,7 @@ public class NovoLeitorFIT : NovoLeitor2 {
             pegar_endereco_de_log.CriarIniDeUltimoLogChecado(pd.endereco_do_arquivo);
             StartFIT();
             LoadStuffFIT(pd.tempo_minimo, pd.tempo_maximo);
+            TestMultiplePlayers();
             CreateStuffFIT();
             GetComponent<Controlador>().InicializacaoFIT();
             pd.Destruir();
