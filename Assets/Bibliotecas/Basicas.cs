@@ -861,15 +861,15 @@ namespace Basicas
     }
 
     /// <summary>
-    /// Classe DadosGUIHashMap. Responsável por guardar os dados sobre as cores do HashMap. Precisa ter funções de entrada e saída.
+    /// Classe DadosGUIHeatMap. Responsável por guardar os dados sobre as cores do HeatMap. Precisa ter funções de entrada e saída.
     /// </summary>
-    public class DadosGUIHashMap
+    public class DadosGUIHeatMap
     {
         public List<int> numeros_de_cor;
         public List<Color> cores;
         public List<Texture2D> texturas_de_cor;
 
-        public DadosGUIHashMap()
+        public DadosGUIHeatMap()
         {
             numeros_de_cor = new List<int>();
             cores = new List<Color>();
