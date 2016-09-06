@@ -18,7 +18,7 @@ public class GuiFITEscolhaDePersonagens : GuiPadrao2
     {
 
         // Begin the ScrollView
-        scrollViewVector = GUI.BeginScrollView(new Rect(450, 25, 400, 200), scrollViewVector, new Rect(0, 0, 380, 200));
+        scrollViewVector = GUI.BeginScrollView(new Rect(475, 25, 420, 200), scrollViewVector, new Rect(0, 0, 400, 200));
 
         GUI.Label(new Rect(0, 0, 200, 600), "", "textarea");
 
