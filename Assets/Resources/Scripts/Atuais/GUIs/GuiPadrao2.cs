@@ -40,4 +40,5 @@ public class GuiPadrao2 : AbstractGui2
     {
         revelado = true;
     }
+
 }
