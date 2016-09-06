@@ -10,12 +10,21 @@ public class GuiTelaInicial : GuiPadrao2
     GUIStyle estilobotoestelainicial;
     private int posicaox;
     private int qualbotao = -1;
-    private int resultado = -1;
-    private string[] toolbarStrings = { "Visualizar Log F!T", "Visualizar Log Bolhas",
-                                        "Créditos", "Sair" };
+    private int resultado = -1;                          
 
     private bool creditos = false;
-
+    
+    public void set_F() {
+        resultado = 0;
+    }
+    public void set_B()
+    {
+        resultado = 1;
+    }
+    public void set_C()
+    {
+        resultado = 2;
+    }
     public override void OnGUI()
     {
         GUI.BeginGroup(new Rect(0, 0, Screen.width, Screen.height));
@@ -23,10 +32,7 @@ public class GuiTelaInicial : GuiPadrao2
         posicaox = 0;
         GUI.Box(new Rect(0, 0, Screen.width, Screen.height), string.Empty);
         GUI.Box(new Rect(Screen.width / 4, Screen.height / 6, Screen.width / 2, Screen.height / 2), "Visualizador de Logs\n\n" +
-            "F!T e Bolhas\n\n" + "Protótipo versão 05/04/2016", estilotitulotelainicial);
-
-        resultado = GUI.Toolbar(new Rect(Screen.width / 12 * 3, Screen.height / 10 * 8, Screen.width / 12 * 6, Screen.height / 10), qualbotao,
-            toolbarStrings);
+            "F!T e Bolhas\n\n" + "Protótipo versão 05/04/2016", estilotitulotelainicial); 
 
         switch (resultado)
         {
@@ -49,7 +55,7 @@ public class GuiTelaInicial : GuiPadrao2
             default:
                 break;
         }
-
+        
         resultado = -1;
 
         GUI.EndGroup();
