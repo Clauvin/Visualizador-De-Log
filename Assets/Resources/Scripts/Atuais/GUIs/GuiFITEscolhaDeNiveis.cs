@@ -22,6 +22,8 @@ public class GuiFITEscolhaDeNiveis : GuiPadrao2
 
         GUI.Label(new Rect(0, 0, 200, 600), "", "textarea");
 
+        position = 0;
+
         for (int i = 0; i < 4; i++)
         {
             toggleNiveis[i] = GUI.Toggle(new Rect(0, position, 100, 30), toggleNiveis[i], "Nivel " + i);
@@ -32,7 +34,7 @@ public class GuiFITEscolhaDeNiveis : GuiPadrao2
 
         for (int i = 4; i < 7; i++)
         {
-            toggleNiveis[i] = GUI.Toggle(new Rect(200, position, 100, 30), toggleNiveis[i], "Nivel " + i);
+            toggleNiveis[i] = GUI.Toggle(new Rect(100, position, 100, 30), toggleNiveis[i], "Nivel " + i);
             position += 20;
         }
 
