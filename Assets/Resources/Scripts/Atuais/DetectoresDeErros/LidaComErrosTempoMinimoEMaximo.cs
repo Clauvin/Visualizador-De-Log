@@ -52,7 +52,7 @@ public class LidaComErrosTempoMinimoEMaximo : LidaComErros
 
     }
 
-    public void ConfigurarVariaveisParaPreload()
+    public void ConfigurarVariaveisDePosicionamentoDeGuiParaPreload()
     {
         x_da_janela_de_erro_de_erro_minimo = Screen.width / 4;
         largura_da_janela_de_erro_de_erro_minimo = 240;
@@ -160,7 +160,7 @@ public class LidaComErrosTempoMinimoEMaximo : LidaComErros
         }
     }
 
-    public override void PossiveisMensagensDeErro()
+    public override void DesenharPossiveisMensagensDeErro()
     {
         if (erro_de_input_errado_minimo) {
 

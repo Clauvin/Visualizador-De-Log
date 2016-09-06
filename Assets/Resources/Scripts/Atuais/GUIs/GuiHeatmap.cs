@@ -21,9 +21,9 @@ public class GuiHeatmap : GuiPadrao2
     public int pos_tempo;
     public int quant_de_heatmaps;
     public Dictionary<int, Color> dicionario_heatmap;
-    public List<DadosGUIHashMap> dados;
+    public List<DadosGUIHeatMap> dados;
     public string[] lista_de_objetos;
-    protected DadosGUIHashMap infoheatmap;
+    protected DadosGUIHeatMap infoheatmap;
 
     Rect posicao_movel;
 
@@ -33,7 +33,7 @@ public class GuiHeatmap : GuiPadrao2
         posy = 120;
         texto = "Significado das Cores";
         revelado = false;
-        dados = new List<DadosGUIHashMap>();
+        dados = new List<DadosGUIHeatMap>();
 
     }
 
@@ -69,7 +69,7 @@ public class GuiHeatmap : GuiPadrao2
             for (int i = 0; i < quant_de_heatmaps; i++)
             {
                 //carrega os dados da GUI referente à lista de cores e quantos objetos representados por cor
-                infoheatmap = new DadosGUIHashMap();
+                infoheatmap = new DadosGUIHeatMap();
 
                 dicionario_heatmap = GetComponent<NovoLeitor2>().GetMatrizHeatmap(i).GetDicionarioDeCores();
                 infoheatmap.numeros_de_cor.AddRange(dicionario_heatmap.Keys);

@@ -14,8 +14,7 @@ public class GuiTelaDePreLoad : GuiPadrao2 {
     protected int posicaox;
     protected int qualbotao = -1;
     protected int resultado = -1;
-    protected string[] toolbarStrings = { "Escolher Log", "Visualizar Log",
-                                        "Retornar Para Tela Título" };
+    protected string[] toolbarStrings;
     protected string tempo_minimo = "Apenas números >= a 0 aqui.";
     protected string tempo_maximo = "Apenas números >= a 0 aqui.";
 
@@ -23,7 +22,7 @@ public class GuiTelaDePreLoad : GuiPadrao2 {
 
     protected PegarEnderecoDeLog pegar_endereco_do_log;
     protected string endereco = "Aqui ficará o endereço do log.";
-    protected string nome_do_arquivo = "Nome do Arquivo de Log";
+    protected string nome_do_arquivo = "Nome do Arquivo de Log - apenas arquivos .txt são aceitos.";
     protected LidaComErrosTempoMinimoEMaximo lida_com_erros_min_e_max;
     protected LidaComErrosEnderecoDeLog lida_com_erros_endereco_de_log;
 
@@ -34,67 +33,27 @@ public class GuiTelaDePreLoad : GuiPadrao2 {
     protected string control_line;
     protected string[] entradas_separadas;
 
-    protected string titulo = "Escolha de Log do FIT\n" + "e Tempo Carregado do Log";
+    protected string titulo;
 
-    PassadorDeDados pd;
+    protected PassadorDeDados pd;
 
     public override void OnGUI()
     {
-        lida_com_erros_min_e_max.ConfigurarVariaveisParaPreload();
+        lida_com_erros_min_e_max.ConfigurarVariaveisDePosicionamentoDeGuiParaPreload();
         lida_com_erros_endereco_de_log.ConfigurarVariaveis();
-        GUI.BeginGroup(new Rect(0, 0, Screen.width, Screen.height));
 
-        posicaox = 0;
-        GUI.Box(new Rect(0, 0, Screen.width, Screen.height), string.Empty);
-        GUI.Box(new Rect(Screen.width / 4, Screen.height / 9, Screen.width / 2, Screen.height / 4), titulo, estilo_titulo_tela_de_preload);
+        DesenharTelaDePreLoad();
 
-        GUI.Label(new Rect(Screen.width / 4, Screen.height / 2 - 20, Screen.width / 2, 20), nome_do_arquivo);
-        GUI.Label(new Rect(Screen.width / 4, Screen.height / 2, Screen.width / 2, 20), endereco, "textfield");
-        GUI.Label(new Rect(Screen.width / 4, Screen.height / 2 + 40, 120, 20), "Instante Mínimo", "textfield");
-        GUI.Label(new Rect(Screen.width / 2, Screen.height / 2 + 40, 120, 20), "Instante Máximo", "textfield");
-        tempo_minimo = GUI.TextArea(new Rect(Screen.width / 4, Screen.height / 2 + 60, 240, 20), tempo_minimo);
-        tempo_maximo = GUI.TextArea(new Rect(Screen.width / 2, Screen.height / 2 + 60, 240, 20), tempo_maximo);
-
-        resultado = GUI.Toolbar(new Rect(Screen.width / 12 * 3, Screen.height / 10 * 8, Screen.width / 12 * 6, Screen.height / 10), qualbotao,
-            toolbarStrings);
-
-        
-        switch (resultado)
+        // graças a C# File Browser, foi necessário adicionar esse código
+        // ao invés de usar FindFile() como antes.
+        if (pegar_endereco_do_log.navegador_de_arquivos.outputFile != null)
         {
-            // Abre a janela do FIT de escolher arquivo, e lê do arquivo escolhido seu tempo inicial e final.
-            case 0:
-
-                EscolhaDeArquivo();
-                break;
-            // Vai para o visualizador do FITs
-            case 1:
-
-                lida_com_erros_min_e_max.DetectarETratarErrosEExcecoesDeInput(tempo_minimo, tempo_maximo);
-                lida_com_erros_endereco_de_log.DetectarETratarErrosEExcecoesDeInput(endereco);
-
-                if (lida_com_erros_min_e_max.NaoTemosErrosDeInput() && lida_com_erros_endereco_de_log.NaoTemosErrosDeInput())
-                {
-                    pd = FindObjectOfType<PassadorDeDados>();
-                    pd.SetValuesDePassagem(Convert.ToInt32(tempo_minimo), Convert.ToInt32(tempo_maximo), endereco);
-                    IrParaLoad();
-                }
-                break;
-            // Retorna para a tela título
-            case 2:
-                pd = FindObjectOfType<PassadorDeDados>();
-                pd.Destruir();
-                UnityEngine.SceneManagement.SceneManager.LoadScene(0);
-                break;
-            default:
-                break;
+            pegar_endereco_do_log.Inverter_Desenhar_Navegador();
+            EscolhaDeArquivo();
+            pegar_endereco_do_log.navegador_de_arquivos.outputFile = null;
         }
 
-        lida_com_erros_min_e_max.PossiveisMensagensDeErro();
-        lida_com_erros_endereco_de_log.PossiveisMensagensDeErro();
-
-        resultado = -1;
-
-        GUI.EndGroup();
+        pegar_endereco_do_log.DesenharNavegadorDeArquivos();
 
     }
 
@@ -116,6 +75,16 @@ public class GuiTelaDePreLoad : GuiPadrao2 {
 
     // Inicialização específica dependendo do log que se vai ler
     protected virtual void InicializacaoEspecifica()
+    {
+
+    }
+
+    protected virtual void DesenharTelaDePreLoad()
+    {
+
+    }
+
+    protected virtual void FuncionamentoDosBotoes()
     {
 
     }

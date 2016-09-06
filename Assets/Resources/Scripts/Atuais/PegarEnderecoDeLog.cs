@@ -1,6 +1,7 @@
-﻿using UnityEditor;
+﻿#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using UnityEngine;
-using System.Collections;
 using System.IO;
 using System.Collections.Generic;
 
@@ -11,11 +12,72 @@ using System.Collections.Generic;
 public class PegarEnderecoDeLog : MonoBehaviour {
 
     public List<string> endereco_de_arquivo;
+    public FileBrowser navegador_de_arquivos;
+
+    private bool desenhar_navegador;
+
+    private float navegador_pos_x = Screen.width / 4;
+    private float navegador_pos_y = Screen.height / 9;
+    private float navegador_largura = Screen.width / 2;
+    private float navegador_altura = Screen.height / 1.25f;
+
+    private Texture2D file, folder, back, drive;
 
     public PegarEnderecoDeLog()
     {
         endereco_de_arquivo = new List<string>();
         endereco_de_arquivo.Add("");
+        navegador_de_arquivos = new FileBrowser();
+        desenhar_navegador = false;
+
+        file = Resources.Load<Texture2D>("Texturas/file menor");
+        folder = Resources.Load<Texture2D>("Texturas/folder menor");
+        back = Resources.Load<Texture2D>("Texturas/back menor");
+        drive = Resources.Load<Texture2D>("Texturas/drive menor");
+
+        // Eu QUERIA cortar a altura e largura assim MAS fazer isso chega a Texture.Set_width e Texture.Set_height...
+        // e isso gera um erro de NullReferenceException: ainda não implementaram Texture.Set_width e Texture.Set_height -__-
+        // (na Unity 5.3.5f1 Personal)
+        /*file.width /= 2; file.height /= 2;
+        folder.width /= 2; folder.height /= 2;
+        back.width /= 2; back.height /= 2;
+        drive.width /= 2; drive.height /= 2;*/
+
+        // Colocando as imagens da GUI do desenhar_navegador pra dentro dele
+        navegador_de_arquivos.fileTexture = file;
+        navegador_de_arquivos.directoryTexture = folder;
+        navegador_de_arquivos.backTexture = back;
+        navegador_de_arquivos.driveTexture = drive;
+
+        if (drive == null) Debug.Log("Nao foi");
+    }
+
+    public void Set_Desenhar_Navegador(bool true_ou_false)
+    {
+        desenhar_navegador = true_ou_false;
+    }
+
+    public bool Get_Desenhar_Navegador()
+    {
+        return desenhar_navegador;
+    }
+
+    // muda o valor de desenhar_navegador para o único valor possível.
+    // ou seja, se true, vira false. Se false, vira true.
+    public void Inverter_Desenhar_Navegador()
+    {
+        desenhar_navegador = !desenhar_navegador;
+    }
+
+    // necessário por conta de possíveis mudanças de tamanho da tela por parte do usuário.
+    public void Atualizar_Posicao_E_Tamanho_Do_Navegador()
+    {
+        navegador_pos_x = Screen.width / 4;
+        navegador_pos_y = Screen.height / 9;
+        navegador_largura = Screen.width / 2;
+        navegador_altura = Screen.height / 1.25f;
+
+        navegador_de_arquivos.setGUIRect(new Rect(navegador_pos_x, navegador_pos_y, navegador_largura, navegador_altura));
     }
 
     private bool AExtensaoETxt(string endereco, int posicao = 0)
@@ -31,11 +93,24 @@ public class PegarEnderecoDeLog : MonoBehaviour {
         else return false;
     }
 
+    public void DesenharNavegadorDeArquivos()
+    {
+        if (desenhar_navegador)
+        {
+            Atualizar_Posicao_E_Tamanho_Do_Navegador();
+            navegador_de_arquivos.draw();
+        }
+    }
+
     public bool FindFile(int posicao = 0)
     {
 
-        //Abre uma janela de procurar arquivos .txt para abrir.
-        endereco_de_arquivo[posicao] = EditorUtility.OpenFilePanel("Teste", CarregarEnderecoDeUltimoLogChecado(), "txt");
+        // Abre uma janela de procurar arquivos .txt para abrir.
+        // Descomentar caso se queira usar a janela nativa do sistema operacional, e ainda assim, apenas dentro do 
+        // Editor da Unity.
+        //endereco_de_arquivo[posicao] = EditorUtility.OpenFilePanel("Teste", CarregarEnderecoDeUltimoLogChecado(), "txt");
+
+        endereco_de_arquivo[posicao] = navegador_de_arquivos.outputFile.ToString();
 
         return AExtensaoETxt(endereco_de_arquivo[posicao]);
     }
@@ -43,7 +118,7 @@ public class PegarEnderecoDeLog : MonoBehaviour {
     public string GetNomeDeArquivoDeLog(int posicao = 0)
     {
         string nome_final;
-        string[] endereco_separado = endereco_de_arquivo[posicao].Split('/');
+        string[] endereco_separado = endereco_de_arquivo[posicao].Split('\\');
 
         nome_final = endereco_separado[endereco_separado.GetUpperBound(0)];
 
@@ -113,13 +188,18 @@ public class PegarEnderecoDeLog : MonoBehaviour {
 
     }
 
+    void Awake()
+    {
+
+    }
+
     // Use this for initialization
     void Start () {
-	
+        
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
+
+    }
 }

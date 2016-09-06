@@ -319,6 +319,27 @@ public class NovoLeitor2 : MonoBehaviour
 
     }
 
+    public void TestMultiplePlayers()
+    {
+        List<BancoDeDadosFIT> bds_de_jogadores = new List<BancoDeDadosFIT>();
+
+        for(int i = 0; i < bd_fit.GetQuantidadeDeEntradas(); i++)
+        {
+            while (bd_fit.GetIdDoJogador(i) > bds_de_jogadores.Count){
+
+                bds_de_jogadores.Add(new BancoDeDadosFIT());
+
+            }
+
+            bds_de_jogadores[bd_fit.GetIdDoJogador(i) - 1].Add(bd_fit.GetInstante(i), bd_fit.GetTempo(i), bd_fit.GetPersonagem(i),
+                                                             bd_fit.GetGridX(i), bd_fit.GetGridY(i), bd_fit.GetTempoDeServidor(i),
+                                                             bd_fit.GetNomeDoJogador(i), bd_fit.GetIdDoJogador(i), bd_fit.GetModoDeJogo(i));
+
+
+        }
+
+    }
+
     public bool LoadStuffBolhas(int tempo_minimo = 0, int tempo_maximo = int.MaxValue)
     {
         //number of HeatMaps

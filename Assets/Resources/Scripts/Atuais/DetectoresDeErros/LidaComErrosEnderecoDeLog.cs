@@ -124,7 +124,7 @@ public class LidaComErrosEnderecoDeLog : LidaComErros
         
     }
 
-    public override void PossiveisMensagensDeErro()
+    public override void DesenharPossiveisMensagensDeErro()
     {
         if (erro_de_acesso_nao_autorizado)
         {
