@@ -100,6 +100,7 @@ GameObject:
   - 114: {fileID: 1352711899}
   - 114: {fileID: 1352711900}
   - 114: {fileID: 1352711901}
+  - 114: {fileID: 1352711902}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -181,7 +182,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1352711893}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71d29f239e28872408927acfcb07fa49, type: 3}
   m_Name: 
@@ -194,7 +195,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1352711893}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e2db4d45a7774f74290f845102b199ed, type: 3}
   m_Name: 
@@ -207,13 +208,24 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1352711893}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75fd969628cd38d468041ed82c3e2ddb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   togglePersonagens: 00000000
   position: 0
+--- !u!114 &1352711902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1352711893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5f257a8e0b8ce94aba2e330db3e5721, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1735725160
 GameObject:
   m_ObjectHideFlags: 0
