@@ -22,7 +22,7 @@ public class GuiPadrao2 : AbstractGui2
 
     public override void SetY(int y) { posy = y; }
 
-    public override void MudarCoordenadas(int x, int y) { posx = x; posy = y; }
+    public override void MudarCoordenadas(int x, int y) { SetX(x); SetY(y); }
 
     public override bool MudarTexto(string novotexto) { return true; }
 
