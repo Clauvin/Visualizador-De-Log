@@ -14,9 +14,13 @@ public class GuiPadrao2 : AbstractGui2
 
     public override void OnGUI() { }
 
-    public override void MudarCoordenadasX(int x) { posx = x; }
+    public override void MudarCoordenadasX(int x) { SetX(x); }
 
-    public override void MudarCoordenadasY(int y) { posy = y; }
+    public override void SetX(int x) { posx = x; }
+
+    public override void MudarCoordenadasY(int y) { SetY(y); }
+
+    public override void SetY(int y) { posy = y; }
 
     public override void MudarCoordenadas(int x, int y) { posx = x; posy = y; }
 
