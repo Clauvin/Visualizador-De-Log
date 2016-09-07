@@ -17,7 +17,7 @@ public class GuiFITEscolhaDeJogadores : GuiPadrao2
 
         
         // Begin the ScrollView
-        scrollViewVector = GUI.BeginScrollView(new Rect(posx, 25, 200, 300), scrollViewVector, new Rect(0, 0, 180, 600));
+        scrollViewVector = GUI.BeginScrollView(new Rect(posx, posy, 200, 300), scrollViewVector, new Rect(0, 0, 180, 600));
 
         GUI.Label(new Rect(0, 0, 200, 600), "", "textarea");
 

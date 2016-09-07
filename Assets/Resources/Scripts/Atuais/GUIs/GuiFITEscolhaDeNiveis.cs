@@ -18,7 +18,7 @@ public class GuiFITEscolhaDeNiveis : GuiPadrao2
     {
 
         // Begin the ScrollView
-        scrollViewVector = GUI.BeginScrollView(new Rect(posx, 25, 400, 200), scrollViewVector, new Rect(0, 0, 380, 200));
+        scrollViewVector = GUI.BeginScrollView(new Rect(posx, posy, 400, 200), scrollViewVector, new Rect(0, 0, 380, 200));
 
         GUI.Label(new Rect(0, 0, 200, 600), "", "textarea");
 

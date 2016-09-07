@@ -16,9 +16,8 @@ public class GuiFITEscolhaDePersonagens : GuiPadrao2
 
     public override void OnGUI()
     {
-
         // Begin the ScrollView
-        scrollViewVector = GUI.BeginScrollView(new Rect(posx, 25, 420, 200), scrollViewVector, new Rect(0, 0, 400, 200));
+        scrollViewVector = GUI.BeginScrollView(new Rect(posx, posy, 420, 200), scrollViewVector, new Rect(0, 0, 400, 200));
 
         GUI.Label(new Rect(0, 0, 200, 600), "", "textarea");
 
