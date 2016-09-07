@@ -7,7 +7,8 @@ public class GuiFITEscolhas : GuiPadrao2 {
     GuiFITEscolhaDeNiveis gui_escolhas_de_niveis;
     GuiFITEscolhaDePersonagens gui_escolhas_de_personagens;
 
-    int meio_da_tela = Screen.width / 2;
+    int meio_da_tela_x = Screen.width / 2;
+    int meio_da_tela_y = Screen.height / 2;
 
     public GuiFITEscolhas()
     {
@@ -35,10 +36,15 @@ public class GuiFITEscolhas : GuiPadrao2 {
 	// Update is called once per frame
 	void Update () {
 
-        meio_da_tela = Screen.width / 2;
-        gui_escolhas_de_jogadores.SetX(meio_da_tela);
-        gui_escolhas_de_niveis.SetX(meio_da_tela);
-        gui_escolhas_de_personagens.SetX(meio_da_tela);
+        meio_da_tela_x = Screen.width / 2;
+        gui_escolhas_de_jogadores.SetX(meio_da_tela_x - Screen.width / 4);
+        gui_escolhas_de_niveis.SetX(meio_da_tela_x);
+        gui_escolhas_de_personagens.SetX(meio_da_tela_x + Screen.width / 4);
+
+        meio_da_tela_y = Screen.height / 4;
+        gui_escolhas_de_jogadores.SetY(meio_da_tela_y);
+        gui_escolhas_de_niveis.SetY(meio_da_tela_y);
+        gui_escolhas_de_personagens.SetY(meio_da_tela_y);
 
     }
 }
