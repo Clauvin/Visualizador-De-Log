@@ -36,6 +36,9 @@ public class GuiFITEscolhas : GuiPadrao2 {
 	void Update () {
 
         meio_da_tela = Screen.width / 2;
+        gui_escolhas_de_jogadores.SetX(meio_da_tela);
+        gui_escolhas_de_niveis.SetX(meio_da_tela);
+        gui_escolhas_de_personagens.SetX(meio_da_tela);
 
     }
 }
