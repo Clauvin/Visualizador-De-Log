@@ -14,18 +14,11 @@ public class GuiFITEscolhaDeNiveis : GuiPadrao2
 
     private Vector2 scrollViewVector = Vector2.zero;
 
-    public int posicao_em_x;
-
-    public GuiFITEscolhaDeNiveis(int pos_x = 0)
-    {
-        posicao_em_x = pos_x;
-    }
-
     public override void OnGUI()
     {
 
         // Begin the ScrollView
-        scrollViewVector = GUI.BeginScrollView(new Rect(posicao_em_x, 25, 400, 200), scrollViewVector, new Rect(0, 0, 380, 200));
+        scrollViewVector = GUI.BeginScrollView(new Rect(posx, 25, 400, 200), scrollViewVector, new Rect(0, 0, 380, 200));
 
         GUI.Label(new Rect(0, 0, 200, 600), "", "textarea");
 
