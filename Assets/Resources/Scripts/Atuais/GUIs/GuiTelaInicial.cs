@@ -20,32 +20,32 @@ public class GuiTelaInicial : GuiPadrao2
     {
         GUI.BeginGroup(new Rect(0, 0, Screen.width, Screen.height));
 
-        posicaox = 0;
-        GUI.Box(new Rect(0, 0, Screen.width, Screen.height), string.Empty);
-        GUI.Box(new Rect(Screen.width / 4, Screen.height / 6, Screen.width / 2, Screen.height / 2), "Visualizador de Logs\n\n" +
-            "F!T e Bolhas\n\n" + "Protótipo versão 05/04/2016", estilotitulotelainicial);
+        //posicaox = 0;
+        //GUI.Box(new Rect(0, 0, Screen.width, Screen.height), string.Empty);
+        //GUI.Box(new Rect(Screen.width / 4, Screen.height / 6, Screen.width / 2, Screen.height / 2), "Visualizador de Logs\n\n" +
+        //    "F!T e Bolhas\n\n" + "Protótipo versão 05/04/2016", estilotitulotelainicial);
 
-        resultado = GUI.Toolbar(new Rect(Screen.width / 12 * 3, Screen.height / 10 * 8, Screen.width / 12 * 6, Screen.height / 10), qualbotao,
-            toolbarStrings);
+        //resultado = GUI.Toolbar(new Rect(Screen.width / 12 * 3, Screen.height / 10 * 8, Screen.width / 12 * 6, Screen.height / 10), qualbotao,
+        //    toolbarStrings);
 
         switch (resultado)
         {
-            //Vai para o loading do FIT
-            case 0:
-                UnityEngine.SceneManagement.SceneManager.LoadScene(1);
-                break;
-            //Vai para o loading do Bolhas
-            case 1:
-                UnityEngine.SceneManagement.SceneManager.LoadScene(2);
-                break;
-            //Abre créditos
+            ////Vai para o loading do FIT
+            //case 0:
+            //    UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+            //    break;
+            ////Vai para o loading do Bolhas
+            //case 1:
+            //    UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+            //    break;
+            ////Abre créditos
             case 2:
                 creditos = true;
                 break;
-            //Fecha o programa
-            case 3:
-                Application.Quit();
-                break;
+            ////Fecha o programa
+            //case 3:
+            //    Application.Quit();
+            //    break;
             default:
                 break;
         }
