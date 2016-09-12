@@ -10,6 +10,8 @@ public class GuiFITEscolhaDeJogadores : GuiPadrao2
 
     public bool toggleBool1 = true;
     public bool toggleBool2 = true;
+    private int largura_da_janela = 200;
+    private int altura_da_janela = 300;
 
     private Vector2 scrollViewVector = Vector2.zero;
 
@@ -17,7 +19,8 @@ public class GuiFITEscolhaDeJogadores : GuiPadrao2
 
         
         // Begin the ScrollView
-        scrollViewVector = GUI.BeginScrollView(new Rect(posx, posy, 200, 300), scrollViewVector, new Rect(0, 0, 180, 600));
+        scrollViewVector = GUI.BeginScrollView(new Rect(posx, posy, 200, 300), scrollViewVector,
+                                               new Rect(0, 0, largura_da_janela - 20, altura_da_janela * 2));
 
         GUI.Label(new Rect(0, 0, 200, 600), "", "textarea");
 
