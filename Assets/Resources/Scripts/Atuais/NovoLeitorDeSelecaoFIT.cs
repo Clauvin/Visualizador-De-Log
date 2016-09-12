@@ -4,7 +4,6 @@ using System;
 using System.IO;
 using System.Collections;
 
-
 public class NovoLeitorDeSelecaoFIT : NovoLeitor2
 {
 
