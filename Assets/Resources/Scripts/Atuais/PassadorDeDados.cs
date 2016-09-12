@@ -5,7 +5,7 @@ using System.Collections;
 /// Responsável por passar valores do pre-load para o load.
 /// <para>Isso é necessário porquê o pre-load e o load são ambos scenes diferentes, e antes de uma scene ser carregada,
 /// tudo da scene anterior é apagado... a menos que você queira que algo não seja.</para>
-/// <para>E eu prefiro passa ro mínimo de dados possíveis de uma scene para a outra, por isso essa classe específica,
+/// <para>E eu prefiro passar o mínimo de dados possíveis de uma scene para a outra, por isso essa classe específica,
 /// e não uma já existente.</para>
 /// </summary>
 public class PassadorDeDados : MonoBehaviour {
