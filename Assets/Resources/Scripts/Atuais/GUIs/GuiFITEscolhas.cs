@@ -15,6 +15,10 @@ public class GuiFITEscolhas : GuiPadrao2 {
         gui_escolhas_de_jogadores = new GuiFITEscolhaDeJogadores();
         gui_escolhas_de_niveis = new GuiFITEscolhaDeNiveis();
         gui_escolhas_de_personagens = new GuiFITEscolhaDePersonagens();
+
+        gui_escolhas_de_jogadores.RevelarGui();
+        gui_escolhas_de_niveis.RevelarGui();
+        gui_escolhas_de_personagens.RevelarGui();
     }
 
     public override void OnGUI()
@@ -30,16 +34,16 @@ public class GuiFITEscolhas : GuiPadrao2 {
 
     // Use this for initialization
     void Start () {
-	
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
         meio_da_tela_x = Screen.width / 2;
-        gui_escolhas_de_jogadores.SetX(meio_da_tela_x - Screen.width / 4);
-        gui_escolhas_de_niveis.SetX(meio_da_tela_x);
-        gui_escolhas_de_personagens.SetX(meio_da_tela_x + Screen.width / 4);
+        gui_escolhas_de_jogadores.SetX(meio_da_tela_x - Screen.width / 4 - gui_escolhas_de_jogadores.largura_da_janela/2);
+        gui_escolhas_de_niveis.SetX(meio_da_tela_x - gui_escolhas_de_niveis.largura_da_janela / 2);
+        gui_escolhas_de_personagens.SetX(meio_da_tela_x + Screen.width / 4 - gui_escolhas_de_personagens.largura_da_janela / 2);
 
         meio_da_tela_y = Screen.height / 4;
         gui_escolhas_de_jogadores.SetY(meio_da_tela_y);
