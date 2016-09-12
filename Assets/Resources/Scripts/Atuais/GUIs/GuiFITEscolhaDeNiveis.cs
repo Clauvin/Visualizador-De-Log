@@ -13,12 +13,16 @@ public class GuiFITEscolhaDeNiveis : GuiPadrao2
     public int position = 0;
 
     private Vector2 scrollViewVector = Vector2.zero;
+    private int largura_da_janela = 400;
+    private int altura_da_janela = 200;
 
     public override void OnGUI()
     {
 
         // Begin the ScrollView
-        scrollViewVector = GUI.BeginScrollView(new Rect(posx, posy, 400, 200), scrollViewVector, new Rect(0, 0, 380, 200));
+        scrollViewVector = GUI.BeginScrollView(new Rect(posx, posy, largura_da_janela, altura_da_janela),
+                                               scrollViewVector,
+                                               new Rect(0, 0, largura_da_janela - 20, altura_da_janela));
 
         GUI.Label(new Rect(0, 0, 200, 600), "", "textarea");
 
