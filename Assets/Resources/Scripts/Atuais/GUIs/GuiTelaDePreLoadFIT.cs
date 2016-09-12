@@ -143,7 +143,10 @@ public class GuiTelaDePreLoadFIT : GuiTelaDePreLoad
     protected override void IrParaLoad()
     {
         // Vai pra Scene "Version FIT 3"
-        UnityEngine.SceneManagement.SceneManager.LoadScene(3);
+        //UnityEngine.SceneManagement.SceneManager.LoadScene(3);
+
+        // Vai pra Scene "Seleção FIT"
+        UnityEngine.SceneManagement.SceneManager.LoadScene(5);
     }
 
     // Use this for initialization
