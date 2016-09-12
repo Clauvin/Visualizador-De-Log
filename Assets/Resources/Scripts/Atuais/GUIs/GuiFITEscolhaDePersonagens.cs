@@ -11,15 +11,18 @@ public class GuiFITEscolhaDePersonagens : GuiPadrao2
 
     public bool[] togglePersonagens = new bool[4];
     public int position = 0;
+    private int largura_da_janela = 420;
+    private int altura_da_janela = 200;
 
     private Vector2 scrollViewVector = Vector2.zero;
 
     public override void OnGUI()
     {
         // Begin the ScrollView
-        scrollViewVector = GUI.BeginScrollView(new Rect(posx, posy, 420, 200), scrollViewVector, new Rect(0, 0, 400, 200));
+        scrollViewVector = GUI.BeginScrollView(new Rect(posx, posy, largura_da_janela, altura_da_janela),
+                                               scrollViewVector, new Rect(0, 0, largura_da_janela - 20, altura_da_janela));
 
-        GUI.Label(new Rect(0, 0, 200, 600), "", "textarea");
+        GUI.Label(new Rect(0, 0, (largura_da_janela - 20) / 2, altura_da_janela * 3), "", "textarea");
 
         position = 0;
 
