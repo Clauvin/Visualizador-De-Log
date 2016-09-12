@@ -20,6 +20,9 @@ public class GuiFITEscolhaDeNiveis : GuiPadrao2
     {
         if (revelado)
         {
+
+            GUI.Label(new Rect(posx, posy - 20, largura_da_janela / 2, 20), "Niveis", "textarea");
+
             // Begin the ScrollView
             scrollViewVector = GUI.BeginScrollView(new Rect(posx, posy, largura_da_janela, altura_da_janela),
                                                    scrollViewVector,
