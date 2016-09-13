@@ -8,12 +8,18 @@ using System.Collections;
 public class GuiFITEscolhaDeJogadores : GuiPadrao2
 {
 
-    public bool toggleBool1 = true;
-    public bool toggleBool2 = true;
     public int largura_da_janela = 200;
     public int altura_da_janela = 300;
+    private int distancia_entre_jogadores = 30;
+    private SortedList lista_de_jogadores;
+    public bool[] selecoes_de_jogadores;
 
     private Vector2 scrollViewVector = Vector2.zero;
+
+    /*public void InitGuiFITEscolhaDeJogadores()
+    {
+        selecoes_de_jogadores = new bool[lista_de_jogadores.Count];
+    }*/
 
     public override void OnGUI() {
 
@@ -27,8 +33,11 @@ public class GuiFITEscolhaDeJogadores : GuiPadrao2
 
             GUI.Label(new Rect(0, 0, 200, 600), "", "textarea");
 
-            toggleBool1 = GUI.Toggle(new Rect(0, 0, 100, 30), toggleBool1, "João");
-            toggleBool2 = GUI.Toggle(new Rect(0, 30, 100, 30), toggleBool2, "José");
+            for (int i = 0; i < lista_de_jogadores.Count; i++)
+            {
+                selecoes_de_jogadores[i] = GUI.Toggle(new Rect(0, distancia_entre_jogadores * i, 100, 30),
+                    selecoes_de_jogadores[i], lista_de_jogadores.GetByIndex(i).ToString());
+            }
 
             // End the ScrollView
             GUI.EndScrollView();
@@ -46,4 +55,9 @@ public class GuiFITEscolhaDeJogadores : GuiPadrao2
 	void Update () {
 	
 	}
+
+    /*public void SetListaDeJogadores(SortedList lista)
+    {
+        lista_de_jogadores = lista;
+    }*/
 }
