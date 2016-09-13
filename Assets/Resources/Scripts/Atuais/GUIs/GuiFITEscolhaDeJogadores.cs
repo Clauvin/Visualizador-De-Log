@@ -16,10 +16,10 @@ public class GuiFITEscolhaDeJogadores : GuiPadrao2
 
     private Vector2 scrollViewVector = Vector2.zero;
 
-    /*public void InitGuiFITEscolhaDeJogadores()
+    public void InitGuiFITEscolhaDeJogadores()
     {
         selecoes_de_jogadores = new bool[lista_de_jogadores.Count];
-    }*/
+    }
 
     public override void OnGUI() {
 
@@ -56,8 +56,8 @@ public class GuiFITEscolhaDeJogadores : GuiPadrao2
 	
 	}
 
-    /*public void SetListaDeJogadores(SortedList lista)
+    public void SetListaDeJogadores(SortedList lista)
     {
         lista_de_jogadores = lista;
-    }*/
+    }
 }
