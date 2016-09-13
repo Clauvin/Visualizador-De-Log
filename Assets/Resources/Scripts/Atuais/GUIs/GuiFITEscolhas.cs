@@ -3,9 +3,9 @@ using System.Collections;
 
 public class GuiFITEscolhas : GuiPadrao2 {
 
-    GuiFITEscolhaDeJogadores gui_escolhas_de_jogadores;
-    GuiFITEscolhaDeNiveis gui_escolhas_de_niveis;
-    GuiFITEscolhaDePersonagens gui_escolhas_de_personagens;
+    public GuiFITEscolhaDeJogadores gui_escolhas_de_jogadores;
+    public GuiFITEscolhaDeNiveis gui_escolhas_de_niveis;
+    public GuiFITEscolhaDePersonagens gui_escolhas_de_personagens;
 
     int meio_da_tela_x = Screen.width / 2;
     int meio_da_tela_y = Screen.height / 2;
