@@ -3,6 +3,7 @@ using Basicas;
 using System;
 using System.IO;
 using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
 /// <para>Responsável por usar as funções de NovoLeitor2 de forma a ler os dados do log do FIT para permitir ao usuário</para>
@@ -34,11 +35,38 @@ public class NovoLeitorDeSelecaoFIT : NovoLeitor2
             pegar_endereco_de_log.CriarIniDeUltimoLogChecado(pd.endereco_do_arquivo);
             LoadStuffSelecaoFIT(pd.tempo_minimo, pd.tempo_maximo);
             pd.Destruir();
+
+            GetComponent<GuiFITEscolhas>().gui_escolhas_de_jogadores.SetListaDeJogadores(SelecionaJogadores());
+            GetComponent<GuiFITEscolhas>().gui_escolhas_de_jogadores.InitGuiFITEscolhaDeJogadores();
+            //GetNiveis();
+            //GetPersonagens();
+
+
+
+
         }
         else
         {
             RetornarParaTelaInicial();
         }
+    }
+
+    public SortedList SelecionaJogadores()
+    {
+        int quant = bd_fit.GetQuantidadeDeEntradas();
+        SortedList lista_de_jogadores = new SortedList();
+
+        for (int i = 0; i < quant; i++)
+        {
+            if (!lista_de_jogadores.ContainsKey(bd_fit.GetNomeDoJogador(i)))
+            {
+                lista_de_jogadores.Add(bd_fit.GetNomeDoJogador(i), bd_fit.GetNomeDoJogador(i));
+            }
+
+        }
+
+        return lista_de_jogadores;
+
     }
 
 }
