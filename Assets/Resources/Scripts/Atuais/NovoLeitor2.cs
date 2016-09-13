@@ -157,10 +157,7 @@ public class NovoLeitor2 : MonoBehaviour
 
         } while (line != null);
 
-        theReader.Close();
-        theReader.Dispose();
-        fs.Close();
-        fs.Dispose();
+        FecharReaders(fs, theReader);
 
         bd_fit = new BancoDeDadosFIT();
         // Create a new StreamReader, tell it which file to read and what encoding the file
@@ -308,10 +305,7 @@ public class NovoLeitor2 : MonoBehaviour
             }
         } while (line != null);
 
-        theReader.Close();
-        theReader.Dispose();
-        fs.Close();
-        fs.Dispose();
+        FecharReaders(fs, theReader);
 
         return true;
 
@@ -368,10 +362,7 @@ public class NovoLeitor2 : MonoBehaviour
 
         } while (line != null);
 
-        theReader.Close();
-        theReader.Dispose();
-        fs.Close();
-        fs.Dispose();
+        FecharReaders(fs, theReader);
 
         bd_fit = new BancoDeDadosFIT();
         // Create a new StreamReader, tell it which file to read and what encoding the file
@@ -516,10 +507,7 @@ public class NovoLeitor2 : MonoBehaviour
             }
         } while (line != null);
 
-        theReader.Close();
-        theReader.Dispose();
-        fs.Close();
-        fs.Dispose();
+        FecharReaders(fs, theReader);
 
         for (int i = 0; i < heatmaps; i++)
         {
@@ -675,10 +663,7 @@ public class NovoLeitor2 : MonoBehaviour
             }
         } while (line != null);
 
-        theReader.Close();
-        theReader.Dispose();
-        fs.Close();
-        fs.Dispose();
+        FecharReaders(fs, theReader);
 
         for (int i = 0; i < heatmaps; i++)
         {
@@ -1316,6 +1301,17 @@ public class NovoLeitor2 : MonoBehaviour
     public void RetornarParaTelaInicial()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
+
+    /// <summary>
+    /// Função privada para fechar readers usados em outras funções de NovoLeitor2.
+    /// </summary>
+    private void FecharReaders(FileStream fs, StreamReader theReader)
+    {
+        theReader.Close();
+        theReader.Dispose();
+        fs.Close();
+        fs.Dispose();
     }
 
     public void NovoLeitor2Init()
