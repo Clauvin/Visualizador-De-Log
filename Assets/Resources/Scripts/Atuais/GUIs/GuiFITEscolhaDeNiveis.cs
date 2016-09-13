@@ -8,13 +8,13 @@ using System.Collections;
 /// </summary>
 public class GuiFITEscolhaDeNiveis : GuiPadrao2
 {
-
-    public bool[] toggleNiveis = new bool[8];
     public int position = 0;
 
     private Vector2 scrollViewVector = Vector2.zero;
     public int largura_da_janela = 400;
     public int altura_da_janela = 200;
+    private SortedList lista_de_niveis;
+    public bool[] selecoes_de_niveis;
 
     public override void OnGUI()
     {
@@ -34,7 +34,7 @@ public class GuiFITEscolhaDeNiveis : GuiPadrao2
 
             for (int i = 0; i < 4; i++)
             {
-                toggleNiveis[i] = GUI.Toggle(new Rect(0, position, 100, 30), toggleNiveis[i], "Nivel " + i);
+                selecoes_de_niveis[i] = GUI.Toggle(new Rect(0, position, 100, 30), selecoes_de_niveis[i], "Nivel " + i);
                 position += 20;
             }
 
@@ -42,7 +42,7 @@ public class GuiFITEscolhaDeNiveis : GuiPadrao2
 
             for (int i = 4; i < 7; i++)
             {
-                toggleNiveis[i] = GUI.Toggle(new Rect(100, position, 100, 30), toggleNiveis[i], "Nivel " + i);
+                selecoes_de_niveis[i] = GUI.Toggle(new Rect(100, position, 100, 30), selecoes_de_niveis[i], "Nivel " + i);
                 position += 20;
             }
 
