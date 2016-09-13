@@ -4,6 +4,10 @@ using System;
 using System.IO;
 using System.Collections;
 
+/// <summary>
+/// <para>Responsável por usar as funções de NovoLeitor2 de forma a ler os dados do log do FIT para permitir ao usuário</para>
+/// <para>escolher que usuários, personagens e níveis ele vai querer analisar.</para>
+/// </summary>
 public class NovoLeitorDeSelecaoFIT : NovoLeitor2
 {
 

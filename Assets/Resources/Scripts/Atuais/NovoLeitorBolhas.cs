@@ -4,6 +4,10 @@ using System;
 using System.IO;
 using System.Collections;
 
+
+/// <summary>
+/// Responsável por usar as funções de NovoLeitor2 de forma a ler e usar os dados do log do Bolhas.
+/// </summary>
 public class NovoLeitorBolhas : NovoLeitor2
 {
 
