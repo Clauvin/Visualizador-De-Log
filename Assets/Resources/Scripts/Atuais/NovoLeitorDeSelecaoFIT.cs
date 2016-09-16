@@ -40,9 +40,8 @@ public class NovoLeitorDeSelecaoFIT : NovoLeitor2
             GetComponent<GuiFITEscolhas>().gui_escolhas_de_jogadores.InitGuiFITEscolhaDeJogadores();
             GetComponent<GuiFITEscolhas>().gui_escolhas_de_niveis.SetListaDeNiveis(SelecionaNiveis());
             GetComponent<GuiFITEscolhas>().gui_escolhas_de_niveis.InitGuiFITEscolhaDeNiveis();
-            /*GetComponent<GuiFITEscolhas>().gui_escolhas_de_personagens.SetListaDePersonagens(SelecionaPersonagens());
-            GetComponent<GuiFITEscolhas>().gui_escolhas_de_personagens.InitGuiFITEscolhaDePersonagens();*/
-            //GetPersonagens();
+            GetComponent<GuiFITEscolhas>().gui_escolhas_de_personagens.SetListaDePersonagens(SelecionaPersonagens());
+            GetComponent<GuiFITEscolhas>().gui_escolhas_de_personagens.InitGuiFITEscolhaDePersonagens();
 
         }
         else
