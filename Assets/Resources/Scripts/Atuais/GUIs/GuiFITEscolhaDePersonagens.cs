@@ -9,12 +9,18 @@ using System.Collections;
 public class GuiFITEscolhaDePersonagens : GuiPadrao2
 {
 
-    public bool[] togglePersonagens = new bool[4];
     public int position = 0;
     public int largura_da_janela = 420;
     public int altura_da_janela = 200;
+    private SortedList lista_de_personagens;
+    public bool[] selecoes_de_personagens;
 
     private Vector2 scrollViewVector = Vector2.zero;
+
+    public void InitGuiFITEscolhaDePersonagens()
+    {
+        selecoes_de_personagens = new bool[lista_de_personagens.Count];
+    }
 
     public override void OnGUI()
     {
@@ -32,7 +38,8 @@ public class GuiFITEscolhaDePersonagens : GuiPadrao2
 
             for (int i = 0; i < 2; i++)
             {
-                togglePersonagens[i] = GUI.Toggle(new Rect(0, position, 100, 30), togglePersonagens[i], "Personagem " + i);
+                selecoes_de_personagens[i] = GUI.Toggle(new Rect(0, position, 100, 30),
+                    selecoes_de_personagens[i], "Personagem " + i);
                 position += 20;
             }
 
@@ -40,7 +47,8 @@ public class GuiFITEscolhaDePersonagens : GuiPadrao2
 
             for (int i = 2; i < 4; i++)
             {
-                togglePersonagens[i] = GUI.Toggle(new Rect(100, position, 100, 30), togglePersonagens[i], "Personagem " + i);
+                selecoes_de_personagens[i] = GUI.Toggle(new Rect(100, position, 100, 30),
+                    selecoes_de_personagens[i], "Personagem " + i);
                 position += 20;
             }
 
@@ -61,5 +69,10 @@ public class GuiFITEscolhaDePersonagens : GuiPadrao2
     void Update()
     {
 
+    }
+
+    public void SetListaDePersonagens(SortedList lista)
+    {
+        lista_de_personagens = lista;
     }
 }
