@@ -8,7 +8,7 @@ using System;
 /// </summary>
 public class GuiTelaDePreLoadFIT : GuiTelaDePreLoad
 {
-
+    
     // Essa função diverge entre FIT e Bolhas, por conta da diferença do formato do log de ambos.
     protected override void EscolhaDeArquivo()
     {
@@ -52,10 +52,7 @@ public class GuiTelaDePreLoadFIT : GuiTelaDePreLoad
 
             tempo_maximo = Convert.ToString(contagem);
 
-            theReader.Close();
-            theReader.Dispose();
-            fs.Close();
-            fs.Dispose();
+            lida_com_texto.FecharReaders(fs, theReader);
 
             pegar_endereco_do_log.CriarIniDeUltimoLogChecado(endereco);
         }
