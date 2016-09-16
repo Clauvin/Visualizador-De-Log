@@ -16,6 +16,11 @@ public class GuiFITEscolhaDeNiveis : GuiPadrao2
     private SortedList lista_de_niveis;
     public bool[] selecoes_de_niveis;
 
+    public void InitGuiFITEscolhaDeNiveis()
+    {
+        selecoes_de_niveis = new bool[lista_de_niveis.Count];
+    }
+
     public override void OnGUI()
     {
         if (revelado)
@@ -32,7 +37,7 @@ public class GuiFITEscolhaDeNiveis : GuiPadrao2
 
             position = 0;
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < lista_de_niveis.Count/2; i++)
             {
                 selecoes_de_niveis[i] = GUI.Toggle(new Rect(0, position, 100, 30), selecoes_de_niveis[i], "Nivel " + i);
                 position += 20;
@@ -40,7 +45,7 @@ public class GuiFITEscolhaDeNiveis : GuiPadrao2
 
             position = 0;
 
-            for (int i = 4; i < 7; i++)
+            for (int i = lista_de_niveis.Count/2; i < lista_de_niveis.Count; i++)
             {
                 selecoes_de_niveis[i] = GUI.Toggle(new Rect(100, position, 100, 30), selecoes_de_niveis[i], "Nivel " + i);
                 position += 20;
@@ -62,5 +67,10 @@ public class GuiFITEscolhaDeNiveis : GuiPadrao2
     void Update()
     {
 
+    }
+
+    public void SetListaDeNiveis(SortedList lista)
+    {
+        lista_de_niveis = lista;
     }
 }
