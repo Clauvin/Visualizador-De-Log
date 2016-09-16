@@ -69,4 +69,9 @@ public class GuiPadrao2 : AbstractGui2
         UnityEngine.SceneManagement.SceneManager.LoadScene(3);
     }
 
+    public void MudarCenaPara_Selecao_Fit()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(5);
+    }
+
 }
