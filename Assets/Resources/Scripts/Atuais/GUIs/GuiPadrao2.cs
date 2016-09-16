@@ -45,6 +45,11 @@ public class GuiPadrao2 : AbstractGui2
         revelado = true;
     }
 
+    public void MudarCenaPara_Tela_Inicial()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
+
     public void MudarCenaPara_Pre_Fit() {
         UnityEngine.SceneManagement.SceneManager.LoadScene(1);
     }
