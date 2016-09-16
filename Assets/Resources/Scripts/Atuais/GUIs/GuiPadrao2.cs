@@ -45,22 +45,28 @@ public class GuiPadrao2 : AbstractGui2
         revelado = true;
     }
 
-    public void Pre_Fit() {
+    public void MudarCenaPara_Pre_Fit() {
         UnityEngine.SceneManagement.SceneManager.LoadScene(1);
     }
-    public void Pre_Bolhas() {
+
+    public void MudarCenaPara_Pre_Bolhas() {
         UnityEngine.SceneManagement.SceneManager.LoadScene(2);
     }
+
     public void creditos() {
 
     }
-    public void Quit() {
+
+    public void Fechar_Aplicacao() {
         Application.Quit();
     }
-    public void Load_Bolhas() {
+
+    public void MudarCenaPara_Load_Bolhas() {
         UnityEngine.SceneManagement.SceneManager.LoadScene(4);
     }
-    public void Load_Fit() {
+
+    public void MudarCenaPara_Load_Fit() {
         UnityEngine.SceneManagement.SceneManager.LoadScene(3);
     }
+
 }
