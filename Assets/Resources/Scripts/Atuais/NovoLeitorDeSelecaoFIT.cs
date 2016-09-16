@@ -87,22 +87,22 @@ public class NovoLeitorDeSelecaoFIT : NovoLeitor2
 
     }
 
-    /*public SortedList SelecionaPersonagens()
+    public SortedList SelecionaPersonagens()
     {
         int quant = bd_fit.GetQuantidadeDeEntradas();
-        SortedList lista_de_jogadores = new SortedList();
+        SortedList lista_de_personagens = new SortedList();
 
         for (int i = 0; i < quant; i++)
         {
-            if (!lista_de_jogadores.ContainsKey(bd_fit.GetPersonagem(i)))
+            if (!lista_de_personagens.ContainsKey(bd_fit.GetPersonagem(i)))
             {
-                lista_de_jogadores.Add(bd_fit.GetPersonagem(i), bd_fit.GetPersonagem(i));
+                lista_de_personagens.Add(bd_fit.GetPersonagem(i), bd_fit.GetPersonagem(i));
             }
         }
 
-        return lista_de_jogadores;
+        return lista_de_personagens;
 
-    }*/
+    }
 
 }
 
