@@ -58,10 +58,7 @@ public class GuiTelaDePreLoadBolhas : GuiTelaDePreLoad
                 tempo_maximo = entradas_separadas[0].Split(':')[1];
             }
 
-            theReader.Close();
-            theReader.Dispose();
-            fs.Close();
-            fs.Dispose();
+            lida_com_texto.FecharReaders(fs, theReader);
 
             pegar_endereco_do_log.CriarIniDeUltimoLogChecado(endereco);
 
