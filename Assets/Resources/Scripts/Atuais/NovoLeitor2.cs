@@ -174,15 +174,11 @@ public class NovoLeitor2 : MonoBehaviour
         int personagem_atual = -1;
         bool checagem_de_acao_do_jogador = true;
         List<List<Vector2>> posicoes_atuais_de_personagens_nos_mapas_do_FIT =
-            posicoes_iniciais_de_personagens_nos_mapas_do_FIT;
+                            posicoes_iniciais_de_personagens_nos_mapas_do_FIT;
         int checando_instante_do_log = 0;
 
         // Part 2: reads the game events.
         // While there's lines left in the text file, do this:
-
-        // Part 2: reads the game events.
-        // While there's lines left in the text file, do this:
-
 
         do
         {
