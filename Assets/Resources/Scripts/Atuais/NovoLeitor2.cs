@@ -41,6 +41,8 @@ public class NovoLeitor2 : MonoBehaviour
 
     private string qual_leitor;
 
+    protected LidaComTexto lida_com_texto;
+
     // No caso, é mesmo um list que guarda lists de Vector2.
     // No caso, cada list<Vector2> são as posições iniciais para um mapa do FIT.
     // O primeiro é o mapa 1, o segundo é o mapa 2, etc.
@@ -157,7 +159,7 @@ public class NovoLeitor2 : MonoBehaviour
 
         } while (line != null);
 
-        FecharReaders(fs, theReader);
+        lida_com_texto.FecharReaders(fs, theReader);
 
         bd_fit = new BancoDeDadosFIT();
         // Create a new StreamReader, tell it which file to read and what encoding the file
@@ -305,7 +307,7 @@ public class NovoLeitor2 : MonoBehaviour
             }
         } while (line != null);
 
-        FecharReaders(fs, theReader);
+        lida_com_texto.FecharReaders(fs, theReader);
 
         return true;
 
@@ -362,7 +364,7 @@ public class NovoLeitor2 : MonoBehaviour
 
         } while (line != null);
 
-        FecharReaders(fs, theReader);
+        lida_com_texto.FecharReaders(fs, theReader);
 
         bd_fit = new BancoDeDadosFIT();
         // Create a new StreamReader, tell it which file to read and what encoding the file
@@ -507,7 +509,7 @@ public class NovoLeitor2 : MonoBehaviour
             }
         } while (line != null);
 
-        FecharReaders(fs, theReader);
+        lida_com_texto.FecharReaders(fs, theReader);
 
         for (int i = 0; i < heatmaps; i++)
         {
@@ -663,7 +665,7 @@ public class NovoLeitor2 : MonoBehaviour
             }
         } while (line != null);
 
-        FecharReaders(fs, theReader);
+        lida_com_texto.FecharReaders(fs, theReader);
 
         for (int i = 0; i < heatmaps; i++)
         {
@@ -1303,16 +1305,7 @@ public class NovoLeitor2 : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 
-    /// <summary>
-    /// Função privada para fechar readers usados em outras funções de NovoLeitor2.
-    /// </summary>
-    private void FecharReaders(FileStream fs, StreamReader theReader)
-    {
-        theReader.Close();
-        theReader.Dispose();
-        fs.Close();
-        fs.Dispose();
-    }
+    
 
     public void NovoLeitor2Init()
     {
