@@ -11,7 +11,7 @@ public class GuiFITBotoesDaTelaDeSelecao : GuiPadrao2
     private int posicao_x;
     private int qual_botao = -1;
     private int resultado = -1;
-    private string[] toolbar_Strings = { "Voltar à Tela Inicial", "Voltar à Escolha de Log FIT",
+    private string[] toolbar_Strings = { "Voltar à\n Tela Inicial", "Voltar à\n Escolha de Log FIT",
                                         "Visualizar" };
 
     public override void OnGUI()
