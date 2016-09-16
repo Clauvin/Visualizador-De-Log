@@ -5,7 +5,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
+using System.IO;
 
 namespace Basicas
 {
@@ -939,6 +939,20 @@ namespace Basicas
             
         }
 
+    }
+
+    public class LidaComTexto
+    {
+        /// <summary>
+        /// Função privada para fechar readers usados em outras funções de NovoLeitor2.
+        /// </summary>
+        public void FecharReaders(FileStream fs, StreamReader theReader)
+        {
+            theReader.Close();
+            theReader.Dispose();
+            fs.Close();
+            fs.Dispose();
+        }
     }
 
 }
