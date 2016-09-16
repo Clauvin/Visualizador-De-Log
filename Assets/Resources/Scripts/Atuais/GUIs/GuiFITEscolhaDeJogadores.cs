@@ -35,7 +35,7 @@ public class GuiFITEscolhaDeJogadores : GuiPadrao2
 
             for (int i = 0; i < lista_de_jogadores.Count; i++)
             {
-                selecoes_de_jogadores[i] = GUI.Toggle(new Rect(0, distancia_entre_jogadores * i, 100, 30),
+                selecoes_de_jogadores[i] = GUI.Toggle(new Rect(0, distancia_entre_jogadores * i, 100, 20),
                     selecoes_de_jogadores[i], lista_de_jogadores.GetByIndex(i).ToString());
             }
 
