@@ -38,7 +38,7 @@ public class GuiTelaDePreLoad : GuiPadrao2 {
 
     protected PassadorDeDados pd;
 
-    protected LidaComTexto lida_com_texto;
+    protected LidaComTexto lida_com_texto = new LidaComTexto();
 
     public override void OnGUI()
     {

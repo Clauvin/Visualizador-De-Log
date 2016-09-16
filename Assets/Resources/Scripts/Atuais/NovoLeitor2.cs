@@ -41,7 +41,7 @@ public class NovoLeitor2 : MonoBehaviour
 
     private string qual_leitor;
 
-    protected LidaComTexto lida_com_texto;
+    protected LidaComTexto lida_com_texto = new LidaComTexto();
 
     // No caso, é mesmo um list que guarda lists de Vector2.
     // No caso, cada list<Vector2> são as posições iniciais para um mapa do FIT.
