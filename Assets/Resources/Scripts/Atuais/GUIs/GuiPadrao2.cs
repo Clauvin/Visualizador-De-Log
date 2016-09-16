@@ -45,22 +45,22 @@ public class GuiPadrao2 : AbstractGui2
         revelado = true;
     }
 
-    public void pre_fit() {
+    public void Pre_Fit() {
         UnityEngine.SceneManagement.SceneManager.LoadScene(1);
     }
-    public void pre_bolhas() {
+    public void Pre_Bolhas() {
         UnityEngine.SceneManagement.SceneManager.LoadScene(2);
     }
     public void creditos() {
 
     }
-    public void quit() {
+    public void Quit() {
         Application.Quit();
     }
-    public void load_bolhas() {
+    public void Load_Bolhas() {
         UnityEngine.SceneManagement.SceneManager.LoadScene(4);
     }
-    public void load_fit() {
+    public void Load_Fit() {
         UnityEngine.SceneManagement.SceneManager.LoadScene(3);
     }
 }
