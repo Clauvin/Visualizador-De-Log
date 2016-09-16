@@ -99,6 +99,7 @@ GameObject:
   - 81: {fileID: 1352711894}
   - 114: {fileID: 1352711902}
   - 114: {fileID: 1352711899}
+  - 114: {fileID: 1352711900}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -185,18 +186,135 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c425c4d72b8e54a498497fa33ad697bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resolucao: {x: 0, y: 0}
+  modo_fit: 
   numeros_de_cores: 
+  heatmap: {fileID: 0}
+  pegar_endereco_de_log: {fileID: 0}
   lista_de_nomes_de_objetos_do_FIT:
-  - 1
-  - 2
-  - 3
-  - 4
+  - 31
+  - 32
+  - 33
+  - 34
   lista_de_nomes_de_objetos_do_bolhas:
-  - Mouse
-  - Baleia
-  - Bolha
-  - Peixe
-  - Nuvem
+  - 4d6f757365
+  - 42616c656961
+  - 426f6c6861
+  - 5065697865
+  - 4e7576656d
+  qual_leitor: 
+--- !u!114 &1352711900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1352711893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cc526ecb0bf48640aae2f32e9fb4b4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  revelado: 0
+  posx: 0
+  posy: 0
+  estilo_botoes_tela_de_selecao:
+    m_Name: 
+    m_Normal:
+      m_Background: {fileID: 0}
+      m_TextColor:
+        r: 0
+        g: 0
+        b: 0
+        a: 1
+    m_Hover:
+      m_Background: {fileID: 0}
+      m_TextColor:
+        r: 0
+        g: 0
+        b: 0
+        a: 1
+    m_Active:
+      m_Background: {fileID: 0}
+      m_TextColor:
+        r: 0
+        g: 0
+        b: 0
+        a: 1
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_TextColor:
+        r: 0
+        g: 0
+        b: 0
+        a: 1
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_TextColor:
+        r: 0
+        g: 0
+        b: 0
+        a: 1
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_TextColor:
+        r: 0
+        g: 0
+        b: 0
+        a: 1
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_TextColor:
+        r: 0
+        g: 0
+        b: 0
+        a: 1
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_TextColor:
+        r: 0
+        g: 0
+        b: 0
+        a: 1
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 0}
+    m_FontSize: 0
+    m_FontStyle: 0
+    m_Alignment: 0
+    m_WordWrap: 0
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
+  posicao_x: 0
+  qual_botao: -1
+  resultado: -1
+  toolbar_Strings:
+  - 566f6c74617220c3a02054656c6120496e696369616c
+  - 566f6c74617220c3a0204573636f6c6861206465204c6f6720464954
+  - 56697375616c697a6172
 --- !u!114 &1352711902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,6 +326,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5f257a8e0b8ce94aba2e330db3e5721, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  revelado: 0
+  posx: 0
+  posy: 0
+  gui_escolhas_de_jogadores: {fileID: 0}
+  gui_escolhas_de_niveis: {fileID: 0}
+  gui_escolhas_de_personagens: {fileID: 0}
+  meio_da_tela_x: 404
+  meio_da_tela_y: 163
 --- !u!1 &1735725160
 GameObject:
   m_ObjectHideFlags: 0
