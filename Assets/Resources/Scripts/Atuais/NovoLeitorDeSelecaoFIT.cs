@@ -38,11 +38,11 @@ public class NovoLeitorDeSelecaoFIT : NovoLeitor2
 
             GetComponent<GuiFITEscolhas>().gui_escolhas_de_jogadores.SetListaDeJogadores(SelecionaJogadores());
             GetComponent<GuiFITEscolhas>().gui_escolhas_de_jogadores.InitGuiFITEscolhaDeJogadores();
-            //GetNiveis();
+            /*GetComponent<GuiFITEscolhas>().gui_escolhas_de_niveis.SetListaDeNiveis(SelecionaNiveis());
+            GetComponent<GuiFITEscolhas>().gui_escolhas_de_niveis.InitGuiFITEscolhaDeNiveis();
+            GetComponent<GuiFITEscolhas>().gui_escolhas_de_personagens.SetListaDePersonagens(SelecionaPersonagens());
+            GetComponent<GuiFITEscolhas>().gui_escolhas_de_personagens.InitGuiFITEscolhaDePersonagens();*/
             //GetPersonagens();
-
-
-
 
         }
         else
@@ -68,6 +68,41 @@ public class NovoLeitorDeSelecaoFIT : NovoLeitor2
         return lista_de_jogadores;
 
     }
+
+    /*public SortedList SelecionaNiveis()
+    {
+        int quant = bd_fit.GetQuantidadeDeEntradas();
+        SortedList lista_de_jogadores = new SortedList();
+
+        for (int i = 0; i < quant; i++)
+        {
+            if (!lista_de_jogadores.ContainsKey(bd_fit.GetNomeDoJogador(i)))
+            {
+                lista_de_jogadores.Add(bd_fit.GetNomeDoJogador(i), bd_fit.GetNomeDoJogador(i));
+            }
+
+        }
+
+        return lista_de_jogadores;
+
+    }
+
+    public SortedList SelecionaPersonagens()
+    {
+        int quant = bd_fit.GetQuantidadeDeEntradas();
+        SortedList lista_de_jogadores = new SortedList();
+
+        for (int i = 0; i < quant; i++)
+        {
+            if (!lista_de_jogadores.ContainsKey(bd_fit.GetPersonagem(i)))
+            {
+                lista_de_jogadores.Add(bd_fit.GetPersonagem(i), bd_fit.GetPersonagem(i));
+            }
+        }
+
+        return lista_de_jogadores;
+
+    }*/
 
 }
 
