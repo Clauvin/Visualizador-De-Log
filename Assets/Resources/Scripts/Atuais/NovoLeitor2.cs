@@ -264,7 +264,7 @@ public class NovoLeitor2 : MonoBehaviour
 
                             }
 
-                            bd_fit.Add(checando_instante_do_log, Int32.Parse(entry_time[1]), i + 1,
+                            bd_fit.Add(checando_instante_do_log, Int32.Parse(entry_time[1]), Int32.Parse(entry_nivel[1]), i + 1,
                                 (int)posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i].x,
                                 (int)posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i].y,
                                 Int32.Parse(entry_tempo_do_servidor[1]), entry_nome_do_jogador[1],
@@ -466,7 +466,7 @@ public class NovoLeitor2 : MonoBehaviour
 
                             }
 
-                            bd_fit.Add(checando_instante_do_log, Int32.Parse(entry_time[1]), i + 1,
+                            bd_fit.Add(checando_instante_do_log, Int32.Parse(entry_time[1]), Int32.Parse(entry_nivel[1]), i + 1,
                                 (int)posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i].x,
                                 (int)posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i].y,
                                 Int32.Parse(entry_tempo_do_servidor[1]), entry_nome_do_jogador[1],
@@ -529,9 +529,10 @@ public class NovoLeitor2 : MonoBehaviour
 
             }
 
-            bds_de_jogadores[bd_fit.GetIdDoJogador(i) - 1].Add(bd_fit.GetInstante(i), bd_fit.GetTempo(i), bd_fit.GetPersonagem(i),
-                                                             bd_fit.GetGridX(i), bd_fit.GetGridY(i), bd_fit.GetTempoDeServidor(i),
-                                                             bd_fit.GetNomeDoJogador(i), bd_fit.GetIdDoJogador(i), bd_fit.GetModoDeJogo(i));
+            bds_de_jogadores[bd_fit.GetIdDoJogador(i) - 1].Add(bd_fit.GetInstante(i), bd_fit.GetTempo(i), bd_fit.GetNivel(i),
+                                                               bd_fit.GetPersonagem(i), bd_fit.GetGridX(i), bd_fit.GetGridY(i),
+                                                              bd_fit.GetTempoDeServidor(i), bd_fit.GetNomeDoJogador(i),
+                                                              bd_fit.GetIdDoJogador(i), bd_fit.GetModoDeJogo(i));
 
 
         }
