@@ -19,6 +19,8 @@ namespace Basicas
         // int
         private ArrayList tempo;
         // int
+        private ArrayList nivel;
+        // int
         private ArrayList personagem;
         // int
         private ArrayList grid_x;
@@ -40,6 +42,7 @@ namespace Basicas
         {
             instante = new ArrayList();
             tempo = new ArrayList();
+            nivel = new ArrayList();
             personagem = new ArrayList();
             grid_x = new ArrayList();
             grid_y = new ArrayList();
@@ -49,11 +52,12 @@ namespace Basicas
             modo_de_jogo = new ArrayList();
         }
 
-        public bool Add(int inst, int time, int pers, int x, int y, int server_time,
+        public bool Add(int inst, int time, int niv, int pers, int x, int y, int server_time,
                         string player_name, int player_id, int game_mode)
         {
             instante.Add(inst);
             tempo.Add(time);
+            nivel.Add(niv);
             personagem.Add(pers);
             grid_x.Add(x);
             grid_y.Add(y);
@@ -81,6 +85,22 @@ namespace Basicas
 #if (DEBUG)
 
                 Debug.Log("BancoDeDadosFIT.GetInstante - Não há posição " + pos);
+
+#endif
+                return -1;
+            }
+        }
+
+        public int GetNivel(int pos)
+        {
+            try { return (int)nivel[pos]; }
+            //ATENÇAO: Esse catch está correto?
+            catch (ArgumentOutOfRangeException excecao)
+            {
+
+#if (DEBUG)
+
+                Debug.Log("BancoDeDadosFIT.GetNivel - Não há posição " + pos);
 
 #endif
                 return -1;
