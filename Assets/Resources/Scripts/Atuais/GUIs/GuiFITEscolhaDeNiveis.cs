@@ -38,7 +38,7 @@ public class GuiFITEscolhaDeNiveis : GuiPadrao2
 
             position = 0;
 
-            for (int i = 0; i < lista_de_niveis.Count/2; i++)
+            for (int i = 0; i < lista_de_niveis.Count; i++)
             {
                 selecoes_de_niveis[i] = GUI.Toggle(new Rect(0, position, 100, 20), selecoes_de_niveis[i], "Nivel " + i);
                 position += distancia_entre_niveis;
