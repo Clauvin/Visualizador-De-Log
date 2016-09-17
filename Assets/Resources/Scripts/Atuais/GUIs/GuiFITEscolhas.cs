@@ -32,10 +32,21 @@ public class GuiFITEscolhas : GuiPadrao2 {
 
     }
 
+    void Awake()
+    {
+        gui_escolhas_de_jogadores = new GuiFITEscolhaDeJogadores();
+        gui_escolhas_de_niveis = new GuiFITEscolhaDeNiveis();
+        gui_escolhas_de_personagens = new GuiFITEscolhaDePersonagens();
+
+        gui_escolhas_de_jogadores.RevelarGui();
+        gui_escolhas_de_niveis.RevelarGui();
+        gui_escolhas_de_personagens.RevelarGui();
+    }
+
     // Use this for initialization
     void Start () {
 
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
