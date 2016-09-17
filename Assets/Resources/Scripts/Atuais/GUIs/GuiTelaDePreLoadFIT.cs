@@ -32,23 +32,29 @@ public class GuiTelaDePreLoadFIT : GuiTelaDePreLoad
             control_line = theReader.ReadLine(); control_line = theReader.ReadLine(); control_line = theReader.ReadLine();
             control_line = theReader.ReadLine();
 
-            entradas_separadas = control_line.Split('=');
-
-            // == 4 porquê existem 4 termos por linha de dados no log do FIT.
-            if (entradas_separadas.Length == 7)
-            {
-                tempo_minimo = Convert.ToString(0);
-            }
-
             int contagem = 0;
 
-            do
+            if (control_line != null)
             {
-                line = control_line;
-                control_line = theReader.ReadLine();
-                contagem++;
+                entradas_separadas = control_line.Split('=');
 
-            } while (control_line != null);
+                // == 4 porquê existem 4 termos por linha de dados no log do FIT.
+                if (entradas_separadas.Length == 7)
+                {
+                    tempo_minimo = Convert.ToString(0);
+                }
+
+                
+
+                do
+                {
+                    line = control_line;
+                    control_line = theReader.ReadLine();
+                    contagem++;
+
+                } while (control_line != null);
+
+            }
 
             tempo_maximo = Convert.ToString(contagem);
 
