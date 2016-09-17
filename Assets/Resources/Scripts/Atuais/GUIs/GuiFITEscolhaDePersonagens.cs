@@ -13,8 +13,10 @@ public class GuiFITEscolhaDePersonagens : GuiPadrao2
     public int altura_da_janela = 200;
     private SortedList lista_de_personagens;
     public bool[] selecoes_de_personagens;
-    public int position = 0;
-    public int distancia_entre_personagens = 20;
+    public int position_x = 0;
+    public int position_y = 0;
+    public int largura_entre_personagens = 100;
+    public int altura_entre_personagens = 20;
 
     private Vector2 scrollViewVector = Vector2.zero;
 
@@ -35,23 +37,23 @@ public class GuiFITEscolhaDePersonagens : GuiPadrao2
 
             GUI.Label(new Rect(0, 0, (largura_da_janela - 20) / 2, altura_da_janela * 3), "", "textarea");
 
-            position = 0;
+            position_y = 0;
 
-            for (int i = 0; i < 2; i++)
+            
+
+            for (int i = 0; i < selecoes_de_personagens.Length; i++)
             {
-                selecoes_de_personagens[i] = GUI.Toggle(new Rect(0, position, 100, 20),
+                selecoes_de_personagens[i] = GUI.Toggle(new Rect(position_x, position_y, 100, 20),
                     selecoes_de_personagens[i], "Personagem " + i);
-                position += distancia_entre_personagens;
+                position_x += largura_entre_personagens;
+                if (position_x >= 2 * largura_entre_personagens)
+                {
+                    position_x = 0;
+                    position_y += altura_entre_personagens;
+                }
             }
 
-            position = 0;
-
-            for (int i = 2; i < 4; i++)
-            {
-                selecoes_de_personagens[i] = GUI.Toggle(new Rect(100, position, 100, 20),
-                    selecoes_de_personagens[i], "Personagem " + i);
-                position += distancia_entre_personagens;
-            }
+            position_y = 0;
 
             // End the ScrollView
             GUI.EndScrollView();
