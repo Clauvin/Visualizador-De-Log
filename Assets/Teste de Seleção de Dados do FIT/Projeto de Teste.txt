@@ -1,0 +1,63 @@
+Funções a serem testadas: colocação de toggles para Personagens, Níveis e Jogadores.
+
+Parâmetros do problema: quantidades de entradas distintas de personagens, níveis e jogadores, chamadas respectivamente de p, n e j.
+
+Modelo 1(baseado em funcionalidade):
+	Característica: quantas entradas.
+	I0 = nenhuma entrada
+	I1 = uma entrada.
+	I2 = várias entradas = oito entradas.
+
+	Característica; quall tipo de entrada?
+	p = personagem
+	n = nível
+	j = jogador.
+
+Método Escolhido: All Combinations.
+
+	I0	I1	I2
+p	0	0	0
+n	1	1	1
+j	8	8	8
+
+Modelo de Teste:
+
+Ia(p ou n ou j)
+Resultado esperado:
+
+Testes:
+I0p
+Resultado Esperado: 0.
+
+I1p
+Resultado Esperado: 1.
+
+I2p
+Resultado Esperado: 8.
+
+I0n
+Resultado Esperado: 0.
+
+I1n
+Resultado Esperado: 1.
+
+I2n
+Resultado Esperado: 8.
+
+I0j
+Resultado Esperado: 0.
+
+I1j
+Resultado Esperado: 1.
+
+I2j
+Resultado Esperado: 8.
+
+Sobre a execução do primeiro teste: a execução dos testes foi feita com 3 arquivos de entrada, denominados I0, I1 e I2. Cada um deles testou respectivamente nenhuma entrada, uma entrada e 8 entradas.
+
+Foram encontrados bugs no teste de I0 - no PreLoad do FIT, os tempos mínimo e máximo não aparecem com 0 entradas, e o GuiFITEscolhaDePersonagens não estava modificado para lidar com uma quantidae variável de personagens.
+
+Sobre a execução do segundo teste(pós-correção de erros do primeiro teste):
+I0 não demonstrou erros, I1 por outro lado sim. O nível 0 estava posicionado no lugar errado e os personagens estavam TODOS embolados.
+
+Além disso, não há como alterar a quantidade de personagens diretamente através de I0, I1 e I2: isso precisa ser feito alterando a quantidade de personagens em cada nível, mas foi possível testar p com 0, 2 e 4 personagens.

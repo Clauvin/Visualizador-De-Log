@@ -1,0 +1,4 @@
+﻿[Mode FIT]
+==START=
+[Test01]
+ServerTime:481=CONNECTED =

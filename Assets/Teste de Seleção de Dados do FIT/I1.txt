@@ -1,0 +1,5 @@
+﻿[Mode FIT]
+==START=
+[Test01]
+ServerTime:481=CONNECTED =
+ServerTime:491=ServerID:1=Player:THIAGO=MODE:3=Level:1=Input:4=Time:237

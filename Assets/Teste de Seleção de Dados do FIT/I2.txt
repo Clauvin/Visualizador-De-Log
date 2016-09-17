@@ -1,0 +1,10 @@
+﻿[Mode FIT]
+==START=
+[Test01]
+ServerTime:481=CONNECTED =
+ServerTime:491=ServerID:1=Player:THIAGO=MODE:3=Level:1=Input:4=Time:237
+ServerTime:501=ServerID:1=Player:Cláuvin=MODE:3=Level:2=Input:4=Time:243
+ServerTime:511=ServerID:1=Player:Richardson=MODE:3=Level:3=Input:4=Time:251
+ServerTime:521=ServerID:1=Player:Josivaldo=MODE:3=Level:4=Input:4=Time:265
+ServerTime:531=ServerID:1=Player:Ariovaldo=MODE:3=Level:5=Input:4=Time:278
+ServerTime:541=ServerID:1=Player:Albuquerque=MODE:3=Level:6=Input:4=Time:292
