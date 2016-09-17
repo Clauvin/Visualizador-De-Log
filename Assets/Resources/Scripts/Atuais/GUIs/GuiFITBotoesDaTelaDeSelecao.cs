@@ -28,12 +28,14 @@ public class GuiFITBotoesDaTelaDeSelecao : GuiPadrao2
         {
 
             case 0:
+                MudarCenaPara_Tela_Inicial();
                 break;
             case 1:
+                MudarCenaPara_Pre_Fit();
                 break;
             //Abre créditos
             case 2:
-                //creditos = true;
+                MudarCenaPara_Load_Fit();
                 break;
             default:
                 break;
