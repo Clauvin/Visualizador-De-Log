@@ -29,9 +29,14 @@ public class PassadorDeDados : MonoBehaviour {
         Destroy(transform.gameObject);
     }
 
-    void Awake()
+    public void NaoDestruirAoDescarregar()
     {
         DontDestroyOnLoad(transform.gameObject);
+    }
+
+    void Awake()
+    {
+        NaoDestruirAoDescarregar();
     }
 
     // Use this for initialization
