@@ -35,6 +35,8 @@ public class GuiFITBotoesDaTelaDeSelecao : GuiPadrao2
                 break;
             //Abre créditos
             case 2:
+                PassadorDeDados pd_vai = new PassadorDeDados();
+                pd_vai.bd_fit = GetComponent<NovoLeitor2>().GetBancoDeDadosFIT();
                 MudarCenaPara_Load_Fit();
                 break;
             default:
