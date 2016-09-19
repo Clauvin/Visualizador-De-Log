@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Basicas;
 using System.Collections;
 
 /// <summary>
@@ -13,12 +14,14 @@ public class PassadorDeDados : MonoBehaviour {
     public int tempo_minimo;
     public int tempo_maximo;
     public string endereco_do_arquivo;
+    public BancoDeDadosFIT bd_fit;
 
-    public void SetValuesDePassagem(int tempo_min, int tempo_max, string endereco)
+    public void SetValuesDePassagem(int tempo_min, int tempo_max, string endereco, BancoDeDadosFIT bd = null)
     {
         tempo_minimo = tempo_min;
         tempo_maximo = tempo_max;
         endereco_do_arquivo = endereco;
+        bd_fit = bd;
     }
 
     public void Destruir()
