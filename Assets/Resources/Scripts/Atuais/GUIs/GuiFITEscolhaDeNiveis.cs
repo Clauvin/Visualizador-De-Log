@@ -16,7 +16,7 @@ public class GuiFITEscolhaDeNiveis : GuiPadrao2
     public bool[] selecoes_de_niveis;
     public int position_x = 0;
     public int position_y = 0;
-    public int largura_entre_niveis = 20;
+    public int largura_entre_niveis = 100;
     public int altura_entre_niveis = 20;
 
     public void InitGuiFITEscolhaDeNiveis()
@@ -45,7 +45,7 @@ public class GuiFITEscolhaDeNiveis : GuiPadrao2
             {
                 selecoes_de_niveis[i] = GUI.Toggle(new Rect(position_x, position_y, 100, 20), selecoes_de_niveis[i], "Nivel " + i);
                 position_x += largura_entre_niveis;
-                if (position_y >= 2 * largura_entre_niveis)
+                if (position_x >= 2 * largura_entre_niveis)
                 {
                     position_x = 0;
                     position_y += altura_entre_niveis;
