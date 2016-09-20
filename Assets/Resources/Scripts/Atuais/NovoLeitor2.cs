@@ -50,6 +50,19 @@ public class NovoLeitor2 : MonoBehaviour
 
     int heatmaps;
 
+    public int Heatmaps
+    {
+        get
+        {
+            return heatmaps;
+        }
+
+        set
+        {
+            heatmaps = value;
+        }
+    }
+
     public void StartFIT()
     {
         qual_leitor = "FIT";
@@ -113,7 +126,7 @@ public class NovoLeitor2 : MonoBehaviour
     {
 
         //number for number of HeatMaps
-        heatmaps = 1;
+        Heatmaps = 1;
 
         // Handle any problems that might arise when reading the text
         string line;
@@ -282,7 +295,7 @@ public class NovoLeitor2 : MonoBehaviour
                             // lemos 2 em entry_char, colocamos mais um, temos três, e por aí vai.
 
                             // Mas sinceramente eu posso não fazer isso e só pegar do vetor de nomes do FIT...
-                            if (i == heatmaps) heatmaps++;
+                            if (i == Heatmaps) Heatmaps++;
 
                         }
 
@@ -314,7 +327,7 @@ public class NovoLeitor2 : MonoBehaviour
     public bool LoadStuffFIT(int instante_minimo = 0, int instante_maximo = int.MaxValue)
     {
         //number for number of HeatMaps
-        heatmaps = 1;
+        Heatmaps = 1;
 
         // Handle any problems that might arise when reading the text
         string line;
@@ -484,7 +497,7 @@ public class NovoLeitor2 : MonoBehaviour
                             // lemos 2 em entry_char, colocamos mais um, temos três, e por aí vai.
 
                             // Mas sinceramente eu posso não fazer isso e só pegar do vetor de nomes do FIT...
-                            if (i == heatmaps) heatmaps++;
+                            if (i == Heatmaps) Heatmaps++;
 
                         }
 
@@ -509,11 +522,11 @@ public class NovoLeitor2 : MonoBehaviour
 
         lida_com_texto.FecharReaders(fs, theReader);
 
-        for (int i = 0; i < heatmaps; i++)
+        for (int i = 0; i < Heatmaps; i++)
         {
             matrizes_dos_heatmaps.Add(new HeatMap());
         }
-        numeros_de_cores = new int[heatmaps];
+        numeros_de_cores = new int[Heatmaps];
 
         return true;
 
@@ -545,7 +558,7 @@ public class NovoLeitor2 : MonoBehaviour
     {
         //number of HeatMaps
         //no caso do Bolhas, 1 + Mouse mais 4 objetos = 6
-        heatmaps = 1 + lista_de_nomes_de_objetos_do_bolhas.GetUpperBound(0) + 1;
+        Heatmaps = 1 + lista_de_nomes_de_objetos_do_bolhas.GetUpperBound(0) + 1;
 
         // Handle any problems that might arise when reading the text
         string line;
@@ -666,11 +679,11 @@ public class NovoLeitor2 : MonoBehaviour
 
         lida_com_texto.FecharReaders(fs, theReader);
 
-        for (int i = 0; i < heatmaps; i++)
+        for (int i = 0; i < Heatmaps; i++)
         {
             matrizes_dos_heatmaps.Add(new HeatMap());
         }
-        numeros_de_cores = new int[heatmaps];
+        numeros_de_cores = new int[Heatmaps];
 
         return true;
     }
