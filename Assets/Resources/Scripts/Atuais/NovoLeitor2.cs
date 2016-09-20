@@ -532,6 +532,15 @@ public class NovoLeitor2 : MonoBehaviour
 
     }
 
+    void InicializarHeatmaps()
+    {
+        for (int i = 0; i < Heatmaps; i++)
+        {
+            matrizes_dos_heatmaps.Add(new HeatMap());
+        }
+        numeros_de_cores = new int[Heatmaps];
+    }
+
     public void TestMultiplePlayers()
     {
         List<BancoDeDadosFIT> bds_de_jogadores = new List<BancoDeDadosFIT>();
