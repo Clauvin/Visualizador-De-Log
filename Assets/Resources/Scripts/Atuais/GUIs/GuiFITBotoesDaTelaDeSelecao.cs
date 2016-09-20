@@ -37,6 +37,7 @@ public class GuiFITBotoesDaTelaDeSelecao : GuiPadrao2
             case 2:
                 PassadorDeDados pd_vai = new PassadorDeDados();
                 pd_vai.bd_fit = GetComponent<NovoLeitor2>().GetBancoDeDadosFIT();
+                pd_vai.heatmaps = GetComponent<NovoLeitor2>().Heatmaps;
                 MudarCenaPara_Load_Fit();
                 break;
             default:
