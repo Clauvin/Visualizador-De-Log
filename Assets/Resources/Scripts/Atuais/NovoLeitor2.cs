@@ -424,7 +424,7 @@ public class NovoLeitor2 : MonoBehaviour
 
                     entry_time = entries[6].Split(':');
                     // entry_time = Time | 1
-                    
+
                     if ((instante_minimo <= checando_instante_do_log) && (checando_instante_do_log <= instante_maximo))
                     {
 
@@ -436,7 +436,7 @@ public class NovoLeitor2 : MonoBehaviour
                         input = Int32.Parse(entries[5].Split(':')[1]);
 
                         if (Int32.Parse(entry_nivel[1]) - 1 != estagio_atual) personagem_atual = 0;
-                        estagio_atual = Int32.Parse(entry_nivel[1])-1;
+                        estagio_atual = Int32.Parse(entry_nivel[1]) - 1;
 
                         for (int i = 0; i < posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual].Count; i++)
                         {
@@ -508,31 +508,27 @@ public class NovoLeitor2 : MonoBehaviour
 
                 }
 
-                #if (DEBUG)
+#if (DEBUG)
 
                 else
                 {
                     Debug.Log("NovoLeitor2.LoadStuff - Linha não tinha sete elementos, tinha " + entries.GetLength(0) + ".");
                 }
 
-                #endif
+#endif
 
             }
         } while (line != null);
 
         lida_com_texto.FecharReaders(fs, theReader);
 
-        for (int i = 0; i < Heatmaps; i++)
-        {
-            matrizes_dos_heatmaps.Add(new HeatMap());
-        }
-        numeros_de_cores = new int[Heatmaps];
+        InicializarHeatmaps();
 
         return true;
 
     }
 
-    void InicializarHeatmaps()
+    public void InicializarHeatmaps()
     {
         for (int i = 0; i < Heatmaps; i++)
         {
@@ -688,11 +684,7 @@ public class NovoLeitor2 : MonoBehaviour
 
         lida_com_texto.FecharReaders(fs, theReader);
 
-        for (int i = 0; i < Heatmaps; i++)
-        {
-            matrizes_dos_heatmaps.Add(new HeatMap());
-        }
-        numeros_de_cores = new int[Heatmaps];
+        InicializarHeatmaps();
 
         return true;
     }
