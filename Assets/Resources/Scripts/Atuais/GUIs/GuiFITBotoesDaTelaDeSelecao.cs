@@ -35,7 +35,9 @@ public class GuiFITBotoesDaTelaDeSelecao : GuiPadrao2
                 break;
             //Abre créditos
             case 2:
-                PassadorDeDados pd_vai = new PassadorDeDados();
+                Object.Instantiate
+                    (Resources.Load("Objetos\\Passador De Dados"));
+                PassadorDeDados pd_vai = FindObjectOfType<PassadorDeDados>().GetComponent<PassadorDeDados>();
                 pd_vai.bd_fit = GetComponent<NovoLeitor2>().GetBancoDeDadosFIT();
                 pd_vai.heatmaps = GetComponent<NovoLeitor2>().Heatmaps;
                 pd_vai.NaoDestruirAoDescarregar();
