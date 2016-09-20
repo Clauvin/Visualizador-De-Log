@@ -15,6 +15,7 @@ public class PassadorDeDados : MonoBehaviour {
     public int tempo_maximo;
     public string endereco_do_arquivo;
     public BancoDeDadosFIT bd_fit;
+    public int heatmaps;
 
     public void SetValuesDePassagem(int tempo_min, int tempo_max, string endereco, BancoDeDadosFIT bd = null)
     {
