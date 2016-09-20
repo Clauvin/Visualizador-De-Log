@@ -48,6 +48,8 @@ public class NovoLeitor2 : MonoBehaviour
     // O primeiro é o mapa 1, o segundo é o mapa 2, etc.
     List<List<Vector2>> posicoes_iniciais_de_personagens_nos_mapas_do_FIT;
 
+    int heatmaps;
+
     public void StartFIT()
     {
         qual_leitor = "FIT";
@@ -111,7 +113,7 @@ public class NovoLeitor2 : MonoBehaviour
     {
 
         //number for number of HeatMaps
-        int heatmaps = 1;
+        heatmaps = 1;
 
         // Handle any problems that might arise when reading the text
         string line;
@@ -312,7 +314,7 @@ public class NovoLeitor2 : MonoBehaviour
     public bool LoadStuffFIT(int instante_minimo = 0, int instante_maximo = int.MaxValue)
     {
         //number for number of HeatMaps
-        int heatmaps = 1;
+        heatmaps = 1;
 
         // Handle any problems that might arise when reading the text
         string line;
@@ -543,7 +545,7 @@ public class NovoLeitor2 : MonoBehaviour
     {
         //number of HeatMaps
         //no caso do Bolhas, 1 + Mouse mais 4 objetos = 6
-        int heatmaps = 1 + lista_de_nomes_de_objetos_do_bolhas.GetUpperBound(0) + 1;
+        heatmaps = 1 + lista_de_nomes_de_objetos_do_bolhas.GetUpperBound(0) + 1;
 
         // Handle any problems that might arise when reading the text
         string line;
