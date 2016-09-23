@@ -12,7 +12,7 @@ public class NovoLeitorFIT : NovoLeitor2 {
     // Use this for initialization
     void Start()
     {
-        NovoLeitor2Init();
+        NovoLeitor2InitFIT();
 
         string endereco;
 #if UNITY_EDITOR

@@ -14,7 +14,7 @@ public class NovoLeitorBolhas : NovoLeitor2
     // Use this for initialization
     void Start()
     {
-        NovoLeitor2Init();
+        NovoLeitor2InitBolhas();
         PassadorDeDados pd = FindObjectOfType<PassadorDeDados>();
         if (pd.endereco_do_arquivo != "")
         {
