@@ -1329,6 +1329,8 @@ public class NovoLeitor2 : MonoBehaviour
 
     public void NovoLeitor2Init()
     {
+        obj_jogador_fit = new ObjetosDeUmJogadorFIT();
+
         resolucao = new Vector2();
         objetos = new ParaVisualizacao<GameObject>();
         materiais = new ParaVisualizacao<Material>();
