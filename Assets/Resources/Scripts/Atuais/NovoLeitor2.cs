@@ -11,9 +11,10 @@ using System.Collections.Generic;
 public class NovoLeitor2 : MonoBehaviour
 {
 
-    protected ObjetosDeUmJogadorFIT obj_jogador_fit;
+    public ObjetosDeUmJogadorFIT obj_jogador_fit;
 
     protected BancoDeDadosBolhas bd_bolhas;
+
 
     protected Vector2 resolucao;
     protected ParaVisualizacao<GameObject> objetos;
@@ -22,9 +23,14 @@ public class NovoLeitor2 : MonoBehaviour
     public ParaVisualizacao<Texture2D> texturas;
     public ParaVisualizacao<Texture2D> texturas_selecionadas;
 
+    
     Pintar pintar;
+
     public ArrayList lista_de_objetos;
+
     public ArrayList lista_de_backgrounds;
+
+
     protected string modo_fit;
 
     protected ArrayList matrizes_dos_heatmaps;
