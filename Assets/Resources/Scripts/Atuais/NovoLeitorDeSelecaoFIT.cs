@@ -52,14 +52,14 @@ public class NovoLeitorDeSelecaoFIT : NovoLeitor2
 
     public SortedList SelecionaJogadores()
     {
-        int quant = bd_fit.GetQuantidadeDeEntradas();
+        int quant = obj_jogador_fit.bd_fit.GetQuantidadeDeEntradas();
         SortedList lista_de_jogadores = new SortedList();
 
         for (int i = 0; i < quant; i++)
         {
-            if (!lista_de_jogadores.ContainsKey(bd_fit.GetNomeDoJogador(i)))
+            if (!lista_de_jogadores.ContainsKey(obj_jogador_fit.bd_fit.GetNomeDoJogador(i)))
             {
-                lista_de_jogadores.Add(bd_fit.GetNomeDoJogador(i), bd_fit.GetNomeDoJogador(i));
+                lista_de_jogadores.Add(obj_jogador_fit.bd_fit.GetNomeDoJogador(i), obj_jogador_fit.bd_fit.GetNomeDoJogador(i));
             }
 
         }
@@ -70,14 +70,14 @@ public class NovoLeitorDeSelecaoFIT : NovoLeitor2
 
     public SortedList SelecionaNiveis()
     {
-        int quant = bd_fit.GetQuantidadeDeEntradas();
+        int quant = obj_jogador_fit.bd_fit.GetQuantidadeDeEntradas();
         SortedList lista_de_niveis = new SortedList();
 
         for (int i = 0; i < quant; i++)
         {
-            if (!lista_de_niveis.ContainsKey(bd_fit.GetNivel(i)))
+            if (!lista_de_niveis.ContainsKey(obj_jogador_fit.bd_fit.GetNivel(i)))
             {
-                lista_de_niveis.Add(bd_fit.GetNivel(i), bd_fit.GetNivel(i));
+                lista_de_niveis.Add(obj_jogador_fit.bd_fit.GetNivel(i), obj_jogador_fit.bd_fit.GetNivel(i));
             }
 
         }
@@ -88,14 +88,14 @@ public class NovoLeitorDeSelecaoFIT : NovoLeitor2
 
     public SortedList SelecionaPersonagens()
     {
-        int quant = bd_fit.GetQuantidadeDeEntradas();
+        int quant = obj_jogador_fit.bd_fit.GetQuantidadeDeEntradas();
         SortedList lista_de_personagens = new SortedList();
 
         for (int i = 0; i < quant; i++)
         {
-            if (!lista_de_personagens.ContainsKey(bd_fit.GetPersonagem(i)))
+            if (!lista_de_personagens.ContainsKey(obj_jogador_fit.bd_fit.GetPersonagem(i)))
             {
-                lista_de_personagens.Add(bd_fit.GetPersonagem(i), bd_fit.GetPersonagem(i));
+                lista_de_personagens.Add(obj_jogador_fit.bd_fit.GetPersonagem(i), obj_jogador_fit.bd_fit.GetPersonagem(i));
             }
         }
 

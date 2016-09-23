@@ -178,7 +178,7 @@ public class NovoLeitor2 : MonoBehaviour
 
         lida_com_texto.FecharReaders(fs, theReader);
 
-        bd_fit = new BancoDeDadosFIT();
+        obj_jogador_fit.bd_fit = new BancoDeDadosFIT();
         // Create a new StreamReader, tell it which file to read and what encoding the file
         // was saved as
         fs = new FileStream(pegar_endereco_de_log.endereco_de_arquivo[0], FileMode.Open);
@@ -281,7 +281,7 @@ public class NovoLeitor2 : MonoBehaviour
 
                             }
 
-                            bd_fit.Add(checando_instante_do_log, Int32.Parse(entry_time[1]), Int32.Parse(entry_nivel[1]), i + 1,
+                            obj_jogador_fit.bd_fit.Add(checando_instante_do_log, Int32.Parse(entry_time[1]), Int32.Parse(entry_nivel[1]), i + 1,
                                 (int)posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i].x,
                                 (int)posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i].y,
                                 Int32.Parse(entry_tempo_do_servidor[1]), entry_nome_do_jogador[1],
@@ -379,7 +379,7 @@ public class NovoLeitor2 : MonoBehaviour
 
         lida_com_texto.FecharReaders(fs, theReader);
 
-        bd_fit = new BancoDeDadosFIT();
+        obj_jogador_fit.bd_fit = new BancoDeDadosFIT();
         // Create a new StreamReader, tell it which file to read and what encoding the file
         // was saved as
         fs = new FileStream(pegar_endereco_de_log.endereco_de_arquivo[0], FileMode.Open);
@@ -483,7 +483,7 @@ public class NovoLeitor2 : MonoBehaviour
 
                             }
 
-                            bd_fit.Add(checando_instante_do_log, Int32.Parse(entry_time[1]), Int32.Parse(entry_nivel[1]), i + 1,
+                            obj_jogador_fit.bd_fit.Add(checando_instante_do_log, Int32.Parse(entry_time[1]), Int32.Parse(entry_nivel[1]), i + 1,
                                 (int)posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i].x,
                                 (int)posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i].y,
                                 Int32.Parse(entry_tempo_do_servidor[1]), entry_nome_do_jogador[1],
@@ -543,18 +543,19 @@ public class NovoLeitor2 : MonoBehaviour
     {
         List<BancoDeDadosFIT> bds_de_jogadores = new List<BancoDeDadosFIT>();
 
-        for(int i = 0; i < bd_fit.GetQuantidadeDeEntradas(); i++)
+        for(int i = 0; i < obj_jogador_fit.bd_fit.GetQuantidadeDeEntradas(); i++)
         {
-            while (bd_fit.GetIdDoJogador(i) > bds_de_jogadores.Count){
+            while (obj_jogador_fit.bd_fit.GetIdDoJogador(i) > bds_de_jogadores.Count){
 
                 bds_de_jogadores.Add(new BancoDeDadosFIT());
 
             }
 
-            bds_de_jogadores[bd_fit.GetIdDoJogador(i) - 1].Add(bd_fit.GetInstante(i), bd_fit.GetTempo(i), bd_fit.GetNivel(i),
-                                                               bd_fit.GetPersonagem(i), bd_fit.GetGridX(i), bd_fit.GetGridY(i),
-                                                              bd_fit.GetTempoDeServidor(i), bd_fit.GetNomeDoJogador(i),
-                                                              bd_fit.GetIdDoJogador(i), bd_fit.GetModoDeJogo(i));
+            bds_de_jogadores[obj_jogador_fit.bd_fit.GetIdDoJogador(i) - 1].Add(
+                obj_jogador_fit.bd_fit.GetInstante(i), obj_jogador_fit.bd_fit.GetTempo(i), obj_jogador_fit.bd_fit.GetNivel(i),
+                obj_jogador_fit.bd_fit.GetPersonagem(i), obj_jogador_fit.bd_fit.GetGridX(i), obj_jogador_fit.bd_fit.GetGridY(i),
+                obj_jogador_fit.bd_fit.GetTempoDeServidor(i), obj_jogador_fit.bd_fit.GetNomeDoJogador(i),
+                obj_jogador_fit.bd_fit.GetIdDoJogador(i), obj_jogador_fit.bd_fit.GetModoDeJogo(i));
 
 
         }
@@ -693,10 +694,10 @@ public class NovoLeitor2 : MonoBehaviour
 
     public bool PrintStuffFIT()
     {
-        for (int i = 0; i < bd_fit.GetQuantidadeDeEntradas(); i++)
+        for (int i = 0; i < obj_jogador_fit.bd_fit.GetQuantidadeDeEntradas(); i++)
         {
-            Debug.Log(bd_fit.GetTempo(i) + " " + bd_fit.GetPersonagem(i) + " " +
-                      bd_fit.GetGridX(i) + " " + bd_fit.GetGridY(i));
+            Debug.Log(obj_jogador_fit.bd_fit.GetTempo(i) + " " + obj_jogador_fit.bd_fit.GetPersonagem(i) + " " +
+                      obj_jogador_fit.bd_fit.GetGridX(i) + " " + obj_jogador_fit.bd_fit.GetGridY(i));
         }
         return true;
 
@@ -752,7 +753,7 @@ public class NovoLeitor2 : MonoBehaviour
         for (int j = 0; j < matrizes_dos_heatmaps.Count; j++)
         {
             ((HeatMap)matrizes_dos_heatmaps[j]).AlterarValoresDeTamanhoDeHeatmap(20, 15);
-            ((HeatMap)matrizes_dos_heatmaps[j]).ReadPointsFIT(bd_fit, j);
+            ((HeatMap)matrizes_dos_heatmaps[j]).ReadPointsFIT(obj_jogador_fit.bd_fit, j);
             ((HeatMap)matrizes_dos_heatmaps[j]).AllTheDifferentPoints();
             ((HeatMap)matrizes_dos_heatmaps[j]).OrganizePoints();
             ((HeatMap)matrizes_dos_heatmaps[j]).FillingTheDictionary();
@@ -764,25 +765,25 @@ public class NovoLeitor2 : MonoBehaviour
         fechar_background = false;
 
         // Para cada objeto...
-        for (i = 0; i < bd_fit.GetQuantidadeDeEntradas(); i++)
+        for (i = 0; i < obj_jogador_fit.bd_fit.GetQuantidadeDeEntradas(); i++)
         {
             // Controle de quando criar um background novo ou
             // não criá-lo. Backgrounds novos são criados, um para cada posição no tempo diferente.
-            if ((i != bd_fit.GetQuantidadeDeEntradas() - 1) && (i != 0))
+            if ((i != obj_jogador_fit.bd_fit.GetQuantidadeDeEntradas() - 1) && (i != 0))
             {
 
-                if (bd_fit.GetPersonagem(i) >= bd_fit.GetPersonagem(i + 1))
+                if (obj_jogador_fit.bd_fit.GetPersonagem(i) >= obj_jogador_fit.bd_fit.GetPersonagem(i + 1))
                 {
                     fechar_background = true;
                 }
-                if (bd_fit.GetPersonagem(i) <= bd_fit.GetPersonagem(i - 1))
+                if (obj_jogador_fit.bd_fit.GetPersonagem(i) <= obj_jogador_fit.bd_fit.GetPersonagem(i - 1))
                 {
                     criar_background = true;
                 }
             }
-            else if (i == bd_fit.GetQuantidadeDeEntradas() - 1)
+            else if (i == obj_jogador_fit.bd_fit.GetQuantidadeDeEntradas() - 1)
             {
-                if (bd_fit.GetPersonagem(i) <= bd_fit.GetPersonagem(i - 1))
+                if (obj_jogador_fit.bd_fit.GetPersonagem(i) <= obj_jogador_fit.bd_fit.GetPersonagem(i - 1))
                 {
                     criar_background = true;
                 }
@@ -797,10 +798,10 @@ public class NovoLeitor2 : MonoBehaviour
             objeto.AddComponent<AoSerClicadoFIT>();
             objeto.AddComponent<LigaDesliga>();
 
-            objeto.name = bd_fit.GetTempo(i).ToString() + " " + bd_fit.GetPersonagem(i).ToString() + " " +
-                bd_fit.GetGridX(i).ToString() + " " + bd_fit.GetGridY(i).ToString();
+            objeto.name = obj_jogador_fit.bd_fit.GetTempo(i).ToString() + " " + obj_jogador_fit.bd_fit.GetPersonagem(i).ToString() + " " +
+                obj_jogador_fit.bd_fit.GetGridX(i).ToString() + " " + obj_jogador_fit.bd_fit.GetGridY(i).ToString();
 
-            material_do_create = Instantiate(materiais.Get(bd_fit.GetPersonagem(i).ToString()));
+            material_do_create = Instantiate(materiais.Get(obj_jogador_fit.bd_fit.GetPersonagem(i).ToString()));
 
             // Essencialmente, materiais guardam texturas, que é o que queremos.
             // Foi um pouco de exagero fazer um material pra cada objeto, mas
@@ -1104,7 +1105,7 @@ public class NovoLeitor2 : MonoBehaviour
         x += (objeto.GetComponent<MeshCollider>().bounds.max.x - objeto.GetComponent<MeshCollider>().bounds.min.x) / 2;
 
         // Terceiro: finalmente, posicionar o objeto com relação ao background.
-        if (qual_leitor == "FIT") x += bd_fit.GetGridX(i) / 32 * (background.GetComponent<Dados>().largura_x / 20);
+        if (qual_leitor == "FIT") x += obj_jogador_fit.bd_fit.GetGridX(i) / 32 * (background.GetComponent<Dados>().largura_x / 20);
         if (qual_leitor == "Bolhas") x += bd_bolhas.GetCoordenadaX(i) * (background.GetComponent<Dados>().largura_x / resolucao.x);
 
         return x;
@@ -1120,7 +1121,7 @@ public class NovoLeitor2 : MonoBehaviour
         z -= (objeto.GetComponent<MeshCollider>().bounds.max.z - objeto.GetComponent<MeshCollider>().bounds.min.z) / 2;
 
         // Terceiro: finalmente, posicionar o objeto com relação ao background.
-        if (qual_leitor == "FIT") z -= (bd_fit.GetGridY(i) / 32 * (background.GetComponent<Dados>().altura_z / 15));
+        if (qual_leitor == "FIT") z -= (obj_jogador_fit.bd_fit.GetGridY(i) / 32 * (background.GetComponent<Dados>().altura_z / 15));
         if (qual_leitor == "Bolhas") z -= (bd_bolhas.GetCoordenadaY(i) * (background.GetComponent<Dados>().altura_z / resolucao.y));
 
         return z;
@@ -1211,7 +1212,7 @@ public class NovoLeitor2 : MonoBehaviour
 
     protected void AddMaterialAObjetoFIT(Material[] rend, GameObject objeto, int i)
     {
-        rend[0].mainTexture = texturas.Get(bd_fit.GetPersonagem(i).ToString());
+        rend[0].mainTexture = texturas.Get(obj_jogador_fit.bd_fit.GetPersonagem(i).ToString());
         objeto.GetComponent<MeshRenderer>().materials = rend;
     }
 
@@ -1231,14 +1232,14 @@ public class NovoLeitor2 : MonoBehaviour
     {
         objeto_a_receber_dados.AddComponent<Dados>();
         objeto_a_receber_dados.GetComponent<Dados>().Atualizar();
-        objeto_a_receber_dados.GetComponent<Dados>().nome_do_objeto = bd_fit.GetPersonagem(i).ToString();
-        objeto_a_receber_dados.GetComponent<Dados>().tempo = bd_fit.GetTempo(i);
-        objeto_a_receber_dados.GetComponent<Dados>().x_log = bd_fit.GetGridX(i);
-        objeto_a_receber_dados.GetComponent<Dados>().y_log = bd_fit.GetGridY(i);
-        objeto_a_receber_dados.GetComponent<Dados>().tempo_do_servidor = bd_fit.GetTempoDeServidor(i);
-        objeto_a_receber_dados.GetComponent<Dados>().id_do_jogador = bd_fit.GetIdDoJogador(i);
-        objeto_a_receber_dados.GetComponent<Dados>().qual_jogador = bd_fit.GetNomeDoJogador(i);
-        objeto_a_receber_dados.GetComponent<Dados>().instante_em_camera = bd_fit.GetInstante(i);
+        objeto_a_receber_dados.GetComponent<Dados>().nome_do_objeto = obj_jogador_fit.bd_fit.GetPersonagem(i).ToString();
+        objeto_a_receber_dados.GetComponent<Dados>().tempo = obj_jogador_fit.bd_fit.GetTempo(i);
+        objeto_a_receber_dados.GetComponent<Dados>().x_log = obj_jogador_fit.bd_fit.GetGridX(i);
+        objeto_a_receber_dados.GetComponent<Dados>().y_log = obj_jogador_fit.bd_fit.GetGridY(i);
+        objeto_a_receber_dados.GetComponent<Dados>().tempo_do_servidor = obj_jogador_fit.bd_fit.GetTempoDeServidor(i);
+        objeto_a_receber_dados.GetComponent<Dados>().id_do_jogador = obj_jogador_fit.bd_fit.GetIdDoJogador(i);
+        objeto_a_receber_dados.GetComponent<Dados>().qual_jogador = obj_jogador_fit.bd_fit.GetNomeDoJogador(i);
+        objeto_a_receber_dados.GetComponent<Dados>().instante_em_camera = obj_jogador_fit.bd_fit.GetInstante(i);
     }
 
     protected void AddDadosBolhas(GameObject objeto_a_receber_dados, int i)
@@ -1289,7 +1290,7 @@ public class NovoLeitor2 : MonoBehaviour
 
     public int GetPrimeiroTempoFIT()
     {
-        return bd_fit.GetInstante(0);
+        return obj_jogador_fit.bd_fit.GetInstante(0);
     }
 
     public int GetPrimeiroTempoBolhas()
@@ -1306,7 +1307,7 @@ public class NovoLeitor2 : MonoBehaviour
 
     public int GetUltimoTempoFIT()
     {
-        return bd_fit.GetInstante(bd_fit.GetQuantidadeDeEntradas() - 1);
+        return obj_jogador_fit.bd_fit.GetInstante(obj_jogador_fit.bd_fit.GetQuantidadeDeEntradas() - 1);
     }
 
     public int GetUltimoTempoBolhas()
@@ -1316,7 +1317,7 @@ public class NovoLeitor2 : MonoBehaviour
 
     public BancoDeDadosFIT GetBancoDeDadosFIT()
     {
-        return bd_fit;
+        return obj_jogador_fit.bd_fit;
     }
 
     public void RetornarParaTelaInicial()

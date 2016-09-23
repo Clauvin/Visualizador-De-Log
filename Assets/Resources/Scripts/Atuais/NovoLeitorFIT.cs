@@ -26,7 +26,7 @@ public class NovoLeitorFIT : NovoLeitor2 {
         pegar_endereco_de_log.endereco_de_arquivo[0] = pd.endereco_do_arquivo;
 
         StartFIT();
-        bd_fit = pd.bd_fit;
+        obj_jogador_fit.bd_fit = pd.bd_fit;
         Heatmaps = pd.heatmaps;
         InicializarHeatmaps();
 
