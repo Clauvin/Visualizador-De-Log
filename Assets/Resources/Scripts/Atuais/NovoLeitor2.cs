@@ -15,7 +15,6 @@ public class NovoLeitor2 : MonoBehaviour
 
     protected BancoDeDadosBolhas bd_bolhas;
 
-
     protected Vector2 resolucao;
     protected ParaVisualizacao<GameObject> objetos;
     protected ParaVisualizacao<Material> materiais;
@@ -26,7 +25,35 @@ public class NovoLeitor2 : MonoBehaviour
     
     Pintar pintar;
 
-    public ArrayList lista_de_objetos;
+    private ArrayList lista_de_objetos;
+    public ArrayList Lista_de_objetos
+    {
+        get
+        {
+            if (qual_leitor == "FIT")
+            {
+                return obj_jogador_fit.lista_de_objetos;
+            }
+            else if (qual_leitor == "Bolhas")
+            {
+                return lista_de_objetos;
+            }
+            else return null;
+        }
+
+        set
+        {
+            if (qual_leitor == "FIT")
+            {
+                obj_jogador_fit.lista_de_objetos = value;
+            }
+            else if (qual_leitor == "Bolhas")
+            {
+                lista_de_objetos = value;
+            }
+            else Debug.Log("Controlador.tipo está com valor diferente de Fit e Bolhas.");
+        }
+    }
 
     public ArrayList lista_de_backgrounds;
 
@@ -70,6 +97,8 @@ public class NovoLeitor2 : MonoBehaviour
             heatmaps = value;
         }
     }
+
+
 
     public void StartFIT()
     {
@@ -826,7 +855,7 @@ public class NovoLeitor2 : MonoBehaviour
             // Ponto já criado, agora adicionar dados a ele
             AddDados(objeto, i);
 
-            lista_de_objetos.Add(objeto);
+            Lista_de_objetos.Add(objeto);
 
             // Criando background para os pontos
             if (criar_background) {
@@ -972,7 +1001,7 @@ public class NovoLeitor2 : MonoBehaviour
             // Ponto já criado, agora adicionar dados a ele
             AddDados(objeto, i);
 
-            lista_de_objetos.Add(objeto);
+            Lista_de_objetos.Add(objeto);
 
             //criando background para o par de pontos
             if (novo_tempo)
@@ -1331,8 +1360,6 @@ public class NovoLeitor2 : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 
-    
-
     public void NovoLeitor2Init()
     {
         obj_jogador_fit = new ObjetosDeUmJogadorFIT();
@@ -1343,7 +1370,7 @@ public class NovoLeitor2 : MonoBehaviour
         texturas = new ParaVisualizacao<Texture2D>();
         texturas_selecionadas = new ParaVisualizacao<Texture2D>();
         pintar = new Pintar();
-        lista_de_objetos = new ArrayList();
+        Lista_de_objetos = new ArrayList();
         lista_de_backgrounds = new ArrayList();
         matrizes_dos_heatmaps = new ArrayList();
         pegar_endereco_de_log = new PegarEnderecoDeLog();

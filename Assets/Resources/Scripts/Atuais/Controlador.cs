@@ -689,8 +689,8 @@ public class Controlador : MonoBehaviour
 
     private void LigarOuDesligarObjetos(bool ligar, bool tipo, string qual_tipo, bool tempo, int tempo_minimo, int tempo_maximo)
     {
-        int limit = GetComponent<NovoLeitor2>().lista_de_objetos.Count;
-        lista_de_objetos_a_ligar_ou_desligar = GetComponent<NovoLeitor2>().lista_de_objetos;
+        int limit = GetComponent<NovoLeitor2>().Lista_de_objetos.Count;
+        lista_de_objetos_a_ligar_ou_desligar = GetComponent<NovoLeitor2>().Lista_de_objetos;
 
         for (int i = 0; i < limit; i++)
         {
@@ -724,7 +724,7 @@ public class Controlador : MonoBehaviour
     private void LigarOuDesligarObjetosConsiderandoSobreposicao
                  (bool ligar, bool tipo, string qual_tipo, bool tempo, int tempo_minimo, int tempo_maximo)
     {
-        int limit = GetComponent<NovoLeitor2>().lista_de_objetos.Count;
+        int limit = GetComponent<NovoLeitor2>().Lista_de_objetos.Count;
         int qual_tempo;
 
         // variáveis usadas para evitar objetos ativos ignorando desligamento por tempo/tipo, quando ambos estão sendo
@@ -732,7 +732,7 @@ public class Controlador : MonoBehaviour
         int t_minimo; int t_maximo;
         int posicao_de_checagem_de_tipo_de_objeto;
 
-        lista_de_objetos_a_ligar_ou_desligar = GetComponent<NovoLeitor2>().lista_de_objetos;
+        lista_de_objetos_a_ligar_ou_desligar = GetComponent<NovoLeitor2>().Lista_de_objetos;
 
         for (int i = 0; i < limit; i++)
         {
@@ -806,19 +806,19 @@ public class Controlador : MonoBehaviour
     void MudarTransparenciaDeTipoEspecificoDeObjetos(string nome, float transparencia)
     {
 
-        int limit = GetComponent<NovoLeitor2>().lista_de_objetos.Count;
+        int limit = GetComponent<NovoLeitor2>().Lista_de_objetos.Count;
 
         for (int i = 0; i < limit; i++)
         {
             Color cor;
-            if (((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).GetComponent<Dados>().nome_do_objeto == nome)
+            if (((GameObject)GetComponent<NovoLeitor2>().Lista_de_objetos[i]).GetComponent<Dados>().nome_do_objeto == nome)
             {
-                cor = ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).
+                cor = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_objetos[i]).
                             GetComponent<MeshRenderer>().material.GetColor("_Color");
 
                 cor.a = transparencia;
 
-                ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).
+                ((GameObject)GetComponent<NovoLeitor2>().Lista_de_objetos[i]).
                             GetComponent<MeshRenderer>().material.SetColor("_Color", cor);
             }
         }
@@ -827,20 +827,20 @@ public class Controlador : MonoBehaviour
     void MudarTransparenciaDeObjetosDeEspacoDeTempoEspecifico(int tempo_minimo, int tempo_maximo, float transparencia)
     {
 
-        int limit = GetComponent<NovoLeitor2>().lista_de_objetos.Count;
+        int limit = GetComponent<NovoLeitor2>().Lista_de_objetos.Count;
 
         for (int i = 0; i < limit; i++)
         {
             Color cor;
-            int tempo = ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).GetComponent<Dados>().tempo;
+            int tempo = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_objetos[i]).GetComponent<Dados>().tempo;
             if ((tempo_minimo <= tempo) && (tempo <= tempo_maximo))
             {
-                cor = ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).
+                cor = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_objetos[i]).
                             GetComponent<MeshRenderer>().material.GetColor("_Color");
 
                 cor.a = transparencia;
 
-                ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).
+                ((GameObject)GetComponent<NovoLeitor2>().Lista_de_objetos[i]).
                             GetComponent<MeshRenderer>().material.SetColor("_Color", cor);
             }
         }
@@ -848,30 +848,30 @@ public class Controlador : MonoBehaviour
 
     void SetInteracaoObjetosDeEspacoDeTempo(int tempo_minimo, int tempo_maximo, bool e_interagivel)
     {
-        int limit = GetComponent<NovoLeitor2>().lista_de_objetos.Count;
+        int limit = GetComponent<NovoLeitor2>().Lista_de_objetos.Count;
 
         for (int i = 0; i < limit; i++)
         {
-            int tempo = ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).GetComponent<Dados>().tempo;
+            int tempo = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_objetos[i]).GetComponent<Dados>().tempo;
             if ((tempo_minimo <= tempo) && (tempo <= tempo_maximo))
             {
-                if (e_interagivel) ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).layer = 0;
-                else ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).layer = 2;
+                if (e_interagivel) ((GameObject)GetComponent<NovoLeitor2>().Lista_de_objetos[i]).layer = 0;
+                else ((GameObject)GetComponent<NovoLeitor2>().Lista_de_objetos[i]).layer = 2;
             }
         }
     }
 
     void SetInteracaoComTiposDeObjetos(string nome, bool e_interagivel)
     {
-        int limit = GetComponent<NovoLeitor2>().lista_de_objetos.Count;
+        int limit = GetComponent<NovoLeitor2>().Lista_de_objetos.Count;
 
         for (int i = 0; i < limit; i++)
         {
-            string nome_do_objeto = ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).GetComponent<Dados>().nome_do_objeto;
+            string nome_do_objeto = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_objetos[i]).GetComponent<Dados>().nome_do_objeto;
             if (nome_do_objeto == nome)
             {
-                if (e_interagivel) ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).layer = 0;
-                else ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).layer = 2;
+                if (e_interagivel) ((GameObject)GetComponent<NovoLeitor2>().Lista_de_objetos[i]).layer = 0;
+                else ((GameObject)GetComponent<NovoLeitor2>().Lista_de_objetos[i]).layer = 2;
             }
         }
     }
@@ -937,9 +937,9 @@ public class Controlador : MonoBehaviour
 
     private void MudancaDeCor(bool a, bool r, bool g, bool b, float change)
     {
-        for (int i = 0; i < GetComponent<NovoLeitor2>().lista_de_objetos.Count; i++)
+        for (int i = 0; i < GetComponent<NovoLeitor2>().Lista_de_objetos.Count; i++)
         {
-            Color cor = ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).GetComponent<MeshRenderer>().
+            Color cor = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_objetos[i]).GetComponent<MeshRenderer>().
                 material.GetColor("_Color");
 
             if (a) cor.a += change;
@@ -947,7 +947,7 @@ public class Controlador : MonoBehaviour
             if (g) cor.g += change;
             if (b) cor.b += change;
 
-            ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).GetComponent<MeshRenderer>().
+            ((GameObject)GetComponent<NovoLeitor2>().Lista_de_objetos[i]).GetComponent<MeshRenderer>().
                 material.SetColor("_Color", cor);
 
         }
