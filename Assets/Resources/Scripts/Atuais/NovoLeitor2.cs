@@ -11,8 +11,10 @@ using System.Collections.Generic;
 public class NovoLeitor2 : MonoBehaviour
 {
 
+    protected ObjetosDeUmJogadorFIT obj_jogador_fit;
+
     protected BancoDeDadosBolhas bd_bolhas;
-    protected BancoDeDadosFIT bd_fit;
+
     protected Vector2 resolucao;
     protected ParaVisualizacao<GameObject> objetos;
     protected ParaVisualizacao<Material> materiais;
@@ -745,7 +747,6 @@ public class NovoLeitor2 : MonoBehaviour
         Material material_heatmap = new Material((Material)Resources.Load("Materiais/MaterialHeatmap"));
 
         material_background.mainTexture = (Texture)Instantiate(Resources.Load("Texturas/Grid"));
-
 
         // Lê e organiza todos os dados do log do FIT.
         for (int j = 0; j < matrizes_dos_heatmaps.Count; j++)
