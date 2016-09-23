@@ -9,6 +9,13 @@ public class ObjetosDeUmJogadorFIT : MonoBehaviour {
     public ArrayList matrizes_dos_heatmaps;
     public BancoDeDadosFIT bd_fit;
 
+    public ObjetosDeUmJogadorFIT()
+    {
+        lista_de_backgrounds = new ArrayList();
+        lista_de_objetos = new ArrayList();
+        //matrizes_dos_heatmaps = new ArrayList();
+    }
+
     // Use this for initialization
     void Start () {
 	
