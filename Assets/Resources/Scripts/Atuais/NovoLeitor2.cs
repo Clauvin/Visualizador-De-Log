@@ -1360,6 +1360,18 @@ public class NovoLeitor2 : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 
+    public void NovoLeitor2InitFIT()
+    {
+        qual_leitor = "FIT";
+        NovoLeitor2Init();
+    }
+
+    public void NovoLeitor2InitBolhas()
+    {
+        qual_leitor = "Bolhas";
+        NovoLeitor2Init();
+    }
+
     public void NovoLeitor2Init()
     {
         obj_jogador_fit = new ObjetosDeUmJogadorFIT();
