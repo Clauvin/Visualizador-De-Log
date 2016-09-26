@@ -74,4 +74,9 @@ public class GuiFITEscolhaDeNiveis : GuiPadrao2
     {
         lista_de_niveis = lista;
     }
+
+    public SortedList GetListaDeNiveis()
+    {
+        return lista_de_niveis;
+    }
 }

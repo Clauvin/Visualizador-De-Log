@@ -60,4 +60,9 @@ public class GuiFITEscolhaDeJogadores : GuiPadrao2
     {
         lista_de_jogadores = lista;
     }
+
+    public SortedList GetListaDeJogadores()
+    {
+        return lista_de_jogadores;
+    }
 }

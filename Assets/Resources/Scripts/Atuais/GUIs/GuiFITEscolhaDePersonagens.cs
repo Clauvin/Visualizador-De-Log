@@ -78,4 +78,9 @@ public class GuiFITEscolhaDePersonagens : GuiPadrao2
     {
         lista_de_personagens = lista;
     }
+
+    public SortedList GetListaDePersonagens()
+    {
+        return lista_de_personagens;
+    }
 }
