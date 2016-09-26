@@ -58,10 +58,6 @@ public class GuiPadrao2 : AbstractGui2
         UnityEngine.SceneManagement.SceneManager.LoadScene(2);
     }
 
-    public void creditos() {
-
-    }
-
     public void Fechar_Aplicacao() {
         Application.Quit();
     }
