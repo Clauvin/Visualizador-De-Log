@@ -30,13 +30,13 @@ public class GuiTelaInicial : GuiPadrao2
 
         switch (resultado)
         {
-            //Vai para o loading do FIT
+            //Vai para o pre-loading do FIT
             case 0:
-                MudarCenaPara_Load_Fit();
+                MudarCenaPara_Pre_Fit();
                 break;
-            //Vai para o loading do Bolhas
+            //Vai para o pre-loading do Bolhas
             case 1:
-                MudarCenaPara_Load_Bolhas();
+                MudarCenaPara_Pre_Bolhas();
                 break;
             //Abre créditos
             case 2:
