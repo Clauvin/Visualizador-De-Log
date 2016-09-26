@@ -299,7 +299,9 @@ namespace Basicas
             
             for (int i = GetQuantidadeDeEntradas() - 1; i >= 0; i--)
             {
-                if (lista_de_jogadores.ContainsKey(GetIdDoJogador(i)))
+                if (lista_de_jogadores.
+                    ContainsKey
+                    (GetNomeDoJogador(i)))
                 {
                     Remove(i);
                 }
