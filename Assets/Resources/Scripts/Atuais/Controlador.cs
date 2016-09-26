@@ -427,7 +427,7 @@ public class Controlador : MonoBehaviour
 
             if (Input.GetButtonDown("Q"))
             {
-                UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+                //GuiPadrao.MudarCenaPara_Menu_Inicial();
             }
 
             //Esse código serve para fazer a Gui dos pontos funcionar.

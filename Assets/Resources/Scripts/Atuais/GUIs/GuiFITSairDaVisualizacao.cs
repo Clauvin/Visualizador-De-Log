@@ -7,6 +7,6 @@ using System.Collections;
 /// </summary>
 public class GuiFITSairDaVisualizacao : GuiSairDaVisualizacao {
 
-    public override void RetornarParaTelaDePreLoad() { UnityEngine.SceneManagement.SceneManager.LoadScene(1); }
+    public override void RetornarParaTelaDePreLoad() { MudarCenaPara_Pre_Fit(); }
 
 }

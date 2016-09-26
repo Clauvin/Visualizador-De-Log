@@ -132,7 +132,7 @@ public class GuiTelaDePreLoadBolhas : GuiTelaDePreLoad
             case 2:
                 pd = FindObjectOfType<PassadorDeDados>();
                 pd.Destruir();
-                UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+                MudarCenaPara_Tela_Inicial();
                 break;
             default:
                 break;
@@ -142,7 +142,7 @@ public class GuiTelaDePreLoadBolhas : GuiTelaDePreLoad
     protected override void IrParaLoad()
     {
         // Vai pra Scene "Version Bolhas"
-        UnityEngine.SceneManagement.SceneManager.LoadScene(4);
+        MudarCenaPara_Load_Bolhas();
     }
 
     // Use this for initialization

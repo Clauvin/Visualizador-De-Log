@@ -20,7 +20,7 @@ public class GuiSairDaVisualizacao : GuiPadrao2 {
 
     public void RetornarParaTelaInicial()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        MudarCenaPara_Tela_Inicial();
     }
 
     public override void OnGUI()

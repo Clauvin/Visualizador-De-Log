@@ -8,6 +8,6 @@ using System.Collections;
 /// </summary>
 public class GuiBolhasSairDaVisualizacao : GuiSairDaVisualizacao {
 
-    public override void RetornarParaTelaDePreLoad() { UnityEngine.SceneManagement.SceneManager.LoadScene(2); }
+    public override void RetornarParaTelaDePreLoad() { MudarCenaPara_Load_Bolhas(); }
 
 }

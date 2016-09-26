@@ -32,11 +32,11 @@ public class GuiTelaInicial : GuiPadrao2
         {
             //Vai para o loading do FIT
             case 0:
-                UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+                MudarCenaPara_Load_Fit();
                 break;
             //Vai para o loading do Bolhas
             case 1:
-                UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+                MudarCenaPara_Load_Bolhas();
                 break;
             //Abre créditos
             case 2:

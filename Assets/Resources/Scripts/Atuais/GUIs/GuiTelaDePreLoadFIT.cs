@@ -136,7 +136,7 @@ public class GuiTelaDePreLoadFIT : GuiTelaDePreLoad
             case 3:
                 pd = FindObjectOfType<PassadorDeDados>();
                 pd.Destruir();
-                UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+                MudarCenaPara_Tela_Inicial();
                 break;
             default:
                 break;
@@ -145,11 +145,7 @@ public class GuiTelaDePreLoadFIT : GuiTelaDePreLoad
 
     protected override void IrParaLoad()
     {
-        // Vai pra Scene "Version FIT 3"
-        //UnityEngine.SceneManagement.SceneManager.LoadScene(3);
-
-        // Vai pra Scene "Seleção FIT"
-        UnityEngine.SceneManagement.SceneManager.LoadScene(5);
+        MudarCenaPara_Selecao_Fit();
     }
 
     // Use this for initialization
