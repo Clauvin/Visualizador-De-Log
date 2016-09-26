@@ -40,6 +40,10 @@ public class GuiFITBotoesDaTelaDeSelecao : GuiPadrao2
                     (Resources.Load("Objetos\\Passador De Dados"));
                 PassadorDeDados pd_vai = FindObjectOfType<PassadorDeDados>().GetComponent<PassadorDeDados>();
                 pd_vai.bd_fit = GetComponent<NovoLeitor2>().GetBancoDeDadosFIT();
+                pd_vai.bd_fit.RemoveEntradas(FindObjectOfType<GuiFITEscolhas>().
+                                             gui_escolhas_de_jogadores.GetListaDeJogadores(),
+                                             FindObjectOfType<GuiFITEscolhas>().
+                                             gui_escolhas_de_jogadores.GetSelecoesDeJogadores());
                 pd_vai.heatmaps = GetComponent<NovoLeitor2>().Heatmaps;
                 pd_vai.NaoDestruirAoDescarregar();
                 MudaCenas.MudarCenaPara_Load_Fit();
