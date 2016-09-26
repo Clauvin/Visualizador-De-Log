@@ -427,7 +427,7 @@ public class Controlador : MonoBehaviour
 
             if (Input.GetButtonDown("Q"))
             {
-                //GuiPadrao.MudarCenaPara_Menu_Inicial();
+                MudaCenas.Fechar_Aplicacao();
             }
 
             //Esse código serve para fazer a Gui dos pontos funcionar.

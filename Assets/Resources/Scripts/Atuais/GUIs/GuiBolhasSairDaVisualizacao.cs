@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Basicas;
+using UnityEngine;
 using System.Collections;
 
 /// <summary>
@@ -8,6 +9,6 @@ using System.Collections;
 /// </summary>
 public class GuiBolhasSairDaVisualizacao : GuiSairDaVisualizacao {
 
-    public override void RetornarParaTelaDePreLoad() { MudarCenaPara_Pre_Bolhas(); }
+    public override void RetornarParaTelaDePreLoad() { MudaCenas.Fechar_Aplicacao(); }
 
 }

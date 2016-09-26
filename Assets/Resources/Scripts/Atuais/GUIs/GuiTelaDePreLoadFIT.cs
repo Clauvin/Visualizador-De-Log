@@ -2,6 +2,7 @@
 using System.Collections;
 using System.IO;
 using System;
+using Basicas;
 
 /// <summary>
 /// Classe derivada de GuiTelaDePreLoad, responsável por definir para a Scene de PreLoad do FIT o que o programa deve fazer.
@@ -136,7 +137,7 @@ public class GuiTelaDePreLoadFIT : GuiTelaDePreLoad
             case 3:
                 pd = FindObjectOfType<PassadorDeDados>();
                 pd.Destruir();
-                MudarCenaPara_Tela_Inicial();
+                MudaCenas.MudarCenaPara_Tela_Inicial();
                 break;
             default:
                 break;
@@ -145,7 +146,7 @@ public class GuiTelaDePreLoadFIT : GuiTelaDePreLoad
 
     protected override void IrParaLoad()
     {
-        MudarCenaPara_Selecao_Fit();
+        MudaCenas.MudarCenaPara_Selecao_Fit();
     }
 
     // Use this for initialization

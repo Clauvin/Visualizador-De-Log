@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Basicas;
 
 /// <summary>
 /// Classe responsável por definir a tela inicial do programa.
@@ -32,11 +33,11 @@ public class GuiTelaInicial : GuiPadrao2
         {
             //Vai para o pre-loading do FIT
             case 0:
-                MudarCenaPara_Pre_Fit();
+                MudaCenas.MudarCenaPara_Pre_Fit();
                 break;
             //Vai para o pre-loading do Bolhas
             case 1:
-                MudarCenaPara_Pre_Bolhas();
+                MudaCenas.MudarCenaPara_Pre_Bolhas();
                 break;
             //Abre créditos
             case 2:

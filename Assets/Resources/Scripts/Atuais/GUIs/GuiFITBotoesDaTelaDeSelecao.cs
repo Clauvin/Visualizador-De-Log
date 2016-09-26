@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Basicas;
 
 /// <summary>
 /// Classe responsável por definir os botões da tela de seleção de opções de leitura de dados do FIT.
@@ -28,10 +29,10 @@ public class GuiFITBotoesDaTelaDeSelecao : GuiPadrao2
         {
 
             case 0:
-                MudarCenaPara_Tela_Inicial();
+                MudaCenas.MudarCenaPara_Tela_Inicial();
                 break;
             case 1:
-                MudarCenaPara_Pre_Fit();
+                MudaCenas.MudarCenaPara_Pre_Fit();
                 break;
             //Abre créditos
             case 2:
@@ -41,7 +42,7 @@ public class GuiFITBotoesDaTelaDeSelecao : GuiPadrao2
                 pd_vai.bd_fit = GetComponent<NovoLeitor2>().GetBancoDeDadosFIT();
                 pd_vai.heatmaps = GetComponent<NovoLeitor2>().Heatmaps;
                 pd_vai.NaoDestruirAoDescarregar();
-                MudarCenaPara_Load_Fit();
+                MudaCenas.MudarCenaPara_Load_Fit();
                 break;
             default:
                 break;

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.IO;
 using System;
+using Basicas;
 
 /// <summary>
 /// Classe derivada de GuiTelaDePreLoad, responsável por definir para a Scene de PreLoad do Bolhas o que o programa deve fazer.
@@ -132,7 +133,7 @@ public class GuiTelaDePreLoadBolhas : GuiTelaDePreLoad
             case 2:
                 pd = FindObjectOfType<PassadorDeDados>();
                 pd.Destruir();
-                MudarCenaPara_Tela_Inicial();
+                MudaCenas.MudarCenaPara_Tela_Inicial();
                 break;
             default:
                 break;
@@ -142,7 +143,7 @@ public class GuiTelaDePreLoadBolhas : GuiTelaDePreLoad
     protected override void IrParaLoad()
     {
         // Vai pra Scene "Version Bolhas"
-        MudarCenaPara_Load_Bolhas();
+        MudaCenas.MudarCenaPara_Load_Bolhas();
     }
 
     // Use this for initialization

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Basicas;
 
 /// <summary>
 /// Classe responsável pelos dois botões na tela de visualização dos elementos do log
@@ -33,7 +34,7 @@ public class GuiSairDaVisualizacao : GuiPadrao2 {
 
             case 1:
 
-                MudarCenaPara_Tela_Inicial();
+                MudaCenas.MudarCenaPara_Tela_Inicial();
                 break;
         }
 
