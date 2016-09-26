@@ -241,32 +241,23 @@ namespace Basicas
         /// <param name="i"></param>
         private void Remove(int i)
         {
-            /*if (i < GetQuantidadeDeEntradas())
+            if (i < GetQuantidadeDeEntradas())
             {
-                instante;
-                
-                tempo;
-                
-                nivel;
-                
-                personagem;
-                
-                grid_x;
-                
-                grid_y;
-                
-                tempo_do_servidor;
-
-                nome_do_jogador;
-
-                id_do_jogador;
-
-                modo_de_jogo;
-               }
+                instante.RemoveAt(i);
+                tempo.RemoveAt(i);                
+                nivel.RemoveAt(i);                
+                personagem.RemoveAt(i);                
+                grid_x.RemoveAt(i);                
+                grid_y.RemoveAt(i);                
+                tempo_do_servidor.RemoveAt(i);
+                nome_do_jogador.RemoveAt(i);
+                id_do_jogador.RemoveAt(i);
+                modo_de_jogo.RemoveAt(i);
+            }
             else
             {
                 //Tratamento de erro
-            }*/
+            }
         }
 
         public void RemoveEntradasDoJogador()
@@ -310,11 +301,10 @@ namespace Basicas
             {
                 if (lista_de_jogadores.ContainsKey(GetIdDoJogador(i)))
                 {
-                    //remover.
+                    Remove(i);
                 }
             }
             
-
         }
 
 
