@@ -234,7 +234,7 @@ namespace Basicas
             }
         }
 
-
+        
     }
 
     /// <summary>
@@ -973,6 +973,49 @@ namespace Basicas
             fs.Close();
             fs.Dispose();
         }
+    }
+
+    /// <summary>
+    /// Muda cenas e fecha a aplicação.
+    /// </summary>
+    public class MudaCenas
+    {
+
+        public static void MudarCenaPara_Tela_Inicial()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        }
+
+        public static void MudarCenaPara_Pre_Fit()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+        }
+
+        public static void MudarCenaPara_Pre_Bolhas()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+        }
+
+        public static void Fechar_Aplicacao()
+        {
+            Application.Quit();
+        }
+
+        public static void MudarCenaPara_Load_Bolhas()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(4);
+        }
+
+        public static void MudarCenaPara_Load_Fit()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(3);
+        }
+
+        public static void MudarCenaPara_Selecao_Fit()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(5);
+        }
+
     }
 
 }
