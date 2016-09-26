@@ -234,7 +234,89 @@ namespace Basicas
             }
         }
 
-        
+        /// <summary>
+        /// Remove a entrada em bd_fit de posição i.
+        /// <para>PRECISA ter checagem de erros.</para>
+        /// </summary>
+        /// <param name="i"></param>
+        private void Remove(int i)
+        {
+            {
+                instante;
+                
+                tempo;
+                
+                nivel;
+                
+                personagem;
+                
+                grid_x;
+                
+                grid_y;
+                
+                tempo_do_servidor;
+
+                nome_do_jogador;
+
+                id_do_jogador;
+
+                modo_de_jogo;
+               }
+            else
+            {
+                //Tratamento de erro
+        }
+
+        public void RemoveEntradasDoJogador()
+        {
+
+        }
+
+        public void RemoveEntradasDoPersonagem()
+        {
+
+        }
+
+        public void RemoveEntradasDoNivel()
+        {
+
+        }
+
+        /// <summary>
+        /// Função que remove entradas do BDFIT, especificamente caso ele tenha:
+        ///     1 - Personagens específicos
+        ///     2 - Níveis específicos
+        ///     3 - Jogadores específicos
+        /// </summary>
+        public void RemoveEntradas(SortedList lista_de_jogadores = null, bool[] quais_jogadores = null,
+                                   SortedList lista_de_personagens = null, bool[] quais_personagens = null,
+                                   SortedList lista_de_niveis = null, bool[] quais_niveis = null
+                                   )
+        {
+            if (lista_de_jogadores != null && quais_jogadores != null)
+            {
+                for (int i = lista_de_jogadores.Count; i >= 0; i--)
+                {
+                    if (!quais_jogadores[i])
+                    {
+                        lista_de_jogadores.RemoveAt(i);
+                    }
+                }
+            }
+            
+            for (int i = GetQuantidadeDeEntradas() - 1; i >= 0; i--)
+            {
+                if (lista_de_jogadores.ContainsKey(GetIdDoJogador(i)))
+                {
+                    //remover.
+                }
+            }
+            
+
+        }
+
+
+
     }
 
     /// <summary>
