@@ -241,6 +241,7 @@ namespace Basicas
         /// <param name="i"></param>
         private void Remove(int i)
         {
+            /*if (i < GetQuantidadeDeEntradas())
             {
                 instante;
                 
@@ -265,6 +266,7 @@ namespace Basicas
             else
             {
                 //Tratamento de erro
+            }*/
         }
 
         public void RemoveEntradasDoJogador()
