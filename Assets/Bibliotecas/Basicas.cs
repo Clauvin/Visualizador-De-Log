@@ -288,7 +288,7 @@ namespace Basicas
         {
             if (lista_de_jogadores != null && quais_jogadores != null)
             {
-                for (int i = lista_de_jogadores.Count; i >= 0; i--)
+                for (int i = lista_de_jogadores.Count - 1; i >= 0; i--)
                 {
                     if (!quais_jogadores[i])
                     {
