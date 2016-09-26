@@ -65,4 +65,11 @@ public class GuiFITEscolhaDeJogadores : GuiPadrao2
     {
         return lista_de_jogadores;
     }
+
+    public bool[] GetSelecoesDeJogadores()
+    {
+        return selecoes_de_jogadores;
+    }
+        
+        
 }

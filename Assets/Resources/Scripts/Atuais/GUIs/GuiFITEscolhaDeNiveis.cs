@@ -79,4 +79,9 @@ public class GuiFITEscolhaDeNiveis : GuiPadrao2
     {
         return lista_de_niveis;
     }
+
+    public bool[] GetSelecoesDeNiveis()
+    {
+        return selecoes_de_niveis;
+    }
 }

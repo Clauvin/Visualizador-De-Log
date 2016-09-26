@@ -83,4 +83,9 @@ public class GuiFITEscolhaDePersonagens : GuiPadrao2
     {
         return lista_de_personagens;
     }
+
+    public bool[] GetSelecoesDePersonagens()
+    {
+        return selecoes_de_personagens;
+    }
 }
