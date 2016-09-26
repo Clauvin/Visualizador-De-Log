@@ -18,11 +18,6 @@ public class GuiSairDaVisualizacao : GuiPadrao2 {
 
     public virtual void RetornarParaTelaDePreLoad() { }
 
-    public void RetornarParaTelaInicial()
-    {
-        MudarCenaPara_Tela_Inicial();
-    }
-
     public override void OnGUI()
     {
         MudarCoordenadas(Screen.width - largura_dos_botoes, Screen.height - altura_dos_botoes);
@@ -38,7 +33,7 @@ public class GuiSairDaVisualizacao : GuiPadrao2 {
 
             case 1:
 
-                RetornarParaTelaInicial();
+                MudarCenaPara_Tela_Inicial();
                 break;
         }
 
