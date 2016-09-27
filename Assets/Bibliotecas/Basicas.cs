@@ -12,7 +12,7 @@ namespace Basicas
     /// <summary>
     /// Responsável por guardar os dados do log carregado do FIT.
     /// </summary>
-    public class BancoDeDadosFIT
+    public class BancoDeDadosFIT : ICloneable
     {
         // int
         private ArrayList instante;
@@ -36,7 +36,13 @@ namespace Basicas
         private ArrayList modo_de_jogo;
 
 
+
         //Time: 1 = Char:1 = GridX:5 = GridY:7
+
+        public BancoDeDadosFIT Clone()
+        {
+            return new BancoDeDadosFIT();
+        }
 
         public BancoDeDadosFIT()
         {
