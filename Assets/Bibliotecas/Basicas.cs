@@ -293,8 +293,8 @@ namespace Basicas
             {
                 for (int i = lista_de_jogadores.Count - 1; i >= 0; i--)
                 {
-                    
-                    if (!quais_jogadores[i])
+                    //O que foi marcado nao deve ser removido. O resto sim.
+                    if (quais_jogadores[i])
                     {
                         lista_de_jogadores.RemoveAt(i);
                     }
