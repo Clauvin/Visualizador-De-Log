@@ -281,15 +281,19 @@ namespace Basicas
         ///     2 - Níveis específicos
         ///     3 - Jogadores específicos
         /// </summary>
-        public void RemoveEntradas(SortedList lista_de_jogadores = null, bool[] quais_jogadores = null,
-                                   SortedList lista_de_personagens = null, bool[] quais_personagens = null,
-                                   SortedList lista_de_niveis = null, bool[] quais_niveis = null
+        public void RemoveEntradas(SortedList jogadores = null, bool[] quais_jogadores = null,
+                                   SortedList personagens = null, bool[] quais_personagens = null,
+                                   SortedList niveis = null, bool[] quais_niveis = null
                                    )
         {
+
+            SortedList lista_de_jogadores = (SortedList)jogadores.Clone();
+
             if (lista_de_jogadores != null && quais_jogadores != null)
             {
                 for (int i = lista_de_jogadores.Count - 1; i >= 0; i--)
                 {
+                    
                     if (!quais_jogadores[i])
                     {
                         lista_de_jogadores.RemoveAt(i);
