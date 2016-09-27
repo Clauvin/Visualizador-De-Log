@@ -39,9 +39,22 @@ namespace Basicas
 
         //Time: 1 = Char:1 = GridX:5 = GridY:7
 
-        public BancoDeDadosFIT Clone()
+        public object Clone()
         {
-            return new BancoDeDadosFIT();
+            BancoDeDadosFIT clone = new BancoDeDadosFIT();
+            clone.instante = (ArrayList)instante.Clone();
+            clone.tempo = (ArrayList)tempo.Clone();
+            clone.nivel = (ArrayList)nivel.Clone();
+            clone.personagem = (ArrayList)personagem.Clone();
+            clone.grid_x = (ArrayList)grid_x.Clone();
+            clone.grid_y = (ArrayList)grid_y.Clone();
+            clone.tempo_do_servidor = (ArrayList)tempo_do_servidor.Clone();
+            clone.nome_do_jogador = (ArrayList)nome_do_jogador.Clone();
+            clone.id_do_jogador = (ArrayList)id_do_jogador.Clone();
+            clone.modo_de_jogo = (ArrayList)modo_de_jogo.Clone();
+
+            return clone;
+
         }
 
         public BancoDeDadosFIT()
