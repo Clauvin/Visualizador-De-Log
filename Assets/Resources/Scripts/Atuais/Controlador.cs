@@ -992,8 +992,7 @@ public class Controlador : MonoBehaviour
     {
 
         modos.Add("Um Frame De Cada Vez em 3D", 0.5f, 5f, 30f, 0f, 0f, false, 1f, new Vector3(0f, 0f, 330f),
-            new Vector3(90f, 0f, 0f), 1f, 2, "6 - Sem grids\n" + "7 - Com grids\n" +
-                                             parte_da_transparencia_dos_objetos +
+            new Vector3(90f, 0f, 0f), 1f, 2, parte_da_transparencia_dos_objetos +
                                              "<- - Câmera recua\n" +
                                              "-> - Câmera avança(pode \n" +
                                              "atravessar grids)\n" +
@@ -1002,8 +1001,7 @@ public class Controlador : MonoBehaviour
                                              "Q - Voltar à tela inicial");
 
         modos.Add("Um Frame De Cada Vez em 2D", 2f, 0f, 10f, 0f, 0f, true, 1f, new Vector3(0f, 0f, 0f),
-            new Vector3(90f, 0f, 0f), 1f, 0, "6 - Sem grids\n" + "7 - Com grids\n" +
-                                             parte_da_transparencia_dos_objetos +
+            new Vector3(90f, 0f, 0f), 1f, 0, parte_da_transparencia_dos_objetos +
                                              "<- - Posição anterior\n" +
                                              "-> - Posição seguinte\n" +
                                              "A - Anterior mais rápido\n" +
