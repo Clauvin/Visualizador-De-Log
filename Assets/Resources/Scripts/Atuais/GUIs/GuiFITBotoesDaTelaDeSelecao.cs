@@ -43,7 +43,15 @@ public class GuiFITBotoesDaTelaDeSelecao : GuiPadrao2
                 pd_vai.bd_fit.RemoveEntradas(FindObjectOfType<GuiFITEscolhas>().
                                              gui_escolhas_de_jogadores.GetListaDeJogadores(),
                                              FindObjectOfType<GuiFITEscolhas>().
-                                             gui_escolhas_de_jogadores.GetSelecoesDeJogadores());
+                                             gui_escolhas_de_jogadores.GetSelecoesDeJogadores(),
+                                             FindObjectOfType<GuiFITEscolhas>().
+                                             gui_escolhas_de_personagens.GetListaDePersonagens(),
+                                             FindObjectOfType<GuiFITEscolhas>().
+                                             gui_escolhas_de_personagens.GetSelecoesDePersonagens(),
+                                             FindObjectOfType<GuiFITEscolhas>().
+                                             gui_escolhas_de_niveis.GetListaDeNiveis(),
+                                             FindObjectOfType<GuiFITEscolhas>().
+                                             gui_escolhas_de_niveis.GetSelecoesDeNiveis());
                 pd_vai.heatmaps = GetComponent<NovoLeitor2>().Heatmaps;
                 pd_vai.NaoDestruirAoDescarregar();
                 MudaCenas.MudarCenaPara_Load_Fit();
