@@ -408,16 +408,6 @@ public class Controlador : MonoBehaviour
                 GetComponent<NovoLeitor2>().DesconectarTodos();
             }
 
-            if (Input.GetButtonDown("6"))
-            {
-                Transparencia0();
-            }
-
-            if (Input.GetButtonDown("7"))
-            {
-                TransparenciaDeVoltaAoNormal(modo_de_visualizacao);
-            }
-
             if (tipo == "Bolhas")
             {
                 if (Input.GetButtonDown("8")) MudarTransparenciaDosObjetos(-0.2f);
@@ -668,16 +658,6 @@ public class Controlador : MonoBehaviour
         int pos_tempo = (int)pos_tempo_float;
         if (pos_tempo < 0) pos_tempo = 0;
         return pos_tempo;
-    }
-
-    void Transparencia0()
-    {
-        GetComponent<NovoLeitor2>().ControlarAlpha(0f);
-    }
-
-    void TransparenciaDeVoltaAoNormal(string modo)
-    {
-        GetComponent<NovoLeitor2>().ControlarAlpha(modos.GetAlpha(modo));
     }
 
     public void MudarTransparenciaDosObjetos(float change)
