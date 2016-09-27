@@ -15,6 +15,8 @@ public class GuiFITBotoesDaTelaDeSelecao : GuiPadrao2
     private string[] toolbar_Strings = { "Voltar à\n Tela Inicial", "Voltar à\n Escolha de Log FIT",
                                         "Visualizar" };
 
+    private bool janela_de_erro = false;
+
     public override void OnGUI()
     {
         GUI.BeginGroup(new Rect(0, 0, Screen.width, Screen.height));
@@ -52,12 +54,36 @@ public class GuiFITBotoesDaTelaDeSelecao : GuiPadrao2
                                              gui_escolhas_de_niveis.GetListaDeNiveis(),
                                              FindObjectOfType<GuiFITEscolhas>().
                                              gui_escolhas_de_niveis.GetSelecoesDeNiveis());
-                pd_vai.heatmaps = GetComponent<NovoLeitor2>().Heatmaps;
-                pd_vai.NaoDestruirAoDescarregar();
-                MudaCenas.MudarCenaPara_Load_Fit();
+
+                if (pd_vai.bd_fit.GetQuantidadeDeEntradas() > 0)
+                {
+                    pd_vai.heatmaps = GetComponent<NovoLeitor2>().Heatmaps;
+                    pd_vai.NaoDestruirAoDescarregar();
+                    MudaCenas.MudarCenaPara_Load_Fit();
+                }
+                else
+                {
+                    pd_vai.Destruir();
+                    janela_de_erro = true;
+                }
+
                 break;
             default:
                 break;
+        }
+
+        if (janela_de_erro)
+        {
+            GUI.BeginGroup(new Rect(Screen.width/4, 0, Screen.width/2, 30));
+
+            GUI.Label(new Rect(0, 0, Screen.width / 2 - 40, 30), "A seleção escolhida não contém dados para análise.",
+                      "textarea");
+
+            if (GUI.Button(new Rect(Screen.width / 2 - 40, 0, 40, 30), "OK")) {
+                janela_de_erro = false;
+            }
+
+            GUI.EndGroup();
         }
 
         resultado = -1;
