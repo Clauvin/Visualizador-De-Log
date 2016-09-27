@@ -287,7 +287,13 @@ namespace Basicas
                                    )
         {
 
-            SortedList lista_de_jogadores = (SortedList)jogadores.Clone();
+            SortedList lista_de_jogadores = null;
+            SortedList lista_de_personagens = null;
+            SortedList lista_de_niveis = null;
+
+            if (jogadores != null) lista_de_jogadores = (SortedList)jogadores.Clone();
+            if (personagens != null) lista_de_personagens = (SortedList)personagens.Clone();
+            if (niveis != null) lista_de_niveis = (SortedList)niveis.Clone();
 
             if (lista_de_jogadores != null && quais_jogadores != null)
             {
@@ -300,12 +306,42 @@ namespace Basicas
                     }
                 }
             }
-            
+
+            if (lista_de_personagens != null && quais_personagens != null)
+            {
+                for (int i = lista_de_personagens.Count - 1; i >= 0; i--)
+                {
+                    //O que foi marcado nao deve ser removido. O resto sim.
+                    if (quais_personagens[i])
+                    {
+                        lista_de_personagens.RemoveAt(i);
+                    }
+                }
+            }
+
+            if (lista_de_niveis != null && quais_niveis != null)
+            {
+                for (int i = lista_de_niveis.Count - 1; i >= 0; i--)
+                {
+                    //O que foi marcado nao deve ser removido. O resto sim.
+                    if (quais_niveis[i])
+                    {
+                        lista_de_niveis.RemoveAt(i);
+                    }
+                }
+            }
+
             for (int i = GetQuantidadeDeEntradas() - 1; i >= 0; i--)
             {
-                if (lista_de_jogadores.
+                if ((lista_de_jogadores.
                     ContainsKey
-                    (GetNomeDoJogador(i)))
+                    (GetNomeDoJogador(i))) ||
+                   (lista_de_personagens.
+                    ContainsKey
+                    (GetPersonagem(i))) ||
+                   (lista_de_niveis.
+                    ContainsKey
+                    (GetNivel(i))))
                 {
                     Remove(i);
                 }
