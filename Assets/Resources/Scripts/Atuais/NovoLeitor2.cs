@@ -163,7 +163,7 @@ public class NovoLeitor2 : MonoBehaviour
     {
 
         //number for number of HeatMaps
-        Heatmaps = 1;
+        Heatmaps = 0;
 
         // Handle any problems that might arise when reading the text
         string line;
@@ -356,6 +356,9 @@ public class NovoLeitor2 : MonoBehaviour
         } while (line != null);
 
         lida_com_texto.FecharReaders(fs, theReader);
+
+        //Com isso, o último heatmap, do último personagem, não vai sumir.
+        if (Heatmaps > 2) Heatmaps++;
 
         return true;
 
