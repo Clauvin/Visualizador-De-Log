@@ -1275,6 +1275,7 @@ public class NovoLeitor2 : MonoBehaviour
         objeto_a_receber_dados.GetComponent<Dados>().id_do_jogador = obj_jogador_fit.bd_fit.GetIdDoJogador(i);
         objeto_a_receber_dados.GetComponent<Dados>().qual_jogador = obj_jogador_fit.bd_fit.GetNomeDoJogador(i);
         objeto_a_receber_dados.GetComponent<Dados>().instante_em_camera = obj_jogador_fit.bd_fit.GetInstante(i);
+        objeto_a_receber_dados.GetComponent<Dados>().nivel = obj_jogador_fit.bd_fit.GetNivel(i);
     }
 
     protected void AddDadosBolhas(GameObject objeto_a_receber_dados, int i)
