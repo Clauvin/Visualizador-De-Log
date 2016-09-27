@@ -40,12 +40,12 @@ public class GuiModo : GuiPadrao2
     {
         if (revelado)
         {
-            GUI.BeginGroup(new Rect(posx, posy, 250, 390));
+            GUI.BeginGroup(new Rect(posx, posy, 250, 310));
 
             posicaox = 0;
             GUI.Label(new Rect(10, posicaox, 250, 20), "Modo: " + texto, "textfield");
             posicaox += 20;
-            GUI.Label(new Rect(10, posicaox, 250, 370), instrucoes, "textfield");
+            GUI.Label(new Rect(10, posicaox, 250, 290), instrucoes, "textfield");
 
             GUI.EndGroup();
         }
