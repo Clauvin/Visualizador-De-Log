@@ -39,7 +39,7 @@ public class GuiFITBotoesDaTelaDeSelecao : GuiPadrao2
                 Object.Instantiate
                     (Resources.Load("Objetos\\Passador De Dados"));
                 PassadorDeDados pd_vai = FindObjectOfType<PassadorDeDados>().GetComponent<PassadorDeDados>();
-                pd_vai.bd_fit = GetComponent<NovoLeitor2>().GetBancoDeDadosFIT();
+                pd_vai.bd_fit = (BancoDeDadosFIT)GetComponent<NovoLeitor2>().GetBancoDeDadosFIT().Clone();
                 pd_vai.bd_fit.RemoveEntradas(FindObjectOfType<GuiFITEscolhas>().
                                              gui_escolhas_de_jogadores.GetListaDeJogadores(),
                                              FindObjectOfType<GuiFITEscolhas>().
