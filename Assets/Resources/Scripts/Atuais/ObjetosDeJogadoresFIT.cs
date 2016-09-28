@@ -41,6 +41,11 @@ public class ObjetosDeJogadoresFIT : MonoBehaviour {
         return (ObjetosDeUmJogadorFIT)obj_jogadores_fit[i];
     }
 
+    public int QuantosJogadores()
+    {
+        return obj_jogadores_fit.Count;
+    }
+
     // Use this for initialization
     void Start () {
 	
