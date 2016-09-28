@@ -15,7 +15,7 @@ public class NovoLeitorDeSelecaoFIT : NovoLeitor2
     // Use this for initialization
     void Start()
     {
-        NovoLeitor2InitFIT();
+        NovoLeitor2InitSelecaoFIT();
 
         string endereco;
 #if UNITY_EDITOR
@@ -52,14 +52,15 @@ public class NovoLeitorDeSelecaoFIT : NovoLeitor2
 
     public SortedList SelecionaJogadores()
     {
-        int quant = obj_jogador_fit.bd_fit.GetQuantidadeDeEntradas();
+        int quant = objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).bd_fit.GetQuantidadeDeEntradas();
         SortedList lista_de_jogadores = new SortedList();
 
         for (int i = 0; i < quant; i++)
         {
-            if (!lista_de_jogadores.ContainsKey(obj_jogador_fit.bd_fit.GetNomeDoJogador(i)))
+            if (!lista_de_jogadores.ContainsKey(objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).bd_fit.GetNomeDoJogador(i)))
             {
-                lista_de_jogadores.Add(obj_jogador_fit.bd_fit.GetNomeDoJogador(i), obj_jogador_fit.bd_fit.GetNomeDoJogador(i));
+                lista_de_jogadores.Add(objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).bd_fit.GetNomeDoJogador(i),
+                    objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).bd_fit.GetNomeDoJogador(i));
             }
 
         }
@@ -70,14 +71,15 @@ public class NovoLeitorDeSelecaoFIT : NovoLeitor2
 
     public SortedList SelecionaNiveis()
     {
-        int quant = obj_jogador_fit.bd_fit.GetQuantidadeDeEntradas();
+        int quant = objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).bd_fit.GetQuantidadeDeEntradas();
         SortedList lista_de_niveis = new SortedList();
 
         for (int i = 0; i < quant; i++)
         {
-            if (!lista_de_niveis.ContainsKey(obj_jogador_fit.bd_fit.GetNivel(i)))
+            if (!lista_de_niveis.ContainsKey(objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).bd_fit.GetNivel(i)))
             {
-                lista_de_niveis.Add(obj_jogador_fit.bd_fit.GetNivel(i), obj_jogador_fit.bd_fit.GetNivel(i));
+                lista_de_niveis.Add(objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).bd_fit.GetNivel(i),
+                    objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).bd_fit.GetNivel(i));
             }
 
         }
@@ -88,14 +90,15 @@ public class NovoLeitorDeSelecaoFIT : NovoLeitor2
 
     public SortedList SelecionaPersonagens()
     {
-        int quant = obj_jogador_fit.bd_fit.GetQuantidadeDeEntradas();
+        int quant = objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).bd_fit.GetQuantidadeDeEntradas();
         SortedList lista_de_personagens = new SortedList();
 
         for (int i = 0; i < quant; i++)
         {
-            if (!lista_de_personagens.ContainsKey(obj_jogador_fit.bd_fit.GetPersonagem(i)))
+            if (!lista_de_personagens.ContainsKey(objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).bd_fit.GetPersonagem(i)))
             {
-                lista_de_personagens.Add(obj_jogador_fit.bd_fit.GetPersonagem(i), obj_jogador_fit.bd_fit.GetPersonagem(i));
+                lista_de_personagens.Add(objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).bd_fit.GetPersonagem(i),
+                                        objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).bd_fit.GetPersonagem(i));
             }
         }
 
