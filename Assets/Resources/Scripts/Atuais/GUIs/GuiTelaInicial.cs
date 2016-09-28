@@ -61,8 +61,8 @@ public class GuiTelaInicial : GuiPadrao2
 
             GUI.Box(new Rect(0, 0, Screen.width * 0.2f, Screen.height * 0.3f), "Créditos\n\n" +
                 "Cláuvin Erlan José\n da Costa Curty de Almeida\n\n" +
-                "e Contribuidores do GitHub:\n" +
-                "adicionar link.");
+                "Contribuidor: Bruno Correia\n" +
+                ".");
 
             if (GUI.Button(new Rect(Screen.width * 0.05f, Screen.height * 0.25f, Screen.width * 0.1f, Screen.height * 0.05f),
                 "Fechar")){
