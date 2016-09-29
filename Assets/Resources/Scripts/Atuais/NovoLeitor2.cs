@@ -1339,6 +1339,30 @@ public class NovoLeitor2 : MonoBehaviour
             + new Vector3(200f, 0, 0);
     }
 
+    public void ReposicionandoPosicoesEsquerda()
+    {
+        ConectarTodos();
+        ancora.transform.position = new Vector3(GetComponent<Controlador>().GetBancoDeDadosModos().GetPosEsq("Heatmap"),
+                                                0f, 0f);
+        DesconectarTodos();
+    }
+
+    public void ReposicionandoPosicoesCentro()
+    {
+        ConectarTodos();
+        ancora.transform.position = new Vector3(GetComponent<Controlador>().GetBancoDeDadosModos().GetPosCen("Heatmap"),
+                                                0f, 0f);
+        DesconectarTodos();
+    }
+
+    public void ReposicionandoPosicoesDireita()
+    {
+        ConectarTodos();
+        ancora.transform.position = new Vector3(GetComponent<Controlador>().GetBancoDeDadosModos().GetPosDir("Heatmap"),
+                                                0f, 0f);
+        DesconectarTodos();
+    }
+
     public void ReposicionandoHeatmapEsquerda()
     {
         heatmap.transform.position = (((GameObject)lista_de_backgrounds[0]).transform.position
