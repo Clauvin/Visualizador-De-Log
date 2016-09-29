@@ -1330,18 +1330,24 @@ public class NovoLeitor2 : MonoBehaviour
     {
         heatmap.transform.position = (((GameObject)lista_de_backgrounds[0]).transform.position
             + new Vector3(GetComponent<Controlador>().GetBancoDeDadosModos().GetPosEsq("Heatmap"), 0, 0));
+        heatmap.transform.localScale = GetComponent<Controlador>().GetBancoDeDadosModos().
+            GetEscalaEsquerdaOuDireita("Heatmap");
     }
 
     public void ReposicionandoHeatmapCentro()
     {
         heatmap.transform.position = (((GameObject)lista_de_backgrounds[0]).transform.position
             + new Vector3(GetComponent<Controlador>().GetBancoDeDadosModos().GetPosCen("Heatmap"), 0, 0));
+        heatmap.transform.localScale = GetComponent<Controlador>().GetBancoDeDadosModos().
+            GetEscalaNoCentro("Heatmap");
     }
 
     public void ReposicionandoHeatmapDireita()
     {
         heatmap.transform.position = (((GameObject)lista_de_backgrounds[0]).transform.position
             + new Vector3(GetComponent<Controlador>().GetBancoDeDadosModos().GetPosDir("Heatmap"), 0, 0));
+        heatmap.transform.localScale = GetComponent<Controlador>().GetBancoDeDadosModos().
+            GetEscalaEsquerdaOuDireita("Heatmap");
     }
 
     public string GetQualLeitor() { return qual_leitor; }
