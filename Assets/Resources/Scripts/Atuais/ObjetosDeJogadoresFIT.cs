@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Classe responsável por guardar todas as instâncias de ObjetosDeUmJogadorFIT,
+/// uma para cada jogador que fez ações registradas no log, para que seja possível a visualização
+/// 2 a 2 de dados de jogadores.
+/// </summary>
 public class ObjetosDeJogadoresFIT : MonoBehaviour {
 
     public ArrayList obj_jogadores_fit;
