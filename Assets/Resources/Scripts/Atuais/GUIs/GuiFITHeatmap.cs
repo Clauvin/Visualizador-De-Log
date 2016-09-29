@@ -20,24 +20,28 @@ public class GuiFITHeatmap : GuiHeatmap
         if ((revelado) && (!gambiarra))
         {
             int qualheatmap = GetComponent<Controlador>().QualHeatmapMostra();
-            GUI.BeginGroup(new Rect(posx, posy, 170, 20 *
-                (dados[qualheatmap].numeros_de_cor.Count + 3)));
 
             posicao_y = 0;
 
-            GUI.Box(new Rect(10, posicao_y, 170, 40 + 20 * dados[qualheatmap].numeros_de_cor.Count), string.Empty);
-
             if (qualheatmap == 0)
             {
-                GUI.TextField(new Rect(10, posicao_y, 160, 20), "Cores e Quantos Objetos");
-                posicao_y += 20;
+                GUI.TextField(new Rect(10, posy-20, 160, 20), "Cores e Quantos Objetos");
             }
             else
             {
-                GUI.TextField(new Rect(10, posicao_y, 160, 40), "Cores e Quantos Objetos\n - Jogador " +
-                    lista_de_objetos[qualheatmap-1]);
-                posicao_y += 40;
+                GUI.TextField(new Rect(10, posy-40, 160, 40), "Cores e Quantos Objetos\n - Jogador " +
+                    lista_de_objetos[qualheatmap - 1]);
             }
+
+            // Begin the ScrollView
+            scrollViewVector = GUI.BeginScrollView(new Rect(posx, posy, largura_da_janela, altura_da_janela),
+                                                   scrollViewVector,
+                                                   new Rect(0, 0, 170, 20 *
+                                                    (dados[qualheatmap].numeros_de_cor.Count + 3)));
+
+            GUI.Box(new Rect(10, posicao_y, 170, 40 + 20 * dados[qualheatmap].numeros_de_cor.Count), string.Empty);
+
+            
 
             //lembrando, uma das cores já foi
             for (int i = 0; i < dados[qualheatmap].numeros_de_cor.Count; i++)
@@ -48,8 +52,8 @@ public class GuiFITHeatmap : GuiHeatmap
                 posicao_y += 20;
             }
 
+            GUI.EndScrollView();
 
-            GUI.EndGroup();
         }
     }
 
@@ -58,6 +62,8 @@ public class GuiFITHeatmap : GuiHeatmap
     public void Start()
     {
         lista_de_objetos = GetComponent<NovoLeitor2>().lista_de_nomes_de_objetos_do_FIT;
+        largura_da_janela = 200;
+        altura_da_janela = 300;
     }
 
 }
