@@ -613,19 +613,25 @@ namespace Basicas
     /// <summary>
     /// Classe BancoDeDadosModos. Responsável por guardar os dados dos modos de visão possível dos logs.
     /// </summary>
-    class BancoDeDadosModos
+    public class BancoDeDadosModos
     {
         private Dictionary<string, float> movimentacao;
         private Dictionary<string, float> camera_x;
         private Dictionary<string, float> camera_init_y;
         private Dictionary<string, float> camera_z;
         private Dictionary<string, float> camera_init_z;
-        private Dictionary<string, bool> orthographic;
+
+        //Orthographic = Representação de um ambiente 3D num plano 2D.
+        //or_not = Representação de um ambiente 3D... no ambiente 3D.
+        private Dictionary<string, bool> orthographic_or_not;
         private Dictionary<string, float> alpha;
-        private Dictionary<string, Vector3> rotation;
+        private Dictionary<string, Vector3> rotation_objects;
         private Dictionary<string, Vector3> rotation_camera;
         private Dictionary<string, float> visible_background_alpha;
         private Dictionary<string, int> layer;
+        private Dictionary<string, float> pos_esq_x;
+        private Dictionary<string, float> pos_cen_x;
+        private Dictionary<string, float> pos_dir_x;
         private Dictionary<string, string> instrucoes;
 
         public BancoDeDadosModos()
@@ -635,30 +641,40 @@ namespace Basicas
             camera_init_y = new Dictionary<string, float>();
             camera_z = new Dictionary<string, float>();
             camera_init_z = new Dictionary<string, float>();
-            orthographic = new Dictionary<string, bool>();
+            orthographic_or_not = new Dictionary<string, bool>();
             alpha = new Dictionary<string, float>();
-            rotation = new Dictionary<string, Vector3>();
+            rotation_objects = new Dictionary<string, Vector3>();
             rotation_camera = new Dictionary<string, Vector3>();
             visible_background_alpha = new Dictionary<string, float>();
             layer = new Dictionary<string, int>();
+            pos_esq_x = new Dictionary<string, float>();
+            pos_cen_x = new Dictionary<string, float>();
+            pos_dir_x = new Dictionary<string, float>();
             instrucoes = new Dictionary<string, string>();
+
         }
 
         public bool Add(string modo, float mov, float x, float y, float z, float initz, bool ort,
-            float alph, Vector3 rot, Vector3 rotationcam, float backalpha, int novolayer, string instrucao)
+            float alph, Vector3 rot, Vector3 rotationcam, float backalpha, int novolayer, float pos_e_x,
+            float pos_c_x, float pos_d_x, string instrucao)
+
         {
             movimentacao.Add(modo, mov);
             camera_x.Add(modo, x);
             camera_init_y.Add(modo, y);
             camera_z.Add(modo, z);
             camera_init_z.Add(modo, initz);
-            orthographic.Add(modo, ort);
+            orthographic_or_not.Add(modo, ort);
             alpha.Add(modo, alph);
-            rotation.Add(modo, rot);
+            rotation_objects.Add(modo, rot);
             rotation_camera.Add(modo, rotationcam);
             visible_background_alpha.Add(modo, backalpha);
             layer.Add(modo, novolayer);
+            pos_esq_x.Add(modo, pos_e_x);
+            pos_cen_x.Add(modo, pos_c_x);
+            pos_dir_x.Add(modo, pos_d_x);
             instrucoes.Add(modo, instrucao);
+
             return true;
         }
 
@@ -806,7 +822,7 @@ namespace Basicas
 
         public bool GetOrthographic(string modo)
         {
-            try { return orthographic[modo]; }
+            try { return orthographic_or_not[modo]; }
             //ATENÇAO: Esse catch está correto?
             catch (ArgumentNullException excecao)
             {
@@ -850,7 +866,7 @@ namespace Basicas
 
         public Vector3 GetRotationChange(string modo)
         {
-            try { return rotation[modo]; }
+            try { return rotation_objects[modo]; }
             //ATENÇAO: Esse catch está correto?
             catch (ArgumentNullException excecao)
             {
@@ -930,6 +946,72 @@ namespace Basicas
             {
 #if (DEBUG)
                 Debug.Log("BancoDeDadosModos.GetLayer - Key " + modo + " não existe.");
+#endif
+                //Isso ainda vai dar problema um dia...
+                return -1;
+            }
+        }
+
+        public float GetPosEsq(string modo)
+        {
+            try { return pos_esq_x[modo]; }
+            //ATENÇAO: Esse catch está correto?
+            catch (ArgumentNullException excecao)
+            {
+#if (DEBUG)
+                Debug.Log("BancoDeDadosModos.GetPosEsq - Key modo é nula.");
+#endif
+                //Isso ainda vai dar problema um dia...
+                return -1;
+            }
+            catch (KeyNotFoundException excecao)
+            {
+#if (DEBUG)
+                Debug.Log("BancoDeDadosModos.GetPosEsq - Key " + modo + " não existe.");
+#endif
+                //Isso ainda vai dar problema um dia...
+                return -1;
+            }
+        }
+
+        public float GetPosCen(string modo)
+        {
+            try { return pos_cen_x[modo]; }
+            //ATENÇAO: Esse catch está correto?
+            catch (ArgumentNullException excecao)
+            {
+#if (DEBUG)
+                Debug.Log("BancoDeDadosModos.GetPosCen - Key modo é nula.");
+#endif
+                //Isso ainda vai dar problema um dia...
+                return -1;
+            }
+            catch (KeyNotFoundException excecao)
+            {
+#if (DEBUG)
+                Debug.Log("BancoDeDadosModos.GetPosCen - Key " + modo + " não existe.");
+#endif
+                //Isso ainda vai dar problema um dia...
+                return -1;
+            }
+        }
+
+        public float GetPosDir(string modo)
+        {
+            try { return pos_dir_x[modo]; }
+            //ATENÇAO: Esse catch está correto?
+            catch (ArgumentNullException excecao)
+            {
+#if (DEBUG)
+                Debug.Log("BancoDeDadosModos.GetPosDir - Key modo é nula.");
+#endif
+                //Isso ainda vai dar problema um dia...
+                return -1;
+            }
+            catch (KeyNotFoundException excecao)
+            {
+#if (DEBUG)
+                Debug.Log("BancoDeDadosModos.GetPosDir - Key " + modo + " não existe.");
 #endif
                 //Isso ainda vai dar problema um dia...
                 return -1;
