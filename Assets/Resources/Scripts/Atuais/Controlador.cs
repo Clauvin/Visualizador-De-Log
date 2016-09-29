@@ -968,6 +968,11 @@ public class Controlador : MonoBehaviour
         return auto_mode_custom;
     }
 
+    public BancoDeDadosModos GetBancoDeDadosModos()
+    {
+        return modos;
+    }
+
     public void InicializacaoBolhas()
     {
 
