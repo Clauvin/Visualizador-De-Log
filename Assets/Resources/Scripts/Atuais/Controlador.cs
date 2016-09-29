@@ -992,7 +992,7 @@ public class Controlador : MonoBehaviour
     {
 
         modos.Add("Um Frame De Cada Vez em 3D", 0.5f, 5f, 30f, 0f, 0f, false, 1f, new Vector3(0f, 0f, 330f),
-            new Vector3(90f, 0f, 0f), 1f, 2, parte_da_transparencia_dos_objetos +
+            new Vector3(90f, 0f, 0f), 1f, 2, 0.0f, 0.0f, 0.0f, parte_da_transparencia_dos_objetos +
                                              "<- - Câmera recua\n" +
                                              "-> - Câmera avança(pode \n" +
                                              "atravessar grids)\n" +
@@ -1001,7 +1001,7 @@ public class Controlador : MonoBehaviour
                                              "Q - Voltar à tela inicial");
 
         modos.Add("Um Frame De Cada Vez em 2D", 2f, 0f, 10f, 0f, 0f, true, 1f, new Vector3(0f, 0f, 0f),
-            new Vector3(90f, 0f, 0f), 1f, 0, parte_da_transparencia_dos_objetos +
+            new Vector3(90f, 0f, 0f), 1f, 0, 0.0f, 0.0f, 0.0f, parte_da_transparencia_dos_objetos +
                                              "<- - Posição anterior\n" +
                                              "-> - Posição seguinte\n" +
                                              "A - Anterior mais rápido\n" +
@@ -1015,7 +1015,7 @@ public class Controlador : MonoBehaviour
                                              "Q - Voltar à tela inicial");
 
         modos.Add("Todos De Uma Vez em 3D", 0.5f, 5f, 2f, 0f, 0f, false, 0f, new Vector3(0f, 0f, 0f),
-            new Vector3(90f, 0f, 0f), 0f, 2, parte_da_transparencia_dos_objetos +
+            new Vector3(90f, 0f, 0f), 0f, 2, 0.0f, 0.0f, 0.0f, parte_da_transparencia_dos_objetos +
                                              "<- - Câmera recua\n" +
                                              "-> - Câmera avança\n" +
                                              "A - Recua mais rápido\n" +
@@ -1025,7 +1025,7 @@ public class Controlador : MonoBehaviour
                                              "Q - Tela inicial");
 
         modos.Add("Heatmap", 0f, 200f, 15f, 0f, 0f, true, 0f, new Vector3(0f, 0f, 0f),
-            new Vector3(90f, 0f, 0f), 1f, 2, "<- - Avança na lista de heatmaps\n" +
+            new Vector3(90f, 0f, 0f), 1f, 2, 196f, 200f, 204f, "<- - Avança na lista de heatmaps\n" +
                                              "-> - Retorna na lista de heatmaps\n" +
                                              "Q - Tela inicial");
 
