@@ -99,7 +99,7 @@ public class NovoLeitor2 : MonoBehaviour
         }
     }
 
-
+    public UnityEngine.Object ancora;
 
     public void StartFIT()
     {
@@ -913,6 +913,9 @@ public class NovoLeitor2 : MonoBehaviour
         AjeitandoOHeatmap(material_heatmap);
 
         GetComponent<Controlador>().MudarTransparenciaDosObjetos(0.2f);
+
+        ancora = Instantiate(Resources.Load("Objetos/Ancora de Movimentacao"));
+        ancora.name = "Ancora";
 
     }
 
