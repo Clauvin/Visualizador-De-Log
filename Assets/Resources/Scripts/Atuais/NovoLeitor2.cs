@@ -99,7 +99,7 @@ public class NovoLeitor2 : MonoBehaviour
         }
     }
 
-    public UnityEngine.Object ancora;
+    public GameObject ancora;
 
     public void StartFIT()
     {
@@ -914,8 +914,9 @@ public class NovoLeitor2 : MonoBehaviour
 
         GetComponent<Controlador>().MudarTransparenciaDosObjetos(0.2f);
 
-        ancora = Instantiate(Resources.Load("Objetos/Ancora de Movimentacao"));
+        ancora = Instantiate(Resources.Load<GameObject>("Objetos/Ancora de Movimentacao"));
         ancora.name = "Ancora";
+        ConectarTodosAAncora();
 
     }
 
@@ -1116,6 +1117,15 @@ public class NovoLeitor2 : MonoBehaviour
             pos = ((GameObject)lista_de_backgrounds[i]).transform.position;
             pos.y = yback0;
             ((GameObject)lista_de_backgrounds[i]).transform.position = pos;
+        }
+    }
+
+    public void ConectarTodosAAncora()
+    {
+        for (int j = 0; j < lista_de_backgrounds.Count; j++)
+        {
+            GameObject background = (GameObject)lista_de_backgrounds[j];
+            background.transform.parent = ancora.transform;
         }
     }
 
