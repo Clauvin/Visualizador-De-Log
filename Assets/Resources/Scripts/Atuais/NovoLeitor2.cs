@@ -1322,7 +1322,8 @@ public class NovoLeitor2 : MonoBehaviour
         materialheatmap.SetTexture("_MainTex", ((HeatMap)matrizes_dos_heatmaps[0]).heatmap);
         heatmap.GetComponent<MeshRenderer>().material = Instantiate(materialheatmap);
 
-        heatmap.transform.position = ((GameObject)lista_de_backgrounds[0]).transform.position + new Vector3(200f, 0, 0);
+        heatmap.transform.position = ((GameObject)lista_de_backgrounds[0]).transform.position
+            + new Vector3(200f, 0, 0);
     }
 
     public string GetQualLeitor() { return qual_leitor; }
