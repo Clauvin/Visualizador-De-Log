@@ -1342,7 +1342,8 @@ public class NovoLeitor2 : MonoBehaviour
     public void ReposicionandoPosicoesEsquerda()
     {
         ConectarTodos();
-        ancora.transform.position = new Vector3(GetComponent<Controlador>().GetBancoDeDadosModos().GetPosEsq("Heatmap"),
+        ancora.transform.position = new Vector3(GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetPosEsq("Todos De Uma Vez em 3D"),
                                                 0f, 0f);
         DesconectarTodos();
     }
@@ -1350,7 +1351,8 @@ public class NovoLeitor2 : MonoBehaviour
     public void ReposicionandoPosicoesCentro()
     {
         ConectarTodos();
-        ancora.transform.position = new Vector3(GetComponent<Controlador>().GetBancoDeDadosModos().GetPosCen("Heatmap"),
+        ancora.transform.position = new Vector3(GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetPosCen("Todos De Uma Vez em 3D"),
                                                 0f, 0f);
         DesconectarTodos();
     }
@@ -1358,7 +1360,8 @@ public class NovoLeitor2 : MonoBehaviour
     public void ReposicionandoPosicoesDireita()
     {
         ConectarTodos();
-        ancora.transform.position = new Vector3(GetComponent<Controlador>().GetBancoDeDadosModos().GetPosDir("Heatmap"),
+        ancora.transform.position = new Vector3(GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetPosDir("Todos De Uma Vez em 3D"),
                                                 0f, 0f);
         DesconectarTodos();
     }
