@@ -2,6 +2,10 @@
 using System.Collections;
 using Basicas;
 
+/// <summary>
+/// Classe responsável por guardar todos os objetos relacionados às ações de um jogador
+/// num log, incluindo o banco de dados com as informações referentes ao log em questão.
+/// </summary>
 public class ObjetosDeUmJogadorFIT : MonoBehaviour {
 
     public ArrayList lista_de_backgrounds;
