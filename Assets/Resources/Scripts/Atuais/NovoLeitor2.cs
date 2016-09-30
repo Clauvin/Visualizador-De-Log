@@ -108,12 +108,28 @@ public class NovoLeitor2 : MonoBehaviour
     {
         get
         {
-            return matrizes_dos_heatmaps;
+            if (qual_leitor == "FIT")
+            {
+                return objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).matrizes_dos_heatmaps;
+            }
+            else if (qual_leitor == "Bolhas")
+            {
+                return matrizes_dos_heatmaps;
+            }
+            else return null;
         }
 
         set
         {
-            matrizes_dos_heatmaps = value;
+            if (qual_leitor == "FIT")
+            {
+                objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).matrizes_dos_heatmaps = value;
+            }
+            else if (qual_leitor == "Bolhas")
+            {
+                matrizes_dos_heatmaps = value;
+            }
+            else Debug.Log("NovoLeitor2.qual_leitor está com valor diferente de Fit e Bolhas.");
         }
     }
 
