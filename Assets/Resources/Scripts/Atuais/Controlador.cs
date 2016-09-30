@@ -92,10 +92,10 @@ public class Controlador : MonoBehaviour
 
                     posicao_da_camera.y -= y;
 
-                    if (posicao_da_camera.y <= ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
-                        GetComponent<NovoLeitor2>().lista_de_backgrounds.Count - 1]).transform.position.y)
+                    if (posicao_da_camera.y <= ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[
+                        GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 1]).transform.position.y)
                     {
-                        posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[0]).transform.position.y + 20.0f;
+                        posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[0]).transform.position.y + 20.0f;
                     }
 
                     FindObjectOfType<Camera>().transform.position = posicao_da_camera;
@@ -107,10 +107,10 @@ public class Controlador : MonoBehaviour
 
                     posicao_da_camera.y -= y;
 
-                    if (posicao_da_camera.y <= ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
+                    if (posicao_da_camera.y <= ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[
                         posicao_temporal_2]).transform.position.y)
                     {
-                        posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
+                        posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[
                             posicao_temporal_1]).transform.position.y;
                     }
 
@@ -127,7 +127,7 @@ public class Controlador : MonoBehaviour
                     {
                         if (posicao_temporal_ <= GetComponent<NovoLeitor2>().GetUltimoTempo())
                         {
-                            posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[0]).transform.position.y +
+                            posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[0]).transform.position.y +
                                               20.0f - 20.0f * posicao_temporal_;
                         }
                         else
@@ -157,7 +157,7 @@ public class Controlador : MonoBehaviour
                             {
                                 if (posicao_temporal_1 <= GetComponent<NovoLeitor2>().GetUltimoTempo())
                                 {
-                                    posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[0]).transform.position.y +
+                                    posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[0]).transform.position.y +
                                                         20.0f - 20.0f * posicao_temporal_1;
                                 }
 
@@ -278,20 +278,20 @@ public class Controlador : MonoBehaviour
 
                         AlterarPosicaoDeCamera('y', true, "Horizontal", "Vertical", false, 0, -1.0f);
 
-                        if (posicao_da_camera.y > ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[0]).transform.position.y + 20.0f)
+                        if (posicao_da_camera.y > ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[0]).transform.position.y + 20.0f)
                         {
-                            posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[0]).transform.position.y + 20.0f;
+                            posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[0]).transform.position.y + 20.0f;
                         }
 
                         float limitacao = 5.0f;
                         if (modo_de_visualizacao == "Um Frame De Cada Vez em 3D") limitacao = -15.0f;
 
-                        if (posicao_da_camera.y < ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
-                                                    GetComponent<NovoLeitor2>().lista_de_backgrounds.Count - 2
+                        if (posicao_da_camera.y < ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[
+                                                    GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 2
                                                     ]).transform.position.y + limitacao - 5.0f)
                         {
-                            posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
-                                                    GetComponent<NovoLeitor2>().lista_de_backgrounds.Count - 2
+                            posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[
+                                                    GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 2
                                                     ]).transform.position.y + limitacao - 5.0f;
                         }
 
@@ -308,20 +308,20 @@ public class Controlador : MonoBehaviour
                     {
                         AlterarPosicaoDeCamera('y', false, "", "", false, 0, -7.0f, true, "a", "d");
 
-                        if (posicao_da_camera.y > ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[0]).transform.position.y + 20.0f)
+                        if (posicao_da_camera.y > ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[0]).transform.position.y + 20.0f)
                         {
-                            posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[0]).transform.position.y + 20.0f;
+                            posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[0]).transform.position.y + 20.0f;
                         }
 
                         float limitacao = 5.0f;
                         if (modo_de_visualizacao == "Um Frame De Cada Vez em 3D") limitacao = -15.0f;
 
-                        if (posicao_da_camera.y < ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
-                                                    GetComponent<NovoLeitor2>().lista_de_backgrounds.Count - 2
+                        if (posicao_da_camera.y < ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[
+                                                    GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 2
                                                     ]).transform.position.y + limitacao - 5.0f)
                         {
-                            posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
-                                                    GetComponent<NovoLeitor2>().lista_de_backgrounds.Count - 2
+                            posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[
+                                                    GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 2
                                                     ]).transform.position.y + limitacao - 5.0f;
                         }
 
@@ -335,30 +335,30 @@ public class Controlador : MonoBehaviour
                     {
                         if (get_tempo_anterior - 1 >= 0)
                         {
-                            ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[get_tempo_anterior - 1]).
+                            ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[get_tempo_anterior - 1]).
                                 GetComponent<LigaDesliga>().Desligar();
                         }
 
-                        ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[get_tempo_anterior]).
+                        ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[get_tempo_anterior]).
                             GetComponent<LigaDesliga>().Desligar();
 
-                        if (get_tempo_anterior + 1 <= GetComponent<NovoLeitor2>().lista_de_backgrounds.Count-1)
+                        if (get_tempo_anterior + 1 <= GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count-1)
                         {
-                            ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[get_tempo_anterior + 1]).
+                            ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[get_tempo_anterior + 1]).
                                 GetComponent<LigaDesliga>().Desligar();
                         }
 
                         get_tempo_anterior = GetComponent<GuiTempo>().GetTempo();
 
                         if (get_tempo_anterior - 1 >= 0) {
-                            ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[get_tempo_anterior - 1]).
+                            ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[get_tempo_anterior - 1]).
                                 GetComponent<LigaDesliga>().Ligar();
                         }
-                        ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[get_tempo_anterior]).
+                        ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[get_tempo_anterior]).
                             GetComponent<LigaDesliga>().Ligar();
-                        if (get_tempo_anterior + 1 <= GetComponent<NovoLeitor2>().lista_de_backgrounds.Count-1)
+                        if (get_tempo_anterior + 1 <= GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count-1)
                         {
-                            ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[get_tempo_anterior + 1]).
+                            ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[get_tempo_anterior + 1]).
                                 GetComponent<LigaDesliga>().Ligar();
                         }
 
@@ -446,7 +446,7 @@ public class Controlador : MonoBehaviour
 
     public void AtualizarValoresDePosicionamento(float posicaoy0)
     {
-        int pos = GetComponent<NovoLeitor2>().lista_de_backgrounds.Count / 2;
+        int pos = GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count / 2;
 
         modos.AddCameraInitY("Um Frame De Cada Vez em 3D", posicaoy0);
         modos.AddCameraInitY("Um Frame De Cada Vez em 2D", posicaoy0+10f);
@@ -470,7 +470,7 @@ public class Controlador : MonoBehaviour
             if ((modo_de_visualizacao == "Todos De Uma Vez em 3D") || (modo_de_visualizacao == "Um Frame De Cada Vez em 2D"))
             {
                 modos.SetCameraInitZ(modo_de_visualizacao, posicaonova.z);
-                ArrayList lista_de_backs = GetComponent<NovoLeitor2>().lista_de_backgrounds;
+                ArrayList lista_de_backs = GetComponent<NovoLeitor2>().Lista_de_backgrounds;
                 int contagem = lista_de_backs.Count;
                 if (modo_de_visualizacao == "Um Frame De Cada Vez em 2D")
                 {
@@ -485,7 +485,7 @@ public class Controlador : MonoBehaviour
             if ((modonovo == "Todos De Uma Vez em 3D") || (modonovo == "Um Frame De Cada Vez em 2D"))
             {
                 posicaonova.z = modos.GetCameraInitZ(modonovo);
-                ArrayList lista_de_backs = GetComponent<NovoLeitor2>().lista_de_backgrounds;
+                ArrayList lista_de_backs = GetComponent<NovoLeitor2>().Lista_de_backgrounds;
                 int contagem = lista_de_backs.Count;
                 int desligar = 0;
                 if (modonovo == "Todos De Uma Vez em 3D") desligar = 0;
@@ -879,11 +879,11 @@ public class Controlador : MonoBehaviour
 
     void TransparenciaDoBackground(float trans)
     {
-        Color cor = ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[count - 1]).
+        Color cor = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[count - 1]).
                 GetComponent<MeshRenderer>().material.GetColor("_Color");
 
         cor.a = trans;
-        ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[count - 1]).
+        ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[count - 1]).
             GetComponent<MeshRenderer>().material.SetColor("_Color", cor);
     }
 
@@ -1044,7 +1044,7 @@ public class Controlador : MonoBehaviour
                                              "-> - Retorna na lista de heatmaps\n" +
                                              "Q - Tela inicial");
 
-        GameObject background = (GameObject)(GetComponent<NovoLeitor2>().lista_de_backgrounds[0]);
+        GameObject background = (GameObject)(GetComponent<NovoLeitor2>().Lista_de_backgrounds[0]);
 
         AtualizarValoresDePosicionamento(background.transform.position.y);
 
@@ -1053,7 +1053,7 @@ public class Controlador : MonoBehaviour
         pos.y = modos.GetCameraInitY(modo_de_visualizacao);
         FindObjectOfType<Camera>().transform.position = pos;
         //Daqui pra baixo, parte do FIT
-        count = GetComponent<NovoLeitor2>().lista_de_backgrounds.Count;
+        count = GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count;
 
         TransparenciaDoBackground(1f);
         GetComponent<NovoLeitor2>().ConectarTodos();
