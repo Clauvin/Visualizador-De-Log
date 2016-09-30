@@ -15,6 +15,11 @@ public class PassadorDeDados : MonoBehaviour {
     public int tempo_maximo;
     public string endereco_do_arquivo;
     public BancoDeDadosFIT bd_fit;
+
+    /// <summary>
+    /// ArrayList de instâncias de BancoDeDadosFIT, uma pra cada jogador.
+    /// </summary>
+    public ArrayList bd_fits;
     public int heatmaps;
 
     public void SetValuesDePassagem(int tempo_min, int tempo_max, string endereco, BancoDeDadosFIT bd = null)
@@ -42,8 +47,8 @@ public class PassadorDeDados : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-	
-	}
+        
+    }
 	
 	// Update is called once per frame
 	void Update () {
