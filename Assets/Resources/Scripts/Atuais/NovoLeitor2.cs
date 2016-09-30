@@ -17,10 +17,25 @@ public class NovoLeitor2 : MonoBehaviour
     protected BancoDeDadosBolhas bd_bolhas;
 
     protected Vector2 resolucao;
+
+    /// <summary>
+    /// Guarda o objeto base a ser instanciado para cada posição de um personagem.
+    /// </summary>
     protected ParaVisualizacao<GameObject> objetos;
+    
+    /// <summary>
+    /// Guarda os materiais a serem instanciados e colocados nos objetos.
+    /// </summary>
     protected ParaVisualizacao<Material> materiais;
 
+    /// <summary>
+    /// Guarda as texturas a serem colocadas nos materiais.
+    /// </summary>
     public ParaVisualizacao<Texture2D> texturas;
+
+    /// <summary>
+    /// Guarda as texturas a serem colocadas nos materiais para representar que um objeto foi selecionado.
+    /// </summary>
     public ParaVisualizacao<Texture2D> texturas_selecionadas;
 
     
