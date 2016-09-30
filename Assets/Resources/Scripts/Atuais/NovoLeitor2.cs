@@ -1344,11 +1344,29 @@ public class NovoLeitor2 : MonoBehaviour
         ancora.transform.position = new Vector3(GetComponent<Controlador>().
                                                 GetBancoDeDadosModos().GetPosEsq("Um Frame De Cada Vez em 3D"),
                                                 0f, 0f);
+
+        for (int i = 0; i < lista_de_backgrounds.Count; i++)
+        {
+            ((GameObject)lista_de_backgrounds[i]).
+                transform.Rotate(GetComponent<Controlador>().
+                                                      GetBancoDeDadosModos().GetRotacaoCentro(
+                                                        "Um Frame De Cada Vez em 3D"));
+        }
     }
 
     public void ReposicionandoPosicoesCentroUmDeCadaVez3D()
     {
-        ancora.transform.position = new Vector3(0f, 0f, 0f);
+        ancora.transform.position = new Vector3(GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetPosCen("Um Frame De Cada Vez em 3D"),
+                                                0f, 0f);
+
+        for (int i = 0; i < lista_de_backgrounds.Count; i++)
+        {
+            ((GameObject)lista_de_backgrounds[i]).
+                transform.Rotate(GetComponent<Controlador>().
+                                                      GetBancoDeDadosModos().GetRotacaoCentro(
+                                                        "Um Frame De Cada Vez em 3D"));
+        }
     }
 
     public void ReposicionandoPosicoesDireitaUmDeCadaVez3D()
@@ -1356,6 +1374,14 @@ public class NovoLeitor2 : MonoBehaviour
         ancora.transform.position = new Vector3(GetComponent<Controlador>().
                                                 GetBancoDeDadosModos().GetPosDir("Um Frame De Cada Vez em 3D"),
                                                 0f, 0f);
+
+        for (int i = 0; i < lista_de_backgrounds.Count; i++)
+        {
+            ((GameObject)lista_de_backgrounds[i]).
+                transform.Rotate(GetComponent<Controlador>().
+                                                      GetBancoDeDadosModos().GetRotacaoEsquerdaOuDireita(
+                                                        "Um Frame De Cada Vez em 3D"));
+        }
     }
 
     public void ReposicionandoPosicoesEsquerdaUmDeCadaVez2D()
