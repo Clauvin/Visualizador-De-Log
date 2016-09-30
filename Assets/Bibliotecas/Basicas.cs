@@ -634,6 +634,8 @@ namespace Basicas
         private Dictionary<string, float> pos_dir_x;
         private Dictionary<string, Vector3> escala_esq_ou_dir;
         private Dictionary<string, Vector3> escala_central;
+        private Dictionary<string, Vector3> rotacao_esq_ou_dir;
+        private Dictionary<string, Vector3> rotacao_central;
         private Dictionary<string, string> instrucoes;
 
         public BancoDeDadosModos()
@@ -654,13 +656,16 @@ namespace Basicas
             pos_dir_x = new Dictionary<string, float>();
             escala_esq_ou_dir = new Dictionary<string, Vector3>();
             escala_central = new Dictionary<string, Vector3>();
+            rotacao_esq_ou_dir = new Dictionary<string, Vector3>();
+            rotacao_central = new Dictionary<string, Vector3>();
             instrucoes = new Dictionary<string, string>();
 
         }
 
         public bool Add(string modo, float mov, float x, float y, float z, float initz, bool ort,
             float alph, Vector3 rot, Vector3 rotationcam, float backalpha, int novolayer, float pos_e_x,
-            float pos_c_x, float pos_d_x, Vector3 esc_esq_ou_dir, Vector3 esc_central, string instrucao)
+            float pos_c_x, float pos_d_x, Vector3 esc_esq_ou_dir, Vector3 esc_central,
+            Vector3 rot_esq_ou_dir, Vector3 rot_central, string instrucao)
 
         {
             movimentacao.Add(modo, mov);
@@ -679,6 +684,8 @@ namespace Basicas
             pos_dir_x.Add(modo, pos_d_x);
             escala_esq_ou_dir.Add(modo, esc_esq_ou_dir);
             escala_central.Add(modo, esc_central);
+            rotacao_esq_ou_dir.Add(modo, rot_esq_ou_dir);
+            rotacao_central.Add(modo, rot_central);
             instrucoes.Add(modo, instrucao);
 
             return true;
@@ -1062,6 +1069,50 @@ namespace Basicas
             {
 #if (DEBUG)
                 Debug.Log("BancoDeDadosModos.GetRotationChangeCamera - Key " + modo + " não existe.");
+#endif
+                //Isso ainda vai dar problema um dia...
+                return new Vector3(float.MinValue, float.MinValue, float.MinValue);
+            }
+        }
+
+        public Vector3 GetRotacaoEsquerdaOuDireita(string modo)
+        {
+            try { return rotacao_esq_ou_dir[modo]; }
+            //ATENÇAO: Esse catch está correto?
+            catch (ArgumentNullException excecao)
+            {
+#if (DEBUG)
+                Debug.Log("BancoDeDadosModos.GetRotacaoEsquerdaOuDireita - Key modo é nula.");
+#endif
+                //Isso ainda vai dar problema um dia...
+                return new Vector3(float.MinValue, float.MinValue, float.MinValue);
+            }
+            catch (KeyNotFoundException excecao)
+            {
+#if (DEBUG)
+                Debug.Log("BancoDeDadosModos.GetRotacaoEsquerdaOuDireita - Key " + modo + " não existe.");
+#endif
+                //Isso ainda vai dar problema um dia...
+                return new Vector3(float.MinValue, float.MinValue, float.MinValue);
+            }
+        }
+
+        public Vector3 GetRotacaoCentro(string modo)
+        {
+            try { return rotacao_central[modo]; }
+            //ATENÇAO: Esse catch está correto?
+            catch (ArgumentNullException excecao)
+            {
+#if (DEBUG)
+                Debug.Log("BancoDeDadosModos.GetRotacaoCentro - Key modo é nula.");
+#endif
+                //Isso ainda vai dar problema um dia...
+                return new Vector3(float.MinValue, float.MinValue, float.MinValue);
+            }
+            catch (KeyNotFoundException excecao)
+            {
+#if (DEBUG)
+                Debug.Log("BancoDeDadosModos.GetRotacaoCentro - Key " + modo + " não existe.");
 #endif
                 //Isso ainda vai dar problema um dia...
                 return new Vector3(float.MinValue, float.MinValue, float.MinValue);
