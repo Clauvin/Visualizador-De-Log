@@ -40,20 +40,63 @@ public class GuiFITBotoesDaTelaDeSelecao : GuiPadrao2
             case 2:
                 Object.Instantiate
                     (Resources.Load("Objetos\\Passador De Dados"));
+
                 PassadorDeDados pd_vai = FindObjectOfType<PassadorDeDados>().GetComponent<PassadorDeDados>();
+
+                bool[] quais_jogadores_foram_escolhidos = FindObjectOfType<GuiFITEscolhas>().
+                                                            gui_escolhas_de_jogadores.GetSelecoesDeJogadores();
+
+                for (int i = 0; i < quais_jogadores_foram_escolhidos.GetLength(0); i++)
+                {
+
+                    if (quais_jogadores_foram_escolhidos[i]) {
+
+                        BancoDeDadosFIT bd_fit_jogador = (BancoDeDadosFIT)GetComponent<NovoLeitor2>().
+                                                          GetBancoDeDadosFIT().Clone();
+
+                        bool[] so_um_jogador = new bool[FindObjectOfType<GuiFITEscolhas>().
+                                                gui_escolhas_de_jogadores.GetSelecoesDeJogadores().GetLength(0)];
+
+                        so_um_jogador[i] = true;
+
+                        bd_fit_jogador.RemoveEntradas(FindObjectOfType<GuiFITEscolhas>().
+                                            gui_escolhas_de_jogadores.GetListaDeJogadores(),
+                                            so_um_jogador,
+                                            FindObjectOfType<GuiFITEscolhas>().
+                                            gui_escolhas_de_personagens.GetListaDePersonagens(),
+                                            FindObjectOfType<GuiFITEscolhas>().
+                                            gui_escolhas_de_personagens.GetSelecoesDePersonagens(),
+                                            FindObjectOfType<GuiFITEscolhas>().
+                                            gui_escolhas_de_niveis.GetListaDeNiveis(),
+                                            FindObjectOfType<GuiFITEscolhas>().
+                                            gui_escolhas_de_niveis.GetSelecoesDeNiveis());
+
+                        pd_vai.bd_fits.Add(bd_fit_jogador);
+
+                    }
+
+                    Debug.Log(pd_vai.bd_fits.Count);
+
+                }
+
+                pd_vai = FindObjectOfType<PassadorDeDados>().GetComponent<PassadorDeDados>();
+
                 pd_vai.bd_fit = (BancoDeDadosFIT)GetComponent<NovoLeitor2>().GetBancoDeDadosFIT().Clone();
+
                 pd_vai.bd_fit.RemoveEntradas(FindObjectOfType<GuiFITEscolhas>().
-                                             gui_escolhas_de_jogadores.GetListaDeJogadores(),
-                                             FindObjectOfType<GuiFITEscolhas>().
-                                             gui_escolhas_de_jogadores.GetSelecoesDeJogadores(),
-                                             FindObjectOfType<GuiFITEscolhas>().
-                                             gui_escolhas_de_personagens.GetListaDePersonagens(),
-                                             FindObjectOfType<GuiFITEscolhas>().
-                                             gui_escolhas_de_personagens.GetSelecoesDePersonagens(),
-                                             FindObjectOfType<GuiFITEscolhas>().
-                                             gui_escolhas_de_niveis.GetListaDeNiveis(),
-                                             FindObjectOfType<GuiFITEscolhas>().
-                                             gui_escolhas_de_niveis.GetSelecoesDeNiveis());
+                                            gui_escolhas_de_jogadores.GetListaDeJogadores(),
+                                            FindObjectOfType<GuiFITEscolhas>().
+                                            gui_escolhas_de_jogadores.GetSelecoesDeJogadores(),
+                                            FindObjectOfType<GuiFITEscolhas>().
+                                            gui_escolhas_de_personagens.GetListaDePersonagens(),
+                                            FindObjectOfType<GuiFITEscolhas>().
+                                            gui_escolhas_de_personagens.GetSelecoesDePersonagens(),
+                                            FindObjectOfType<GuiFITEscolhas>().
+                                            gui_escolhas_de_niveis.GetListaDeNiveis(),
+                                            FindObjectOfType<GuiFITEscolhas>().
+                                            gui_escolhas_de_niveis.GetSelecoesDeNiveis());
+
+                
 
                 if (pd_vai.bd_fit.GetQuantidadeDeEntradas() > 0)
                 {
