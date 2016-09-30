@@ -612,6 +612,8 @@ namespace Basicas
     */
     /// <summary>
     /// Classe BancoDeDadosModos. Responsável por guardar os dados dos modos de visão possível dos logs.
+    /// <para>AVISO: o Vector3 a ser adicionado em rotacao_esq_ou_dir e rotacao_central precisa ter seus
+    /// valores ordenados em z, x, y, em radianos. </para>
     /// </summary>
     public class BancoDeDadosModos
     {
@@ -634,6 +636,8 @@ namespace Basicas
         private Dictionary<string, float> pos_dir_x;
         private Dictionary<string, Vector3> escala_esq_ou_dir;
         private Dictionary<string, Vector3> escala_central;
+
+
         private Dictionary<string, Vector3> rotacao_esq_ou_dir;
         private Dictionary<string, Vector3> rotacao_central;
         private Dictionary<string, string> instrucoes;
