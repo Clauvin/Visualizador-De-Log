@@ -1339,7 +1339,7 @@ public class NovoLeitor2 : MonoBehaviour
             + new Vector3(200f, 0, 0);
     }
 
-    public void ReposicionandoPosicoesEsquerda()
+    public void ReposicionandoPosicoesEsquerdaTodosDeUmaVez3D()
     {
         ConectarTodos();
         ancora.transform.position = new Vector3(GetComponent<Controlador>().
@@ -1348,7 +1348,7 @@ public class NovoLeitor2 : MonoBehaviour
         DesconectarTodos();
     }
 
-    public void ReposicionandoPosicoesCentro()
+    public void ReposicionandoPosicoesCentroTodosDeUmaVez3D()
     {
         ConectarTodos();
         ancora.transform.position = new Vector3(GetComponent<Controlador>().
@@ -1357,7 +1357,7 @@ public class NovoLeitor2 : MonoBehaviour
         DesconectarTodos();
     }
 
-    public void ReposicionandoPosicoesDireita()
+    public void ReposicionandoPosicoesDireitaTodosDeUmaVez3D()
     {
         ConectarTodos();
         ancora.transform.position = new Vector3(GetComponent<Controlador>().
