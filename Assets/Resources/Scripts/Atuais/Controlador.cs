@@ -260,8 +260,6 @@ public class Controlador : MonoBehaviour
                 {
                     if ((Input.GetKeyUp("left"))) { MostrarHeatmapAnterior(); }
                     if ((Input.GetKeyUp("right"))) { MostrarHeatmapPosterior(); }
-                    /*if ((Input.GetKeyUp("left"))) { GetComponent<NovoLeitor2>().ReposicionandoHeatmapEsquerda(); }
-                    if ((Input.GetKeyUp("right"))) { GetComponent<NovoLeitor2>().ReposicionandoHeatmapCentro(); }*/
                     GetComponent<NovoLeitor2>().ChangeTexturaHeatmap(qual_heatmap_mostrar);
                 }
 
