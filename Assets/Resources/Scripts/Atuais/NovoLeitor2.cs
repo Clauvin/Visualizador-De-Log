@@ -1339,6 +1339,25 @@ public class NovoLeitor2 : MonoBehaviour
             + new Vector3(200f, 0, 0);
     }
 
+    public void ReposicionandoPosicoesEsquerdaUmDeCadaVez3D()
+    {
+        ancora.transform.position = new Vector3(GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetPosEsq("Um Frame De Cada Vez em 3D"),
+                                                0f, 0f);
+    }
+
+    public void ReposicionandoPosicoesCentroUmDeCadaVez3D()
+    {
+        ancora.transform.position = new Vector3(0f, 0f, 0f);
+    }
+
+    public void ReposicionandoPosicoesDireitaUmDeCadaVez3D()
+    {
+        ancora.transform.position = new Vector3(GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetPosDir("Um Frame De Cada Vez em 3D"),
+                                                0f, 0f);
+    }
+
     public void ReposicionandoPosicoesEsquerdaUmDeCadaVez2D()
     {
         ancora.transform.position = new Vector3(GetComponent<Controlador>().
