@@ -269,6 +269,7 @@ public class Controlador : MonoBehaviour
             }
             else
             {
+
                 //Esse código movimenta a câmera para frente e para trás.
                 if (Input.GetAxis("Horizontal") != 0)
                 {
@@ -1009,8 +1010,8 @@ public class Controlador : MonoBehaviour
                                              "Q - Voltar à tela inicial");
 
         modos.Add("Um Frame De Cada Vez em 2D", 2f, 0f, 10f, 0f, 0f, true, 1f, new Vector3(0f, 0f, 0f),
-            new Vector3(90f, 0f, 0f), 1f, 0, 0.0f, 0.0f, 0.0f,
-            new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), parte_da_transparencia_dos_objetos +
+            new Vector3(90f, 0f, 0f), 1f, 0, -4f, 0.0f, 4f,
+            new Vector3(0.5f, 1f, 0.5f), new Vector3(1f, 1f, 1f), parte_da_transparencia_dos_objetos +
                                              "<- - Posição anterior\n" +
                                              "-> - Posição seguinte\n" +
                                              "A - Anterior mais rápido\n" +
@@ -1024,7 +1025,7 @@ public class Controlador : MonoBehaviour
                                              "Q - Voltar à tela inicial");
 
         modos.Add("Todos De Uma Vez em 3D", 0.5f, 5f, 2f, 0f, 0f, false, 0f, new Vector3(0f, 0f, 0f),
-            new Vector3(90f, 0f, 0f), 0f, 2, 0.0f, 0.0f, 0.0f,
+            new Vector3(90f, 0f, 0f), 0f, 2, -12.0f, 0.0f, 12.0f,
             new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), parte_da_transparencia_dos_objetos +
                                              "<- - Câmera recua\n" +
                                              "-> - Câmera avança\n" +
