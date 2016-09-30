@@ -102,10 +102,24 @@ public class NovoLeitor2 : MonoBehaviour
         }
     }
 
+    private ArrayList matrizes_dos_heatmaps;
+
+    protected ArrayList Matrizes_dos_heatmaps
+    {
+        get
+        {
+            return matrizes_dos_heatmaps;
+        }
+
+        set
+        {
+            matrizes_dos_heatmaps = value;
+        }
+    }
 
     protected string modo_fit;
 
-    protected ArrayList matrizes_dos_heatmaps;
+    
     public int[] numeros_de_cores;
 
     GameObject heatmap;
@@ -617,7 +631,7 @@ public class NovoLeitor2 : MonoBehaviour
     {
         for (int i = 0; i < Heatmaps; i++)
         {
-            matrizes_dos_heatmaps.Add(new HeatMap());
+            Matrizes_dos_heatmaps.Add(new HeatMap());
         }
         numeros_de_cores = new int[Heatmaps];
     }
@@ -833,15 +847,15 @@ public class NovoLeitor2 : MonoBehaviour
         material_background.mainTexture = (Texture)Instantiate(Resources.Load("Texturas/Grid"));
 
         // Lê e organiza todos os dados do log do FIT.
-        for (int j = 0; j < matrizes_dos_heatmaps.Count; j++)
+        for (int j = 0; j < Matrizes_dos_heatmaps.Count; j++)
         {
-            ((HeatMap)matrizes_dos_heatmaps[j]).AlterarValoresDeTamanhoDeHeatmap(20, 15);
-            ((HeatMap)matrizes_dos_heatmaps[j]).ReadPointsFIT(objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).bd_fit, j);
-            ((HeatMap)matrizes_dos_heatmaps[j]).AllTheDifferentPoints();
-            ((HeatMap)matrizes_dos_heatmaps[j]).OrganizePoints();
-            ((HeatMap)matrizes_dos_heatmaps[j]).FillingTheDictionary();
-            ((HeatMap)matrizes_dos_heatmaps[j]).PaintingTheHeatmap();
-            numeros_de_cores[j] = ((HeatMap)matrizes_dos_heatmaps[j]).HowManyPoints();
+            ((HeatMap)Matrizes_dos_heatmaps[j]).AlterarValoresDeTamanhoDeHeatmap(20, 15);
+            ((HeatMap)Matrizes_dos_heatmaps[j]).ReadPointsFIT(objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).bd_fit, j);
+            ((HeatMap)Matrizes_dos_heatmaps[j]).AllTheDifferentPoints();
+            ((HeatMap)Matrizes_dos_heatmaps[j]).OrganizePoints();
+            ((HeatMap)Matrizes_dos_heatmaps[j]).FillingTheDictionary();
+            ((HeatMap)Matrizes_dos_heatmaps[j]).PaintingTheHeatmap();
+            numeros_de_cores[j] = ((HeatMap)Matrizes_dos_heatmaps[j]).HowManyPoints();
         }
 
         criar_background = true;
@@ -991,16 +1005,16 @@ public class NovoLeitor2 : MonoBehaviour
         material_background.mainTexture = (Texture)Instantiate(Resources.Load("Texturas/Fundo Bolhas Desenhado"));
 
         // Lê todos os dados do log do Bolhas...
-        for (int j = 0; j < matrizes_dos_heatmaps.Count; j++)
+        for (int j = 0; j < Matrizes_dos_heatmaps.Count; j++)
         {
-            ((HeatMap)matrizes_dos_heatmaps[j]).AlterarValoresDeTamanhoDeHeatmap(800, 600);
-            if (j == 0)  ((HeatMap)matrizes_dos_heatmaps[j]).ReadPointsBolhas(bd_bolhas, "Todos");
-            else ((HeatMap)matrizes_dos_heatmaps[j]).ReadPointsBolhas(bd_bolhas, lista_de_nomes_de_objetos_do_bolhas[j-1]);
-            ((HeatMap)matrizes_dos_heatmaps[j]).AllTheDifferentPoints();
-            ((HeatMap)matrizes_dos_heatmaps[j]).OrganizePoints();
-            ((HeatMap)matrizes_dos_heatmaps[j]).FillingTheDictionary();
-            ((HeatMap)matrizes_dos_heatmaps[j]).PaintingTheHeatmap();
-            numeros_de_cores[j] = ((HeatMap)matrizes_dos_heatmaps[j]).HowManyPoints();
+            ((HeatMap)Matrizes_dos_heatmaps[j]).AlterarValoresDeTamanhoDeHeatmap(800, 600);
+            if (j == 0)  ((HeatMap)Matrizes_dos_heatmaps[j]).ReadPointsBolhas(bd_bolhas, "Todos");
+            else ((HeatMap)Matrizes_dos_heatmaps[j]).ReadPointsBolhas(bd_bolhas, lista_de_nomes_de_objetos_do_bolhas[j-1]);
+            ((HeatMap)Matrizes_dos_heatmaps[j]).AllTheDifferentPoints();
+            ((HeatMap)Matrizes_dos_heatmaps[j]).OrganizePoints();
+            ((HeatMap)Matrizes_dos_heatmaps[j]).FillingTheDictionary();
+            ((HeatMap)Matrizes_dos_heatmaps[j]).PaintingTheHeatmap();
+            numeros_de_cores[j] = ((HeatMap)Matrizes_dos_heatmaps[j]).HowManyPoints();
         }
 
         tempo = bd_bolhas.GetTempo(0);
@@ -1225,17 +1239,17 @@ public class NovoLeitor2 : MonoBehaviour
 
     public HeatMap GetMatrizHeatmap(int i = 0)
     {
-        return ((HeatMap)matrizes_dos_heatmaps[i]);
+        return ((HeatMap)Matrizes_dos_heatmaps[i]);
     }
 
-    public int GetQuantHeatmaps() { return matrizes_dos_heatmaps.Count; }
+    public int GetQuantHeatmaps() { return Matrizes_dos_heatmaps.Count; }
 
     public void ChangeTexturaHeatmap(int qual)
     {
         if ((qual >= 0) && (qual < GetQuantHeatmaps()))
         {
             heatmap.GetComponent<MeshRenderer>().material.
-                SetTexture("_MainTex", ((HeatMap)matrizes_dos_heatmaps[qual]).heatmap);
+                SetTexture("_MainTex", ((HeatMap)Matrizes_dos_heatmaps[qual]).heatmap);
 
         }
         
@@ -1376,7 +1390,7 @@ public class NovoLeitor2 : MonoBehaviour
     {
         heatmap = Instantiate<GameObject>((GameObject)Resources.Load("Objetos/BackgroundHeatmap"));
         heatmap.name = "Heatmap";
-        materialheatmap.SetTexture("_MainTex", ((HeatMap)matrizes_dos_heatmaps[0]).heatmap);
+        materialheatmap.SetTexture("_MainTex", ((HeatMap)Matrizes_dos_heatmaps[0]).heatmap);
         heatmap.GetComponent<MeshRenderer>().material = Instantiate(materialheatmap);
 
         heatmap.transform.position = ((GameObject)Lista_de_backgrounds[0]).transform.position
@@ -1569,7 +1583,7 @@ public class NovoLeitor2 : MonoBehaviour
         pintar = new Pintar();
         Lista_de_objetos = new ArrayList();
         Lista_de_backgrounds = new ArrayList();
-        matrizes_dos_heatmaps = new ArrayList();
+        Matrizes_dos_heatmaps = new ArrayList();
         pegar_endereco_de_log = new PegarEnderecoDeLog();
         nomes_e_numeros_de_objetos_do_FIT = new Dictionary<string, int>();
         nomes_e_numeros_de_objetos_do_bolhas = new Dictionary<string, int>();
@@ -1591,7 +1605,7 @@ public class NovoLeitor2 : MonoBehaviour
         pintar = new Pintar();
         Lista_de_objetos = new ArrayList();
         Lista_de_backgrounds = new ArrayList();
-        matrizes_dos_heatmaps = new ArrayList();
+        Matrizes_dos_heatmaps = new ArrayList();
         pegar_endereco_de_log = new PegarEnderecoDeLog();
         nomes_e_numeros_de_objetos_do_FIT = new Dictionary<string, int>();
         nomes_e_numeros_de_objetos_do_bolhas = new Dictionary<string, int>();
