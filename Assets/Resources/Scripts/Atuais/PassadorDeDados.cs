@@ -22,6 +22,11 @@ public class PassadorDeDados : MonoBehaviour {
     public ArrayList bd_fits;
     public int heatmaps;
 
+    public PassadorDeDados()
+    {
+        bd_fits = new ArrayList();
+    }
+
     public void SetValuesDePassagem(int tempo_min, int tempo_max, string endereco, BancoDeDadosFIT bd = null)
     {
         tempo_minimo = tempo_min;
