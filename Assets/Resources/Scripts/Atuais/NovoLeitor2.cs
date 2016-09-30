@@ -67,11 +67,40 @@ public class NovoLeitor2 : MonoBehaviour
             {
                 lista_de_objetos = value;
             }
-            else Debug.Log("Controlador.tipo está com valor diferente de Fit e Bolhas.");
+            else Debug.Log("NovoLeitor2.qual_leitor está com valor diferente de Fit e Bolhas.");
         }
     }
 
-    public ArrayList lista_de_backgrounds;
+    private ArrayList lista_de_backgrounds;
+
+    public ArrayList Lista_de_backgrounds
+    {
+        get
+        {
+            if (qual_leitor == "FIT")
+            {
+                return objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).lista_de_backgrounds;
+            }
+            else if (qual_leitor == "Bolhas")
+            {
+                return lista_de_backgrounds;
+            }
+            else return null;
+        }
+
+        set
+        {
+            if (qual_leitor == "FIT")
+            {
+                objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).lista_de_backgrounds = value;
+            }
+            else if (qual_leitor == "Bolhas")
+            {
+                lista_de_backgrounds = value;
+            }
+            else Debug.Log("NovoLeitor2.qual_leitor está com valor diferente de Fit e Bolhas.");
+        }
+    }
 
 
     protected string modo_fit;
@@ -891,7 +920,7 @@ public class NovoLeitor2 : MonoBehaviour
             if (criar_background)
             {
                 background = ColocarDadosEmBackground(background, i);
-                lista_de_backgrounds.Add(background);                
+                Lista_de_backgrounds.Add(background);                
             }
 
             // Passar os valores de x, y e tempo para a posição de objetos
@@ -1042,7 +1071,7 @@ public class NovoLeitor2 : MonoBehaviour
             if (novo_tempo)
             {
                 background = ColocarDadosEmBackground(background, i);
-                lista_de_backgrounds.Add(background);
+                Lista_de_backgrounds.Add(background);
             }
 
             objeto.transform.localScale = new Vector3(texturas.Get(bd_bolhas.GetQualObjeto(i).ToString()).width / resolucao.x,
@@ -1088,22 +1117,22 @@ public class NovoLeitor2 : MonoBehaviour
 
     public void ControlarAlpha(float alpha)
     {
-        for (int i = 0; i < lista_de_backgrounds.Count; i++)
+        for (int i = 0; i < Lista_de_backgrounds.Count; i++)
         {
-            Color cor = ((GameObject)lista_de_backgrounds[i]).GetComponent<MeshRenderer>().material.GetColor("_Color");
+            Color cor = ((GameObject)Lista_de_backgrounds[i]).GetComponent<MeshRenderer>().material.GetColor("_Color");
                
             cor.a = alpha;
 
-            ((GameObject)lista_de_backgrounds[i]).GetComponent<MeshRenderer>().material.SetColor("_Color", cor);
+            ((GameObject)Lista_de_backgrounds[i]).GetComponent<MeshRenderer>().material.SetColor("_Color", cor);
         }
     }
 
     public void GirarBackgrounds(Vector3 coordenadas)
     {
-        for (int i = 0; i < lista_de_backgrounds.Count; i++)
+        for (int i = 0; i < Lista_de_backgrounds.Count; i++)
         {
-            ((GameObject)lista_de_backgrounds[i]).transform.rotation = Quaternion.identity;
-            ((GameObject)lista_de_backgrounds[i]).transform.Rotate(coordenadas);
+            ((GameObject)Lista_de_backgrounds[i]).transform.rotation = Quaternion.identity;
+            ((GameObject)Lista_de_backgrounds[i]).transform.Rotate(coordenadas);
         }
     }
 
@@ -1115,49 +1144,49 @@ public class NovoLeitor2 : MonoBehaviour
 
     public void AlterarLayer(int alt)
     {
-        for (int i = 0; i < lista_de_backgrounds.Count; i++)
+        for (int i = 0; i < Lista_de_backgrounds.Count; i++)
         {
-            ((GameObject)lista_de_backgrounds[i]).GetComponent<Conector>().NoLayer(alt);
+            ((GameObject)Lista_de_backgrounds[i]).GetComponent<Conector>().NoLayer(alt);
         }
     }
 
     public void PosicionarBackgrounds(float dist)
     {
-        float yback0 = ((GameObject)lista_de_backgrounds[0]).transform.position.y;
+        float yback0 = ((GameObject)Lista_de_backgrounds[0]).transform.position.y;
         Vector3 pos;
 
-        for (int i = 1; i < lista_de_backgrounds.Count; i++)
+        for (int i = 1; i < Lista_de_backgrounds.Count; i++)
         {
             yback0 -= dist;
-            pos = ((GameObject)lista_de_backgrounds[i]).transform.position;
+            pos = ((GameObject)Lista_de_backgrounds[i]).transform.position;
             pos.y = yback0;
-            ((GameObject)lista_de_backgrounds[i]).transform.position = pos;
+            ((GameObject)Lista_de_backgrounds[i]).transform.position = pos;
         }
     }
 
     public void ConectarTodosAAncora()
     {
-        for (int j = 0; j < lista_de_backgrounds.Count; j++)
+        for (int j = 0; j < Lista_de_backgrounds.Count; j++)
         {
-            GameObject background = (GameObject)lista_de_backgrounds[j];
+            GameObject background = (GameObject)Lista_de_backgrounds[j];
             background.transform.parent = ancora.transform;
         }
     }
 
     public void ConectarTodos()
     {
-        for (int j = 0; j < lista_de_backgrounds.Count; j++)
+        for (int j = 0; j < Lista_de_backgrounds.Count; j++)
         {
-            GameObject background = (GameObject)lista_de_backgrounds[j];
+            GameObject background = (GameObject)Lista_de_backgrounds[j];
             background.GetComponent<Conector>().Conectar();
         }
     }
 
     public void DesconectarTodos()
     {
-        for (int j = 0; j < lista_de_backgrounds.Count; j++)
+        for (int j = 0; j < Lista_de_backgrounds.Count; j++)
         {
-            GameObject background = (GameObject)lista_de_backgrounds[j];
+            GameObject background = (GameObject)Lista_de_backgrounds[j];
             background.GetComponent<Conector>().Desconectar();
         }
     }
@@ -1337,7 +1366,7 @@ public class NovoLeitor2 : MonoBehaviour
 
     protected void AjeitandoACamera(Vector3 new_pos_camera, Camera a_camera)
     {
-        new_pos_camera.y = ((GameObject)lista_de_backgrounds[0]).transform.position.y;
+        new_pos_camera.y = ((GameObject)Lista_de_backgrounds[0]).transform.position.y;
         a_camera.transform.position = new_pos_camera;
         a_camera.transform.Rotate(90f, 0f, 0f);
         a_camera.orthographic = true;
@@ -1350,7 +1379,7 @@ public class NovoLeitor2 : MonoBehaviour
         materialheatmap.SetTexture("_MainTex", ((HeatMap)matrizes_dos_heatmaps[0]).heatmap);
         heatmap.GetComponent<MeshRenderer>().material = Instantiate(materialheatmap);
 
-        heatmap.transform.position = ((GameObject)lista_de_backgrounds[0]).transform.position
+        heatmap.transform.position = ((GameObject)Lista_de_backgrounds[0]).transform.position
             + new Vector3(200f, 0, 0);
     }
 
@@ -1361,9 +1390,9 @@ public class NovoLeitor2 : MonoBehaviour
                                                 GetBancoDeDadosModos().GetPosEsq("Um Frame De Cada Vez em 3D"),
                                                 0f, 0f);
 
-        for (int i = 0; i < lista_de_backgrounds.Count; i++)
+        for (int i = 0; i < Lista_de_backgrounds.Count; i++)
         {
-            ((GameObject)lista_de_backgrounds[i]).transform.localEulerAngles = GetComponent<Controlador>().
+            ((GameObject)Lista_de_backgrounds[i]).transform.localEulerAngles = GetComponent<Controlador>().
                                                 GetBancoDeDadosModos().GetRotacaoCentro("Um Frame De Cada Vez em 3D");
         }
         DesconectarTodos();
@@ -1377,9 +1406,9 @@ public class NovoLeitor2 : MonoBehaviour
                                                 GetBancoDeDadosModos().GetPosCen("Um Frame De Cada Vez em 3D"),
                                                 0f, 0f);
 
-        for (int i = 0; i < lista_de_backgrounds.Count; i++)
+        for (int i = 0; i < Lista_de_backgrounds.Count; i++)
         {
-            ((GameObject)lista_de_backgrounds[i]).transform.localEulerAngles = GetComponent<Controlador>().
+            ((GameObject)Lista_de_backgrounds[i]).transform.localEulerAngles = GetComponent<Controlador>().
                                                 GetBancoDeDadosModos().GetRotacaoCentro("Um Frame De Cada Vez em 3D");
         }
         DesconectarTodos();
@@ -1392,9 +1421,9 @@ public class NovoLeitor2 : MonoBehaviour
                                                 GetBancoDeDadosModos().GetPosDir("Um Frame De Cada Vez em 3D"),
                                                 0f, 0f);
 
-        for (int i = 0; i < lista_de_backgrounds.Count; i++)
+        for (int i = 0; i < Lista_de_backgrounds.Count; i++)
         {
-            ((GameObject)lista_de_backgrounds[i]).transform.localEulerAngles = GetComponent<Controlador>().
+            ((GameObject)Lista_de_backgrounds[i]).transform.localEulerAngles = GetComponent<Controlador>().
                                                 GetBancoDeDadosModos().GetRotacaoEsquerdaOuDireita("Um Frame De Cada Vez em 3D");
         }
         DesconectarTodos();
@@ -1454,7 +1483,7 @@ public class NovoLeitor2 : MonoBehaviour
 
     public void ReposicionandoHeatmapEsquerda()
     {
-        heatmap.transform.position = (((GameObject)lista_de_backgrounds[0]).transform.position
+        heatmap.transform.position = (((GameObject)Lista_de_backgrounds[0]).transform.position
             + new Vector3(GetComponent<Controlador>().GetBancoDeDadosModos().GetPosEsq("Heatmap"), 0, 0));
         heatmap.transform.localScale = GetComponent<Controlador>().GetBancoDeDadosModos().
             GetEscalaEsquerdaOuDireita("Heatmap");
@@ -1462,7 +1491,7 @@ public class NovoLeitor2 : MonoBehaviour
 
     public void ReposicionandoHeatmapCentro()
     {
-        heatmap.transform.position = (((GameObject)lista_de_backgrounds[0]).transform.position
+        heatmap.transform.position = (((GameObject)Lista_de_backgrounds[0]).transform.position
             + new Vector3(GetComponent<Controlador>().GetBancoDeDadosModos().GetPosCen("Heatmap"), 0, 0));
         heatmap.transform.localScale = GetComponent<Controlador>().GetBancoDeDadosModos().
             GetEscalaNoCentro("Heatmap");
@@ -1470,7 +1499,7 @@ public class NovoLeitor2 : MonoBehaviour
 
     public void ReposicionandoHeatmapDireita()
     {
-        heatmap.transform.position = (((GameObject)lista_de_backgrounds[0]).transform.position
+        heatmap.transform.position = (((GameObject)Lista_de_backgrounds[0]).transform.position
             + new Vector3(GetComponent<Controlador>().GetBancoDeDadosModos().GetPosDir("Heatmap"), 0, 0));
         heatmap.transform.localScale = GetComponent<Controlador>().GetBancoDeDadosModos().
             GetEscalaEsquerdaOuDireita("Heatmap");
@@ -1539,7 +1568,7 @@ public class NovoLeitor2 : MonoBehaviour
         texturas_selecionadas = new ParaVisualizacao<Texture2D>();
         pintar = new Pintar();
         Lista_de_objetos = new ArrayList();
-        lista_de_backgrounds = new ArrayList();
+        Lista_de_backgrounds = new ArrayList();
         matrizes_dos_heatmaps = new ArrayList();
         pegar_endereco_de_log = new PegarEnderecoDeLog();
         nomes_e_numeros_de_objetos_do_FIT = new Dictionary<string, int>();
@@ -1561,7 +1590,7 @@ public class NovoLeitor2 : MonoBehaviour
         texturas_selecionadas = new ParaVisualizacao<Texture2D>();
         pintar = new Pintar();
         Lista_de_objetos = new ArrayList();
-        lista_de_backgrounds = new ArrayList();
+        Lista_de_backgrounds = new ArrayList();
         matrizes_dos_heatmaps = new ArrayList();
         pegar_endereco_de_log = new PegarEnderecoDeLog();
         nomes_e_numeros_de_objetos_do_FIT = new Dictionary<string, int>();
