@@ -1341,47 +1341,48 @@ public class NovoLeitor2 : MonoBehaviour
 
     public void ReposicionandoPosicoesEsquerdaUmDeCadaVez3D()
     {
+        ConectarTodos();
         ancora.transform.position = new Vector3(GetComponent<Controlador>().
                                                 GetBancoDeDadosModos().GetPosEsq("Um Frame De Cada Vez em 3D"),
                                                 0f, 0f);
 
         for (int i = 0; i < lista_de_backgrounds.Count; i++)
         {
-            ((GameObject)lista_de_backgrounds[i]).
-                transform.Rotate(GetComponent<Controlador>().
-                                                      GetBancoDeDadosModos().GetRotacaoCentro(
-                                                        "Um Frame De Cada Vez em 3D"));
+            ((GameObject)lista_de_backgrounds[i]).transform.localEulerAngles = GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetRotacaoCentro("Um Frame De Cada Vez em 3D");
         }
+        DesconectarTodos();
+
     }
 
     public void ReposicionandoPosicoesCentroUmDeCadaVez3D()
     {
+        ConectarTodos();
         ancora.transform.position = new Vector3(GetComponent<Controlador>().
                                                 GetBancoDeDadosModos().GetPosCen("Um Frame De Cada Vez em 3D"),
                                                 0f, 0f);
 
         for (int i = 0; i < lista_de_backgrounds.Count; i++)
         {
-            ((GameObject)lista_de_backgrounds[i]).
-                transform.Rotate(GetComponent<Controlador>().
-                                                      GetBancoDeDadosModos().GetRotacaoCentro(
-                                                        "Um Frame De Cada Vez em 3D"));
+            ((GameObject)lista_de_backgrounds[i]).transform.localEulerAngles = GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetRotacaoCentro("Um Frame De Cada Vez em 3D");
         }
+        DesconectarTodos();
     }
 
     public void ReposicionandoPosicoesDireitaUmDeCadaVez3D()
     {
+        ConectarTodos();
         ancora.transform.position = new Vector3(GetComponent<Controlador>().
                                                 GetBancoDeDadosModos().GetPosDir("Um Frame De Cada Vez em 3D"),
                                                 0f, 0f);
 
         for (int i = 0; i < lista_de_backgrounds.Count; i++)
         {
-            ((GameObject)lista_de_backgrounds[i]).
-                transform.Rotate(GetComponent<Controlador>().
-                                                      GetBancoDeDadosModos().GetRotacaoEsquerdaOuDireita(
-                                                        "Um Frame De Cada Vez em 3D"));
+            ((GameObject)lista_de_backgrounds[i]).transform.localEulerAngles = GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetRotacaoEsquerdaOuDireita("Um Frame De Cada Vez em 3D");
         }
+        DesconectarTodos();
     }
 
     public void ReposicionandoPosicoesEsquerdaUmDeCadaVez2D()
