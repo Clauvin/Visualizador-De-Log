@@ -11,6 +11,7 @@ public class ObjetosDeUmJogadorFIT : MonoBehaviour {
     public ArrayList lista_de_backgrounds;
     public ArrayList lista_de_objetos;
     public ArrayList matrizes_dos_heatmaps;
+    public GameObject ancora_dos_dados;
     public BancoDeDadosFIT bd_fit;
 
     public ObjetosDeUmJogadorFIT()
