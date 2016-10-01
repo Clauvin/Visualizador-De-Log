@@ -40,6 +40,7 @@ public class NovoLeitor2 : MonoBehaviour
 
     
     Pintar pintar;
+    public int qual_jogador = 0;
 
     private ArrayList lista_de_objetos;
     public ArrayList Lista_de_objetos
@@ -48,7 +49,7 @@ public class NovoLeitor2 : MonoBehaviour
         {
             if (qual_leitor == "FIT")
             {
-                return objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).lista_de_objetos;
+                return objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).lista_de_objetos;
             }
             else if (qual_leitor == "Bolhas")
             {
@@ -61,7 +62,7 @@ public class NovoLeitor2 : MonoBehaviour
         {
             if (qual_leitor == "FIT")
             {
-                objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).lista_de_objetos = value;
+                objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).lista_de_objetos = value;
             }
             else if (qual_leitor == "Bolhas")
             {
@@ -79,7 +80,7 @@ public class NovoLeitor2 : MonoBehaviour
         {
             if (qual_leitor == "FIT")
             {
-                return objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).lista_de_backgrounds;
+                return objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).lista_de_backgrounds;
             }
             else if (qual_leitor == "Bolhas")
             {
@@ -92,7 +93,7 @@ public class NovoLeitor2 : MonoBehaviour
         {
             if (qual_leitor == "FIT")
             {
-                objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).lista_de_backgrounds = value;
+                objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).lista_de_backgrounds = value;
             }
             else if (qual_leitor == "Bolhas")
             {
@@ -110,7 +111,7 @@ public class NovoLeitor2 : MonoBehaviour
         {
             if (qual_leitor == "FIT")
             {
-                return objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).matrizes_dos_heatmaps;
+                return objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).matrizes_dos_heatmaps;
             }
             else if (qual_leitor == "Bolhas")
             {
@@ -123,7 +124,7 @@ public class NovoLeitor2 : MonoBehaviour
         {
             if (qual_leitor == "FIT")
             {
-                objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).matrizes_dos_heatmaps = value;
+                objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).matrizes_dos_heatmaps = value;
             }
             else if (qual_leitor == "Bolhas")
             {
