@@ -17,7 +17,7 @@ public class ObjetosDeUmJogadorFIT : MonoBehaviour {
     {
         lista_de_backgrounds = new ArrayList();
         lista_de_objetos = new ArrayList();
-        //matrizes_dos_heatmaps = new ArrayList();
+        matrizes_dos_heatmaps = new ArrayList();
     }
 
     // Use this for initialization
