@@ -14,7 +14,7 @@ public class ObjetosDeJogadoresFIT : MonoBehaviour {
     public ObjetosDeJogadoresFIT()
     {
         obj_jogadores_fit = new ArrayList();
-        Add(new ObjetosDeUmJogadorFIT());
+        //Add(new ObjetosDeUmJogadorFIT());
         Pos = 0;
     }
 
