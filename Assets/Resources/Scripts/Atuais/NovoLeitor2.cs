@@ -708,10 +708,14 @@ public class NovoLeitor2 : MonoBehaviour
             objeto.AddComponent<AoSerClicadoFIT>();
             objeto.AddComponent<LigaDesliga>();
 
-            objeto.name = objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).bd_fit.GetTempo(i).ToString() + " " + objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).bd_fit.GetPersonagem(i).ToString() + " " +
-                objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).bd_fit.GetGridX(i).ToString() + " " + objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).bd_fit.GetGridY(i).ToString();
+            objeto.name = objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).bd_fit.GetNomeDoJogador(i) + " " +
+                objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).bd_fit.GetTempo(i).ToString() + " " +
+                objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).bd_fit.GetPersonagem(i).ToString() + " " +
+                objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).bd_fit.GetGridX(i).ToString() + " " +
+                objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).bd_fit.GetGridY(i).ToString();
 
-            material_do_create = Instantiate(materiais.Get(objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).bd_fit.GetPersonagem(i).ToString()));
+            material_do_create = Instantiate(materiais.Get(objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).
+                                             bd_fit.GetPersonagem(i).ToString()));
 
             // Essencialmente, materiais guardam texturas, que é o que queremos.
             // Foi um pouco de exagero fazer um material pra cada objeto, mas
