@@ -66,6 +66,7 @@ public class GuiFITSelecaoDeJogadores : GuiPadrao2
         {
             ObjetosDeUmJogadorFIT objetos = GetComponent<NovoLeitor2>().objs_jogadores_fit.GetObjetosDeUmJogadorFIT(1);
             if (objetos.ancora_dos_dados != null) objetos.ancora_dos_dados.SetActive(true);
+            GetComponent<NovoLeitor2>().objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).ancora_dos_dados.SetActive(false);
         }
     }
 
