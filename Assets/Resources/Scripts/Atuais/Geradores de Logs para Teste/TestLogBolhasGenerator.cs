@@ -2,7 +2,7 @@
 using System.Collections;
 
 /// <summary>
-/// Classe responsável por criar um log aleatório no formato do do Bolhas para testes
+/// Classe responsável por criar um log aleatório no formato do do Bolhas para testes.
 /// </summary>
 public class TestLogBolhasGenerator : MonoBehaviour
 {

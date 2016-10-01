@@ -1,6 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Classe responsável por mostrar ao usuário que jogadores, níveis e personagens ele pode escolher para serem
+/// carregados.
+/// <para>Não segue o padrão de ser uma filha de uma classe GUI genérica por questões de tempo de desenvolvimento: o ideal
+/// é que houvesse uma classe GUI genérica GuiEscolhas.</para>
+/// </summary>
 public class GuiFITEscolhas : GuiPadrao2 {
 
     public GuiFITEscolhaDeJogadores gui_escolhas_de_jogadores;
