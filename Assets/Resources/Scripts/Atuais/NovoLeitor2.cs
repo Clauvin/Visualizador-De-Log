@@ -807,6 +807,7 @@ public class NovoLeitor2 : MonoBehaviour
         ancora = Instantiate(Resources.Load<GameObject>("Objetos/Ancora de Movimentacao"));
         ancora.name = "Ancora";
         ConectarTodosAAncora();
+        objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).ancora_dos_dados = ancora;
 
     }
 
