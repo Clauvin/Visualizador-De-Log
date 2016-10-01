@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-using Basicas;
+﻿using Basicas;
 
 /// <summary>
 /// Classe GuiFITSairDaVisualizacao. Filha de GuiSairDaVisualizacao, e responsável pelos dois botões

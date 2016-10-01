@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 /// <summary>
 /// Classe responsável por mostrar qual modo de visualização está sendo visto pelo usuário.

@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using Basicas;
 
 /// <summary>
 /// Classe responsável por definir a tela inicial do programa.

@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-/// <summary>
+﻿/// <summary>
 /// Classe padrão de onde outras classes de interface gráfica derivam.
 /// <para>Contém funções padrões para posicionamento de GUI.</para>
 /// </summary>

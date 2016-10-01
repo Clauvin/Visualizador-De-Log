@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System;
-using System.Globalization;
 
 /// <summary>
 /// Classe responsável por permitir ao usuário sumir e aparecer com objetos baseando-se no

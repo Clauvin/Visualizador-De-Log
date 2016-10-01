@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 /// <summary>
 /// Classe responsável por mostrar ao usuário que jogadores, níveis e personagens ele pode escolher para serem

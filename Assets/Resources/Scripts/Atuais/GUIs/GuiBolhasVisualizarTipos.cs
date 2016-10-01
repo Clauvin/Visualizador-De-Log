@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-/// <summary>
+﻿/// <summary>
 /// Responsável por visualizar quais tipos de objetos do Bolhas estão visíveis, quais não
 /// e permite ao usuário alterar isso.
 /// </summary>

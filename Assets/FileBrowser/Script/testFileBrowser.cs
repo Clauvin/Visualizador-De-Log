@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 
 public class testFileBrowser : MonoBehaviour {
 	//skins and textures

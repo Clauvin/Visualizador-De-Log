@@ -1,6 +1,5 @@
 #define thread //comment out this line if you would like to disable multi-threaded search
 using UnityEngine;
-using System.Collections;
 using System.IO;
 #if thread
 using System.Threading;

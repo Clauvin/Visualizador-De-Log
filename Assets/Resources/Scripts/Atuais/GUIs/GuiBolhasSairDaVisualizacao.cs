@@ -1,6 +1,4 @@
 ﻿using Basicas;
-using UnityEngine;
-using System.Collections;
 
 /// <summary>
 /// Classe derivada de GuiSairDaVisualizacao.
