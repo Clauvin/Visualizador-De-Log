@@ -141,6 +141,35 @@ public class NovoLeitor2 : MonoBehaviour
 
     GameObject heatmap;
 
+    public GameObject Heatmap
+    {
+        get
+        {
+            if (qual_leitor == "FIT")
+            {
+                return objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).heatmap;
+            }
+            else if (qual_leitor == "Bolhas")
+            {
+                return heatmap;
+            }
+            else return null;
+        }
+
+        set
+        {
+            if (qual_leitor == "FIT")
+            {
+                objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).heatmap = value;
+            }
+            else if (qual_leitor == "Bolhas")
+            {
+                heatmap = value;
+            }
+            else Debug.Log("NovoLeitor2.qual_leitor está com valor diferente de Fit e Bolhas.");
+        }
+    }
+
     protected PegarEnderecoDeLog pegar_endereco_de_log;
 
     public string[] lista_de_nomes_de_objetos_do_FIT = { "1", "2", "3", "4" };
@@ -1083,7 +1112,7 @@ public class NovoLeitor2 : MonoBehaviour
     {
         if ((qual >= 0) && (qual < GetQuantHeatmaps()))
         {
-            heatmap.GetComponent<MeshRenderer>().material.
+            Heatmap.GetComponent<MeshRenderer>().material.
                 SetTexture("_MainTex", ((HeatMap)Matrizes_dos_heatmaps[qual]).heatmap);
 
         }
@@ -1232,12 +1261,12 @@ public class NovoLeitor2 : MonoBehaviour
 
     protected void AjeitandoOHeatmap(Material materialheatmap)
     {
-        heatmap = Instantiate<GameObject>((GameObject)Resources.Load("Objetos/BackgroundHeatmap"));
-        heatmap.name = "Heatmap";
+        Heatmap = Instantiate<GameObject>((GameObject)Resources.Load("Objetos/BackgroundHeatmap"));
+        Heatmap.name = "Heatmap";
         materialheatmap.SetTexture("_MainTex", ((HeatMap)Matrizes_dos_heatmaps[0]).heatmap);
-        heatmap.GetComponent<MeshRenderer>().material = Instantiate(materialheatmap);
+        Heatmap.GetComponent<MeshRenderer>().material = Instantiate(materialheatmap);
 
-        heatmap.transform.position = ((GameObject)Lista_de_backgrounds[0]).transform.position
+        Heatmap.transform.position = ((GameObject)Lista_de_backgrounds[0]).transform.position
             + new Vector3(200f, 0, 0);
     }
 
@@ -1341,25 +1370,25 @@ public class NovoLeitor2 : MonoBehaviour
 
     public void ReposicionandoHeatmapEsquerda()
     {
-        heatmap.transform.position = (((GameObject)Lista_de_backgrounds[0]).transform.position
+        Heatmap.transform.position = (((GameObject)Lista_de_backgrounds[0]).transform.position
             + new Vector3(GetComponent<Controlador>().GetBancoDeDadosModos().GetPosEsq("Heatmap"), 0, 0));
-        heatmap.transform.localScale = GetComponent<Controlador>().GetBancoDeDadosModos().
+        Heatmap.transform.localScale = GetComponent<Controlador>().GetBancoDeDadosModos().
             GetEscalaEsquerdaOuDireita("Heatmap");
     }
 
     public void ReposicionandoHeatmapCentro()
     {
-        heatmap.transform.position = (((GameObject)Lista_de_backgrounds[0]).transform.position
+        Heatmap.transform.position = (((GameObject)Lista_de_backgrounds[0]).transform.position
             + new Vector3(GetComponent<Controlador>().GetBancoDeDadosModos().GetPosCen("Heatmap"), 0, 0));
-        heatmap.transform.localScale = GetComponent<Controlador>().GetBancoDeDadosModos().
+        Heatmap.transform.localScale = GetComponent<Controlador>().GetBancoDeDadosModos().
             GetEscalaNoCentro("Heatmap");
     }
 
     public void ReposicionandoHeatmapDireita()
     {
-        heatmap.transform.position = (((GameObject)Lista_de_backgrounds[0]).transform.position
+        Heatmap.transform.position = (((GameObject)Lista_de_backgrounds[0]).transform.position
             + new Vector3(GetComponent<Controlador>().GetBancoDeDadosModos().GetPosDir("Heatmap"), 0, 0));
-        heatmap.transform.localScale = GetComponent<Controlador>().GetBancoDeDadosModos().
+        Heatmap.transform.localScale = GetComponent<Controlador>().GetBancoDeDadosModos().
             GetEscalaEsquerdaOuDireita("Heatmap");
     }
 
