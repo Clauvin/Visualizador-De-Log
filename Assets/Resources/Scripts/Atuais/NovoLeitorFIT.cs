@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Basicas;
+using UnityEngine;
 
 /// <summary>
 /// Responsável por usar as funções de NovoLeitor2 de forma a ler e usar os dados do log do FIT.
@@ -22,11 +23,20 @@ public class NovoLeitorFIT : NovoLeitor2 {
         pegar_endereco_de_log.endereco_de_arquivo[0] = pd.endereco_do_arquivo;
 
         StartFIT();
-        objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit = pd.bd_fit;
-        Heatmaps = pd.heatmaps;
-        InicializarHeatmaps();
+        //objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit = pd.bd_fit;
+        for (int i = 0; i < objs_jogadores_fit.obj_jogadores_fit.Count; i++)
+        {
+            qual_jogador = i;
+            objs_jogadores_fit.Add(new ObjetosDeUmJogadorFIT());
+            objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit = (BancoDeDadosFIT)(pd.bd_fits[qual_jogador]);
+            Heatmaps = pd.heatmaps;
+            InicializarHeatmaps();
 
-        CreateStuffFIT();
+            CreateStuffFIT();
+
+        }
+        
+        
         GetComponent<Controlador>().InicializacaoFIT();
         
         pd.Destruir();
