@@ -24,7 +24,7 @@ public class NovoLeitorFIT : NovoLeitor2 {
 
         StartFIT();
         //objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit = pd.bd_fit;
-        for (int i = 0; i < objs_jogadores_fit.obj_jogadores_fit.Count; i++)
+        for (int i = 0; i < pd.bd_fits.Count; i++)
         {
             qual_jogador = i;
             objs_jogadores_fit.Add(new ObjetosDeUmJogadorFIT());
@@ -35,8 +35,8 @@ public class NovoLeitorFIT : NovoLeitor2 {
             CreateStuffFIT();
 
         }
-        
-        
+        qual_jogador = 0;
+
         GetComponent<Controlador>().InicializacaoFIT();
         
         pd.Destruir();
