@@ -74,8 +74,6 @@ public class GuiFITBotoesDaTelaDeSelecao : GuiPadrao2
 
                     }
 
-                    Debug.Log(pd_vai.bd_fits.Count);
-
                 }
 
                 pd_vai = FindObjectOfType<PassadorDeDados>().GetComponent<PassadorDeDados>();
