@@ -827,16 +827,18 @@ public class NovoLeitor2 : MonoBehaviour
 
         }
 
+        ancora = Instantiate(Resources.Load<GameObject>("Objetos/Ancora de Movimentacao"));
+        ancora.name = "Ancora";
+        ConectarTodosAAncora();
+        objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).ancora_dos_dados = ancora;
+
         AjeitandoACamera(new_pos_camera, a_camera);
 
         AjeitandoOHeatmap(material_heatmap);
 
         GetComponent<Controlador>().MudarTransparenciaDosObjetos(0.2f);
 
-        ancora = Instantiate(Resources.Load<GameObject>("Objetos/Ancora de Movimentacao"));
-        ancora.name = "Ancora";
-        ConectarTodosAAncora();
-        objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).ancora_dos_dados = ancora;
+        
 
     }
 
@@ -1268,6 +1270,8 @@ public class NovoLeitor2 : MonoBehaviour
 
         Heatmap.transform.position = ((GameObject)Lista_de_backgrounds[0]).transform.position
             + new Vector3(200f, 0, 0);
+
+        Heatmap.transform.parent = ancora.transform;
     }
 
     public void ReposicionandoPosicoesEsquerdaUmDeCadaVez3D()
