@@ -1425,9 +1425,6 @@ public class NovoLeitor2 : MonoBehaviour
         texturas = new ParaVisualizacao<Texture2D>();
         texturas_selecionadas = new ParaVisualizacao<Texture2D>();
         pintar = new Pintar();
-        Lista_de_objetos = new ArrayList();
-        Lista_de_backgrounds = new ArrayList();
-        Matrizes_dos_heatmaps = new ArrayList();
         pegar_endereco_de_log = new PegarEnderecoDeLog();
         nomes_e_numeros_de_objetos_do_FIT = new Dictionary<string, int>();
         nomes_e_numeros_de_objetos_do_bolhas = new Dictionary<string, int>();
