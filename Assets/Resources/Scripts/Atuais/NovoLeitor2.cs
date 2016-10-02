@@ -718,8 +718,6 @@ public class NovoLeitor2 : MonoBehaviour
         
         for (i = 0; i < objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetQuantidadeDeEntradas(); i++)
         {
-            Debug.Log(objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetQuantidadeDeEntradas());
-
             // Controle de quando criar um background novo ou
             // não criá-lo. Backgrounds novos são criados, um para cada posição no tempo diferente.
             if ((i != objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetQuantidadeDeEntradas() - 1) && (i != 0))
@@ -1306,7 +1304,7 @@ public class NovoLeitor2 : MonoBehaviour
                                                 GetBancoDeDadosModos().GetRotacaoCentro("Um Frame De Cada Vez em 3D");
         }
 
-        DesconectarTodos();
+        //DesconectarTodos();
     }
 
     public void ReposicionandoPosicoesDireitaUmDeCadaVez3D()
@@ -1321,7 +1319,8 @@ public class NovoLeitor2 : MonoBehaviour
             ((GameObject)Lista_de_backgrounds[i]).transform.localEulerAngles = GetComponent<Controlador>().
                                                 GetBancoDeDadosModos().GetRotacaoEsquerdaOuDireita("Um Frame De Cada Vez em 3D");
         }
-        DesconectarTodos();
+        ///ATENÇÃO, NÃO DESCOMENTAR ESSA LINHA.
+        //DesconectarTodos();
     }
 
     public void ReposicionandoPosicoesEsquerdaUmDeCadaVez2D()
