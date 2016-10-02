@@ -968,13 +968,18 @@ public class Controlador : MonoBehaviour
 
             if (ativos[0] && !ativos[1])
             {
-                GetComponent<NovoLeitor2>().ReposicionandoPosicoesEsquerdaUmDeCadaVez3D();
+                GetComponent<NovoLeitor2>().qual_jogador = 0;
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesCentroUmDeCadaVez3D();
             } else if (ativos[0] && ativos[1])
             {
-                GetComponent<NovoLeitor2>().ReposicionandoPosicoesCentroUmDeCadaVez3D();
+                GetComponent<NovoLeitor2>().qual_jogador = 0;
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesEsquerdaUmDeCadaVez3D();
+                GetComponent<NovoLeitor2>().qual_jogador = 1;
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesDireitaUmDeCadaVez3D();
             } else if (!ativos[0] && ativos[1])
             {
-                GetComponent<NovoLeitor2>().ReposicionandoPosicoesDireitaUmDeCadaVez3D();
+                GetComponent<NovoLeitor2>().qual_jogador = 1;
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesCentroUmDeCadaVez3D();
             }
 
         } else if (modo_de_visualizacao == "Um Frame De Cada Vez em 2D")
@@ -982,14 +987,19 @@ public class Controlador : MonoBehaviour
 
             if (ativos[0] && !ativos[1])
             {
-                GetComponent<NovoLeitor2>().ReposicionandoPosicoesEsquerdaUmDeCadaVez2D();
+                GetComponent<NovoLeitor2>().qual_jogador = 0;
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesCentroUmDeCadaVez2D();
             }
             else if (ativos[0] && ativos[1])
             {
-                GetComponent<NovoLeitor2>().ReposicionandoPosicoesCentroUmDeCadaVez2D();
+                GetComponent<NovoLeitor2>().qual_jogador = 0;
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesEsquerdaUmDeCadaVez2D();
+                GetComponent<NovoLeitor2>().qual_jogador = 1;
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesDireitaUmDeCadaVez2D();
             }
             else if (!ativos[0] && ativos[1]){
-                GetComponent<NovoLeitor2>().ReposicionandoPosicoesDireitaUmDeCadaVez2D();
+                GetComponent<NovoLeitor2>().qual_jogador = 1;
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesCentroUmDeCadaVez2D();
             }
 
         } else if (modo_de_visualizacao == "Todos De Uma Vez em 3D")
@@ -997,14 +1007,19 @@ public class Controlador : MonoBehaviour
 
             if (ativos[0] && !ativos[1])
             {
-                GetComponent<NovoLeitor2>().ReposicionandoPosicoesEsquerdaTodosDeUmaVez3D();
+                GetComponent<NovoLeitor2>().qual_jogador = 0;
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesCentroTodosDeUmaVez3D();
             }
             else if (ativos[0] && ativos[1])
             {
-                GetComponent<NovoLeitor2>().ReposicionandoPosicoesCentroTodosDeUmaVez3D();
+                GetComponent<NovoLeitor2>().qual_jogador = 0;
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesEsquerdaTodosDeUmaVez3D();
+                GetComponent<NovoLeitor2>().qual_jogador = 1;
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesDireitaTodosDeUmaVez3D();
             }
             else if (!ativos[0] && ativos[1]){
-                GetComponent<NovoLeitor2>().ReposicionandoPosicoesDireitaTodosDeUmaVez3D();
+                GetComponent<NovoLeitor2>().qual_jogador = 1;
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesCentroTodosDeUmaVez3D();
             }
 
         } else if (modo_de_visualizacao == "Heatmap")
@@ -1012,15 +1027,20 @@ public class Controlador : MonoBehaviour
 
             if (ativos[0] && !ativos[1])
             {
-                GetComponent<NovoLeitor2>().ReposicionandoHeatmapEsquerda();
+                GetComponent<NovoLeitor2>().qual_jogador = 0;
+                GetComponent<NovoLeitor2>().ReposicionandoHeatmapCentro();
             }
             else if (ativos[0] && ativos[1])
             {
-                GetComponent<NovoLeitor2>().ReposicionandoHeatmapCentro();
+                GetComponent<NovoLeitor2>().qual_jogador = 0;
+                GetComponent<NovoLeitor2>().ReposicionandoHeatmapEsquerda();
+                GetComponent<NovoLeitor2>().qual_jogador = 1;
+                GetComponent<NovoLeitor2>().ReposicionandoHeatmapDireita();
             }
             else if (!ativos[0] && ativos[1])
             {
-                GetComponent<NovoLeitor2>().ReposicionandoHeatmapDireita();
+                GetComponent<NovoLeitor2>().qual_jogador = 1;
+                GetComponent<NovoLeitor2>().ReposicionandoHeatmapCentro();
             }
 
         }
@@ -1120,14 +1140,20 @@ public class Controlador : MonoBehaviour
         pos.y = modos.GetCameraInitY(modo_de_visualizacao);
         FindObjectOfType<Camera>().transform.position = pos;
         //Daqui pra baixo, parte do FIT
-        count = GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count;
 
-        TransparenciaDoBackground(1f);
-        GetComponent<NovoLeitor2>().ConectarTodos();
-        Mudanca_De_Modo_De_Visualizacao("Um Frame De Cada Vez em 3D", true);
-        GetComponent<NovoLeitor2>().PosicionarBackgrounds(20f);
-        GetComponent<Camera>().clearFlags = CameraClearFlags.Skybox;
-        GetComponent<NovoLeitor2>().DesconectarTodos();
+        for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
+        {
+            GetComponent<NovoLeitor2>().qual_jogador = i;
+            count = GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count;
+
+            TransparenciaDoBackground(1f);
+            GetComponent<NovoLeitor2>().ConectarTodos();
+            Mudanca_De_Modo_De_Visualizacao("Um Frame De Cada Vez em 3D", true);
+            GetComponent<NovoLeitor2>().PosicionarBackgrounds(20f);
+            GetComponent<Camera>().clearFlags = CameraClearFlags.Skybox;
+            GetComponent<NovoLeitor2>().DesconectarTodos();
+        }
+        
         GetComponent<GuiModo>().MudarInstrucoes(instrucoes_genericas + modos.GetInstrucao(modo_de_visualizacao));
         GetComponent<GuiModo>().RevelarGui();
 
