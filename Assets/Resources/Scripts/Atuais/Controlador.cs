@@ -959,6 +959,73 @@ public class Controlador : MonoBehaviour
         if (qual_heatmap_mostrar >= GetComponent<NovoLeitor2>().GetQuantHeatmaps()) qual_heatmap_mostrar = 0;
     }
 
+    public void AlteracaoDePosicionamentoDeJogadores()
+    {
+        bool[] ativos = GetComponent<NovoLeitor2>().GetQuaisJogadoresEstaoAtivos();
+        
+        if (modo_de_visualizacao == "Um Frame De Cada Vez em 3D")
+        {
+
+            if (ativos[0] && !ativos[1])
+            {
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesEsquerdaUmDeCadaVez3D();
+            } else if (ativos[0] && ativos[1])
+            {
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesCentroUmDeCadaVez3D();
+            } else if (!ativos[0] && ativos[1])
+            {
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesDireitaUmDeCadaVez3D();
+            }
+
+        } else if (modo_de_visualizacao == "Um Frame De Cada Vez em 2D")
+        {
+
+            if (ativos[0] && !ativos[1])
+            {
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesEsquerdaUmDeCadaVez2D();
+            }
+            else if (ativos[0] && ativos[1])
+            {
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesCentroUmDeCadaVez2D();
+            }
+            else if (!ativos[0] && ativos[1]){
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesDireitaUmDeCadaVez2D();
+            }
+
+        } else if (modo_de_visualizacao == "Todos De Uma Vez em 3D")
+        {
+
+            if (ativos[0] && !ativos[1])
+            {
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesEsquerdaTodosDeUmaVez3D();
+            }
+            else if (ativos[0] && ativos[1])
+            {
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesCentroTodosDeUmaVez3D();
+            }
+            else if (!ativos[0] && ativos[1]){
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesDireitaTodosDeUmaVez3D();
+            }
+
+        } else if (modo_de_visualizacao == "Heatmap")
+        {
+
+            if (ativos[0] && !ativos[1])
+            {
+                GetComponent<NovoLeitor2>().ReposicionandoHeatmapEsquerda();
+            }
+            else if (ativos[0] && ativos[1])
+            {
+                GetComponent<NovoLeitor2>().ReposicionandoHeatmapCentro();
+            }
+            else if (!ativos[0] && ativos[1])
+            {
+                GetComponent<NovoLeitor2>().ReposicionandoHeatmapDireita();
+            }
+
+        }
+    }
+
     public bool GetAutoMode()
     {
         return auto_mode;
