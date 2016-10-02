@@ -51,8 +51,12 @@ public class GuiFITSelecaoDeJogadores : GuiPadrao2
     {
         if (jogador_1)
         {
-            ObjetosDeUmJogadorFIT objetos = GetComponent<NovoLeitor2>().objs_jogadores_fit.GetObjetosDeUmJogadorFIT(1);
-            if (objetos.ancora_dos_dados != null) objetos.ancora_dos_dados.SetActive(false);
+            if (GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores() == 2)
+            {
+                ObjetosDeUmJogadorFIT objetos = GetComponent<NovoLeitor2>().objs_jogadores_fit.GetObjetosDeUmJogadorFIT(1);
+                objetos.ancora_dos_dados.SetActive(false);
+            }
+            
             GetComponent<NovoLeitor2>().objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).ancora_dos_dados.SetActive(true);
             
         }
@@ -68,6 +72,7 @@ public class GuiFITSelecaoDeJogadores : GuiPadrao2
             if (objetos.ancora_dos_dados != null) objetos.ancora_dos_dados.SetActive(true);
             GetComponent<NovoLeitor2>().objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).ancora_dos_dados.SetActive(false);
         }
+        GetComponent<Controlador>().AlteracaoDePosicionamentoDeJogadores();
     }
 
     // Use this for initialization
