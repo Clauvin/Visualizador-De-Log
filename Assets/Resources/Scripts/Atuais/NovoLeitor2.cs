@@ -1287,7 +1287,7 @@ public class NovoLeitor2 : MonoBehaviour
             ((GameObject)Lista_de_backgrounds[i]).transform.localEulerAngles = GetComponent<Controlador>().
                                                 GetBancoDeDadosModos().GetRotacaoCentro("Um Frame De Cada Vez em 3D");
         }
-        DesconectarTodos();
+        //DesconectarTodos();
 
     }
 
