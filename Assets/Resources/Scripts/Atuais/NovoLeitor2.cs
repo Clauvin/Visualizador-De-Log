@@ -715,8 +715,11 @@ public class NovoLeitor2 : MonoBehaviour
         fechar_background = false;
 
         // Para cada objeto...
+        
         for (i = 0; i < objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetQuantidadeDeEntradas(); i++)
         {
+            Debug.Log(objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetQuantidadeDeEntradas());
+
             // Controle de quando criar um background novo ou
             // não criá-lo. Backgrounds novos são criados, um para cada posição no tempo diferente.
             if ((i != objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetQuantidadeDeEntradas() - 1) && (i != 0))
@@ -1097,7 +1100,7 @@ public class NovoLeitor2 : MonoBehaviour
         z -= (objeto.GetComponent<MeshCollider>().bounds.max.z - objeto.GetComponent<MeshCollider>().bounds.min.z) / 2;
 
         // Terceiro: finalmente, posicionar o objeto com relação ao background.
-        if (qual_leitor == "FIT") z -= (objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).bd_fit.GetGridY(i) / 32 * (background.GetComponent<Dados>().altura_z / 15));
+        if (qual_leitor == "FIT") z -= (objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetGridY(i) / 32 * (background.GetComponent<Dados>().altura_z / 15));
         if (qual_leitor == "Bolhas") z -= (bd_bolhas.GetCoordenadaY(i) * (background.GetComponent<Dados>().altura_z / resolucao.y));
 
         return z;
@@ -1302,6 +1305,7 @@ public class NovoLeitor2 : MonoBehaviour
             ((GameObject)Lista_de_backgrounds[i]).transform.localEulerAngles = GetComponent<Controlador>().
                                                 GetBancoDeDadosModos().GetRotacaoCentro("Um Frame De Cada Vez em 3D");
         }
+
         DesconectarTodos();
     }
 
@@ -1432,10 +1436,35 @@ public class NovoLeitor2 : MonoBehaviour
         return objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit;
     }
 
+    /// <summary>
+    /// Função que retorna dos 1 a 2 conjuntos de dados de jogadores a serem analisados, quais estão ativos.
+    /// </summary>
+    /// <returns>Retorna um array de 2 booleans.</returns>
+    public bool[] GetQuaisJogadoresEstaoAtivos()
+    {
+        bool[] result = new bool[2];
+        result[0] = false; result[1] = false;
+        if (objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).ancora_dos_dados.activeSelf)
+        {
+            result[0] = true;
+        }
+        if (objs_jogadores_fit.QuantosJogadores() == 2)
+        {
+            if (objs_jogadores_fit.GetObjetosDeUmJogadorFIT(1).ancora_dos_dados.activeSelf)
+            {
+                result[1] = true;
+            }
+        }
+
+        return result;
+    }
+
     public void RetornarParaTelaInicial()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
+
+
 
     public void NovoLeitor2InitFIT()
     {
