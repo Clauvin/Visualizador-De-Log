@@ -49,27 +49,31 @@ public class GuiFITSelecaoDeJogadores : GuiPadrao2
 
     void Controle()
     {
+
         if (jogador_1)
         {
             if (GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores() == 2)
             {
+                GetComponent<NovoLeitor2>().qual_jogador = 1;
+                GetComponent<NovoLeitor2>().ConectarTodos();
                 ObjetosDeUmJogadorFIT objetos = GetComponent<NovoLeitor2>().objs_jogadores_fit.GetObjetosDeUmJogadorFIT(1);
                 objetos.ancora_dos_dados.SetActive(false);
             }
-            
+
             GetComponent<NovoLeitor2>().objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).ancora_dos_dados.SetActive(true);
             
         }
         else if (jogador_1_2)
         {
-            ObjetosDeUmJogadorFIT objetos = GetComponent<NovoLeitor2>().objs_jogadores_fit.GetObjetosDeUmJogadorFIT(1);
-            if (objetos.ancora_dos_dados != null) objetos.ancora_dos_dados.SetActive(true);
+            GetComponent<NovoLeitor2>().objs_jogadores_fit.GetObjetosDeUmJogadorFIT(1).ancora_dos_dados.SetActive(true);
             GetComponent<NovoLeitor2>().objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).ancora_dos_dados.SetActive(true);
         }
         else if (jogador_2)
         {
             ObjetosDeUmJogadorFIT objetos = GetComponent<NovoLeitor2>().objs_jogadores_fit.GetObjetosDeUmJogadorFIT(1);
             if (objetos.ancora_dos_dados != null) objetos.ancora_dos_dados.SetActive(true);
+            GetComponent<NovoLeitor2>().qual_jogador = 0;
+            GetComponent<NovoLeitor2>().ConectarTodos();
             GetComponent<NovoLeitor2>().objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).ancora_dos_dados.SetActive(false);
         }
         GetComponent<Controlador>().AlteracaoDePosicionamentoDeJogadores();
