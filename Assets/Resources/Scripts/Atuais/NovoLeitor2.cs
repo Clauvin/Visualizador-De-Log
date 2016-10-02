@@ -203,7 +203,20 @@ public class NovoLeitor2 : MonoBehaviour
         }
     }
 
-    public GameObject ancora;
+    public GameObject Ancora
+    {
+        get
+        {
+            return ancora;
+        }
+
+        set
+        {
+            ancora = value;
+        }
+    }
+
+    private GameObject ancora;
 
     public void StartFIT()
     {
@@ -828,10 +841,11 @@ public class NovoLeitor2 : MonoBehaviour
 
         }
 
-        ancora = Instantiate(Resources.Load<GameObject>("Objetos/Ancora de Movimentacao"));
-        ancora.name = "Ancora";
+        Ancora = Instantiate(Resources.Load<GameObject>("Objetos/Ancora de Movimentacao"));
+        Ancora.name = "Ancora";
         ConectarTodosAAncora();
-        objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).ancora_dos_dados = ancora;
+        objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).ancora_dos_dados = Ancora;
+        Ancora.name = objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetNomeDoJogador(0) + " " + Ancora.name;
 
         AjeitandoACamera(new_pos_camera, a_camera);
 
@@ -1048,7 +1062,7 @@ public class NovoLeitor2 : MonoBehaviour
         for (int j = 0; j < Lista_de_backgrounds.Count; j++)
         {
             GameObject background = (GameObject)Lista_de_backgrounds[j];
-            background.transform.parent = ancora.transform;
+            background.transform.parent = Ancora.transform;
         }
     }
 
@@ -1272,13 +1286,13 @@ public class NovoLeitor2 : MonoBehaviour
         Heatmap.transform.position = ((GameObject)Lista_de_backgrounds[0]).transform.position
             + new Vector3(200f, 0, 0);
 
-        Heatmap.transform.parent = ancora.transform;
+        Heatmap.transform.parent = Ancora.transform;
     }
 
     public void ReposicionandoPosicoesEsquerdaUmDeCadaVez3D()
     {
         ConectarTodos();
-        ancora.transform.position = new Vector3(GetComponent<Controlador>().
+        Ancora.transform.position = new Vector3(GetComponent<Controlador>().
                                                 GetBancoDeDadosModos().GetPosEsq("Um Frame De Cada Vez em 3D"),
                                                 0f, 0f);
 
@@ -1294,7 +1308,7 @@ public class NovoLeitor2 : MonoBehaviour
     public void ReposicionandoPosicoesCentroUmDeCadaVez3D()
     {
         ConectarTodos();
-        ancora.transform.position = new Vector3(GetComponent<Controlador>().
+        Ancora.transform.position = new Vector3(GetComponent<Controlador>().
                                                 GetBancoDeDadosModos().GetPosCen("Um Frame De Cada Vez em 3D"),
                                                 0f, 0f);
 
@@ -1310,7 +1324,7 @@ public class NovoLeitor2 : MonoBehaviour
     public void ReposicionandoPosicoesDireitaUmDeCadaVez3D()
     {
         ConectarTodos();
-        ancora.transform.position = new Vector3(GetComponent<Controlador>().
+        /*ancora.transform.position = new Vector3(GetComponent<Controlador>().
                                                 GetBancoDeDadosModos().GetPosDir("Um Frame De Cada Vez em 3D"),
                                                 0f, 0f);
 
@@ -1318,40 +1332,40 @@ public class NovoLeitor2 : MonoBehaviour
         {
             ((GameObject)Lista_de_backgrounds[i]).transform.localEulerAngles = GetComponent<Controlador>().
                                                 GetBancoDeDadosModos().GetRotacaoEsquerdaOuDireita("Um Frame De Cada Vez em 3D");
-        }
+        }*/
         ///ATENÇÃO, NÃO DESCOMENTAR ESSA LINHA.
         //DesconectarTodos();
     }
 
     public void ReposicionandoPosicoesEsquerdaUmDeCadaVez2D()
     {
-        ancora.transform.position = new Vector3(GetComponent<Controlador>().
+        Ancora.transform.position = new Vector3(GetComponent<Controlador>().
                                                 GetBancoDeDadosModos().GetPosEsq("Um Frame De Cada Vez em 2D"),
                                                 0f, 0f);
-        ancora.transform.localScale = GetComponent<Controlador>().
+        Ancora.transform.localScale = GetComponent<Controlador>().
                                                 GetBancoDeDadosModos().GetEscalaEsquerdaOuDireita("Um Frame De Cada Vez em 2D");
     }
 
     public void ReposicionandoPosicoesCentroUmDeCadaVez2D()
     {
-        ancora.transform.position = new Vector3(0f, 0f, 0f);
-        ancora.transform.localScale = GetComponent<Controlador>().
+        Ancora.transform.position = new Vector3(0f, 0f, 0f);
+        Ancora.transform.localScale = GetComponent<Controlador>().
                                                 GetBancoDeDadosModos().GetEscalaNoCentro("Um Frame De Cada Vez em 2D");
     }
 
     public void ReposicionandoPosicoesDireitaUmDeCadaVez2D()
     {
-        ancora.transform.position = new Vector3(GetComponent<Controlador>().
+        Ancora.transform.position = new Vector3(GetComponent<Controlador>().
                                                 GetBancoDeDadosModos().GetPosDir("Um Frame De Cada Vez em 2D"),
                                                 0f, 0f);
-        ancora.transform.localScale = GetComponent<Controlador>().
+        Ancora.transform.localScale = GetComponent<Controlador>().
                                                 GetBancoDeDadosModos().GetEscalaEsquerdaOuDireita("Um Frame De Cada Vez em 2D");
     }
 
     public void ReposicionandoPosicoesEsquerdaTodosDeUmaVez3D()
     {
         ConectarTodos();
-        ancora.transform.position = new Vector3(GetComponent<Controlador>().
+        Ancora.transform.position = new Vector3(GetComponent<Controlador>().
                                                 GetBancoDeDadosModos().GetPosEsq("Todos De Uma Vez em 3D"),
                                                 0f, 0f);
         DesconectarTodos();
@@ -1360,7 +1374,7 @@ public class NovoLeitor2 : MonoBehaviour
     public void ReposicionandoPosicoesCentroTodosDeUmaVez3D()
     {
         ConectarTodos();
-        ancora.transform.position = new Vector3(GetComponent<Controlador>().
+        Ancora.transform.position = new Vector3(GetComponent<Controlador>().
                                                 GetBancoDeDadosModos().GetPosCen("Todos De Uma Vez em 3D"),
                                                 0f, 0f);
         DesconectarTodos();
@@ -1369,7 +1383,7 @@ public class NovoLeitor2 : MonoBehaviour
     public void ReposicionandoPosicoesDireitaTodosDeUmaVez3D()
     {
         ConectarTodos();
-        ancora.transform.position = new Vector3(GetComponent<Controlador>().
+        Ancora.transform.position = new Vector3(GetComponent<Controlador>().
                                                 GetBancoDeDadosModos().GetPosDir("Todos De Uma Vez em 3D"),
                                                 0f, 0f);
         DesconectarTodos();
