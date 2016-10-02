@@ -203,20 +203,36 @@ public class NovoLeitor2 : MonoBehaviour
         }
     }
 
+    private GameObject ancora;
+
     public GameObject Ancora
     {
         get
         {
-            return ancora;
+            if (qual_leitor == "FIT")
+            {
+                return objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).ancora_dos_dados;
+            }
+            else if (qual_leitor == "Bolhas")
+            {
+                return ancora;
+            }
+            else return null;
         }
 
         set
         {
-            ancora = value;
+            if (qual_leitor == "FIT")
+            {
+                objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).ancora_dos_dados= value;
+            }
+            else if (qual_leitor == "Bolhas")
+            {
+                ancora = value;
+            }
+            else Debug.Log("NovoLeitor2.qual_leitor está com valor diferente de Fit e Bolhas.");
         }
     }
-
-    private GameObject ancora;
 
     public void StartFIT()
     {
@@ -1324,7 +1340,7 @@ public class NovoLeitor2 : MonoBehaviour
     public void ReposicionandoPosicoesDireitaUmDeCadaVez3D()
     {
         ConectarTodos();
-        /*ancora.transform.position = new Vector3(GetComponent<Controlador>().
+        Ancora.transform.position = new Vector3(GetComponent<Controlador>().
                                                 GetBancoDeDadosModos().GetPosDir("Um Frame De Cada Vez em 3D"),
                                                 0f, 0f);
 
@@ -1332,7 +1348,7 @@ public class NovoLeitor2 : MonoBehaviour
         {
             ((GameObject)Lista_de_backgrounds[i]).transform.localEulerAngles = GetComponent<Controlador>().
                                                 GetBancoDeDadosModos().GetRotacaoEsquerdaOuDireita("Um Frame De Cada Vez em 3D");
-        }*/
+        }
         ///ATENÇÃO, NÃO DESCOMENTAR ESSA LINHA.
         //DesconectarTodos();
     }
