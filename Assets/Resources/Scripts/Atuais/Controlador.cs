@@ -1157,6 +1157,8 @@ public class Controlador : MonoBehaviour
         GetComponent<GuiModo>().MudarInstrucoes(instrucoes_genericas + modos.GetInstrucao(modo_de_visualizacao));
         GetComponent<GuiModo>().RevelarGui();
 
+        AlteracaoDePosicionamentoDeJogadores();
+
         usuario_pode_fazer_input = true;
 
     }
