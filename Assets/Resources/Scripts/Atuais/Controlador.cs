@@ -493,6 +493,7 @@ public class Controlador : MonoBehaviour
     {
         if ((modo_de_visualizacao != modonovo) || (forcar == true))
         {
+
             Vector3 posicaonova = GetComponent<Camera>().transform.position;
             posicaonova.x = modos.GetCameraX(modonovo);
 
@@ -502,6 +503,7 @@ public class Controlador : MonoBehaviour
             if ((modo_de_visualizacao == "Todos De Uma Vez em 3D") || (modo_de_visualizacao == "Um Frame De Cada Vez em 2D"))
             {
                 modos.SetCameraInitZ(modo_de_visualizacao, posicaonova.z);
+
                 ArrayList lista_de_backs = GetComponent<NovoLeitor2>().Lista_de_backgrounds;
                 int contagem = lista_de_backs.Count;
                 if (modo_de_visualizacao == "Um Frame De Cada Vez em 2D")
@@ -584,6 +586,8 @@ public class Controlador : MonoBehaviour
                 pos_rot_inicial_todos_de_uma_vez_em_3D = GetComponent<Camera>().transform.rotation;
                 pegar_valor_de_camera_todos_de_uma_vez_em_3D = false;
             }
+
+            AlteracaoDePosicionamentoDeJogadores();
 
         }
 
