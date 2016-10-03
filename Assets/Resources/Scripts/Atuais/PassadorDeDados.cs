@@ -20,6 +20,7 @@ public class PassadorDeDados : MonoBehaviour {
     /// ArrayList de instâncias de BancoDeDadosFIT, uma pra cada jogador.
     /// </summary>
     public ArrayList bd_fits;
+
     public int heatmaps;
 
     public PassadorDeDados()
