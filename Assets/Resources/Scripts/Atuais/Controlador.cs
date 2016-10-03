@@ -333,14 +333,29 @@ public class Controlador : MonoBehaviour
                         float limitacao = 5.0f;
                         if (modo_de_visualizacao == "Um Frame De Cada Vez em 3D") limitacao = -15.0f;
 
-                        if (posicao_da_camera.y < ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[
+                        if (GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 1 > 1)
+                        {
+                            if (posicao_da_camera.y < ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[
                                                     GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 2
                                                     ]).transform.position.y + limitacao - 5.0f)
+                            {
+                                posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[
+                                                        GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 2
+                                                        ]).transform.position.y + limitacao - 5.0f;
+                            }
+                        } else
                         {
-                            posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[
-                                                    GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 2
-                                                    ]).transform.position.y + limitacao - 5.0f;
+                            if (posicao_da_camera.y < ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[
+                                                    GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 1
+                                                    ]).transform.position.y + 10.0f)
+                            {
+                                posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[
+                                                        GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 1
+                                                        ]).transform.position.y + 10.0f;
+                            }
                         }
+
+                        
 
                         FindObjectOfType<Camera>().transform.position = posicao_da_camera;
                     }
