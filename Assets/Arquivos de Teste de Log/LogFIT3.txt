@@ -5,8 +5,8 @@ ServerTime:481=CONNECTED =
 ServerTime:491=ServerID:1=Player:THIAGO=MODE:3=Level:1=Input:4=Time:237
 ServerTime:492=ServerID:2=Player:Cláuvin=MODE:3=Level:1=Input:4=Time:238
 ServerTime:493=ServerID:3=Player:Leonardo=MODE:3=Level:1=Input:4=Time:239
-ServerTime:494=ServerID:4=Player:Rodrigo=MODE:3=Level:1=Input:4=Time:240
-ServerTime:495=ServerID:4=Player:Rodrigo=MODE:3=Level:1=Input:3=Time:241
+ServerTime:494=ServerID:4=Player:Rodrigo=MODE:3=Level:1=Input:2=Time:240
+ServerTime:495=ServerID:4=Player:Rodrigo=MODE:3=Level:1=Input:2=Time:241
 ServerTime:496=ServerID:4=Player:Rodrigo=MODE:3=Level:1=Input:2=Time:242
 ServerTime:501=ServerID:1=Player:THIAGO=MODE:3=Level:1=Input:4=Time:243
 ServerTime:511=ServerID:1=Player:THIAGO=MODE:3=Level:1=Input:4=Time:251
