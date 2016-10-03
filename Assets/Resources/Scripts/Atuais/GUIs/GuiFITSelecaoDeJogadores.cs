@@ -22,7 +22,7 @@ public class GuiFITSelecaoDeJogadores : GuiPadrao2
         jogador_1 = GUI.Button(new Rect(10, 30, 180, 20), GetComponent<NovoLeitor2>().
                                                objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).bd_fit.GetNomeDoJogador(0));
 
-        if (GetComponent<NovoLeitor2>().objs_jogadores_fit.obj_jogadores_fit.Count > 1)
+        if (GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores() > 1)
         {
 
             jogador_1_2 = GUI.Button(new Rect(10, 50, 180, 20), GetComponent<NovoLeitor2>().
