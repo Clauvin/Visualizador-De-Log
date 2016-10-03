@@ -12,10 +12,15 @@ public class NovoLeitorFIT : NovoLeitor2 {
         NovoLeitor2InitFIT();
 
         string endereco;
+
 #if UNITY_EDITOR
+
         endereco = Application.dataPath + "/Arquivos de Teste de Log";
+
 #else
+
         endereco = System.IO.Directory.GetCurrentDirectory();
+
 #endif
 
         PassadorDeDados pd = FindObjectOfType<PassadorDeDados>();
