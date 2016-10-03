@@ -28,7 +28,7 @@ public class NovoLeitorFIT : NovoLeitor2 {
         pegar_endereco_de_log.endereco_de_arquivo[0] = pd.endereco_do_arquivo;
 
         StartFIT();
-        //objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit = pd.bd_fit;
+        
         for (int i = 0; i < pd.bd_fits.Count; i++)
         {
             qual_jogador = i;
