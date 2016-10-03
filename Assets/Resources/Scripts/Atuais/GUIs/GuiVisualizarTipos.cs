@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 /// <summary>
 /// Responsável por visualizar quais tipos de objetos estão visíveis, quais não
