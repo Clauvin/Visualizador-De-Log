@@ -8,6 +8,9 @@ using System.Collections;
 /// </summary>
 public class ObjetosDeJogadoresFIT : MonoBehaviour {
 
+    /// <summary>
+    /// ArrayList de instâncias de ObjetosDeUmJogadorFIT, uma pra cada jogador.
+    /// </summary>
     public ArrayList obj_jogadores_fit;
     int pos;
 
