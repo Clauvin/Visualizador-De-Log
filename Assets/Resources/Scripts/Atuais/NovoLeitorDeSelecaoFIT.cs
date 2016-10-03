@@ -1,9 +1,5 @@
 ﻿using UnityEngine;
-using Basicas;
-using System;
-using System.IO;
 using System.Collections;
-using System.Collections.Generic;
 
 /// <summary>
 /// <para>Responsável por usar as funções de NovoLeitor2 de forma a ler os dados do log do FIT para permitir ao usuário</para>
