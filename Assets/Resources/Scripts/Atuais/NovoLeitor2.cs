@@ -1305,6 +1305,11 @@ public class NovoLeitor2 : MonoBehaviour
         Heatmap.transform.parent = Ancora.transform;
     }
 
+    public void ResetandoAncoras()
+    {
+
+    }
+
     public void ReposicionandoPosicoesEsquerdaUmDeCadaVez3D()
     {
         ConectarTodos();
@@ -1360,6 +1365,12 @@ public class NovoLeitor2 : MonoBehaviour
                                                 0f, 0f);
         Ancora.transform.localScale = GetComponent<Controlador>().
                                                 GetBancoDeDadosModos().GetEscalaEsquerdaOuDireita("Um Frame De Cada Vez em 2D");
+
+        for (int i = 0; i < Lista_de_backgrounds.Count; i++)
+        {
+            ((GameObject)Lista_de_backgrounds[i]).transform.localEulerAngles = GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetRotacaoCentro("Um Frame De Cada Vez em 2D");
+        }
     }
 
     public void ReposicionandoPosicoesCentroUmDeCadaVez2D()
@@ -1367,6 +1378,12 @@ public class NovoLeitor2 : MonoBehaviour
         Ancora.transform.position = new Vector3(0f, 0f, 0f);
         Ancora.transform.localScale = GetComponent<Controlador>().
                                                 GetBancoDeDadosModos().GetEscalaNoCentro("Um Frame De Cada Vez em 2D");
+
+        for (int i = 0; i < Lista_de_backgrounds.Count; i++)
+        {
+            ((GameObject)Lista_de_backgrounds[i]).transform.localEulerAngles = GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetRotacaoCentro("Um Frame De Cada Vez em 2D");
+        }
     }
 
     public void ReposicionandoPosicoesDireitaUmDeCadaVez2D()
@@ -1376,6 +1393,12 @@ public class NovoLeitor2 : MonoBehaviour
                                                 0f, 0f);
         Ancora.transform.localScale = GetComponent<Controlador>().
                                                 GetBancoDeDadosModos().GetEscalaEsquerdaOuDireita("Um Frame De Cada Vez em 2D");
+
+        for (int i = 0; i < Lista_de_backgrounds.Count; i++)
+        {
+            ((GameObject)Lista_de_backgrounds[i]).transform.localEulerAngles = GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetRotacaoCentro("Um Frame De Cada Vez em 2D");
+        }
     }
 
     public void ReposicionandoPosicoesEsquerdaTodosDeUmaVez3D()
@@ -1384,6 +1407,12 @@ public class NovoLeitor2 : MonoBehaviour
         Ancora.transform.position = new Vector3(GetComponent<Controlador>().
                                                 GetBancoDeDadosModos().GetPosEsq("Todos De Uma Vez em 3D"),
                                                 0f, 0f);
+
+        for (int i = 0; i < Lista_de_backgrounds.Count; i++)
+        {
+            ((GameObject)Lista_de_backgrounds[i]).transform.localEulerAngles = GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetRotacaoCentro("Todos De Uma Vez em 3D");
+        }
         DesconectarTodos();
     }
 
@@ -1393,6 +1422,12 @@ public class NovoLeitor2 : MonoBehaviour
         Ancora.transform.position = new Vector3(GetComponent<Controlador>().
                                                 GetBancoDeDadosModos().GetPosCen("Todos De Uma Vez em 3D"),
                                                 0f, 0f);
+
+        for (int i = 0; i < Lista_de_backgrounds.Count; i++)
+        {
+            ((GameObject)Lista_de_backgrounds[i]).transform.localEulerAngles = GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetRotacaoCentro("Todos De Uma Vez em 3D");
+        }
         DesconectarTodos();
     }
 
@@ -1402,6 +1437,13 @@ public class NovoLeitor2 : MonoBehaviour
         Ancora.transform.position = new Vector3(GetComponent<Controlador>().
                                                 GetBancoDeDadosModos().GetPosDir("Todos De Uma Vez em 3D"),
                                                 0f, 0f);
+
+        for (int i = 0; i < Lista_de_backgrounds.Count; i++)
+        {
+            ((GameObject)Lista_de_backgrounds[i]).transform.localEulerAngles = GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetRotacaoCentro("Todos De Uma Vez em 3D");
+        }
+
         DesconectarTodos();
     }
 
