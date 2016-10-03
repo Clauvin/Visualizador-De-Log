@@ -54,7 +54,6 @@ public class GuiFITEscolhaDePersonagens : GuiPadrao2
 
             position_y = 0;
 
-            // End the ScrollView
             GUI.EndScrollView();
 
         }
