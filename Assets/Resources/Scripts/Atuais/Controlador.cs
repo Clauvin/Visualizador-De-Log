@@ -278,22 +278,39 @@ public class Controlador : MonoBehaviour
 
                         AlterarPosicaoDeCamera('y', true, "Horizontal", "Vertical", false, 0, -1.0f);
 
-                        if (posicao_da_camera.y > ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[0]).transform.position.y + 20.0f)
+                        if (posicao_da_camera.y > ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[0]).
+                            transform.position.y + 20.0f)
                         {
-                            posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[0]).transform.position.y + 20.0f;
+                            posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[0]).
+                                transform.position.y + 20.0f;
                         }
 
                         float limitacao = 5.0f;
                         if (modo_de_visualizacao == "Um Frame De Cada Vez em 3D") limitacao = -15.0f;
 
-                        if (posicao_da_camera.y < ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[
-                                                    GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 2
-                                                    ]).transform.position.y + limitacao - 5.0f)
+                        if (GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count > 1)
                         {
-                            posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[
-                                                    GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 2
-                                                    ]).transform.position.y + limitacao - 5.0f;
+                            if (posicao_da_camera.y < ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[
+                                                        GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 2
+                                                        ]).transform.position.y + limitacao - 5.0f)
+                            {
+                                posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[
+                                                        GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 2
+                                                        ]).transform.position.y + limitacao - 5.0f;
+                            }
+                        } else
+                        {
+                            if (posicao_da_camera.y < ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[
+                                                        GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 1
+                                                        ]).transform.position.y + 10.0f)
+                            {
+                                posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[
+                                                        GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 1
+                                                        ]).transform.position.y + 10.0f;
+                            }
                         }
+
+
 
                         FindObjectOfType<Camera>().transform.position = posicao_da_camera;
 
