@@ -727,7 +727,7 @@ public class NovoLeitor2 : MonoBehaviour
 
         material_background.mainTexture = (Texture)Instantiate(Resources.Load("Texturas/Grid"));
 
-        // Lê e organiza todos os dados do log do FIT.
+        // Cria o Heatmap
         for (int j = 0; j < Matrizes_dos_heatmaps.Count; j++)
         {
             ((HeatMap)Matrizes_dos_heatmaps[j]).AlterarValoresDeTamanhoDeHeatmap(20, 15);
