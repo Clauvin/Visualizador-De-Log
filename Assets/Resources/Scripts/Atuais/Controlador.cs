@@ -1178,18 +1178,6 @@ public class Controlador : MonoBehaviour
 
         for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
         {
-            GameObject background = (GameObject)(GetComponent<NovoLeitor2>().Lista_de_backgrounds[0]);
-            AtualizarValoresDePosicionamento(background.transform.position.y);
-        }
-
-        //gambiarra a ser corrigida posteriormente
-        Vector3 pos = FindObjectOfType<Camera>().transform.position;
-        pos.y = modos.GetCameraInitY(modo_de_visualizacao);
-        FindObjectOfType<Camera>().transform.position = pos;
-        //Daqui pra baixo, parte do FIT
-
-        for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
-        {
             GetComponent<NovoLeitor2>().qual_jogador = i;
             count = GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count;
 
@@ -1212,6 +1200,17 @@ public class Controlador : MonoBehaviour
         GetComponent<GuiModo>().RevelarGui();
 
         AlteracaoDePosicionamentoDeJogadores();
+
+        //gambiarra a ser corrigida posteriormente
+        Vector3 pos = FindObjectOfType<Camera>().transform.position;
+        pos.y = modos.GetCameraInitY(modo_de_visualizacao);
+        FindObjectOfType<Camera>().transform.position = pos;
+
+        for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
+        {
+            GameObject background = (GameObject)(GetComponent<NovoLeitor2>().Lista_de_backgrounds[0]);
+            AtualizarValoresDePosicionamento(background.transform.position.y);
+        }
 
         usuario_pode_fazer_input = true;
 
