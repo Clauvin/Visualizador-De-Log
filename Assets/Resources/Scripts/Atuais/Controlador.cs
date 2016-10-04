@@ -1197,12 +1197,19 @@ public class Controlador : MonoBehaviour
 
             TransparenciaDoBackground(1f);
             GetComponent<NovoLeitor2>().ConectarTodos();
-            Mudanca_De_Modo_De_Visualizacao("Um Frame De Cada Vez em 3D", true);
+            
+        }
+
+        Mudanca_De_Modo_De_Visualizacao("Um Frame De Cada Vez em 3D", true);
+
+        for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
+        {
             GetComponent<NovoLeitor2>().PosicionarBackgrounds(20f);
-            GetComponent<Camera>().clearFlags = CameraClearFlags.Skybox;
             GetComponent<NovoLeitor2>().DesconectarTodos();
         }
-        
+
+        GetComponent<Camera>().clearFlags = CameraClearFlags.Skybox;
+
         GetComponent<GuiModo>().MudarInstrucoes(instrucoes_genericas + modos.GetInstrucao(modo_de_visualizacao));
         GetComponent<GuiModo>().RevelarGui();
 
