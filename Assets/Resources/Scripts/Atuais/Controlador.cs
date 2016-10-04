@@ -478,13 +478,13 @@ public class Controlador : MonoBehaviour
 
     public void AtualizarValoresDePosicionamento(float posicaoy0)
     {
-        modos.AddCameraInitY("Um Frame De Cada Vez em 3D", posicaoy0 + 60f);
-        modos.AddCameraInitY("Um Frame De Cada Vez em 2D", posicaoy0 + 20f);
-        modos.AddCameraInitY("Todos De Uma Vez em 3D", posicaoy0 + 20f);
+        modos.SetCameraInitY("Um Frame De Cada Vez em 3D", posicaoy0 + 20f);
+        modos.SetCameraInitY("Um Frame De Cada Vez em 2D", posicaoy0 + 20f);
+        modos.SetCameraInitY("Todos De Uma Vez em 3D", posicaoy0 + 20f);
 
         modos.AddCameraInitX("Todos De Uma Vez em 3D", 0f);
 
-        modos.AddCameraInitY("Heatmap", posicaoy0);
+        modos.SetCameraInitY("Heatmap", posicaoy0);
     }
 
     public void Mudanca_De_Modo_De_Visualizacao(string modonovo, bool forcar = false)
@@ -1201,16 +1201,17 @@ public class Controlador : MonoBehaviour
 
         AlteracaoDePosicionamentoDeJogadores();
 
+        GameObject background = (GameObject)(GetComponent<NovoLeitor2>().Lista_de_backgrounds[0]);
+
+        AtualizarValoresDePosicionamento(background.transform.position.y);
+
         //gambiarra a ser corrigida posteriormente
         Vector3 pos = FindObjectOfType<Camera>().transform.position;
         pos.y = modos.GetCameraInitY(modo_de_visualizacao);
-        FindObjectOfType<Camera>().transform.position = pos;
 
-        for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
-        {
-            GameObject background = (GameObject)(GetComponent<NovoLeitor2>().Lista_de_backgrounds[0]);
-            AtualizarValoresDePosicionamento(background.transform.position.y);
-        }
+        Debug.Log(pos);
+
+        FindObjectOfType<Camera>().transform.position = pos;
 
         usuario_pode_fazer_input = true;
 
