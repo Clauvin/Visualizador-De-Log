@@ -1191,6 +1191,7 @@ public class Controlador : MonoBehaviour
 
         for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
         {
+            GetComponent<NovoLeitor2>().qual_jogador = i;
             GetComponent<NovoLeitor2>().PosicionarBackgrounds(20f);
             GetComponent<NovoLeitor2>().DesconectarTodos();
         }
