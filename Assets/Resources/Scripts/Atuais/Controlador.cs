@@ -504,33 +504,43 @@ public class Controlador : MonoBehaviour
             {
                 modos.SetCameraInitZ(modo_de_visualizacao, posicaonova.z);
 
-                ArrayList lista_de_backs = GetComponent<NovoLeitor2>().Lista_de_backgrounds;
-                int contagem = lista_de_backs.Count;
-                if (modo_de_visualizacao == "Um Frame De Cada Vez em 2D")
+                for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
                 {
-                    //GetComponent<NovoLeitor2>().DesconectarTodos();
+                    GetComponent<NovoLeitor2>().qual_jogador = i;
+                    ArrayList lista_de_backs = GetComponent<NovoLeitor2>().Lista_de_backgrounds;
+                    int contagem = lista_de_backs.Count;
+                    if (modo_de_visualizacao == "Um Frame De Cada Vez em 2D")
+                    {
+                        //GetComponent<NovoLeitor2>().DesconectarTodos();
+                    }
+
+                    for (int j = 0; j < contagem; j++)
+                    {
+                        ((GameObject)lista_de_backs[j]).GetComponent<LigaDesliga>().Ligar();
+                    }
                 }
 
-                for (int i = 0; i < contagem; i++)
-                {
-                    ((GameObject)lista_de_backs[i]).GetComponent<LigaDesliga>().Ligar();
-                }
             }
             if ((modonovo == "Todos De Uma Vez em 3D") || (modonovo == "Um Frame De Cada Vez em 2D"))
             {
                 posicaonova.z = modos.GetCameraInitZ(modonovo);
-                ArrayList lista_de_backs = GetComponent<NovoLeitor2>().Lista_de_backgrounds;
-                int contagem = lista_de_backs.Count;
-                int desligar = 0;
-                if (modonovo == "Todos De Uma Vez em 3D") desligar = 0;
-                else if (modonovo == "Um Frame De Cada Vez em 2D")
+
+                for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
                 {
-                    //GetComponent<NovoLeitor2>().ConectarTodos();
-                    desligar = 1;
-                }
-                for (int i = desligar; i < contagem; i++)
-                {
-                    ((GameObject)lista_de_backs[i]).GetComponent<LigaDesliga>().Desligar();
+                    GetComponent<NovoLeitor2>().qual_jogador = i;
+                    ArrayList lista_de_backs = GetComponent<NovoLeitor2>().Lista_de_backgrounds;
+                    int contagem = lista_de_backs.Count;
+                    int desligar = 0;
+                    if (modonovo == "Todos De Uma Vez em 3D") desligar = 0;
+                    else if (modonovo == "Um Frame De Cada Vez em 2D")
+                    {
+                        //GetComponent<NovoLeitor2>().ConectarTodos();
+                        desligar = 1;
+                    }
+                    for (int j = desligar; j < contagem; j++)
+                    {
+                        ((GameObject)lista_de_backs[j]).GetComponent<LigaDesliga>().Desligar();
+                    }
                 }
 
             }
@@ -539,14 +549,16 @@ public class Controlador : MonoBehaviour
             GetComponent<Camera>().transform.position = posicaonova;
             GetComponent<Camera>().orthographic = modos.GetOrthographic(modonovo);
 
-            GetComponent<NovoLeitor2>().ControlarAlpha(modos.GetAlpha(modonovo));
-            GetComponent<NovoLeitor2>().GirarBackgrounds(modos.GetRotationChange(modonovo));
+            for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
+            {
+                GetComponent<NovoLeitor2>().ControlarAlpha(modos.GetAlpha(modonovo));
+                GetComponent<NovoLeitor2>().GirarBackgrounds(modos.GetRotationChange(modonovo));
+                GetComponent<NovoLeitor2>().AlterarLayer(modos.GetLayer(modonovo));
+                TransparenciaDoBackground(modos.GetVisibleBackgroundAlpha(modonovo));
+            }
 
             GetComponent<NovoLeitor2>().GirarCamera(modos.GetRotationChangeCamera(modonovo));
-            GetComponent<NovoLeitor2>().AlterarLayer(modos.GetLayer(modonovo));
-
-            TransparenciaDoBackground(modos.GetVisibleBackgroundAlpha(modonovo));
-
+            
             if (modonovo == "Um Frame De Cada Vez em 2D")
             {
                 get_tempo_anterior = GetComponent<GuiTempo>().GetTempo();
@@ -563,7 +575,6 @@ public class Controlador : MonoBehaviour
                 if (modo_de_visualizacao == "Um Frame De Cada Vez em 3D") GetComponent<GuiTempo>().DesativarGuiDoAutoMode();
                 else if (modo_de_visualizacao == "Um Frame De Cada Vez em 2D") GetComponent<GuiTempo>().AtivarGuiDoAutoMode();
                 GetComponent<GuiTempo>().RevelarGui();
-                
             }
             else { GetComponent<GuiTempo>().EsconderGui(); }
 
@@ -1167,9 +1178,11 @@ public class Controlador : MonoBehaviour
                                              "-> - Retorna na lista de heatmaps\n" +
                                              "Q - Tela inicial");
 
-        GameObject background = (GameObject)(GetComponent<NovoLeitor2>().Lista_de_backgrounds[0]);
-
-        AtualizarValoresDePosicionamento(background.transform.position.y);
+        for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
+        {
+            GameObject background = (GameObject)(GetComponent<NovoLeitor2>().Lista_de_backgrounds[0]);
+            AtualizarValoresDePosicionamento(background.transform.position.y);
+        }
 
         //gambiarra a ser corrigida posteriormente
         Vector3 pos = FindObjectOfType<Camera>().transform.position;
