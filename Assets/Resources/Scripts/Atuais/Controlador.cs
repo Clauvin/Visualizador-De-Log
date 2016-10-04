@@ -478,9 +478,9 @@ public class Controlador : MonoBehaviour
 
     public void AtualizarValoresDePosicionamento(float posicaoy0)
     {
-        modos.AddCameraInitY("Um Frame De Cada Vez em 3D", posicaoy0);
-        modos.AddCameraInitY("Um Frame De Cada Vez em 2D", posicaoy0+10f);
-        modos.AddCameraInitY("Todos De Uma Vez em 3D", posicaoy0 + 10f);
+        modos.AddCameraInitY("Um Frame De Cada Vez em 3D", posicaoy0 + 60f);
+        modos.AddCameraInitY("Um Frame De Cada Vez em 2D", posicaoy0 + 20f);
+        modos.AddCameraInitY("Todos De Uma Vez em 3D", posicaoy0 + 20f);
 
         modos.AddCameraInitX("Todos De Uma Vez em 3D", 0f);
 
