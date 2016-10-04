@@ -405,8 +405,9 @@ public class Controlador : MonoBehaviour
                 Mudanca_De_Modo_De_Visualizacao("Um Frame De Cada Vez em 3D");
 
                 GetComponent<NovoLeitor2>().PosicionarBackgrounds(20f);
-                GetComponent<Camera>().clearFlags = CameraClearFlags.Skybox;
                 GetComponent<NovoLeitor2>().DesconectarTodos();
+
+                GetComponent<Camera>().clearFlags = CameraClearFlags.Skybox;
             }
 
             if ((Input.GetButtonDown("3")) && (modo_de_visualizacao != "Um Frame De Cada Vez em 2D"))
@@ -415,8 +416,8 @@ public class Controlador : MonoBehaviour
                 Mudanca_De_Modo_De_Visualizacao("Um Frame De Cada Vez em 2D");
 
                 GetComponent<NovoLeitor2>().PosicionarBackgrounds(20f);
-                GetComponent<Camera>().clearFlags = CameraClearFlags.Skybox;
                 //GetComponent<NovoLeitor2>().DesconectarTodos();
+                GetComponent<Camera>().clearFlags = CameraClearFlags.Skybox;
             }
 
             if ((Input.GetButtonDown("4")) && (modo_de_visualizacao != "Todos De Uma Vez em 3D"))
@@ -425,9 +426,9 @@ public class Controlador : MonoBehaviour
                 Mudanca_De_Modo_De_Visualizacao("Todos De Uma Vez em 3D");
 
                 GetComponent<NovoLeitor2>().PosicionarBackgrounds(1f);
-                GetComponent<Camera>().clearFlags = CameraClearFlags.SolidColor;
                 GetComponent<Camera>().backgroundColor = Color.black;
                 GetComponent<NovoLeitor2>().DesconectarTodos();
+                GetComponent<Camera>().clearFlags = CameraClearFlags.SolidColor;
             }
 
             if ((Input.GetButtonDown("5")) && (modo_de_visualizacao != "Heatmap"))
@@ -436,9 +437,9 @@ public class Controlador : MonoBehaviour
                 Mudanca_De_Modo_De_Visualizacao("Heatmap");
 
                 GetComponent<NovoLeitor2>().PosicionarBackgrounds(1f);
-                GetComponent<Camera>().clearFlags = CameraClearFlags.SolidColor;
                 GetComponent<Camera>().backgroundColor = Color.black;
                 GetComponent<NovoLeitor2>().DesconectarTodos();
+                GetComponent<Camera>().clearFlags = CameraClearFlags.SolidColor;
             }
 
             if (tipo == "Bolhas")
