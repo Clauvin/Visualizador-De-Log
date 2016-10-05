@@ -408,7 +408,7 @@ public class Controlador : MonoBehaviour
                 {
                     GetComponent<NovoLeitor2>().ConectarTodos();
                     GetComponent<NovoLeitor2>().PosicionarBackgrounds(20f);
-                    GetComponent<NovoLeitor2>().DesconectarTodos();
+                    //GetComponent<NovoLeitor2>().DesconectarTodos();
                 }
 
                 GetComponent<Camera>().clearFlags = CameraClearFlags.Skybox;
@@ -433,7 +433,9 @@ public class Controlador : MonoBehaviour
             {
                 
                 Mudanca_De_Modo_De_Visualizacao("Todos De Uma Vez em 3D");
-
+            
+                // Gambiarra temporária para evitar problemas de posicionamento errado do primeiro jogador,
+                // em caso de dupla.
                 for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
                 {
                     GetComponent<NovoLeitor2>().ConectarTodos();
@@ -538,6 +540,10 @@ public class Controlador : MonoBehaviour
                     if (modo_de_visualizacao == "Um Frame De Cada Vez em 2D")
                     {
                         //GetComponent<NovoLeitor2>().DesconectarTodos();
+                    }
+                    else if (modo_de_visualizacao == "Todos De Uma Vez em 3D")
+                    {
+                        GetComponent<NovoLeitor2>().ConectarTodos();
                     }
 
                     for (int j = 0; j < contagem; j++)
