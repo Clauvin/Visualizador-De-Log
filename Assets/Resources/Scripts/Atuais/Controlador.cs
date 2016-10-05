@@ -1150,7 +1150,7 @@ public class Controlador : MonoBehaviour
 
         modos.Add("Um Frame De Cada Vez em 3D", 0.5f, 5f, 30f, 0f, 0f, false, 1f, new Vector3(0f, 0f, 330f),
             new Vector3(90f, 0f, 0f), 1f, 2, -8.0f, 0.0f, 12.0f,
-            new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f),
+            new Vector3(1f, 1f, 1f), new Vector3(1f, 1f, 1f),
             new Vector3(0, 0f, 30f),
             new Vector3(0f, 0f, 330f), parte_da_transparencia_dos_objetos +
                                              "<- - Câmera recua\n" +
