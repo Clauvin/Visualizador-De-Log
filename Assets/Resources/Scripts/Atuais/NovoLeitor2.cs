@@ -1335,6 +1335,7 @@ public class NovoLeitor2 : MonoBehaviour
         Ancora.transform.position = new Vector3(GetComponent<Controlador>().
                                                 GetBancoDeDadosModos().GetPosCen("Um Frame De Cada Vez em 3D"),
                                                 0f, 0f);
+
         Ancora.transform.localScale = GetComponent<Controlador>().GetBancoDeDadosModos().
             GetEscalaNoCentro("Um Frame De Cada Vez em 3D");
 
