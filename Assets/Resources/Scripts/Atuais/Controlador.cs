@@ -401,44 +401,62 @@ public class Controlador : MonoBehaviour
 
             if ((Input.GetButtonDown("2")) && (modo_de_visualizacao != "Um Frame De Cada Vez em 3D"))
             {
-                GetComponent<NovoLeitor2>().ConectarTodos();
+                
                 Mudanca_De_Modo_De_Visualizacao("Um Frame De Cada Vez em 3D");
 
-                GetComponent<NovoLeitor2>().PosicionarBackgrounds(20f);
-                GetComponent<NovoLeitor2>().DesconectarTodos();
+                for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
+                {
+                    GetComponent<NovoLeitor2>().ConectarTodos();
+                    GetComponent<NovoLeitor2>().PosicionarBackgrounds(20f);
+                    GetComponent<NovoLeitor2>().DesconectarTodos();
+                }
 
                 GetComponent<Camera>().clearFlags = CameraClearFlags.Skybox;
             }
 
             if ((Input.GetButtonDown("3")) && (modo_de_visualizacao != "Um Frame De Cada Vez em 2D"))
             {
-                GetComponent<NovoLeitor2>().ConectarTodos();
+                
                 Mudanca_De_Modo_De_Visualizacao("Um Frame De Cada Vez em 2D");
 
-                GetComponent<NovoLeitor2>().PosicionarBackgrounds(20f);
-                //GetComponent<NovoLeitor2>().DesconectarTodos();
+                for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
+                {
+                    GetComponent<NovoLeitor2>().ConectarTodos();
+                    GetComponent<NovoLeitor2>().PosicionarBackgrounds(20f);
+                    //GetComponent<NovoLeitor2>().DesconectarTodos();
+                }
+
                 GetComponent<Camera>().clearFlags = CameraClearFlags.Skybox;
             }
 
             if ((Input.GetButtonDown("4")) && (modo_de_visualizacao != "Todos De Uma Vez em 3D"))
             {
-                GetComponent<NovoLeitor2>().ConectarTodos();
+                
                 Mudanca_De_Modo_De_Visualizacao("Todos De Uma Vez em 3D");
 
-                GetComponent<NovoLeitor2>().PosicionarBackgrounds(1f);
-                GetComponent<Camera>().backgroundColor = Color.black;
-                GetComponent<NovoLeitor2>().DesconectarTodos();
+                for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
+                {
+                    GetComponent<NovoLeitor2>().ConectarTodos();
+                    GetComponent<NovoLeitor2>().PosicionarBackgrounds(1f);
+                    GetComponent<Camera>().backgroundColor = Color.black;
+                    GetComponent<NovoLeitor2>().DesconectarTodos();
+                }
+
                 GetComponent<Camera>().clearFlags = CameraClearFlags.SolidColor;
             }
 
             if ((Input.GetButtonDown("5")) && (modo_de_visualizacao != "Heatmap"))
             {
-                GetComponent<NovoLeitor2>().ConectarTodos();
                 Mudanca_De_Modo_De_Visualizacao("Heatmap");
 
-                GetComponent<NovoLeitor2>().PosicionarBackgrounds(1f);
-                GetComponent<Camera>().backgroundColor = Color.black;
-                GetComponent<NovoLeitor2>().DesconectarTodos();
+                for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
+                {
+                    GetComponent<NovoLeitor2>().ConectarTodos();
+                    GetComponent<NovoLeitor2>().PosicionarBackgrounds(1f);
+                    GetComponent<Camera>().backgroundColor = Color.black;
+                    GetComponent<NovoLeitor2>().DesconectarTodos();
+                }
+
                 GetComponent<Camera>().clearFlags = CameraClearFlags.SolidColor;
             }
 
@@ -1210,8 +1228,6 @@ public class Controlador : MonoBehaviour
         //gambiarra a ser corrigida posteriormente
         Vector3 pos = FindObjectOfType<Camera>().transform.position;
         pos.y = modos.GetCameraInitY(modo_de_visualizacao);
-
-        Debug.Log(pos);
 
         FindObjectOfType<Camera>().transform.position = pos;
 
