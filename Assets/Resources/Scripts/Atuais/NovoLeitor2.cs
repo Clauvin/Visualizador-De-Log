@@ -1458,24 +1458,30 @@ public class NovoLeitor2 : MonoBehaviour
 
     public void ReposicionandoHeatmapEsquerda()
     {
-        Heatmap.transform.position = (((GameObject)Lista_de_backgrounds[0]).transform.position
-            + new Vector3(GetComponent<Controlador>().GetBancoDeDadosModos().GetPosEsq("Heatmap"), 0, 0));
+        Ancora.transform.position = new Vector3(GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetPosEsq("Heatmap"),
+                                                0f, 0f);
+
         Heatmap.transform.localScale = GetComponent<Controlador>().GetBancoDeDadosModos().
             GetEscalaEsquerdaOuDireita("Heatmap");
     }
 
     public void ReposicionandoHeatmapCentro()
     {
-        Heatmap.transform.position = (((GameObject)Lista_de_backgrounds[0]).transform.position
-            + new Vector3(GetComponent<Controlador>().GetBancoDeDadosModos().GetPosCen("Heatmap"), 0, 0));
+        Ancora.transform.position = new Vector3(GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetPosCen("Heatmap"),
+                                                0f, 0f);
+
         Heatmap.transform.localScale = GetComponent<Controlador>().GetBancoDeDadosModos().
             GetEscalaNoCentro("Heatmap");
     }
 
     public void ReposicionandoHeatmapDireita()
     {
-        Heatmap.transform.position = (((GameObject)Lista_de_backgrounds[0]).transform.position
-            + new Vector3(GetComponent<Controlador>().GetBancoDeDadosModos().GetPosDir("Heatmap"), 0, 0));
+        Ancora.transform.position = new Vector3(GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetPosDir("Heatmap"),
+                                                0f, 0f);
+
         Heatmap.transform.localScale = GetComponent<Controlador>().GetBancoDeDadosModos().
             GetEscalaEsquerdaOuDireita("Heatmap");
     }
