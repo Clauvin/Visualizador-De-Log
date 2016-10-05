@@ -1204,7 +1204,7 @@ public class Controlador : MonoBehaviour
                                              "Q - Tela inicial");
 
         modos.Add("Heatmap", 0f, 200f, 15f, 0f, 0f, true, 0f, new Vector3(0f, 0f, 0f),
-            new Vector3(90f, 0f, 0f), 1f, 2, 196f, 200f, 204f,
+            new Vector3(90f, 0f, 0f), 1f, 2, -4f, 0f, 4f,
             new Vector3(0.67f, 1f, 0.5f), new Vector3(1.333333f, 1f, 1f),
             new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), "<- - Avança na lista de heatmaps\n" +
                                              "-> - Retorna na lista de heatmaps\n" +
