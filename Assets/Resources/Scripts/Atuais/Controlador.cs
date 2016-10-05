@@ -22,7 +22,6 @@ public class Controlador : MonoBehaviour
     int get_tempo_anterior;
     BancoDeDadosModos modos = new BancoDeDadosModos();
     public string modo_de_visualizacao = "Todos De Uma Vez em 3D";
-    int count;
     string instrucoes_genericas = "Instrucoes:\n" +
                                  "2 - 'Um Frame De Cada Vez em 3D'\n" +
                                  "3 - 'Um Frame De Cada Vez em 2D'\n" +
@@ -583,6 +582,7 @@ public class Controlador : MonoBehaviour
 
             for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
             {
+                GetComponent<NovoLeitor2>().qual_jogador = i;
                 GetComponent<NovoLeitor2>().ControlarAlpha(modos.GetAlpha(modonovo));
                 GetComponent<NovoLeitor2>().GirarBackgrounds(modos.GetRotationChange(modonovo));
                 GetComponent<NovoLeitor2>().AlterarLayer(modos.GetLayer(modonovo));
@@ -958,7 +958,9 @@ public class Controlador : MonoBehaviour
 
     void TransparenciaDoBackground(float trans)
     {
-        Color cor = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[count - 1]).
+        int count = GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count;
+        Color cor = ((GameObject)GetComponent<NovoLeitor2>().
+            Lista_de_backgrounds[count - 1]).
                 GetComponent<MeshRenderer>().material.GetColor("_Color");
 
         cor.a = trans;
@@ -1213,7 +1215,6 @@ public class Controlador : MonoBehaviour
         for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
         {
             GetComponent<NovoLeitor2>().qual_jogador = i;
-            count = GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count;
 
             TransparenciaDoBackground(1f);
             GetComponent<NovoLeitor2>().ConectarTodos();
