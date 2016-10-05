@@ -1317,6 +1317,9 @@ public class NovoLeitor2 : MonoBehaviour
                                                 GetBancoDeDadosModos().GetPosEsq("Um Frame De Cada Vez em 3D"),
                                                 0f, 0f);
 
+        Ancora.transform.localScale = GetComponent<Controlador>().GetBancoDeDadosModos().
+            GetEscalaEsquerdaOuDireita("Um Frame De Cada Vez em 3D");
+
         for (int i = 0; i < Lista_de_backgrounds.Count; i++)
         {
             ((GameObject)Lista_de_backgrounds[i]).transform.localEulerAngles = GetComponent<Controlador>().
@@ -1332,6 +1335,8 @@ public class NovoLeitor2 : MonoBehaviour
         Ancora.transform.position = new Vector3(GetComponent<Controlador>().
                                                 GetBancoDeDadosModos().GetPosCen("Um Frame De Cada Vez em 3D"),
                                                 0f, 0f);
+        Ancora.transform.localScale = GetComponent<Controlador>().GetBancoDeDadosModos().
+            GetEscalaNoCentro("Um Frame De Cada Vez em 3D");
 
         for (int i = 0; i < Lista_de_backgrounds.Count; i++)
         {
@@ -1348,6 +1353,9 @@ public class NovoLeitor2 : MonoBehaviour
         Ancora.transform.position = new Vector3(GetComponent<Controlador>().
                                                 GetBancoDeDadosModos().GetPosDir("Um Frame De Cada Vez em 3D"),
                                                 0f, 0f);
+
+        Ancora.transform.localScale = GetComponent<Controlador>().GetBancoDeDadosModos().
+            GetEscalaEsquerdaOuDireita("Um Frame De Cada Vez em 3D");
 
         for (int i = 0; i < Lista_de_backgrounds.Count; i++)
         {
