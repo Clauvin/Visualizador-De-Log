@@ -440,6 +440,15 @@ public class Controlador : MonoBehaviour
                     GetComponent<NovoLeitor2>().PosicionarBackgrounds(1f);
                     GetComponent<Camera>().backgroundColor = Color.black;
                     GetComponent<NovoLeitor2>().DesconectarTodos();
+
+                    GetComponent<NovoLeitor2>().qual_jogador = i;
+                    ArrayList lista_de_backs = GetComponent<NovoLeitor2>().Lista_de_backgrounds;
+                    int contagem = lista_de_backs.Count;
+                    int desligar = 0;
+                    for (int j = desligar; j < contagem; j++)
+                    {
+                        ((GameObject)lista_de_backs[j]).GetComponent<LigaDesliga>().Desligar();
+                    }
                 }
 
                 GetComponent<Camera>().clearFlags = CameraClearFlags.SolidColor;
