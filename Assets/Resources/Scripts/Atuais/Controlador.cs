@@ -514,7 +514,7 @@ public class Controlador : MonoBehaviour
 
         modos.AddCameraInitX("Todos De Uma Vez em 3D", 0f);
 
-        modos.SetCameraInitY("Heatmap", posicaoy0);
+        modos.SetCameraInitY("Heatmap", posicaoy0 + 1f);
     }
 
     public void Mudanca_De_Modo_De_Visualizacao(string modonovo, bool forcar = false)
