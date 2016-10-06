@@ -459,13 +459,15 @@ public class Controlador : MonoBehaviour
             {
                 Mudanca_De_Modo_De_Visualizacao("Heatmap");
 
-                for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
+                GetComponent<Camera>().backgroundColor = Color.black;
+
+                /*for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
                 {
                     GetComponent<NovoLeitor2>().ConectarTodos();
                     GetComponent<NovoLeitor2>().PosicionarBackgrounds(1f);
-                    GetComponent<Camera>().backgroundColor = Color.black;
+                    
                     GetComponent<NovoLeitor2>().DesconectarTodos();
-                }
+                }*/
 
                 GetComponent<Camera>().clearFlags = CameraClearFlags.SolidColor;
             }
