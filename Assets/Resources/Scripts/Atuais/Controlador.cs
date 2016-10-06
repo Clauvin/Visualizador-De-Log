@@ -446,7 +446,7 @@ public class Controlador : MonoBehaviour
                     GetComponent<NovoLeitor2>().ConectarTodos();
                     GetComponent<NovoLeitor2>().PosicionarBackgrounds(1f);
                     
-                    GetComponent<NovoLeitor2>().DesconectarTodos();
+                    if (GetComponent<NovoLeitor2>().Ancora.activeSelf) GetComponent<NovoLeitor2>().DesconectarTodos();
 
                     ArrayList lista_de_backs = GetComponent<NovoLeitor2>().Lista_de_backgrounds;
                     int contagem = lista_de_backs.Count;
@@ -1057,7 +1057,11 @@ public class Controlador : MonoBehaviour
             if (ativos[0] && !ativos[1])
             {
                 GetComponent<NovoLeitor2>().qual_jogador = 0;
+                //GetComponent<NovoLeitor2>().Ancora.SetActive(true);
                 GetComponent<NovoLeitor2>().ReposicionandoPosicoesCentroUmDeCadaVez3D();
+                //GetComponent<NovoLeitor2>().Ancora.SetActive(false);
+                GetComponent<NovoLeitor2>().qual_jogador = 1;
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesDireitaUmDeCadaVez3D();
             } else if (ativos[0] && ativos[1])
             {
                 GetComponent<NovoLeitor2>().qual_jogador = 0;
@@ -1066,6 +1070,10 @@ public class Controlador : MonoBehaviour
                 GetComponent<NovoLeitor2>().ReposicionandoPosicoesDireitaUmDeCadaVez3D();
             } else if (!ativos[0] && ativos[1])
             {
+                GetComponent<NovoLeitor2>().qual_jogador = 0;
+                GetComponent<NovoLeitor2>().Ancora.SetActive(true);
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesEsquerdaUmDeCadaVez3D();
+                GetComponent<NovoLeitor2>().Ancora.SetActive(false);
                 GetComponent<NovoLeitor2>().qual_jogador = 1;
                 GetComponent<NovoLeitor2>().ReposicionandoPosicoesCentroUmDeCadaVez3D();
             }
