@@ -1197,7 +1197,7 @@ public class Controlador : MonoBehaviour
 
         modos.Add("Todos De Uma Vez em 3D", 0.5f, 5f, 2f, 0f, 0f, false, 0f, new Vector3(0f, 0f, 0f),
             new Vector3(90f, 0f, 0f), 0f, 2, -12.0f, 0.0f, 12.0f,
-            new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f),
+            new Vector3(1f, 1f, 1f), new Vector3(1f, 1f, 1f),
             new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), parte_da_transparencia_dos_objetos +
                                              "<- - Câmera recua\n" +
                                              "-> - Câmera avança\n" +
