@@ -405,6 +405,7 @@ public class Controlador : MonoBehaviour
 
                 for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
                 {
+                    GetComponent<NovoLeitor2>().qual_jogador = i;
                     GetComponent<NovoLeitor2>().ConectarTodos();
                     GetComponent<NovoLeitor2>().PosicionarBackgrounds(20f);
                     //GetComponent<NovoLeitor2>().DesconectarTodos();
@@ -420,6 +421,7 @@ public class Controlador : MonoBehaviour
 
                 for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
                 {
+                    GetComponent<NovoLeitor2>().qual_jogador = i;
                     GetComponent<NovoLeitor2>().ConectarTodos();
                     GetComponent<NovoLeitor2>().PosicionarBackgrounds(20f);
                     //GetComponent<NovoLeitor2>().DesconectarTodos();
@@ -437,12 +439,12 @@ public class Controlador : MonoBehaviour
                 // em caso de dupla.
                 for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
                 {
+                    GetComponent<NovoLeitor2>().qual_jogador = i;
                     GetComponent<NovoLeitor2>().ConectarTodos();
                     GetComponent<NovoLeitor2>().PosicionarBackgrounds(1f);
                     GetComponent<Camera>().backgroundColor = Color.black;
                     GetComponent<NovoLeitor2>().DesconectarTodos();
 
-                    GetComponent<NovoLeitor2>().qual_jogador = i;
                     ArrayList lista_de_backs = GetComponent<NovoLeitor2>().Lista_de_backgrounds;
                     int contagem = lista_de_backs.Count;
                     int desligar = 0;
@@ -1170,8 +1172,7 @@ public class Controlador : MonoBehaviour
         modos.Add("Um Frame De Cada Vez em 3D", 0.5f, 5f, 30f, 0f, 0f, false, 1f, new Vector3(0f, 0f, 330f),
             new Vector3(90f, 0f, 0f), 1f, 2, -8.0f, 0.0f, 12.0f,
             new Vector3(1f, 1f, 1f), new Vector3(1f, 1f, 1f),
-            new Vector3(0, 0f, 30f),
-            new Vector3(0f, 0f, 330f), parte_da_transparencia_dos_objetos +
+            new Vector3(0, 0f, 30f), new Vector3(0f, 0f, 330f), parte_da_transparencia_dos_objetos +
                                              "<- - Câmera recua\n" +
                                              "-> - Câmera avança(pode \n" +
                                              "atravessar grids)\n" +
