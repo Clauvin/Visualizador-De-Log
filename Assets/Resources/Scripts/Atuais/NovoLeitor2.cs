@@ -1471,6 +1471,8 @@ public class NovoLeitor2 : MonoBehaviour
                                                 GetBancoDeDadosModos().GetPosEsq("Heatmap"),
                                                 0f, 0f);
 
+        Ancora.transform.localScale = new Vector3(1f, 1f, 1f);
+
         Heatmap.transform.localScale = GetComponent<Controlador>().GetBancoDeDadosModos().
             GetEscalaEsquerdaOuDireita("Heatmap");
     }
@@ -1481,6 +1483,8 @@ public class NovoLeitor2 : MonoBehaviour
                                                 GetBancoDeDadosModos().GetPosCen("Heatmap"),
                                                 0f, 0f);
 
+        Ancora.transform.localScale = new Vector3(1f, 1f, 1f);
+
         Heatmap.transform.localScale = GetComponent<Controlador>().GetBancoDeDadosModos().
             GetEscalaNoCentro("Heatmap");
     }
@@ -1490,6 +1494,8 @@ public class NovoLeitor2 : MonoBehaviour
         Ancora.transform.position = new Vector3(GetComponent<Controlador>().
                                                 GetBancoDeDadosModos().GetPosDir("Heatmap"),
                                                 0f, 0f);
+
+        Ancora.transform.localScale = new Vector3(1f, 1f, 1f);
 
         Heatmap.transform.localScale = GetComponent<Controlador>().GetBancoDeDadosModos().
             GetEscalaEsquerdaOuDireita("Heatmap");
