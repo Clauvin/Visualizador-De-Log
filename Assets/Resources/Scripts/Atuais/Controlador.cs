@@ -434,15 +434,18 @@ public class Controlador : MonoBehaviour
             {
                 
                 Mudanca_De_Modo_De_Visualizacao("Todos De Uma Vez em 3D");
-            
+
                 // Gambiarra temporária para evitar problemas de posicionamento errado do primeiro jogador,
                 // em caso de dupla.
+
+                GetComponent<Camera>().backgroundColor = Color.black;
+
                 for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
                 {
                     GetComponent<NovoLeitor2>().qual_jogador = i;
                     GetComponent<NovoLeitor2>().ConectarTodos();
                     GetComponent<NovoLeitor2>().PosicionarBackgrounds(1f);
-                    GetComponent<Camera>().backgroundColor = Color.black;
+                    
                     GetComponent<NovoLeitor2>().DesconectarTodos();
 
                     ArrayList lista_de_backs = GetComponent<NovoLeitor2>().Lista_de_backgrounds;
