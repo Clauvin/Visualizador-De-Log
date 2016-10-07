@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
+using Basicas;
 using System.Collections;
 
 /// <summary>
 /// Responsável por passar valores do pre-load para o load.
 /// <para>Isso é necessário porquê o pre-load e o load são ambos scenes diferentes, e antes de uma scene ser carregada,
 /// tudo da scene anterior é apagado... a menos que você queira que algo não seja.</para>
-/// <para>E eu prefiro passa ro mínimo de dados possíveis de uma scene para a outra, por isso essa classe específica,
+/// <para>E eu prefiro passar o mínimo de dados possíveis de uma scene para a outra, por isso essa classe específica,
 /// e não uma já existente.</para>
 /// </summary>
 public class PassadorDeDados : MonoBehaviour {
@@ -13,12 +14,26 @@ public class PassadorDeDados : MonoBehaviour {
     public int tempo_minimo;
     public int tempo_maximo;
     public string endereco_do_arquivo;
+    public BancoDeDadosFIT bd_fit;
 
-    public void SetValuesDePassagem(int tempo_min, int tempo_max, string endereco)
+    /// <summary>
+    /// ArrayList de instâncias de BancoDeDadosFIT, uma pra cada jogador.
+    /// </summary>
+    public ArrayList bd_fits;
+
+    public int heatmaps;
+
+    public PassadorDeDados()
+    {
+        bd_fits = new ArrayList();
+    }
+
+    public void SetValuesDePassagem(int tempo_min, int tempo_max, string endereco, BancoDeDadosFIT bd = null)
     {
         tempo_minimo = tempo_min;
         tempo_maximo = tempo_max;
         endereco_do_arquivo = endereco;
+        bd_fit = bd;
     }
 
     public void Destruir()
@@ -26,15 +41,20 @@ public class PassadorDeDados : MonoBehaviour {
         Destroy(transform.gameObject);
     }
 
-    void Awake()
+    public void NaoDestruirAoDescarregar()
     {
         DontDestroyOnLoad(transform.gameObject);
     }
 
+    void Awake()
+    {
+        NaoDestruirAoDescarregar();
+    }
+
     // Use this for initialization
     void Start () {
-	
-	}
+        
+    }
 	
 	// Update is called once per frame
 	void Update () {

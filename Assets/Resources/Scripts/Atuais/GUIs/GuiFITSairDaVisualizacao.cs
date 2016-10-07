@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using Basicas;
 
 /// <summary>
 /// Classe GuiFITSairDaVisualizacao. Filha de GuiSairDaVisualizacao, e responsável pelos dois botões
@@ -7,6 +6,6 @@ using System.Collections;
 /// </summary>
 public class GuiFITSairDaVisualizacao : GuiSairDaVisualizacao {
 
-    public override void RetornarParaTelaDePreLoad() { UnityEngine.SceneManagement.SceneManager.LoadScene(1); }
+    public override void RetornarParaTelaDePreLoad() { MudaCenas.MudarCenaPara_Pre_Fit(); }
 
 }

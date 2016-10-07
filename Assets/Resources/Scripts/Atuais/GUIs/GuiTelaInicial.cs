@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using Basicas;
 
 /// <summary>
 /// Classe responsável por definir a tela inicial do programa.
@@ -23,20 +23,20 @@ public class GuiTelaInicial : GuiPadrao2
         posicaox = 0;
         GUI.Box(new Rect(0, 0, Screen.width, Screen.height), string.Empty);
         GUI.Box(new Rect(Screen.width / 4, Screen.height / 6, Screen.width / 2, Screen.height / 2), "Visualizador de Logs\n\n" +
-            "F!T e Bolhas\n\n" + "Protótipo versão 05/04/2016", estilotitulotelainicial);
+            "F!T e Bolhas\n\n" + "1.0.0-beta", estilotitulotelainicial);
 
         resultado = GUI.Toolbar(new Rect(Screen.width / 12 * 3, Screen.height / 10 * 8, Screen.width / 12 * 6, Screen.height / 10), qualbotao,
             toolbarStrings);
 
         switch (resultado)
         {
-            //Vai para o loading do FIT
+            //Vai para o pre-loading do FIT
             case 0:
-                UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+                MudaCenas.MudarCenaPara_Pre_Fit();
                 break;
-            //Vai para o loading do Bolhas
+            //Vai para o pre-loading do Bolhas
             case 1:
-                UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+                MudaCenas.MudarCenaPara_Pre_Bolhas();
                 break;
             //Abre créditos
             case 2:
@@ -60,8 +60,8 @@ public class GuiTelaInicial : GuiPadrao2
 
             GUI.Box(new Rect(0, 0, Screen.width * 0.2f, Screen.height * 0.3f), "Créditos\n\n" +
                 "Cláuvin Erlan José\n da Costa Curty de Almeida\n\n" +
-                "e Contribuidores do GitHub:\n" +
-                "adicionar link.");
+                "Contribuidor: Bruno Correia\n" +
+                ".");
 
             if (GUI.Button(new Rect(Screen.width * 0.05f, Screen.height * 0.25f, Screen.width * 0.1f, Screen.height * 0.05f),
                 "Fechar")){

@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.IO;
-using System;
+using Basicas;
 
 /// <summary>
 /// Classe básica semi-esqueletal(por conta de classes virtuais vazias)
@@ -36,6 +35,8 @@ public class GuiTelaDePreLoad : GuiPadrao2 {
     protected string titulo;
 
     protected PassadorDeDados pd;
+
+    protected LidaComTexto lida_com_texto = new LidaComTexto();
 
     public override void OnGUI()
     {

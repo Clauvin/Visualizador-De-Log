@@ -22,18 +22,12 @@ public class Controlador : MonoBehaviour
     int get_tempo_anterior;
     BancoDeDadosModos modos = new BancoDeDadosModos();
     public string modo_de_visualizacao = "Todos De Uma Vez em 3D";
-    int count;
     string instrucoes_genericas = "Instrucoes:\n" +
                                  "2 - 'Um Frame De Cada Vez em 3D'\n" +
                                  "3 - 'Um Frame De Cada Vez em 2D'\n" +
                                  "4 - 'Todos De Uma Vez em 3D'\n" +
                                  "5 - Heatmap\n";
     public string tipo;
-
-    GameObject background_um_de_cada_vez_2D;
-    Vector3 background_um_de_cada_vez_2D_posicao_original;
-    Vector3 background_um_de_cada_vez_2D_posicao_atual;
-    bool background_um_de_cada_vez_2D_posicao_atual_foi_preenchido = false;
 
     Transform objeto_clicado = null;
 
@@ -92,10 +86,11 @@ public class Controlador : MonoBehaviour
 
                     posicao_da_camera.y -= y;
 
-                    if (posicao_da_camera.y <= ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
-                        GetComponent<NovoLeitor2>().lista_de_backgrounds.Count - 1]).transform.position.y)
+                    if (posicao_da_camera.y <= ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[
+                        GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 1]).transform.position.y)
                     {
-                        posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[0]).transform.position.y + 20.0f;
+                        posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[0]).
+                            transform.position.y + 20.0f;
                     }
 
                     FindObjectOfType<Camera>().transform.position = posicao_da_camera;
@@ -107,10 +102,10 @@ public class Controlador : MonoBehaviour
 
                     posicao_da_camera.y -= y;
 
-                    if (posicao_da_camera.y <= ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
+                    if (posicao_da_camera.y <= ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[
                         posicao_temporal_2]).transform.position.y)
                     {
-                        posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
+                        posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[
                             posicao_temporal_1]).transform.position.y;
                     }
 
@@ -127,12 +122,12 @@ public class Controlador : MonoBehaviour
                     {
                         if (posicao_temporal_ <= GetComponent<NovoLeitor2>().GetUltimoTempo())
                         {
-                            posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[0]).transform.position.y +
+                            posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[0]).transform.position.y +
                                               20.0f - 20.0f * posicao_temporal_;
                         }
                         else
                         {
-                            GetComponent<GuiTempo>().SetStringEditavel("Tempo " + tempo + " não existe.");
+                            GetComponent<GuiTempo>().SetStringEditavel("Instante " + tempo + " não existe.");
                         }
                     }
 
@@ -157,7 +152,7 @@ public class Controlador : MonoBehaviour
                             {
                                 if (posicao_temporal_1 <= GetComponent<NovoLeitor2>().GetUltimoTempo())
                                 {
-                                    posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[0]).transform.position.y +
+                                    posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[0]).transform.position.y +
                                                         20.0f - 20.0f * posicao_temporal_1;
                                 }
 
@@ -167,8 +162,8 @@ public class Controlador : MonoBehaviour
                         }
                         else
                         {
-                            if (!resultado1) GetComponent<GuiTempo>().SetAutoPassagemDeTempoCustomComecoEditavel("Tempo " + tempo1 + " não existe.");
-                            if (!resultado2) GetComponent<GuiTempo>().SetAutoPassagemDeTempoCustomFinalEditavel("Tempo " + tempo2 + " não existe.");
+                            if (!resultado1) GetComponent<GuiTempo>().SetAutoPassagemDeTempoCustomComecoEditavel("Instante " + tempo1 + " não existe.");
+                            if (!resultado2) GetComponent<GuiTempo>().SetAutoPassagemDeTempoCustomFinalEditavel("Instante " + tempo2 + " não existe.");
                         }
 
                         FindObjectOfType<Camera>().transform.position = posicao_da_camera;
@@ -260,13 +255,19 @@ public class Controlador : MonoBehaviour
                 {
                     if ((Input.GetKeyUp("left"))) { MostrarHeatmapAnterior(); }
                     if ((Input.GetKeyUp("right"))) { MostrarHeatmapPosterior(); }
-                    GetComponent<NovoLeitor2>().ChangeTexturaHeatmap(qual_heatmap_mostrar);
+                    for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
+                    {
+                        GetComponent<NovoLeitor2>().qual_jogador = i;
+                        GetComponent<NovoLeitor2>().ChangeTexturaHeatmap(qual_heatmap_mostrar);
+                    }
+                    
                 }
 
 
             }
             else
             {
+
                 //Esse código movimenta a câmera para frente e para trás.
                 if (Input.GetAxis("Horizontal") != 0)
                 {
@@ -277,22 +278,39 @@ public class Controlador : MonoBehaviour
 
                         AlterarPosicaoDeCamera('y', true, "Horizontal", "Vertical", false, 0, -1.0f);
 
-                        if (posicao_da_camera.y > ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[0]).transform.position.y + 20.0f)
+                        if (posicao_da_camera.y > ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[0]).
+                            transform.position.y + 20.0f)
                         {
-                            posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[0]).transform.position.y + 20.0f;
+                            posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[0]).
+                                transform.position.y + 20.0f;
                         }
 
                         float limitacao = 5.0f;
                         if (modo_de_visualizacao == "Um Frame De Cada Vez em 3D") limitacao = -15.0f;
 
-                        if (posicao_da_camera.y < ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
-                                                    GetComponent<NovoLeitor2>().lista_de_backgrounds.Count - 2
-                                                    ]).transform.position.y + limitacao - 5.0f)
+                        if (GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count > 1)
                         {
-                            posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
-                                                    GetComponent<NovoLeitor2>().lista_de_backgrounds.Count - 2
-                                                    ]).transform.position.y + limitacao - 5.0f;
+                            if (posicao_da_camera.y < ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[
+                                                        GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 2
+                                                        ]).transform.position.y + limitacao - 5.0f)
+                            {
+                                posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[
+                                                        GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 2
+                                                        ]).transform.position.y + limitacao - 5.0f;
+                            }
+                        } else
+                        {
+                            if (posicao_da_camera.y < ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[
+                                                        GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 1
+                                                        ]).transform.position.y + 10.0f)
+                            {
+                                posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[
+                                                        GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 1
+                                                        ]).transform.position.y + 10.0f;
+                            }
                         }
+
+
 
                         FindObjectOfType<Camera>().transform.position = posicao_da_camera;
 
@@ -307,22 +325,37 @@ public class Controlador : MonoBehaviour
                     {
                         AlterarPosicaoDeCamera('y', false, "", "", false, 0, -7.0f, true, "a", "d");
 
-                        if (posicao_da_camera.y > ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[0]).transform.position.y + 20.0f)
+                        if (posicao_da_camera.y > ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[0]).transform.position.y + 20.0f)
                         {
-                            posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[0]).transform.position.y + 20.0f;
+                            posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[0]).transform.position.y + 20.0f;
                         }
 
                         float limitacao = 5.0f;
                         if (modo_de_visualizacao == "Um Frame De Cada Vez em 3D") limitacao = -15.0f;
 
-                        if (posicao_da_camera.y < ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
-                                                    GetComponent<NovoLeitor2>().lista_de_backgrounds.Count - 2
-                                                    ]).transform.position.y + limitacao - 5.0f)
+                        if (GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 1 > 1)
                         {
-                            posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[
-                                                    GetComponent<NovoLeitor2>().lista_de_backgrounds.Count - 2
-                                                    ]).transform.position.y + limitacao - 5.0f;
+                            if (posicao_da_camera.y < ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[
+                                                    GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 2
+                                                    ]).transform.position.y + limitacao - 5.0f)
+                            {
+                                posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[
+                                                        GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 2
+                                                        ]).transform.position.y + limitacao - 5.0f;
+                            }
+                        } else
+                        {
+                            if (posicao_da_camera.y < ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[
+                                                    GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 1
+                                                    ]).transform.position.y + 10.0f)
+                            {
+                                posicao_da_camera.y = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[
+                                                        GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 1
+                                                        ]).transform.position.y + 10.0f;
+                            }
                         }
+
+                        
 
                         FindObjectOfType<Camera>().transform.position = posicao_da_camera;
                     }
@@ -332,34 +365,52 @@ public class Controlador : MonoBehaviour
                 {
                     if (GetComponent<GuiTempo>().GetTempo() != get_tempo_anterior)
                     {
-                        if (get_tempo_anterior - 1 >= 0)
+                        int tempo_anterior = get_tempo_anterior;
+
+                        for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
                         {
-                            ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[get_tempo_anterior - 1]).
+                            GetComponent<NovoLeitor2>().qual_jogador = i;
+                            get_tempo_anterior = tempo_anterior;
+                            if ((get_tempo_anterior - 1 >= 0) && (get_tempo_anterior <=
+                                    GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 1))
+                            {
+                                ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[get_tempo_anterior - 1]).
+                                    GetComponent<LigaDesliga>().Desligar();
+                            }
+
+                            if (get_tempo_anterior <= GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 1)
+                            {
+                                ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[get_tempo_anterior]).
                                 GetComponent<LigaDesliga>().Desligar();
-                        }
-                        if (get_tempo_anterior > 500) Debug.Log(get_tempo_anterior);
-                        ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[get_tempo_anterior]).
-                            GetComponent<LigaDesliga>().Desligar();
-                        if (get_tempo_anterior + 1 <= GetComponent<NovoLeitor2>().lista_de_backgrounds.Count-1)
-                        {
-                            ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[get_tempo_anterior + 1]).
-                                GetComponent<LigaDesliga>().Desligar();
-                        }
+                            }
 
-                        get_tempo_anterior = GetComponent<GuiTempo>().GetTempo();
+                            if (get_tempo_anterior + 1 <= GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 1)
+                            {
+                                ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[get_tempo_anterior + 1]).
+                                    GetComponent<LigaDesliga>().Desligar();
+                            }
 
-                        if (get_tempo_anterior - 1 >= 0) {
-                            ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[get_tempo_anterior - 1]).
+                            get_tempo_anterior = GetComponent<GuiTempo>().GetTempo();
+
+                            if ((get_tempo_anterior - 1 >= 0) && (get_tempo_anterior <=
+                                    GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 1))
+                            {
+                                ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[get_tempo_anterior - 1]).
+                                    GetComponent<LigaDesliga>().Ligar();
+                            }
+
+                            if (get_tempo_anterior <= GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 1)
+                            {
+                                ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[get_tempo_anterior]).
                                 GetComponent<LigaDesliga>().Ligar();
-                        }
-                        ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[get_tempo_anterior]).
-                            GetComponent<LigaDesliga>().Ligar();
-                        if (get_tempo_anterior + 1 <= GetComponent<NovoLeitor2>().lista_de_backgrounds.Count-1)
-                        {
-                            ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[get_tempo_anterior + 1]).
-                                GetComponent<LigaDesliga>().Ligar();
-                        }
+                            }
 
+                            if (get_tempo_anterior + 1 <= GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 1)
+                            {
+                                ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[get_tempo_anterior + 1]).
+                                    GetComponent<LigaDesliga>().Ligar();
+                            }
+                        }
                     }
                 }
 
@@ -367,54 +418,81 @@ public class Controlador : MonoBehaviour
 
             if ((Input.GetButtonDown("2")) && (modo_de_visualizacao != "Um Frame De Cada Vez em 3D"))
             {
-                GetComponent<NovoLeitor2>().ConectarTodos();
+                
                 Mudanca_De_Modo_De_Visualizacao("Um Frame De Cada Vez em 3D");
 
-                GetComponent<NovoLeitor2>().PosicionarBackgrounds(20f);
+                for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
+                {
+                    GetComponent<NovoLeitor2>().qual_jogador = i;
+                    GetComponent<NovoLeitor2>().ConectarTodos();
+                    GetComponent<NovoLeitor2>().PosicionarBackgrounds(20f);
+                    //GetComponent<NovoLeitor2>().DesconectarTodos();
+                }
+
                 GetComponent<Camera>().clearFlags = CameraClearFlags.Skybox;
-                GetComponent<NovoLeitor2>().DesconectarTodos();
             }
 
             if ((Input.GetButtonDown("3")) && (modo_de_visualizacao != "Um Frame De Cada Vez em 2D"))
             {
-                GetComponent<NovoLeitor2>().ConectarTodos();
+                
                 Mudanca_De_Modo_De_Visualizacao("Um Frame De Cada Vez em 2D");
 
-                GetComponent<NovoLeitor2>().PosicionarBackgrounds(20f);
+                for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
+                {
+                    GetComponent<NovoLeitor2>().qual_jogador = i;
+                    GetComponent<NovoLeitor2>().ConectarTodos();
+                    GetComponent<NovoLeitor2>().PosicionarBackgrounds(20f);
+                    //GetComponent<NovoLeitor2>().DesconectarTodos();
+                }
+
                 GetComponent<Camera>().clearFlags = CameraClearFlags.Skybox;
-                //GetComponent<NovoLeitor2>().DesconectarTodos();
             }
 
             if ((Input.GetButtonDown("4")) && (modo_de_visualizacao != "Todos De Uma Vez em 3D"))
             {
-                GetComponent<NovoLeitor2>().ConectarTodos();
+                
                 Mudanca_De_Modo_De_Visualizacao("Todos De Uma Vez em 3D");
 
-                GetComponent<NovoLeitor2>().PosicionarBackgrounds(1f);
-                GetComponent<Camera>().clearFlags = CameraClearFlags.SolidColor;
+                // Gambiarra temporária para evitar problemas de posicionamento errado do primeiro jogador,
+                // em caso de dupla.
+
                 GetComponent<Camera>().backgroundColor = Color.black;
-                GetComponent<NovoLeitor2>().DesconectarTodos();
+
+                for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
+                {
+                    GetComponent<NovoLeitor2>().qual_jogador = i;
+                    GetComponent<NovoLeitor2>().ConectarTodos();
+                    GetComponent<NovoLeitor2>().PosicionarBackgrounds(1f);
+                    
+                    if (GetComponent<NovoLeitor2>().Ancora.activeSelf) GetComponent<NovoLeitor2>().DesconectarTodos();
+
+                    ArrayList lista_de_backs = GetComponent<NovoLeitor2>().Lista_de_backgrounds;
+                    int contagem = lista_de_backs.Count;
+                    int desligar = 0;
+                    for (int j = desligar; j < contagem; j++)
+                    {
+                        ((GameObject)lista_de_backs[j]).GetComponent<LigaDesliga>().Desligar();
+                    }
+                }
+
+                GetComponent<Camera>().clearFlags = CameraClearFlags.SolidColor;
             }
 
             if ((Input.GetButtonDown("5")) && (modo_de_visualizacao != "Heatmap"))
             {
-                GetComponent<NovoLeitor2>().ConectarTodos();
                 Mudanca_De_Modo_De_Visualizacao("Heatmap");
 
-                GetComponent<NovoLeitor2>().PosicionarBackgrounds(1f);
-                GetComponent<Camera>().clearFlags = CameraClearFlags.SolidColor;
                 GetComponent<Camera>().backgroundColor = Color.black;
-                GetComponent<NovoLeitor2>().DesconectarTodos();
-            }
 
-            if (Input.GetButtonDown("6"))
-            {
-                Transparencia0();
-            }
+                /*for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
+                {
+                    GetComponent<NovoLeitor2>().ConectarTodos();
+                    GetComponent<NovoLeitor2>().PosicionarBackgrounds(1f);
+                    
+                    GetComponent<NovoLeitor2>().DesconectarTodos();
+                }*/
 
-            if (Input.GetButtonDown("7"))
-            {
-                TransparenciaDeVoltaAoNormal(modo_de_visualizacao);
+                GetComponent<Camera>().clearFlags = CameraClearFlags.SolidColor;
             }
 
             if (tipo == "Bolhas")
@@ -426,7 +504,7 @@ public class Controlador : MonoBehaviour
 
             if (Input.GetButtonDown("Q"))
             {
-                UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+                MudaCenas.Fechar_Aplicacao();
             }
 
             //Esse código serve para fazer a Gui dos pontos funcionar.
@@ -454,21 +532,20 @@ public class Controlador : MonoBehaviour
 
     public void AtualizarValoresDePosicionamento(float posicaoy0)
     {
-        int pos = GetComponent<NovoLeitor2>().lista_de_backgrounds.Count / 2;
-
-        modos.AddCameraInitY("Um Frame De Cada Vez em 3D", posicaoy0);
-        modos.AddCameraInitY("Um Frame De Cada Vez em 2D", posicaoy0+10f);
-        modos.AddCameraInitY("Todos De Uma Vez em 3D", posicaoy0 + 10f);
+        modos.SetCameraInitY("Um Frame De Cada Vez em 3D", posicaoy0 + 20f);
+        modos.SetCameraInitY("Um Frame De Cada Vez em 2D", posicaoy0 + 20f);
+        modos.SetCameraInitY("Todos De Uma Vez em 3D", posicaoy0 + 20f);
 
         modos.AddCameraInitX("Todos De Uma Vez em 3D", 0f);
 
-        modos.AddCameraInitY("Heatmap", posicaoy0);
+        modos.SetCameraInitY("Heatmap", posicaoy0 + 1f);
     }
 
     public void Mudanca_De_Modo_De_Visualizacao(string modonovo, bool forcar = false)
     {
         if ((modo_de_visualizacao != modonovo) || (forcar == true))
         {
+
             Vector3 posicaonova = GetComponent<Camera>().transform.position;
             posicaonova.x = modos.GetCameraX(modonovo);
 
@@ -478,33 +555,48 @@ public class Controlador : MonoBehaviour
             if ((modo_de_visualizacao == "Todos De Uma Vez em 3D") || (modo_de_visualizacao == "Um Frame De Cada Vez em 2D"))
             {
                 modos.SetCameraInitZ(modo_de_visualizacao, posicaonova.z);
-                ArrayList lista_de_backs = GetComponent<NovoLeitor2>().lista_de_backgrounds;
-                int contagem = lista_de_backs.Count;
-                if (modo_de_visualizacao == "Um Frame De Cada Vez em 2D")
+
+                for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
                 {
-                    //GetComponent<NovoLeitor2>().DesconectarTodos();
+                    GetComponent<NovoLeitor2>().qual_jogador = i;
+                    ArrayList lista_de_backs = GetComponent<NovoLeitor2>().Lista_de_backgrounds;
+                    int contagem = lista_de_backs.Count;
+                    if (modo_de_visualizacao == "Um Frame De Cada Vez em 2D")
+                    {
+                        //GetComponent<NovoLeitor2>().DesconectarTodos();
+                    }
+                    else if (modo_de_visualizacao == "Todos De Uma Vez em 3D")
+                    {
+                        GetComponent<NovoLeitor2>().ConectarTodos();
+                    }
+
+                    for (int j = 0; j < contagem; j++)
+                    {
+                        ((GameObject)lista_de_backs[j]).GetComponent<LigaDesliga>().Ligar();
+                    }
                 }
 
-                for (int i = 0; i < contagem; i++)
-                {
-                    ((GameObject)lista_de_backs[i]).GetComponent<LigaDesliga>().Ligar();
-                }
             }
             if ((modonovo == "Todos De Uma Vez em 3D") || (modonovo == "Um Frame De Cada Vez em 2D"))
             {
                 posicaonova.z = modos.GetCameraInitZ(modonovo);
-                ArrayList lista_de_backs = GetComponent<NovoLeitor2>().lista_de_backgrounds;
-                int contagem = lista_de_backs.Count;
-                int desligar = 0;
-                if (modonovo == "Todos De Uma Vez em 3D") desligar = 0;
-                else if (modonovo == "Um Frame De Cada Vez em 2D")
+
+                for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
                 {
-                    //GetComponent<NovoLeitor2>().ConectarTodos();
-                    desligar = 1;
-                }
-                for (int i = desligar; i < contagem; i++)
-                {
-                    ((GameObject)lista_de_backs[i]).GetComponent<LigaDesliga>().Desligar();
+                    GetComponent<NovoLeitor2>().qual_jogador = i;
+                    ArrayList lista_de_backs = GetComponent<NovoLeitor2>().Lista_de_backgrounds;
+                    int contagem = lista_de_backs.Count;
+                    int desligar = 0;
+                    if (modonovo == "Todos De Uma Vez em 3D") desligar = 0;
+                    else if (modonovo == "Um Frame De Cada Vez em 2D")
+                    {
+                        //GetComponent<NovoLeitor2>().ConectarTodos();
+                        desligar = 1;
+                    }
+                    for (int j = desligar; j < contagem; j++)
+                    {
+                        ((GameObject)lista_de_backs[j]).GetComponent<LigaDesliga>().Desligar();
+                    }
                 }
 
             }
@@ -513,14 +605,17 @@ public class Controlador : MonoBehaviour
             GetComponent<Camera>().transform.position = posicaonova;
             GetComponent<Camera>().orthographic = modos.GetOrthographic(modonovo);
 
-            GetComponent<NovoLeitor2>().ControlarAlpha(modos.GetAlpha(modonovo));
-            GetComponent<NovoLeitor2>().GirarBackgrounds(modos.GetRotationChange(modonovo));
+            for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
+            {
+                GetComponent<NovoLeitor2>().qual_jogador = i;
+                GetComponent<NovoLeitor2>().ControlarAlpha(modos.GetAlpha(modonovo));
+                GetComponent<NovoLeitor2>().GirarBackgrounds(modos.GetRotationChange(modonovo));
+                GetComponent<NovoLeitor2>().AlterarLayer(modos.GetLayer(modonovo));
+                TransparenciaDoBackground(modos.GetVisibleBackgroundAlpha(modonovo));
+            }
 
             GetComponent<NovoLeitor2>().GirarCamera(modos.GetRotationChangeCamera(modonovo));
-            GetComponent<NovoLeitor2>().AlterarLayer(modos.GetLayer(modonovo));
-
-            TransparenciaDoBackground(modos.GetVisibleBackgroundAlpha(modonovo));
-
+            
             if (modonovo == "Um Frame De Cada Vez em 2D")
             {
                 get_tempo_anterior = GetComponent<GuiTempo>().GetTempo();
@@ -537,7 +632,6 @@ public class Controlador : MonoBehaviour
                 if (modo_de_visualizacao == "Um Frame De Cada Vez em 3D") GetComponent<GuiTempo>().DesativarGuiDoAutoMode();
                 else if (modo_de_visualizacao == "Um Frame De Cada Vez em 2D") GetComponent<GuiTempo>().AtivarGuiDoAutoMode();
                 GetComponent<GuiTempo>().RevelarGui();
-                
             }
             else { GetComponent<GuiTempo>().EsconderGui(); }
 
@@ -560,6 +654,8 @@ public class Controlador : MonoBehaviour
                 pos_rot_inicial_todos_de_uma_vez_em_3D = GetComponent<Camera>().transform.rotation;
                 pegar_valor_de_camera_todos_de_uma_vez_em_3D = false;
             }
+
+            AlteracaoDePosicionamentoDeJogadores();
 
         }
 
@@ -669,16 +765,6 @@ public class Controlador : MonoBehaviour
         return pos_tempo;
     }
 
-    void Transparencia0()
-    {
-        GetComponent<NovoLeitor2>().ControlarAlpha(0f);
-    }
-
-    void TransparenciaDeVoltaAoNormal(string modo)
-    {
-        GetComponent<NovoLeitor2>().ControlarAlpha(modos.GetAlpha(modo));
-    }
-
     public void MudarTransparenciaDosObjetos(float change)
     {
 
@@ -688,8 +774,8 @@ public class Controlador : MonoBehaviour
 
     private void LigarOuDesligarObjetos(bool ligar, bool tipo, string qual_tipo, bool tempo, int tempo_minimo, int tempo_maximo)
     {
-        int limit = GetComponent<NovoLeitor2>().lista_de_objetos.Count;
-        lista_de_objetos_a_ligar_ou_desligar = GetComponent<NovoLeitor2>().lista_de_objetos;
+        int limit = GetComponent<NovoLeitor2>().Lista_de_objetos.Count;
+        lista_de_objetos_a_ligar_ou_desligar = GetComponent<NovoLeitor2>().Lista_de_objetos;
 
         for (int i = 0; i < limit; i++)
         {
@@ -723,7 +809,7 @@ public class Controlador : MonoBehaviour
     private void LigarOuDesligarObjetosConsiderandoSobreposicao
                  (bool ligar, bool tipo, string qual_tipo, bool tempo, int tempo_minimo, int tempo_maximo)
     {
-        int limit = GetComponent<NovoLeitor2>().lista_de_objetos.Count;
+        int limit = GetComponent<NovoLeitor2>().Lista_de_objetos.Count;
         int qual_tempo;
 
         // variáveis usadas para evitar objetos ativos ignorando desligamento por tempo/tipo, quando ambos estão sendo
@@ -731,7 +817,7 @@ public class Controlador : MonoBehaviour
         int t_minimo; int t_maximo;
         int posicao_de_checagem_de_tipo_de_objeto;
 
-        lista_de_objetos_a_ligar_ou_desligar = GetComponent<NovoLeitor2>().lista_de_objetos;
+        lista_de_objetos_a_ligar_ou_desligar = GetComponent<NovoLeitor2>().Lista_de_objetos;
 
         for (int i = 0; i < limit; i++)
         {
@@ -805,19 +891,19 @@ public class Controlador : MonoBehaviour
     void MudarTransparenciaDeTipoEspecificoDeObjetos(string nome, float transparencia)
     {
 
-        int limit = GetComponent<NovoLeitor2>().lista_de_objetos.Count;
+        int limit = GetComponent<NovoLeitor2>().Lista_de_objetos.Count;
 
         for (int i = 0; i < limit; i++)
         {
             Color cor;
-            if (((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).GetComponent<Dados>().nome_do_objeto == nome)
+            if (((GameObject)GetComponent<NovoLeitor2>().Lista_de_objetos[i]).GetComponent<Dados>().nome_do_objeto == nome)
             {
-                cor = ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).
+                cor = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_objetos[i]).
                             GetComponent<MeshRenderer>().material.GetColor("_Color");
 
                 cor.a = transparencia;
 
-                ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).
+                ((GameObject)GetComponent<NovoLeitor2>().Lista_de_objetos[i]).
                             GetComponent<MeshRenderer>().material.SetColor("_Color", cor);
             }
         }
@@ -826,20 +912,20 @@ public class Controlador : MonoBehaviour
     void MudarTransparenciaDeObjetosDeEspacoDeTempoEspecifico(int tempo_minimo, int tempo_maximo, float transparencia)
     {
 
-        int limit = GetComponent<NovoLeitor2>().lista_de_objetos.Count;
+        int limit = GetComponent<NovoLeitor2>().Lista_de_objetos.Count;
 
         for (int i = 0; i < limit; i++)
         {
             Color cor;
-            int tempo = ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).GetComponent<Dados>().tempo;
+            int tempo = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_objetos[i]).GetComponent<Dados>().tempo;
             if ((tempo_minimo <= tempo) && (tempo <= tempo_maximo))
             {
-                cor = ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).
+                cor = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_objetos[i]).
                             GetComponent<MeshRenderer>().material.GetColor("_Color");
 
                 cor.a = transparencia;
 
-                ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).
+                ((GameObject)GetComponent<NovoLeitor2>().Lista_de_objetos[i]).
                             GetComponent<MeshRenderer>().material.SetColor("_Color", cor);
             }
         }
@@ -847,30 +933,30 @@ public class Controlador : MonoBehaviour
 
     void SetInteracaoObjetosDeEspacoDeTempo(int tempo_minimo, int tempo_maximo, bool e_interagivel)
     {
-        int limit = GetComponent<NovoLeitor2>().lista_de_objetos.Count;
+        int limit = GetComponent<NovoLeitor2>().Lista_de_objetos.Count;
 
         for (int i = 0; i < limit; i++)
         {
-            int tempo = ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).GetComponent<Dados>().tempo;
+            int tempo = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_objetos[i]).GetComponent<Dados>().tempo;
             if ((tempo_minimo <= tempo) && (tempo <= tempo_maximo))
             {
-                if (e_interagivel) ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).layer = 0;
-                else ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).layer = 2;
+                if (e_interagivel) ((GameObject)GetComponent<NovoLeitor2>().Lista_de_objetos[i]).layer = 0;
+                else ((GameObject)GetComponent<NovoLeitor2>().Lista_de_objetos[i]).layer = 2;
             }
         }
     }
 
     void SetInteracaoComTiposDeObjetos(string nome, bool e_interagivel)
     {
-        int limit = GetComponent<NovoLeitor2>().lista_de_objetos.Count;
+        int limit = GetComponent<NovoLeitor2>().Lista_de_objetos.Count;
 
         for (int i = 0; i < limit; i++)
         {
-            string nome_do_objeto = ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).GetComponent<Dados>().nome_do_objeto;
+            string nome_do_objeto = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_objetos[i]).GetComponent<Dados>().nome_do_objeto;
             if (nome_do_objeto == nome)
             {
-                if (e_interagivel) ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).layer = 0;
-                else ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).layer = 2;
+                if (e_interagivel) ((GameObject)GetComponent<NovoLeitor2>().Lista_de_objetos[i]).layer = 0;
+                else ((GameObject)GetComponent<NovoLeitor2>().Lista_de_objetos[i]).layer = 2;
             }
         }
     }
@@ -897,11 +983,13 @@ public class Controlador : MonoBehaviour
 
     void TransparenciaDoBackground(float trans)
     {
-        Color cor = ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[count - 1]).
+        int count = GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count;
+        Color cor = ((GameObject)GetComponent<NovoLeitor2>().
+            Lista_de_backgrounds[count - 1]).
                 GetComponent<MeshRenderer>().material.GetColor("_Color");
 
         cor.a = trans;
-        ((GameObject)GetComponent<NovoLeitor2>().lista_de_backgrounds[count - 1]).
+        ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[count - 1]).
             GetComponent<MeshRenderer>().material.SetColor("_Color", cor);
     }
 
@@ -936,9 +1024,9 @@ public class Controlador : MonoBehaviour
 
     private void MudancaDeCor(bool a, bool r, bool g, bool b, float change)
     {
-        for (int i = 0; i < GetComponent<NovoLeitor2>().lista_de_objetos.Count; i++)
+        for (int i = 0; i < GetComponent<NovoLeitor2>().Lista_de_objetos.Count; i++)
         {
-            Color cor = ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).GetComponent<MeshRenderer>().
+            Color cor = ((GameObject)GetComponent<NovoLeitor2>().Lista_de_objetos[i]).GetComponent<MeshRenderer>().
                 material.GetColor("_Color");
 
             if (a) cor.a += change;
@@ -946,7 +1034,7 @@ public class Controlador : MonoBehaviour
             if (g) cor.g += change;
             if (b) cor.b += change;
 
-            ((GameObject)GetComponent<NovoLeitor2>().lista_de_objetos[i]).GetComponent<MeshRenderer>().
+            ((GameObject)GetComponent<NovoLeitor2>().Lista_de_objetos[i]).GetComponent<MeshRenderer>().
                 material.SetColor("_Color", cor);
 
         }
@@ -977,6 +1065,101 @@ public class Controlador : MonoBehaviour
         if (qual_heatmap_mostrar >= GetComponent<NovoLeitor2>().GetQuantHeatmaps()) qual_heatmap_mostrar = 0;
     }
 
+    public void AlteracaoDePosicionamentoDeJogadores()
+    {
+        bool[] ativos = GetComponent<NovoLeitor2>().GetQuaisJogadoresEstaoAtivos();
+        
+        if (modo_de_visualizacao == "Um Frame De Cada Vez em 3D")
+        {
+
+            if (ativos[0] && !ativos[1])
+            {
+                GetComponent<NovoLeitor2>().qual_jogador = 0;
+                //GetComponent<NovoLeitor2>().Ancora.SetActive(true);
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesCentroUmDeCadaVez3D();
+                //GetComponent<NovoLeitor2>().Ancora.SetActive(false);
+                GetComponent<NovoLeitor2>().qual_jogador = 1;
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesDireitaUmDeCadaVez3D();
+            } else if (ativos[0] && ativos[1])
+            {
+                GetComponent<NovoLeitor2>().qual_jogador = 0;
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesEsquerdaUmDeCadaVez3D();
+                GetComponent<NovoLeitor2>().qual_jogador = 1;
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesDireitaUmDeCadaVez3D();
+            } else if (!ativos[0] && ativos[1])
+            {
+                GetComponent<NovoLeitor2>().qual_jogador = 0;
+                GetComponent<NovoLeitor2>().Ancora.SetActive(true);
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesEsquerdaUmDeCadaVez3D();
+                GetComponent<NovoLeitor2>().Ancora.SetActive(false);
+                GetComponent<NovoLeitor2>().qual_jogador = 1;
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesCentroUmDeCadaVez3D();
+            }
+
+        } else if (modo_de_visualizacao == "Um Frame De Cada Vez em 2D")
+        {
+
+            if (ativos[0] && !ativos[1])
+            {
+                GetComponent<NovoLeitor2>().qual_jogador = 0;
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesCentroUmDeCadaVez2D();
+            }
+            else if (ativos[0] && ativos[1])
+            {
+                GetComponent<NovoLeitor2>().qual_jogador = 0;
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesEsquerdaUmDeCadaVez2D();
+                GetComponent<NovoLeitor2>().qual_jogador = 1;
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesDireitaUmDeCadaVez2D();
+            }
+            else if (!ativos[0] && ativos[1]){
+                GetComponent<NovoLeitor2>().qual_jogador = 1;
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesCentroUmDeCadaVez2D();
+            }
+
+        } else if (modo_de_visualizacao == "Todos De Uma Vez em 3D")
+        {
+
+            if (ativos[0] && !ativos[1])
+            {
+                GetComponent<NovoLeitor2>().qual_jogador = 0;
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesCentroTodosDeUmaVez3D();
+            }
+            else if (ativos[0] && ativos[1])
+            {
+                GetComponent<NovoLeitor2>().qual_jogador = 0;
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesEsquerdaTodosDeUmaVez3D();
+                GetComponent<NovoLeitor2>().qual_jogador = 1;
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesDireitaTodosDeUmaVez3D();
+            }
+            else if (!ativos[0] && ativos[1]){
+                GetComponent<NovoLeitor2>().qual_jogador = 1;
+                GetComponent<NovoLeitor2>().ReposicionandoPosicoesCentroTodosDeUmaVez3D();
+            }
+
+        } else if (modo_de_visualizacao == "Heatmap")
+        {
+
+            if (ativos[0] && !ativos[1])
+            {
+                GetComponent<NovoLeitor2>().qual_jogador = 0;
+                GetComponent<NovoLeitor2>().ReposicionandoHeatmapCentro();
+            }
+            else if (ativos[0] && ativos[1])
+            {
+                GetComponent<NovoLeitor2>().qual_jogador = 0;
+                GetComponent<NovoLeitor2>().ReposicionandoHeatmapEsquerda();
+                GetComponent<NovoLeitor2>().qual_jogador = 1;
+                GetComponent<NovoLeitor2>().ReposicionandoHeatmapDireita();
+            }
+            else if (!ativos[0] && ativos[1])
+            {
+                GetComponent<NovoLeitor2>().qual_jogador = 1;
+                GetComponent<NovoLeitor2>().ReposicionandoHeatmapCentro();
+            }
+
+        }
+    }
+
     public bool GetAutoMode()
     {
         return auto_mode;
@@ -985,6 +1168,11 @@ public class Controlador : MonoBehaviour
     public bool GetAutoModeCustom()
     {
         return auto_mode_custom;
+    }
+
+    public BancoDeDadosModos GetBancoDeDadosModos()
+    {
+        return modos;
     }
 
     public void InicializacaoBolhas()
@@ -1011,8 +1199,9 @@ public class Controlador : MonoBehaviour
     {
 
         modos.Add("Um Frame De Cada Vez em 3D", 0.5f, 5f, 30f, 0f, 0f, false, 1f, new Vector3(0f, 0f, 330f),
-            new Vector3(90f, 0f, 0f), 1f, 2, "6 - Sem grids\n" + "7 - Com grids\n" +
-                                             parte_da_transparencia_dos_objetos +
+            new Vector3(90f, 0f, 0f), 1f, 2, -8.0f, 0.0f, 12.0f,
+            new Vector3(1f, 1f, 1f), new Vector3(1f, 1f, 1f),
+            new Vector3(0, 0f, 30f), new Vector3(0f, 0f, 330f), parte_da_transparencia_dos_objetos +
                                              "<- - Câmera recua\n" +
                                              "-> - Câmera avança(pode \n" +
                                              "atravessar grids)\n" +
@@ -1021,8 +1210,9 @@ public class Controlador : MonoBehaviour
                                              "Q - Voltar à tela inicial");
 
         modos.Add("Um Frame De Cada Vez em 2D", 2f, 0f, 10f, 0f, 0f, true, 1f, new Vector3(0f, 0f, 0f),
-            new Vector3(90f, 0f, 0f), 1f, 0, "6 - Sem grids\n" + "7 - Com grids\n" +
-                                             parte_da_transparencia_dos_objetos +
+            new Vector3(90f, 0f, 0f), 1f, 0, -4f, 0.0f, 4f,
+            new Vector3(0.5f, 1f, 0.5f), new Vector3(1f, 1f, 1f),
+            new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), parte_da_transparencia_dos_objetos +
                                              "<- - Posição anterior\n" +
                                              "-> - Posição seguinte\n" +
                                              "A - Anterior mais rápido\n" +
@@ -1036,7 +1226,9 @@ public class Controlador : MonoBehaviour
                                              "Q - Voltar à tela inicial");
 
         modos.Add("Todos De Uma Vez em 3D", 0.5f, 5f, 2f, 0f, 0f, false, 0f, new Vector3(0f, 0f, 0f),
-            new Vector3(90f, 0f, 0f), 0f, 2, parte_da_transparencia_dos_objetos +
+            new Vector3(90f, 0f, 0f), 0f, 2, -12.0f, 0.0f, 12.0f,
+            new Vector3(1f, 1f, 1f), new Vector3(1f, 1f, 1f),
+            new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), parte_da_transparencia_dos_objetos +
                                              "<- - Câmera recua\n" +
                                              "-> - Câmera avança\n" +
                                              "A - Recua mais rápido\n" +
@@ -1046,29 +1238,46 @@ public class Controlador : MonoBehaviour
                                              "Q - Tela inicial");
 
         modos.Add("Heatmap", 0f, 200f, 15f, 0f, 0f, true, 0f, new Vector3(0f, 0f, 0f),
-            new Vector3(90f, 0f, 0f), 1f, 2, "<- - Avança na lista de heatmaps\n" +
+            new Vector3(90f, 0f, 0f), 1f, 2, -4f, 0f, 4f,
+            new Vector3(0.67f, 1f, 0.5f), new Vector3(1.333333f, 1f, 1f),
+            new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), "<- - Avança na lista de heatmaps\n" +
                                              "-> - Retorna na lista de heatmaps\n" +
                                              "Q - Tela inicial");
 
-        GameObject background = (GameObject)(GetComponent<NovoLeitor2>().lista_de_backgrounds[0]);
+        for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
+        {
+            GetComponent<NovoLeitor2>().qual_jogador = i;
+
+            TransparenciaDoBackground(1f);
+            GetComponent<NovoLeitor2>().ConectarTodos();
+            
+        }
+
+        Mudanca_De_Modo_De_Visualizacao("Um Frame De Cada Vez em 3D", true);
+
+        for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
+        {
+            GetComponent<NovoLeitor2>().qual_jogador = i;
+            GetComponent<NovoLeitor2>().PosicionarBackgrounds(20f);
+            GetComponent<NovoLeitor2>().DesconectarTodos();
+        }
+
+        GetComponent<Camera>().clearFlags = CameraClearFlags.Skybox;
+
+        GetComponent<GuiModo>().MudarInstrucoes(instrucoes_genericas + modos.GetInstrucao(modo_de_visualizacao));
+        GetComponent<GuiModo>().RevelarGui();
+
+        AlteracaoDePosicionamentoDeJogadores();
+
+        GameObject background = (GameObject)(GetComponent<NovoLeitor2>().Lista_de_backgrounds[0]);
 
         AtualizarValoresDePosicionamento(background.transform.position.y);
 
         //gambiarra a ser corrigida posteriormente
         Vector3 pos = FindObjectOfType<Camera>().transform.position;
         pos.y = modos.GetCameraInitY(modo_de_visualizacao);
-        FindObjectOfType<Camera>().transform.position = pos;
-        //Daqui pra baixo, parte do FIT
-        count = GetComponent<NovoLeitor2>().lista_de_backgrounds.Count;
 
-        TransparenciaDoBackground(1f);
-        GetComponent<NovoLeitor2>().ConectarTodos();
-        Mudanca_De_Modo_De_Visualizacao("Um Frame De Cada Vez em 3D", true);
-        GetComponent<NovoLeitor2>().PosicionarBackgrounds(20f);
-        GetComponent<Camera>().clearFlags = CameraClearFlags.Skybox;
-        GetComponent<NovoLeitor2>().DesconectarTodos();
-        GetComponent<GuiModo>().MudarInstrucoes(instrucoes_genericas + modos.GetInstrucao(modo_de_visualizacao));
-        GetComponent<GuiModo>().RevelarGui();
+        FindObjectOfType<Camera>().transform.position = pos;
 
         usuario_pode_fazer_input = true;
 

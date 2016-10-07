@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.IO;
 using System;
+using Basicas;
 
 /// <summary>
 /// Classe derivada de GuiTelaDePreLoad, responsável por definir para a Scene de PreLoad do FIT o que o programa deve fazer.
 /// </summary>
 public class GuiTelaDePreLoadFIT : GuiTelaDePreLoad
 {
-
+    
     // Essa função diverge entre FIT e Bolhas, por conta da diferença do formato do log de ambos.
     protected override void EscolhaDeArquivo()
     {
@@ -32,30 +32,33 @@ public class GuiTelaDePreLoadFIT : GuiTelaDePreLoad
             control_line = theReader.ReadLine(); control_line = theReader.ReadLine(); control_line = theReader.ReadLine();
             control_line = theReader.ReadLine();
 
-            entradas_separadas = control_line.Split('=');
-
-            // == 4 porquê existem 4 termos por linha de dados no log do FIT.
-            if (entradas_separadas.Length == 7)
-            {
-                tempo_minimo = Convert.ToString(0);
-            }
-
             int contagem = 0;
 
-            do
+            if (control_line != null)
             {
-                line = control_line;
-                control_line = theReader.ReadLine();
-                contagem++;
+                entradas_separadas = control_line.Split('=');
 
-            } while (control_line != null);
+                // == 4 porquê existem 4 termos por linha de dados no log do FIT.
+                if (entradas_separadas.Length == 7)
+                {
+                    tempo_minimo = Convert.ToString(0);
+                }
+
+                
+
+                do
+                {
+                    line = control_line;
+                    control_line = theReader.ReadLine();
+                    contagem++;
+
+                } while (control_line != null);
+
+            }
 
             tempo_maximo = Convert.ToString(contagem);
 
-            theReader.Close();
-            theReader.Dispose();
-            fs.Close();
-            fs.Dispose();
+            lida_com_texto.FecharReaders(fs, theReader);
 
             pegar_endereco_do_log.CriarIniDeUltimoLogChecado(endereco);
         }
@@ -65,7 +68,7 @@ public class GuiTelaDePreLoadFIT : GuiTelaDePreLoad
     {
         lida_com_erros_endereco_de_log.valor_de_comparacao_de_tipo_de_log = "[Mode FIT]";
         titulo = "Escolha de Log do FIT\n" + "e Tempo Carregado do Log";
-        toolbarStrings = new string[] { "Escolher Log", "Escolher Posições Iniciais", "Visualizar Log", "Retornar Para Tela Título" };
+        toolbarStrings = new string[] { "Escolher Log", "Escolher Posições Iniciais", "Selecionar Dados", "Retornar Para Tela Título" };
     }
 
     protected override void DesenharTelaDePreLoad()
@@ -133,7 +136,7 @@ public class GuiTelaDePreLoadFIT : GuiTelaDePreLoad
             case 3:
                 pd = FindObjectOfType<PassadorDeDados>();
                 pd.Destruir();
-                UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+                MudaCenas.MudarCenaPara_Tela_Inicial();
                 break;
             default:
                 break;
@@ -142,8 +145,7 @@ public class GuiTelaDePreLoadFIT : GuiTelaDePreLoad
 
     protected override void IrParaLoad()
     {
-        // Vai pra Scene "Version FIT 3"
-        UnityEngine.SceneManagement.SceneManager.LoadScene(3);
+        MudaCenas.MudarCenaPara_Selecao_Fit();
     }
 
     // Use this for initialization

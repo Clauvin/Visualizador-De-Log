@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using Basicas;
 
@@ -24,6 +23,9 @@ public class GuiHeatmap : GuiPadrao2
     public List<DadosGUIHeatMap> dados;
     public string[] lista_de_objetos;
     protected DadosGUIHeatMap infoheatmap;
+    protected Vector2 scrollViewVector = Vector2.zero;
+    protected float largura_da_janela;
+    protected float altura_da_janela;
 
     Rect posicao_movel;
 

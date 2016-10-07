@@ -1,6 +1,7 @@
-﻿using UnityEngine;
-using System.Collections;
-
+﻿/// <summary>
+/// Classe responsável por visualizar quais tipos de objetos do FIT estão visíveis, quais não
+/// e permite ao usuário alterar isso.
+/// </summary>
 public class GuiFITVisualizarTipos : GuiVisualizarTipos
 {
 

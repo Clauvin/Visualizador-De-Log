@@ -11,24 +11,164 @@ using System.Collections.Generic;
 public class NovoLeitor2 : MonoBehaviour
 {
 
+    // Arraylist de ObjetosDeUmJogadorFIT
+    public ObjetosDeJogadoresFIT objs_jogadores_fit;
+
     protected BancoDeDadosBolhas bd_bolhas;
-    protected BancoDeDadosFIT bd_fit;
+
     protected Vector2 resolucao;
+
+    /// <summary>
+    /// Guarda o objeto base a ser instanciado para cada posição de um personagem.
+    /// </summary>
     protected ParaVisualizacao<GameObject> objetos;
+    
+    /// <summary>
+    /// Guarda os materiais a serem instanciados e colocados nos objetos.
+    /// </summary>
     protected ParaVisualizacao<Material> materiais;
 
+    /// <summary>
+    /// Guarda as texturas a serem colocadas nos materiais.
+    /// </summary>
     public ParaVisualizacao<Texture2D> texturas;
+
+    /// <summary>
+    /// Guarda as texturas a serem colocadas nos materiais para representar que um objeto foi selecionado.
+    /// </summary>
     public ParaVisualizacao<Texture2D> texturas_selecionadas;
 
+    
     Pintar pintar;
-    public ArrayList lista_de_objetos;
-    public ArrayList lista_de_backgrounds;
+    public int qual_jogador = 0;
+
+    private ArrayList lista_de_objetos;
+    public ArrayList Lista_de_objetos
+    {
+        get
+        {
+            if (qual_leitor == "FIT")
+            {
+                return objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).lista_de_objetos;
+            }
+            else if (qual_leitor == "Bolhas")
+            {
+                return lista_de_objetos;
+            }
+            else return null;
+        }
+
+        set
+        {
+            if (qual_leitor == "FIT")
+            {
+                objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).lista_de_objetos = value;
+            }
+            else if (qual_leitor == "Bolhas")
+            {
+                lista_de_objetos = value;
+            }
+            else Debug.Log("NovoLeitor2.qual_leitor está com valor diferente de Fit e Bolhas.");
+        }
+    }
+
+    private ArrayList lista_de_backgrounds;
+
+    public ArrayList Lista_de_backgrounds
+    {
+        get
+        {
+            if (qual_leitor == "FIT")
+            {
+                return objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).lista_de_backgrounds;
+            }
+            else if (qual_leitor == "Bolhas")
+            {
+                return lista_de_backgrounds;
+            }
+            else return null;
+        }
+
+        set
+        {
+            if (qual_leitor == "FIT")
+            {
+                objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).lista_de_backgrounds = value;
+            }
+            else if (qual_leitor == "Bolhas")
+            {
+                lista_de_backgrounds = value;
+            }
+            else Debug.Log("NovoLeitor2.qual_leitor está com valor diferente de Fit e Bolhas.");
+        }
+    }
+
+    private ArrayList matrizes_dos_heatmaps;
+
+    protected ArrayList Matrizes_dos_heatmaps
+    {
+        get
+        {
+            if (qual_leitor == "FIT")
+            {
+                return objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).matrizes_dos_heatmaps;
+            }
+            else if (qual_leitor == "Bolhas")
+            {
+                return matrizes_dos_heatmaps;
+            }
+            else return null;
+        }
+
+        set
+        {
+            if (qual_leitor == "FIT")
+            {
+                objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).matrizes_dos_heatmaps = value;
+            }
+            else if (qual_leitor == "Bolhas")
+            {
+                matrizes_dos_heatmaps = value;
+            }
+            else Debug.Log("NovoLeitor2.qual_leitor está com valor diferente de Fit e Bolhas.");
+        }
+    }
+
     protected string modo_fit;
 
-    protected ArrayList matrizes_dos_heatmaps;
+    
     public int[] numeros_de_cores;
 
     GameObject heatmap;
+
+    public GameObject Heatmap
+    {
+        get
+        {
+            if (qual_leitor == "FIT")
+            {
+                return objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).heatmap;
+            }
+            else if (qual_leitor == "Bolhas")
+            {
+                return heatmap;
+            }
+            else return null;
+        }
+
+        set
+        {
+            if (qual_leitor == "FIT")
+            {
+                objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).heatmap = value;
+            }
+            else if (qual_leitor == "Bolhas")
+            {
+                heatmap = value;
+            }
+            else Debug.Log("NovoLeitor2.qual_leitor está com valor diferente de Fit e Bolhas.");
+        }
+    }
 
     protected PegarEnderecoDeLog pegar_endereco_de_log;
 
@@ -41,10 +181,58 @@ public class NovoLeitor2 : MonoBehaviour
 
     private string qual_leitor;
 
+    protected LidaComTexto lida_com_texto = new LidaComTexto();
+
     // No caso, é mesmo um list que guarda lists de Vector2.
     // No caso, cada list<Vector2> são as posições iniciais para um mapa do FIT.
     // O primeiro é o mapa 1, o segundo é o mapa 2, etc.
     List<List<Vector2>> posicoes_iniciais_de_personagens_nos_mapas_do_FIT;
+
+    int heatmaps;
+
+    public int Heatmaps
+    {
+        get
+        {
+            return heatmaps;
+        }
+
+        set
+        {
+            heatmaps = value;
+        }
+    }
+
+    private GameObject ancora;
+
+    public GameObject Ancora
+    {
+        get
+        {
+            if (qual_leitor == "FIT")
+            {
+                return objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).ancora_dos_dados;
+            }
+            else if (qual_leitor == "Bolhas")
+            {
+                return ancora;
+            }
+            else return null;
+        }
+
+        set
+        {
+            if (qual_leitor == "FIT")
+            {
+                objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).ancora_dos_dados= value;
+            }
+            else if (qual_leitor == "Bolhas")
+            {
+                ancora = value;
+            }
+            else Debug.Log("NovoLeitor2.qual_leitor está com valor diferente de Fit e Bolhas.");
+        }
+    }
 
     public void StartFIT()
     {
@@ -105,10 +293,11 @@ public class NovoLeitor2 : MonoBehaviour
         nomes_e_numeros_de_objetos_do_bolhas.Add("Nuvem", 4);
     }
 
-    public bool LoadStuffFIT(int instante_minimo = 0, int instante_maximo = int.MaxValue)
+    public bool LoadStuffSelecaoFIT(int instante_minimo = 0, int instante_maximo = int.MaxValue)
     {
+
         //number for number of HeatMaps
-        int heatmaps = 1;
+        Heatmaps = 0;
 
         // Handle any problems that might arise when reading the text
         string line;
@@ -156,12 +345,9 @@ public class NovoLeitor2 : MonoBehaviour
 
         } while (line != null);
 
-        theReader.Close();
-        theReader.Dispose();
-        fs.Close();
-        fs.Dispose();
+        lida_com_texto.FecharReaders(fs, theReader);
 
-        bd_fit = new BancoDeDadosFIT();
+        objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit = new BancoDeDadosFIT();
         // Create a new StreamReader, tell it which file to read and what encoding the file
         // was saved as
         fs = new FileStream(pegar_endereco_de_log.endereco_de_arquivo[0], FileMode.Open);
@@ -174,12 +360,11 @@ public class NovoLeitor2 : MonoBehaviour
         int personagem_atual = -1;
         bool checagem_de_acao_do_jogador = true;
         List<List<Vector2>> posicoes_atuais_de_personagens_nos_mapas_do_FIT =
-            posicoes_iniciais_de_personagens_nos_mapas_do_FIT;
+                            posicoes_iniciais_de_personagens_nos_mapas_do_FIT;
         int checando_instante_do_log = 0;
 
         // Part 2: reads the game events.
         // While there's lines left in the text file, do this:
-
 
         do
         {
@@ -208,7 +393,7 @@ public class NovoLeitor2 : MonoBehaviour
 
                     entry_time = entries[6].Split(':');
                     // entry_time = Time | 1
-                    
+
                     if ((instante_minimo <= checando_instante_do_log) && (checando_instante_do_log <= instante_maximo))
                     {
 
@@ -220,7 +405,7 @@ public class NovoLeitor2 : MonoBehaviour
                         input = Int32.Parse(entries[5].Split(':')[1]);
 
                         if (Int32.Parse(entry_nivel[1]) - 1 != estagio_atual) personagem_atual = 0;
-                        estagio_atual = Int32.Parse(entry_nivel[1])-1;
+                        estagio_atual = Int32.Parse(entry_nivel[1]) - 1;
 
                         for (int i = 0; i < posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual].Count; i++)
                         {
@@ -265,7 +450,8 @@ public class NovoLeitor2 : MonoBehaviour
 
                             }
 
-                            bd_fit.Add(checando_instante_do_log, Int32.Parse(entry_time[1]), i + 1,
+                            objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.Add(checando_instante_do_log,
+                                Int32.Parse(entry_time[1]), Int32.Parse(entry_nivel[1]), i + 1,
                                 (int)posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i].x,
                                 (int)posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i].y,
                                 Int32.Parse(entry_tempo_do_servidor[1]), entry_nome_do_jogador[1],
@@ -281,7 +467,7 @@ public class NovoLeitor2 : MonoBehaviour
                             // lemos 2 em entry_char, colocamos mais um, temos três, e por aí vai.
 
                             // Mas sinceramente eu posso não fazer isso e só pegar do vetor de nomes do FIT...
-                            if (i == heatmaps) heatmaps++;
+                            if (i == Heatmaps) Heatmaps++;
 
                         }
 
@@ -292,48 +478,60 @@ public class NovoLeitor2 : MonoBehaviour
 
                 }
 
-                #if (DEBUG)
+#if (DEBUG)
 
                 else
                 {
                     Debug.Log("NovoLeitor2.LoadStuff - Linha não tinha sete elementos, tinha " + entries.GetLength(0) + ".");
                 }
 
-                #endif
+#endif
 
             }
         } while (line != null);
 
-        theReader.Close();
-        theReader.Dispose();
-        fs.Close();
-        fs.Dispose();
+        lida_com_texto.FecharReaders(fs, theReader);
 
-        for (int i = 0; i < heatmaps; i++)
-        {
-            matrizes_dos_heatmaps.Add(new HeatMap());
-        }
-        numeros_de_cores = new int[heatmaps];
+        //Com isso, o último heatmap, do último personagem, não vai sumir.
+        if (Heatmaps > 2) Heatmaps++;
 
         return true;
 
+    }
+
+    public void InicializarHeatmaps()
+    {
+        for (int i = 0; i < Heatmaps; i++)
+        {
+            Matrizes_dos_heatmaps.Add(new HeatMap());
+        }
+        numeros_de_cores = new int[Heatmaps];
     }
 
     public void TestMultiplePlayers()
     {
         List<BancoDeDadosFIT> bds_de_jogadores = new List<BancoDeDadosFIT>();
 
-        for(int i = 0; i < bd_fit.GetQuantidadeDeEntradas(); i++)
+        for(int i = 0; i < objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetQuantidadeDeEntradas(); i++)
         {
-            while (bd_fit.GetIdDoJogador(i) > bds_de_jogadores.Count){
+            while (objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).
+                    bd_fit.GetIdDoJogador(i) > bds_de_jogadores.Count){
 
                 bds_de_jogadores.Add(new BancoDeDadosFIT());
 
             }
 
-            bds_de_jogadores[bd_fit.GetIdDoJogador(i) - 1].Add(bd_fit.GetInstante(i), bd_fit.GetTempo(i), bd_fit.GetPersonagem(i),
-                                                             bd_fit.GetGridX(i), bd_fit.GetGridY(i), bd_fit.GetTempoDeServidor(i),
-                                                             bd_fit.GetNomeDoJogador(i), bd_fit.GetIdDoJogador(i), bd_fit.GetModoDeJogo(i));
+            bds_de_jogadores[objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetIdDoJogador(i) - 1].Add(
+                objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetInstante(i),
+                objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetTempo(i),
+                objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetNivel(i),
+                objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetPersonagem(i),
+                objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetGridX(i),
+                objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetGridY(i),
+                objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetTempoDeServidor(i),
+                objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetNomeDoJogador(i),
+                objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetIdDoJogador(i),
+                objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetModoDeJogo(i));
 
 
         }
@@ -344,7 +542,7 @@ public class NovoLeitor2 : MonoBehaviour
     {
         //number of HeatMaps
         //no caso do Bolhas, 1 + Mouse mais 4 objetos = 6
-        int heatmaps = 1 + lista_de_nomes_de_objetos_do_bolhas.GetUpperBound(0) + 1;
+        Heatmaps = 1 + lista_de_nomes_de_objetos_do_bolhas.GetUpperBound(0) + 1;
 
         // Handle any problems that might arise when reading the text
         string line;
@@ -463,26 +661,21 @@ public class NovoLeitor2 : MonoBehaviour
             }
         } while (line != null);
 
-        theReader.Close();
-        theReader.Dispose();
-        fs.Close();
-        fs.Dispose();
+        lida_com_texto.FecharReaders(fs, theReader);
 
-        for (int i = 0; i < heatmaps; i++)
-        {
-            matrizes_dos_heatmaps.Add(new HeatMap());
-        }
-        numeros_de_cores = new int[heatmaps];
+        InicializarHeatmaps();
 
         return true;
     }
 
     public bool PrintStuffFIT()
     {
-        for (int i = 0; i < bd_fit.GetQuantidadeDeEntradas(); i++)
+        for (int i = 0; i < objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetQuantidadeDeEntradas(); i++)
         {
-            Debug.Log(bd_fit.GetTempo(i) + " " + bd_fit.GetPersonagem(i) + " " +
-                      bd_fit.GetGridX(i) + " " + bd_fit.GetGridY(i));
+            Debug.Log(objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetTempo(i) + " " + 
+                      objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetPersonagem(i) + " " +
+                      objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetGridX(i) + " " +
+                      objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetGridY(i));
         }
         return true;
 
@@ -534,42 +727,36 @@ public class NovoLeitor2 : MonoBehaviour
 
         material_background.mainTexture = (Texture)Instantiate(Resources.Load("Texturas/Grid"));
 
-
-        // Lê e organiza todos os dados do log do FIT.
-        for (int j = 0; j < matrizes_dos_heatmaps.Count; j++)
-        {
-            ((HeatMap)matrizes_dos_heatmaps[j]).AlterarValoresDeTamanhoDeHeatmap(20, 15);
-            ((HeatMap)matrizes_dos_heatmaps[j]).ReadPointsFIT(bd_fit, j);
-            ((HeatMap)matrizes_dos_heatmaps[j]).AllTheDifferentPoints();
-            ((HeatMap)matrizes_dos_heatmaps[j]).OrganizePoints();
-            ((HeatMap)matrizes_dos_heatmaps[j]).FillingTheDictionary();
-            ((HeatMap)matrizes_dos_heatmaps[j]).PaintingTheHeatmap();
-            numeros_de_cores[j] = ((HeatMap)matrizes_dos_heatmaps[j]).HowManyPoints();
-        }
+        // Cria o Heatmap
+        //PreenchedorDeHeatmapsFIT();
 
         criar_background = true;
         fechar_background = false;
 
         // Para cada objeto...
-        for (i = 0; i < bd_fit.GetQuantidadeDeEntradas(); i++)
+
+        for (i = 0; i < objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetQuantidadeDeEntradas(); i++)
         {
             // Controle de quando criar um background novo ou
             // não criá-lo. Backgrounds novos são criados, um para cada posição no tempo diferente.
-            if ((i != bd_fit.GetQuantidadeDeEntradas() - 1) && (i != 0))
+            if ((i != objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetQuantidadeDeEntradas() - 1) && (i != 0))
             {
 
-                if (bd_fit.GetPersonagem(i) >= bd_fit.GetPersonagem(i + 1))
+                if (objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetPersonagem(i) >=
+                    objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetPersonagem(i + 1))
                 {
                     fechar_background = true;
                 }
-                if (bd_fit.GetPersonagem(i) <= bd_fit.GetPersonagem(i - 1))
+                if (objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetPersonagem(i) <=
+                    objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetPersonagem(i - 1))
                 {
                     criar_background = true;
                 }
             }
-            else if (i == bd_fit.GetQuantidadeDeEntradas() - 1)
+            else if (i == objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetQuantidadeDeEntradas() - 1)
             {
-                if (bd_fit.GetPersonagem(i) <= bd_fit.GetPersonagem(i - 1))
+                if (objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetPersonagem(i) <=
+                    objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetPersonagem(i - 1))
                 {
                     criar_background = true;
                 }
@@ -584,10 +771,14 @@ public class NovoLeitor2 : MonoBehaviour
             objeto.AddComponent<AoSerClicadoFIT>();
             objeto.AddComponent<LigaDesliga>();
 
-            objeto.name = bd_fit.GetTempo(i).ToString() + " " + bd_fit.GetPersonagem(i).ToString() + " " +
-                bd_fit.GetGridX(i).ToString() + " " + bd_fit.GetGridY(i).ToString();
+            objeto.name = objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetNomeDoJogador(i) + " " +
+                objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetTempo(i).ToString() + " " +
+                objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetPersonagem(i).ToString() + " " +
+                objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetGridX(i).ToString() + " " +
+                objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetGridY(i).ToString();
 
-            material_do_create = Instantiate(materiais.Get(bd_fit.GetPersonagem(i).ToString()));
+            material_do_create = Instantiate(materiais.Get(objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).
+                                             bd_fit.GetPersonagem(i).ToString()));
 
             // Essencialmente, materiais guardam texturas, que é o que queremos.
             // Foi um pouco de exagero fazer um material pra cada objeto, mas
@@ -606,12 +797,13 @@ public class NovoLeitor2 : MonoBehaviour
             // Ponto já criado, agora adicionar dados a ele
             AddDados(objeto, i);
 
-            lista_de_objetos.Add(objeto);
+            Lista_de_objetos.Add(objeto);
 
             // Criando background para os pontos
-            if (criar_background) {
+            if (criar_background)
+            {
 
-                background = CriarBackground(background, material_background); 
+                background = CriarBackground(background, material_background);
 
             }
 
@@ -623,7 +815,7 @@ public class NovoLeitor2 : MonoBehaviour
             if (criar_background)
             {
                 background = ColocarDadosEmBackground(background, i);
-                lista_de_backgrounds.Add(background);                
+                Lista_de_backgrounds.Add(background);
             }
 
             // Passar os valores de x, y e tempo para a posição de objetos
@@ -648,6 +840,7 @@ public class NovoLeitor2 : MonoBehaviour
             if (fechar_background)
             {
                 background.GetComponent<Conector>().Conectar();
+                background.name = background.GetComponent<Dados>().qual_jogador + " - Background - " + i;
             }
 
             criar_background = false;
@@ -655,12 +848,48 @@ public class NovoLeitor2 : MonoBehaviour
 
         }
 
+        Ancora = Instantiate(Resources.Load<GameObject>("Objetos/Ancora de Movimentacao"));
+        Ancora.name = "Ancora";
+        ConectarTodosAAncora();
+        objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).ancora_dos_dados = Ancora;
+        Ancora.name = objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetNomeDoJogador(0) + " " + Ancora.name;
+
         AjeitandoACamera(new_pos_camera, a_camera);
 
         AjeitandoOHeatmap(material_heatmap);
 
         GetComponent<Controlador>().MudarTransparenciaDosObjetos(0.2f);
 
+
+
+    }
+
+    protected void PreenchedorDeHeatmapsFIT()
+    {
+        LendoPontosDeHeatmapsFIT();
+        OrganizacaoDePontosEPinturaDeHeatmapsFIT();
+    }
+
+    protected void LendoPontosDeHeatmapsFIT()
+    {
+        for (int j = 0; j < Matrizes_dos_heatmaps.Count; j++)
+        {
+            ((HeatMap)Matrizes_dos_heatmaps[j]).AlterarValoresDeTamanhoDeHeatmap(20, 15);
+            ((HeatMap)Matrizes_dos_heatmaps[j]).ReadPointsFIT(objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit,
+                                                              j);
+            
+        }
+    }
+
+    protected void OrganizacaoDePontosEPinturaDeHeatmapsFIT()
+    {
+        for (int j = 0; j < Matrizes_dos_heatmaps.Count; j++)
+        {
+            ((HeatMap)Matrizes_dos_heatmaps[j]).OrganizePoints();
+            ((HeatMap)Matrizes_dos_heatmaps[j]).FillingTheDictionary();
+            ((HeatMap)Matrizes_dos_heatmaps[j]).PaintingTheHeatmap();
+            numeros_de_cores[j] = ((HeatMap)Matrizes_dos_heatmaps[j]).HowManyPoints();
+        }
     }
 
     public void CreateStuffBolhas()
@@ -690,16 +919,16 @@ public class NovoLeitor2 : MonoBehaviour
         material_background.mainTexture = (Texture)Instantiate(Resources.Load("Texturas/Fundo Bolhas Desenhado"));
 
         // Lê todos os dados do log do Bolhas...
-        for (int j = 0; j < matrizes_dos_heatmaps.Count; j++)
+        for (int j = 0; j < Matrizes_dos_heatmaps.Count; j++)
         {
-            ((HeatMap)matrizes_dos_heatmaps[j]).AlterarValoresDeTamanhoDeHeatmap(800, 600);
-            if (j == 0)  ((HeatMap)matrizes_dos_heatmaps[j]).ReadPointsBolhas(bd_bolhas, "Todos");
-            else ((HeatMap)matrizes_dos_heatmaps[j]).ReadPointsBolhas(bd_bolhas, lista_de_nomes_de_objetos_do_bolhas[j-1]);
-            ((HeatMap)matrizes_dos_heatmaps[j]).AllTheDifferentPoints();
-            ((HeatMap)matrizes_dos_heatmaps[j]).OrganizePoints();
-            ((HeatMap)matrizes_dos_heatmaps[j]).FillingTheDictionary();
-            ((HeatMap)matrizes_dos_heatmaps[j]).PaintingTheHeatmap();
-            numeros_de_cores[j] = ((HeatMap)matrizes_dos_heatmaps[j]).HowManyPoints();
+            ((HeatMap)Matrizes_dos_heatmaps[j]).AlterarValoresDeTamanhoDeHeatmap(800, 600);
+            if (j == 0)  ((HeatMap)Matrizes_dos_heatmaps[j]).ReadPointsBolhas(bd_bolhas, "Todos");
+            else ((HeatMap)Matrizes_dos_heatmaps[j]).ReadPointsBolhas(bd_bolhas, lista_de_nomes_de_objetos_do_bolhas[j-1]);
+            ((HeatMap)Matrizes_dos_heatmaps[j]).AllTheDifferentPoints();
+            ((HeatMap)Matrizes_dos_heatmaps[j]).OrganizePoints();
+            ((HeatMap)Matrizes_dos_heatmaps[j]).FillingTheDictionary();
+            ((HeatMap)Matrizes_dos_heatmaps[j]).PaintingTheHeatmap();
+            numeros_de_cores[j] = ((HeatMap)Matrizes_dos_heatmaps[j]).HowManyPoints();
         }
 
         tempo = bd_bolhas.GetTempo(0);
@@ -752,7 +981,7 @@ public class NovoLeitor2 : MonoBehaviour
             // Ponto já criado, agora adicionar dados a ele
             AddDados(objeto, i);
 
-            lista_de_objetos.Add(objeto);
+            Lista_de_objetos.Add(objeto);
 
             //criando background para o par de pontos
             if (novo_tempo)
@@ -770,7 +999,7 @@ public class NovoLeitor2 : MonoBehaviour
             if (novo_tempo)
             {
                 background = ColocarDadosEmBackground(background, i);
-                lista_de_backgrounds.Add(background);
+                Lista_de_backgrounds.Add(background);
             }
 
             objeto.transform.localScale = new Vector3(texturas.Get(bd_bolhas.GetQualObjeto(i).ToString()).width / resolucao.x,
@@ -816,22 +1045,22 @@ public class NovoLeitor2 : MonoBehaviour
 
     public void ControlarAlpha(float alpha)
     {
-        for (int i = 0; i < lista_de_backgrounds.Count; i++)
+        for (int i = 0; i < Lista_de_backgrounds.Count; i++)
         {
-            Color cor = ((GameObject)lista_de_backgrounds[i]).GetComponent<MeshRenderer>().material.GetColor("_Color");
+            Color cor = ((GameObject)Lista_de_backgrounds[i]).GetComponent<MeshRenderer>().material.GetColor("_Color");
                
             cor.a = alpha;
 
-            ((GameObject)lista_de_backgrounds[i]).GetComponent<MeshRenderer>().material.SetColor("_Color", cor);
+            ((GameObject)Lista_de_backgrounds[i]).GetComponent<MeshRenderer>().material.SetColor("_Color", cor);
         }
     }
 
     public void GirarBackgrounds(Vector3 coordenadas)
     {
-        for (int i = 0; i < lista_de_backgrounds.Count; i++)
+        for (int i = 0; i < Lista_de_backgrounds.Count; i++)
         {
-            ((GameObject)lista_de_backgrounds[i]).transform.rotation = Quaternion.identity;
-            ((GameObject)lista_de_backgrounds[i]).transform.Rotate(coordenadas);
+            ((GameObject)Lista_de_backgrounds[i]).transform.rotation = Quaternion.identity;
+            ((GameObject)Lista_de_backgrounds[i]).transform.Rotate(coordenadas);
         }
     }
 
@@ -843,40 +1072,49 @@ public class NovoLeitor2 : MonoBehaviour
 
     public void AlterarLayer(int alt)
     {
-        for (int i = 0; i < lista_de_backgrounds.Count; i++)
+        for (int i = 0; i < Lista_de_backgrounds.Count; i++)
         {
-            ((GameObject)lista_de_backgrounds[i]).GetComponent<Conector>().NoLayer(alt);
+            ((GameObject)Lista_de_backgrounds[i]).GetComponent<Conector>().NoLayer(alt);
         }
     }
 
     public void PosicionarBackgrounds(float dist)
     {
-        float yback0 = ((GameObject)lista_de_backgrounds[0]).transform.position.y;
+        float yback0 = ((GameObject)Lista_de_backgrounds[0]).transform.position.y;
         Vector3 pos;
 
-        for (int i = 1; i < lista_de_backgrounds.Count; i++)
+        for (int i = 1; i < Lista_de_backgrounds.Count; i++)
         {
             yback0 -= dist;
-            pos = ((GameObject)lista_de_backgrounds[i]).transform.position;
+            pos = ((GameObject)Lista_de_backgrounds[i]).transform.position;
             pos.y = yback0;
-            ((GameObject)lista_de_backgrounds[i]).transform.position = pos;
+            ((GameObject)Lista_de_backgrounds[i]).transform.position = pos;
+        }
+    }
+
+    public void ConectarTodosAAncora()
+    {
+        for (int j = 0; j < Lista_de_backgrounds.Count; j++)
+        {
+            GameObject background = (GameObject)Lista_de_backgrounds[j];
+            background.transform.parent = Ancora.transform;
         }
     }
 
     public void ConectarTodos()
     {
-        for (int j = 0; j < lista_de_backgrounds.Count; j++)
+        for (int j = 0; j < Lista_de_backgrounds.Count; j++)
         {
-            GameObject background = (GameObject)lista_de_backgrounds[j];
+            GameObject background = (GameObject)Lista_de_backgrounds[j];
             background.GetComponent<Conector>().Conectar();
         }
     }
 
     public void DesconectarTodos()
     {
-        for (int j = 0; j < lista_de_backgrounds.Count; j++)
+        for (int j = 0; j < Lista_de_backgrounds.Count; j++)
         {
-            GameObject background = (GameObject)lista_de_backgrounds[j];
+            GameObject background = (GameObject)Lista_de_backgrounds[j];
             background.GetComponent<Conector>().Desconectar();
         }
     }
@@ -891,8 +1129,10 @@ public class NovoLeitor2 : MonoBehaviour
         x += (objeto.GetComponent<MeshCollider>().bounds.max.x - objeto.GetComponent<MeshCollider>().bounds.min.x) / 2;
 
         // Terceiro: finalmente, posicionar o objeto com relação ao background.
-        if (qual_leitor == "FIT") x += bd_fit.GetGridX(i) / 32 * (background.GetComponent<Dados>().largura_x / 20);
-        if (qual_leitor == "Bolhas") x += bd_bolhas.GetCoordenadaX(i) * (background.GetComponent<Dados>().largura_x / resolucao.x);
+        if (qual_leitor == "FIT") x += objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetGridX(i) / 32 * 
+                (background.GetComponent<Dados>().largura_x / 20);
+        if (qual_leitor == "Bolhas") x += bd_bolhas.GetCoordenadaX(i) * 
+                (background.GetComponent<Dados>().largura_x / resolucao.x);
 
         return x;
     }
@@ -907,7 +1147,7 @@ public class NovoLeitor2 : MonoBehaviour
         z -= (objeto.GetComponent<MeshCollider>().bounds.max.z - objeto.GetComponent<MeshCollider>().bounds.min.z) / 2;
 
         // Terceiro: finalmente, posicionar o objeto com relação ao background.
-        if (qual_leitor == "FIT") z -= (bd_fit.GetGridY(i) / 32 * (background.GetComponent<Dados>().altura_z / 15));
+        if (qual_leitor == "FIT") z -= (objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetGridY(i) / 32 * (background.GetComponent<Dados>().altura_z / 15));
         if (qual_leitor == "Bolhas") z -= (bd_bolhas.GetCoordenadaY(i) * (background.GetComponent<Dados>().altura_z / resolucao.y));
 
         return z;
@@ -915,17 +1155,17 @@ public class NovoLeitor2 : MonoBehaviour
 
     public HeatMap GetMatrizHeatmap(int i = 0)
     {
-        return ((HeatMap)matrizes_dos_heatmaps[i]);
+        return ((HeatMap)Matrizes_dos_heatmaps[i]);
     }
 
-    public int GetQuantHeatmaps() { return matrizes_dos_heatmaps.Count; }
+    public int GetQuantHeatmaps() { return Matrizes_dos_heatmaps.Count; }
 
     public void ChangeTexturaHeatmap(int qual)
     {
         if ((qual >= 0) && (qual < GetQuantHeatmaps()))
         {
-            heatmap.GetComponent<MeshRenderer>().material.
-                SetTexture("_MainTex", ((HeatMap)matrizes_dos_heatmaps[qual]).heatmap);
+            Heatmap.GetComponent<MeshRenderer>().material.
+                SetTexture("_MainTex", ((HeatMap)Matrizes_dos_heatmaps[qual]).heatmap);
 
         }
         
@@ -950,7 +1190,6 @@ public class NovoLeitor2 : MonoBehaviour
     {
         background.AddComponent<Dados>();
         background.GetComponent<Dados>().Atualizar();
-        background.name = "Background - " + i;
         return background;
     }
 
@@ -998,7 +1237,8 @@ public class NovoLeitor2 : MonoBehaviour
 
     protected void AddMaterialAObjetoFIT(Material[] rend, GameObject objeto, int i)
     {
-        rend[0].mainTexture = texturas.Get(bd_fit.GetPersonagem(i).ToString());
+        rend[0].mainTexture = texturas.Get(objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).
+                                bd_fit.GetPersonagem(i).ToString());
         objeto.GetComponent<MeshRenderer>().materials = rend;
     }
 
@@ -1018,14 +1258,24 @@ public class NovoLeitor2 : MonoBehaviour
     {
         objeto_a_receber_dados.AddComponent<Dados>();
         objeto_a_receber_dados.GetComponent<Dados>().Atualizar();
-        objeto_a_receber_dados.GetComponent<Dados>().nome_do_objeto = bd_fit.GetPersonagem(i).ToString();
-        objeto_a_receber_dados.GetComponent<Dados>().tempo = bd_fit.GetTempo(i);
-        objeto_a_receber_dados.GetComponent<Dados>().x_log = bd_fit.GetGridX(i);
-        objeto_a_receber_dados.GetComponent<Dados>().y_log = bd_fit.GetGridY(i);
-        objeto_a_receber_dados.GetComponent<Dados>().tempo_do_servidor = bd_fit.GetTempoDeServidor(i);
-        objeto_a_receber_dados.GetComponent<Dados>().id_do_jogador = bd_fit.GetIdDoJogador(i);
-        objeto_a_receber_dados.GetComponent<Dados>().qual_jogador = bd_fit.GetNomeDoJogador(i);
-        objeto_a_receber_dados.GetComponent<Dados>().instante_em_camera = bd_fit.GetInstante(i);
+        objeto_a_receber_dados.GetComponent<Dados>().nome_do_objeto = objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).
+                                                                         bd_fit.GetPersonagem(i).ToString();
+        objeto_a_receber_dados.GetComponent<Dados>().tempo = objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).
+                                                                bd_fit.GetTempo(i);
+        objeto_a_receber_dados.GetComponent<Dados>().x_log = objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).
+                                                                bd_fit.GetGridX(i);
+        objeto_a_receber_dados.GetComponent<Dados>().y_log = objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).
+                                                                bd_fit.GetGridY(i);
+        objeto_a_receber_dados.GetComponent<Dados>().tempo_do_servidor = objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).
+                                                                bd_fit.GetTempoDeServidor(i);
+        objeto_a_receber_dados.GetComponent<Dados>().id_do_jogador = objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).
+                                                                bd_fit.GetIdDoJogador(i);
+        objeto_a_receber_dados.GetComponent<Dados>().qual_jogador = objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).
+                                                                bd_fit.GetNomeDoJogador(i);
+        objeto_a_receber_dados.GetComponent<Dados>().instante_em_camera = objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).
+                                                                bd_fit.GetInstante(i);
+        objeto_a_receber_dados.GetComponent<Dados>().nivel = objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).
+                                                                bd_fit.GetNivel(i);
     }
 
     protected void AddDadosBolhas(GameObject objeto_a_receber_dados, int i)
@@ -1055,7 +1305,7 @@ public class NovoLeitor2 : MonoBehaviour
 
     protected void AjeitandoACamera(Vector3 new_pos_camera, Camera a_camera)
     {
-        new_pos_camera.y = ((GameObject)lista_de_backgrounds[0]).transform.position.y;
+        new_pos_camera.y = ((GameObject)Lista_de_backgrounds[0]).transform.position.y;
         a_camera.transform.position = new_pos_camera;
         a_camera.transform.Rotate(90f, 0f, 0f);
         a_camera.orthographic = true;
@@ -1063,12 +1313,211 @@ public class NovoLeitor2 : MonoBehaviour
 
     protected void AjeitandoOHeatmap(Material materialheatmap)
     {
-        heatmap = Instantiate<GameObject>((GameObject)Resources.Load("Objetos/BackgroundHeatmap"));
-        heatmap.name = "Heatmap";
-        materialheatmap.SetTexture("_MainTex", ((HeatMap)matrizes_dos_heatmaps[0]).heatmap);
-        heatmap.GetComponent<MeshRenderer>().material = Instantiate(materialheatmap);
+        Heatmap = Instantiate<GameObject>((GameObject)Resources.Load("Objetos/BackgroundHeatmap"));
+        Heatmap.name = "Heatmap";
+        materialheatmap.SetTexture("_MainTex", ((HeatMap)Matrizes_dos_heatmaps[0]).heatmap);
+        Heatmap.GetComponent<MeshRenderer>().material = Instantiate(materialheatmap);
 
-        heatmap.transform.position = ((GameObject)lista_de_backgrounds[0]).transform.position + new Vector3(200f, 0, 0);
+        Heatmap.transform.position = ((GameObject)Lista_de_backgrounds[0]).transform.position
+            + new Vector3(200f, 0, 0);
+
+        Heatmap.transform.parent = Ancora.transform;
+    }
+
+    public void ResetandoAncoras()
+    {
+
+    }
+
+    public void ReposicionandoPosicoesEsquerdaUmDeCadaVez3D()
+    {
+        ConectarTodos();
+        Ancora.transform.position = new Vector3(GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetPosEsq("Um Frame De Cada Vez em 3D"),
+                                                0f, 0f);
+
+        Ancora.transform.localScale = GetComponent<Controlador>().GetBancoDeDadosModos().
+            GetEscalaEsquerdaOuDireita("Um Frame De Cada Vez em 3D");
+
+        for (int i = 0; i < Lista_de_backgrounds.Count; i++)
+        {
+            ((GameObject)Lista_de_backgrounds[i]).transform.localEulerAngles = GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetRotacaoCentro("Um Frame De Cada Vez em 3D");
+        }
+        //DesconectarTodos();
+
+    }
+
+    public void ReposicionandoPosicoesCentroUmDeCadaVez3D()
+    {
+        ConectarTodos();
+        Ancora.transform.position = new Vector3(GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetPosCen("Um Frame De Cada Vez em 3D"),
+                                                0f, 0f);
+
+        Ancora.transform.localScale = GetComponent<Controlador>().GetBancoDeDadosModos().
+            GetEscalaNoCentro("Um Frame De Cada Vez em 3D");
+
+        for (int i = 0; i < Lista_de_backgrounds.Count; i++)
+        {
+            ((GameObject)Lista_de_backgrounds[i]).transform.localEulerAngles = GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetRotacaoCentro("Um Frame De Cada Vez em 3D");
+        }
+
+        //DesconectarTodos();
+    }
+
+    public void ReposicionandoPosicoesDireitaUmDeCadaVez3D()
+    {
+        ConectarTodos();
+        Ancora.transform.position = new Vector3(GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetPosDir("Um Frame De Cada Vez em 3D"),
+                                                0f, 0f);
+
+        Ancora.transform.localScale = GetComponent<Controlador>().GetBancoDeDadosModos().
+            GetEscalaEsquerdaOuDireita("Um Frame De Cada Vez em 3D");
+
+        for (int i = 0; i < Lista_de_backgrounds.Count; i++)
+        {
+            ((GameObject)Lista_de_backgrounds[i]).transform.localEulerAngles = GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetRotacaoEsquerdaOuDireita("Um Frame De Cada Vez em 3D");
+        }
+        ///ATENÇÃO, NÃO DESCOMENTAR ESSA LINHA.
+        //DesconectarTodos();
+    }
+
+    public void ReposicionandoPosicoesEsquerdaUmDeCadaVez2D()
+    {
+        Ancora.transform.position = new Vector3(GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetPosEsq("Um Frame De Cada Vez em 2D"),
+                                                0f, 0f);
+        Ancora.transform.localScale = GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetEscalaEsquerdaOuDireita("Um Frame De Cada Vez em 2D");
+
+        for (int i = 0; i < Lista_de_backgrounds.Count; i++)
+        {
+            ((GameObject)Lista_de_backgrounds[i]).transform.localEulerAngles = GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetRotacaoCentro("Um Frame De Cada Vez em 2D");
+        }
+    }
+
+    public void ReposicionandoPosicoesCentroUmDeCadaVez2D()
+    {
+        Ancora.transform.position = new Vector3(0f, 0f, 0f);
+        Ancora.transform.localScale = GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetEscalaNoCentro("Um Frame De Cada Vez em 2D");
+
+        for (int i = 0; i < Lista_de_backgrounds.Count; i++)
+        {
+            ((GameObject)Lista_de_backgrounds[i]).transform.localEulerAngles = GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetRotacaoCentro("Um Frame De Cada Vez em 2D");
+        }
+    }
+
+    public void ReposicionandoPosicoesDireitaUmDeCadaVez2D()
+    {
+        Ancora.transform.position = new Vector3(GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetPosDir("Um Frame De Cada Vez em 2D"),
+                                                0f, 0f);
+        Ancora.transform.localScale = GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetEscalaEsquerdaOuDireita("Um Frame De Cada Vez em 2D");
+
+        for (int i = 0; i < Lista_de_backgrounds.Count; i++)
+        {
+            ((GameObject)Lista_de_backgrounds[i]).transform.localEulerAngles = GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetRotacaoCentro("Um Frame De Cada Vez em 2D");
+        }
+    }
+
+    public void ReposicionandoPosicoesEsquerdaTodosDeUmaVez3D()
+    {
+        ConectarTodos();
+        Ancora.transform.position = new Vector3(GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetPosEsq("Todos De Uma Vez em 3D"),
+                                                0f, 0f);
+
+        Ancora.transform.localScale = GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetEscalaEsquerdaOuDireita("Todos De Uma Vez em 3D");
+
+        for (int i = 0; i < Lista_de_backgrounds.Count; i++)
+        {
+            ((GameObject)Lista_de_backgrounds[i]).transform.localEulerAngles = GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetRotacaoCentro("Todos De Uma Vez em 3D");
+        }
+        DesconectarTodos();
+    }
+
+    public void ReposicionandoPosicoesCentroTodosDeUmaVez3D()
+    {
+        ConectarTodos();
+        Ancora.transform.position = new Vector3(GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetPosCen("Todos De Uma Vez em 3D"),
+                                                0f, 0f);
+
+        Ancora.transform.localScale = GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetEscalaNoCentro("Todos De Uma Vez em 3D");
+
+        for (int i = 0; i < Lista_de_backgrounds.Count; i++)
+        {
+            ((GameObject)Lista_de_backgrounds[i]).transform.localEulerAngles = GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetRotacaoCentro("Todos De Uma Vez em 3D");
+        }
+        DesconectarTodos();
+    }
+
+    public void ReposicionandoPosicoesDireitaTodosDeUmaVez3D()
+    {
+        ConectarTodos();
+        Ancora.transform.position = new Vector3(GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetPosDir("Todos De Uma Vez em 3D"),
+                                                0f, 0f);
+
+        Ancora.transform.localScale = GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetEscalaEsquerdaOuDireita("Todos De Uma Vez em 3D");
+
+        for (int i = 0; i < Lista_de_backgrounds.Count; i++)
+        {
+            ((GameObject)Lista_de_backgrounds[i]).transform.localEulerAngles = GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetRotacaoCentro("Todos De Uma Vez em 3D");
+        }
+
+        DesconectarTodos();
+    }
+
+    public void ReposicionandoHeatmapEsquerda()
+    {
+        Ancora.transform.position = new Vector3(GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetPosEsq("Heatmap"),
+                                                0f, 0f);
+
+        Ancora.transform.localScale = new Vector3(1f, 1f, 1f);
+
+        Heatmap.transform.localScale = GetComponent<Controlador>().GetBancoDeDadosModos().
+            GetEscalaEsquerdaOuDireita("Heatmap");
+    }
+
+    public void ReposicionandoHeatmapCentro()
+    {
+        Ancora.transform.position = new Vector3(GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetPosCen("Heatmap"),
+                                                0f, 0f);
+
+        Ancora.transform.localScale = new Vector3(1f, 1f, 1f);
+
+        Heatmap.transform.localScale = GetComponent<Controlador>().GetBancoDeDadosModos().
+            GetEscalaNoCentro("Heatmap");
+    }
+
+    public void ReposicionandoHeatmapDireita()
+    {
+        Ancora.transform.position = new Vector3(GetComponent<Controlador>().
+                                                GetBancoDeDadosModos().GetPosDir("Heatmap"),
+                                                0f, 0f);
+
+        Ancora.transform.localScale = new Vector3(1f, 1f, 1f);
+
+        Heatmap.transform.localScale = GetComponent<Controlador>().GetBancoDeDadosModos().
+            GetEscalaEsquerdaOuDireita("Heatmap");
     }
 
     public string GetQualLeitor() { return qual_leitor; }
@@ -1076,7 +1525,7 @@ public class NovoLeitor2 : MonoBehaviour
 
     public int GetPrimeiroTempoFIT()
     {
-        return bd_fit.GetInstante(0);
+        return objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetInstante(0);
     }
 
     public int GetPrimeiroTempoBolhas()
@@ -1093,7 +1542,8 @@ public class NovoLeitor2 : MonoBehaviour
 
     public int GetUltimoTempoFIT()
     {
-        return bd_fit.GetInstante(bd_fit.GetQuantidadeDeEntradas() - 1);
+        return objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.
+                    GetInstante(objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetQuantidadeDeEntradas() - 1);
     }
 
     public int GetUltimoTempoBolhas()
@@ -1101,26 +1551,89 @@ public class NovoLeitor2 : MonoBehaviour
         return bd_bolhas.GetTempo(bd_bolhas.GetQuantidadeDeEntradas() - 1);
     }
 
+    public BancoDeDadosFIT GetBancoDeDadosFIT()
+    {
+        return objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit;
+    }
+
+    /// <summary>
+    /// Função que retorna dos 1 a 2 conjuntos de dados de jogadores a serem analisados, quais estão ativos.
+    /// </summary>
+    /// <returns>Retorna um array de 2 booleans.</returns>
+    public bool[] GetQuaisJogadoresEstaoAtivos()
+    {
+        bool[] result = new bool[2];
+        result[0] = false; result[1] = false;
+        if (objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).ancora_dos_dados.activeSelf)
+        {
+            result[0] = true;
+        }
+        if (objs_jogadores_fit.QuantosJogadores() == 2)
+        {
+            if (objs_jogadores_fit.GetObjetosDeUmJogadorFIT(1).ancora_dos_dados.activeSelf)
+            {
+                result[1] = true;
+            }
+        }
+
+        return result;
+    }
+
     public void RetornarParaTelaInicial()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 
+
+
+    public void NovoLeitor2InitFIT()
+    {
+        qual_leitor = "FIT";
+        NovoLeitor2Init();
+    }
+
+    public void NovoLeitor2InitBolhas()
+    {
+        qual_leitor = "Bolhas";
+        NovoLeitor2Init();
+    }
+
     public void NovoLeitor2Init()
     {
+        objs_jogadores_fit = new ObjetosDeJogadoresFIT();
+
         resolucao = new Vector2();
         objetos = new ParaVisualizacao<GameObject>();
         materiais = new ParaVisualizacao<Material>();
         texturas = new ParaVisualizacao<Texture2D>();
         texturas_selecionadas = new ParaVisualizacao<Texture2D>();
         pintar = new Pintar();
-        lista_de_objetos = new ArrayList();
-        lista_de_backgrounds = new ArrayList();
-        matrizes_dos_heatmaps = new ArrayList();
         pegar_endereco_de_log = new PegarEnderecoDeLog();
         nomes_e_numeros_de_objetos_do_FIT = new Dictionary<string, int>();
         nomes_e_numeros_de_objetos_do_bolhas = new Dictionary<string, int>();
         posicoes_iniciais_de_personagens_nos_mapas_do_FIT = new List<List<Vector2>>();
     }
-    
+
+    public void NovoLeitor2InitSelecaoFIT()
+    {
+        qual_leitor = "FIT";
+
+        objs_jogadores_fit = new ObjetosDeJogadoresFIT();
+        objs_jogadores_fit.Add(new ObjetosDeUmJogadorFIT());
+
+        resolucao = new Vector2();
+        objetos = new ParaVisualizacao<GameObject>();
+        materiais = new ParaVisualizacao<Material>();
+        texturas = new ParaVisualizacao<Texture2D>();
+        texturas_selecionadas = new ParaVisualizacao<Texture2D>();
+        pintar = new Pintar();
+        Lista_de_objetos = new ArrayList();
+        Lista_de_backgrounds = new ArrayList();
+        Matrizes_dos_heatmaps = new ArrayList();
+        pegar_endereco_de_log = new PegarEnderecoDeLog();
+        nomes_e_numeros_de_objetos_do_FIT = new Dictionary<string, int>();
+        nomes_e_numeros_de_objetos_do_bolhas = new Dictionary<string, int>();
+        posicoes_iniciais_de_personagens_nos_mapas_do_FIT = new List<List<Vector2>>();
+    }
+
 }

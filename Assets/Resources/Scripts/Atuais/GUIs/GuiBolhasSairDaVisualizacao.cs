@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using Basicas;
 
 /// <summary>
 /// Classe derivada de GuiSairDaVisualizacao.
@@ -8,6 +7,6 @@ using System.Collections;
 /// </summary>
 public class GuiBolhasSairDaVisualizacao : GuiSairDaVisualizacao {
 
-    public override void RetornarParaTelaDePreLoad() { UnityEngine.SceneManagement.SceneManager.LoadScene(2); }
+    public override void RetornarParaTelaDePreLoad() { MudaCenas.Fechar_Aplicacao(); }
 
 }

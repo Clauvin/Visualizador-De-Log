@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 /// <summary>
 /// Classe GuiFITInfoObjeto, derivada de GuiInfoObjeto.

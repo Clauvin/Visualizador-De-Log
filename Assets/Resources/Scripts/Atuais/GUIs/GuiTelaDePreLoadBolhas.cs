@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.IO;
 using System;
+using Basicas;
 
 /// <summary>
 /// Classe derivada de GuiTelaDePreLoad, responsável por definir para a Scene de PreLoad do Bolhas o que o programa deve fazer.
@@ -58,10 +58,7 @@ public class GuiTelaDePreLoadBolhas : GuiTelaDePreLoad
                 tempo_maximo = entradas_separadas[0].Split(':')[1];
             }
 
-            theReader.Close();
-            theReader.Dispose();
-            fs.Close();
-            fs.Dispose();
+            lida_com_texto.FecharReaders(fs, theReader);
 
             pegar_endereco_do_log.CriarIniDeUltimoLogChecado(endereco);
 
@@ -135,7 +132,7 @@ public class GuiTelaDePreLoadBolhas : GuiTelaDePreLoad
             case 2:
                 pd = FindObjectOfType<PassadorDeDados>();
                 pd.Destruir();
-                UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+                MudaCenas.MudarCenaPara_Tela_Inicial();
                 break;
             default:
                 break;
@@ -145,7 +142,7 @@ public class GuiTelaDePreLoadBolhas : GuiTelaDePreLoad
     protected override void IrParaLoad()
     {
         // Vai pra Scene "Version Bolhas"
-        UnityEngine.SceneManagement.SceneManager.LoadScene(4);
+        MudaCenas.MudarCenaPara_Load_Bolhas();
     }
 
     // Use this for initialization

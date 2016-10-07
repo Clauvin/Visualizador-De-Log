@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using Basicas;
 
 /// <summary>
 /// Classe responsável pelos dois botões na tela de visualização dos elementos do log
@@ -18,11 +18,6 @@ public class GuiSairDaVisualizacao : GuiPadrao2 {
 
     public virtual void RetornarParaTelaDePreLoad() { }
 
-    public void RetornarParaTelaInicial()
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
-    }
-
     public override void OnGUI()
     {
         MudarCoordenadas(Screen.width - largura_dos_botoes, Screen.height - altura_dos_botoes);
@@ -38,7 +33,7 @@ public class GuiSairDaVisualizacao : GuiPadrao2 {
 
             case 1:
 
-                RetornarParaTelaInicial();
+                MudaCenas.MudarCenaPara_Tela_Inicial();
                 break;
         }
 

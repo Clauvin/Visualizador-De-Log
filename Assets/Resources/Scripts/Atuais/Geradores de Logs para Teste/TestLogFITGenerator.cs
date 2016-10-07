@@ -3,6 +3,8 @@ using System.Collections;
 
 /// <summary>
 /// Classe responsável por criar um log aleatório no formato do do FIT para testes.
+/// <para>DEPRECADO: não é atualizado a MUITO tempo. Salvador_de_Texto_do_Log precisa ser
+///       modificado para criar logs atuais.</para>
 /// </summary>
 public class TestLogFITGenerator : MonoBehaviour
 {

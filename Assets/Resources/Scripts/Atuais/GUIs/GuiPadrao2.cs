@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-/// <summary>
+﻿/// <summary>
 /// Classe padrão de onde outras classes de interface gráfica derivam.
 /// <para>Contém funções padrões para posicionamento de GUI.</para>
 /// </summary>
@@ -14,11 +11,15 @@ public class GuiPadrao2 : AbstractGui2
 
     public override void OnGUI() { }
 
-    public override void MudarCoordenadasX(int x) { posx = x; }
+    public override void MudarCoordenadasX(int x) { SetX(x); }
 
-    public override void MudarCoordenadasY(int y) { posy = y; }
+    public override void SetX(int x) { posx = x; }
 
-    public override void MudarCoordenadas(int x, int y) { posx = x; posy = y; }
+    public override void MudarCoordenadasY(int y) { SetY(y); }
+
+    public override void SetY(int y) { posy = y; }
+
+    public override void MudarCoordenadas(int x, int y) { SetX(x); SetY(y); }
 
     public override bool MudarTexto(string novotexto) { return true; }
 
@@ -40,4 +41,5 @@ public class GuiPadrao2 : AbstractGui2
     {
         revelado = true;
     }
+
 }

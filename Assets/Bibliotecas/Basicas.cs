@@ -5,19 +5,21 @@ using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
+using System.IO;
 
 namespace Basicas
 {
     /// <summary>
     /// Responsável por guardar os dados do log carregado do FIT.
     /// </summary>
-    public class BancoDeDadosFIT
+    public class BancoDeDadosFIT : ICloneable
     {
         // int
         private ArrayList instante;
         // int
         private ArrayList tempo;
+        // int
+        private ArrayList nivel;
         // int
         private ArrayList personagem;
         // int
@@ -34,12 +36,32 @@ namespace Basicas
         private ArrayList modo_de_jogo;
 
 
+
         //Time: 1 = Char:1 = GridX:5 = GridY:7
+
+        public object Clone()
+        {
+            BancoDeDadosFIT clone = new BancoDeDadosFIT();
+            clone.instante = (ArrayList)instante.Clone();
+            clone.tempo = (ArrayList)tempo.Clone();
+            clone.nivel = (ArrayList)nivel.Clone();
+            clone.personagem = (ArrayList)personagem.Clone();
+            clone.grid_x = (ArrayList)grid_x.Clone();
+            clone.grid_y = (ArrayList)grid_y.Clone();
+            clone.tempo_do_servidor = (ArrayList)tempo_do_servidor.Clone();
+            clone.nome_do_jogador = (ArrayList)nome_do_jogador.Clone();
+            clone.id_do_jogador = (ArrayList)id_do_jogador.Clone();
+            clone.modo_de_jogo = (ArrayList)modo_de_jogo.Clone();
+
+            return clone;
+
+        }
 
         public BancoDeDadosFIT()
         {
             instante = new ArrayList();
             tempo = new ArrayList();
+            nivel = new ArrayList();
             personagem = new ArrayList();
             grid_x = new ArrayList();
             grid_y = new ArrayList();
@@ -49,11 +71,12 @@ namespace Basicas
             modo_de_jogo = new ArrayList();
         }
 
-        public bool Add(int inst, int time, int pers, int x, int y, int server_time,
+        public bool Add(int inst, int time, int niv, int pers, int x, int y, int server_time,
                         string player_name, int player_id, int game_mode)
         {
             instante.Add(inst);
             tempo.Add(time);
+            nivel.Add(niv);
             personagem.Add(pers);
             grid_x.Add(x);
             grid_y.Add(y);
@@ -81,6 +104,22 @@ namespace Basicas
 #if (DEBUG)
 
                 Debug.Log("BancoDeDadosFIT.GetInstante - Não há posição " + pos);
+
+#endif
+                return -1;
+            }
+        }
+
+        public int GetNivel(int pos)
+        {
+            try { return (int)nivel[pos]; }
+            //ATENÇAO: Esse catch está correto?
+            catch (ArgumentOutOfRangeException excecao)
+            {
+
+#if (DEBUG)
+
+                Debug.Log("BancoDeDadosFIT.GetNivel - Não há posição " + pos);
 
 #endif
                 return -1;
@@ -213,6 +252,122 @@ namespace Basicas
                 return -1;
             }
         }
+
+        /// <summary>
+        /// Remove a entrada em bd_fit de posição i.
+        /// <para>PRECISA ter checagem de erros.</para>
+        /// </summary>
+        /// <param name="i"></param>
+        private void Remove(int i)
+        {
+            if (i < GetQuantidadeDeEntradas())
+            {
+                instante.RemoveAt(i);
+                tempo.RemoveAt(i);                
+                nivel.RemoveAt(i);                
+                personagem.RemoveAt(i);                
+                grid_x.RemoveAt(i);                
+                grid_y.RemoveAt(i);                
+                tempo_do_servidor.RemoveAt(i);
+                nome_do_jogador.RemoveAt(i);
+                id_do_jogador.RemoveAt(i);
+                modo_de_jogo.RemoveAt(i);
+            }
+            else
+            {
+                //Tratamento de erro
+            }
+        }
+
+        public void RemoveEntradasDoJogador()
+        {
+
+        }
+
+        public void RemoveEntradasDoPersonagem()
+        {
+
+        }
+
+        public void RemoveEntradasDoNivel()
+        {
+
+        }
+
+        /// <summary>
+        /// Função que remove entradas do BDFIT, especificamente caso ele tenha:
+        ///     1 - Personagens específicos
+        ///     2 - Níveis específicos
+        ///     3 - Jogadores específicos
+        /// </summary>
+        public void RemoveEntradas(SortedList jogadores = null, bool[] quais_jogadores = null,
+                                   SortedList personagens = null, bool[] quais_personagens = null,
+                                   SortedList niveis = null, bool[] quais_niveis = null
+                                   )
+        {
+
+            SortedList lista_de_jogadores = null;
+            SortedList lista_de_personagens = null;
+            SortedList lista_de_niveis = null;
+
+            if (jogadores != null) lista_de_jogadores = (SortedList)jogadores.Clone();
+            if (personagens != null) lista_de_personagens = (SortedList)personagens.Clone();
+            if (niveis != null) lista_de_niveis = (SortedList)niveis.Clone();
+
+            if (lista_de_jogadores != null && quais_jogadores != null)
+            {
+                for (int i = lista_de_jogadores.Count - 1; i >= 0; i--)
+                {
+                    //O que foi marcado nao deve ser removido. O resto sim.
+                    if (quais_jogadores[i])
+                    {
+                        lista_de_jogadores.RemoveAt(i);
+                    }
+                }
+            }
+
+            if (lista_de_personagens != null && quais_personagens != null)
+            {
+                for (int i = lista_de_personagens.Count - 1; i >= 0; i--)
+                {
+                    //O que foi marcado nao deve ser removido. O resto sim.
+                    if (quais_personagens[i])
+                    {
+                        lista_de_personagens.RemoveAt(i);
+                    }
+                }
+            }
+
+            if (lista_de_niveis != null && quais_niveis != null)
+            {
+                for (int i = lista_de_niveis.Count - 1; i >= 0; i--)
+                {
+                    //O que foi marcado nao deve ser removido. O resto sim.
+                    if (quais_niveis[i])
+                    {
+                        lista_de_niveis.RemoveAt(i);
+                    }
+                }
+            }
+
+            for (int i = GetQuantidadeDeEntradas() - 1; i >= 0; i--)
+            {
+                if ((lista_de_jogadores.
+                    ContainsKey
+                    (GetNomeDoJogador(i))) ||
+                   (lista_de_personagens.
+                    ContainsKey
+                    (GetPersonagem(i))) ||
+                   (lista_de_niveis.
+                    ContainsKey
+                    (GetNivel(i))))
+                {
+                    Remove(i);
+                }
+            }
+            
+        }
+
 
 
     }
@@ -457,20 +612,34 @@ namespace Basicas
     */
     /// <summary>
     /// Classe BancoDeDadosModos. Responsável por guardar os dados dos modos de visão possível dos logs.
+    /// <para>AVISO: o Vector3 a ser adicionado em rotacao_esq_ou_dir e rotacao_central precisa ter seus
+    /// valores ordenados em z, x, y, em radianos. </para>
     /// </summary>
-    class BancoDeDadosModos
+    public class BancoDeDadosModos
     {
         private Dictionary<string, float> movimentacao;
         private Dictionary<string, float> camera_x;
         private Dictionary<string, float> camera_init_y;
         private Dictionary<string, float> camera_z;
         private Dictionary<string, float> camera_init_z;
-        private Dictionary<string, bool> orthographic;
+
+        //Orthographic = Representação de um ambiente 3D num plano 2D.
+        //or_not = Representação de um ambiente 3D... no ambiente 3D.
+        private Dictionary<string, bool> orthographic_or_not;
         private Dictionary<string, float> alpha;
-        private Dictionary<string, Vector3> rotation;
+        private Dictionary<string, Vector3> rotation_objects;
         private Dictionary<string, Vector3> rotation_camera;
         private Dictionary<string, float> visible_background_alpha;
         private Dictionary<string, int> layer;
+        private Dictionary<string, float> pos_esq_x;
+        private Dictionary<string, float> pos_cen_x;
+        private Dictionary<string, float> pos_dir_x;
+        private Dictionary<string, Vector3> escala_esq_ou_dir;
+        private Dictionary<string, Vector3> escala_central;
+
+
+        private Dictionary<string, Vector3> rotacao_esq_ou_dir;
+        private Dictionary<string, Vector3> rotacao_central;
         private Dictionary<string, string> instrucoes;
 
         public BancoDeDadosModos()
@@ -480,30 +649,49 @@ namespace Basicas
             camera_init_y = new Dictionary<string, float>();
             camera_z = new Dictionary<string, float>();
             camera_init_z = new Dictionary<string, float>();
-            orthographic = new Dictionary<string, bool>();
+            orthographic_or_not = new Dictionary<string, bool>();
             alpha = new Dictionary<string, float>();
-            rotation = new Dictionary<string, Vector3>();
+            rotation_objects = new Dictionary<string, Vector3>();
             rotation_camera = new Dictionary<string, Vector3>();
             visible_background_alpha = new Dictionary<string, float>();
             layer = new Dictionary<string, int>();
+            pos_esq_x = new Dictionary<string, float>();
+            pos_cen_x = new Dictionary<string, float>();
+            pos_dir_x = new Dictionary<string, float>();
+            escala_esq_ou_dir = new Dictionary<string, Vector3>();
+            escala_central = new Dictionary<string, Vector3>();
+            rotacao_esq_ou_dir = new Dictionary<string, Vector3>();
+            rotacao_central = new Dictionary<string, Vector3>();
             instrucoes = new Dictionary<string, string>();
+
         }
 
         public bool Add(string modo, float mov, float x, float y, float z, float initz, bool ort,
-            float alph, Vector3 rot, Vector3 rotationcam, float backalpha, int novolayer, string instrucao)
+            float alph, Vector3 rot, Vector3 rotationcam, float backalpha, int novolayer, float pos_e_x,
+            float pos_c_x, float pos_d_x, Vector3 esc_esq_ou_dir, Vector3 esc_central,
+            Vector3 rot_esq_ou_dir, Vector3 rot_central, string instrucao)
+
         {
             movimentacao.Add(modo, mov);
             camera_x.Add(modo, x);
             camera_init_y.Add(modo, y);
             camera_z.Add(modo, z);
             camera_init_z.Add(modo, initz);
-            orthographic.Add(modo, ort);
+            orthographic_or_not.Add(modo, ort);
             alpha.Add(modo, alph);
-            rotation.Add(modo, rot);
+            rotation_objects.Add(modo, rot);
             rotation_camera.Add(modo, rotationcam);
             visible_background_alpha.Add(modo, backalpha);
             layer.Add(modo, novolayer);
+            pos_esq_x.Add(modo, pos_e_x);
+            pos_cen_x.Add(modo, pos_c_x);
+            pos_dir_x.Add(modo, pos_d_x);
+            escala_esq_ou_dir.Add(modo, esc_esq_ou_dir);
+            escala_central.Add(modo, esc_central);
+            rotacao_esq_ou_dir.Add(modo, rot_esq_ou_dir);
+            rotacao_central.Add(modo, rot_central);
             instrucoes.Add(modo, instrucao);
+
             return true;
         }
 
@@ -651,7 +839,7 @@ namespace Basicas
 
         public bool GetOrthographic(string modo)
         {
-            try { return orthographic[modo]; }
+            try { return orthographic_or_not[modo]; }
             //ATENÇAO: Esse catch está correto?
             catch (ArgumentNullException excecao)
             {
@@ -695,7 +883,7 @@ namespace Basicas
 
         public Vector3 GetRotationChange(string modo)
         {
-            try { return rotation[modo]; }
+            try { return rotation_objects[modo]; }
             //ATENÇAO: Esse catch está correto?
             catch (ArgumentNullException excecao)
             {
@@ -778,6 +966,160 @@ namespace Basicas
 #endif
                 //Isso ainda vai dar problema um dia...
                 return -1;
+            }
+        }
+
+        public float GetPosEsq(string modo)
+        {
+            try { return pos_esq_x[modo]; }
+            //ATENÇAO: Esse catch está correto?
+            catch (ArgumentNullException excecao)
+            {
+#if (DEBUG)
+                Debug.Log("BancoDeDadosModos.GetPosEsq - Key modo é nula.");
+#endif
+                //Isso ainda vai dar problema um dia...
+                return -1;
+            }
+            catch (KeyNotFoundException excecao)
+            {
+#if (DEBUG)
+                Debug.Log("BancoDeDadosModos.GetPosEsq - Key " + modo + " não existe.");
+#endif
+                //Isso ainda vai dar problema um dia...
+                return -1;
+            }
+        }
+
+        public float GetPosCen(string modo)
+        {
+            try { return pos_cen_x[modo]; }
+            //ATENÇAO: Esse catch está correto?
+            catch (ArgumentNullException excecao)
+            {
+#if (DEBUG)
+                Debug.Log("BancoDeDadosModos.GetPosCen - Key modo é nula.");
+#endif
+                //Isso ainda vai dar problema um dia...
+                return -1;
+            }
+            catch (KeyNotFoundException excecao)
+            {
+#if (DEBUG)
+                Debug.Log("BancoDeDadosModos.GetPosCen - Key " + modo + " não existe.");
+#endif
+                //Isso ainda vai dar problema um dia...
+                return -1;
+            }
+        }
+
+        public float GetPosDir(string modo)
+        {
+            try { return pos_dir_x[modo]; }
+            //ATENÇAO: Esse catch está correto?
+            catch (ArgumentNullException excecao)
+            {
+#if (DEBUG)
+                Debug.Log("BancoDeDadosModos.GetPosDir - Key modo é nula.");
+#endif
+                //Isso ainda vai dar problema um dia...
+                return -1;
+            }
+            catch (KeyNotFoundException excecao)
+            {
+#if (DEBUG)
+                Debug.Log("BancoDeDadosModos.GetPosDir - Key " + modo + " não existe.");
+#endif
+                //Isso ainda vai dar problema um dia...
+                return -1;
+            }
+        }
+
+        public Vector3 GetEscalaEsquerdaOuDireita(string modo)
+        {
+            try { return escala_esq_ou_dir[modo]; }
+            //ATENÇAO: Esse catch está correto?
+            catch (ArgumentNullException excecao)
+            {
+#if (DEBUG)
+                Debug.Log("BancoDeDadosModos.GetEscalaEsquerdaOuDireita - Key modo é nula.");
+#endif
+                //Isso ainda vai dar problema um dia...
+                return new Vector3(float.MinValue, float.MinValue, float.MinValue);
+            }
+            catch (KeyNotFoundException excecao)
+            {
+#if (DEBUG)
+                Debug.Log("BancoDeDadosModos.GetEscalaEsquerdaOuDireita - Key " + modo + " não existe.");
+#endif
+                //Isso ainda vai dar problema um dia...
+                return new Vector3(float.MinValue, float.MinValue, float.MinValue);
+            }
+        }
+
+        public Vector3 GetEscalaNoCentro(string modo)
+        {
+            try { return escala_central[modo]; }
+            //ATENÇAO: Esse catch está correto?
+            catch (ArgumentNullException excecao)
+            {
+#if (DEBUG)
+                Debug.Log("BancoDeDadosModos.GetRotationChangeCamera - Key modo é nula.");
+#endif
+                //Isso ainda vai dar problema um dia...
+                return new Vector3(float.MinValue, float.MinValue, float.MinValue);
+            }
+            catch (KeyNotFoundException excecao)
+            {
+#if (DEBUG)
+                Debug.Log("BancoDeDadosModos.GetRotationChangeCamera - Key " + modo + " não existe.");
+#endif
+                //Isso ainda vai dar problema um dia...
+                return new Vector3(float.MinValue, float.MinValue, float.MinValue);
+            }
+        }
+
+        public Vector3 GetRotacaoEsquerdaOuDireita(string modo)
+        {
+            try { return rotacao_esq_ou_dir[modo]; }
+            //ATENÇAO: Esse catch está correto?
+            catch (ArgumentNullException excecao)
+            {
+#if (DEBUG)
+                Debug.Log("BancoDeDadosModos.GetRotacaoEsquerdaOuDireita - Key modo é nula.");
+#endif
+                //Isso ainda vai dar problema um dia...
+                return new Vector3(float.MinValue, float.MinValue, float.MinValue);
+            }
+            catch (KeyNotFoundException excecao)
+            {
+#if (DEBUG)
+                Debug.Log("BancoDeDadosModos.GetRotacaoEsquerdaOuDireita - Key " + modo + " não existe.");
+#endif
+                //Isso ainda vai dar problema um dia...
+                return new Vector3(float.MinValue, float.MinValue, float.MinValue);
+            }
+        }
+
+        public Vector3 GetRotacaoCentro(string modo)
+        {
+            try { return rotacao_central[modo]; }
+            //ATENÇAO: Esse catch está correto?
+            catch (ArgumentNullException excecao)
+            {
+#if (DEBUG)
+                Debug.Log("BancoDeDadosModos.GetRotacaoCentro - Key modo é nula.");
+#endif
+                //Isso ainda vai dar problema um dia...
+                return new Vector3(float.MinValue, float.MinValue, float.MinValue);
+            }
+            catch (KeyNotFoundException excecao)
+            {
+#if (DEBUG)
+                Debug.Log("BancoDeDadosModos.GetRotacaoCentro - Key " + modo + " não existe.");
+#endif
+                //Isso ainda vai dar problema um dia...
+                return new Vector3(float.MinValue, float.MinValue, float.MinValue);
             }
         }
 
@@ -937,6 +1279,63 @@ namespace Basicas
 
             return a;
             
+        }
+
+    }
+
+    public class LidaComTexto
+    {
+        /// <summary>
+        /// Função privada para fechar readers usados em outras funções de NovoLeitor2.
+        /// </summary>
+        public void FecharReaders(FileStream fs, StreamReader theReader)
+        {
+            theReader.Close();
+            theReader.Dispose();
+            fs.Close();
+            fs.Dispose();
+        }
+    }
+
+    /// <summary>
+    /// Muda cenas e fecha a aplicação.
+    /// </summary>
+    public class MudaCenas
+    {
+
+        public static void MudarCenaPara_Tela_Inicial()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        }
+
+        public static void MudarCenaPara_Pre_Fit()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+        }
+
+        public static void MudarCenaPara_Pre_Bolhas()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+        }
+
+        public static void Fechar_Aplicacao()
+        {
+            Application.Quit();
+        }
+
+        public static void MudarCenaPara_Load_Bolhas()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(4);
+        }
+
+        public static void MudarCenaPara_Load_Fit()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(3);
+        }
+
+        public static void MudarCenaPara_Selecao_Fit()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(5);
         }
 
     }

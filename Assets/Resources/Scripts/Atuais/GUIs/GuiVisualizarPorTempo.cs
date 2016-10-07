@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System;
-using System.Globalization;
 
 /// <summary>
 /// Classe responsável por permitir ao usuário sumir e aparecer com objetos baseando-se no
@@ -64,14 +62,23 @@ public class GuiVisualizarPorTempo : GuiPadrao2 {
                 {
                     if (visivel_ou_invisivel == 1)
                     {
-                        GetComponent<Controlador>().DeixarObjetosEmEspacoDeTempoInvisiveisEIninteragiveis(
-                            Int32.Parse(tempo_minimo), Int32.Parse(tempo_maximo));
+                        for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
+                        {
+                            GetComponent<NovoLeitor2>().qual_jogador = i;
+                            GetComponent<Controlador>().DeixarObjetosEmEspacoDeTempoInvisiveisEIninteragiveis(
+                                Int32.Parse(tempo_minimo), Int32.Parse(tempo_maximo));
+                        }
                         E_Pra_Deixar_Visivel_Ou_Invisivel();
+
                     }
                     else
                     {
-                        GetComponent<Controlador>().DeixarObjetosEmEspacoDeTempoVisiveisEInteragiveis(
-                            Int32.Parse(tempo_minimo), Int32.Parse(tempo_maximo));
+                        for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
+                        {
+                            GetComponent<NovoLeitor2>().qual_jogador = i;
+                            GetComponent<Controlador>().DeixarObjetosEmEspacoDeTempoVisiveisEInteragiveis(
+                                Int32.Parse(tempo_minimo), Int32.Parse(tempo_maximo));
+                        }
                         E_Pra_Deixar_Visivel_Ou_Invisivel();
                     }
                 }

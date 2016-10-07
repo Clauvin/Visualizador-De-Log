@@ -17,6 +17,7 @@ public class Conector : MonoBehaviour {
     public void AddPonto(GameObject ponto)
     {
         lista_de_pontos.Add(ponto);
+        backgroundprincipal.GetComponent<Dados>().qual_jogador = ponto.GetComponent<Dados>().qual_jogador;
     }
 
     public void Conectar()
