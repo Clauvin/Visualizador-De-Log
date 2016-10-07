@@ -37,9 +37,18 @@ public class NovoLeitorFIT : NovoLeitor2 {
             Heatmaps = pd.heatmaps;
             InicializarHeatmaps();
 
-            CreateStuffFIT();
+            
 
         }
+
+        for (int i = 0; i < pd.bd_fits.Count; i++)
+        {
+            qual_jogador = i;
+            PreenchedorDeHeatmapsFIT();
+            CreateStuffFIT();
+        }
+
+
         qual_jogador = 0;
 
         GetComponent<Controlador>().InicializacaoFIT();

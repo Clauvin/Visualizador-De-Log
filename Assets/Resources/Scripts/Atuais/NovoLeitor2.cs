@@ -728,7 +728,7 @@ public class NovoLeitor2 : MonoBehaviour
         material_background.mainTexture = (Texture)Instantiate(Resources.Load("Texturas/Grid"));
 
         // Cria o Heatmap
-        PreenchedorDeHeatmapsFIT();
+        //PreenchedorDeHeatmapsFIT();
 
         criar_background = true;
         fechar_background = false;
@@ -866,17 +866,12 @@ public class NovoLeitor2 : MonoBehaviour
 
     protected void PreenchedorDeHeatmapsFIT()
     {
+        LendoPontosDeHeatmapsFIT();
         for (int j = 0; j < Matrizes_dos_heatmaps.Count; j++)
         {
-            ((HeatMap)Matrizes_dos_heatmaps[j]).AlterarValoresDeTamanhoDeHeatmap(20, 15);
-            ((HeatMap)Matrizes_dos_heatmaps[j]).ReadPointsFIT(objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit,
-                                                              j);
             ((HeatMap)Matrizes_dos_heatmaps[j]).AllTheDifferentPoints();
-            ((HeatMap)Matrizes_dos_heatmaps[j]).OrganizePoints();
-            ((HeatMap)Matrizes_dos_heatmaps[j]).FillingTheDictionary();
-            ((HeatMap)Matrizes_dos_heatmaps[j]).PaintingTheHeatmap();
-            numeros_de_cores[j] = ((HeatMap)Matrizes_dos_heatmaps[j]).HowManyPoints();
         }
+        OrganizacaoDePontosEPinturaDeHeatmapsFIT();
     }
 
     protected void LendoPontosDeHeatmapsFIT()
