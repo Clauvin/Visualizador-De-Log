@@ -29,11 +29,6 @@ public class Controlador : MonoBehaviour
                                  "5 - Heatmap\n";
     public string tipo;
 
-    GameObject background_um_de_cada_vez_2D;
-    Vector3 background_um_de_cada_vez_2D_posicao_original;
-    Vector3 background_um_de_cada_vez_2D_posicao_atual;
-    bool background_um_de_cada_vez_2D_posicao_atual_foi_preenchido = false;
-
     Transform objeto_clicado = null;
 
     float cam_sensitividade_X = 10.0f;
