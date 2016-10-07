@@ -365,9 +365,12 @@ public class Controlador : MonoBehaviour
                 {
                     if (GetComponent<GuiTempo>().GetTempo() != get_tempo_anterior)
                     {
+                        int tempo_anterior = get_tempo_anterior;
+
                         for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
                         {
                             GetComponent<NovoLeitor2>().qual_jogador = i;
+                            get_tempo_anterior = tempo_anterior;
                             if ((get_tempo_anterior - 1 >= 0) && (get_tempo_anterior <=
                                     GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 1))
                             {
