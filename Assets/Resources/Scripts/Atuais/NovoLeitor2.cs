@@ -1542,8 +1542,12 @@ public class NovoLeitor2 : MonoBehaviour
 
     public int GetUltimoTempoFIT()
     {
-        return objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.
-                    GetInstante(objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetQuantidadeDeEntradas() - 1);
+
+        // Estas duas linhas comentadas abaixo retornam mais instantes do que realmente existem.
+        // Por ora, esta gambiarra abaixo, que retorna a quantidade de backgrounds, resolve todos os problemas.
+        /*return objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.
+                    GetInstante(objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetQuantidadeDeEntradas() - 1);*/
+        return objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).lista_de_backgrounds.Count - 1;
     }
 
     public int GetUltimoTempoBolhas()
