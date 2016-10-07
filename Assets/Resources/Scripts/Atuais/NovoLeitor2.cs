@@ -728,23 +728,13 @@ public class NovoLeitor2 : MonoBehaviour
         material_background.mainTexture = (Texture)Instantiate(Resources.Load("Texturas/Grid"));
 
         // Cria o Heatmap
-        for (int j = 0; j < Matrizes_dos_heatmaps.Count; j++)
-        {
-            ((HeatMap)Matrizes_dos_heatmaps[j]).AlterarValoresDeTamanhoDeHeatmap(20, 15);
-            ((HeatMap)Matrizes_dos_heatmaps[j]).ReadPointsFIT(objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit,
-                                                              j);
-            ((HeatMap)Matrizes_dos_heatmaps[j]).AllTheDifferentPoints();
-            ((HeatMap)Matrizes_dos_heatmaps[j]).OrganizePoints();
-            ((HeatMap)Matrizes_dos_heatmaps[j]).FillingTheDictionary();
-            ((HeatMap)Matrizes_dos_heatmaps[j]).PaintingTheHeatmap();
-            numeros_de_cores[j] = ((HeatMap)Matrizes_dos_heatmaps[j]).HowManyPoints();
-        }
+        PreenchedorDeHeatmapsFIT();
 
         criar_background = true;
         fechar_background = false;
 
         // Para cada objeto...
-        
+
         for (i = 0; i < objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetQuantidadeDeEntradas(); i++)
         {
             // Controle de quando criar um background novo ou
@@ -757,7 +747,7 @@ public class NovoLeitor2 : MonoBehaviour
                 {
                     fechar_background = true;
                 }
-                if (objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetPersonagem(i) <= 
+                if (objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetPersonagem(i) <=
                     objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetPersonagem(i - 1))
                 {
                     criar_background = true;
@@ -810,9 +800,10 @@ public class NovoLeitor2 : MonoBehaviour
             Lista_de_objetos.Add(objeto);
 
             // Criando background para os pontos
-            if (criar_background) {
+            if (criar_background)
+            {
 
-                background = CriarBackground(background, material_background); 
+                background = CriarBackground(background, material_background);
 
             }
 
@@ -824,7 +815,7 @@ public class NovoLeitor2 : MonoBehaviour
             if (criar_background)
             {
                 background = ColocarDadosEmBackground(background, i);
-                Lista_de_backgrounds.Add(background);                
+                Lista_de_backgrounds.Add(background);
             }
 
             // Passar os valores de x, y e tempo para a posição de objetos
@@ -869,8 +860,23 @@ public class NovoLeitor2 : MonoBehaviour
 
         GetComponent<Controlador>().MudarTransparenciaDosObjetos(0.2f);
 
-        
 
+
+    }
+
+    protected void PreenchedorDeHeatmapsFIT()
+    {
+        for (int j = 0; j < Matrizes_dos_heatmaps.Count; j++)
+        {
+            ((HeatMap)Matrizes_dos_heatmaps[j]).AlterarValoresDeTamanhoDeHeatmap(20, 15);
+            ((HeatMap)Matrizes_dos_heatmaps[j]).ReadPointsFIT(objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit,
+                                                              j);
+            ((HeatMap)Matrizes_dos_heatmaps[j]).AllTheDifferentPoints();
+            ((HeatMap)Matrizes_dos_heatmaps[j]).OrganizePoints();
+            ((HeatMap)Matrizes_dos_heatmaps[j]).FillingTheDictionary();
+            ((HeatMap)Matrizes_dos_heatmaps[j]).PaintingTheHeatmap();
+            numeros_de_cores[j] = ((HeatMap)Matrizes_dos_heatmaps[j]).HowManyPoints();
+        }
     }
 
     public void CreateStuffBolhas()
