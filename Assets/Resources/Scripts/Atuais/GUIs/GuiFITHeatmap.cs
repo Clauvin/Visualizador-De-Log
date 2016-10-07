@@ -26,7 +26,7 @@ public class GuiFITHeatmap : GuiHeatmap
             }
             else
             {
-                GUI.TextField(new Rect(10, posy-40, 160, 40), "Cores e Quantos Objetos\n - Jogador " +
+                GUI.TextField(new Rect(10, posy-40, 160, 40), "Cores e Quantos Objetos\n - Personagem " +
                     lista_de_objetos[qualheatmap - 1]);
             }
 
