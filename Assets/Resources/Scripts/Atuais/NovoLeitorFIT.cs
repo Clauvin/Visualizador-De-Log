@@ -44,7 +44,33 @@ public class NovoLeitorFIT : NovoLeitor2 {
         for (int i = 0; i < pd.bd_fits.Count; i++)
         {
             qual_jogador = i;
-            PreenchedorDeHeatmapsFIT();
+            LendoPontosDeHeatmapsFIT();
+        }
+
+        for (int i = 0; i < pd.bd_fits.Count; i++)
+        {
+            qual_jogador = i;
+            for (int j = 0; j < Matrizes_dos_heatmaps.Count; j++)
+            {
+                ((HeatMap)Matrizes_dos_heatmaps[j]).AllTheDifferentPoints();
+            }
+        }
+
+        if (objs_jogadores_fit.QuantosJogadores() == 2)
+        {
+            for (int j = 0; j < Matrizes_dos_heatmaps.Count; j++)
+            {
+                qual_jogador = 0;
+                HeatMap outro_heatmap = (HeatMap)Matrizes_dos_heatmaps[j];
+                qual_jogador = 1;
+                ((HeatMap)Matrizes_dos_heatmaps[j]).DifferentHeatmapsSamePaletteOfColors(outro_heatmap);
+            }
+        }
+
+        for (int i = 0; i < pd.bd_fits.Count; i++)
+        {
+            qual_jogador = i;
+            OrganizacaoDePontosEPinturaDeHeatmapsFIT();
             CreateStuffFIT();
         }
 

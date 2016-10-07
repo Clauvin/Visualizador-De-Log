@@ -867,10 +867,6 @@ public class NovoLeitor2 : MonoBehaviour
     protected void PreenchedorDeHeatmapsFIT()
     {
         LendoPontosDeHeatmapsFIT();
-        for (int j = 0; j < Matrizes_dos_heatmaps.Count; j++)
-        {
-            ((HeatMap)Matrizes_dos_heatmaps[j]).AllTheDifferentPoints();
-        }
         OrganizacaoDePontosEPinturaDeHeatmapsFIT();
     }
 
@@ -881,6 +877,7 @@ public class NovoLeitor2 : MonoBehaviour
             ((HeatMap)Matrizes_dos_heatmaps[j]).AlterarValoresDeTamanhoDeHeatmap(20, 15);
             ((HeatMap)Matrizes_dos_heatmaps[j]).ReadPointsFIT(objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit,
                                                               j);
+            
         }
     }
 
