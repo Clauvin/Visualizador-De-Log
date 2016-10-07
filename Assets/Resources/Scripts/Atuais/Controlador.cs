@@ -365,43 +365,49 @@ public class Controlador : MonoBehaviour
                 {
                     if (GetComponent<GuiTempo>().GetTempo() != get_tempo_anterior)
                     {
-                        if (get_tempo_anterior - 1 >= 0)
+                        for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
                         {
-                            ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[get_tempo_anterior - 1]).
+                            GetComponent<NovoLeitor2>().qual_jogador = i;
+                            if ((get_tempo_anterior - 1 >= 0) && (get_tempo_anterior <=
+                                    GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 1))
+                            {
+                                ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[get_tempo_anterior - 1]).
+                                    GetComponent<LigaDesliga>().Desligar();
+                            }
+
+                            if (get_tempo_anterior <= GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 1)
+                            {
+                                ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[get_tempo_anterior]).
                                 GetComponent<LigaDesliga>().Desligar();
-                        }
+                            }
 
-                        if (get_tempo_anterior <= GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 1)
-                        {
-                            ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[get_tempo_anterior]).
-                            GetComponent<LigaDesliga>().Desligar();
-                        }
-                            
-                        if (get_tempo_anterior + 1 <= GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count-1)
-                        {
-                            ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[get_tempo_anterior + 1]).
-                                GetComponent<LigaDesliga>().Desligar();
-                        }
+                            if (get_tempo_anterior + 1 <= GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 1)
+                            {
+                                ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[get_tempo_anterior + 1]).
+                                    GetComponent<LigaDesliga>().Desligar();
+                            }
 
-                        get_tempo_anterior = GetComponent<GuiTempo>().GetTempo();
+                            get_tempo_anterior = GetComponent<GuiTempo>().GetTempo();
 
-                        if (get_tempo_anterior - 1 >= 0) {
-                            ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[get_tempo_anterior - 1]).
+                            if ((get_tempo_anterior - 1 >= 0) && (get_tempo_anterior <=
+                                    GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 1))
+                            {
+                                ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[get_tempo_anterior - 1]).
+                                    GetComponent<LigaDesliga>().Ligar();
+                            }
+
+                            if (get_tempo_anterior <= GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 1)
+                            {
+                                ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[get_tempo_anterior]).
                                 GetComponent<LigaDesliga>().Ligar();
-                        }
+                            }
 
-                        if (get_tempo_anterior <= GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 1)
-                        {
-                            ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[get_tempo_anterior]).
-                            GetComponent<LigaDesliga>().Ligar();
+                            if (get_tempo_anterior + 1 <= GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count - 1)
+                            {
+                                ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[get_tempo_anterior + 1]).
+                                    GetComponent<LigaDesliga>().Ligar();
+                            }
                         }
-
-                        if (get_tempo_anterior + 1 <= GetComponent<NovoLeitor2>().Lista_de_backgrounds.Count-1)
-                        {
-                            ((GameObject)GetComponent<NovoLeitor2>().Lista_de_backgrounds[get_tempo_anterior + 1]).
-                                GetComponent<LigaDesliga>().Ligar();
-                        }
-
                     }
                 }
 
