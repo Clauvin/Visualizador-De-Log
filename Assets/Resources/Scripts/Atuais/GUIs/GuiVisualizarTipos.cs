@@ -53,11 +53,20 @@ public class GuiVisualizarTipos : GuiPadrao2 {
                 {
                     if (visivel_ou_invisivel[i] == 1)
                     {
-                        GetComponent<Controlador>().DeixarTipoDeObjetoInvisivelEIninteragivel(lista_de_nomes_de_objetos[i]);
+                        for (int j = 0; j < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); j++)
+                        {
+                            GetComponent<NovoLeitor2>().qual_jogador = j;
+                            GetComponent<Controlador>().DeixarTipoDeObjetoInvisivelEIninteragivel(lista_de_nomes_de_objetos[i]);
+                        }
+                        
                     }
                     else
                     {
-                        GetComponent<Controlador>().DeixarTipoDeObjetoVisivelEInteragivel(lista_de_nomes_de_objetos[i]);
+                        for (int j = 0; j < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); j++)
+                        {
+                            GetComponent<NovoLeitor2>().qual_jogador = j;
+                            GetComponent<Controlador>().DeixarTipoDeObjetoVisivelEInteragivel(lista_de_nomes_de_objetos[i]);
+                        }
                     }
                     MudaVisibilidade(i);
                 }
