@@ -879,6 +879,27 @@ public class NovoLeitor2 : MonoBehaviour
         }
     }
 
+    protected void LendoPontosDeHeatmapsFIT()
+    {
+        for (int j = 0; j < Matrizes_dos_heatmaps.Count; j++)
+        {
+            ((HeatMap)Matrizes_dos_heatmaps[j]).AlterarValoresDeTamanhoDeHeatmap(20, 15);
+            ((HeatMap)Matrizes_dos_heatmaps[j]).ReadPointsFIT(objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit,
+                                                              j);
+        }
+    }
+
+    protected void OrganizacaoDePontosEPinturaDeHeatmapsFIT()
+    {
+        for (int j = 0; j < Matrizes_dos_heatmaps.Count; j++)
+        {
+            ((HeatMap)Matrizes_dos_heatmaps[j]).OrganizePoints();
+            ((HeatMap)Matrizes_dos_heatmaps[j]).FillingTheDictionary();
+            ((HeatMap)Matrizes_dos_heatmaps[j]).PaintingTheHeatmap();
+            numeros_de_cores[j] = ((HeatMap)Matrizes_dos_heatmaps[j]).HowManyPoints();
+        }
+    }
+
     public void CreateStuffBolhas()
     {
         Camera a_camera = FindObjectOfType<Camera>();
