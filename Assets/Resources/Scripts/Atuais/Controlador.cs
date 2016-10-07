@@ -127,7 +127,7 @@ public class Controlador : MonoBehaviour
                         }
                         else
                         {
-                            GetComponent<GuiTempo>().SetStringEditavel("Tempo " + tempo + " não existe.");
+                            GetComponent<GuiTempo>().SetStringEditavel("Instante " + tempo + " não existe.");
                         }
                     }
 
