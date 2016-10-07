@@ -259,7 +259,12 @@ public class Controlador : MonoBehaviour
                 {
                     if ((Input.GetKeyUp("left"))) { MostrarHeatmapAnterior(); }
                     if ((Input.GetKeyUp("right"))) { MostrarHeatmapPosterior(); }
-                    GetComponent<NovoLeitor2>().ChangeTexturaHeatmap(qual_heatmap_mostrar);
+                    for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
+                    {
+                        GetComponent<NovoLeitor2>().qual_jogador = i;
+                        GetComponent<NovoLeitor2>().ChangeTexturaHeatmap(qual_heatmap_mostrar);
+                    }
+                    
                 }
 
 
