@@ -231,6 +231,7 @@ public class HeatMap {
         }
     }
 
+    public void DifferentHeatmapsSamePaletteOfColors(HeatMap outro)
     {
         numeros_diferentes.AddRange(outro.numeros_diferentes);
         numeros_diferentes.Sort();
