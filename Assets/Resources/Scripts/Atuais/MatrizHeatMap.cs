@@ -231,6 +231,22 @@ public class HeatMap {
         }
     }
 
+    {
+        numeros_diferentes.AddRange(outro.numeros_diferentes);
+        numeros_diferentes.Sort();
+        for (int i = 0; i < numeros_diferentes.Count-1; i++)
+        {
+            if ((int)numeros_diferentes[i] == (int)numeros_diferentes[i + 1])
+            {
+                numeros_diferentes.RemoveAt(i);
+                i--;
+            }
+        }
+        maior_numero = (int)(numeros_diferentes[numeros_diferentes.Count - 1]);
+        outro.numeros_diferentes = numeros_diferentes;
+        outro.maior_numero = maior_numero;
+    }
+
     public void OrganizePoints()
     {
         numeros_diferentes.Sort();
