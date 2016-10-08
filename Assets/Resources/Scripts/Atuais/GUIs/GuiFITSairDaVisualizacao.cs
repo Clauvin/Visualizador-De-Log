@@ -19,6 +19,11 @@ public class GuiFITSairDaVisualizacao : GuiSairDaVisualizacao {
                 break;
 
             case 1:
+                Instantiate(Resources.Load<GameObject>("Objetos\\Passador De Dados"));
+                PassadorDeDados pd = FindObjectOfType<PassadorDeDados>();
+                pd.SetValuesDePassagem(0, int.MaxValue,
+                    GetComponent<NovoLeitor2>().pegar_endereco_de_log.endereco_de_arquivo[0]);
+                pd.NaoDestruirAoDescarregar();
                 MudaCenas.MudarCenaPara_Selecao_Fit();
                 break;
 

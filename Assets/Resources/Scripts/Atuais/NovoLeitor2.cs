@@ -170,7 +170,7 @@ public class NovoLeitor2 : MonoBehaviour
         }
     }
 
-    protected PegarEnderecoDeLog pegar_endereco_de_log;
+    public PegarEnderecoDeLog pegar_endereco_de_log;
 
     public string[] lista_de_nomes_de_objetos_do_FIT = { "1", "2", "3", "4" };
     public string[] lista_de_nomes_de_objetos_do_bolhas = { "Mouse", "Baleia", "Bolha", "Peixe", "Nuvem" };
