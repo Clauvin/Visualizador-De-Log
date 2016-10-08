@@ -23,7 +23,7 @@ public class GuiTelaInicial : GuiPadrao2
         posicaox = 0;
         GUI.Box(new Rect(0, 0, Screen.width, Screen.height), string.Empty);
         GUI.Box(new Rect(Screen.width / 4, Screen.height / 6, Screen.width / 2, Screen.height / 2), "Visualizador de Logs\n\n" +
-            "F!T e Bolhas\n\n" + "1.0.0-beta", estilotitulotelainicial);
+            "F!T\n\n" + "1.0.1-beta", estilotitulotelainicial);
 
         resultado = GUI.Toolbar(new Rect(Screen.width / 12 * 3, Screen.height / 10 * 8, Screen.width / 12 * 6, Screen.height / 10), qualbotao,
             toolbarStrings);
