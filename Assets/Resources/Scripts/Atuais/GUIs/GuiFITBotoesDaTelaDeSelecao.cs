@@ -42,6 +42,9 @@ public class GuiFITBotoesDaTelaDeSelecao : GuiPadrao2
 
                 PassadorDeDados pd_vai = FindObjectOfType<PassadorDeDados>().GetComponent<PassadorDeDados>();
 
+                pd_vai.endereco_do_arquivo = GetComponent<NovoLeitor2>().pegar_endereco_de_log.endereco_de_arquivo[0];
+
+
                 bool[] quais_jogadores_foram_escolhidos = FindObjectOfType<GuiFITEscolhas>().
                                                             gui_escolhas_de_jogadores.GetSelecoesDeJogadores();
 
