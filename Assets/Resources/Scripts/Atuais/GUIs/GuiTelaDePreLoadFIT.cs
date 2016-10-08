@@ -68,7 +68,7 @@ public class GuiTelaDePreLoadFIT : GuiTelaDePreLoad
     {
         lida_com_erros_endereco_de_log.valor_de_comparacao_de_tipo_de_log = "[Mode FIT]";
         titulo = "Escolha de Log do FIT\n" + "e Tempo Carregado do Log";
-        toolbarStrings = new string[] { "Escolher Log", "Escolher Posições Iniciais", "Selecionar Dados", "Retornar Para Tela Título" };
+        toolbarStrings = new string[] { "Escolher Log", "Escolher Posições Iniciais", "Retornar Para Tela Título" };
     }
 
     protected override void DesenharTelaDePreLoad()
@@ -86,10 +86,6 @@ public class GuiTelaDePreLoadFIT : GuiTelaDePreLoad
 
             GUI.Label(new Rect(Screen.width / 4, Screen.height / 2 - 20, Screen.width / 2, 20), nome_do_arquivo);
             GUI.TextField(new Rect(Screen.width / 4, Screen.height / 2, Screen.width / 2, 20), endereco, "textfield");
-            /*GUI.Label(new Rect(Screen.width / 4, Screen.height / 2 + 40, 120, 20), "Instante Mínimo", "textfield");
-            GUI.Label(new Rect(Screen.width / 2, Screen.height / 2 + 40, 120, 20), "Instante Máximo", "textfield");
-            tempo_minimo = GUI.TextArea(new Rect(Screen.width / 4, Screen.height / 2 + 60, 240, 20), tempo_minimo);
-            tempo_maximo = GUI.TextArea(new Rect(Screen.width / 2, Screen.height / 2 + 60, 240, 20), tempo_maximo);*/
 
             resultado = GUI.Toolbar(new Rect(Screen.width / 12 * 3, Screen.height / 10 * 8, Screen.width / 12 * 6, Screen.height / 10),
                 qualbotao, toolbarStrings);
@@ -97,7 +93,6 @@ public class GuiTelaDePreLoadFIT : GuiTelaDePreLoad
 
         FuncionamentoDosBotoes();
 
-        //lida_com_erros_min_e_max.DesenharPossiveisMensagensDeErro();
         lida_com_erros_endereco_de_log.DesenharPossiveisMensagensDeErro();
 
         resultado = -1;
@@ -116,11 +111,8 @@ public class GuiTelaDePreLoadFIT : GuiTelaDePreLoad
                 pegar_endereco_do_log.Inverter_Desenhar_Navegador();
 
                 break;
-            case 1:
-
-                break;
             // Vai para o visualizador do FITs
-            case 2:
+            case 1:
 
                 lida_com_erros_min_e_max.DetectarETratarErrosEExcecoesDeInput(tempo_minimo, tempo_maximo);
                 lida_com_erros_endereco_de_log.DetectarETratarErrosEExcecoesDeInput(endereco);
@@ -133,7 +125,7 @@ public class GuiTelaDePreLoadFIT : GuiTelaDePreLoad
                 }
                 break;
             // Retorna para a tela título
-            case 3:
+            case 2:
                 pd = FindObjectOfType<PassadorDeDados>();
                 pd.Destruir();
                 MudaCenas.MudarCenaPara_Tela_Inicial();
