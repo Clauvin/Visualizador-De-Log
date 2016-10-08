@@ -13,12 +13,15 @@ public class GuiFITEscolhaDeJogadores : GuiPadrao2
     private int distancia_entre_jogadores = 30;
     private SortedList lista_de_jogadores;
     public bool[] selecoes_de_jogadores;
+    public bool[] selecoes_anteriores_de_jogadores;
+    public int quant = 0;
 
     private Vector2 scrollViewVector = Vector2.zero;
 
     public void InitGuiFITEscolhaDeJogadores()
     {
         selecoes_de_jogadores = new bool[lista_de_jogadores.Count];
+        selecoes_anteriores_de_jogadores = selecoes_de_jogadores;
     }
 
     public override void OnGUI() {
@@ -35,12 +38,25 @@ public class GuiFITEscolhaDeJogadores : GuiPadrao2
 
             for (int i = 0; i < lista_de_jogadores.Count; i++)
             {
-                selecoes_de_jogadores[i] = GUI.Toggle(new Rect(0, distancia_entre_jogadores * i, 100, 20),
-                    selecoes_de_jogadores[i], lista_de_jogadores.GetByIndex(i).ToString());
+                if ((quant == 2) && (selecoes_de_jogadores[i] == false))
+                {
+                    /*GUI.Toggle(new Rect(0, distancia_entre_jogadores * i, 100, 20),
+                    selecoes_de_jogadores[i], lista_de_jogadores.GetByIndex(i).ToString());*/
+                } else
+                {
+                    selecoes_de_jogadores[i] = GUI.Toggle(new Rect(0, distancia_entre_jogadores * i, 100, 20),
+                        selecoes_de_jogadores[i], lista_de_jogadores.GetByIndex(i).ToString());
+                }
             }
 
+            quant = 0;
+            for (int j = 0; j < selecoes_de_jogadores.GetLength(0); j++)
+            {
+                if (selecoes_de_jogadores[j] == true) quant++;
+            }
             // End the ScrollView
             GUI.EndScrollView();
+
         }
         
 
