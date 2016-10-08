@@ -11,8 +11,7 @@ public class GuiTelaInicial : GuiPadrao2
     private int posicaox;
     private int qualbotao = -1;
     private int resultado = -1;
-    private string[] toolbarStrings = { "Visualizar Log F!T", "Visualizar Log Bolhas",
-                                        "Créditos", "Sair" };
+    private string[] toolbarStrings = { "Visualizar Log F!T", "Créditos", "Sair" };
 
     private bool creditos = false;
 
@@ -22,11 +21,12 @@ public class GuiTelaInicial : GuiPadrao2
 
         posicaox = 0;
         GUI.Box(new Rect(0, 0, Screen.width, Screen.height), string.Empty);
-        GUI.Box(new Rect(Screen.width / 4, Screen.height / 6, Screen.width / 2, Screen.height / 2), "Visualizador de Logs\n\n" +
-            "F!T\n\n" + "1.0.1-beta", estilotitulotelainicial);
+        GUI.Box(new Rect(Screen.width / 4, Screen.height / 6, Screen.width / 2, Screen.height / 2),
+            "Visualizador de Logs\n\n" + "F!T\n\n" + "1.0.1-beta", estilotitulotelainicial);
 
-        resultado = GUI.Toolbar(new Rect(Screen.width / 12 * 3, Screen.height / 10 * 8, Screen.width / 12 * 6, Screen.height / 10), qualbotao,
-            toolbarStrings);
+        resultado = GUI.Toolbar(new Rect(Screen.width / 12 * 3, Screen.height / 10 * 8,
+                                        Screen.width / 12 * 6, Screen.height / 10), qualbotao,
+                                toolbarStrings);
 
         switch (resultado)
         {
@@ -34,16 +34,12 @@ public class GuiTelaInicial : GuiPadrao2
             case 0:
                 MudaCenas.MudarCenaPara_Pre_Fit();
                 break;
-            //Vai para o pre-loading do Bolhas
-            case 1:
-                MudaCenas.MudarCenaPara_Pre_Bolhas();
-                break;
             //Abre créditos
-            case 2:
+            case 1:
                 creditos = true;
                 break;
             //Fecha o programa
-            case 3:
+            case 2:
                 Application.Quit();
                 break;
             default:
