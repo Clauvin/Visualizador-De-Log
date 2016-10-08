@@ -9,10 +9,10 @@ using Basicas;
 /// </summary>
 public class GuiSairDaVisualizacao : GuiPadrao2 {
 
-    private int largura_dos_botoes;
-    private int altura_dos_botoes;
-    private int resultado;
-    private int qual_botao = -1;
+    protected int largura_dos_botoes;
+    protected int altura_dos_botoes;
+    protected int resultado;
+    protected int qual_botao = -1;
 
     protected string[] strings_da_toolbar = { "Tela De Pre-Load", "Tela Inicial" };
 
@@ -25,19 +25,15 @@ public class GuiSairDaVisualizacao : GuiPadrao2 {
         GUI.BeginGroup(new Rect(posx, posy, largura_dos_botoes, altura_dos_botoes));
         resultado = GUI.Toolbar(new Rect(0, 0, largura_dos_botoes, altura_dos_botoes), qual_botao,
             strings_da_toolbar);
-        switch (resultado)
-        {
-            case 0:
-                RetornarParaTelaDePreLoad();
-                break;
 
-            case 1:
-
-                MudaCenas.MudarCenaPara_Tela_Inicial();
-                break;
-        }
+        Escolha();
 
         GUI.EndGroup();
+
+    }
+
+    protected virtual void Escolha()
+    {
 
     }
 
