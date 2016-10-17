@@ -502,11 +502,6 @@ public class Controlador : MonoBehaviour
                 if (Input.GetButtonDown("9")) MudarTransparenciaDosObjetos(0.2f);
             }
 
-            if (Input.GetButtonDown("Q"))
-            {
-                MudaCenas.Fechar_Aplicacao();
-            }
-
             //Esse código serve para fazer a Gui dos pontos funcionar.
             if (Input.GetMouseButtonDown(0))
             {
@@ -1206,8 +1201,7 @@ public class Controlador : MonoBehaviour
                                              "-> - Câmera avança(pode \n" +
                                              "atravessar grids)\n" +
                                              "A - Câmera recua mais rápido\n" +
-                                             "D - Câmera avança mais rápido\n" +
-                                             "Q - Voltar à tela inicial");
+                                             "D - Câmera avança mais rápido\n");
 
         modos.Add("Um Frame De Cada Vez em 2D", 2f, 0f, 10f, 0f, 0f, true, 1f, new Vector3(0f, 0f, 0f),
             new Vector3(90f, 0f, 0f), 1f, 0, -4f, 0.0f, 4f,
@@ -1222,8 +1216,7 @@ public class Controlador : MonoBehaviour
                                              "R - Liga/Desliga\n" +
                                              "automático\n" +
                                              "T - Liga/Desliga\n" +
-                                             "automático customizado\n" +
-                                             "Q - Voltar à tela inicial");
+                                             "automático customizado\n");
 
         modos.Add("Todos De Uma Vez em 3D", 0.5f, 5f, 2f, 0f, 0f, false, 0f, new Vector3(0f, 0f, 0f),
             new Vector3(90f, 0f, 0f), 0f, 2, -12.0f, 0.0f, 12.0f,
@@ -1234,15 +1227,13 @@ public class Controlador : MonoBehaviour
                                              "A - Recua mais rápido\n" +
                                              "D - Avança mais rápido\n" +
                                              "R - Reseta posição e rotação\n" +
-                                             "S - Reseta rotação\n" +
-                                             "Q - Tela inicial");
+                                             "S - Reseta rotação\n");
 
         modos.Add("Heatmap", 0f, 200f, 15f, 0f, 0f, true, 0f, new Vector3(0f, 0f, 0f),
             new Vector3(90f, 0f, 0f), 1f, 2, -4f, 0f, 4f,
             new Vector3(0.67f, 1f, 0.5f), new Vector3(1.333333f, 1f, 1f),
             new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), "<- - Avança na lista de heatmaps\n" +
-                                             "-> - Retorna na lista de heatmaps\n" +
-                                             "Q - Tela inicial");
+                                             "-> - Retorna na lista de heatmaps\n");
 
         for (int i = 0; i < GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores(); i++)
         {
