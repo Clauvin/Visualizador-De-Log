@@ -1,0 +1,25 @@
+﻿[Mode FIT]
+==START=
+[Test01]
+ServerTime:481=CONNECTED =
+ServerTime:491=ServerID:1=Player:THIAGO=MODE:3=Level:1=Input:4=Time:237
+ServerTime:492=ServerID:2=Player:Cláuvin=MODE:3=Level:1=Input:4=Time:238
+ServerTime:493=ServerID:3=Player:Leonardo=MODE:3=Level:1=Input:4=Time:239
+ServerTime:494=ServerID:4=Player:Rodrigo=MODE:3=Level:1=Input:2=Time:240
+ServerTime:495=ServerID:5=Player:Jefferson=MODE:3=Level:1=Input:2=Time:241
+ServerTime:496=ServerID:6=Player:Matias=MODE:3=Level:1=Input:2=Time:242
+ServerTime:497=ServerID:7=Player:Cassandra=MODE:3=Level:1=Input:2=Time:243
+ServerTime:498=ServerID:8=Player:Jackson=MODE:3=Level:1=Input:2=Time:244
+ServerTime:499=ServerID:9=Player:Lucian=MODE:3=Level:1=Input:2=Time:245
+ServerTime:500=ServerID:10=Player:Matheus=MODE:3=Level:1=Input:2=Time:246
+ServerTime:501=ServerID:11=Player:QWERT=MODE:3=Level:1=Input:2=Time:247
+ServerTime:502=ServerID:12=Player:Orielle=MODE:3=Level:1=Input:2=Time:248
+ServerTime:503=ServerID:13=Player:Bastião=MODE:3=Level:1=Input:2=Time:249
+ServerTime:504=ServerID:14=Player:Helena=MODE:3=Level:1=Input:2=Time:250
+ServerTime:505=ServerID:15=Player:Ariel=MODE:3=Level:1=Input:2=Time:251
+ServerTime:506=ServerID:16=Player:Liana=MODE:3=Level:1=Input:2=Time:252
+ServerTime:507=ServerID:17=Player:Asmodeus=MODE:3=Level:1=Input:2=Time:253
+ServerTime:508=ServerID:18=Player:Brian=MODE:3=Level:1=Input:2=Time:254
+ServerTime:509=ServerID:19=Player:Lode=MODE:3=Level:1=Input:2=Time:255
+ServerTime:510=ServerID:20=Player:Loder=MODE:3=Level:1=Input:2=Time:256
+ServerTime:511=ServerID:21=Player:Stratos=MODE:3=Level:1=Input:2=Time:257
