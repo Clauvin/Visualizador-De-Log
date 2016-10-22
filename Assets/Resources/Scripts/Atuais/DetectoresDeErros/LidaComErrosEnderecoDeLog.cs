@@ -171,6 +171,19 @@ public class LidaComErrosEnderecoDeLog : LidaComErros
         }
     }
 
+    /// <summary>
+    /// Coloca todos os booleans indicando erros em false.
+    /// </summary>
+    public void ResetarMensagensDeErro()
+    {
+        erro_de_acesso_nao_autorizado = false;
+        erro_de_inexistencia_do_arquivo = false;
+        erro_de_caminho_escolhido_invalido = false;
+        erro_de_caminho_escolhido_longo_demais = false;
+        erro_de_extensao_nao_txt = false;
+        erro_de_log_errado = false;
+    }
+
     public override bool NaoTemosErrosDeInput()
     {
         // Deus abençoe que C# me permite fazer essas comparações em sequência.
