@@ -1222,10 +1222,13 @@ public class Controlador : MonoBehaviour
             new Vector3(90f, 0f, 0f), 0f, 2, -12.0f, 0.0f, 12.0f,
             new Vector3(1f, 1f, 1f), new Vector3(1f, 1f, 1f),
             new Vector3(0f, 0f, 0f), new Vector3(0f, 0f, 0f), parte_da_transparencia_dos_objetos +
-                                             "<- - Câmera recua\n" +
-                                             "-> - Câmera avança\n" +
-                                             "A - Recua mais rápido\n" +
-                                             "D - Avança mais rápido\n" +
+                                             "^ - Câmera avança\n" +
+                                             "v - Câmera recua\n" +
+                                             "<- - Câmera vai para esquerda\n" +
+                                             "-> - Câmera vai para direita\n" +
+                                             "A - Câmera vai para esquerda rápido\n" +
+                                             "D - Câmera vai para direita rápido\n" +
+                                             "Segurar botão direito do mouse - \n" +
                                              "R - Reseta posição e rotação\n" +
                                              "S - Reseta rotação\n");
 
