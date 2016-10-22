@@ -109,6 +109,7 @@ public class GuiTelaDePreLoadFIT : GuiTelaDePreLoad
             case 0:
 
                 pegar_endereco_do_log.Inverter_Desenhar_Navegador();
+                lida_com_erros_endereco_de_log.ResetarMensagensDeErro();
 
                 break;
             // Vai para o visualizador do FITs
