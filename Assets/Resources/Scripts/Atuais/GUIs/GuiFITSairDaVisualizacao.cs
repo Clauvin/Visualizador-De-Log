@@ -37,7 +37,7 @@ public class GuiFITSairDaVisualizacao : GuiSairDaVisualizacao {
     void Start () {
         largura_dos_botoes = 480;
         altura_dos_botoes = 22;
-        strings_da_toolbar = new string[3] { "Pre-Load", "Seleção de Jogadores", "Início" };
+        strings_da_toolbar = new string[3] { "Pre-Load", "Seleção de Jogadores", "Tela Título" };
 	}
 
 }
