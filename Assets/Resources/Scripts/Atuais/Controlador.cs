@@ -209,6 +209,16 @@ public class Controlador : MonoBehaviour
                     FindObjectOfType<Camera>().transform.position = posicao_da_camera;
                 }
 
+                //Esse código movimenta a câmera para frente e para trás mais rápido.
+                if ((Input.GetButton("w")) || (Input.GetButton("s")))
+                {
+
+                    AlterarPosicaoDeCamera('y', false, "", "", false, 0, 7, true, "w", "s");
+
+                    FindObjectOfType<Camera>().transform.position = posicao_da_camera;
+
+                }
+
                 // Girar câmera no plano XY.
                 if (Input.GetMouseButton(1))
                 {
