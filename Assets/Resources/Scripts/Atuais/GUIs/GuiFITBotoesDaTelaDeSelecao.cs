@@ -37,9 +37,12 @@ public class GuiFITBotoesDaTelaDeSelecao : GuiPadrao2
                 break;
             //Abre créditos
             case 2:
+
+                //instancia um Passador de Dados
                 Object.Instantiate
                     (Resources.Load("Objetos\\Passador De Dados"));
 
+                //pega o passador de dados instanciado.
                 PassadorDeDados pd_vai = FindObjectOfType<PassadorDeDados>().GetComponent<PassadorDeDados>();
 
                 pd_vai.endereco_do_arquivo = GetComponent<NovoLeitor2>().pegar_endereco_de_log.endereco_de_arquivo[0];
@@ -73,7 +76,7 @@ public class GuiFITBotoesDaTelaDeSelecao : GuiPadrao2
                                             FindObjectOfType<GuiFITEscolhas>().
                                             gui_escolhas_de_niveis.GetSelecoesDeNiveis());
 
-                        pd_vai.bd_fits.Add(bd_fit_jogador);
+                        if (bd_fit_jogador.GetQuantidadeDeEntradas() > 0) pd_vai.bd_fits.Add(bd_fit_jogador);
 
                     }
 
