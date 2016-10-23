@@ -1525,7 +1525,8 @@ public class NovoLeitor2 : MonoBehaviour
 
     public int GetPrimeiroTempoFIT()
     {
-        return objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetInstante(0);
+        //return objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.GetInstante(0);
+        return 0;
     }
 
     public int GetPrimeiroTempoBolhas()
