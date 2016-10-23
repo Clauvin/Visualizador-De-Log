@@ -1080,9 +1080,8 @@ public class Controlador : MonoBehaviour
             if (ativos[0] && !ativos[1])
             {
                 GetComponent<NovoLeitor2>().qual_jogador = 0;
-                //GetComponent<NovoLeitor2>().Ancora.SetActive(true);
                 GetComponent<NovoLeitor2>().ReposicionandoPosicoesCentroUmDeCadaVez3D();
-                //GetComponent<NovoLeitor2>().Ancora.SetActive(false);
+
                 GetComponent<NovoLeitor2>().qual_jogador = 1;
                 GetComponent<NovoLeitor2>().ReposicionandoPosicoesDireitaUmDeCadaVez3D();
             } else if (ativos[0] && ativos[1])
