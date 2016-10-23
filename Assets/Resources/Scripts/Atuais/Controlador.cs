@@ -1074,6 +1074,7 @@ public class Controlador : MonoBehaviour
     {
         bool[] ativos = GetComponent<NovoLeitor2>().GetQuaisJogadoresEstaoAtivos();
         
+        
         if (modo_de_visualizacao == "Um Frame De Cada Vez em 3D")
         {
 
@@ -1081,9 +1082,11 @@ public class Controlador : MonoBehaviour
             {
                 GetComponent<NovoLeitor2>().qual_jogador = 0;
                 GetComponent<NovoLeitor2>().ReposicionandoPosicoesCentroUmDeCadaVez3D();
-
-                GetComponent<NovoLeitor2>().qual_jogador = 1;
-                GetComponent<NovoLeitor2>().ReposicionandoPosicoesDireitaUmDeCadaVez3D();
+                if (GetComponent<NovoLeitor2>().objs_jogadores_fit.QuantosJogadores() == 2)
+                {
+                    GetComponent<NovoLeitor2>().qual_jogador = 1;
+                    GetComponent<NovoLeitor2>().ReposicionandoPosicoesDireitaUmDeCadaVez3D();
+                }
             } else if (ativos[0] && ativos[1])
             {
                 GetComponent<NovoLeitor2>().qual_jogador = 0;
