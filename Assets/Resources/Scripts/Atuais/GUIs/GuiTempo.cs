@@ -66,6 +66,15 @@ public class GuiTempo : GuiPadrao2
         
     }
 
+    public int QualEOUltimoInstante()
+    {
+
+        GetComponent<NovoLeitor2>().QualEOMaior();
+
+        return GetComponent<NovoLeitor2>().GetUltimoTempoFIT();
+
+    }
+
     public void PegarQualModo(string modo)
     {
 
