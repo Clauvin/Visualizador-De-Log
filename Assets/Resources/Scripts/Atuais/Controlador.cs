@@ -1247,7 +1247,7 @@ public class Controlador : MonoBehaviour
                                              "  Permite girar a câmera\n" +
                                              "  movendo o mouse\n" +
                                              "R - Reseta posição e rotação\n" +
-                                             "S - Reseta rotação\n");
+                                             "F - Reseta rotação\n");
 
         modos.Add("Heatmap", 0f, 200f, 15f, 0f, 0f, true, 0f, new Vector3(0f, 0f, 0f),
             new Vector3(90f, 0f, 0f), 1f, 2, -4f, 0f, 4f,
