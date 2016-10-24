@@ -1589,7 +1589,32 @@ public class NovoLeitor2 : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 
+    public void QualEOMaior()
+    {
+        bool[] ativos = GetComponent<NovoLeitor2>().GetQuaisJogadoresEstaoAtivos();
 
+        if (ativos[0] && !ativos[1])
+        {
+            qual_jogador = 0;
+        }
+
+        else if (!ativos[0] && ativos[1])
+        {
+            qual_jogador = 1;
+        }
+
+        else if (ativos[0] && ativos[1])
+        {
+            int quant;
+            qual_jogador = 0;
+            quant = Lista_de_backgrounds.Count;
+            qual_jogador = 1;
+            if (Lista_de_backgrounds.Count < quant)
+            {
+                qual_jogador = 0;
+            }
+        }
+    }
 
     public void NovoLeitor2InitFIT()
     {
