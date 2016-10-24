@@ -17,6 +17,7 @@ public class GuiFITEscolhaDeNiveis : GuiPadrao2
     public int position_y = 0;
     public int largura_entre_niveis = 100;
     public int altura_entre_niveis = 20;
+    public int quant;
 
     public void InitGuiFITEscolhaDeNiveis()
     {
@@ -42,13 +43,29 @@ public class GuiFITEscolhaDeNiveis : GuiPadrao2
 
             for (int i = 0; i < lista_de_niveis.Count; i++)
             {
-                selecoes_de_niveis[i] = GUI.Toggle(new Rect(position_x, position_y, 100, 20), selecoes_de_niveis[i], "Nivel " + (i + 1));
+
+                if ((quant == 1) && (selecoes_de_niveis[i] == false))
+                {
+
+                }
+                else
+                {
+                    selecoes_de_niveis[i] = GUI.Toggle(new Rect(position_x, position_y, 100, 20), selecoes_de_niveis[i], "Nivel " + (i + 1));
+                }
+
+                
                 position_x += largura_entre_niveis;
                 if (position_x >= 2 * largura_entre_niveis)
                 {
                     position_x = 0;
                     position_y += altura_entre_niveis;
                 }
+            }
+
+            quant = 0;
+            for (int j = 0; j < selecoes_de_niveis.GetLength(0); j++)
+            {
+                if (selecoes_de_niveis[j] == true) quant++;
             }
 
             // End the ScrollView
