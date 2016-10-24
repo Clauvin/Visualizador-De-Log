@@ -1616,6 +1616,37 @@ public class NovoLeitor2 : MonoBehaviour
         }
     }
 
+    public int QualEOMaiorParaGui()
+    {
+
+        bool[] ativos = GetComponent<NovoLeitor2>().GetQuaisJogadoresEstaoAtivos();
+
+        int retorna = 0;
+
+        if (ativos[0] && !ativos[1])
+        {
+            retorna = objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).lista_de_backgrounds.Count - 1;
+        }
+
+        else if (!ativos[0] && ativos[1])
+        {
+            retorna = objs_jogadores_fit.GetObjetosDeUmJogadorFIT(1).lista_de_backgrounds.Count - 1;
+        }
+
+        else if (ativos[0] && ativos[1])
+        {
+            if (objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).lista_de_backgrounds.Count - 1 >
+                objs_jogadores_fit.GetObjetosDeUmJogadorFIT(1).lista_de_backgrounds.Count - 1)
+
+                retorna = objs_jogadores_fit.GetObjetosDeUmJogadorFIT(0).lista_de_backgrounds.Count - 1;
+
+            else retorna = objs_jogadores_fit.GetObjetosDeUmJogadorFIT(1).lista_de_backgrounds.Count - 1;
+        }
+
+        return retorna;
+
+    }
+
     public void NovoLeitor2InitFIT()
     {
         qual_leitor = "FIT";
