@@ -251,7 +251,7 @@ public class Controlador : MonoBehaviour
 
                 }
 
-                if (Input.GetButton("s"))
+                if (Input.GetButton("f"))
                 {
 
                     FindObjectOfType<Camera>().transform.rotation = pos_rot_inicial_todos_de_uma_vez_em_3D;
