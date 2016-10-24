@@ -65,6 +65,7 @@ public class Controlador : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        GetComponent<NovoLeitor2>().QualEOMaior();
 
         if (usuario_pode_fazer_input)
         {
