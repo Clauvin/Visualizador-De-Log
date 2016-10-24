@@ -1,0 +1,15 @@
+﻿[Mode FIT]
+==START=
+[Test01]
+ServerTime:481=CONNECTED =
+ServerTime:491=ServerID:1=Player:THIAGO=MODE:3=Level:1=Input:3=Time:237
+ServerTime:492=ServerID:1=Player:THIAGO=MODE:3=Level:1=Input:3=Time:238
+ServerTime:493=ServerID:1=Player:THIAGO=MODE:3=Level:1=Input:3=Time:239
+ServerTime:494=ServerID:1=Player:THIAGO=MODE:3=Level:1=Input:3=Time:240
+ServerTime:495=ServerID:1=Player:THIAGO=MODE:3=Level:1=Input:3=Time:241
+ServerTime:496=ServerID:1=Player:THIAGO=MODE:3=Level:1=Input:3=Time:242
+ServerTime:497=ServerID:1=Player:THIAGO=MODE:3=Level:1=Input:3=Time:243
+ServerTime:498=ServerID:1=Player:THIAGO=MODE:3=Level:1=Input:3=Time:244
+ServerTime:499=ServerID:1=Player:THIAGO=MODE:3=Level:1=Input:3=Time:245
+ServerTime:500=ServerID:1=Player:THIAGO=MODE:3=Level:1=Input:3=Time:246
+
