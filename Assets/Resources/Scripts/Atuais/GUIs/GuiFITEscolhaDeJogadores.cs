@@ -32,9 +32,10 @@ public class GuiFITEscolhaDeJogadores : GuiPadrao2
 
             // Begin the ScrollView
             scrollViewVector = GUI.BeginScrollView(new Rect(posx, posy, 200, 300), scrollViewVector,
-                                                   new Rect(0, 0, largura_da_janela - 20, altura_da_janela * 2));
+                                                   new Rect(0, 0, largura_da_janela - 20, lista_de_jogadores.Count *
+                                                            distancia_entre_jogadores));
 
-            GUI.Label(new Rect(0, 0, 200, 600), "", "textarea");
+            GUI.Label(new Rect(0, 0, 200, lista_de_jogadores.Count * distancia_entre_jogadores), "", "textarea");
 
             for (int i = 0; i < lista_de_jogadores.Count; i++)
             {
