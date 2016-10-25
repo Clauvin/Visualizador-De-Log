@@ -359,6 +359,8 @@ public class NovoLeitor2 : MonoBehaviour
         int estagio_atual = -1;
         int personagem_atual = -1;
         bool checagem_de_acao_do_jogador = true;
+        Dictionary<int, List<List<Vector2>>> posicoes_atuais_de_todos_os_jogadores =
+            new Dictionary<int, List<List<Vector2>>>();
         List<List<Vector2>> posicoes_atuais_de_personagens_nos_mapas_do_FIT =
                             posicoes_iniciais_de_personagens_nos_mapas_do_FIT;
         int checando_instante_do_log = 0;
@@ -404,6 +406,13 @@ public class NovoLeitor2 : MonoBehaviour
                         entry_nivel = entries[4].Split(':');
                         input = Int32.Parse(entries[5].Split(':')[1]);
 
+                        if (posicoes_atuais_de_todos_os_jogadores.ContainsKey(Int32.Parse(entry_id_do_jogador[1]) - 1) == false) {
+
+                            posicoes_atuais_de_todos_os_jogadores[Int32.Parse(entry_id_do_jogador[1]) - 1] =
+                                posicoes_iniciais_de_personagens_nos_mapas_do_FIT;
+
+                        }
+
                         if (Int32.Parse(entry_nivel[1]) - 1 != estagio_atual) personagem_atual = 0;
                         estagio_atual = Int32.Parse(entry_nivel[1]) - 1;
 
@@ -417,32 +426,41 @@ public class NovoLeitor2 : MonoBehaviour
                                 {
                                     // Movimentacao para cima;
                                     case 1:
-                                        vetor_de_passagem = posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i];
+                                        vetor_de_passagem = posicoes_atuais_de_todos_os_jogadores
+                                            [Int32.Parse(entry_id_do_jogador[1]) - 1][estagio_atual][i];
                                         vetor_de_passagem.y -= 32;
-                                        posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i] = vetor_de_passagem;
+                                        posicoes_atuais_de_todos_os_jogadores
+                                             [Int32.Parse(entry_id_do_jogador[1]) - 1][estagio_atual][i] = vetor_de_passagem;
                                         break;
                                     // Movimentacao para esquerda;
                                     case 2:
-                                        vetor_de_passagem = posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i];
+                                        vetor_de_passagem = posicoes_atuais_de_todos_os_jogadores
+                                            [Int32.Parse(entry_id_do_jogador[1]) - 1][estagio_atual][i];
                                         vetor_de_passagem.x -= 32;
-                                        posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i] = vetor_de_passagem;
+                                        posicoes_atuais_de_todos_os_jogadores
+                                             [Int32.Parse(entry_id_do_jogador[1]) - 1][estagio_atual][i] = vetor_de_passagem;
                                         break;
                                     // Movimentacao para baixo;
                                     case 3:
-                                        vetor_de_passagem = posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i];
+                                        vetor_de_passagem = posicoes_atuais_de_todos_os_jogadores
+                                            [Int32.Parse(entry_id_do_jogador[1]) - 1][estagio_atual][i];
                                         vetor_de_passagem.y += 32;
-                                        posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i] = vetor_de_passagem;
+                                        posicoes_atuais_de_todos_os_jogadores
+                                             [Int32.Parse(entry_id_do_jogador[1]) - 1][estagio_atual][i] = vetor_de_passagem;
                                         break;
                                     // Movimentacao para direita;
                                     case 4:
-                                        vetor_de_passagem = posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i];
+                                        vetor_de_passagem = posicoes_atuais_de_todos_os_jogadores
+                                            [Int32.Parse(entry_id_do_jogador[1]) - 1][estagio_atual][i];
                                         vetor_de_passagem.x += 32;
-                                        posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i] = vetor_de_passagem;
+                                        posicoes_atuais_de_todos_os_jogadores
+                                             [Int32.Parse(entry_id_do_jogador[1]) - 1][estagio_atual][i] = vetor_de_passagem;
                                         break;
                                     // Troca de Personagem
                                     case 0:
                                         personagem_atual = personagem_atual + 1;
-                                        personagem_atual %= posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual].Count;
+                                        personagem_atual %= posicoes_atuais_de_todos_os_jogadores
+                                             [Int32.Parse(entry_id_do_jogador[1]) - 1][estagio_atual].Count;
                                         break;
                                     default:
                                         break;
@@ -452,8 +470,10 @@ public class NovoLeitor2 : MonoBehaviour
 
                             objs_jogadores_fit.GetObjetosDeUmJogadorFIT(qual_jogador).bd_fit.Add(checando_instante_do_log,
                                 Int32.Parse(entry_time[1]), Int32.Parse(entry_nivel[1]), i + 1,
-                                (int)posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i].x,
-                                (int)posicoes_atuais_de_personagens_nos_mapas_do_FIT[estagio_atual][i].y,
+                                (int)posicoes_atuais_de_todos_os_jogadores
+                                             [Int32.Parse(entry_id_do_jogador[1]) - 1][estagio_atual][i].x,
+                                (int)posicoes_atuais_de_todos_os_jogadores
+                                             [Int32.Parse(entry_id_do_jogador[1]) - 1][estagio_atual][i].y,
                                 Int32.Parse(entry_tempo_do_servidor[1]), entry_nome_do_jogador[1],
                                 Int32.Parse(entry_id_do_jogador[1]), Int32.Parse(entry_modo_de_jogo[1]));
 
