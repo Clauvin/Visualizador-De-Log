@@ -409,7 +409,7 @@ public class NovoLeitor2 : MonoBehaviour
                         if (posicoes_atuais_de_todos_os_jogadores.ContainsKey(Int32.Parse(entry_id_do_jogador[1]) - 1) == false) {
 
                             posicoes_atuais_de_todos_os_jogadores[Int32.Parse(entry_id_do_jogador[1]) - 1] =
-                                new List<List<Vector2>>(posicoes_iniciais_de_personagens_nos_mapas_do_FIT);
+                                CriarNovasCoordenadasIniciaisDePersonagens();
 
                         }
 
@@ -1665,6 +1665,29 @@ public class NovoLeitor2 : MonoBehaviour
 
         return retorna;
 
+    }
+
+    public List<List<Vector2>> CriarNovasCoordenadasIniciaisDePersonagens()
+    {
+        List<List<Vector2>> novas_coordenadas = new List<List<Vector2>>();
+
+        for (int i = 0; i < posicoes_iniciais_de_personagens_nos_mapas_do_FIT.Count; i++)
+        {
+            novas_coordenadas.Add(new List<Vector2>());
+
+            for (int j = 0; j < posicoes_iniciais_de_personagens_nos_mapas_do_FIT[i].Count; j++)
+            {
+                novas_coordenadas[i].Add(new Vector2(
+                    posicoes_iniciais_de_personagens_nos_mapas_do_FIT[i][j].x,
+                    posicoes_iniciais_de_personagens_nos_mapas_do_FIT[i][j].y
+                    ));
+            }
+
+        }
+
+        return novas_coordenadas;
+
+        
     }
 
     public void NovoLeitor2InitFIT()
