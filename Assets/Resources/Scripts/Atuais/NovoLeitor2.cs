@@ -409,7 +409,7 @@ public class NovoLeitor2 : MonoBehaviour
                         if (posicoes_atuais_de_todos_os_jogadores.ContainsKey(Int32.Parse(entry_id_do_jogador[1]) - 1) == false) {
 
                             posicoes_atuais_de_todos_os_jogadores[Int32.Parse(entry_id_do_jogador[1]) - 1] =
-                                posicoes_iniciais_de_personagens_nos_mapas_do_FIT;
+                                new List<List<Vector2>>(posicoes_iniciais_de_personagens_nos_mapas_do_FIT);
 
                         }
 
