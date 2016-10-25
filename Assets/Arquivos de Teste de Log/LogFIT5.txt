@@ -18,7 +18,7 @@ ServerTime:503=ServerID:13=Player:Bastião=MODE:3=Level:1=Input:2=Time:249
 ServerTime:504=ServerID:14=Player:Helena=MODE:3=Level:1=Input:2=Time:250
 ServerTime:505=ServerID:15=Player:Ariel=MODE:3=Level:1=Input:2=Time:251
 ServerTime:506=ServerID:16=Player:Liana=MODE:3=Level:1=Input:2=Time:252
-ServerTime:507=ServerID:17=Player:Asmodeus=MODE:3=Level:1=Input:2=Time:253
+ServerTime:507=ServerID:17=Player:Ás=MODE:3=Level:1=Input:2=Time:253
 ServerTime:508=ServerID:18=Player:Brian=MODE:3=Level:1=Input:2=Time:254
 ServerTime:509=ServerID:19=Player:Lode=MODE:3=Level:1=Input:2=Time:255
 ServerTime:510=ServerID:20=Player:Loder=MODE:3=Level:1=Input:2=Time:256
