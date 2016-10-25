@@ -513,7 +513,12 @@ public class NovoLeitor2 : MonoBehaviour
         lida_com_texto.FecharReaders(fs, theReader);
 
         //Com isso, o último heatmap, do último personagem, não vai sumir.
-        if (Heatmaps > 2) Heatmaps++;
+        //if (Heatmaps >= 2) Heatmaps++;
+
+        //Gambiarra para que sempre sejam mostrados 5 heatmaps
+        // ou seja, não haja a possibilidade de um bug de um mapa inicial de um só personagem e
+        // o heatmap dele não aparecendo por alguma razão.
+        Heatmaps = 5;
 
         return true;
 
